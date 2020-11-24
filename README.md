@@ -69,11 +69,11 @@ ___
 
 > Or Contributors/People
 
-[![@team](https://avatars2.githubusercontent.com/u/64921184?s=200&v=4)
-[![@team](https://avatars0.githubusercontent.com/u/62026523?s=200&u=c5ffa62223d32312a6f3592c66e4c791eb4c7343&v=4)
-[![@team](https://avatars1.githubusercontent.com/u/60184096?s=200&u=354406f2bcd0522f17e5c94d2b7c6d34596f0ec9&v=4)
-[![@team](https://avatars0.githubusercontent.com/u/58741436?s=200&u=ffc14f01ed18eab531f52e6b06865ee410b57965&v=4)
-[![@team](https://avatars2.githubusercontent.com/u/60231618?s=200&u=5a15300a5626ca41ca26910dc1660a74d3dc4847&v=4)
+![@team](https://avatars2.githubusercontent.com/u/64921184?s=200&v=4)
+![@team](https://avatars0.githubusercontent.com/u/62026523?s=200&u=c5ffa62223d32312a6f3592c66e4c791eb4c7343&v=4)
+![@team](https://avatars1.githubusercontent.com/u/60184096?s=200&u=354406f2bcd0522f17e5c94d2b7c6d34596f0ec9&v=4)
+![@team](https://avatars0.githubusercontent.com/u/58741436?s=200&u=ffc14f01ed18eab531f52e6b06865ee410b57965&v=4)
+![@team](https://avatars2.githubusercontent.com/u/60231618?s=200&u=5a15300a5626ca41ca26910dc1660a74d3dc4847&v=4)
 
 - You can just grab their GitHub profile image URL
 - You should probably resize their picture using `?s=200` at the end of the image URL.
