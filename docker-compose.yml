@@ -1,7 +1,20 @@
 version: "3.8"
 services:
- webapp: 
-    build: ./
-    ports:
+  webapp_dev: 
+     build:
+       context: .  
+       dockerfile: Dockerfile_development
+     ports:
       - "80:3000"
-    container_name: web
+     container_name: webapp_dev
+     restart: always
+  
+  webapp_prod: 
+     build:
+       context: .  
+       dockerfile: Dockerfile_production
+     ports:
+      - "81:3000"
+     container_name: webapp_prod
+     restart: always
+
