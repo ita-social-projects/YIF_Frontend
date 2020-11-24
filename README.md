@@ -1,191 +1,90 @@
-<a href="https://softserve.academy/"><img src="https://s.057.ua/section/newsInternalIcon/upload/images/news/icon/000/050/792/vnutr_5ce4f980ef15f.jpg" title="SoftServe IT Academy" alt="SoftServe IT Academy"></a>
+#Your IT Future
+___
 
-***INSERT GRAPHIC HERE (include hyperlink in image)***
+## About the project
 
-# Repository Title Goes Here
+This is a project that provides applicants with an opportunity to get acquainted with the list of educational institutions that provide education in our region. Applicants can get detailed information about the available specialties that are required for admission, training materials, etc.
 
-> Subtitle or Short Description Goes Here
+##Main parts of the project and technologies
 
-> ideally one sentence
 
-> include terms/tags that can be searched
+ This project contains 4 main parts: client frontend, backend and database. All parts of the project are at https://github.com/ita-social-projects/YIF_Frontend
 
-**Badges will go here**
+Let's take a closer look at the technologies of each part.
 
-- build status
-- coverage
-- issues (waffle.io maybe)
-- devDependencies
-- npm package
-- slack
-- downloads
-- gitter chat
-- license
-- etc.
+Client Frontend - We are using React
 
-[![Build Status](https://img.shields.io/travis/ita-social-projects/GreenCity/master?style=flat-square)](https://travis-ci.org/github/ita-social-projects/GreenCity)
-[![Coverage Status](https://img.shields.io/gitlab/coverage/ita-social-projects/GreenCity/master?style=flat-square)](https://coveralls.io)
-[![Github Issues](https://img.shields.io/github/issues/ita-social-projects/GreenCity?style=flat-square)](https://github.com/ita-social-projects/GreenCity/issues)
-[![Pending Pull-Requests](https://img.shields.io/github/issues-pr/ita-social-projects/GreenCity?style=flat-square)](https://github.com/ita-social-projects/GreenCity/pulls)
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
+Backend - ASP.NET Core 3.1, Doker, FluentValidation, Swagger, Automaper
 
-- For more on these wonderful  badges, refer to <a href="https://shields.io/" target="_blank">shields.io</a>.
+Database - Entity Framework and hosted on Microsoft Azure
+
+Code quality - SonarCloud
+
+Testing - xUnit
+
+SDLC - Scrum/Kanban
 
 ---
 
-## Table of Contents (Optional)
+## How to start the project locally.
 
-> If your `README` has a lot of info, section headers might be nice.
 
-- [Installation](#installation)
-  - [Required to install](#Required-to-install)
-  - [Environment](#Environment)
-  - [Clone](#Clone)
-  - [Setup](#Setup)
-  - [How to run local](#How-to-run-local)
-  - [How to run Docker](#How-to-run-Docker)
-- [Usage](#Usage)
-  - [How to work with swagger UI](#How-to-work-with-swagger-UI)
-  - [How to run tests](#How-to-run-tests)
-  - [How to Checkstyle](#How-to-Checkstyle)
-- [Documentation](#Documentation))
-- [Contributing](#contributing)
-  - [git flow](#git-flow)
-  - [issue flow](#git-flow)
-- [FAQ](#faq)
-- [Support](#support)
-- [License](#license)
+Clone or download the project from https://github.com/ita-social-projects/YIF_Frontend
+
+* Install ASP.NET Core 3.1
+
+* Install Entity Framework
+
+* Install Node.js v10.19.0+
+
+* Create local database from https://github.com/ita-social-projects/YIF_Frontend
+
 
 ---
 
-## Installation
+## How to run the project with docker-compose locally
 
-- All the `code` required to get started
-- Images of what it should look like
 
-### Required to install
-* Python (3.6.3)
-* PostgreSQL (9.5.9)
-* Django (1.11.6)
-* NodeJS (6.11.4)
-* Redis (3.0.6)
+The instructions below will allow you to run application locally in the containers for developing and testing purpose.
 
-### Environment
-environmental variables
-```properties
-spring.datasource.url=${DATASOURCE_URL}
-spring.datasource.username=${DATASOURCE_USER}
-spring.datasource.password=${DATASOURCE_PASSWORD}
-spring.mail.username=${EMAIL_ADDRESS}
-spring.mail.password=${EMAIL_PASSWORD}
-cloud.name=${CLOUD_NAME}
-api.key=${API_KEY}
-api.secret=${API_SECRET}
-```
+### Installation Prerequisites:
 
-### Clone
+* Docker version 17.05 or higher, [Docker Compose] (https://docs.docker.com/compose). If you are running Microsoft Windows family OS, it is better to use docker-desktop.
+* Access to the Azure Storage.
 
-- Clone this repo to your local machine using `https://github.com/ita-social-projects/SOMEREPO`
+* Clone repository from GitHub with:
+ git clone https://github.com/ita-social-projects/YIF_Frontend
 
-### Setup
+* Move to the https://github.com/ita-social-projects/YIF_Frontend and run "docker build -t " 
 
-- If you want more syntax highlighting, format your code like this:
+* Next run "docker run -d -p [port]:[port] --name web https://github.com/ita-social-projects/YIF_Frontend
 
-> update and install this package first
+* Run the FronEnd and BackEnd of the application by executing the "docker-compose up" command.
 
-```shell
-$ brew update
-$ brew install SOMEREPOproductions
-```
+* Now you can access your application at http://localhost.
 
-> now install npm and bower packages
 
-```shell
-$ npm install
-$ bower install
-```
-
-- For all the possible languages that support syntax highlithing on GitHub (which is basically all of them), refer <a href="https://github.com/github/linguist/blob/master/lib/linguist/languages.yml" target="_blank">here</a>.
-
-### How to run local
-
-### How to run Docker
-
----
-
-## Usage
-### How to work with swagger UI
-### How to run tests
-### How to Checkstyle
-
----
-
-## Documentation
-
----
-
-## Contributing
-
-### Git flow
-> To get started...
-#### Step 1
-
-- **Option 1**
-    - 🍴 Fork this repo!
-
-- **Option 2**
-    - 👯 Clone this repo to your local machine using `https://github.com/ita-social-projects/SOMEREPO.git`
-
-#### Step 2
-
-- **HACK AWAY!** 🔨🔨🔨
-
-#### Step 3
-
-- 🔃 Create a new pull request using <a href="https://github.com/ita-social-projects/SOMEREPO/compare/" target="_blank">github.com/ita-social-projects/SOMEREPO</a>.
-
-### Issue flow
-
----
-
+___
 ## Team
 
 > Or Contributors/People
 
-[![@lhalam](https://avatars3.githubusercontent.com/u/3837059?s=100&v=4)](https://github.com/lhalam)
-[![@lhalam](https://avatars3.githubusercontent.com/u/3837059?s=100&v=4)](https://github.com/lhalam)
-[![@lhalam](https://avatars3.githubusercontent.com/u/3837059?s=100&v=4)](https://github.com/lhalam)
-[![@lhalam](https://avatars3.githubusercontent.com/u/3837059?s=100&v=4)](https://github.com/lhalam) 
-[![@lhalam](https://avatars3.githubusercontent.com/u/3837059?s=100&v=4)](https://github.com/lhalam)
-[![@lhalam](https://avatars3.githubusercontent.com/u/3837059?s=100&v=4)](https://github.com/lhalam)
-[![@lhalam](https://avatars3.githubusercontent.com/u/3837059?s=100&v=4)](https://github.com/lhalam)
-[![@lhalam](https://avatars3.githubusercontent.com/u/3837059?s=100&v=4)](https://github.com/lhalam)  
+![@team](https://avatars2.githubusercontent.com/u/64921184?s=200&v=4)
+![@team](https://avatars0.githubusercontent.com/u/62026523?s=200&u=c5ffa62223d32312a6f3592c66e4c791eb4c7343&v=4)
+![@team](https://avatars1.githubusercontent.com/u/60184096?s=200&u=354406f2bcd0522f17e5c94d2b7c6d34596f0ec9&v=4)
+![@team](https://avatars0.githubusercontent.com/u/58741436?s=200&u=ffc14f01ed18eab531f52e6b06865ee410b57965&v=4)
+![@team](https://avatars2.githubusercontent.com/u/60231618?s=200&u=5a15300a5626ca41ca26910dc1660a74d3dc4847&v=4)
 
 - You can just grab their GitHub profile image URL
 - You should probably resize their picture using `?s=200` at the end of the image URL.
 
 ---
 
-## FAQ
+### FAQ
 
 - **How do I do *specifically* so and so?**
     - No problem! Just do this.
 
 ---
 
-## Support
-
-Reach out to me at one of the following places!
-
-- Website at <a href="http://Website.com" target="_blank">`Website.com`</a>
-- Facebook at <a href="https://www.facebook.com/LiubomyrHalamaha/" target="_blank">`Liubomyr Halamaha`</a>
-- Insert more social links here.
-
----
-
-## License
-
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
-
-- **[MIT license](http://opensource.org/licenses/mit-license.php)**
 - Copyright 2020 © <a href="https://softserve.academy/" target="_blank"> SoftServe IT Academy</a>.
