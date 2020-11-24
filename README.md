@@ -55,7 +55,7 @@ The instructions below will allow you to run application locally in the containe
 * Clone repository from GitHub with:
  git clone https://github.com/ita-social-projects/YIF_Frontend
 
-* Move to the ... and run "docker build -t  ..." 
+* Move to the https://github.com/ita-social-projects/YIF_Frontend and run "docker build -t " 
 
 * Next run "docker run -d -p [port]:[port] --name web https://github.com/ita-social-projects/YIF_Frontend
 
