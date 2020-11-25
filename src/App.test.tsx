@@ -1,15 +1,24 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import ReactDOM from 'react-dom';
+import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import App from './App';
+import { Counter } from './features/counter/Counter';
 
-test('renders learn react link', () => {
-  const { getByText } = render(
+
+
+it('renders without crashing', () => {
+  render(
     <Provider store={store}>
       <App />
-    </Provider>
-  );
-
-  expect(getByText(/learn/i)).toBeInTheDocument();
+    </Provider>);
+    const linkElement = screen.getByText(/Toolkit/i);
+    expect(linkElement).toBeInTheDocument();
 });
+
+test('Fake Test', () => {
+  expect(true).toBeTruthy();
+})
+
+console.log(Counter);
