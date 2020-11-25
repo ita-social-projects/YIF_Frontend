@@ -1,0 +1,43 @@
+#!groovy
+//  groovy Jenkinsfile
+properties([disableConcurrentBuilds()])
+
+pipeline  {
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+    stages {
+        stage("Create docker image") { 
+            steps {
+                echo 'Creating docker image ...'
+                dir('.'){
+                    sh "docker build -t rominos71/YIF-project Docker_development . "
+                }
+            }
+        }
+    
+    stages {
+        stage("===Run test====") { 
+            steps {
+                echo 'Running test'
+                {
+                    sh 'make check || true'
+                    sh "npm test"
+                }
+            }
+        }
+         
+        stage("docker run") {
+           steps {
+               echo " ============== docker run =================="
+                 {
+               sh '''
+               docker run -d --restart=always --name YIF-project -p 80:3000 rominos71/YIF-project
+               '''
+                }
+           }
+        }
+
+    }
+}
