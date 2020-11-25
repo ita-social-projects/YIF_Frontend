@@ -14,9 +14,9 @@ test('renders without crashing', () => {
   render(
     <Provider store={store}>
       <App />
-    </Provider>);
-    const linkElement = screen.getByText(/Toolkit/i);
-    expect(linkElement).toBeInTheDocument();
-});
+    </Provider>
+  );
 
+  expect(screen.getByText(/Toolkit/i)).toBeInTheDocument();
+});
 
