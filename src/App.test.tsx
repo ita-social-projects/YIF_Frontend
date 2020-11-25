@@ -6,9 +6,11 @@ import { store } from './app/store';
 import App from './App';
 import { Counter } from './features/counter/Counter';
 
+test('fake test', () => {
+  expect(true).toBeTruthy();
+});
 
-
-it('renders without crashing', () => {
+test('renders without crashing', () => {
   render(
     <Provider store={store}>
       <App />
@@ -17,8 +19,4 @@ it('renders without crashing', () => {
     expect(linkElement).toBeInTheDocument();
 });
 
-test('Fake Test', () => {
-  expect(true).toBeTruthy();
-})
 
-console.log(Counter);
