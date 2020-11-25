@@ -1,16 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { render, screen } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
-import App from './App';
-import { Counter } from './features/counter/Counter';
+import React from "react";
+import ReactDOM from "react-dom";
+import { render, screen } from "@testing-library/react";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
+import App from "./App";
+import { Counter } from "./components/counter/Counter";
 
-test('fake test', () => {
+test("fake test", () => {
   expect(true).toBeTruthy();
 });
 
-test('renders without crashing', () => {
+test("renders without crashing", () => {
   render(
     <Provider store={store}>
       <App />
@@ -19,4 +19,3 @@ test('renders without crashing', () => {
 
   expect(screen.getByText(/Toolkit/i)).toBeInTheDocument();
 });
-

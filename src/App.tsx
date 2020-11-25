@@ -1,7 +1,7 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import { Counter } from "./components/counter/Counter";
+import "./App.css";
 
 function App() {
   return (
@@ -9,9 +9,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Counter />
-        <p>
-          Don't waste your time. Learn to code
-        </p>
+        <p>Don't waste your time. Learn to code</p>
         <span>
           <span>Learn </span>
           <a
