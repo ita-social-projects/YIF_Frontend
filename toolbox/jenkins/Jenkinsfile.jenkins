@@ -14,7 +14,7 @@ pipeline  {
         stage("Create docker image") { 
             steps {
                 echo 'Creating docker image(dev) ...'
-                dir('/var/lib/jenkins/'){
+                dir('.'){
                     sh "docker build -t rominos71/yifproject . "
                 }
             }
