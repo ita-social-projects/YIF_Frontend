@@ -28,7 +28,7 @@ React app file structure - Grouping by features
 
 Src should have, at less, those folders: components, pages, services, store, hoc, errorBoundry, errorIndicator. Also index.txs and app.tsx.
 
-## Component test/style files should be located in the folder of this component. Store located in the root folder and should contain actions and reducers folders.
+Component test/style files should be located in the folder of this component. Store located in the root folder and should contain actions and reducers folders.
 
 ## How to start the project locally.
 
