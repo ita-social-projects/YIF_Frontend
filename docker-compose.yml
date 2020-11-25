@@ -9,12 +9,5 @@ services:
      container_name: webapp_dev
      restart: always
   
-  webapp_prod: 
-     build:
-       context: .  
-       dockerfile: Dockerfile_production
-     ports:
-      - "81:3000"
-     container_name: webapp_prod
-     restart: always
+
 
