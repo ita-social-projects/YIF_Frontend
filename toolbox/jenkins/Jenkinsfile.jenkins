@@ -17,17 +17,7 @@ pipeline  {
             }
         }
     
-    stages {
-        stage("===Run test====") { 
-            steps {
-                echo 'Running test'
-                {
-                    sh 'make check || true'
-                    sh "npm test"
-                }
-            }
-        }
-         
+             
         stage("docker run") {
            steps {
                echo " ============== docker run =================="
