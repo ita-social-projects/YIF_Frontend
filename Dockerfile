@@ -1,8 +1,7 @@
 FROM node:latest
 
-WORKDIR /
-COPY . /
-
+WORKDIR /var/www
+COPY . /var/www
 
 RUN npm install
 
