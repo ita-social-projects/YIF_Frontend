@@ -15,6 +15,7 @@ pipeline  {
             steps {
                 echo 'Creating docker image(dev) ...'
                 dir('.'){
+                    sh "sudo su"
                     sh "docker build -t rominos71/yifproject . "
                 }
             }
