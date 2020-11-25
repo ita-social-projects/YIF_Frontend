@@ -13,7 +13,7 @@ pipeline  {
             steps {
                 echo 'Creating docker image(dev) ...'
                 dir('.'){
-                    sh "docker build -t rominos71/yifproject -f Dockerfile_development ."
+                    sh "sudo docker build -t rominos71/yifproject -f Dockerfile_development ."
                 }
             }
         }
@@ -22,7 +22,7 @@ pipeline  {
         stage("docker run(dev)") {
            steps {
                echo " ============== docker run =================="
-                     sh "docker run -d --restart=always --name yifproject -p 80:3000 rominos71/yifproject"
+                     sh "sudo docker run -d --restart=always --name yifproject -p 80:3000 rominos71/yifproject"
            }
         }
 
