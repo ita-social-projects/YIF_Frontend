@@ -13,7 +13,7 @@ pipeline  {
             steps {
                 echo 'Creating docker image(dev) ...'
                 dir('.'){
-                    sh "docker build -t rominos71/YIF-project -f Docker_development ."
+                    sh "docker build -t rominos71/YIFproject -f Docker_development ."
                 }
             }
         }
