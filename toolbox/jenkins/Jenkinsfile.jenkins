@@ -3,7 +3,9 @@
 properties([disableConcurrentBuilds()])
 
 pipeline  {
-    agent any
+    agent { 
+        label 'master'
+        }
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
@@ -13,7 +15,7 @@ pipeline  {
             steps {
                 echo 'Creating docker image(dev) ...'
                 dir('.'){
-                    sh "docker build -t yifproject ."
+                    sh "docker build -t rominos71/yifproject ."
                 }
             }
         }
@@ -22,7 +24,7 @@ pipeline  {
         stage("docker run(dev)") {
            steps {
                echo " ============== docker run =================="
-                     sh "docker run -d --restart=always --name yifproject -p 80:3000 yifproject"
+                     sh "docker run -d --restart=always --name yifproject -p 80:3000 rominos71/yifproject"
            }
         }
 
