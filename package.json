@@ -53,6 +53,7 @@
   },
   "lint-staged": {
     "**/*.(js|jsx|ts|tsx|css|sass|less|scss|yml|yaml)": [
+      "eslint --fix",
       "npm test -- --coverage --watchAll=false --findRelatedTests",
       "git add"
     ]
