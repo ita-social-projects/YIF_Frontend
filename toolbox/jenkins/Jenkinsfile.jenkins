@@ -11,9 +11,9 @@ pipeline  {
     stages {
         stage("Create docker image") { 
             steps {
-                echo 'Creating docker image(вум) ...'
+                echo 'Creating docker image(dev) ...'
                 dir('.'){
-                    sh "docker build -t rominos71/YIF-project -f Docker_development . "
+                    sh "docker build -t rominos71/YIF-project -f Docker_development ."
                 }
             }
         }
@@ -22,7 +22,7 @@ pipeline  {
         stage("docker run(dev)") {
            steps {
                echo " ============== docker run =================="
-                     sh "docker run -d --restart=always --name YIF-project(dev) -p 80:3000 rominos71/YIF-project "
+                     sh "docker run -d --restart=always --name YIF-project(dev) -p 80:3000 rominos71/YIF-project"
            }
         }
 
