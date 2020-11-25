@@ -22,7 +22,7 @@ pipeline  {
         stage("docker run(dev)") {
            steps {
                echo " ============== docker run =================="
-                     sh "docker run -d --restart=always --name YIF-project(dev) -p 80:3000 rominos71/YIF-project"
+                     sh "docker run -d --restart=always --name YIF-project(dev) -p 80:3000 rominos71/YIFproject"
            }
         }
 
