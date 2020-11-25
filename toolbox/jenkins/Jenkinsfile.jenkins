@@ -15,7 +15,6 @@ pipeline  {
             steps {
                 echo 'Creating docker image(dev) ...'
                 dir('/var/lib/jenkins/'){
-                    sh "pwd"
                     sh "docker build -t rominos71/yifproject . "
                 }
             }
