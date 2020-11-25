@@ -14,7 +14,7 @@ pipeline  {
         stage("Create docker image") { 
             steps {
                 echo 'Creating docker image(dev) ...'
-                dir("${env.WORKSPACE}/aQA"){
+                dir("${$HOME}"){
                     sh "pwd"
                     sh "docker build -t rominos71/yifproject . "
                 }
