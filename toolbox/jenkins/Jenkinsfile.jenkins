@@ -10,15 +10,6 @@ pipeline  {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
     }
-    stages {
-        stage("Create docker image") { 
-            steps {
-                echo 'Creating docker image(dev) ...'
-                dir("."){
-                    sh "docker build -t rominos71/yifproject -f Dockerfile_development . "
-                }
-            }
-        }
     
     stage('Npm install') {
             steps {
@@ -35,6 +26,16 @@ pipeline  {
             }
         }
 
+    stages {
+        stage("Create docker image") { 
+            steps {
+                echo 'Creating docker image(dev) ...'
+                dir("."){
+                    sh "docker build -t rominos71/yifproject -f Dockerfile_development . "
+                }
+            }
+        }
+    
     stage("docker stop") {
             steps {
                 echo " ============== stoping all images =================="
