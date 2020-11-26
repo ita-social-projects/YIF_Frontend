@@ -7,7 +7,7 @@ import {
   incrementAsync,
   selectCount,
 } from './counterSlice';
-// import styles from "./counter.module.css";
+import styles from './counter.module.css';
 
 export default function Counter() {
   const count = useSelector(selectCount);
@@ -16,7 +16,7 @@ export default function Counter() {
 
   return (
     <div>
-      {/* <div className={styles.row}>
+      <div className={styles.row}>
         <button
           className={styles.button}
           aria-label="Increment value"
@@ -54,7 +54,7 @@ export default function Counter() {
         >
           Add Async
         </button>
-      </div> */}
+      </div>
     </div>
   );
 }
