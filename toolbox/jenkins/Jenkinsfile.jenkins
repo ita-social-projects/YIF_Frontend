@@ -15,11 +15,26 @@ pipeline  {
             steps {
                 echo 'Creating docker image(dev) ...'
                 dir("."){
-                    sh "docker build -t rominos71/yifproject . "
+                    sh "docker build -t rominos71/yifproject -f Dockerfile_development . "
                 }
             }
         }
-    
+    stage("docker stop") {
+            steps {
+                echo " ============== stoping all images =================="
+                sh '''
+                docker stop bootshop
+                '''
+            }
+        } 
+    stage("docker remove") {
+            steps {
+                echo " ============== removing all docker containers =================="
+                sh '''
+                docker rm bootshop
+                '''
+            }
+        }
              
         stage("docker run(dev)") {
            steps {
