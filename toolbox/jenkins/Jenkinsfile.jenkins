@@ -19,6 +19,13 @@ pipeline  {
                 }
             }
         }
+
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                sh 'npm test'
+            }
+            
     stage("docker stop") {
             steps {
                 echo " ============== stoping all images =================="
