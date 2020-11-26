@@ -19,6 +19,14 @@ pipeline  {
                 }
             }
         }
+    
+    stage('Npm install') {
+            steps {
+                echo 'Installing modules...'
+                sh 'npm install'
+            }
+        }
+
 
     stage('Test') {
             steps {
