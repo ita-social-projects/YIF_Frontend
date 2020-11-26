@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   decrement,
   increment,
   incrementByAmount,
   incrementAsync,
   selectCount,
-} from "./counterSlice";
-import styles from "./counter.module.css";
+} from './counterSlice';
+// import styles from "./counter.module.css";
 
 export default function Counter() {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
-  const [incrementAmount, setIncrementAmount] = useState("2");
+  const [incrementAmount, setIncrementAmount] = useState('2');
 
   return (
     <div>
-      <div className={styles.row}>
+      {/* <div className={styles.row}>
         <button
           className={styles.button}
           aria-label="Increment value"
@@ -54,7 +54,7 @@ export default function Counter() {
         >
           Add Async
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
