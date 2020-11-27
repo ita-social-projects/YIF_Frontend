@@ -1,5 +1,6 @@
 #Your IT Future
-___
+
+---
 
 ## About the project
 
@@ -7,8 +8,7 @@ This is a project that provides applicants with an opportunity to get acquainted
 
 ##Main parts of the project and technologies
 
-
- This project contains 4 main parts: client frontend, backend and database. All parts of the project are at https://github.com/ita-social-projects/YIF_Frontend
+This project contains 4 main parts: client frontend, backend and database. All parts of the project are at https://github.com/ita-social-projects/YIF_Frontend
 
 Let's take a closer look at the technologies of each part.
 
@@ -24,47 +24,48 @@ Testing - xUnit
 
 SDLC - Scrum/Kanban
 
----
+React app file structure - Grouping by features
+
+Src should have, at less, those folders: components, pages, services, store, hoc, errorBoundry, errorIndicator. Also index.txs and app.tsx.
+
+Component test/style files should be located in the folder of this component. Store located in the root folder and should contain actions and reducers folders.
 
 ## How to start the project locally.
 
-
 Clone or download the project from https://github.com/ita-social-projects/YIF_Frontend
 
-* Install ASP.NET Core 3.1
+- Install ASP.NET Core 3.1
 
-* Install Entity Framework
+- Install Entity Framework
 
-* Install Node.js v10.19.0+
+- Install Node.js v10.19.0+
 
-* Create local database from https://github.com/ita-social-projects/YIF_Frontend
-
+- Create local database from https://github.com/ita-social-projects/YIF_Frontend
 
 ---
 
 ## How to run the project with docker-compose locally
 
-
 The instructions below will allow you to run application locally in the containers for developing and testing purpose.
 
 ### Installation Prerequisites:
 
-* Docker version 17.05 or higher, [Docker Compose] (https://docs.docker.com/compose). If you are running Microsoft Windows family OS, it is better to use docker-desktop.
-* Access to the Azure Storage.
+- Docker version 17.05 or higher, [Docker Compose] (https://docs.docker.com/compose). If you are running Microsoft Windows family OS, it is better to use docker-desktop.
+- Access to the Azure Storage.
 
-* Clone repository from GitHub with:
- git clone https://github.com/ita-social-projects/YIF_Frontend
+- Clone repository from GitHub with:
+  git clone https://github.com/ita-social-projects/YIF_Frontend
 
-* Move to the https://github.com/ita-social-projects/YIF_Frontend and run "docker build -t " 
+- Move to the https://github.com/ita-social-projects/YIF_Frontend and run "docker build -t "
 
-* Next run "docker run -d -p [port]:[port] --name web https://github.com/ita-social-projects/YIF_Frontend
+- Next run "docker run -d -p [port]:[port] --name web https://github.com/ita-social-projects/YIF_Frontend
 
-* Run the FronEnd and BackEnd of the application by executing the "docker-compose up" command.
+- Run the FronEnd and BackEnd of the application by executing the "docker-compose up" command.
 
-* Now you can access your application at http://localhost.
+- Now you can access your application at http://localhost.
 
+---
 
-___
 ## Team
 
 > Or Contributors/People
@@ -82,8 +83,8 @@ ___
 
 ### FAQ
 
-- **How do I do *specifically* so and so?**
-    - No problem! Just do this.
+- **How do I do _specifically_ so and so?**
+  - No problem! Just do this.
 
 ---
 
