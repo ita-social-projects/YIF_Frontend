@@ -1,0 +1,66 @@
+#!groovy
+//  groovy Jenkinsfile
+properties([disableConcurrentBuilds()])
+
+pipeline  {
+    agent { 
+        label 'master'
+        }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+    stages {
+        
+    stage('Npm install') {
+            steps {
+                echo 'Installing modules...'
+                sh 'npm install'
+            }
+        }
+
+
+    stage('Test') {
+            steps {
+                echo 'Testing...'
+                sh 'npm run test -- --watchAll=false'
+            }
+        }
+
+
+
+    stage("Create docker image") { 
+            steps {
+                echo 'Creating docker image(dev) ...'
+                dir("."){
+                    sh "docker build -t rominos71/yifproject -f Dockerfile_development . "
+                }
+            }
+        }
+    
+    stage("docker stop") {
+            steps {
+                echo " ============== stoping all images =================="
+                sh '''
+                docker stop yifproject
+                '''
+            }
+        } 
+    stage("docker remove") {
+            steps {
+                echo " ============== removing all docker containers =================="
+                sh '''
+                docker rm yifproject
+                '''
+            }
+        }
+             
+        stage("docker run(dev)") {
+           steps {
+               echo " ============== docker run =================="
+                     sh "docker run -d --restart=always --name yifproject -p 80:3000 rominos71/yifproject"
+           }
+        }
+
+    }
+}
