@@ -4,12 +4,11 @@
 /shelf/
 /workspace.xml
 /.idea
-<<<<<<< HEAD
 /node_modules
 =======
 
 # dependencies
-/node_modules 
+/node_modules
 /.pnp
 .pnp.js
 
@@ -54,4 +53,3 @@ yarn-error.log*
 
 /.vscode
 /.phpstorm
->>>>>>> b5a2b8636df93f8aa6828388ed683b9582fc9664
