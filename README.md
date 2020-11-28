@@ -12,11 +12,7 @@ This project contains 4 main parts: client frontend, backend and database. All p
 
 Let's take a closer look at the technologies of each part.
 
-Client Frontend - We are using React
-
-Backend - ASP.NET Core 3.1, Doker, FluentValidation, Swagger, Automaper
-
-Database - Entity Framework and hosted on Microsoft Azure
+Client Frontend - We are using React, React-redux, Typescript
 
 Code quality - SonarCloud
 
@@ -24,9 +20,15 @@ Testing - xUnit
 
 SDLC - Scrum/Kanban
 
-React app file structure - Grouping by features
+Project Management platform - ClickUp
+
+React app file structure - “Grouping by features/functionality”
 
 Src should have, at less, those folders: components, pages, services, store, hoc, errorBoundry, errorIndicator. Also index.txs and app.tsx.
+
+Component test/style files should be located in the folder of this component.
+ 
+Store located in the root folder and should contain actions and reducers folders.
 
 Component test/style files should be located in the folder of this component. Store located in the root folder and should contain actions and reducers folders.
 
@@ -34,13 +36,7 @@ Component test/style files should be located in the folder of this component. St
 
 Clone or download the project from https://github.com/ita-social-projects/YIF_Frontend
 
-- Install ASP.NET Core 3.1
-
-- Install Entity Framework
-
 - Install Node.js v10.19.0+
-
-- Create local database from https://github.com/ita-social-projects/YIF_Frontend
 
 ---
 
@@ -50,19 +46,32 @@ The instructions below will allow you to run application locally in the containe
 
 ### Installation Prerequisites:
 
-- Docker version 17.05 or higher, [Docker Compose] (https://docs.docker.com/compose). If you are running Microsoft Windows family OS, it is better to use docker-desktop.
-- Access to the Azure Storage.
+- Docker version 17.05 or higher, [Docker Compose] (https://docs.docker.com/compose).
 
-- Clone repository from GitHub with:
-  git clone https://github.com/ita-social-projects/YIF_Frontend
+Install Docker app on your system!
+Download install from official site
+Run install app
+In BIOS -> enable Hyper V
+Follow the link in error message
+  - 
+- In MS Visual Studio Code (or other IDE) in terminal:
+	- If you have compose-file then run:  [name of the compose file] up -> exp: docker-compose up
+	- If you DO NOT have compose-file then:
+		- create Dockerfile
+		- create .dockerignore
+		- run in terminal: docker run -t [name of your docker image] .
+		- run in terminal: docker build -d --restart=always -p [port]:[port] [name of docker image]
+-after successful execution of command type in terminal: docker ps.
+Check up time of your container. If this time only increments itself, then your application is working fine. If you see that the time value is constantly set up to 0(zero) try to fix issues with your app(docker image if be more specific).
+To stop our container:
+	- docker-compose down
+	-docker stop [container id(first 3 chars)]
+For our team
+-Download
+-Install
+-docker-compose up
+-docker-compose down
 
-- Move to the https://github.com/ita-social-projects/YIF_Frontend and run "docker build -t "
-
-- Next run "docker run -d -p [port]:[port] --name web https://github.com/ita-social-projects/YIF_Frontend
-
-- Run the FronEnd and BackEnd of the application by executing the "docker-compose up" command.
-
-- Now you can access your application at http://localhost.
 
 ---
 
