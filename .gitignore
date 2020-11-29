@@ -31,6 +31,8 @@ typings/
 
 # testing
 /coverage
+/reports
+/.scannerwork
 
 # production
 /build
