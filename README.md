@@ -14,9 +14,9 @@ Let's take a closer look at the technologies of each part.
 
 Client Frontend - We are using React, React-redux, Typescript
 
-Code quality - SonarCloud
+Code quality - SonarCloud, Eslint
 
-Testing - xUnit
+Testing - xUnit, jest
 
 SDLC - Scrum/Kanban
 
