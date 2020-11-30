@@ -1,4 +1,4 @@
-#Your IT Future
+# Your IT Future
 
 ---
 
@@ -6,7 +6,8 @@
 
 This is a project that provides applicants with an opportunity to get acquainted with the list of educational institutions that provide education in our region. Applicants can get detailed information about the available specialties that are required for admission, training materials, etc.
 
-##Main parts of the project and technologies
+
+## Main parts of the project and technologies
 
 This project contains 4 main parts: client frontend, backend and database. All parts of the project are at https://github.com/ita-social-projects/YIF_Frontend
 
@@ -32,7 +33,8 @@ Store located in the root folder and should contain actions and reducers folders
 
 Component test/style files should be located in the folder of this component. Store located in the root folder and should contain actions and reducers folders.
 
-## How to start the project locally.
+
+## How to start the project locally
 
 Clone or download the project from https://github.com/ita-social-projects/YIF_Frontend
 
@@ -48,34 +50,28 @@ The instructions below will allow you to run application locally in the containe
 
 - Docker version 17.05 or higher, [Docker Compose] (https://docs.docker.com/compose).
 
-Install Docker app on your system!
-Download install from official site
-Run install app
-In BIOS -> enable Hyper V
-Follow the link in error message
-  - 
+- Install Docker app on your system!
+   - Download install from official site
+   - Run install app In BIOS -> enable Hyper V
+   - Follow the link in error message
+
 - In MS Visual Studio Code (or other IDE) in terminal:
 	- If you have compose-file then run:  [name of the compose file] up -> exp: docker-compose up
-	- If you DO NOT have compose-file then:
+	If you DO NOT have compose-file then:
 		- create Dockerfile
 		- create .dockerignore
 		- run in terminal: docker run -t [name of your docker image] .
 		- run in terminal: docker build -d --restart=always -p [port]:[port] [name of docker image]
--after successful execution of command type in terminal: docker ps.
-Check up time of your container. If this time only increments itself, then your application is working fine. If you see that the time value is constantly set up to 0(zero) try to fix issues with your app(docker image if be more specific).
-To stop our container:
-	- docker-compose down
-	-docker stop [container id(first 3 chars)]
-For our team
--Download
--Install
--docker-compose up
--docker-compose down
-
+        - after successful execution of command type in terminal: docker ps.
+    Check up time of your container. If this time only increments itself, then your application is working fine. If you see that the time value is constantly set up to 0(zero) try to fix issues with your app(docker image if be more specific).
+    - To stop our container:
+	    - docker-compose down
+	    - docker stop [container id(first 3 chars)]
+ 
 
 ---
 
-## Team
+### Team
 
 > Or Contributors/People
 
@@ -91,6 +87,7 @@ For our team
 ---
 
 ### FAQ
+
 
 - **How do I do _specifically_ so and so?**
   - No problem! Just do this.
