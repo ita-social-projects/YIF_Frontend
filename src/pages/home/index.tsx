@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from './home.module.css';
+import { Header } from '../../components';
 
 const Home = () => {
   return (
     <>
-      <div className={styles.header}>Header</div>
+      <Header />
       <div className={styles.banner}>Banner</div>
       <div className={styles.filter}>Filter</div>
       <div className={styles.about}>About</div>
