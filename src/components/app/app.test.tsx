@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 import App from './index';
@@ -9,11 +9,11 @@ test('fake test', () => {
 });
 
 test('renders without crashing', () => {
-  render(
+  const app = render(
     <Provider store={store}>
       <App />
     </Provider>
   );
 
-  expect(screen.getByText(/Toolkit/i)).toBeInTheDocument();
+  expect(app).toMatchSnapshot();
 });
