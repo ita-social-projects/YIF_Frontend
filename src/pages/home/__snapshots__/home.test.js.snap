@@ -16,9 +16,112 @@ Object {
         Banner
       </div>
       <div
-        class="filter"
+        class="dropbox"
       >
-        Filter
+        <div>
+          <h2>
+            University filter
+          </h2>
+        </div>
+        <form
+          action="#"
+          method="POST"
+        >
+          <select
+            name="universities"
+          >
+            <option>
+              Choose university
+            </option>
+            <optgroup
+              label="U_G_1"
+            >
+              <option
+                value="u1"
+              >
+                u1
+              </option>
+              <option
+                value="u2"
+              >
+                u2
+              </option>
+            </optgroup>
+            <optgroup
+              label="U_G_2"
+            >
+              <option
+                value="u3"
+              >
+                u3
+              </option>
+              <option
+                value="u4"
+              >
+                u4
+              </option>
+            </optgroup>
+          </select>
+          <select
+            name="direction"
+          >
+            <option>
+              Choose direction
+            </option>
+            <option
+              value="d1"
+            >
+              d1
+            </option>
+            <option
+              value="d2"
+            >
+              d2
+            </option>
+            <option
+              value="d3"
+            >
+              d3
+            </option>
+            <option
+              value="d4"
+            >
+              d4
+            </option>
+          </select>
+          <select
+            name="speciality"
+          >
+            <option>
+              Choose speciality
+            </option>
+            <option
+              value="s1"
+            >
+              s1
+            </option>
+            <option
+              value="s2"
+            >
+              s2
+            </option>
+            <option
+              value="s3"
+            >
+              s3
+            </option>
+            <option
+              value="s4"
+            >
+              s4
+            </option>
+          </select>
+          <button
+            type="submit"
+          >
+            Submit
+          </button>
+        </form>
       </div>
       <div
         class="about"
@@ -54,9 +157,112 @@ Object {
       Banner
     </div>
     <div
-      class="filter"
+      class="dropbox"
     >
-      Filter
+      <div>
+        <h2>
+          University filter
+        </h2>
+      </div>
+      <form
+        action="#"
+        method="POST"
+      >
+        <select
+          name="universities"
+        >
+          <option>
+            Choose university
+          </option>
+          <optgroup
+            label="U_G_1"
+          >
+            <option
+              value="u1"
+            >
+              u1
+            </option>
+            <option
+              value="u2"
+            >
+              u2
+            </option>
+          </optgroup>
+          <optgroup
+            label="U_G_2"
+          >
+            <option
+              value="u3"
+            >
+              u3
+            </option>
+            <option
+              value="u4"
+            >
+              u4
+            </option>
+          </optgroup>
+        </select>
+        <select
+          name="direction"
+        >
+          <option>
+            Choose direction
+          </option>
+          <option
+            value="d1"
+          >
+            d1
+          </option>
+          <option
+            value="d2"
+          >
+            d2
+          </option>
+          <option
+            value="d3"
+          >
+            d3
+          </option>
+          <option
+            value="d4"
+          >
+            d4
+          </option>
+        </select>
+        <select
+          name="speciality"
+        >
+          <option>
+            Choose speciality
+          </option>
+          <option
+            value="s1"
+          >
+            s1
+          </option>
+          <option
+            value="s2"
+          >
+            s2
+          </option>
+          <option
+            value="s3"
+          >
+            s3
+          </option>
+          <option
+            value="s4"
+          >
+            s4
+          </option>
+        </select>
+        <button
+          type="submit"
+        >
+          Submit
+        </button>
+      </form>
     </div>
     <div
       class="about"
