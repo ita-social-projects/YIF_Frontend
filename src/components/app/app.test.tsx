@@ -8,12 +8,12 @@ test('fake test', () => {
   expect(true).toBeTruthy();
 });
 
-// test('renders without crashing', () => {
-//   const app = render(
-//     <Provider store={store}>
-//       <App />
-//     </Provider>
-//   );
+test('renders without crashing', () => {
+  const app = render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
 
-//   expect(app).toMatchSnapshot();
-// });
+  expect(app).toMatchSnapshot();
+});
