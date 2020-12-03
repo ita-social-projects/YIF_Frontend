@@ -59,10 +59,9 @@
     }
   },
   "lint-staged": {
-    "**/*.(js|jsx|ts|tsx)": [
+    "src/**/*.(js|jsx|ts|tsx)": [
       "eslint --fix",
-      "npm test -- --coverage --watchAll=false",
-      "git add"
+      "npm test -- --coverage --watchAll=false --findRelatedTests"
     ]
   },
   "jestSonar": {
