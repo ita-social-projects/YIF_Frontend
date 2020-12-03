@@ -1,0 +1,208 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <header>
+        <a
+          href="https://www.softserveinc.com/en-us"
+          target="_blank"
+        >
+          <img
+            alt="logo"
+            class="logo"
+            src="https://scontent.fdnk1-2.fna.fbcdn.net/v/t1.0-9/84388180_10163108035310038_42562361399181312_n.png?_nc_cat=111&ccb=2&_nc_sid=09cbfe&_nc_ohc=5AyeiaZU6ZoAX9ZGaza&_nc_ht=scontent.fdnk1-2.fna&oh=f4772a8be3d6e8a4c49c38c7cf1cbff1&oe=5FEF13CF"
+          />
+        </a>
+        <nav>
+          <ul>
+            <li>
+              <a
+                href="/directions"
+              >
+                Directions
+              </a>
+            </li>
+            <li>
+              <a
+                href="/universities"
+              >
+                Universities
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div>
+          <a
+            href="/login"
+          >
+            Log In
+          </a>
+          <a
+            href="/register"
+          >
+            Register
+          </a>
+        </div>
+      </header>
+      <div
+        class="banner"
+      >
+        Banner
+      </div>
+      <div
+        class="filter"
+      >
+        Filter
+      </div>
+      <div
+        class="about"
+      >
+        About
+      </div>
+      <div
+        class="cta"
+      >
+        Call to action
+      </div>
+      <div
+        class="partners"
+      >
+        Partners
+      </div>
+      <div
+        class="footer"
+      >
+        Footer
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <header>
+      <a
+        href="https://www.softserveinc.com/en-us"
+        target="_blank"
+      >
+        <img
+          alt="logo"
+          class="logo"
+          src="https://scontent.fdnk1-2.fna.fbcdn.net/v/t1.0-9/84388180_10163108035310038_42562361399181312_n.png?_nc_cat=111&ccb=2&_nc_sid=09cbfe&_nc_ohc=5AyeiaZU6ZoAX9ZGaza&_nc_ht=scontent.fdnk1-2.fna&oh=f4772a8be3d6e8a4c49c38c7cf1cbff1&oe=5FEF13CF"
+        />
+      </a>
+      <nav>
+        <ul>
+          <li>
+            <a
+              href="/directions"
+            >
+              Directions
+            </a>
+          </li>
+          <li>
+            <a
+              href="/universities"
+            >
+              Universities
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div>
+        <a
+          href="/login"
+        >
+          Log In
+        </a>
+        <a
+          href="/register"
+        >
+          Register
+        </a>
+      </div>
+    </header>
+    <div
+      class="banner"
+    >
+      Banner
+    </div>
+    <div
+      class="filter"
+    >
+      Filter
+    </div>
+    <div
+      class="about"
+    >
+      About
+    </div>
+    <div
+      class="cta"
+    >
+      Call to action
+    </div>
+    <div
+      class="partners"
+    >
+      Partners
+    </div>
+    <div
+      class="footer"
+    >
+      Footer
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
