@@ -1,14 +1,14 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import Home from '.';
+import Header from '.';
 
-test('renders without crashing', () => {
-  const home = render(
+test('should ', () => {
+  const header = render(
     <MemoryRouter>
-      <Home />
+      <Header />
     </MemoryRouter>
   );
 
-  expect(home).toMatchSnapshot();
+  expect(header).toMatchSnapshot();
 });
