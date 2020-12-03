@@ -1,0 +1,29 @@
+.dropbox{
+    
+    height: 300px;
+    background: #fff;
+    text-align: center;
+    
+    h2{
+      font-size: 34px;
+    }
+    
+    p{
+      font-size:18px;
+    } 
+    button{
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    select{
+      margin-left: 5px;
+      width: 150px;
+      cursor: pointer;
+      
+      .hidden{
+        display:none;
+      }
+    }
+  }
+
+
