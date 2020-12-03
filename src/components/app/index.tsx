@@ -3,7 +3,7 @@ import './app.css';
 import Home from '../../pages/home/home';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-function App() {
+const App = () => {
   return (
     <Router>
       <Switch>
@@ -13,6 +13,6 @@ function App() {
       </Switch>
     </Router>
   );
-}
+};
 
 export default App;

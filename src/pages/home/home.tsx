@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './home.module.css';
 
-export default function Home() {
+const Home = () => {
   return (
     <>
       <div className={styles.header}>Header</div>
@@ -13,4 +13,6 @@ export default function Home() {
       <div className={styles.footer}>Footer</div>
     </>
   );
-}
+};
+
+export default Home;
