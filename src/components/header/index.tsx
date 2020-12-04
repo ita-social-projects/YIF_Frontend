@@ -16,19 +16,15 @@ const Header: React.FC = () => {
         />
       </a>
       <nav>
-        <ul>
-          <li>
-            <NavLink to='/directions'>Directions</NavLink>
-          </li>
-          <li>
-            <NavLink to='/universities'>Universities</NavLink>
-          </li>
-        </ul>
+        <div className={styles.pages}>
+          <NavLink to='/directions'>Directions</NavLink>
+          <NavLink to='/universities'>Universities</NavLink>
+        </div>
+        <div className={styles.entry}>
+          <Link to='/login'>Log In</Link>
+          <Link to='/register'>Register</Link>
+        </div>
       </nav>
-      <div>
-        <Link to='/login'>Log In</Link>
-        <Link to='/register'>Register</Link>
-      </div>
     </header>
   );
 };
