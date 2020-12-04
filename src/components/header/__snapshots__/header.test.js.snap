@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders without crashing 1`] = `
+exports[`should  1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
@@ -48,36 +48,6 @@ Object {
           </div>
         </nav>
       </header>
-      <div
-        class="banner"
-      >
-        Banner
-      </div>
-      <div
-        class="filter"
-      >
-        Filter
-      </div>
-      <div
-        class="about"
-      >
-        About
-      </div>
-      <div
-        class="cta"
-      >
-        Call to action
-      </div>
-      <div
-        class="partners"
-      >
-        Partners
-      </div>
-      <div
-        class="footer"
-      >
-        Footer
-      </div>
     </div>
   </body>,
   "container": <div>
@@ -124,36 +94,6 @@ Object {
         </div>
       </nav>
     </header>
-    <div
-      class="banner"
-    >
-      Banner
-    </div>
-    <div
-      class="filter"
-    >
-      Filter
-    </div>
-    <div
-      class="about"
-    >
-      About
-    </div>
-    <div
-      class="cta"
-    >
-      Call to action
-    </div>
-    <div
-      class="partners"
-    >
-      Partners
-    </div>
-    <div
-      class="footer"
-    >
-      Footer
-    </div>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

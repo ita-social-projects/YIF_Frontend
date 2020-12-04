@@ -1,15 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render correctly 1`] = `
+exports[`renders without crashing 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="header"
-      >
-        Header
-      </div>
+      <header>
+        <a
+          href="https://www.softserveinc.com/en-us"
+          rel="noreferrer noopener"
+          target="_blank"
+        >
+          <img
+            alt="logo"
+            class="logo"
+            src="https://scontent.fdnk1-2.fna.fbcdn.net/v/t1.0-9/84388180_10163108035310038_42562361399181312_n.png?_nc_cat=111&ccb=2&_nc_sid=09cbfe&_nc_ohc=5AyeiaZU6ZoAX9ZGaza&_nc_ht=scontent.fdnk1-2.fna&oh=f4772a8be3d6e8a4c49c38c7cf1cbff1&oe=5FEF13CF"
+          />
+        </a>
+        <nav>
+          <div
+            class="pages"
+          >
+            <a
+              href="/directions"
+            >
+              Directions
+            </a>
+            <a
+              href="/universities"
+            >
+              Universities
+            </a>
+          </div>
+          <div
+            class="entry"
+          >
+            <a
+              href="/login"
+            >
+              Log In
+            </a>
+            <a
+              href="/register"
+            >
+              Register
+            </a>
+          </div>
+        </nav>
+      </header>
       <div
         class="banner"
       >
@@ -43,11 +81,49 @@ Object {
     </div>
   </body>,
   "container": <div>
-    <div
-      class="header"
-    >
-      Header
-    </div>
+    <header>
+      <a
+        href="https://www.softserveinc.com/en-us"
+        rel="noreferrer noopener"
+        target="_blank"
+      >
+        <img
+          alt="logo"
+          class="logo"
+          src="https://scontent.fdnk1-2.fna.fbcdn.net/v/t1.0-9/84388180_10163108035310038_42562361399181312_n.png?_nc_cat=111&ccb=2&_nc_sid=09cbfe&_nc_ohc=5AyeiaZU6ZoAX9ZGaza&_nc_ht=scontent.fdnk1-2.fna&oh=f4772a8be3d6e8a4c49c38c7cf1cbff1&oe=5FEF13CF"
+        />
+      </a>
+      <nav>
+        <div
+          class="pages"
+        >
+          <a
+            href="/directions"
+          >
+            Directions
+          </a>
+          <a
+            href="/universities"
+          >
+            Universities
+          </a>
+        </div>
+        <div
+          class="entry"
+        >
+          <a
+            href="/login"
+          >
+            Log In
+          </a>
+          <a
+            href="/register"
+          >
+            Register
+          </a>
+        </div>
+      </nav>
+    </header>
     <div
       class="banner"
     >
