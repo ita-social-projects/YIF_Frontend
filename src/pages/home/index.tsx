@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './home.module.css';
-import { Header } from '../../components';
+import styles from './home.module.scss';
+import { Header, Banner } from '../../components';
 
 const Home = () => {
   return (
     <>
       <Header />
-      <div className={styles.banner}>Banner</div>
+      <Banner />
       <div className={styles.filter}>Filter</div>
       <div className={styles.about}>About</div>
       <div className={styles.cta}>Call to action</div>
