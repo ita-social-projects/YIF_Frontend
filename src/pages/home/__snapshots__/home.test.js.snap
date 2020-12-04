@@ -8,6 +8,7 @@ Object {
       <header>
         <a
           href="https://www.softserveinc.com/en-us"
+          rel="noreferrer noopener"
           target="_blank"
         >
           <img
@@ -83,6 +84,7 @@ Object {
     <header>
       <a
         href="https://www.softserveinc.com/en-us"
+        rel="noreferrer noopener"
         target="_blank"
       >
         <img
