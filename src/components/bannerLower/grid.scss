@@ -1,0 +1,37 @@
+@mixin clearfix {
+  &::after {
+    display: table;
+    clear: both;
+    content: '';
+  }
+}
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+.three-col-grid {
+  @include clearfix;
+}
+.l-wrap {
+  max-width: 1140px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.grid-item {
+  margin: 1%, 0;
+  float: left;
+}
+.grid-item:last-child {
+  margin-right: 0;
+  float: right;
+}
+.two-col-grid {
+  @include clearfix;
+  .grid-item {
+    width: 49%;
+  }
+}
