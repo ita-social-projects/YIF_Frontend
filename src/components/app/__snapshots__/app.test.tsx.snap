@@ -26,9 +26,34 @@ Object {
         About
       </div>
       <div
-        class="cta"
+        class="banner"
       >
-        Call to action
+        <div
+          class="two-col-grid label"
+        >
+          <div
+            class="grid-item wordAnimation leftWord"
+          >
+            Your IT
+          </div>
+          <div
+            class="grid-item wordAnimation rightWord"
+          >
+            Future
+          </div>
+        </div>
+        <div
+          class="description"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </div>
+        <a
+          class="bannerButton"
+          href="/somewhere"
+          rel="call to action"
+        >
+          Call to action
+        </a>
       </div>
       <div
         class="partners"
@@ -64,9 +89,34 @@ Object {
       About
     </div>
     <div
-      class="cta"
+      class="banner"
     >
-      Call to action
+      <div
+        class="two-col-grid label"
+      >
+        <div
+          class="grid-item wordAnimation leftWord"
+        >
+          Your IT
+        </div>
+        <div
+          class="grid-item wordAnimation rightWord"
+        >
+          Future
+        </div>
+      </div>
+      <div
+        class="description"
+      >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </div>
+      <a
+        class="bannerButton"
+        href="/somewhere"
+        rel="call to action"
+      >
+        Call to action
+      </a>
     </div>
     <div
       class="partners"
