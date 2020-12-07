@@ -1,15 +1,15 @@
 import React from 'react';
-import styles from './home.module.css';
-import BannerLower from '../../components/bannerLower';
+import styles from './home.module.scss';
+import { Header, Banner, BannerLower } from '../../components';
 
 const Home = () => {
   return (
     <>
-      <div className={styles.header}>Header</div>
-      <div className={styles.banner}>Banner</div>
+      <Header />
+      <Banner />
       <div className={styles.filter}>Filter</div>
       <div className={styles.about}>About</div>
-      <BannerLower  />
+      <BannerLower />
       <div className={styles.partners}>Partners</div>
       <div className={styles.footer}>Footer</div>
     </>
