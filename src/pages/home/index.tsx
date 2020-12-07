@@ -1,16 +1,16 @@
 import React from 'react';
-import { Dropbox } from '../../components';
-import styles from './home.module.css';
+import styles from './home.module.scss';
+import { Header, Banner, BannerLower,Dropbox } from '../../components';
 
 
 const Home = () => { 
   return (
     <>
-      <div className={styles.header}>Header</div>
-      <div className={styles.banner}>Banner</div>
+      <Header />
+      <Banner />
       <Dropbox/>
       <div className={styles.about}>About</div>
-      <div className={styles.cta}>Call to action</div>
+      <BannerLower />
       <div className={styles.partners}>Partners</div>
       <div className={styles.footer}>Footer</div>
     </>
