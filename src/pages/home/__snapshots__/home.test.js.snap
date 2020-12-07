@@ -31,9 +31,123 @@ Object {
         Call to action
       </div>
       <div
-        class="partners"
+        class="blockPartners"
       >
-        Partners
+        <h1>
+          Our partners
+        </h1>
+        <div
+          class="wrapperSlider"
+        >
+          <div
+            class="slider"
+            style="transform: translate( 0%);"
+          >
+            <div
+              class="inner"
+            >
+              <div
+                class="slide"
+              >
+                <img
+                  alt="imgSlide"
+                  src="imgSlide1.svg"
+                  style="width: 300px; height: auto;"
+                />
+              </div>
+              <div
+                class="slide"
+              >
+                <img
+                  alt="imgSlide"
+                  src="imgSlide2.png"
+                  style="width: 300px; height: auto;"
+                />
+              </div>
+              <div
+                class="slide"
+              >
+                <img
+                  alt="imgSlide"
+                  src="imgSlide3.png"
+                  style="width: 300px; height: auto;"
+                />
+              </div>
+              <div
+                class="slide"
+              >
+                <img
+                  alt="imgSlide"
+                  src="imgSlide4.jpg"
+                  style="width: 300px; height: auto;"
+                />
+              </div>
+              <div
+                class="slide"
+              >
+                <img
+                  alt="imgSlide"
+                  src="imgSlide5.jpg"
+                  style="width: 300px; height: auto;"
+                />
+              </div>
+              <div
+                class="slide"
+              >
+                <img
+                  alt="imgSlide"
+                  src="imgSlide6.jpg"
+                  style="width: 300px; height: auto;"
+                />
+              </div>
+              <div
+                class="slide"
+              >
+                <img
+                  alt="imgSlide"
+                  src="imgSlide7.svg"
+                  style="width: 300px; height: auto;"
+                />
+              </div>
+              <div
+                class="slide"
+              >
+                <img
+                  alt="imgSlide"
+                  src="imgSlide8.svg"
+                  style="width: 300px; height: auto;"
+                />
+              </div>
+              <div
+                class="slide"
+              >
+                <img
+                  alt="imgSlide"
+                  src="imgSlide9.svg"
+                  style="width: 300px; height: auto;"
+                />
+              </div>
+            </div>
+          </div>
+          <button
+            class="left"
+            data-testid="buttonLeft"
+          >
+            <img
+              alt="arrow"
+              src="arrow.svg"
+            />
+          </button>
+          <button
+            class="right"
+            data-testid="buttonRight"
+          >
+            <img
+              alt="arrow"
+              src="arrow.svg"
+            />
+          </button>
+        </div>
       </div>
       <div
         class="footer"
@@ -69,9 +183,123 @@ Object {
       Call to action
     </div>
     <div
-      class="partners"
+      class="blockPartners"
     >
-      Partners
+      <h1>
+        Our partners
+      </h1>
+      <div
+        class="wrapperSlider"
+      >
+        <div
+          class="slider"
+          style="transform: translate( 0%);"
+        >
+          <div
+            class="inner"
+          >
+            <div
+              class="slide"
+            >
+              <img
+                alt="imgSlide"
+                src="imgSlide1.svg"
+                style="width: 300px; height: auto;"
+              />
+            </div>
+            <div
+              class="slide"
+            >
+              <img
+                alt="imgSlide"
+                src="imgSlide2.png"
+                style="width: 300px; height: auto;"
+              />
+            </div>
+            <div
+              class="slide"
+            >
+              <img
+                alt="imgSlide"
+                src="imgSlide3.png"
+                style="width: 300px; height: auto;"
+              />
+            </div>
+            <div
+              class="slide"
+            >
+              <img
+                alt="imgSlide"
+                src="imgSlide4.jpg"
+                style="width: 300px; height: auto;"
+              />
+            </div>
+            <div
+              class="slide"
+            >
+              <img
+                alt="imgSlide"
+                src="imgSlide5.jpg"
+                style="width: 300px; height: auto;"
+              />
+            </div>
+            <div
+              class="slide"
+            >
+              <img
+                alt="imgSlide"
+                src="imgSlide6.jpg"
+                style="width: 300px; height: auto;"
+              />
+            </div>
+            <div
+              class="slide"
+            >
+              <img
+                alt="imgSlide"
+                src="imgSlide7.svg"
+                style="width: 300px; height: auto;"
+              />
+            </div>
+            <div
+              class="slide"
+            >
+              <img
+                alt="imgSlide"
+                src="imgSlide8.svg"
+                style="width: 300px; height: auto;"
+              />
+            </div>
+            <div
+              class="slide"
+            >
+              <img
+                alt="imgSlide"
+                src="imgSlide9.svg"
+                style="width: 300px; height: auto;"
+              />
+            </div>
+          </div>
+        </div>
+        <button
+          class="left"
+          data-testid="buttonLeft"
+        >
+          <img
+            alt="arrow"
+            src="arrow.svg"
+          />
+        </button>
+        <button
+          class="right"
+          data-testid="buttonRight"
+        >
+          <img
+            alt="arrow"
+            src="arrow.svg"
+          />
+        </button>
+      </div>
     </div>
     <div
       class="footer"
