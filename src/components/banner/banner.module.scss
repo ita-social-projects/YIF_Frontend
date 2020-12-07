@@ -1,0 +1,35 @@
+.banner {
+  height: calc(100vh - 124px);
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  h1 {
+    font-size: 100px;
+    line-height: 117px;
+    margin: 0 0 60px 0;
+  }
+
+  p {
+    width: 800px;
+    font-size: 18px;
+    line-height: 21px;
+    margin: 0 0 60px 0;
+    font-style: normal;
+    font-weight: normal;
+  }
+
+  .callToAction {
+    width: 468px;
+    height: 93px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 15px;
+    background-color: #afdef8;
+    font-size: 50px;
+    line-height: 59px;
+  }
+}

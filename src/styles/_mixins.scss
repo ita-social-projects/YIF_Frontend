@@ -1,0 +1,28 @@
+/* Mixin
+  ========================================================================== */
+
+// mixin for fonts creating
+@mixin font($font_name, $file_name, $weight, $style) {
+  @font-face {
+    font-family: $font_name;
+    font-display: swap;
+    src: url('/public/assets/fonts/#{$file_name}.woff') format('woff'),
+      url('/public/assets/fonts/#{$file_name}.woff2') format('woff2');
+    font-weight: #{$weight};
+    font-style: #{$style};
+  }
+}
+
+// flex settings
+@mixin flex($direction, $align-items, $justify-content) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align-items;
+  justify-content: $justify-content;
+}
+
+// size to one line
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
