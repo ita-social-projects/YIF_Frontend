@@ -9,7 +9,8 @@ describe('HOME PAGE: lower banner', () => {
     expect(getByText(/your it/i)).toBeInTheDocument();
     const rightWord = screen.getByText(/future/i);
     expect(rightWord).toBeInTheDocument();
-    expect(rightWord.className).toMatch('grid-item wordAnimation rightWord');
+    console.log(rightWord.tagName);
+    expect(rightWord.tagName).toMatch(/DIV/i);
   });
 
   test('check the botton', () => {

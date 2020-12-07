@@ -13,25 +13,25 @@ html {
 *:after {
   box-sizing: inherit;
 }
-.three-col-grid {
+.threeColGrid {
   @include clearfix;
 }
-.l-wrap {
+.lWrap {
   max-width: 1140px;
   margin-right: auto;
   margin-left: auto;
 }
-.grid-item {
+.gridItem {
   margin: 1%, 0;
   float: left;
 }
-.grid-item:last-child {
+.gridItem:last-child {
   margin-right: 0;
   float: right;
 }
-.two-col-grid {
+.twoColGrid {
   @include clearfix;
-  .grid-item {
+  .gridItem {
     width: 49%;
   }
 }
