@@ -1,0 +1,39 @@
+header {
+  height: 124px;
+  font-size: 25px;
+  text-align: center;
+  background: #c4c4c4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .logo {
+    height: 104px;
+    width: 104px;
+    margin: 0 20px;
+  }
+
+  nav {
+    display: flex;
+    line-height: 124px;
+    a {
+      text-decoration: none;
+      color: #111;
+      margin: 5px;
+      padding: 15px 20px;
+      border-radius: 12px;
+    }
+    .pages {
+      margin-right: 45px;
+      a {
+        background-color: #eaeaea;
+      }
+    }
+    .entry {
+      margin-right: 15px;
+      a {
+        background-color: #afdef8;
+      }
+    }
+  }
+}
