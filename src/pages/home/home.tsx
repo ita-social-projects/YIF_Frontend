@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './home.module.css';
+import {Slider} from "../../components/slider";
 
 const Home = () => {
   return (
@@ -9,7 +10,7 @@ const Home = () => {
       <div className={styles.filter}>Filter</div>
       <div className={styles.about}>About</div>
       <div className={styles.cta}>Call to action</div>
-      <div className={styles.partners}>Partners</div>
+      <Slider />
       <div className={styles.footer}>Footer</div>
     </>
   );
