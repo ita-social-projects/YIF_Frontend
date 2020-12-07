@@ -1,0 +1,90 @@
+.box{
+  display:inline-block;
+  //height: 300px;
+  text-align: center;
+  
+  .dropboxMenu{
+    float:left;
+    list-style-type: none;
+    cursor:pointer;
+    border:none;
+    width: 260px;
+    height: 75px;
+    cursor:pointer;
+    border-radius: 15px;
+    background: #EAEAEA;
+  }
+}
+
+
+.combolist-li{
+    margin-top:2px;
+    text-align: left;
+    height: 175px; 
+    overflow-y: auto;
+    overflow-x:hidden;
+    display: none;
+    //border:2px solid black;
+    margin-left: -80px;
+
+    li{
+      list-style-type: none;
+      font-size: 14px;
+      color:black;
+      border: 1px solid #A5A5A5;
+      box-sizing: border-box;
+      width: 235px;
+      height: 35px;
+      text-align: left;
+      background-color:#B8BABA;
+      padding-left: 20px;
+      padding-top:7px;
+      padding-bottom: 7px;
+      padding-right: 132px;
+      
+  
+  }
+
+}
+
+.combolist-li li:hover{
+    background-color: white;
+}
+
+input{
+    font-size: 35px;
+    background: #EAEAEA;
+    width: 275px;
+    height: 70px;
+    text-align:center;
+    border:none;
+    cursor: pointer;
+    margin-left:-40px;
+}
+
+.show{
+    display: inline-block;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+
+

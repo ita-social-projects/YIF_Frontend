@@ -1,69 +1,62 @@
-import React,{Fragment} from 'react'
-import styles from './dropbox.module.scss';
+import React,{Fragment,useEffect} from 'react'
+import './dropboxModule.scss';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  SET_DATA,
+  selectData,
+} from '../../store/reducers/dropboxReducer';
+import DropboxElement from '../common/dropbox/dropbox'
 
-type Props ={
-    university:string[],
-    direction:string[],
-    speciality:string[],
-    a?:number,
-    filter1?:()=> void,
-    resetFilter?:()=>void,
+
+//This is proto for filter function. When we developt better filter - change it
+const filter1 =()=>{
+  const selectors = document.querySelectorAll('select'); 
+ if(selectors[0].selectedIndex===2){
+      selectors[1].options[3].hidden=true
+      selectors[1].options[4].hidden=true
+      selectors[1].selectedIndex=2;
+
+      selectors[2].options[2].hidden=true
+      selectors[2].options[3].hidden=true
+      selectors[2].selectedIndex=5;
+  }else
+  if((selectors[0].selectedIndex===0)||(selectors[1].selectedIndex===0)||(selectors[2].selectedIndex===0)){
+    
+    for(let a:number = 0;a<3;a++){
+      selectors[a].selectedIndex=0;
+      for(let b:number = 0; b<5;b++){
+          selectors[a].options[b].hidden=false;
+      }
+    
+  }
+  }
 }
 
-class Dropbox extends React.Component<Props,{}>{
-      
-       state={
-          university:this.props.university,
-          direction:this.props.direction,
-          speciality:this.props.speciality,
-          number:this.props.a,
-       }
-
-      render(){
-        const {filter1} = this.props;
-
-          return(
-            <Fragment>
-             <div className={styles.dropbox}>
-             <div>
+const Dropbox =()=>{
+    const state = useSelector(selectData);
+    const dispatch = useDispatch();  
+    
+    let university:string[] = state.university;
+    let direction:string[] = state.direction;
+    let speciality:string[] = state.speciality;
+              
+    return(
+        <Fragment>
+             <div className='dropbox'>
+             <div className='title_'>
                   <h2>University filter</h2>
              </div>           
-            <form  action='#' method='POST'>
-            <select name='universities' onClick={filter1} defaultValue={0} >
-                <option>Choose university</option>
-                <optgroup label="U_G_1">
-                    <option value={this.state.university[0]}>{this.state.university[0]}</option>
-                    <option value={this.state.university[1]}>{this.state.university[1]}</option>
-                </optgroup>
-                <optgroup label="U_G_2">
-                    <option value={this.state.university[2]}>{this.state.university[2]}</option>
-                    <option value={this.state.university[3]}>{this.state.university[3]}</option>
-                </optgroup>
-            </select>
-            
-            <select name='direction' defaultValue={0}>
-                <option >Choose direction</option>
-                <option value={this.state.direction[0]}>{this.state.direction[0]}</option>
-                <option value={this.state.direction[1]}>{this.state.direction[1]}</option>
-                <option value={this.state.direction[2]}>{this.state.direction[2]}</option>
-                <option value={this.state.direction[3]}>{this.state.direction[3]}</option>
-            </select>
-     
-            <select name='speciality' defaultValue={0}>
-                <option >Choose speciality</option>
-                <option value={this.state.speciality[0]}>{this.state.speciality[0]}</option>
-                <option value={this.state.speciality[1]}>{this.state.speciality[1]}</option>
-                <option value={this.state.speciality[2]}>{this.state.speciality[2]}</option>
-                <option value={this.state.speciality[3]}>{this.state.speciality[3]}</option>
-            </select>
-            <button type={"submit"}>
-                    Submit
-            </button>
+            <form  action='#' method='POST'> 
+            <div className="selectors">
+                    <DropboxElement data={direction} keyId={0} listName={'Direction'} ></DropboxElement>               
+                    <DropboxElement data={speciality} keyId={1} listName={'Speciality'} ></DropboxElement>
+                    <DropboxElement data={university} keyId={2} listName={'University'}  ></DropboxElement>    
+                    <button type={"submit"}>Search</button> 
+            </div>
+                  
             </form>
-             </div>         
+             </div>
             </Fragment>
-          )
-      }
+    )
 }
-
 export default Dropbox;

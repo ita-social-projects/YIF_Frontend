@@ -1,0 +1,51 @@
+.dropbox{
+ 
+    height: 550px;
+    width:1440px;
+    background: #fff;
+    text-align: center;
+    
+    .title_{
+      h2{
+
+        margin:0;
+        margin-top:90px;
+        margin-bottom:80px;
+        margin-left:380px;
+        margin-right:auto;
+
+        font-style: normal;
+        font-weight: normal;
+        font-size: 90px;
+        line-height: 105px;
+      }
+    }
+
+    .selectors{
+      text-align: center;
+      margin-left: 65px;
+      .box{
+        margin-left: 25px;
+      }   
+      button{
+       margin:0px;
+       margin-left: 110px;
+       margin-top:15px;
+       font-size: 35px;
+       width: 232px;
+       height: 75px;
+       border-radius: 15px;
+       border:none;
+       background: #AFDEF8;
+       cursor: pointer;
+       position: absolute;
+     }
+    }
+
+  }
+
+ 
+
+   
+
+  
