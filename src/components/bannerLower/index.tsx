@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import './grid.scss';
-import './bannerLower.scss';
+import grid from './grid.module.scss';
+import style from './bannerLower.module.scss';
 
 export default class BannerLower extends Component<any> {
   scrollRef: any = React.createRef();
@@ -31,18 +31,30 @@ export default class BannerLower extends Component<any> {
 
   render() {
     return (
-      <div ref={this.scrollRef} className='banner'>
-        <div className='two-col-grid label'>
-          <div className='grid-item wordAnimation leftWord'>Your IT</div>
-          <div className='grid-item wordAnimation rightWord'>Future</div>
+      <div ref={this.scrollRef} className={style.banner}>
+        <div className={`${grid.twoColGrid} ${style.label}`}>
+          <div
+            className={`${grid.gridItem} ${style.wordAnimation} ${style.leftWord}`}
+          >
+            Your IT
+          </div>
+          <div
+            className={`${grid.gridItem} ${style.wordAnimation} ${style.rightWord}`}
+          >
+            Future
+          </div>
         </div>
-        <div className='description'>
+        <div className={style.description}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequat.
         </div>
-        <a href='/somewhere' className='bannerButton' rel='call to action'>
+        <a
+          href='/somewhere'
+          className={style.bannerButton}
+          rel='call to action'
+        >
           Call to action
         </a>
       </div>

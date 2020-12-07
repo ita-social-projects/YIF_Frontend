@@ -29,15 +29,15 @@ Object {
         class="banner"
       >
         <div
-          class="two-col-grid label"
+          class="twoColGrid label"
         >
           <div
-            class="grid-item wordAnimation leftWord"
+            class="gridItem wordAnimation leftWord"
           >
             Your IT
           </div>
           <div
-            class="grid-item wordAnimation rightWord"
+            class="gridItem wordAnimation rightWord"
           >
             Future
           </div>
@@ -92,15 +92,15 @@ Object {
       class="banner"
     >
       <div
-        class="two-col-grid label"
+        class="twoColGrid label"
       >
         <div
-          class="grid-item wordAnimation leftWord"
+          class="gridItem wordAnimation leftWord"
         >
           Your IT
         </div>
         <div
-          class="grid-item wordAnimation rightWord"
+          class="gridItem wordAnimation rightWord"
         >
           Future
         </div>
