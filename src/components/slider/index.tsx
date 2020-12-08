@@ -12,7 +12,7 @@ import imgSlide8 from "./image/imgSlide8.svg"
 import imgSlide9 from "./image/imgSlide9.svg"
 import arrow from "./image/arrow.svg"
 
-export const Slider: React.FunctionComponent = () => {
+const Slider: React.FunctionComponent = () => {
 
   let sliderList = [
     <Slide src={imgSlide1}/>,
@@ -67,3 +67,5 @@ export const Slider: React.FunctionComponent = () => {
       </div>
   )
 }
+
+export default Slider;
