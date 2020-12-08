@@ -23,10 +23,7 @@ afterEach(()=>{
 it("renders with or without a name",() =>{
     act(()=>{
         render(
-            <Provider store={store}>
-        <Dropbox />
-      </Provider>
-        ,container);
+            <Provider store={store}><Dropbox /></Provider>,container);
     });
     expect(container.textContent).toBe("");
 
