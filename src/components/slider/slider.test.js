@@ -1,5 +1,5 @@
 import React from 'react';
-import {Slider} from "./index";
+import {Slider} from "../index";
 import ReactDom from 'react-dom';
 import { render, fireEvent, screen} from "@testing-library/react";
 
