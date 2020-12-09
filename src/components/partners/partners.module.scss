@@ -1,10 +1,9 @@
 
 %btn-style {
   position: absolute;
-  top: 65%;
   transform: translateY(-50%);
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   background: none;
   border: none;
   outline: none;
@@ -24,11 +23,11 @@
 
   h1 {
     text-align: center;
-    font-size: 90px;
+    font-size: 5rem;// 80px
     font-weight: 400;
-    line-height: 105px;
+    line-height: 5.6rem;//91px
     @extend %resize;
-    margin-bottom: 80px;
+    margin: 100px 0 80px 0;
   }
 
   .wrapperSlider {
@@ -42,7 +41,7 @@
       margin: 0 auto;
       @extend %resize;
       display: flex;
-      height: 300px;
+      height: 310px;
       transition: 0.5s ease-in-out;
 
       .inner {
@@ -51,11 +50,13 @@
         margin: 0 auto;
 
         .slide {
-          margin: 0 15px;
+          margin: 0 17px;
           display: flex;
           align-items: center;
           width: 300px;
-          height: 100%;
+          height: 95%;
+          background-color: #F2F9FF;
+          border-radius: 15px;
         }
       }
     }
@@ -64,11 +65,24 @@
 
 .left {
   left: 8%;
+  top: 59%;
   transform: rotate(180deg);
   @extend %btn-style;
 }
 
 .right {
   right: 8%;
+  top: 64%;
   @extend %btn-style;
+}
+
+.right path,
+.left path{
+  background-color: #AABACB;
+}
+
+.right:hover path,
+.left:hover path {
+  fill: #12335E;
+  fill-opacity: 100%;
 }
