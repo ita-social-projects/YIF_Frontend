@@ -20,18 +20,23 @@ const Dropbox =()=>{
         <div className='dropbox'>
             <div className='title_'>
                 <h2>University filter</h2>
-            </div>           
-            <form  action='#' method='POST'> 
+            </div>
+            <div className="filter-form">
+            <form  action='#' method='POST' id='univ_filter'> 
                 <div className="selectors">
                   <DropboxElement data={direction} keyId={0} listName={'Direction'} ></DropboxElement>               
-                  <DropboxElement data={speciality} keyId={1} listName={'Speciality'} ></DropboxElement>
-                  <DropboxElement data={university} keyId={2} listName={'University'}  ></DropboxElement>    
-                  <button type={"submit"}>
-                      <span className='searchText'>Search</span>
-                      <span className='searchIcon'><SearchIcon></SearchIcon></span>
-                  </button> 
+                  <DropboxElement data={speciality} keyId={1} listName={'Speciality'} width={348}></DropboxElement>
+                  <DropboxElement data={university} keyId={2} listName={'University'}  ></DropboxElement>       
                 </div>      
             </form>
+            <button type={"submit"} form='univ_filter'>
+                  <span className='searchText'>Search</span>
+                  <span className='searchIcon'><SearchIcon></SearchIcon></span>
+            </button>
+            
+            </div>           
+            
+             
         </div>
       </Fragment>
     )
