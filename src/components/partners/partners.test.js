@@ -22,4 +22,3 @@ test('check if user can scroll the slide', () => {
   fireEvent.click(buttonLeft);
   expect(onClick).toHaveBeenCalledTimes(1);
 });
-
