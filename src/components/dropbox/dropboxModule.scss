@@ -1,45 +1,41 @@
 .dropbox{
   height: 550px;
   background: #BAD0E5;
-  //display: inline;
-  //text-align: center;
-  //width: 1440px;
-  //margin-right: auto;
-  //margin-left: auto;
-  
+
   .title_{
     width:600px;
+    //border:solid 1px black;
+    margin:0px;
+    //margin-top:90px;
     margin-left:auto;
     margin-right:auto;
-    h2{
-     // margin:0;
-      margin-top:90px;
-      margin-bottom:80px;
-      //font-style: normal;
-      //font-weight: normal;
+    //margin-top:90px;
+    //padding-left: 90px;
+    margin-bottom:80px;
+    h3{
+      //line-height: 90px;
       font-size: 90px;
-      //line-height: 105px;
     }
   }
 
 .filter-form{
-  height: 50px;
-  width: 1000px;
+  //height: 50px;
+  width: 1200px;
+  //border:solid 1px black;
   margin-left:auto;
   margin-right:auto;
 }
 
   .selectors{
-    //text-align: center;
-    //margin-left: 65px;
-    //
-    //width: 100vh;
     float:left;
     margin-right: 40px;
-    .box{
+     
+    .box:nth-of-type(2){
       margin-left: 25px;
-    }   
-    
+    }
+    .box:nth-of-type(3){
+      margin-left: 25px;
+    }  
   }
 }
 

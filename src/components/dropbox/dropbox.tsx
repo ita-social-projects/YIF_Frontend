@@ -19,7 +19,7 @@ const Dropbox =()=>{
       <Fragment>
         <div className='dropbox'>
             <div className='title_'>
-                <h2>University filter</h2>
+                <h3>University filter</h3>
             </div>
             <div className="filter-form">
             <form  action='#' method='POST' id='univ_filter'> 
