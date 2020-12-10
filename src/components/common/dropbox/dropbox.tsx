@@ -6,6 +6,7 @@ type Props={
    data:string[];
    keyId:number;
    listName?:string; 
+   width?:number;
 }
 
 class DropboxElement extends React.Component<Props,{}>{
@@ -32,11 +33,13 @@ class DropboxElement extends React.Component<Props,{}>{
         const list = document.querySelectorAll('.combolist-li');
         const li = list[this.props.keyId].querySelectorAll('li'); 
         const input = document.querySelectorAll('input');
+        const listBox = document.querySelectorAll('.list-box');
         
         for(let i:number = 0; i<li.length;i++){   
             li[i].addEventListener('click',()=>{
             input[this.props.keyId].value=li[i].innerHTML;
-            list[this.props.keyId].classList.toggle('show'); 
+            list[this.props.keyId].classList.toggle('show');
+            listBox[this.props.keyId].classList.toggle('show-list-box'); 
             })
         }
     }
@@ -48,22 +51,39 @@ class DropboxElement extends React.Component<Props,{}>{
 
     showHideList=()=>{
         const input = document.querySelectorAll('.combolist-li');
+        const listBox = document.querySelectorAll('.list-box');
+        
         input[this.props.keyId].classList.toggle('show');
+        listBox[this.props.keyId].classList.toggle('show-list-box');
+    }
+
+    showHideBoxList=()=>{
+        const listBox = document.querySelectorAll('.list-box');
+        listBox[this.props.keyId].classList.toggle('show-list-box');
     }
 
     render(){
 
-        const {listName} = this.props;
+        let {listName,width} = this.props;
         const {showHideArrow,showHideList} = this;
+
+        if(width===null){
+            width = 260;
+        }
+
         return(
             <div className='box'>
-                <ul className='dropboxMenu'>
+                <ul className='dropboxMenu' style={{width: `${width}px`}}>
                     <li className='input-li' onClick={showHideArrow}>
-                        <input type='text' value={listName} readOnly onClick={showHideList}></input>
-                        <div className='arrow' onClick={showHideList}><Arrow/></div>
-                        <ul className='combolist-li'>
-                            <li>{listName}</li>
-                        </ul>
+                        <div className="dropbox-title">
+                            <input type='text' value={listName} readOnly onClick={showHideList}></input>
+                            <div className='arrow' onClick={showHideList}><Arrow/></div>
+                        </div>
+                        <div className="list-box">
+                            <ul className='combolist-li'>
+                                <li>{listName}</li>
+                            </ul>
+                        </div>                    
                     </li>
                 </ul>
             </div>
