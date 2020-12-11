@@ -1,6 +1,31 @@
 .dropbox{
   height: 550px;
   background: #BAD0E5;
+  position:relative;
+
+  .filter1{
+    position: absolute;
+    //border:solid 1px black;
+    right: 50px;
+    top:35px;
+  }
+  .filter2{
+    position: absolute;
+    //border:solid 1px black;
+    right: 30px;
+    bottom: 20px;
+  }
+  .filter3{
+    position: absolute;
+    //border:solid 1px black;
+    //width:378px;
+    //padding-top: 100px;
+    //padding-left: 260px;
+    left: 30px;
+    bottom: 0px;
+    z-index: 0;
+
+  }
 
   .title_{
     width:600px;
@@ -14,6 +39,8 @@
     margin-bottom:80px;
     h3{
       //line-height: 90px;
+      //margin-top:90px;
+      padding-top: 90px;
       font-size: 90px;
     }
   }
@@ -24,14 +51,25 @@
   //border:solid 1px black;
   margin-left:auto;
   margin-right:auto;
-}
+  
+  }
+
+
 
   .selectors{
     float:left;
     margin-right: 40px;
+    //z-index: 1;
+
+    .box:nth-of-type(1){
+      //margin-left: 25px;
+      position: relative;
+      z-index: 1;
+    }
      
     .box:nth-of-type(2){
       margin-left: 25px;
+
     }
     .box:nth-of-type(3){
       margin-left: 25px;
@@ -54,7 +92,7 @@ button{
     position: absolute;
     .searchIcon{
       margin-left:30px;
-      margin-top:10px;
+      margin-top:15px;
       color:white;
     }
     .searchText{

@@ -22,6 +22,7 @@
   margin-top:10px;
   padding-top:0px;
   height: 0px;
+  opacity: 1;
   transition: height 0.7s;
   //padding-bottom:5px;
   //padding-left: 5px;
@@ -66,6 +67,7 @@
       padding-top:17px;
       padding-bottom: 14px;
       padding-right: 132px;
+      //opacity: 1;
       //border:solid 1px black;
   }
 }
@@ -131,7 +133,7 @@
   //padding-bottom:5px;
   //padding-left: 5px;
   //padding-right: 5px;
-  height: 260px;
+  height: 210px;
   transition: height 0.5s
 }
 
