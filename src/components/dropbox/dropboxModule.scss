@@ -36,7 +36,7 @@
     margin-right:auto;
     //margin-top:90px;
     //padding-left: 90px;
-    margin-bottom:80px;
+    margin-bottom:60px;
     h3{
       //line-height: 90px;
       //margin-top:90px;
@@ -84,19 +84,27 @@ button{
     display:inline-block;
     font-size: 35px;
     width: 232px;
-    height: 75px;
+    height: 65px;
     border-radius: 15px;
     border:none;
     //background-color: #AFDEF8;
     cursor: pointer;
-    position: absolute;
+    margin-top: -6px;
+    position: relative;
     .searchIcon{
-      margin-left:30px;
-      margin-top:15px;
-      color:white;
+      position: absolute;
+      top:25%;
+      right: 22px;
+      //margin-left:30px;
+      //padding-top:5px;
     }
     .searchText{
-      margin-left:20px;
+      //margin-left:20px;
+      //font-family: Asap;
+      position: absolute;
+      top:18%;
+      left:50px;
+      //top:25%
     }
   
 }
