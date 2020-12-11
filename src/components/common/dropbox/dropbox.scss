@@ -10,7 +10,7 @@
     width: 260px;
     height: 55px;
     cursor:pointer;
-    border-radius: 15px;
+    border-radius: 5px;
     background: #F2F9FF;
   }
 }
@@ -36,6 +36,7 @@
 
 .combolist-li{
     margin-top:5px;
+    border-radius:5px;
     //text-align: left;
     //height: 175px;
     display: block;
@@ -123,18 +124,16 @@
 }
 
 .show{
-    //display: inline-block;
-    height: 250px; /***/
-    transition: height 0.5s
+    height: 250px;
+    transition: height 0.5s;
 }
 
 .show-list-box{
-  //visibility:visible;
-  //padding-bottom:5px;
-  //padding-left: 5px;
-  //padding-right: 5px;
   height: 210px;
-  transition: height 0.5s
+  transition: height 0.5s;
+}
+.gray-color-text{
+  color:gray;
 }
 
 /* width */

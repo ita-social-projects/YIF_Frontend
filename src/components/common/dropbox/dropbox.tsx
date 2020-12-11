@@ -37,7 +37,7 @@ class DropboxElement extends React.Component<Props,{}>{
         const listBox = document.querySelectorAll('.list-box');
         
         for(let i:number = 0; i<li.length;i++){   
-            li[i].addEventListener('click',()=>{
+            li[i].addEventListener('click drag',()=>{
             input[this.props.keyId].value=li[i].innerHTML;
             list[this.props.keyId].classList.toggle('show');
             listBox[this.props.keyId].classList.toggle('show-list-box'); 
@@ -51,16 +51,13 @@ class DropboxElement extends React.Component<Props,{}>{
     }
 
     showHideList=()=>{
-        const input = document.querySelectorAll('.combolist-li');
+        const combolistLi = document.querySelectorAll('.combolist-li');
         const listBox = document.querySelectorAll('.list-box');
+        const input = document.querySelectorAll('input');
         
-        input[this.props.keyId].classList.toggle('show');
+        combolistLi[this.props.keyId].classList.toggle('show');
         listBox[this.props.keyId].classList.toggle('show-list-box');
-    }
-
-    showHideBoxList=()=>{
-        const listBox = document.querySelectorAll('.list-box');
-        listBox[this.props.keyId].classList.toggle('show-list-box');
+        input[this.props.keyId].classList.toggle('gray-color-text');
     }
 
     render(){
