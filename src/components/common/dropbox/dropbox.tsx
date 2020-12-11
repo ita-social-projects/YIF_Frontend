@@ -37,7 +37,7 @@ class DropboxElement extends React.Component<Props,{}>{
         const listBox = document.querySelectorAll('.list-box');
         
         for(let i:number = 0; i<li.length;i++){   
-            li[i].addEventListener('click',()=>{
+            li[i].addEventListener('mousedown',()=>{
             input[this.props.keyId].value=li[i].innerHTML;
             list[this.props.keyId].classList.toggle('show');
             listBox[this.props.keyId].classList.toggle('show-list-box');
@@ -78,10 +78,10 @@ class DropboxElement extends React.Component<Props,{}>{
         return(
             <div className='box'>
                 <ul className='dropboxMenu' style={{width: `${width}px`}}>
-                    <li className='input-li' onClick={showHideArrow}>
+                    <li className='input-li' onMouseDown={showHideArrow}>
                         <div className="dropbox-title">
-                            <input type='text' name={listName} style={{width: `${inputWidth}px`}} value={listName} readOnly onClick={showHideList}></input>
-                            <div className='arrow' onClick={showHideList}><Arrow/></div>
+                            <input type='text' name={listName} style={{width: `${inputWidth}px`}} value={listName} readOnly onMouseDown={showHideList}></input>
+                            <div className='arrow' onMouseDown={showHideList}><Arrow/></div>
                         </div>
                         <div className="list-box">
                             <ul className='combolist-li'>
