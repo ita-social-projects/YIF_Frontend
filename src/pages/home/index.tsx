@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './home.module.scss';
-import { Header, Banner, BannerLower } from '../../components';
+import { Header, Banner, BannerLower, Partners } from '../../components';
+
 
 const Home = () => {
   return (
@@ -10,7 +11,7 @@ const Home = () => {
       <div className={styles.filter}>Filter</div>
       <div className={styles.about}>About</div>
       <BannerLower />
-      <div className={styles.partners}>Partners</div>
+      <Partners />
       <div className={styles.footer}>Footer</div>
     </>
   );
