@@ -37,10 +37,11 @@ class DropboxElement extends React.Component<Props,{}>{
         const listBox = document.querySelectorAll('.list-box');
         
         for(let i:number = 0; i<li.length;i++){   
-            li[i].addEventListener('click drag',()=>{
+            li[i].addEventListener('click',()=>{
             input[this.props.keyId].value=li[i].innerHTML;
             list[this.props.keyId].classList.toggle('show');
-            listBox[this.props.keyId].classList.toggle('show-list-box'); 
+            listBox[this.props.keyId].classList.toggle('show-list-box');
+            input[this.props.keyId].classList.toggle('gray-color-text'); 
             })
         }
     }
