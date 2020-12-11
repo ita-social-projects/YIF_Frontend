@@ -35,30 +35,35 @@ class DropboxElement extends React.Component<Props,{}>{
         const li = list[this.props.keyId].querySelectorAll('li'); 
         const input = document.querySelectorAll('input');
         const listBox = document.querySelectorAll('.list-box');
+        const arrow = document.querySelectorAll('.arrow');
         
         for(let i:number = 0; i<li.length;i++){   
-            li[i].addEventListener('mousedown',()=>{
+            li[i].addEventListener('click',()=>{
             input[this.props.keyId].value=li[i].innerHTML;
             list[this.props.keyId].classList.toggle('show');
             listBox[this.props.keyId].classList.toggle('show-list-box');
-            input[this.props.keyId].classList.toggle('gray-color-text'); 
+            input[this.props.keyId].classList.toggle('gray-color-text');
+            arrow[this.props.keyId].classList.toggle('arrow-up'); 
             })
         }
     }
-
+    
     showHideArrow=()=>{
         const arrow = document.querySelectorAll('.arrow');
         arrow[this.props.keyId].classList.toggle('arrow-up');
     }
+    
 
     showHideList=()=>{
         const combolistLi = document.querySelectorAll('.combolist-li');
         const listBox = document.querySelectorAll('.list-box');
         const input = document.querySelectorAll('input');
+        const arrow = document.querySelectorAll('.arrow');
         
         combolistLi[this.props.keyId].classList.toggle('show');
         listBox[this.props.keyId].classList.toggle('show-list-box');
         input[this.props.keyId].classList.toggle('gray-color-text');
+        arrow[this.props.keyId].classList.toggle('arrow-up');
     }
 
     render(){
@@ -78,10 +83,10 @@ class DropboxElement extends React.Component<Props,{}>{
         return(
             <div className='box'>
                 <ul className='dropboxMenu' style={{width: `${width}px`}}>
-                    <li className='input-li' onMouseDown={showHideArrow}>
+                    <li className='input-li'>
                         <div className="dropbox-title">
-                            <input type='text' name={listName} style={{width: `${inputWidth}px`}} value={listName} readOnly onMouseDown={showHideList}></input>
-                            <div className='arrow' onMouseDown={showHideList}><Arrow/></div>
+                            <input type='text' name={listName} style={{width: `${inputWidth}px`}} value={listName} readOnly onClick={showHideList}></input>
+                            <div className='arrow' onClick={showHideList}><Arrow/></div>
                         </div>
                         <div className="list-box">
                             <ul className='combolist-li'>
