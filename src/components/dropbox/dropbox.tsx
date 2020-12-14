@@ -29,23 +29,24 @@ const Dropbox =()=>{
       <Fragment>
         <div className={styles.dropbox}>
             <div className={styles.title_}>
-                <h3>University filter</h3>
+                <h3>Фільтр університетів</h3>
             </div>
             <form  action='#' method='POST' id='univ_filter'> 
                 <div className={styles.selectors}>
                   <div className={styles.box}>
-                  <DropboxElement data={direction} keyId={0} listName={'Direction'} ></DropboxElement>
+                  <DropboxElement data={direction} keyId={0} listName={'Direction'} listTitle={'Напрями'} ></DropboxElement>
                   </div>
                   <div className={styles.box}>
-                  <DropboxElement data={speciality} keyId={1} listName={'Speciality'} width={21.75}></DropboxElement>
+                  <DropboxElement data={speciality} keyId={1} listName={'Speciality'} width={21.75} listTitle={'Спеціальності'}></DropboxElement>
                   </div>
                   <div className={styles.box}>
-                  <DropboxElement data={university} keyId={2} listName={'University'} ></DropboxElement>  
+                  <DropboxElement data={university} keyId={2} listName={'University'} listTitle={'Університети'}></DropboxElement>  
                   </div>
                   <button type={"submit"} form='univ_filter'>
-                      <span className={styles.searchText}>Search</span>
+                      <span className={styles.searchText}>Пошук</span>
                       <span className={styles.searchIcon}><SearchIcon></SearchIcon></span>
-                  </button>  
+                  </button>
+                  <img src='../' alt=''></img>  
                 </div>      
             </form>
             <div className={styles.filter1}><Filter1></Filter1></div>
