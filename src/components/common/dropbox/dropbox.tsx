@@ -1,5 +1,7 @@
 import React from 'react'
 import './dropbox.scss';
+import styles from './dropbox.module.scss';
+
 import {ReactComponent as Arrow} from './arrow.svg'
 
 type Props={
@@ -17,7 +19,7 @@ class DropboxElement extends React.Component<Props,{}>{
     }
     
     componentDidMount(){
-        const ul = document.querySelectorAll('.combolist-li');
+        const ul = document.querySelectorAll('.'+styles.combolist_li);
         this.addElementsNew(ul[this.props.keyId],this.props.data);
         this.select();
     }
@@ -31,23 +33,25 @@ class DropboxElement extends React.Component<Props,{}>{
     }
 
     select =()=>{
-        const list = document.querySelectorAll('.combolist-li');
-        const li = list[this.props.keyId].querySelectorAll('li'); 
+        const list = document.querySelectorAll('.'+styles.combolist_li);
+        const li = list[this.props.keyId].querySelectorAll('.'+styles.combolist_li+' li');
         const input = document.querySelectorAll('input');
-        const listBox = document.querySelectorAll('.list-box');
-        const arrow = document.querySelectorAll('.arrow');
+        //const input = document.querySelectorAll('.dropbox-title')[this.props.keyId].querySelectorAll('input');
+        const listBox = document.querySelectorAll('.'+styles.list_box);
+        const arrow = document.querySelectorAll('.'+styles.arrow);
         
         for(let i:number = 0; i<li.length;i++){   
-            li[i].addEventListener('click',()=>{
-            input[this.props.keyId].value=li[i].innerHTML;
-            list[this.props.keyId].classList.toggle('show');
-            listBox[this.props.keyId].classList.toggle('show-list-box');
-            input[this.props.keyId].classList.toggle('gray-color-text');
-            arrow[this.props.keyId].classList.toggle('arrow-up'); 
+            li[i].addEventListener('click',()=>{ 
+                input[this.props.keyId].value=li[i].innerHTML;
+                list[this.props.keyId].classList.toggle(styles.show);
+                listBox[this.props.keyId].classList.toggle(styles.show_list_box);
+                input[this.props.keyId].classList.toggle(styles.gray_color_text);
+                arrow[this.props.keyId].classList.toggle(styles.arrow_up); 
             })
         }
     }
     
+    //this func here for history
     showHideArrow=()=>{
         const arrow = document.querySelectorAll('.arrow');
         arrow[this.props.keyId].classList.toggle('arrow-up');
@@ -55,17 +59,17 @@ class DropboxElement extends React.Component<Props,{}>{
     
 
     showHideList=()=>{
-        const combolistLi = document.querySelectorAll('.combolist-li');
-        const listBox = document.querySelectorAll('.list-box');
+        const combolistLi = document.querySelectorAll('.'+styles.combolist_li);
+        const listBox = document.querySelectorAll('.'+styles.list_box);
         const input = document.querySelectorAll('input');
-        const arrow = document.querySelectorAll('.arrow');
+        const arrow = document.querySelectorAll('.'+styles.arrow);
         
-        combolistLi[this.props.keyId].classList.toggle('show');
-        listBox[this.props.keyId].classList.toggle('show-list-box');
-        input[this.props.keyId].classList.toggle('gray-color-text');
-        arrow[this.props.keyId].classList.toggle('arrow-up');
+        combolistLi[this.props.keyId].classList.toggle(styles.show);
+        listBox[this.props.keyId].classList.toggle(styles.show_list_box);
+        input[this.props.keyId].classList.toggle(styles.gray_color_text);
+        arrow[this.props.keyId].classList.toggle(styles.arrow_up); 
     }
-
+    
     render(){
 
         let {listName,width,inputWidth} = this.props;
@@ -73,23 +77,26 @@ class DropboxElement extends React.Component<Props,{}>{
         
         //customise width of our dropbox element
         if(width===null){
-            width = 260;
-            inputWidth= width-80;
+            //width = 260;
+            width = 16.25;
+            //inputWidth= width-80;
+            inputWidth= width-5;
         }else
         if((width!=null)){
-            inputWidth= width-80;
+            //inputWidth= width-80;
+            inputWidth= width-5;
         }
 
         return(
-            <div className='box'>
-                <ul className='dropboxMenu' style={{width: `${width}px`}}>
-                    <li className='input-li'>
-                        <div className="dropbox-title">
-                            <input type='text' name={listName} style={{width: `${inputWidth}px`}} value={listName} readOnly onClick={showHideList}></input>
-                            <div className='arrow' onClick={showHideList}><Arrow/></div>
+            <div className={styles.box}>
+                <ul className={styles.dropboxMenu} style={{width: `${width}rem`}}>
+                    <li className={styles.input_li}>
+                        <div className={styles.dropbox_title}>
+                            <input type='text' name={listName} style={{width: `${inputWidth}rem`}} value={listName} readOnly onClick={showHideList}></input>
+                            <div className={styles.arrow} onClick={showHideList}><Arrow/></div>
                         </div>
-                        <div className="list-box">
-                            <ul className='combolist-li'>
+                        <div className={styles.list_box}>
+                            <ul className={styles.combolist_li}>
                                 <li>{listName}</li>
                             </ul>
                         </div>                    
