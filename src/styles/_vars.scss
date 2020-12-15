@@ -1,7 +1,40 @@
 /* Variables:
   ========================================================================== */
 
+@import './fonts';
+
 // fonts
-$font: 'Poppins', sans-serif;
+$fontNunito: 'Nunito', sans-serif;
+$fontOpenSans: 'Open Sans', sans-serif;
+
+//fotn-weight
+$light: 300;
+$regular: 400;
+$semiBold: 600;
+$bold: 700;
+$extraBold: 800;
+
+//font-size
+$font_90px: 5, 625rem;
+$font_80px: 5rem;
+$font_40px: 2, 5rem;
+$font_30px: 1.875rem;
+$font_18px: 1, 125rem;
+$font_16px: 1rem;
+$font_15px: 0, 9375rem;
 
 // colors
+$darkBlue: #11345c;
+$gray: #afbecf;
+$black: #000000;
+$white: #ffffff;
+
+$lightBlue_1: #bad0e5;
+$lightBlue_2: #d6e5f2;
+$lightBlue_3: #f2f9ff;
+
+//border before hover
+$borderFirst: 1px solid $darkBlue;
+
+//border on hover
+$borderSecond: 1px solid $black;
