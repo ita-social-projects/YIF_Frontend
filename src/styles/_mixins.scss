@@ -2,12 +2,12 @@
   ========================================================================== */
 
 // mixin for fonts creating
-@mixin font($font_name, $file_name, $weight, $style) {
+@mixin font($font_name, $folder_name, $file_name, $weight, $style) {
   @font-face {
     font-family: $font_name;
     font-display: swap;
-    src: url('/public/assets/fonts/#{$file_name}.woff') format('woff'),
-      url('/public/assets/fonts/#{$file_name}.woff2') format('woff2');
+    src: url('/assets/fonts/#{$folder_name}/#{$file_name}.woff') format('woff'),
+      url('/assets/fonts/#{$folder_name}/#{$file_name}.woff2') format('woff2');
     font-weight: #{$weight};
     font-style: #{$style};
   }
