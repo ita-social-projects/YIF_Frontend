@@ -1,16 +1,15 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react'; // import react-testing methods
+import { render, fireEvent, screen } from '@testing-library/react';
 
 import BannerLower from './index';
 
 describe('HOME PAGE: lower banner', () => {
   test('render a block and check label', () => {
     const { getByText } = render(<BannerLower />);
-    expect(getByText(/your it/i)).toBeInTheDocument();
-    const rightWord = screen.getByText(/future/i);
-    expect(rightWord).toBeInTheDocument();
-    console.log(rightWord.tagName);
-    expect(rightWord.tagName).toMatch(/DIV/i);
+    expect(getByText(/your it future/i)).toBeInTheDocument();
+    const label = screen.getByText(/future/i);
+    expect(label).toBeInTheDocument();
+    expect(label.tagName).toMatch(/H1/i);
   });
 
   test('check the botton', () => {

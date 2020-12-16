@@ -1,0 +1,59 @@
+@font-face {
+  font-family: Asap-Medium;
+  src: url(/assets/fonts/Asap-Medium.ttf);
+}
+
+.container {
+  width: 100%;
+  background-color: #bad0e5;
+  border-top: 2px dashed #12335e;
+}
+.div {
+  position: relative;
+  overflow: hidden;
+  background-color: #bad0e5;
+  max-height: 530px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5.75rem 0 8.75rem 0;
+
+  h1 {
+    font-family: Asap-Medium;
+    font-weight: 400;
+    font-size: 3rem;
+    line-height: 1.15;
+  }
+  p {
+    max-width: 795px;
+    margin: 2.5rem 0 1.875rem 0;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1rem;
+    line-height: 1.36;
+  }
+  a {
+    margin: 0.5rem 0;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 1rem 3.125rem;
+    border-radius: 15px;
+    border: 1px solid #12335e00;
+    background-color: #12335e;
+    color: #ffffff;
+    font-family: Asap-Medium;
+    font-weight: normal;
+    font-size: 1.875rem;
+    line-height: 1.13;
+    transition: color 0.25s ease, background-color 0.25s ease, border 0.25s ease;
+  }
+  a:hover {
+    background-color: rgba(255, 255, 255, 0);
+    color: #000000;
+    border: 1px solid black;
+  }
+}
