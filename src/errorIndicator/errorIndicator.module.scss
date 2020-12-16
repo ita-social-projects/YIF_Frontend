@@ -1,10 +1,5 @@
 @import '../styles/index.scss';
 
-@font-face {
-  font-family: Asap-Medium;
-  src: url(/assets/fonts/Asap-Medium.ttf);
-}
-
 .error {
   overflow: hidden;
   position: relative;
@@ -20,22 +15,23 @@
   background-color: white;
   background-image: url(/assets/images/error.svg);
   background-repeat: no-repeat;
-  background-size: auto 94%;
-  background-position: 100% 100%;
-  font-family: Asap-Medium;
-  padding: 6.25rem 0 16.7rem 8.125rem;
+  background-size: auto 98%;
+  background-position: 95% 100%;
+  font-family: $fontOpenSans;
+  padding: 8.75rem 0 16.7rem 8.125rem;
   h1 {
     font-weight: 700;
     font-size: 5rem;
-    line-height: 1.15;
+    line-height: 1.25;
   }
   p {
     margin-top: 3.186rem;
-    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: $fontOpenSans;
     font-size: 1.125rem;
     line-height: 1.36;
   }
   a {
+    font-family: $fontOpenSans;
     margin-top: 1.563rem;
     font-size: 1.125rem;
     color: red;
@@ -50,7 +46,8 @@
 @include laptop {
   /*   1024px - 1365px   */
   .error {
-    background-size: auto 84%;
+    background-size: auto 54%;
+    background-position: 100% 50%;
     padding-bottom: 12rem;
   }
 }
@@ -58,9 +55,9 @@
 @include tablet {
   /*   768px - 1023px   */
   .error {
-    background-size: auto 54%;
+    background-size: auto 44%;
     padding-bottom: 6rem;
-    background-position: 100% 50%;
+    background-position: 100% 30%;
   }
 }
 @include mobile-w {

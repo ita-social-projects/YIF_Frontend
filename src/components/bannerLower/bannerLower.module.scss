@@ -1,9 +1,5 @@
-@import '../../styles/';
+@import '../../styles/index.scss';
 
-@font-face {
-  font-family: Asap-Medium;
-  src: url(/assets/fonts/Asap-Medium.ttf);
-}
 .container {
   width: 100%;
   background-color: #bad0e5;
@@ -29,16 +25,16 @@
   background-position: 100% 100%;
 
   h1 {
-    font-family: Asap-Medium;
+    font-family: $fontNunito;
     font-weight: 400;
     font-size: 5rem;
-    line-height: 1.15;
+    line-height: 1.36;
   }
   p {
     width: 55vw;
     max-width: 795px;
     margin: 2.5rem 0 1.875rem 0;
-    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: $fontOpenSans;
     font-size: 1rem;
     line-height: 1.36;
   }
@@ -50,7 +46,7 @@
     border: 1px solid #12335e00;
     background-color: #12335e;
     color: #ffffff;
-    font-family: Asap-Medium;
+    font-family: $fontNunito;
     font-weight: normal;
     font-size: 1.875rem;
     line-height: 1.13;

@@ -37,10 +37,10 @@ export default class BannerLower extends Component<any> {
         >
           <h1>Your IT Future</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Існують легенди (записи яких збереглися в античних храмах), згідно з
+            якими людська раса походить від cтворінь, які нагадують амфібій.
+            Їхні тіла були вкриті лускою й дихали вони через зябра. У низці
+            міфів риби виконують функцію деміурга.
           </p>
           <a
             href='/somewhere'
