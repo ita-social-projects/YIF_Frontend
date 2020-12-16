@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from '../components/header';
-import ErrorIndicator from '../errorIndicator';
+import ErrorIndicator from '../pages/page404';
 import { RootState } from '../store/store';
 import { Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';

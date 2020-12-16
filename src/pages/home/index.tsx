@@ -18,7 +18,7 @@ const Home = () => {
         <Partners />
         <div className={styles.footer}>Footer</div>
         {/* Delete lower component later: */}
-        <FakeRequest />
+        {/* <FakeRequest />*/}
       </ErrorBoundry>
     </>
   );
