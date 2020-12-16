@@ -5,7 +5,7 @@ import { render, fireEvent, screen} from "@testing-library/react";
 
 test('render a title', () => {
   const {getByText} = render(<Partners />);
-  expect(getByText(/Our partners/i)).toBeInTheDocument();
+  expect(getByText(/Наші партнери/i)).toBeInTheDocument();
   const buttonRight = screen.getByTestId('buttonRight');
   const buttonLeft = screen.getByTestId('buttonLeft');
   expect(buttonLeft).toBeInTheDocument();
