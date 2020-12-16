@@ -16,18 +16,19 @@
 }
 
 .blockPartners {
+  max-width: 1440px;
   height: 500px;
-  margin-bottom: 80px;
+  margin-bottom: 5rem;
   @extend %resize;
   position: relative;
 
   h1 {
     text-align: center;
     font-size: 5rem;// 80px
-    font-weight: 400;
+    font-weight: 300;
     line-height: 5.6rem;//91px
     @extend %resize;
-    margin: 100px 0 80px 0;
+    margin: 6.25rem 0 5rem 0;
   }
 
   .wrapperSlider {
@@ -41,7 +42,7 @@
       margin: 0 auto;
       @extend %resize;
       display: flex;
-      height: 310px;
+      height: 300px;
       transition: 0.5s ease-in-out;
 
       .inner {
@@ -50,13 +51,14 @@
         margin: 0 auto;
 
         .slide {
-          margin: 0 17px;
+          margin: 0 1.06rem;
           display: flex;
           align-items: center;
-          width: 300px;
-          height: 95%;
+          min-width: 300px;
+          height: 100%;
           background-color: #F2F9FF;
-          border-radius: 15px;
+          border-radius: 0.93rem;
+          justify-content: center;
         }
       }
     }
@@ -65,15 +67,15 @@
 
 .left {
   left: 8%;
-  top: 59%;
-  transform: rotate(180deg);
+  top: 66%;
   @extend %btn-style;
 }
 
 .right {
   right: 8%;
-  top: 64%;
+  top: 61%;
   @extend %btn-style;
+  transform: rotate(180deg);
 }
 
 .right path,
