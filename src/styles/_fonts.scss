@@ -1,7 +1,9 @@
 @import './mixins';
 
-// there are example how to connect fonts
-@include font('Poppins-Medium', 'Poppins-Medium', '500', 'normal');
-@include font('Poppins-Regular', 'Poppins-Regular', '400', 'normal');
-@include font('Poppins-Bold', 'Poppins-Bold', '600', 'normal');
-@include font('Poppins-SemiBold', 'Poppins-SemiBold', '700', 'normal');
+@include font('OpenSans', 'openSans', 'OpenSans-Regular', '400', 'normal');
+@include font('OpenSans', 'openSans', 'OpenSans-Bold', '700', 'normal');
+
+@include font('Nunito', 'nunito', 'Nunito-ExtraBold', '800', 'normal');
+@include font('Nunito', 'nunito', 'Nunito-SemiBold', '600', 'normal');
+@include font('Nunito', 'nunito', 'Nunito-Regular', '400', 'normal');
+@include font('Nunito', 'nunito', 'Nunito-Light', '300', 'normal');
