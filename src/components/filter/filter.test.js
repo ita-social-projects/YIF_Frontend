@@ -5,7 +5,7 @@ import { act } from "react-dom/test-utils";
 import { Provider } from 'react-redux';
 
 import { store } from '../../store/store';
-import Dropbox from './dropbox';
+import Dropbox from './filter';
 
 let container = null;
 

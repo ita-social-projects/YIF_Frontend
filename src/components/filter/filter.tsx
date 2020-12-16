@@ -6,7 +6,7 @@ import {
 } from '../../store/reducers/dropboxReducer';
 import DropboxElement from '../common/dropbox/dropbox'
 //import styles from './dropbox.module.scss';
-import styles from './dropboxModule.module.scss';
+import styles from './filter.module.scss';
 
 
 import {ReactComponent as SearchIcon} from './search.svg'
@@ -17,7 +17,7 @@ import {ReactComponent as Filter2} from './filter2.svg'
 import {ReactComponent as Filter3} from './filter3.svg'
 
 
-const Dropbox =()=>{
+const Filter =()=>{
     
     const state = useSelector(selectData); 
     
@@ -56,4 +56,4 @@ const Dropbox =()=>{
       </Fragment>
     )
 }
-export default Dropbox;
+export default Filter;
