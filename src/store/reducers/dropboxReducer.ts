@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppThunk, RootState } from "../../store/store";
+import { RootState } from "../../store/store";
 
 interface getData_{
     value:{

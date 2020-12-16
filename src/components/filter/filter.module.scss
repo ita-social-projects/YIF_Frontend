@@ -1,9 +1,9 @@
-//@import '../common/dropbox/dropbox.module.scss';
+
+@import '../../styles/index.scss';
 
 .dropbox{
-  //height: 550px;
   height: 34.38rem;
-  background: #BAD0E5;
+  background:$lightBlue_1;
   position:relative;
 
   .filter1{
@@ -25,27 +25,19 @@
   }
 
   .title_{
-    width:45rem;
-    //border:solid 1px black;
+    width:55rem;
     margin:0;
     margin-left:auto;
     margin-right:auto;
     margin-bottom:3.75rem;
     h3{
+      font-family: $fontNunito;
       padding-top: 5.63rem;
-      font-size: 80px;
+      font-size: $font_80px;
+      font-weight: $regular;
     }
   }
-/*
-.filter_form{
-  width: 75rem;
-  //border:solid 1px black;
-  margin-left:auto;
-  margin-right:auto;
-  }
-*/
   .selectors{
-    //margin-right: 2.5rem;
     display:flex;
     justify-content:center;
 
@@ -64,32 +56,31 @@
     
     button{
     float:none; 
-    background-color:  #12335E;
-    color:white;
+    background-color: $darkBlue;
+    color:$white;
     display:inline-block;
-    font-size: 35px;
-    width: 232px;
-    height: 65px;
-    border-radius: 15px;
+    width: 14.5rem;
+    height: 4rem;
+    border-radius: 0.94rem;
     border:none;
-    //background-color: #AFDEF8;
     cursor: pointer;
-    margin-top: -6px;
-    margin-left:40px;
+    margin-top: -0.375rem;
+    margin-left:2.5rem;
     position: relative;
     .searchIcon{
       position: absolute;
       top:25%;
-      right: 22px;
-    }
+      right: 1.3rem;
+      }
     .searchText{
       position: absolute;
       top:18%;
-      left:50px;
-  
+      left:4.1rem;
+      font-size: $font_30px;
+      font-family: $fontNunito;
+      font-weight: $light;
+      }
     }
-  
-}
   }
 }
 

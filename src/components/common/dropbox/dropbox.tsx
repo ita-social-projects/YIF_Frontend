@@ -1,52 +1,51 @@
 import React from 'react'
-import './dropbox.scss';
 import styles from './dropbox.module.scss';
-
 import {ReactComponent as Arrow} from './arrow.svg'
 
 type Props={
-   data:string[];
-   keyId:number;
-   listName?:string;
-   listTitle?:string; 
-   width?:number;
-   inputWidth?:number
+   data:string[]; // data from Props witch needed to upload in dropbox
+   keyId:number; // unique keyId witch indentify for what dropbox we will upload data
+   listName:string; // needed for naming our input
+   listTitle?:string; // optional - needed for naming 'reset - state' filed
+   width?:number; // optional - for setting custom width of our dropbox
+   inputWidth?:number // optional - for setting custom width of our input
 }
 
+
 class DropboxElement extends React.Component<Props,{}>{
-    
-    constructor(props:Props) {
-        super(props);
-    }
-    
+  
+    // when component is mounted - upload data to our dropbox
     componentDidMount(){
-        const ul = document.querySelectorAll('.'+styles.combolist_li);
+        const ul = document.querySelectorAll(`.${styles.combolist_li}`);
         this.addElementsNew(ul[this.props.keyId],this.props.data);
         this.select();
     }
 
+    // dynamic uploading data to our dropbox from props
     addElementsNew=(element:Element,data:string[])=>{
         for(let i:number = 0;i<data.length;i++){   
+            
             let li:Element = document.createElement('li');
             li.innerHTML=data[i];
             element.appendChild(li);
+
         }
     }
 
+    // function that will call if we click on option in dropbox
     select =()=>{
         
-        const list = document.querySelectorAll('.'+styles.combolist_li); 
-        const input = document.querySelectorAll('input'); 
-        const listBox = document.querySelectorAll('.'+styles.list_box);
-        const arrow = document.querySelectorAll('.'+styles.arrow);
-
-        //const input = document.querySelectorAll('.dropbox-title')[this.props.keyId].querySelectorAll('input'); 
-        const li = list[this.props.keyId].querySelectorAll('.'+styles.combolist_li+' li');
+        const list = document.querySelectorAll(`.${styles.combolist_li}`); 
+        const listBox = document.querySelectorAll(`.${styles.list_box}`);
+        const arrow = document.querySelectorAll(`.${styles.arrow}`);
+        const input = document.querySelectorAll<HTMLInputElement>(`.${styles.dropbox_title} input`);
+        const li = list[this.props.keyId].querySelectorAll(`.${styles.combolist_li} li`);
+        
         for(let i:number = 0; i<li.length;i++){   
             li[i].addEventListener('click',()=>{ 
-                input[this.props.keyId].value=li[i].innerHTML;
                 
-                list[this.props.keyId].classList.toggle(styles.show);
+                input[this.props.keyId].value=li[i].innerHTML;
+                //list[this.props.keyId].classList.toggle(styles.show);
                 listBox[this.props.keyId].classList.toggle(styles.show_list_box);
                 input[this.props.keyId].classList.toggle(styles.gray_color_text);
                 arrow[this.props.keyId].classList.toggle(styles.arrow_up);
@@ -54,35 +53,32 @@ class DropboxElement extends React.Component<Props,{}>{
             })
         }
     }
-    
-    //this func here for history
-    showHideArrow=()=>{
-        const arrow = document.querySelectorAll('.arrow');
-        arrow[this.props.keyId].classList.toggle('arrow-up');
-    }
-    
 
+    // function that will make our option list hide/visible
     showHideList=()=>{
-        const combolistLi = document.querySelectorAll('.'+styles.combolist_li);
-        const listBox = document.querySelectorAll('.'+styles.list_box);
-        const input = document.querySelectorAll('input');
-        const arrow = document.querySelectorAll('.'+styles.arrow);
-              
+        const combolistLi = document.querySelectorAll(`.${styles.combolist_li}`);
+        const listBox = document.querySelectorAll(`.${styles.list_box}`);
+        const input = document.querySelectorAll<HTMLInputElement>(`.${styles.dropbox_title} input`);
+        const arrow = document.querySelectorAll(`.${styles.arrow}`);
+        
+        //hide all(before) dropboxes 
         for(let c:number = 0; c<this.props.keyId;c++){
-            combolistLi[c].classList.remove(styles.show);
-            listBox[c].classList.remove(styles.show_list_box);
-            input[c].classList.remove(styles.gray_color_text);
-            arrow[c].classList.remove(styles.arrow_up);
-        }
-
-        for(let c:number = this.props.keyId+1; c<combolistLi.length;c++){
-            combolistLi[c].classList.remove(styles.show);
+            //combolistLi[c].classList.remove(styles.show);
             listBox[c].classList.remove(styles.show_list_box);
             input[c].classList.remove(styles.gray_color_text);
             arrow[c].classList.remove(styles.arrow_up);
         }
         
-        combolistLi[this.props.keyId].classList.toggle(styles.show);
+        //hide all(after) dropboxes 
+        for(let c:number = this.props.keyId+1; c<combolistLi.length;c++){
+            //combolistLi[c].classList.remove(styles.show);
+            listBox[c].classList.remove(styles.show_list_box);
+            input[c].classList.remove(styles.gray_color_text);
+            arrow[c].classList.remove(styles.arrow_up);
+        }
+        
+        //show dropbox that we need 
+        //combolistLi[this.props.keyId].classList.toggle(styles.show);
         listBox[this.props.keyId].classList.toggle(styles.show_list_box);
         input[this.props.keyId].classList.toggle(styles.gray_color_text);
         arrow[this.props.keyId].classList.toggle(styles.arrow_up);
@@ -92,7 +88,7 @@ class DropboxElement extends React.Component<Props,{}>{
     render(){
 
         let {listName,width,inputWidth,listTitle} = this.props;
-        const {showHideArrow,showHideList} = this;
+        const {showHideList} = this;
         
         //customise width of our dropbox element
         if(width===null){
