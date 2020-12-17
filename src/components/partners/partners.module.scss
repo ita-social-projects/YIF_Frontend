@@ -62,21 +62,21 @@
 
 .left {
   left: 8%;
-  top: 66%;
-  @extend %btn-style;
-}
-
-.right {
-  right: 8%;
-  top: 61%;
+  top: 60%;
   @extend %btn-style;
   transform: rotate(180deg);
 }
 
-.right path,
-.left path{
-  background-color: #AABACB;
+.right {
+  right: 8%;
+  top: 65%;
+  @extend %btn-style;
 }
+
+/*.right path,
+.left path{
+  fill: #AABACB;
+}*/
 
 .right:hover path,
 .left:hover path {
