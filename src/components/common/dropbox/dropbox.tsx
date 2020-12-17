@@ -45,7 +45,6 @@ class DropboxElement extends React.Component<Props,{}>{
             li[i].addEventListener('click',()=>{ 
                 
                 input[this.props.keyId].value=li[i].innerHTML;
-                //list[this.props.keyId].classList.toggle(styles.show);
                 listBox[this.props.keyId].classList.toggle(styles.show_list_box);
                 input[this.props.keyId].classList.toggle(styles.gray_color_text);
                 arrow[this.props.keyId].classList.toggle(styles.arrow_up);
@@ -63,7 +62,6 @@ class DropboxElement extends React.Component<Props,{}>{
         
         //hide all(before) dropboxes 
         for(let c:number = 0; c<this.props.keyId;c++){
-            //combolistLi[c].classList.remove(styles.show);
             listBox[c].classList.remove(styles.show_list_box);
             input[c].classList.remove(styles.gray_color_text);
             arrow[c].classList.remove(styles.arrow_up);
@@ -71,14 +69,12 @@ class DropboxElement extends React.Component<Props,{}>{
         
         //hide all(after) dropboxes 
         for(let c:number = this.props.keyId+1; c<combolistLi.length;c++){
-            //combolistLi[c].classList.remove(styles.show);
             listBox[c].classList.remove(styles.show_list_box);
             input[c].classList.remove(styles.gray_color_text);
             arrow[c].classList.remove(styles.arrow_up);
         }
         
         //show dropbox that we need 
-        //combolistLi[this.props.keyId].classList.toggle(styles.show);
         listBox[this.props.keyId].classList.toggle(styles.show_list_box);
         input[this.props.keyId].classList.toggle(styles.gray_color_text);
         arrow[this.props.keyId].classList.toggle(styles.arrow_up);

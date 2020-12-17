@@ -50,11 +50,11 @@
   background:$lightBlue_3;
   border-radius: 0.32rem;
   margin-top:0.63rem;
-  padding-top:0;
-  height: 0;
+  padding-top:0rem;
+  height: 0rem;
   opacity: 1;
   transition: height 0.7s;
-  padding:0;
+  padding:0rem;
   overflow-y: auto;
   overflow-x:hidden;
   .combolist_li{
@@ -62,7 +62,7 @@
     border-radius: 0.32rem;
     display: block;
     text-align: right;
-    height: 0;
+    height: 0rem;
     transition: height 0.5s;
     padding-bottom:0.32rem;
     padding-left: 0.32rem;
@@ -91,13 +91,6 @@
 }
 
 // stand alone classes for visual effects
-//for 
-/*
-.show{
-  height: 15.625rem;
-  transition: height 0.5s;
-}
-*/
 //for options(li) 
 .show_list_box{
   height: 13.13rem;
