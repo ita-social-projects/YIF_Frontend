@@ -1,3 +1,5 @@
+@import "../../styles/index";
+
 
 %btn-style {
   position: absolute;
@@ -10,29 +12,23 @@
   cursor: pointer;
 }
 
-%resize {
-  padding: 0;
-  margin: 0;
-}
-
 .blockPartners {
   max-width: 1440px;
   height: 500px;
   margin-bottom: 5rem;
-  @extend %resize;
   position: relative;
 
   h1 {
+    font-family: $fontNunito;
     text-align: center;
-    font-size: 5rem;// 80px
-    font-weight: 300;
+    font-size: $font_80px;
+    font-weight: $light;
     line-height: 5.6rem;//91px
-    @extend %resize;
     margin: 6.25rem 0 5rem 0;
   }
 
   .wrapperSlider {
-    width: 1000px;
+    max-width: 1000px;
     margin: 0 auto;
     display: flex;
     overflow: hidden;
@@ -40,9 +36,8 @@
     .slider {
       width: 100%;
       margin: 0 auto;
-      @extend %resize;
       display: flex;
-      height: 300px;
+      height: 100%;
       transition: 0.5s ease-in-out;
 
       .inner {
@@ -54,7 +49,7 @@
           margin: 0 1.06rem;
           display: flex;
           align-items: center;
-          min-width: 300px;
+          min-width: 30%;
           height: 100%;
           background-color: #F2F9FF;
           border-radius: 0.93rem;
@@ -86,5 +81,4 @@
 .right:hover path,
 .left:hover path {
   fill: #12335E;
-  fill-opacity: 100%;
 }
