@@ -1,38 +1,107 @@
+@import '../styles.scss';
+
+@mixin test($color, $colorHover, $borderColor, $backgroundColor) {
+  a {
+    color: $color;
+  }
+
+  &:hover {
+    border: solid 1px $borderColor;
+    background: $backgroundColor;
+
+    a {
+      color: $colorHover;
+    }
+  }
+}
+
 header {
-  height: 124px;
-  font-size: 25px;
+  box-sizing: border-box;
+  height: 6.25rem; //100px
+  font-size: $font_18px;
   text-align: center;
-  background: #c4c4c4;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  background: $lightBlue_1;
+  @include flex(row, center, space-between);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
 
   .logo {
-    height: 104px;
-    width: 104px;
-    margin: 0 20px;
+    text-decoration: none;
+    font-family: $fontNunito;
+    color: #000;
+    font-size: $font_40px;
+    font-weight: 800;
+    margin: 0 3vw 0 9.03vw;
   }
 
   nav {
     display: flex;
-    line-height: 124px;
+    align-items: center;
+    font-family: $fontOpenSans;
+    margin-right: 9.03vw;
+
     a {
       text-decoration: none;
-      color: #111;
-      margin: 5px;
-      padding: 15px 20px;
-      border-radius: 12px;
+      color: #000;
+      font-size: $font_18px;
+      font-weight: 400;
+      position: relative;
     }
     .pages {
-      margin-right: 45px;
+      margin-right: 5.56vw;
+
+      & > * {
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
       a {
-        background-color: #eaeaea;
+        margin-right: 2.78vw; //40px
+        padding-bottom: 0.375rem; //6px
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          height: 0.125rem;
+          background: currentColor;
+          transform: scaleX(0);
+          transform-origin: right;
+          transition: transform 250ms ease-in;
+        }
+
+        &:hover::after {
+          transform: scaleX(1);
+          transform-origin: left;
+        }
       }
     }
     .entry {
-      margin-right: 15px;
-      a {
-        background-color: #afdef8;
+      display: flex;
+      align-items: center;
+
+      .button {
+        padding: 0.875rem 1.5rem; //14px 24px
+        background: transparent;
+        font-size: $font_18px;
+        border-radius: 0.625rem; //10px
+        border: solid 1px $black;
+        cursor: pointer;
+
+        @include test($black, $white, $darkBlue, $darkBlue);
+      }
+
+      & > * {
+        margin-right: 1.81vw;
+
+        &:last-child {
+          margin-right: 0;
+          background: $darkBlue;
+          border: solid 1px $darkBlue;
+
+          @include test($white, $black, $black, transparent);
+        }
       }
     }
   }
