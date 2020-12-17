@@ -30,6 +30,8 @@
     margin-left:auto;
     margin-right:auto;
     margin-bottom:3.75rem;
+    position: relative;
+    z-index: 1;
     h3{
       font-family: $fontNunito;
       padding-top: 5.63rem;
@@ -48,10 +50,14 @@
      
     .box:nth-of-type(2){
       margin-left: 1.5625rem;
+      position: relative;
+      z-index: 1;
 
     }
     .box:nth-of-type(3){
       margin-left: 1.5625rem;
+      position: relative;
+      z-index: 1;
     }
     
     button{

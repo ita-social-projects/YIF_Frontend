@@ -5,3 +5,4 @@ export { default as Header } from './header';
 export { default as Banner } from './banner';
 export { default as BannerLower } from './bannerLower';
 export { default as Partners } from './partners';
+export { default as Footer } from './footer/footer';
