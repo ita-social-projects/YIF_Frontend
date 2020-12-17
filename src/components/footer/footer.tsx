@@ -1,32 +1,37 @@
-import React,{Fragment} from 'react'
+import React from 'react'
 import styles from './footer.module.scss';
+import { Link } from 'react-router-dom';
 
 const Footer =()=>{
     return(
-        <Fragment>
+        <footer>
             <div className={styles.footer}>
                 <section className={styles.mainElements}>
                     <article>
-                        <button>Вхід</button>
-                        <button>Реєстрація</button>
+                        <Link to='/login'>
+                            <button>Вхід</button>
+                        </Link>
+                        <Link to='/register'>
+                            <button>Реєстрація</button>
+                        </Link>
                         <p>Рівне, вул. Словацького, 55</p>
-                        <p><a href='mailto:#'>exampleYourITFuture@example.com</a></p>
+                        <p><Link to='mailto:#'>exampleYourITFuture@example.com</Link></p>
                     </article>
                     <article>
-                        <a href='/'>
-                            <h2>YIF</h2>
-                        </a>
+                        <Link to='/' className={styles.logo} data-testid='logo'>
+                            YIF
+                        </Link>
                     </article>
                     <article>
-                        <p><a href='#'>Напрями</a></p>
-                        <p><a href='#'>Університети</a></p>
+                        <p><Link className={styles.linkstyle} to='/directions'>Напрями</Link></p>
+                        <p><Link className={styles.linkstyle} to='/universities'>Університети</Link></p>
                     </article>
                 </section>
                 <div className={styles.copyright}>
                     <p>&#169; 2020-2021 SoftServe IT Academy</p>
                 </div>
             </div>
-        </Fragment>
+        </footer>
     )
 }
 
