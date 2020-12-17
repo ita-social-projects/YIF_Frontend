@@ -4,16 +4,15 @@ import PartnersComponent from './partnersComponent/partnerComponent';
 
 const Partners: React.FunctionComponent = () => {
   let sliderList = [
-
-    <PartnersComponent src='assets/icons/logoItCluster.png' />,
-    <PartnersComponent src='assets/icons/logoSoftServe.png' />,
-    <PartnersComponent src='assets/icons/logoRDGU.png' />,
     <PartnersComponent src='assets/icons/logoNUWGP.png' />,
     <PartnersComponent src='assets/icons/logoSoftServe.png' />,
     <PartnersComponent src='assets/icons/logoRDGU.png' />,
     <PartnersComponent src='assets/icons/logoItCluster.png' />,
+    <PartnersComponent src='assets/icons/ba.png' />,
+    <PartnersComponent src='assets/icons/step.svg' />,
+    <PartnersComponent src='assets/icons/logoItCluster.png' />,
     <PartnersComponent src='assets/icons/logoSoftServe.png' />,
-    <PartnersComponent src='assets/icons/logoRDGU.png' />,
+    <PartnersComponent src='assets/icons/ba.png' />,
   ];
 
   let arrow = (
