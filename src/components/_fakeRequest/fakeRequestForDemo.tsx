@@ -9,7 +9,7 @@ const FakeRequest = () => {
     <span
       onClick={() => {
         dispatch(fakeRequestService());
-        setTimeout(() => dispatch(requestFailure()), 4000);
+        setTimeout(() => dispatch(requestFailure()), 3000);
       }}
     >
       Зареєструйся
