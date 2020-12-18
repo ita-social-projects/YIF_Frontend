@@ -1,4 +1,3 @@
-
 %btn-style {
   position: absolute;
   transform: translateY(-50%);
@@ -23,9 +22,9 @@
 
   h1 {
     text-align: center;
-    font-size: 5rem;// 80px
+    font-size: 5rem; // 80px
     font-weight: 400;
-    line-height: 5.6rem;//91px
+    line-height: 5.6rem; //91px
     @extend %resize;
     margin: 100px 0 80px 0;
   }
@@ -55,7 +54,7 @@
           align-items: center;
           width: 300px;
           height: 95%;
-          background-color: #F2F9FF;
+          background-color: #f2f9ff;
           border-radius: 15px;
         }
       }
@@ -77,12 +76,12 @@
 }
 
 .right path,
-.left path{
-  background-color: #AABACB;
+.left path {
+  background-color: #aabacb;
 }
 
 .right:hover path,
 .left:hover path {
-  fill: #12335E;
+  fill: #12335e;
   fill-opacity: 100%;
 }
