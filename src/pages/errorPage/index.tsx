@@ -18,9 +18,9 @@ class ErrorIndicator extends Component<any> {
             Посилання, за яким ви перейшли, могло бути
             <br /> хибним або сторінку видалено.
           </p>
-          <Link className={errorStyle.btn} to='/'>
+          <a className={errorStyle.btn} href='/'>
             &gt; &nbsp; Повернутися на головну.
-          </Link>
+          </a>
         </div>
       </>
     );
