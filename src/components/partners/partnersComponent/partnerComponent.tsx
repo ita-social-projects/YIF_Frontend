@@ -7,11 +7,10 @@ interface Props {
 const PartnerComponent: React.FunctionComponent<Props> = (props)  =>  {
 
   let imgStyles = {
-    maxWidth: 300 + 'px',
     height: "auto",
     padding: 10 +'px',
   }
-    return ( <img src={props.src} alt='imgSlide' style={imgStyles}/>
+    return ( <img src={props.src} alt='imgSlide' style={imgStyles} />
   );
 }
 
