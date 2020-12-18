@@ -1,35 +1,78 @@
+@import '../styles.scss';
+
 .banner {
-  height: calc(100vh - 124px);
-  min-height: 600px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  height: calc(100vh - 6.25rem);
+  min-height: 50rem; //800px
+  max-height: 62.5rem; //1000px
+  font-family: $fontNunito;
+  @include flex(row, center, center);
 
-  h1 {
-    font-size: 100px;
-    line-height: 117px;
-    margin: 0 0 60px 0;
-  }
+  .content {
+    @include flex(column, center, center);
+    width: 100%;
+    margin: 0 9.03vw;
+    position: relative;
 
-  p {
-    width: 800px;
-    font-size: 18px;
-    line-height: 21px;
-    margin: 0 0 60px 0;
-    font-style: normal;
-    font-weight: normal;
-  }
+    .image {
+      height: 39.0625rem; //625px
+      position: absolute;
+      top: calc(50% - (39.0625rem / 2));
+      left: calc(50% - (53.4375rem / 2) - (35.9375rem / 2)); //center-left
+      transition: 150ms linear;
+    }
 
-  .callToAction {
-    width: 468px;
-    height: 93px;
-    margin-bottom: 20px;
-    border: none;
-    border-radius: 15px;
-    background-color: #afdef8;
-    font-size: 50px;
-    line-height: 59px;
+    .textContent {
+      @include flex(column, flex-start, center);
+      width: 35.9375rem; //575px
+      text-align: left;
+      position: absolute;
+      top: calc(50% - (32.1875rem / 2));
+      left: calc(50% - (35.9375rem / 2) + (38.4375rem / 2)); //center-right
+
+      h1 {
+        font-size: 5.625rem; //90px
+        font-weight: $semiBold;
+        margin-bottom: 1.5625rem;
+      }
+
+      p {
+        width: 34.5625rem; //553px
+        font-family: $fontOpenSans;
+        font-weight: $regular;
+        font-size: 1.125rem;
+        margin-bottom: 1.875rem;
+        padding-left: 0.7rem;
+      }
+
+      .button {
+        @include flex(row, center, center);
+        margin-left: 0.7rem;
+        padding: 0.6875rem 1.5rem 0.6875rem 3.4375rem;
+        border-radius: 0.9375rem;
+        font-family: $fontNunito;
+        font-size: 1.875rem;
+        font-weight: $regular;
+        line-height: 2.5625rem;
+        color: $white;
+        background: $darkBlue;
+        border: solid 1px $darkBlue;
+        cursor: pointer;
+        svg {
+          padding-left: 1.75rem;
+        }
+
+        &:hover {
+          color: $black;
+          background: transparent;
+          border: solid 1px $black;
+
+          svg {
+            path {
+              fill: $black;
+            }
+          }
+        }
+      }
+    }
   }
 }
