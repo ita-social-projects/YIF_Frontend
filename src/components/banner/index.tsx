@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './banner.module.scss';
+
+// interface Props {
+//   handleClick: Function;
+// }
 
 const Banner: React.FC = () => {
   const arrow = (
@@ -19,12 +23,15 @@ const Banner: React.FC = () => {
     </svg>
   );
 
-  const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
-    const elem = document.querySelector(`.${styles.image}`) as HTMLImageElement;
-    const x = -event.clientX * 0.02;
-    const y = -event.clientY * 0.02;
+  const [offsetX, setOffsetX] = useState(0);
+  const [offsetY, setOffsetY] = useState(0);
+  const [isThrottled, setIsThrottled] = useState(false);
 
-    elem.style.transform = `translateX(${x}px) translateY(${y}px)`;
+  const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
+    throttle(() => {
+      setOffsetX(-event.clientX);
+      setOffsetY(-event.clientY);
+    }, 100);
   };
 
   const handleClick = () => {
@@ -36,6 +43,20 @@ const Banner: React.FC = () => {
     });
   };
 
+  const throttle = (func: Function, ms: number): void => {
+    if (isThrottled) return;
+
+    func();
+
+    setIsThrottled(true);
+
+    setTimeout(() => {
+      setIsThrottled(false);
+    }, ms);
+  };
+
+  // const { handleClick } = props;
+
   return (
     <div className={styles.banner} onMouseMove={handleMouseMove}>
       <div className={styles.content}>
@@ -43,6 +64,10 @@ const Banner: React.FC = () => {
           src='/assets/images/banner.svg'
           alt='img'
           className={styles.image}
+          style={{
+            transform: `translate(${offsetX * 0.02}px, ${offsetY * 0.02}px)`,
+          }}
+          data-testid='image'
         />
         <div className={styles.textContent}>
           <h1>Your IT Future</h1>
@@ -53,7 +78,7 @@ const Banner: React.FC = () => {
             які нагадують амфібій. Їхні тіла були вкриті лускою й дихали вони
             через зябра.
           </p>
-          <button className={styles.button} onClick={handleClick}>
+          <button className={styles.button} onClick={() => handleClick()}>
             Почни вже
             {arrow}
           </button>
