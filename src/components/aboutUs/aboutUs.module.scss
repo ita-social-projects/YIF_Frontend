@@ -34,7 +34,7 @@
 
     &__block {
       width: calc((330 / 1180) * 100%);
-      height: 390px;
+      height: auto;
       @include flex(column, center, space-between);
       background-color: $lightBlue_1;
       border-radius: 15px;

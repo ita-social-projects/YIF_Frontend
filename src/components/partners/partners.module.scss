@@ -1,3 +1,5 @@
+@import "../../styles/index";
+
 
 %btn-style {
   position: absolute;
@@ -10,28 +12,23 @@
   cursor: pointer;
 }
 
-%resize {
-  padding: 0;
-  margin: 0;
-}
-
 .blockPartners {
+  max-width: 1440px;
   height: 500px;
-  margin-bottom: 80px;
-  @extend %resize;
+  margin-bottom: 5rem;
   position: relative;
 
   h1 {
+    font-family: $fontNunito;
     text-align: center;
-    font-size: 5rem;// 80px
-    font-weight: 400;
+    font-size: $font_80px;
+    font-weight: $light;
     line-height: 5.6rem;//91px
-    @extend %resize;
-    margin: 100px 0 80px 0;
+    margin: 6.25rem 0 5rem 0;
   }
 
   .wrapperSlider {
-    width: 1000px;
+    max-width: 1000px;
     margin: 0 auto;
     display: flex;
     overflow: hidden;
@@ -39,9 +36,8 @@
     .slider {
       width: 100%;
       margin: 0 auto;
-      @extend %resize;
       display: flex;
-      height: 310px;
+      height: 100%;
       transition: 0.5s ease-in-out;
 
       .inner {
@@ -50,13 +46,14 @@
         margin: 0 auto;
 
         .slide {
-          margin: 0 17px;
+          margin: 0 1.06rem;
           display: flex;
           align-items: center;
-          width: 300px;
-          height: 95%;
+          min-width: 30%;
+          height: 100%;
           background-color: #F2F9FF;
-          border-radius: 15px;
+          border-radius: 0.93rem;
+          justify-content: center;
         }
       }
     }
@@ -65,24 +62,18 @@
 
 .left {
   left: 8%;
-  top: 59%;
-  transform: rotate(180deg);
+  top: 60%;
   @extend %btn-style;
+  transform: rotate(180deg);
 }
 
 .right {
   right: 8%;
-  top: 64%;
+  top: 65%;
   @extend %btn-style;
-}
-
-.right path,
-.left path{
-  background-color: #AABACB;
 }
 
 .right:hover path,
 .left:hover path {
   fill: #12335E;
-  fill-opacity: 100%;
 }

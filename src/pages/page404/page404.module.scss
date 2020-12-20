@@ -1,4 +1,4 @@
-@import '../styles/index.scss';
+@import '../../styles/index.scss';
 
 .error {
   overflow: hidden;
@@ -12,7 +12,7 @@
   justify-content: left;
   align-items: flex-start;
   text-align: left;
-  background-color: white;
+  background-color: $white;
   background-image: url(/assets/images/error.svg);
   background-repeat: no-repeat;
   background-size: auto 98%;
