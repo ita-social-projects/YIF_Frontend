@@ -4,6 +4,7 @@
 /shelf/
 /workspace.xml
 /.idea
+debug.log
 
 # dependencies
 /node_modules

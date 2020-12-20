@@ -6,7 +6,9 @@ import {
   BannerLower,
   Partners,
   AboutUs,
+  Filter,
 } from '../../components';
+
 import ErrorBoundry from '../../errorBoundry';
 
 import FakeRequest from '../../components/_fakeRequest'; // delete later
@@ -17,13 +19,13 @@ const Home = () => {
       <ErrorBoundry>
         <Header />
         <Banner />
-        <div className={styles.filter}>Filter</div>
+        <Filter />
         <AboutUs />
         <BannerLower />
         <Partners />
         <div className={styles.footer}>Footer</div>
         {/* Delete lower component later: */}
-        <FakeRequest />
+        {/* <FakeRequest />*/}
       </ErrorBoundry>
     </>
   );

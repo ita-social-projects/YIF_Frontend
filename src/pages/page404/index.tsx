@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import errorStyle from './errorIndicator.module.scss';
+import errorStyle from './page404.module.scss';
 
 class ErrorIndicator extends Component<any> {
   render() {
