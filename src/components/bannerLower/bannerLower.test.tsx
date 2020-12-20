@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
-
 import BannerLower from './index';
 
 describe('HOME PAGE: lower banner', () => {
