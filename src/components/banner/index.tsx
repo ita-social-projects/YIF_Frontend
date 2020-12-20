@@ -34,15 +34,6 @@ const Banner: React.FC<Props> = (props) => {
     }, 100);
   };
 
-  // const handleClick = () => {
-  //   const elem = document.getElementById('filter') as HTMLDivElement;
-
-  //   elem.scrollIntoView({
-  //     block: 'center',
-  //     behavior: 'smooth',
-  //   });
-  // };
-
   const throttle = (func: Function, ms: number): void => {
     if (isThrottled) return;
 
