@@ -42,12 +42,7 @@ export default class BannerLower extends Component<any> {
             Їхні тіла були вкриті лускою й дихали вони через зябра. У низці
             міфів риби виконують функцію деміурга.
           </p>
-          <button
-            // rel='call to action'
-            onClick={() => handleClick()}
-          >
-            Зареєструйся
-          </button>
+          <button onClick={() => handleClick()}>Зареєструйся</button>
         </div>
       </div>
     );
