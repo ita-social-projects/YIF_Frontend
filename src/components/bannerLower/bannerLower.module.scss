@@ -38,12 +38,12 @@
     font-size: 1rem;
     line-height: 1.36;
   }
-  a {
+  button {
     text-decoration: none;
     cursor: pointer;
     padding: 1rem 3.125rem;
     border-radius: 15px;
-    border: 1px solid #12335e00;
+    border: 1px solid #12335e;
     background-color: #12335e;
     color: #ffffff;
     font-family: $fontNunito;
@@ -52,7 +52,7 @@
     line-height: 1.13;
     transition: color 0.25s ease, background-color 0.25s ease, border 0.25s ease;
   }
-  a:hover {
+  button:hover {
     background-color: rgba(255, 255, 255, 0);
     color: #000000;
     border: 1px solid black;
