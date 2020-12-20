@@ -14,13 +14,12 @@ const Header: React.FC = () => {
           <NavLink to='/universities'>Університети</NavLink>
         </div>
         <div className={styles.entry}>
-          <button className={styles.button}>
-            <Link to='/login'>Вхід</Link>
-          </button>
-
-          <button className={styles.button}>
-            <Link to='/register'>Реєстрація</Link>
-          </button>
+          <Link to='/login' className={styles.button}>
+            Вхід
+          </Link>
+          <Link to='/register' className={styles.button}>
+            Реєстрація
+          </Link>
         </div>
       </nav>
     </header>
