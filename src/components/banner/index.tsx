@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styles from './banner.module.scss';
 
-// interface Props {
-//   handleClick: Function;
-// }
+interface Props {
+  handleClick: Function;
+}
 
-const Banner: React.FC = () => {
+const Banner: React.FC<Props> = (props) => {
   const arrow = (
     <svg
       width='55'
@@ -34,14 +34,14 @@ const Banner: React.FC = () => {
     }, 100);
   };
 
-  const handleClick = () => {
-    const elem = document.getElementById('filter') as HTMLDivElement;
+  // const handleClick = () => {
+  //   const elem = document.getElementById('filter') as HTMLDivElement;
 
-    elem.scrollIntoView({
-      block: 'center',
-      behavior: 'smooth',
-    });
-  };
+  //   elem.scrollIntoView({
+  //     block: 'center',
+  //     behavior: 'smooth',
+  //   });
+  // };
 
   const throttle = (func: Function, ms: number): void => {
     if (isThrottled) return;
@@ -55,7 +55,7 @@ const Banner: React.FC = () => {
     }, ms);
   };
 
-  // const { handleClick } = props;
+  const { handleClick } = props;
 
   return (
     <div className={styles.banner} onMouseMove={handleMouseMove}>

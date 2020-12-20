@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 import style from './bannerLower.module.scss';
 
+interface Props {
+  handleClick: Function;
+}
+
 export default class BannerLower extends Component<any> {
   scrollRef: any = React.createRef();
 
@@ -29,6 +33,7 @@ export default class BannerLower extends Component<any> {
   };
 
   render() {
+    const { handleClick } = this.props;
     return (
       <div className={style.container}>
         <div
@@ -42,15 +47,12 @@ export default class BannerLower extends Component<any> {
             Їхні тіла були вкриті лускою й дихали вони через зябра. У низці
             міфів риби виконують функцію деміурга.
           </p>
-          <a
-            href='/somewhere'
-            rel='call to action'
-            onClick={(e) => {
-              e.preventDefault();
-            }}
+          <button
+            // rel='call to action'
+            onClick={() => handleClick()}
           >
             Зареєструйся
-          </a>
+          </button>
         </div>
       </div>
     );
