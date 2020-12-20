@@ -6,6 +6,7 @@ import {
   BannerLower,
   Partners,
   Filter,
+  AboutUs,
 } from '../../components';
 import ErrorBoundry from '../../errorBoundry';
 
@@ -27,7 +28,7 @@ const Home = () => {
         <Header />
         <Banner handleClick={handleClick} />
         <Filter />
-        <div className={styles.about}>About</div>
+        <AboutUs />
         <BannerLower handleClick={handleClick} />
         <Partners />
         <div className={styles.footer}>Footer</div>
