@@ -28,6 +28,7 @@ export default class BannerLower extends Component<any> {
   };
 
   render() {
+    const { handleClick } = this.props;
     return (
       <div className={style.container}>
         <div
@@ -41,15 +42,7 @@ export default class BannerLower extends Component<any> {
             Їхні тіла були вкриті лускою й дихали вони через зябра. У низці
             міфів риби виконують функцію деміурга.
           </p>
-          <a
-            href='/somewhere'
-            rel='call to action'
-            onClick={(e) => {
-              e.preventDefault();
-            }}
-          >
-            Зареєструйся
-          </a>
+          <button onClick={() => handleClick()}>Зареєструйся</button>
         </div>
       </div>
     );

@@ -1,5 +1,4 @@
-@import "../../styles/index";
-
+@import '../../styles/index';
 
 %btn-style {
   position: absolute;
@@ -23,7 +22,7 @@
     text-align: center;
     font-size: $font_80px;
     font-weight: $light;
-    line-height: 5.6rem;//91px
+    line-height: 5.6rem; //91px
     margin: 6.25rem 0 5rem 0;
   }
 
@@ -51,7 +50,7 @@
           align-items: center;
           min-width: 30%;
           height: 100%;
-          background-color: #F2F9FF;
+          background-color: #f2f9ff;
           border-radius: 0.93rem;
           justify-content: center;
         }
@@ -75,5 +74,5 @@
 
 .right:hover path,
 .left:hover path {
-  fill: #12335E;
+  fill: #12335e;
 }
