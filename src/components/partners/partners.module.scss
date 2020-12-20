@@ -14,6 +14,7 @@
 
 .blockPartners {
   max-width: 1440px;
+  margin: 0 auto;
   height: 500px;
   margin-bottom: 5rem;
   position: relative;
@@ -35,7 +36,7 @@
 
     .slider {
       width: 100%;
-      margin: 0 auto;
+     margin: 0 auto;
       display: flex;
       height: 100%;
       transition: 0.5s ease-in-out;
