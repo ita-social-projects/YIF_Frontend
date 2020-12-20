@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-
 import style from './bannerLower.module.scss';
-
-interface Props {
-  handleClick: Function;
-}
 
 export default class BannerLower extends Component<any> {
   scrollRef: any = React.createRef();

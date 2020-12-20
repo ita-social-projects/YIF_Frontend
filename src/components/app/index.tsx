@@ -1,10 +1,9 @@
 import React from 'react';
 import './app.scss';
 import Home from '../../pages/home';
-import ErrorPage from '../../pages/page404/index'
-import FilterPage from '../../pages/filterPage/index'
+import ErrorPage from '../../pages/errorPage';
+import FilterPage from '../../pages/filterPage/index';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
 
 const App = () => {
   return (
@@ -12,8 +11,8 @@ const App = () => {
       <Switch>
         <Route exact path='/'>
           <Home />
-        </Route> 
-        <Route path='/filterPage' component={FilterPage}/>
+        </Route>
+        <Route path='/filterPage' component={FilterPage} />
         <Route path='/404' component={ErrorPage} status={404} />
         <Route component={ErrorPage} status={404} />
       </Switch>
