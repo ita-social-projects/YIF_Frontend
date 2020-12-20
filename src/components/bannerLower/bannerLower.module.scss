@@ -2,12 +2,12 @@
 
 .container {
   width: 100%;
-  background-color: #bad0e5;
+  background-color: $lightBlue_1;
 }
 .banner {
   position: relative;
   overflow: hidden;
-  background-color: #bad0e5;
+  background-color: $lightBlue_1;
   max-height: 530px;
   width: 100%;
   max-width: 1440px;
@@ -26,8 +26,8 @@
 
   h1 {
     font-family: $fontNunito;
-    font-weight: 400;
-    font-size: 5rem;
+    font-weight: $regular;
+    font-size: $font_80px;
     line-height: 1.36;
   }
   p {
@@ -35,27 +35,27 @@
     max-width: 795px;
     margin: 2.5rem 0 1.875rem 0;
     font-family: $fontOpenSans;
-    font-size: 1rem;
+    font-size: $font_16px;
     line-height: 1.36;
   }
-  a {
+  button {
     text-decoration: none;
     cursor: pointer;
     padding: 1rem 3.125rem;
     border-radius: 15px;
-    border: 1px solid #12335e00;
-    background-color: #12335e;
-    color: #ffffff;
+    border: 1px solid $darkBlue;
+    background-color: $darkBlue;
+    color: $white;
     font-family: $fontNunito;
     font-weight: normal;
-    font-size: 1.875rem;
+    font-size: $font_30px;
     line-height: 1.13;
     transition: color 0.25s ease, background-color 0.25s ease, border 0.25s ease;
   }
-  a:hover {
+  button:hover {
     background-color: rgba(255, 255, 255, 0);
-    color: #000000;
-    border: 1px solid black;
+    color: $black;
+    border: $borderSecond;
   }
 }
 .animationBg {

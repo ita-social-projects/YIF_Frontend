@@ -15,7 +15,9 @@ const fakeRequestService = () => {
         return response.json();
       })
       .then((json) => {
-        dispatch(requestSuccess());
+        // ======== uncoment after demo: ========
+        // dispatch(requestSuccess());
+
         console.log(json);
       })
       .catch((error) => {

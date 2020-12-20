@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Header from '../components/header';
-import ErrorIndicator from '../pages/page404';
+import ErrorPage from '../pages/errorPage';
 import { RootState } from '../store/store';
 import { Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
@@ -18,12 +17,7 @@ class ErrorBoundry extends Component<
     const { error } = this.props.state;
 
     if (error) {
-      return (
-        <>
-          <Header />
-          <ErrorIndicator />;
-        </>
-      );
+      return <ErrorPage />;
     }
     return this.props.children;
   }
