@@ -51,6 +51,7 @@ export default class BannerLower extends Component<any> {
             }}
           >
             Зареєструйся
+            {/* Delete after demo: */}
             {/* <FakeRequest /> */}
           </a>
         </div>
