@@ -1,8 +1,7 @@
 @import '../../styles/index.scss';
 
 .aboutUs {
-  width: 100vw;
-  //height: 920px;
+  width: 100%;
   height: auto;
   @include flex(column, center, center);
   position: relative;

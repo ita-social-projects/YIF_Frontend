@@ -7,6 +7,7 @@ import {
   Partners,
   Filter,
   AboutUs,
+  Footer,
 } from '../../components';
 import ErrorBoundry from '../../errorBoundry';
 
@@ -31,7 +32,7 @@ const Home = () => {
         <AboutUs />
         <BannerLower handleClick={handleClick} />
         <Partners />
-        <div className={styles.footer}>Footer</div>
+        <Footer />
         {/* Delete lower component later: */}
         {/* <FakeRequest /> */}
       </ErrorBoundry>

@@ -1,0 +1,143 @@
+@import '../../styles/index.scss';
+
+.footer{
+  height: 20.5rem;
+  background-color: $lightBlue_1;
+
+    
+  a:link, a:visited {
+    color: black;
+  }
+    
+  p{  // underline effect of <a> tag   
+    a{
+      position: relative;
+    }
+      
+    a{
+      padding-bottom: 0.375rem; 
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0%;
+        bottom: 0%;
+        width: 100%;
+        height: 0.125rem;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 250ms ease-in;
+      }
+
+      &:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+  }   
+       
+  .mainElements{
+    padding-top: 5rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+
+    article{
+      width: 14.5rem;
+    }
+
+    article:nth-of-type(1){ // block with buttons           
+      margin-left:8.13rem;
+      font-family:$fontOpenSans;
+      font-size: $font_15px;
+      font-weight: $regular; 
+
+      a:nth-of-type(1){ //for button sing In
+        button{
+          padding:0.94rem 1.37rem;
+          border-radius: 0.625rem;
+          border: solid 1px $black;
+          color:  $black;
+          background: transparent;
+          cursor: pointer;
+          transition: 0.25s;
+                
+          &:hover{
+            background: $darkBlue;
+            border: solid 1px $darkBlue;
+            color:$white;
+            transition: 0.25s;
+          }
+        }
+      }
+
+      a:nth-of-type(2){ //for button Register
+        margin-left: 0.63rem; 
+          button{                  
+            padding:0.94rem 1.37rem;
+            border-radius: 0.625rem;
+            background: $darkBlue;
+            border: solid 1px $darkBlue;
+            color:$white;
+            cursor: pointer;
+            transition: 0.25s;
+              
+            &:hover{
+              border: solid 1px $black;
+              background: transparent;
+              color:$black;
+              transition: 0.25s;
+            }
+          }
+      }            
+      p:nth-of-type(1){ // address line
+        margin-top: 2.19rem;
+      }
+      p:nth-of-type(2){ // email link
+        margin-top: 0.63rem;
+          a{
+            font-size: $font_15px;
+            font-weight: $regular;
+            font-family:$fontOpenSans;
+          } 
+      }
+    }
+        
+    article:nth-of-type(2){ // block with logo
+      text-align: center;
+        .logo {
+          text-decoration: none;
+          font-family: $fontNunito;
+          color: $black;
+          font-size: $font_40px;
+          font-weight: $extraBold;
+          }
+    }
+        
+    article:nth-of-type(3){ // block with links direc and univ
+      margin-right:8.13rem;
+        text-align: right; 
+          .linkstyle{  // fort link style
+            font-weight: $regular;
+            font-size: $font_15px;
+            font-family:$fontOpenSans;
+            width: 100%;
+          }
+          p:nth-of-type(2){
+            margin-top: 0.63rem;
+          }
+    }
+  }
+  .copyright{
+    width:20rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3.75rem;
+    text-align: center;
+    font-weight: normal;
+    font-size: $font_18px;
+    font-family: $fontOpenSans;
+  }
+}
+
