@@ -1,0 +1,63 @@
+@import '../../styles/index.scss';
+
+.aboutUs {
+  width: 100%;
+  height: auto;
+  @include flex(column, center, center);
+  position: relative;
+
+  &__title {
+    margin-top: 100px;
+    color: $black;
+    font-family: $fontNunito;
+    font-size: $font_80px;
+    font-weight: $regular;
+  }
+
+  &__desc {
+    width: calc((800 / 1180) * 100%);
+    margin-top: 25px;
+    font-family: $fontOpenSans;
+    font-weight: $regular;
+    font-size: $font_16px;
+    color: $black;
+    text-align: center;
+  }
+
+  &__advantages {
+    width: 100%;
+    height: auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    @include flex(row, flex-start, space-between);
+
+    &__block {
+      width: calc((330 / 1180) * 100%);
+      height: auto;
+      @include flex(column, center, space-between);
+      background-color: $lightBlue_1;
+      border-radius: 15px;
+    }
+
+    &__title {
+      margin-top: 40px;
+      font-family: $fontNunito;
+      font-weight: $light;
+      font-size: $font_30px;
+    }
+
+    &__imgBlock {
+      width: 100%;
+    }
+
+    &__img {
+      width: 100%;
+    }
+  }
+}
+
+.container {
+  width: calc((1180 / 1440) * 100%);
+  height: 100%;
+  @include flex(column, center, flex-start);
+}

@@ -31,24 +31,18 @@ Object {
           <div
             class="entry"
           >
-            <button
+            <a
               class="button"
+              href="/login"
             >
-              <a
-                href="/login"
-              >
-                Вхід
-              </a>
-            </button>
-            <button
+              Вхід
+            </a>
+            <a
               class="button"
+              href="/register"
             >
-              <a
-                href="/register"
-              >
-                Реєстрація
-              </a>
-            </button>
+              Реєстрація
+            </a>
           </div>
         </nav>
       </header>
@@ -81,24 +75,18 @@ Object {
         <div
           class="entry"
         >
-          <button
+          <a
             class="button"
+            href="/login"
           >
-            <a
-              href="/login"
-            >
-              Вхід
-            </a>
-          </button>
-          <button
+            Вхід
+          </a>
+          <a
             class="button"
+            href="/register"
           >
-            <a
-              href="/register"
-            >
-              Реєстрація
-            </a>
-          </button>
+            Реєстрація
+          </a>
         </div>
       </nav>
     </header>
