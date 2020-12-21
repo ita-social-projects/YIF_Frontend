@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import style from './bannerLower.module.scss';
+import FakeRequest from '../_fakeRequest/fakeRequestForDemo'; //delete
 
 export default class BannerLower extends Component<any> {
   scrollRef: any = React.createRef();
@@ -42,7 +43,17 @@ export default class BannerLower extends Component<any> {
             Їхні тіла були вкриті лускою й дихали вони через зябра. У низці
             міфів риби виконують функцію деміурга.
           </p>
-          <button onClick={() => handleClick()}>Зареєструйся</button>
+          <a
+            href='/somewhere'
+            rel='call to action'
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+          >
+            Зареєструйся
+            {/* Delete after demo: */}
+            {/* <FakeRequest /> */}
+          </a>
         </div>
       </div>
     );
