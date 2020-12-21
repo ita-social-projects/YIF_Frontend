@@ -1,17 +1,12 @@
 @import '../styles.scss';
 
 @mixin test($color, $colorHover, $borderColor, $backgroundColor) {
-  a {
-    color: $color;
-  }
+  color: $color;
 
   &:hover {
     border: solid 1px $borderColor;
     background: $backgroundColor;
-
-    a {
-      color: $colorHover;
-    }
+    color: $colorHover;
   }
 }
 

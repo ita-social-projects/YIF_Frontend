@@ -19,7 +19,7 @@ const Footer =()=>{
                     </article>
                     <article>
                         <Link to='/' className={styles.logo} data-testid='logo'>
-                            YIF
+                            YIF 
                         </Link>
                     </article>
                     <article>

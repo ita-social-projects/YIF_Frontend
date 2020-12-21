@@ -20,20 +20,20 @@
   font-family: $fontOpenSans;
   padding: 8.75rem 0 16.7rem 8.125rem;
   h1 {
-    font-weight: 700;
-    font-size: 5rem;
+    font-weight: $bold;
+    font-size: $font_80px;
     line-height: 1.25;
   }
   p {
     margin-top: 3.186rem;
     font-family: $fontOpenSans;
-    font-size: 1.125rem;
+    font-size: $font_18px;
     line-height: 1.36;
   }
-  a {
+  .btn {
     font-family: $fontOpenSans;
     margin-top: 1.563rem;
-    font-size: 1.125rem;
+    font-size: $font_18px;
     color: red;
     cursor: pointer;
   }
