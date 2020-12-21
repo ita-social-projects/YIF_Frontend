@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import style from './bannerLower.module.scss';
+import FakeRequest from '../_fakeRequest/fakeRequestForDemo'; //delete
 
 export default class BannerLower extends Component<any> {
   scrollRef: any = React.createRef();
@@ -49,6 +50,7 @@ export default class BannerLower extends Component<any> {
             }}
           >
             Зареєструйся
+            {/* <FakeRequest /> */}
           </a>
         </div>
       </div>
