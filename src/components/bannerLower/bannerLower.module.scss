@@ -38,7 +38,7 @@
     font-size: $font_16px;
     line-height: 1.36;
   }
-  button {
+  a {
     text-decoration: none;
     cursor: pointer;
     padding: 1rem 3.125rem;
@@ -52,7 +52,7 @@
     line-height: 1.13;
     transition: color 0.25s ease, background-color 0.25s ease, border 0.25s ease;
   }
-  button:hover {
+  a:hover {
     background-color: rgba(255, 255, 255, 0);
     color: $black;
     border: $borderSecond;
