@@ -29,6 +29,7 @@ export default class BannerLower extends Component<any> {
   };
 
   render() {
+    const { handleClick } = this.props;
     return (
       <div className={style.container}>
         <div
