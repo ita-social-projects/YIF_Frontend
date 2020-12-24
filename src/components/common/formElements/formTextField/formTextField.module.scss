@@ -1,0 +1,18 @@
+@import '../../../../styles/index.scss';
+
+.formTextField {
+  @include flex(row, flex-start, center);
+  font-family: $fontOpenSans;
+  font-weight: $regular;
+  font-size: 14px; // fix this in the Future
+  color: $black;
+
+  &__text {
+    margin-left: 5px;
+  }
+
+  &__link {
+    color: $darkBlue;
+    margin-left: 5px;
+  }
+}
