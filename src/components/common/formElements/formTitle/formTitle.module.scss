@@ -1,0 +1,9 @@
+@import '../../../../styles/index.scss';
+
+.formTitle {
+  font-family: $fontOpenSans;
+  font-weight: $regular;
+  font-size: 26px; //fix this in the future
+  color: $black;
+  margin: 0 auto;
+}
