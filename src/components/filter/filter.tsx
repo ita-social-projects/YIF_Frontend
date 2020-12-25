@@ -31,7 +31,7 @@ const Filter = () => {
 
     //submit our form and redirect to the filterPage
     const onSubmit=(event:any)=>{
-      event.preventDefault();
+      event.preventDefault();      
       history.push('/404');
     }    
     
