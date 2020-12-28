@@ -1,0 +1,31 @@
+@import '../../../../styles/index.scss';
+
+.error {
+  width: 350px;
+  padding-top: 13px;
+  padding-bottom: 7px;
+  padding-left: 20px;
+  background-color: rgba($red, 0.3);
+  color: $red;
+  font-size: 11px;
+  font-weight: $regular;
+  font-family: $fontOpenSans;
+  @include flex(row, flex-end, flex-start);
+}
+
+.formError {
+  svg path {
+    fill: $white;
+  }
+
+  background-color: $red;
+  color: $white;
+  padding-top: 22px;
+  padding-bottom: 16px;
+}
+
+.iconWrap {
+  @include flex(row, flex-end, flex-start);
+  padding-right: 15px;
+  align-self: center;
+}
