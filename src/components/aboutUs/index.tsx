@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './aboutUs.module.scss';
 import AdvantagesBlock from './advantagesBlock/index';
-import { FormButton, FormTitle, FormTextField } from '../common/formElements';
 
 const AboutUs: React.FC = () => {
   const advantagesArr: { url: string; title: string; id: number }[] = [
@@ -39,11 +38,7 @@ const AboutUs: React.FC = () => {
           наприклад, риба приносить із дна першоствореного океану мул, з якого
           створюється суходіл.
         </p>
-
         <div className={styles.aboutUs__advantages}>{Items}</div>
-        <FormButton title='Увійти' />
-        <FormTitle title='Увійти' />
-        <FormTextField text='Ще не зареєстровані?' url='/login' />
       </div>
     </section>
   );

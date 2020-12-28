@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import style from './bannerLower.module.scss';
-import FakeRequest from '../_fakeRequest/fakeRequestForDemo'; //delete
+//import FakeRequest from '../_fakeRequest/fakeRequestForDemo'; //delete
 
 export default class BannerLower extends Component<any> {
   scrollRef: any = React.createRef();
@@ -29,7 +29,7 @@ export default class BannerLower extends Component<any> {
   };
 
   render() {
-    const { handleClick } = this.props;
+    //const { handleClick } = this.props;
     return (
       <div className={style.container}>
         <div

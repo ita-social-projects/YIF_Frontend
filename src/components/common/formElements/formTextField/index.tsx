@@ -3,8 +3,8 @@ import styles from './formTextField.module.scss';
 import { Link } from 'react-router-dom';
 
 interface Props {
-  text: string;
-  url: string;
+  text: string; // here should be the text you want to see before "Перейдіть сюди"
+  url: string; //here should be a link to the page, that needs to be opened on click
 }
 
 const FormTextField: React.FC<Props> = (props) => {

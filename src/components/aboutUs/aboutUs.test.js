@@ -2,14 +2,9 @@ import React from 'react';
 import AboutUs from '.';
 import styles from './aboutUs.module.scss';
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 
 test('render a title', () => {
-  const { getByText } = render(
-    <MemoryRouter>
-      <AboutUs />
-    </MemoryRouter>
-  );
+  const { getByText } = render(<AboutUs />);
   expect(getByText(/Про нас/i)).toBeInTheDocument();
   const title = screen.getByText(/Про нас/i);
   expect(title).toBeInTheDocument();

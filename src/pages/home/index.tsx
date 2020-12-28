@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './home.module.scss';
 import {
   Header,
   Banner,
@@ -11,7 +10,7 @@ import {
 } from '../../components';
 import ErrorBoundry from '../../errorBoundry';
 
-import FakeRequest from '../../components/_fakeRequest'; // delete later
+//import FakeRequest from '../../components/_fakeRequest'; // delete later
 
 const handleClick = () => {
   const elem = document.getElementById('filter') as HTMLDivElement;
