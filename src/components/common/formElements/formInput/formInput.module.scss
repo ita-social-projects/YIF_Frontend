@@ -1,0 +1,40 @@
+@import '../../../../styles/index.scss';
+
+.inputErrorWrap {
+  @include flex(column, flex-start, flex-start);
+}
+
+.inputContainer {
+  @include flex(row, flex-end, flex-start);
+  width: 350px;
+  height: 40px;
+  border-bottom: 1px solid $black;
+  margin-bottom: 45px;
+}
+
+.inputFailed {
+  border-bottom: 1px solid $red;
+  margin-bottom: 1px;
+}
+
+.imgContainer {
+  padding: 0 20px;
+  cursor: pointer;
+}
+
+.formInput {
+  padding-bottom: 2px;
+  font-family: $fontOpenSans;
+  font-weight: $regular;
+  font-size: 14px; // fix this in the Future
+  color: $black;
+  width: 100%;
+  cursor: pointer;
+
+  &::placeholder {
+    font-family: $fontOpenSans;
+    font-weight: $regular;
+    font-size: 14px; // fix this in the Future
+    color: $black;
+  }
+}

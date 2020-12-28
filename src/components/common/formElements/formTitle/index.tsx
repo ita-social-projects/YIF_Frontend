@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './formTitle.module.scss';
 interface Props {
-  title: string;
+  title: string; //here should be the text you want to see as a Title of the form
 }
 
 const FormTitle: React.FC<Props> = (props) => {
