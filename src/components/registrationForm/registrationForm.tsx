@@ -1,17 +1,27 @@
-import classes from './../registrationForm.module.scss'
+import classes from './registrationForm.module.scss'
 import React from "react";
 import { Field, Formik, Form } from 'formik';
 import { validationField } from '../../services/validateForm/ValidatorsField';
+import {FormButton,
+    FormCloseButton,
+    FormInput,
+    FormInputError,
+    FormTextField,
+    FormTitle,} from '../common/formElements'
 
 
 const RegistrationForm: React.FC = () => {
-
   return (
-      <section>
-        <div className={classes.wrapper}>
+      <section className={classes.wrapper}>
           <div className={classes.form}>
-            <span>X</span>
-            <h2>Реєстрація</h2>
+            <div className={classes.wrapperImg}>
+              <img
+                  src='/assets/images/imgRegistration.svg'
+                   alt='win'/>
+            </div>
+            <FormCloseButton />
+            <FormTitle title='Реєстрація' />
+           {/* <FormInputError errorType='form' errorMessage='Користувач з такою електронною поштою вже зареєстрований'/>*/}
             <Formik
                 initialValues={{ email: '', password: '', confirmPassword: '' }}
                 validationSchema={validationField}
@@ -40,48 +50,46 @@ const RegistrationForm: React.FC = () => {
                   <Form onSubmit={handleSubmit}>
                     <div>
                       <Field
+                          component={FormInput}
                           placeholder={'Електронна пошта'}
+                          iconName ='email'
                           type="email"
                           name="email"
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.email}
                       />
-                      {errors.email && touched.email ? <div className={classes.error}>{errors.email}</div> : null}
                     </div>
                     <div>
                       <Field
+                          component={FormInput}
                           placeholder={'Пароль'}
+                          iconName ='lock'
                           type="password"
                           name="password"
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.password}
                       />
-                      {errors.password && touched.password ? <div className={classes.error}>{errors.password}</div> : null}
                     </div>
                     <div>
                       <Field
+                          component={FormInput}
                           placeholder={'Підтвердіть пароль'}
+                          iconName ='lock'
                           type="password"
                           name="confirmPassword"
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.confirmPassword}
                       />
-                      {errors.confirmPassword && touched.confirmPassword ? <div className={classes.error}>{errors.confirmPassword}</div> : null}
                     </div>
-                    <button  data-testid='button' type='submit'>
-                      Увійти
-                    </button>
-                    <div>Вже зареєстровані? Перейдіть
-                      <span> сюди</span>
-                    </div>
+                    < FormButton data-testid='button' form='register' title='Увійти'/>
+                    <FormTextField text='Вже зареєстровані?' url={'/login'} />
                   </Form>
               )}
             </Formik>
           </div>
-        </div>
       </section>
   );
 }
