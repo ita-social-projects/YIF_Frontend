@@ -4,7 +4,7 @@ import { RootState } from '../store/store';
 import { Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { connect } from 'react-redux';
-import { requestFailure } from '../store/reducers/requestStatus';
+import { requestFailure } from '../store/reducers/errorBoundryStatus.reducer';
 
 class ErrorBoundry extends Component<
   any,
@@ -25,7 +25,7 @@ class ErrorBoundry extends Component<
 
 const mapStateToProps = (state: RootState) => {
   return {
-    state: state.requestStatus,
+    state: state.errorBoundryStatus,
   };
 };
 const mapDispatchToProps = (dispatch: any) => {
