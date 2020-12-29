@@ -11,7 +11,7 @@ import {
 } from '../../components';
 import ErrorBoundry from '../../errorBoundry';
 
-import FakeRequest from '../../components/_fakeRequest'; // delete later
+import FakeLogin from '../../components/_fakeRequest/fakeLogin'; // delete later
 
 const handleClick = () => {
   const elem = document.getElementById('filter') as HTMLDivElement;
@@ -34,7 +34,7 @@ const Home = () => {
         <Partners />
         <Footer />
         {/* Delete lower component later: */}
-        {/* <FakeRequest /> */}
+        <FakeLogin />
       </ErrorBoundry>
     </>
   );

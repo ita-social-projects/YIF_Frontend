@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Header from '../../components/header';
 import errorStyle from './errorPage.module.scss';
 
@@ -8,12 +7,12 @@ class ErrorIndicator extends Component<any> {
     return (
       <>
         <Header />
-        <div className={errorStyle.error}>
-          <h1>
+        <section className={errorStyle.error}>
+          <h2>
             Трясця,
             <br /> сторінку
             <br /> не виявлено...
-          </h1>
+          </h2>
           <p>
             Посилання, за яким ви перейшли, могло бути
             <br /> хибним або сторінку видалено.
@@ -21,7 +20,7 @@ class ErrorIndicator extends Component<any> {
           <a className={errorStyle.btn} href='/'>
             &gt; &nbsp; Повернутися на головну.
           </a>
-        </div>
+        </section>
       </>
     );
   }
