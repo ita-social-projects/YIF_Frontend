@@ -47,6 +47,7 @@
     }
 
     &__imgBlock {
+      margin-top: 40px;
       width: 100%;
     }
 
@@ -58,6 +59,7 @@
 
 .container {
   width: calc((1180 / 1440) * 100%);
+  max-width: 1440px;
   height: 100%;
   @include flex(column, center, flex-start);
 }
