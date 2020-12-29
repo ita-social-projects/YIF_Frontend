@@ -38,7 +38,6 @@ const AboutUs: React.FC = () => {
           наприклад, риба приносить із дна першоствореного океану мул, з якого
           створюється суходіл.
         </p>
-
         <div className={styles.aboutUs__advantages}>{Items}</div>
       </div>
     </section>

@@ -34,8 +34,9 @@
     font-family: $fontOpenSans;
     margin-top: 1.563rem;
     font-size: $font_18px;
-    color: red;
+    color: $red;
     cursor: pointer;
+    font-weight: $bold;
   }
 }
 
