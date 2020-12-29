@@ -8,7 +8,7 @@ describe('HOME PAGE: lower banner', () => {
     expect(getByText(/your it future/i)).toBeInTheDocument();
     const label = screen.getByText(/future/i);
     expect(label).toBeInTheDocument();
-    expect(label.tagName).toMatch(/H1/i);
+    expect(label.tagName).toMatch(/H2/i);
   });
 
   test('check the button', () => {

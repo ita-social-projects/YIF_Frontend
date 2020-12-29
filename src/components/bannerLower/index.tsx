@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import style from './bannerLower.module.scss';
-import FakeRequest from '../_fakeRequest/fakeRequestForDemo'; //delete
 
 export default class BannerLower extends Component<any> {
   scrollRef: any = React.createRef();
@@ -29,14 +28,13 @@ export default class BannerLower extends Component<any> {
   };
 
   render() {
-    const { handleClick } = this.props;
     return (
-      <div className={style.container}>
+      <section className={style.container}>
         <div
           ref={this.scrollRef}
           className={`${style.banner} ${style.animationBg} ${style.animationBounce}`}
         >
-          <h1>Your IT Future</h1>
+          <h2>Your IT Future</h2>
           <p>
             Існують легенди (записи яких збереглися в античних храмах), згідно з
             якими людська раса походить від cтворінь, які нагадують амфібій.
@@ -51,11 +49,9 @@ export default class BannerLower extends Component<any> {
             }}
           >
             Зареєструйся
-            {/* Delete after demo: */}
-            {/* <FakeRequest /> */}
           </a>
         </div>
-      </div>
+      </section>
     );
   }
 }
