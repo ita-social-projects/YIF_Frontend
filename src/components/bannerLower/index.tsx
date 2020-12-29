@@ -44,6 +44,7 @@ export default class BannerLower extends Component<any> {
             міфів риби виконують функцію деміурга.
           </p>
           <a
+            className={style.animatedButton}
             href='/somewhere'
             rel='call to action'
             onClick={(e) => {
