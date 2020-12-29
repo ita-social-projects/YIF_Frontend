@@ -59,6 +59,9 @@
     color: $white;
     border-color: $darkBlue;
   }
+  20% {
+    color: $black;
+  }
   100% {
     background-position: 100% 0;
     color: $black;
@@ -70,6 +73,9 @@
   0% {
     background-position: 100% 0;
     color: $black;
+  }
+  80% {
+    color: $white;
   }
   100% {
     background-position: 0 0;
