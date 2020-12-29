@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './header.module.scss';
-import { NavLink, Link } from 'react-router-dom';
+import {NavLink, Link, BrowserRouter} from 'react-router-dom';
 
 const Header: React.FC = () => {
   return (
@@ -17,9 +17,9 @@ const Header: React.FC = () => {
           <Link to='/login' className={styles.button}>
             Вхід
           </Link>
-          <Link to='/register' className={styles.button}>
+          <NavLink to='/register' className={styles.button}>
             Реєстрація
-          </Link>
+          </NavLink>
         </div>
       </nav>
     </header>

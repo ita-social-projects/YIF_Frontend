@@ -1,0 +1,25 @@
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  padding-top: 127px;
+  background-color: #D6E5F2;
+
+   .form {
+     margin: 0 auto;
+     width: 450px;
+     height: auto;
+     background-color: white;
+   }
+
+}
+.error {
+  border: 1px solid red;
+  background-color: red;
+  color: white;
+}
+
+button {
+  margin: 20px;
+  padding: 10px;
+  background-color: #0074D9;
+}
