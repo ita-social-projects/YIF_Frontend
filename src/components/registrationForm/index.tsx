@@ -2,12 +2,13 @@ import React from "react";
 import {Header} from '../index';
 import RegistrationForm from "./registrationForm";
 
+
 const RegistrationPage: React.FC = () => {
-  return(
+  return (
       <>
-        <Header />
-        <RegistrationForm />
-        </>
+        <Header/>
+        <RegistrationForm/>
+      </>
   )
 }
 
