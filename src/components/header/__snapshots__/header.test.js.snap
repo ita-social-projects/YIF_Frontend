@@ -32,13 +32,13 @@ Object {
             class="entry"
           >
             <a
-              class="button"
+              class="animatedButtonTransparent"
               href="/login"
             >
               Вхід
             </a>
             <a
-              class="button"
+              class="animatedButton"
               href="/register"
             >
               Реєстрація
@@ -76,13 +76,13 @@ Object {
           class="entry"
         >
           <a
-            class="button"
+            class="animatedButtonTransparent"
             href="/login"
           >
             Вхід
           </a>
           <a
-            class="button"
+            class="animatedButton"
             href="/register"
           >
             Реєстрація
