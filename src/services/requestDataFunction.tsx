@@ -22,12 +22,17 @@ type Response = { //declaration of type
   data: object; 
   statusCode: number;
 };
+/*
 let result: Response = { // initialization of object -> result type Response
   data: {}, 
   statusCode: 0,
 };
-
+*/
 export const RequestData = (link: string, method: string, data?: object) => {
+  let result: Response = { // initialization of object -> result type Response
+    data: {}, 
+    statusCode: 0,
+  };
   return new Promise((resolve, rejects) => {
     fetch(link, {
       method: method,
@@ -45,7 +50,8 @@ export const RequestData = (link: string, method: string, data?: object) => {
         resolve(result);
       })
       .catch((err) => {
-        rejects(err);
+        //rejects(err);
+        Promise.reject(err);
       });
   });
 };
