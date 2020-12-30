@@ -1,18 +1,20 @@
-import {
+import errorBoundryStatusReducer, {
   requestStart,
   requestFailure,
   requestSuccess,
+  errorBoundryStatusState,
 } from './errorBoundryStatus.reducer';
-import errorBoundryStatusReducer from './errorBoundryStatus.reducer';
 
 describe('ERROR BOUNDARY', () => {
   it('should return the initial state', () => {
     const emptyObj: any = {};
+    const mockState: any = { errorBoundryStatus: true };
     expect(errorBoundryStatusReducer(undefined, emptyObj)).toEqual({
       loading: false,
       error: false,
       succes: false,
     });
+    expect(errorBoundryStatusState(mockState)).toEqual(true);
   });
 
   it('should change state error to true', () => {
