@@ -1,0 +1,108 @@
+.frame{
+    width: 1000px;
+    height: 400px;
+    border:solid 1px black
+}
+
+.page{
+    height: 1208px;
+    .mainWorkingFiled{
+        height: 700px;
+        //border:solid 1px black;
+        margin-top:45px;
+        background-color: #C4C4C4;
+        //position: relative;
+        display: flex;
+        justify-content: space-between;
+        .mainMenuBar{
+            width: 45px;
+            height: 700px;   
+            background-color: gray;
+            border:solid 1px black;
+            z-index: 1;
+            //position: absolute;
+            cursor: pointer;
+            .icon{
+                width: 35px;
+                height: 35px;
+                border-radius:50%;
+                background-color: white;
+                margin-top: 4px;
+                margin-left: 4px;
+                margin-right: 4px;
+            }
+            
+        }
+        .mainMenu{
+            //width: 310px;
+            width: 0px;
+            height: 700px;
+            left:45px;
+            background-color: gray;
+            border:solid 1px black;
+            //position: absolute;
+            z-index: 1;
+            transition: 0.5s;
+            &:hover{
+                width: 310px;  
+            }
+            .userFiled{
+                margin-top:20px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                overflow-x:hidden;
+                .icon{
+                   width: 70px;
+                   height: 70px;
+                   border-radius:50%;
+                   background-color: white;
+                   margin-left: 20px;
+                }
+                p{
+                    margin-left: 20px;
+                }
+            }
+            .optionList{
+                margin-top:20px;
+                ul{
+                    //list-style-type: none;
+                    //width: 0px;
+                    width: 100%;
+                    overflow-x:hidden;
+                    li{
+                        //width: 100%;
+                        height: 30px;
+                        overflow:hidden;
+                        padding: 7px 18px;
+                        border:solid 1px black;
+                        cursor:pointer;
+                        &:hover{
+                            background-color: white;
+                        }
+                    }
+                }
+            }
+
+        }
+        .mainFiled{ 
+            //text-align: left;
+            border:solid 1px black;
+            width: 100%;
+            //position: absolute;
+            z-index: 0;
+            overflow:auto;
+        }
+    }
+    .univMap{
+        margin-top:55px;
+        height: 380px;
+        background-color: #C4C4C4;
+        text-align: center;
+    }
+}
+
+.mainMenuBar:hover + .mainMenu{
+    width: 310px;
+    transition: 0.5s;
+}
