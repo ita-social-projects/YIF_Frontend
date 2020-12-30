@@ -1,8 +1,8 @@
 import React from 'react';
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import Banner from '.';
 
-describe('banner', () => {
+describe('banner elements', () => {
   let banner;
 
   const textElements = [
@@ -32,33 +32,29 @@ describe('banner', () => {
     //check the image location
     expect(imageDom).toHaveAttribute('src', '/assets/images/banner.svg');
   });
+});
 
-  test('should change image position on mousemove', () => {
-    const targetElem = banner.getByAltText('img');
+describe('banner events', () => {
+  test('should change image position on mousemove once every 100ms', () => {
+    const { getByAltText } = render(<Banner />);
+    const targetElem = getByAltText('img');
 
-    act(() => {
-      fireEvent.mouseMove(targetElem, { clientX: 10, clientY: 20 });
-    });
+    fireEvent.mouseMove(targetElem, { clientX: 10, clientY: 20 });
+    fireEvent.mouseMove(targetElem, { clientX: 20, clientY: 40 });
 
     expect(targetElem.style).toHaveProperty(
       'transform',
       'translate(-0.2px, -0.4px)'
     );
   });
+
+  test('should fire scroll event once button is clicked', () => {
+    const handleClick = jest.fn();
+    const { getByRole } = render(<Banner handleClick={handleClick} />);
+    const button = getByRole('button');
+
+    fireEvent.click(button);
+
+    expect(handleClick).toHaveBeenCalled();
+  });
 });
-
-// describe('description', () => {
-//   test('should fire scroll event once button is clicked', () => {
-//     const handleClick = jest.fn(() => true);
-//     const { getByRole } = render(<Banner onClick={handleClick} />);
-//     const button = getByRole('button');
-
-//     // fireEvent.click(button);
-
-//     act(() => {
-//       fireEvent.click(button);
-//     });
-
-//     expect(handleClick()).toBe(true);
-//   });
-// });
