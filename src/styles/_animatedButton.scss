@@ -1,0 +1,84 @@
+@import './vars';
+
+@mixin buttonAnimation(
+  $animation-name,
+  $animation-duration,
+  $animation-iteration-count,
+  $animation-timing-function,
+  $animation-fill-mode
+) {
+  animation-name: $animation-name;
+  animation-duration: $animation-duration;
+  animation-iteration-count: $animation-iteration-count;
+  animation-timing-function: $animation-timing-function;
+  animation-fill-mode: $animation-fill-mode;
+}
+
+@mixin animatedButtonHover($color, $border) {
+  color: $color;
+  border: $border;
+}
+
+.animatedButton {
+  background: url('/assets/images/nature-sprite.png');
+  color: #fff;
+  border: solid 1px $darkBlue;
+  background-size: 2300% 100%;
+  cursor: pointer;
+  @include buttonAnimation(move-in-steps-reverse, 0.5s, 1, steps(22), forwards);
+
+  &:hover {
+    @include buttonAnimation(move-in-steps, 0.7s, 1, steps(22), forwards);
+    @include animatedButtonHover($black, solid 1px $black);
+  }
+}
+
+.animatedButtonTransparent {
+  background: url('/assets/images/nature-sprite.png');
+  color: $black;
+  border: solid 1px $black;
+  background-size: 2300% 100%;
+  cursor: pointer;
+  @include buttonAnimation(move-in-steps, 0.7s, 1, steps(22), forwards);
+
+  &:hover {
+    @include buttonAnimation(
+      move-in-steps-reverse,
+      0.5s,
+      1,
+      steps(22),
+      forwards
+    );
+    @include animatedButtonHover($white, solid 1px $darkBlue);
+  }
+}
+
+@keyframes move-in-steps {
+  0% {
+    background-position: 0 0;
+    color: $white;
+    border-color: $darkBlue;
+  }
+  20% {
+    color: $black;
+  }
+  100% {
+    background-position: 100% 0;
+    color: $black;
+    border-color: $black;
+  }
+}
+
+@keyframes move-in-steps-reverse {
+  0% {
+    background-position: 100% 0;
+    color: $black;
+  }
+  80% {
+    color: $white;
+  }
+  100% {
+    background-position: 0 0;
+    color: $white;
+  }
+}
