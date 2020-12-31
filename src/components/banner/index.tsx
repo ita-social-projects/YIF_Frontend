@@ -69,7 +69,10 @@ const Banner: React.FC<Props> = (props) => {
             які нагадують амфібій. Їхні тіла були вкриті лускою й дихали вони
             через зябра.
           </p>
-          <button className={styles.button} onClick={() => handleClick()}>
+          <button
+            className={`${styles.button} ${styles.animatedButton}`}
+            onClick={() => handleClick()}
+          >
             Почни вже
             {arrow}
           </button>
