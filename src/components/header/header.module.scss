@@ -1,15 +1,5 @@
 @import '../styles.scss';
 
-@mixin test($color, $colorHover, $borderColor, $backgroundColor) {
-  color: $color;
-
-  &:hover {
-    border: solid 1px $borderColor;
-    background: $backgroundColor;
-    color: $colorHover;
-  }
-}
-
 header {
   box-sizing: border-box;
   height: 6.25rem; //100px
@@ -18,6 +8,8 @@ header {
   background: $lightBlue_1;
   @include flex(row, center, space-between);
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
 
   .logo {
     text-decoration: none;
@@ -76,15 +68,16 @@ header {
       display: flex;
       align-items: center;
 
-      .button {
+      .animatedButton {
         padding: 0.875rem 1.5rem; //14px 24px
-        background: transparent;
-        font-size: $font_18px;
         border-radius: 0.625rem; //10px
-        border: solid 1px $black;
-        cursor: pointer;
+        font-size: $font_18px;
+      }
 
-        @include test($black, $white, $darkBlue, $darkBlue);
+      .animatedButtonTransparent {
+        padding: 0.875rem 1.5rem; //14px 24px
+        border-radius: 0.625rem; //10px
+        font-size: $font_18px;
       }
 
       & > * {
@@ -92,10 +85,6 @@ header {
 
         &:last-child {
           margin-right: 0;
-          background: $darkBlue;
-          border: solid 1px $darkBlue;
-
-          @include test($white, $black, $black, transparent);
         }
       }
     }
