@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import style from './fakeRequest.module.scss';
 import useLogin from '../../services/useLogin';
 import useRegistration from '../../services/useRegistration';
