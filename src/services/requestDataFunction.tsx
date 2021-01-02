@@ -5,10 +5,10 @@ import { rejects } from "assert";
 // To use this function(promise)
 //
 // RequestData(URL,method,[data(if method is not GET)])
-//.then((res)=>{
+//.then((res:type)=>{
 //    console.log(res)
 //  })
-//  .catch((err)=>{
+//  .catch((err:type)=>{
 //    console.log(err)
 //  })
 //
@@ -18,41 +18,27 @@ import { rejects } from "assert";
 //    'filed2':'value2'
 //}
 
-type Response = { //declaration of type
-  data: object; 
-  statusCode: number;
-};
-/*
-let result: Response = { // initialization of object -> result type Response
-  data: {}, 
-  statusCode: 0,
-};
-*/
-export const RequestData = (link: string, method: string, data?: object) => {
-  let result: Response = { // initialization of object -> result type Response
-    data: {}, 
-    statusCode: 0,
-  };
-  return new Promise((resolve, rejects) => {
-    fetch(link, {
-      method: method,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => {
-        result.statusCode = res.status;
-        return res.json();
-      })
-      .then((data) => {
-        result.data = data;
-        resolve(result);
-        //Promise.resolve(result);
-      })
-      .catch((err) => {
-        //rejects(err);
-        Promise.reject(err);
-      });
-  });
-};
+type Respone<T extends object> ={
+  statusCode: number,
+  data:T,
+}
+
+ export async function requestData<TData extends object>(url: string,method:string,body?:any):Promise<Respone<TData>>{
+  const res = await fetch(url,{
+    method: method,
+    headers:{
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+  
+  const statusCode = res.status;
+  const parseBody = await res.json();
+
+  return{
+    statusCode,
+    data:parseBody as TData,
+  }
+}
+
+

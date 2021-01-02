@@ -1,6 +1,6 @@
 import { rejects } from "assert";
 import { resolve } from "path";
-import { RequestData } from "./requestDataFunction";
+import { requestData } from "./requestDataFunction";
 
 const mockJsonPromise = Promise.resolve("received data");
 const mockFetchPromise = Promise.resolve({
@@ -10,7 +10,7 @@ const mockFetchPromise = Promise.resolve({
 global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
 it("method GET", () => {
-  RequestData("URL", "GET");
+  requestData("URL", "GET");
   expect(global.fetch).toHaveBeenCalledWith("URL", {
     body: undefined,
     headers: { "Content-Type": "application/json" },
@@ -20,7 +20,7 @@ it("method GET", () => {
 });
 
 it("method POST", () => {
-  RequestData("URL", "POST", { filed1: "value1" });
+  requestData("URL", "POST", { filed1: "value1" });
   expect(global.fetch).toHaveBeenCalledWith("URL", {
     body: JSON.stringify({ filed1: "value1" }),
     headers: { "Content-Type": "application/json" },
@@ -30,7 +30,7 @@ it("method POST", () => {
 });
 
 it("request Data on success", () => {
-  const request = RequestData("", "", "");
+  const request = requestData("", "", "");
   return expect(request).resolves.toMatchObject({
     data: "received data",
     statusCode: 200,
