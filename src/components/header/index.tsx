@@ -10,16 +10,16 @@ const Header: React.FC = () => {
       </Link>
       <nav>
         <div className={styles.pages}>
-          <NavLink to='/directions'>Напрями</NavLink>
-          <NavLink to='/universities'>Університети</NavLink>
+          <Link to='/directions'>Напрями</Link>
+          <Link to='/universities'>Університети</Link>
         </div>
         <div className={styles.entry}>
-          <Link to='/login' className={styles.button}>
+          <Link to='/login' className={styles.animatedButtonTransparent}>
             Вхід
           </Link>
-          <NavLink to='/register' className={styles.button}>
+          <Link to='/register' className={styles.animatedButton}>
             Реєстрація
-          </NavLink>
+          </Link>
         </div>
       </nav>
     </header>

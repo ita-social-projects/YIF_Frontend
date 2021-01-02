@@ -1,15 +1,18 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import dropboxReducer from '../store/reducers/dropboxReducer';
-//import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from '../components/counter/counterSlice';
-import requestStatusReducer from './reducers/requestStatus';
+import errorBoundryStatusReducer from './reducers/errorBoundryStatus.reducer';
+import loginStatusReducer from './reducers/loginStatus.reducer';
+import registrStatusReducer from './reducers/registrStatus.reducer';
 
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     dropbox: dropboxReducer,
-    requestStatus: requestStatusReducer,
+    errorBoundryStatus: errorBoundryStatusReducer,
+    loginStatus: loginStatusReducer,
+    registrStatus: registrStatusReducer,
   },
 });
 

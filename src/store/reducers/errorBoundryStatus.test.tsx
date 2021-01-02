@@ -1,32 +1,38 @@
-import { requestStart, requestFailure, requestSuccess } from './requestStatus';
-import requestStatusReducer from './requestStatus';
+import errorBoundryStatusReducer, {
+  requestStart,
+  requestFailure,
+  requestSuccess,
+  errorBoundryStatusState,
+} from './errorBoundryStatus.reducer';
 
 describe('ERROR BOUNDARY', () => {
   it('should return the initial state', () => {
     const emptyObj: any = {};
-    expect(requestStatusReducer(undefined, emptyObj)).toEqual({
+    const mockState: any = { errorBoundryStatus: true };
+    expect(errorBoundryStatusReducer(undefined, emptyObj)).toEqual({
       loading: false,
       error: false,
       succes: false,
     });
+    expect(errorBoundryStatusState(mockState)).toEqual(true);
   });
 
   it('should change state error to true', () => {
-    expect(requestStatusReducer(undefined, requestFailure())).toEqual({
+    expect(errorBoundryStatusReducer(undefined, requestFailure())).toEqual({
       loading: false,
       error: true,
       succes: false,
     });
   });
   it('should change state loading to true', () => {
-    expect(requestStatusReducer(undefined, requestStart())).toEqual({
+    expect(errorBoundryStatusReducer(undefined, requestStart())).toEqual({
       loading: true,
       error: false,
       succes: false,
     });
   });
   it('should change state to succesfull', () => {
-    expect(requestStatusReducer(undefined, requestSuccess())).toEqual({
+    expect(errorBoundryStatusReducer(undefined, requestSuccess())).toEqual({
       loading: false,
       error: false,
       succes: true,
