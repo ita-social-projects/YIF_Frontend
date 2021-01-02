@@ -152,11 +152,11 @@ class UserWorksSpace extends React.Component<Props,{}>{
     
         return(
             <Fragment>
-                <section className={styles.mainWorkingFiled}>
-                            <article className={styles.mainMenuBar}>
+                <section className={styles.mainWorkingFiled} onMouseLeave={this.hideBar}>
+                            <article className={styles.mainMenuBar} onMouseEnter={this.hideBar}>
                                 <div className={styles.logo}>YIF</div>
-                                <div className={`${styles.homeIcon} ${styles.hoverEffectIcons} ${styles.icons}`} onClick={this.homeSelect}>{homeIcon}</div>
-                                <div className={`${styles.userIcon} ${styles.hoverEffectIcons} ${styles.icons}`} onClick={this.userSelect}>{userIcon}</div>
+                                <div className={`${styles.homeIcon} ${styles.hoverEffectIcons} ${styles.icons}`} onClick={this.homeSelect}>{homeIcon} </div>
+                                <div className={`${styles.userIcon} ${styles.hoverEffectIcons} ${styles.icons}`} onClick={this.userSelect}>{userIcon} </div>
                             </article>
                             <article className={`${styles.mainMenu} ${styles.menus}`} >
                                 <section>
@@ -192,7 +192,7 @@ class UserWorksSpace extends React.Component<Props,{}>{
                                     </article>
                                 </section>
                             </article>
-                            <article className={styles.mainFiled} onMouseOver={this.hideBar}>{box}</article>
+                            <article className={styles.mainFiled} onMouseEnter={this.hideBar}>{box}</article>
                         </section>
             </Fragment>
         )
