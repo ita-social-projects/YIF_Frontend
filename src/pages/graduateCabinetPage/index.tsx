@@ -2,7 +2,6 @@ import React,{Fragment} from 'react'
 import Frame from 'react-frame-component';
 import { getJSDocReturnType } from 'typescript'
 import styles from './graduateCabinetPage.module.scss';
-import styless from '../../components/footer/footer.module.scss'
 import {
     Header,
     Banner,
@@ -11,7 +10,19 @@ import {
     Filter,
     AboutUs,
     Footer,
+    Option1MainMenu,
+    Option2MainMenu,
+    Option3MainMenu,
+    Option4MainMenu,
+    Option5MainMenu,
+    Option1UserMenu,
+    Option2UserMenu,
+    Option3UserMenu,
+    Option4UserMenu,
+    Option5UserMenu,
   } from '../../components';
+
+
 
 type Props={
     
@@ -32,7 +43,9 @@ type Props={
     }
 
     state={
-        show:1,
+        chosenBlock:-1,
+        homeMenuFrame:0,
+        userMenuFrame:0,
     }
 
     resetNavBar =()=>{  //reset NavBar and it elements
@@ -43,7 +56,7 @@ type Props={
             icon.classList.remove(styles.whiteBackground);
             icon.classList.add(styles.hoverEffectIcons);
         })
-            
+
         menus.forEach((menu)=>{ // hide all side menus
             menu.classList.remove(styles.mainMenuWidth);
         })
@@ -59,7 +72,7 @@ type Props={
         this.resetNavBar();
         let mainMenu = document.querySelector(`.${styles.mainMenu}`);
         let homeIcon = document.querySelector(`.${styles.homeIcon}`);
-        this.setMenu(mainMenu,homeIcon);
+        this.setMenu(mainMenu,homeIcon);      
     }
 
     userSelect =()=>{
@@ -73,28 +86,83 @@ type Props={
         this.resetNavBar();  
     }
 
-    onChangeState = (a:number) =>{
+    onChangeFrame = (frame:number,chosenBlock:number) =>{
         const copyState = this.state;
-        if(a===1){
-            copyState.show = 1;
+        copyState.chosenBlock = chosenBlock;
+        if(chosenBlock===0){
+            copyState.homeMenuFrame = frame;
+        } else 
+        if(chosenBlock===1){
+            copyState.userMenuFrame = frame;
         }
-        else if(a===2){
-            copyState.show = 2;
-        }
-        this.setState((state)=>{
+        this.setState(()=>{
             return{
-                show:copyState.show,
+                chosenBlock:copyState.chosenBlock,
+                homeMenuFrame:copyState.homeMenuFrame,
+                userMenuFrame:copyState.userMenuFrame,
             }
         })
     }
 
     render(){
-        let box
-        if(this.state.show === 1){
-            box = <Filter/>;
-        }
-        else if(this.state.show === 2){
-            box = <AboutUs></AboutUs>
+        let box;
+        switch(this.state.chosenBlock){     //will show frame based on user selection 
+            case 0:{
+                switch(this.state.homeMenuFrame){
+                    case 0:{
+                        box = <Option1MainMenu/>;
+                    break 
+                    }
+                    case 1:{
+                        box = <Option2MainMenu/>;
+                    break 
+                    }
+                    case 2:{
+                        box = <Option3MainMenu/>;
+                    break 
+                    }
+                    case 3:{
+                        box = <Option4MainMenu/>;
+                    break 
+                    }
+                    case 4:{
+                        box = <Option5MainMenu/>;
+                    break 
+                    }
+                    default:
+                    break;
+                }
+            break
+            }
+            case 1:{
+                switch(this.state.userMenuFrame){
+                    case 0:{
+                        box = <Option1UserMenu/>;
+                    break 
+                    }
+                    case 1:{
+                        box = <Option2UserMenu/>;
+                    break 
+                    }
+                    case 2:{
+                        box = <Option3UserMenu/>;
+                    break 
+                    }
+                    case 3:{
+                        box = <Option4UserMenu/>;
+                    break 
+                    }
+                    case 4:{
+                        box = <Option5UserMenu/>;
+                    break 
+                    }
+                    default:
+                    break;
+                }
+            break
+            }
+            default:
+            box = <Option1MainMenu/>;
         }
 
         return(
@@ -115,11 +183,11 @@ type Props={
                                     </article>
                                     <article className={styles.optionList}>
                                         <ul>
-                                            <li onClick={()=>this.onChangeState(1)}>Опція 1 (головне меню)</li>
-                                            <li onClick={()=>this.onChangeState(2)}>Опція 2 (головне меню)</li>
-                                            <li>Опція 3 (головне меню)</li>
-                                            <li>Опція 4 (головне меню)</li>
-                                            <li>Опція 5 (головне меню)</li>
+                                            <li onClick={()=>this.onChangeFrame(0,0)}>Опція 1 (головне меню)</li>
+                                            <li onClick={()=>this.onChangeFrame(1,0)}>Опція 2 (головне меню)</li>
+                                            <li onClick={()=>this.onChangeFrame(2,0)}>Опція 3 (головне меню)</li>
+                                            <li onClick={()=>this.onChangeFrame(3,0)}>Опція 4 (головне меню)</li>
+                                            <li onClick={()=>this.onChangeFrame(4,0)}>Опція 5 (головне меню)</li>
                                         </ul>
                                     </article>
                                 </section>
@@ -132,11 +200,11 @@ type Props={
                                     </article>
                                     <article className={styles.optionList}>
                                         <ul>
-                                            <li onClick={()=>this.onChangeState(1)}>Опція 1 (меню користувача)</li>
-                                            <li onClick={()=>this.onChangeState(2)}>Опція 2 (меню користувача)</li>
-                                            <li>Опція 3 (меню користувача)</li>
-                                            <li>Опція 4 (меню користувача)</li>
-                                            <li>Опція 5 (меню користувача)</li>
+                                            <li onClick={()=>this.onChangeFrame(0,1)}>Опція 1 (меню користувача)</li>
+                                            <li onClick={()=>this.onChangeFrame(1,1)}>Опція 2 (меню користувача)</li>
+                                            <li onClick={()=>this.onChangeFrame(2,1)}>Опція 3 (меню користувача)</li>
+                                            <li onClick={()=>this.onChangeFrame(3,1)}>Опція 4 (меню користувача)</li>
+                                            <li onClick={()=>this.onChangeFrame(4,1)}>Опція 5 (меню користувача)</li>
                                         </ul>
                                     </article>
                                 </section>
