@@ -10,12 +10,10 @@ import {
   FormTextField,
   FormTitle,
 } from '../common/formElements'
-//import {useDispatch} from "react-redux";
-//import RegisterUserHook from ',,/../services/RegisterUserHook'
 
 
 const RegistrationForm: React.FC = () => {
-  // const dispatch = useDispatch();
+
   return (
       <section role='section' className={classes.wrapper}>
         <div role='wrapper' className={classes.form}>
@@ -38,9 +36,6 @@ const RegistrationForm: React.FC = () => {
                     confirmPassword: '',
                   },
                 });
-                //const { email, password, confirmPassword } = values;
-                //console.log(email, password, confirmPassword);
-                /*dispatch(RegisterUserHook(email, password, confirmPassword));*/
               }}
           >
             {({
