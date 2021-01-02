@@ -7,3 +7,4 @@ export { default as AboutUs } from './aboutUs';
 export { default as BannerLower } from './bannerLower';
 export { default as Partners } from './partners';
 export { default as Footer } from './footer/footer';
+export { default as LoginForm } from './loginForm';
