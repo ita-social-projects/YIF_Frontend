@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './header.module.scss';
-import { NavLink, Link } from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 
 const Header: React.FC = () => {
   return (
@@ -10,14 +10,14 @@ const Header: React.FC = () => {
       </Link>
       <nav>
         <div className={styles.pages}>
-          <NavLink to='/directions'>Напрями</NavLink>
-          <NavLink to='/universities'>Університети</NavLink>
+          <Link to='/directions'>Напрями</Link>
+          <Link to='/universities'>Університети</Link>
         </div>
         <div className={styles.entry}>
-          <Link to='/login' className={styles.button}>
+          <Link to='/login' className={styles.animatedButtonTransparent}>
             Вхід
           </Link>
-          <Link to='/register' className={styles.button}>
+          <Link to='/register' className={styles.animatedButton}>
             Реєстрація
           </Link>
         </div>

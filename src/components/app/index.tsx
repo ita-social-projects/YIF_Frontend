@@ -5,6 +5,7 @@ import ErrorPage from '../../pages/errorPage';
 import FilterPage from '../../pages/filterPage/index';
 import LoginPage from '../../pages/loginPage';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import RegistrationForm from '../../components/registrationForm/index';
 
 const App = () => {
   return (
@@ -15,6 +16,9 @@ const App = () => {
         </Route>
         <Route path='/login'>
           <LoginPage />
+        </Route>
+        <Route path='/register'>
+          <RegistrationForm />
         </Route>
         <Route path='/filterPage' component={FilterPage} />
         <Route path='/404' component={ErrorPage} status={404} />

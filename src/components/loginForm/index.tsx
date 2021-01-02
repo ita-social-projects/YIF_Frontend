@@ -10,12 +10,8 @@ import {
 } from '../common/formElements';
 import { Formik, Form, Field } from 'formik';
 import { validationField } from '../../services/validateForm/ValidatorsField';
-import { useDispatch } from 'react-redux';
-//import loginUserHook from '../../services/loginUserHook';
 
 const LoginForm = () => {
-  //const dispatch = useDispatch();
-
   return (
     <section className={styles.loginFormPage}>
       <div className={styles.loginFormWrap}>
@@ -34,10 +30,6 @@ const LoginForm = () => {
           validationSchema={validationField}
           onSubmit={(values, actions) => {
             const { password, email } = values;
-            //dispatch(loginUserHook(email, password));
-
-            console.log(email);
-            console.log(password);
 
             actions.setSubmitting(false);
             actions.resetForm({
