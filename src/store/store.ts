@@ -5,6 +5,7 @@ import errorBoundryStatusReducer from './reducers/errorBoundryStatus.reducer';
 import loginStatusReducer from './reducers/loginStatus.reducer';
 import registrStatusReducer from './reducers/registrStatus.reducer';
 
+
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
@@ -14,6 +15,8 @@ export const store = configureStore({
     registrStatus: registrStatusReducer,
   },
 });
+
+
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ThunkAction<
