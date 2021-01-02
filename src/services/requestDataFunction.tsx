@@ -48,6 +48,7 @@ export const RequestData = (link: string, method: string, data?: object) => {
       .then((data) => {
         result.data = data;
         resolve(result);
+        //Promise.resolve(result);
       })
       .catch((err) => {
         //rejects(err);

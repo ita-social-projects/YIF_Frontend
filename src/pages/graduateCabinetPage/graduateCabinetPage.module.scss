@@ -12,8 +12,9 @@
             height: 700px;   
             background-color: gray;
             border:solid 1px black;
-            z-index: 1;
+            z-index: 0;
             position: absolute;
+            //left:20px;
             cursor: pointer;
             .logo{
                 font-size:24px;
@@ -39,10 +40,13 @@
         }
         
         .mainFiled{ 
-            //text-align: left;
-            border:solid 1px black;
+            //border:solid 1px red;
+            margin-left:45px;
             width: 100%;
+            //margin-left: auto;
+            //margin-right: auto;
             //position: absolute;
+            //left:20px;
             z-index: 0;
             overflow:auto;
         }
