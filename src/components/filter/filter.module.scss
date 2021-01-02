@@ -1,115 +1,104 @@
-
 @import '../../styles/index.scss';
 
-.dropbox{
+.dropbox {
   height: 34.38rem;
   width: 100%;
-  background:$lightBlue_1;
-  position:relative;
+  background: $lightBlue_1;
+  position: relative;
 
-  .form{
+  .form {
     width: 75rem;
-    margin-left:auto;
-    margin-right:auto;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .filter1{
+  .filter1 {
     position: absolute;
     right: 3.13rem;
     top: 2.19rem;
   }
-  .filter2{
+  .filter2 {
     position: absolute;
     right: 1.88rem;
     bottom: 1.25rem;
   }
-  .filter3{
+  .filter3 {
     position: absolute;
     left: 8.75rem;
     bottom: 0rem;
     z-index: 0;
-
   }
 
-  .title_{
-    width:55rem;
-    margin:0rem;
-    margin-left:auto;
-    margin-right:auto;
-    margin-bottom:3.75rem;
+  .title_ {
+    width: 55rem;
+    margin: 0rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3.75rem;
     position: relative;
     z-index: 1;
-    h3{
+    h3 {
       font-family: $fontNunito;
       padding-top: 5.63rem;
       font-size: $font_80px;
       font-weight: $regular;
     }
   }
-  .selectors{
-    display:flex;
-    justify-content:center;
+  .selectors {
+    display: flex;
+    justify-content: center;
 
-    .box:nth-of-type(1){
+    .box:nth-of-type(1) {
       position: relative;
       z-index: 1;
     }
-     
-    .box:nth-of-type(2){
-      margin-left: 1.5625rem;
-      position: relative;
-      z-index: 1;
 
-    }
-    .box:nth-of-type(3){
+    .box:nth-of-type(2) {
       margin-left: 1.5625rem;
       position: relative;
       z-index: 1;
     }
-    
-    button{
-    float:none; 
-    background-color: $darkBlue;
-    color:$white;
-    display:inline-block;
-    width: 14.5rem;
-    height: 4rem;
-    padding: 0.75rem 3.44rem;
-    border-radius: 0.94rem;
-    border: solid 1px $darkBlue;
-    cursor: pointer;
-    margin-top: -0.379rem;
-    margin-left:2.5rem;
-    position: relative;
-    transition: 0.25s;
-    .searchIcon{
-      position: absolute;
-      top:25%;
-      right: 1.375rem;
-      padding-top:0px;
-      }
-    .searchText{
-      position: absolute;
-      top:16%;
-      left:1.8rem;
-      padding-left: 27px;
-      font-size: $font_30px;
-      font-family: $fontNunito;
-      font-weight: $light;
-      }
-
-    &:hover{
-      border: solid 1px $black;
-      color:  $black;
-      background: transparent;
-      transition: 0.25s;
-      .searchIcon path{
-        fill: $black;
-        fill-opacity: 100%;
-      }
+    .box:nth-of-type(3) {
+      margin-left: 1.5625rem;
+      position: relative;
+      z-index: 1;
     }
 
+    button {
+      float: none;
+      display: inline-block;
+      width: 14.5rem;
+      height: 4rem;
+      padding: 0.75rem 3.44rem;
+      border-radius: 0.94rem;
+      margin-top: -0.379rem;
+      margin-left: 2.5rem;
+      position: relative;
+      .searchIcon {
+        position: absolute;
+        top: 25%;
+        right: 1.375rem;
+        padding-top: 0px;
+        path {
+          transition: 0.5s;
+        }
+      }
+      .searchText {
+        position: absolute;
+        top: 16%;
+        left: 1.8rem;
+        padding-left: 27px;
+        font-size: $font_30px;
+        font-family: $fontNunito;
+        font-weight: $light;
+      }
+
+      &:hover {
+        .searchIcon path {
+          fill: $black;
+          fill-opacity: 100%;
+        }
+      }
     }
   }
 }
-
