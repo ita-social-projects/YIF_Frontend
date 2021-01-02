@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { RequestData } from '../services/requestDataFunction';
+import { useHistory } from 'react-router-dom';
 
 const useRegistration = (endpoint: string) => {
+  const history = useHistory();
   const [email, setEmail] = useState({ email: '' });
   const [password, setPassword] = useState({ password: '' });
   const [confirmPassword, setConfirmPassword] = useState({
@@ -34,11 +36,12 @@ const useRegistration = (endpoint: string) => {
       confirmPassword: value,
     });
   };
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = (
+    e: React.ChangeEvent<HTMLFormElement>,
+    pathToRedirect: string
+  ) => {
     e.preventDefault();
-    setSubmitted({
-      submitted: true,
-    });
+    setSubmitted({ submitted: true });
 
     RequestData(endpoint, 'POST', {
       email: email.email,
@@ -52,6 +55,7 @@ const useRegistration = (endpoint: string) => {
           setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('refreshToken', res.data.refreshToken);
+          history.push(pathToRedirect);
         } else {
           setError({
             hasError: true,
@@ -64,7 +68,7 @@ const useRegistration = (endpoint: string) => {
         setError({
           hasError: true,
           errorStatusCode: error.statusCode,
-          errorMessage: error.data.message || 'something gone wrong',
+          errorMessage: 'something gone wrong',
         });
       });
   };

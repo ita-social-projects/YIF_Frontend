@@ -10,8 +10,12 @@ import {
 } from '../common/formElements';
 import { Formik, Form, Field } from 'formik';
 import { validationField } from '../../services/validateForm/ValidatorsField';
+import useLogin from '../../services/useLogin';
+import Spinner from '../common/spinner';
 
 const LoginForm = () => {
+  const APIUrl: string = 'https://yifbackend.tk/api/Authentication/LoginUser';
+  const useYIFLogin = useLogin(APIUrl);
   return (
     <section className={styles.loginFormPage}>
       <div className={styles.loginFormWrap}>
@@ -24,13 +28,20 @@ const LoginForm = () => {
         </div>
         <FormCloseButton />
         <FormTitle title='Вхід' />
-        <FormInputError errorType='form' errorMessage='Щось пішло не так' />
+        {useYIFLogin.submitted.submitted && !useYIFLogin.error.hasError && (
+          <Spinner />
+        )}
+        {useYIFLogin.error.hasError && (
+          <FormInputError
+            errorType='form'
+            errorMessage={useYIFLogin.error.errorMessage}
+          />
+        )}
+
         <Formik
           initialValues={{ email: '', password: '' }}
           validationSchema={validationField}
           onSubmit={(values, actions) => {
-            const { password, email } = values;
-
             actions.setSubmitting(false);
             actions.resetForm({
               values: {
@@ -40,8 +51,18 @@ const LoginForm = () => {
             });
           }}
         >
-          {({ values, handleChange, handleBlur, handleSubmit }) => (
-            <Form onSubmit={handleSubmit}>
+          {({ values, handleChange, handleBlur, handleSubmit, errors }) => (
+            <Form
+              onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
+                handleSubmit(e);
+                if (
+                  errors.email === undefined &&
+                  errors.password === undefined
+                ) {
+                  useYIFLogin.handleSubmit(e, '/cabinet');
+                }
+              }}
+            >
               <div>
                 <Field
                   component={FormInput}
@@ -49,7 +70,10 @@ const LoginForm = () => {
                   type='email'
                   name='email'
                   placeholder='Електронна пошта'
-                  onChange={handleChange}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChange(e);
+                    useYIFLogin.handleChangeEmail(e);
+                  }}
                   onBlur={handleBlur}
                   value={values.email}
                 />
@@ -62,7 +86,10 @@ const LoginForm = () => {
                   type='password'
                   name='password'
                   placeholder='Пароль'
-                  onChange={handleChange}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChange(e);
+                    useYIFLogin.handleChangePassword(e);
+                  }}
                   onBlur={handleBlur}
                   value={values.password}
                 />

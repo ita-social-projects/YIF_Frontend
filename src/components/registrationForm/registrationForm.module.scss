@@ -20,7 +20,11 @@
   }
   .wrapperImg {
     position: absolute;
-    top: 6%;
+    top: 3.5%;
     right: 0;
+    img {
+      max-width: 95%;
+      height: auto;
+    }
   }
 }

@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { RequestData } from '../services/requestDataFunction';
+import { useHistory } from 'react-router-dom';
 
 const useLogin = (endpoint: string) => {
+  const history = useHistory();
   const [email, setEmail] = useState({ email: '' });
   const [password, setPassword] = useState({ password: '' });
   const [submitted, setSubmitted] = useState({ submitted: false });
@@ -10,7 +12,6 @@ const useLogin = (endpoint: string) => {
     errorStatusCode: '',
     errorMessage: '',
   });
-
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setEmail({
@@ -27,7 +28,10 @@ const useLogin = (endpoint: string) => {
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken');
   };
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = (
+    e: React.ChangeEvent<HTMLFormElement>,
+    pathToRedirect: string
+  ) => {
     e.preventDefault();
     setSubmitted({
       submitted: true,
@@ -43,6 +47,7 @@ const useLogin = (endpoint: string) => {
           setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('refreshToken', res.data.refreshToken);
+          history.push(pathToRedirect);
         } else {
           setError({
             hasError: true,
@@ -55,7 +60,7 @@ const useLogin = (endpoint: string) => {
         setError({
           hasError: true,
           errorStatusCode: error.statusCode,
-          errorMessage: error.message || 'something gone wrong',
+          errorMessage: 'something gone wrong',
         });
       });
   };
