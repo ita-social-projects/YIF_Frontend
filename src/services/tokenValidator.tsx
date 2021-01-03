@@ -58,18 +58,20 @@ function AuthProvider({ children }: any) {
 
   useEffect(() => {
     setToken(localStorage.getItem('token'));
-    setRefreshToken(localStorage.getItem('refresh-token'));
+    setRefreshToken(localStorage.getItem('refreshToken'));
 
     window.onstorage = (event: StorageEvent) => {
       if (event.key === 'token') setToken(localStorage.getItem('token'));
-      if (event.key === 'refresh-token')
-        setRefreshToken(localStorage.getItem('refresh-token'));
+      if (event.key === 'refreshToken')
+        setRefreshToken(localStorage.getItem('refreshToken'));
     };
   }, []);
 
   const updateToken = useCallback((token, refreshToken) => {
+    setToken(token);
+    setRefreshToken(refreshToken);
     localStorage.setItem('token', token);
-    localStorage.setItem('refresh-token', refreshToken);
+    localStorage.setItem('refreshToken', refreshToken);
   }, []);
 
   const removeToken = useCallback(() => {
@@ -78,8 +80,7 @@ function AuthProvider({ children }: any) {
   }, []);
 
   const getToken = useCallback(async () => {
-    // const url = 'https://yifbackend.tk/api/Authentication/RefreshToken';
-    const url = 'http://localhost:3001/token';
+    const url = 'https://yifbackend.tk/api/Authentication/RefreshToken';
     let currentToken = token;
     if (isExpired) {
       try {
@@ -89,7 +90,10 @@ function AuthProvider({ children }: any) {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-          body: refreshToken,
+          body: JSON.stringify({
+            token,
+            refreshToken,
+          }),
         });
 
         if (response.ok) {
@@ -99,10 +103,10 @@ function AuthProvider({ children }: any) {
           updateToken(currentToken, newRefreshToken);
         } else {
           let result = await response.json();
-          console.log(result.message);
+          console.error(result.title);
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
     return currentToken;
