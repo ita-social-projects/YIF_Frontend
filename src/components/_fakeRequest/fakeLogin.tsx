@@ -19,7 +19,11 @@ const FakeLogin: React.FC<any> = () => {
     <div className={style.container}>
       <div className={style.div}>
         <h1>GET FAKE LOGIN</h1>
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
+            handleSubmit(e, '/');
+          }}
+        >
           <input
             type='text'
             name='email'
@@ -67,7 +71,11 @@ const FakeRegistration: React.FC<any> = () => {
     <div className={style.container}>
       <div className={style.div}>
         <h1>GET FAKE REGISTRATION</h1>
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
+            handleSubmit(e, '/');
+          }}
+        >
           <input
             type='text'
             name='email'

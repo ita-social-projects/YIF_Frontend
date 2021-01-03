@@ -18,7 +18,11 @@ describe('USE REGISTRATION HOOK', () => {
       error,
     } = useRegistration(APIUrl);
     return (
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
+          handleSubmit(e, '');
+        }}
+      >
         <input
           type='text'
           data-testid='email'
