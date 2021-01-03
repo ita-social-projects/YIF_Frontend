@@ -47,7 +47,7 @@ describe('token validator', () => {
     title: 'title',
   };
 
-  test('should call fetch function', async () => {
+  test('should fetch successfully', async () => {
     jest.spyOn(global, 'fetch').mockImplementation(() =>
       Promise.resolve({
         ok: true,
@@ -78,7 +78,7 @@ describe('token validator', () => {
     );
   });
 
-  test('should call fetch function', async () => {
+  test('should fetch unsuccessfully', async () => {
     jest.spyOn(global, 'fetch').mockImplementation(() =>
       Promise.resolve({
         ok: false,
@@ -109,7 +109,7 @@ describe('token validator', () => {
     );
   });
 
-  test('update token', () => {
+  test('should update token', () => {
     const { getByTestId } = render(
       <AuthProvider>
         <TestComponent />
@@ -121,7 +121,7 @@ describe('token validator', () => {
     expect(window.onstorage).toBeTruthy();
   });
 
-  test('remove token', () => {
+  test('should remove token', () => {
     const { getByTestId } = render(
       <AuthProvider>
         <TestComponent />
