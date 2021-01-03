@@ -1,13 +1,8 @@
 import React from 'react';
 import styles from './header.module.scss';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../services/tokenValidator';
 
 const Header: React.FC = () => {
-  const { token, isExpired } = useAuth();
-  console.log(token);
-  console.log(isExpired);
-
   return (
     <header>
       <Link to='/' className={styles.logo} data-testid='logo'>

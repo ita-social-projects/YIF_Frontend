@@ -15,15 +15,16 @@ type Decoded = {
   roles: string;
 };
 
+type Token = string | null;
+
 type Values = {
-  token: string | null;
+  token: Token;
   user: Object;
   isExpired: boolean;
+  getToken: Function;
   updateToken: Function;
   removeToken: Function;
 };
-
-type Token = string | null;
 
 const authContext = createContext({} as Values);
 
@@ -50,20 +51,25 @@ const getUser = (token: Token) => {
 
 function AuthProvider({ children }: any) {
   const [token, setToken] = useState<Token>(null);
+  const [refreshToken, setRefreshToken] = useState<Token>(null);
 
   const isExpired = useMemo(() => isTokenExpired(token), [token]);
   const user = useMemo(() => getUser(token), [token]);
 
   useEffect(() => {
     setToken(localStorage.getItem('token'));
+    setRefreshToken(localStorage.getItem('refresh-token'));
 
     window.onstorage = (event: StorageEvent) => {
       if (event.key === 'token') setToken(localStorage.getItem('token'));
+      if (event.key === 'refresh-token')
+        setRefreshToken(localStorage.getItem('refresh-token'));
     };
   }, []);
 
-  const updateToken = useCallback((token) => {
+  const updateToken = useCallback((token, refreshToken) => {
     localStorage.setItem('token', token);
+    localStorage.setItem('refresh-token', refreshToken);
   }, []);
 
   const removeToken = useCallback(() => {
@@ -71,9 +77,40 @@ function AuthProvider({ children }: any) {
     localStorage.removeItem('token');
   }, []);
 
+  const getToken = useCallback(async () => {
+    // const url = 'https://yifbackend.tk/api/Authentication/RefreshToken';
+    const url = 'http://localhost:3001/token';
+    let currentToken = token;
+    if (isExpired) {
+      try {
+        let response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: refreshToken,
+        });
+
+        if (response.ok) {
+          let result = await response.json();
+          currentToken = result.token;
+          let newRefreshToken = result.refreshToken;
+          updateToken(currentToken, newRefreshToken);
+        } else {
+          let result = await response.json();
+          console.log(result.message);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    return currentToken;
+  }, [isExpired, refreshToken, token, updateToken]);
+
   return (
     <authContext.Provider
-      value={{ token, user, isExpired, updateToken, removeToken }}
+      value={{ token, user, isExpired, getToken, updateToken, removeToken }}
     >
       {children}
     </authContext.Provider>
