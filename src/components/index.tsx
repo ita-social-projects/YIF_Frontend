@@ -25,3 +25,4 @@ export { default as Option3UserMenu } from './forCabinetPage/options/userOptions
 export { default as Option4UserMenu } from './forCabinetPage/options/userOptions/option4/index'
 export { default as Option5UserMenu } from './forCabinetPage/options/userOptions/option5/index'
 
+export { default as LoginForm } from './loginForm';

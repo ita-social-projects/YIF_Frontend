@@ -53,19 +53,14 @@
         font-size: 1.875rem;
         font-weight: $regular;
         line-height: 2.5625rem;
-        color: $white;
-        background: $darkBlue;
-        border: solid 1px $darkBlue;
-        cursor: pointer;
         svg {
           padding-left: 1.75rem;
+          path {
+            transition: linear 0.5s;
+          }
         }
 
         &:hover {
-          color: $black;
-          background: transparent;
-          border: solid 1px $black;
-
           svg {
             path {
               fill: $black;

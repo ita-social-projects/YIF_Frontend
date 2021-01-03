@@ -67,7 +67,11 @@ const FormInput: FC<CustomInputProps & FieldProps> = ({
         <input className={styles.formInput} type={type} {...field} {...props} />
       </div>
       {touched[field.name] && errors[field.name] ? (
-        <FormInputError errorType='input' errorMessage={errors[field.name]} />
+        <FormInputError
+          errorType='input'
+          errorMessage={errors[field.name]}
+          data-testid={field.name}
+        />
       ) : null}
     </>
   );

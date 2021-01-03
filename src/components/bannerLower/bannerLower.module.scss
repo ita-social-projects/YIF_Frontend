@@ -24,7 +24,7 @@
   background-size: auto 69%;
   background-position: 100% 100%;
 
-  h1 {
+  h2 {
     font-family: $fontNunito;
     font-weight: $regular;
     font-size: $font_80px;
@@ -40,22 +40,12 @@
   }
   a {
     text-decoration: none;
-    cursor: pointer;
     padding: 1rem 3.125rem;
     border-radius: 15px;
-    border: 1px solid $darkBlue;
-    background-color: $darkBlue;
-    color: $white;
     font-family: $fontNunito;
     font-weight: normal;
     font-size: $font_30px;
     line-height: 1.13;
-    transition: color 0.25s ease, background-color 0.25s ease, border 0.25s ease;
-  }
-  a:hover {
-    background-color: rgba(255, 255, 255, 0);
-    color: $black;
-    border: $borderSecond;
   }
 }
 .animationBg {

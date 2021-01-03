@@ -2,7 +2,7 @@ import { rejects } from "assert";
 import { resolve } from "path";
 import { requestData } from "./requestDataFunction";
 
-const mockJsonPromise = Promise.resolve("received data");
+const mockJsonPromise = Promise.resolve('received data');
 const mockFetchPromise = Promise.resolve({
   json: () => mockJsonPromise,
   status: 200,
@@ -13,8 +13,8 @@ it("method GET", () => {
   requestData("URL", "GET");
   expect(global.fetch).toHaveBeenCalledWith("URL", {
     body: undefined,
-    headers: { "Content-Type": "application/json" },
-    method: "GET",
+    headers: { 'Content-Type': 'application/json' },
+    method: 'GET',
   });
   expect(global.fetch).toHaveBeenCalledTimes(1);
 });
@@ -32,7 +32,7 @@ it("method POST", () => {
 it("request Data on success", () => {
   const request = requestData("", "", "");
   return expect(request).resolves.toMatchObject({
-    data: "received data",
+    data: 'received data',
     statusCode: 200,
   });
 });

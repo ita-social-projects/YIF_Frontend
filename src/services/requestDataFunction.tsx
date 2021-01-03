@@ -1,4 +1,4 @@
-import { rejects } from "assert";
+import { rejects } from 'assert';
 
 // To import this function(promise) -> import {RequestData} from [path]
 //------------------------------------------------------------
