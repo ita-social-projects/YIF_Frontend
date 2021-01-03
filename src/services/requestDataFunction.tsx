@@ -1,4 +1,4 @@
-import { rejects } from "assert";
+import { rejects } from 'assert';
 
 // To import this function(promise) -> import {RequestData} from [path]
 //------------------------------------------------------------
@@ -18,21 +18,23 @@ import { rejects } from "assert";
 //    'filed2':'value2'
 //}
 
-type Response = { //declaration of type
-  data: object; 
+type Response = {
+  //declaration of type
+  data: object;
   statusCode: number;
 };
-let result: Response = { // initialization of object -> result type Response
-  data: {}, 
+let result: Response = {
+  // initialization of object -> result type Response
+  data: {},
   statusCode: 0,
 };
 
-export const RequestData = (link: string, method: string, data?: object) => {
+export const requestData = (link: string, method: string, data?: object) => {
   return new Promise((resolve, rejects) => {
     fetch(link, {
       method: method,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     })

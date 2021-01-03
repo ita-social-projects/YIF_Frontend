@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { RequestData } from '../services/requestDataFunction';
+import { requestData } from '../services/requestDataFunction';
 import { useHistory } from 'react-router-dom';
 
 const useLogin = (endpoint: string) => {
@@ -33,11 +33,9 @@ const useLogin = (endpoint: string) => {
     pathToRedirect: string
   ) => {
     e.preventDefault();
-    setSubmitted({
-      submitted: true,
-    });
-
-    RequestData(endpoint, 'POST', {
+    setSubmitted({ submitted: true });
+    setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
+    requestData(endpoint, 'POST', {
       email: email.email,
       password: password.password,
     })
