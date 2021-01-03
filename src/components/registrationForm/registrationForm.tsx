@@ -56,11 +56,12 @@ const RegistrationForm: React.FC = () => {
             handleBlur,
             handleSubmit,
             isSubmitting,
+            isValid,
           }) => (
             <Form
               onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
                 handleSubmit(e);
-                if (!Object.keys(errors).length) {
+                if (touched.email && isValid) {
                   useYIFRegistration.handleSubmit(e, '/cabinet');
                 }
               }}
@@ -89,12 +90,7 @@ const RegistrationForm: React.FC = () => {
                   name='password'
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     handleChange(e);
-                    if (
-                      errors.email === undefined &&
-                      errors.password === undefined
-                    ) {
-                      useYIFRegistration.handleChangePassword(e);
-                    }
+                    useYIFRegistration.handleChangePassword(e);
                   }}
                   onBlur={handleBlur}
                   value={values.password}

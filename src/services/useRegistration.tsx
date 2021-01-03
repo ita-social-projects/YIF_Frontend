@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { RequestData } from '../services/requestDataFunction';
+import { requestData } from '../services/requestDataFunction';
 import { useHistory } from 'react-router-dom';
 
 const useRegistration = (endpoint: string) => {
@@ -42,8 +42,9 @@ const useRegistration = (endpoint: string) => {
   ) => {
     e.preventDefault();
     setSubmitted({ submitted: true });
+    setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
 
-    RequestData(endpoint, 'POST', {
+    requestData(endpoint, 'POST', {
       email: email.email,
       username: email.email,
       password: password.password,

@@ -51,11 +51,20 @@ const LoginForm = () => {
             });
           }}
         >
-          {({ values, handleChange, handleBlur, handleSubmit, errors }) => (
+          {({
+            values,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            errors,
+            touched,
+            isValid,
+          }) => (
             <Form
               onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
                 handleSubmit(e);
                 if (
+                  touched.email &&
                   errors.email === undefined &&
                   errors.password === undefined
                 ) {
