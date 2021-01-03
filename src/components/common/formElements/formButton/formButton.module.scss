@@ -1,4 +1,5 @@
 @import '../../../../styles/index.scss';
+@import '../../../styles.scss';
 
 .formButton {
   width: 350px;
@@ -6,19 +7,10 @@
   border-radius: 5px;
   margin-top: 35px;
   text-align: center;
-  background-color: $darkBlue;
   font-family: $fontOpenSans;
   font-weight: $regular;
   font-size: $font_18px;
-  color: $white;
-  cursor: pointer;
   border: 1px solid $darkBlue;
-
-  &:hover {
-    border: 1px solid $black;
-    color: $black;
-    background-color: transparent;
-  }
 }
 
 .buttonLogin {

@@ -13,8 +13,8 @@ const initialState: IInitState = {
   succes: false,
 };
 
-export const requestStatus = createSlice({
-  name: 'requestStatus',
+export const errorBoundryStatus = createSlice({
+  name: 'errorBoundryStatus',
   initialState,
   reducers: {
     requestStart: (state) => {
@@ -39,8 +39,9 @@ export const {
   requestStart,
   requestFailure,
   requestSuccess,
-} = requestStatus.actions;
+} = errorBoundryStatus.actions;
 
-export const requestStatusState = (state: RootState) => state.requestStatus;
+export const errorBoundryStatusState = (state: RootState) =>
+  state.errorBoundryStatus;
 
-export default requestStatus.reducer;
+export default errorBoundryStatus.reducer;
