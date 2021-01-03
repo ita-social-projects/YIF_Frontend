@@ -11,8 +11,8 @@ const FormButton: React.FC<Props> = (props) => {
     <button
       className={
         form === 'login'
-          ? `${styles.formButton} ${styles.buttonLogin}`
-          : `${styles.formButton}`
+          ? `${styles.formButton} ${styles.buttonLogin} ${styles.animatedButton}`
+          : `${styles.formButton} ${styles.animatedButton}`
       }
       type='submit'
     >
