@@ -112,7 +112,7 @@ const RegistrationForm: React.FC = () => {
                   value={values.confirmPassword}
                 />
               </div>
-              <FormButton data-testid='button' form='register' title='Увійти' />
+              <FormButton data-testid='button' form='register' title='Реєстрація' />
               <FormTextField text='Вже зареєстровані?' url={'/login'} />
             </Form>
           )}
