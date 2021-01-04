@@ -18,9 +18,6 @@ describe('token validator', () => {
       removeToken,
     } = useAuth();
 
-    // const testToken =
-    //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjliNmRkNGY2LTIzMGEtNDA4Ni05YWQ5LTQyYTZlNTEwNmJmOCIsImVtYWlsIjoicm9tYW4uYXJrLmtvQGdtYWlsLmNvbSIsInJvbGVzIjoiR3JhZHVhdGUiLCJleHAiOjE2MDkzMzA2NjR9.EqY773v1vn7_OO72pu8GKpk4ylpQ-UZn8oNQMtP7WPg';
-
     return (
       <div>
         <button data-testid='get-token' onClick={getToken}>
@@ -118,7 +115,9 @@ describe('token validator', () => {
     const button = getByTestId('update-token');
     fireEvent.click(button);
 
-    expect(window.onstorage).toBeTruthy();
+    expect(window.localStorage.token).toEqual(
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjliNmRkNGY2LTIzMGEtNDA4Ni05YWQ5LTQyYTZlNTEwNmJmOCIsImVtYWlsIjoicm9tYW4uYXJrLmtvQGdtYWlsLmNvbSIsInJvbGVzIjoiR3JhZHVhdGUiLCJleHAiOjE2MDkzMzA2NjR9.EqY773v1vn7_OO72pu8GKpk4ylpQ-UZn8oNQMtP7WPg'
+    );
   });
 
   test('should remove token', () => {
@@ -130,6 +129,6 @@ describe('token validator', () => {
     const button = getByTestId('remove-token');
     fireEvent.click(button);
 
-    expect(window.onstorage).toBeTruthy();
+    expect(window.localStorage.token).toBe(undefined);
   });
 });
