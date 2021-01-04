@@ -1,5 +1,6 @@
 import React from 'react';
 import FormButton from '.';
+import ReactDOM from 'react-dom';
 import { render, screen } from '@testing-library/react';
 import { unmountComponentAtNode } from 'react-dom';
 
@@ -13,6 +14,11 @@ afterEach(() => {
   unmountComponentAtNode(container);
   container.remove();
   container = null;
+});
+
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<FormButton />, div);
 });
 
 test('render a title from props', () => {
