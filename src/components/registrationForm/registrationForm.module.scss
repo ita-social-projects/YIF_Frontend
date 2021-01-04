@@ -3,10 +3,11 @@
 
 .wrapper {
   padding-top: 100px;
+  padding-bottom: 100px;
   width: 100%;
   height: calc(100vh - 6.25rem);
-  max-height: 62.5rem;
-  min-height: 56.25rem;
+  //max-height: 62.5rem;
+  min-height: 65.25rem;
   background-color: $lightBlue_2;
   @include flex(row, flex-start, center);
 
