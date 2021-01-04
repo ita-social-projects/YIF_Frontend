@@ -27,7 +27,7 @@ const Home = () => {
         <Banner handleClick={handleClick} />
         <Filter />
         <AboutUs />
-        <BannerLower handleClick={handleClick} />
+        <BannerLower />
         <Partners />
         <Footer />
       </ErrorBoundry>
