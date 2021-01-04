@@ -49,7 +49,7 @@ const Banner: React.FC<Props> = (props) => {
   const { handleClick } = props;
 
   return (
-    <div className={styles.banner} onMouseMove={handleMouseMove}>
+    <section className={styles.banner} onMouseMove={handleMouseMove}>
       <div className={styles.content}>
         <img
           src='/assets/images/banner.svg'
@@ -78,7 +78,7 @@ const Banner: React.FC<Props> = (props) => {
           </button>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
