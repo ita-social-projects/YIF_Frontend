@@ -1,5 +1,6 @@
 import React from 'react';
 import FormCloseButton from '.';
+import ReactDOM from 'react-dom';
 import { render, screen } from '@testing-library/react';
 import { unmountComponentAtNode } from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
@@ -14,6 +15,16 @@ afterEach(() => {
   unmountComponentAtNode(container);
   container.remove();
   container = null;
+});
+
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(
+    <MemoryRouter>
+      <FormCloseButton />
+    </MemoryRouter>,
+    div
+  );
 });
 
 test('check the link', () => {
