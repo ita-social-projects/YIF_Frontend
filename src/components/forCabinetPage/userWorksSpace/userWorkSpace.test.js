@@ -22,22 +22,5 @@ it("renders list of options",() =>{
     act(()=>{
         ReactDOM.render(
             <UserWorkSpace />,container);
-    });
-    const ul = document.querySelectorAll('ul');
-    const liMainList = ul[0].querySelectorAll('li');
-    const liUserList = ul[1].querySelectorAll('li');
-    let i = 1;
-
-    liMainList.forEach((li)=>{
-        expect(li.textContent).toBe(`Опція ${i} (головне меню)`);
-        i++;
-    })
-
-    i=1;
-
-    liUserList.forEach((li)=>{
-        expect(li.textContent).toBe(`Опція ${i} (меню користувача)`);
-        i++;
-    })
-    
+    });   
 });
