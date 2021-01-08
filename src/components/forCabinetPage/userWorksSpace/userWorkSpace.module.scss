@@ -13,20 +13,7 @@
     border: solid 1px black;
     z-index: 0;
     position: absolute;
-    .logo {
-      font-size: 24px; //new font-size. We will keep it or change it in UI desing
-      width: 100%;
-      text-align: center;
-      margin-top: 0.625rem;
-    }
-    .homeIcon {
-      margin: 0 auto;
-      margin-top: 5rem;
-      text-align: center;
-      padding-top: 0.375rem;
-      width: 2.063rem;
-      cursor: pointer;
-    }
+
     .userIcon {
       margin: 0 auto;
       margin-top: 0.938rem;
@@ -49,27 +36,11 @@
   width: 0rem;
   height: 43.75rem;
   left: 2.813rem;
-  background-color: gray;
+  background-color: white;
   position: absolute;
   z-index: 1;
   transition: 0.4s;
-  .userFiled {
-    height: 7.5rem;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    overflow-x: hidden;
-    .icon {
-      width: 3.438rem;
-      height: 3.438rem;
-      border-radius: 50%;
-      background-color: white;
-      margin-left: 1.25rem;
-    }
-    p {
-      margin-left: 1.25rem;
-    }
-  }
+  border-radius: 0 20px 20px 0;
   .optionList {
     ul {
       width: 100%;
@@ -78,53 +49,9 @@
         height: 1.875rem;
         overflow: hidden;
         padding: 0.438rem 1.25rem;
-        border: solid 1px black;
-        cursor: pointer;
+        cursor: pointer;       
         &:hover {
-          background-color: white;
-        }
-      }
-    }
-  }
-}
-
-.userMenu {
-  width: 0rem;
-  height: 43.75rem;
-  left: 2.813rem;
-  background-color: gray;
-  position: absolute;
-  z-index: 1;
-  transition: 0.4s;
-  .userFiled {
-    height: 7.5rem;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    overflow-x: hidden;
-    .icon {
-      width: 3.438rem;
-      height: 3.438rem;
-      border-radius: 50%;
-      background-color: white;
-      margin-left: 1.25rem;
-    }
-    p {
-      margin-left: 1.25rem;
-    }
-  }
-  .optionList {
-    ul {
-      width: 100%;
-      overflow-x: hidden;
-      li {
-        height: 1.875rem;
-        overflow: hidden;
-        padding: 0.438rem 1.25rem;
-        border: solid 1px black;
-        cursor: pointer;
-        &:hover {
-          background-color: white;
+          text-decoration: underline;
         }
       }
     }
@@ -141,6 +68,6 @@
   }
 }
 .mainMenuWidth {
-  width: 19.375rem;
+  width: 11.062rem;
   transition: 0.4s;
 }
