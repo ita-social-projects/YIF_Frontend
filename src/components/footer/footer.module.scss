@@ -1,7 +1,6 @@
 @import '../../styles/index.scss';
 
 .footer {
-  height: 20.5rem;
   background-color: $lightBlue_1;
 
   a:link,
@@ -60,6 +59,7 @@
         button {
           padding: 0.94rem 1.37rem;
           border-radius: 0.625rem;
+          margin-bottom: 2.19rem;
         }
       }
 
@@ -69,11 +69,8 @@
         button {
           padding: 0.94rem 1.37rem;
           border-radius: 0.625rem;
+          margin-bottom: 2.19rem;
         }
-      }
-      p:nth-of-type(1) {
-        // address line
-        margin-top: 2.19rem;
       }
       p:nth-of-type(2) {
         // email link
@@ -119,6 +116,7 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 3.75rem;
+    padding-bottom: 1.5625rem; //25px
     text-align: center;
     font-weight: normal;
     font-size: $font_18px;

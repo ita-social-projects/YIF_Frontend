@@ -1,19 +1,19 @@
-import React, { Fragment } from "react";
-import styles from "./graduateCabinetPage.module.scss";
+import React, { Fragment } from 'react';
+import styles from './graduateCabinetPage.module.scss';
 import {
   Header,
   Footer,
   UserWorksSpace,
   UniversityMaps,
-} from "../../components";
+} from '../../components';
 
 const UserCabinet = () => {
   return (
     <Fragment>
-      <Header></Header>
+      <Header />
       <UserWorksSpace />
       <UniversityMaps />
-      <Footer></Footer>
+      <Footer background='#fff' />
     </Fragment>
   );
 };
