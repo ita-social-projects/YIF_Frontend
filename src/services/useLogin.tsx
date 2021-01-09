@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { requestData } from '../services/requestDataFunction';
 import { useHistory } from 'react-router-dom';
+import { useAuth } from './tokenValidator';
 
 const useLogin = (endpoint: string) => {
+  const { updateToken } = useAuth();
   const history = useHistory();
   const [email, setEmail] = useState({ email: '' });
   const [password, setPassword] = useState({ password: '' });
@@ -43,8 +45,9 @@ const useLogin = (endpoint: string) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
           setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
-          localStorage.setItem('token', res.data.token);
-          localStorage.setItem('refreshToken', res.data.refreshToken);
+          // localStorage.setItem('token', res.data.token);
+          // localStorage.setItem('refreshToken', res.data.refreshToken);
+          updateToken(res.data.token, res.data.refreshToken);
           history.push(pathToRedirect);
         } else {
           setError({

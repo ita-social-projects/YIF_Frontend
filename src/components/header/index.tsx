@@ -68,26 +68,28 @@ const Header: React.FC = () => {
     </span>
   );
 
-  return user ? (
-    <header>
-      <Link to='/' className={styles.logo} data-testid='logo'>
-        YIF
-      </Link>
-      <nav>
-        <div className={styles.pages}>
-          <Link to='/directions'>Напрями</Link>
-          <Link to='/universities'>Університети</Link>
-        </div>
-        <div className={styles.entry}>
-          <img
-            src='https://avatars1.githubusercontent.com/u/60184096?s=200&u=354406f2bcd0522f17e5c94d2b7c6d34596f0ec9&v=4'
-            className={styles.avatar}
-          />
-          <div className={styles.dropdown}>{dropdownContent}</div>
-        </div>
-      </nav>
-    </header>
+  const entryContent = user ? (
+    <>
+      <img
+        // src='https://avatars1.githubusercontent.com/u/60184096?s=200&u=354406f2bcd0522f17e5c94d2b7c6d34596f0ec9&v=4'
+        src='assets/icons/avatar.png'
+        alt='avatar'
+        className={styles.avatar}
+      />
+      <div className={styles.dropdown}>{dropdownContent}</div>
+    </>
   ) : (
+    <>
+      <Link to='/login' className={styles.animatedButtonTransparent}>
+        Вхід
+      </Link>
+      <Link to='/register' className={styles.animatedButton}>
+        Реєстрація
+      </Link>
+    </>
+  );
+
+  return (
     <header>
       <Link to='/' className={styles.logo} data-testid='logo'>
         YIF
@@ -97,14 +99,7 @@ const Header: React.FC = () => {
           <Link to='/directions'>Напрями</Link>
           <Link to='/universities'>Університети</Link>
         </div>
-        <div className={styles.entry}>
-          <Link to='/login' className={styles.animatedButtonTransparent}>
-            Вхід
-          </Link>
-          <Link to='/register' className={styles.animatedButton}>
-            Реєстрація
-          </Link>
-        </div>
+        <div className={styles.entry}>{entryContent}</div>
       </nav>
     </header>
   );
