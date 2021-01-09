@@ -34,39 +34,22 @@ type User = {
 
 const authContext = createContext({} as Values);
 
-const getUser = (token: Token) => {
-  if (!token) {
-    return null;
-  }
-  const decoded: Decoded = jwt_decode(token);
-  const user = {
-    id: decoded.id,
-    role: decoded.roles,
-    email: decoded.email,
-  };
-  return user;
-};
+// const getUser = (token: Token) => {
+//   if (!token) {
+//     return null;
+//   }
+//   const decoded: Decoded = jwt_decode(token);
+//   const user = {
+//     id: decoded.id,
+//     role: decoded.roles,
+//     email: decoded.email,
+//   };
+//   return user;
+// };
 
 function AuthProvider({ children }: any) {
   const [token, setToken] = useState<Token>(null);
   const [refreshToken, setRefreshToken] = useState<Token>(null);
-
-  const isTokenExpired = useCallback((token: Token) => {
-    if (!token) {
-      return true;
-    }
-    try {
-      const decoded: Decoded = jwt_decode(token);
-      return decoded.exp <= new Date().getTime() / 1000 ? true : false;
-    } catch (error) {
-      setToken(null);
-      localStorage.removeItem('token');
-      return true;
-    }
-  }, []);
-
-  const isExpired = useMemo(() => isTokenExpired(token), [isTokenExpired, token]);
-  const user = useMemo(() => getUser(token), [token]);
 
   const updateToken = useCallback((token, refreshToken) => {
     setToken(token);
@@ -84,42 +67,74 @@ function AuthProvider({ children }: any) {
 
   const getToken = useCallback(async () => {
     const url = 'https://yifbackend.tk/api/Authentication/RefreshToken';
-    let currentToken = token;
-    if (isExpired) {
-      try {
-        let response = await fetch(url, {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            token,
-            refreshToken,
-          }),
-        });
+    try {
+      let response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          token,
+          refreshToken,
+        }),
+      });
 
-        if (response.ok) {
-          let result = await response.json();
-          currentToken = result.token;
-          let newRefreshToken = result.refreshToken;
-          updateToken(currentToken, newRefreshToken);
-
-          /* 
-          let { newToken, newRefreshToken } = result;
-          updateToken(newToken, newRefreshToken);
-          */
-        } else {
-          let result = await response.json();
-          console.error(result.title);
-        }
-      } catch (error) {
-        console.error(error);
-        // removeToken();
+      if (response.ok) {
+        let result = await response.json();
+        let { newToken, newRefreshToken } = result;
+        updateToken(newToken, newRefreshToken);
+      } else {
+        let result = await response.json();
+        removeToken();
+        console.error(result.title);
       }
+    } catch (error) {
+      console.error(error);
+      removeToken();
     }
     // return currentToken;
-  }, [isExpired, refreshToken, token, updateToken]);
+  }, [token, refreshToken, updateToken, removeToken]);
+
+  const isTokenExpired = useCallback(
+    (token: Token) => {
+      if (!token) {
+        return false;
+      }
+      try {
+        const decoded: Decoded = jwt_decode(token);
+        return decoded.exp <= new Date().getTime() / 1000 ? true : false;
+      } catch (error) {
+        removeToken();
+        return false;
+      }
+    },
+    [removeToken]
+  );
+
+  const getUser = useCallback(
+    (token: Token) => {
+      if (!token) {
+        return null;
+      }
+      try {
+        const decoded: Decoded = jwt_decode(token);
+        const user = {
+          id: decoded.id,
+          role: decoded.roles,
+          email: decoded.email,
+        };
+        return user;
+      } catch (error) {
+        removeToken();
+        return null;
+      }
+    },
+    [removeToken]
+  );
+
+  const isExpired = useMemo(() => isTokenExpired(token), [isTokenExpired, token]);
+  const user = useMemo(() => getUser(token), [getUser, token]);
 
   useEffect(() => {
     setToken(localStorage.getItem('token'));
