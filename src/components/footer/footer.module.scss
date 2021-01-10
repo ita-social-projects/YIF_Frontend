@@ -1,11 +1,17 @@
 @import '../../styles/index.scss';
 
+%button {
+  padding: 0.94rem 1.37rem;
+  border-radius: 0.625rem;
+  margin-bottom: 2.19rem;
+}
+
 .footer {
   background-color: $lightBlue_1;
 
   a:link,
   a:visited {
-    color: black;
+    color: $black;
   }
 
   .mainElements {
@@ -29,9 +35,7 @@
       a:nth-of-type(1) {
         //for button sing In
         button {
-          padding: 0.94rem 1.37rem;
-          border-radius: 0.625rem;
-          margin-bottom: 2.19rem;
+          @extend %button;
         }
       }
 
@@ -39,9 +43,7 @@
         //for button Register
         margin-left: 0.63rem;
         button {
-          padding: 0.94rem 1.37rem;
-          border-radius: 0.625rem;
-          margin-bottom: 2.19rem;
+          @extend %button;
         }
       }
       p:nth-of-type(2) {
