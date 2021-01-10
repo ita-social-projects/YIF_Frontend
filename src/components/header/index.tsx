@@ -54,7 +54,10 @@ const Header: React.FC = () => {
 
   const dropdownContent = isDropdownOpen ? (
     <>
-      <span className={styles.userName} onClick={handleClick}>
+      <span
+        className={`${styles.userName} ${styles.underlineAnimation}`}
+        onClick={handleClick}
+      >
         {userEmail} {dropdownArrowUp}
       </span>
       <div className={styles.dropdownContent}>
