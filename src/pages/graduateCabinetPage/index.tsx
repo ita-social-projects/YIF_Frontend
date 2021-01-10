@@ -1,11 +1,12 @@
-import React, { Fragment } from "react";
-import styles from "./graduateCabinetPage.module.scss";
+import React, { Fragment } from 'react';
+import styles from './graduateCabinetPage.module.scss';
 import {
   Header,
   Footer,
   UserWorksSpace,
   UniversityMaps,
-} from "../../components";
+} from '../../components';
+import ImageUploader from '../../components/imageUploader';
 
 const UserCabinet = () => {
   return (
@@ -13,6 +14,7 @@ const UserCabinet = () => {
       <Header></Header>
       <UserWorksSpace />
       <UniversityMaps />
+      <ImageUploader />
       <Footer></Footer>
     </Fragment>
   );
