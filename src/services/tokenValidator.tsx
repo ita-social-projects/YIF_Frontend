@@ -34,19 +34,6 @@ type User = {
 
 const authContext = createContext({} as Values);
 
-// const getUser = (token: Token) => {
-//   if (!token) {
-//     return null;
-//   }
-//   const decoded: Decoded = jwt_decode(token);
-//   const user = {
-//     id: decoded.id,
-//     role: decoded.roles,
-//     email: decoded.email,
-//   };
-//   return user;
-// };
-
 function AuthProvider({ children }: any) {
   const [token, setToken] = useState<Token>(null);
   const [refreshToken, setRefreshToken] = useState<Token>(null);
@@ -133,7 +120,10 @@ function AuthProvider({ children }: any) {
     [removeToken]
   );
 
-  const isExpired = useMemo(() => isTokenExpired(token), [isTokenExpired, token]);
+  const isExpired = useMemo(() => isTokenExpired(token), [
+    isTokenExpired,
+    token,
+  ]);
   const user = useMemo(() => getUser(token), [getUser, token]);
 
   useEffect(() => {

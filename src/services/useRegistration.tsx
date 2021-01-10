@@ -56,8 +56,6 @@ const useRegistration = (endpoint: string) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
           setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
-          // localStorage.setItem('token', res.data.token);
-          // localStorage.setItem('refreshToken', res.data.refreshToken);
           updateToken(res.data.token, res.data.refreshToken);
           history.push(pathToRedirect);
         } else {
