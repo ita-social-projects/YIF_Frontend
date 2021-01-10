@@ -7,7 +7,7 @@ const Header: React.FC = () => {
   const { user, removeToken } = useAuth();
   const userEmail = user?.email.substr(0, user?.email.indexOf('@'));
 
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const dropdownArrowDown = (
     <svg
@@ -44,15 +44,15 @@ const Header: React.FC = () => {
 
   const handleClick = (event: React.MouseEvent) => {
     event.preventDefault();
-    setDropdownOpen(() => !dropdownOpen);
+    setDropdownOpen(() => !isDropdownOpen);
   };
 
   const logout = () => {
-    setDropdownOpen(() => !dropdownOpen);
+    setDropdownOpen(() => !isDropdownOpen);
     removeToken();
   };
 
-  const dropdownContent = dropdownOpen ? (
+  const dropdownContent = isDropdownOpen ? (
     <>
       <span className={styles.userName} onClick={handleClick}>
         {userEmail} {dropdownArrowUp}
@@ -63,7 +63,10 @@ const Header: React.FC = () => {
       </div>
     </>
   ) : (
-    <span className={styles.userName} onClick={handleClick}>
+    <span
+      className={`${styles.userName} ${styles.underlineAnimation}`}
+      onClick={handleClick}
+    >
       {userEmail} {dropdownArrowDown}
     </span>
   );
@@ -71,8 +74,7 @@ const Header: React.FC = () => {
   const entryContent = user ? (
     <>
       <img
-        // src='https://avatars1.githubusercontent.com/u/60184096?s=200&u=354406f2bcd0522f17e5c94d2b7c6d34596f0ec9&v=4'
-        src='assets/icons/avatar.png'
+        src='assets/icons/avatar.jpg'
         alt='avatar'
         className={styles.avatar}
       />
@@ -96,8 +98,12 @@ const Header: React.FC = () => {
       </Link>
       <nav>
         <div className={styles.pages}>
-          <Link to='/directions'>Напрями</Link>
-          <Link to='/universities'>Університети</Link>
+          <Link to='/directions' className={styles.underlineAnimation}>
+            Напрями
+          </Link>
+          <Link to='/universities' className={styles.underlineAnimation}>
+            Університети
+          </Link>
         </div>
         <div className={styles.entry}>{entryContent}</div>
       </nav>
