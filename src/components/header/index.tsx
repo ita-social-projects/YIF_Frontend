@@ -7,7 +7,7 @@ const Header: React.FC = () => {
   const { user, removeToken } = useAuth();
   const userEmail = user?.email.substr(0, user?.email.indexOf('@'));
 
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const dropdownArrowDown = (
     <svg
@@ -44,11 +44,11 @@ const Header: React.FC = () => {
 
   const handleClick = (event: React.MouseEvent) => {
     event.preventDefault();
-    setDropdownOpen(() => !isDropdownOpen);
+    setIsDropdownOpen(() => !isDropdownOpen);
   };
 
   const logout = () => {
-    setDropdownOpen(() => !isDropdownOpen);
+    setIsDropdownOpen(() => !isDropdownOpen);
     removeToken();
   };
 
