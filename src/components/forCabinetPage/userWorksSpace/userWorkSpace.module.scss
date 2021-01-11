@@ -1,5 +1,5 @@
 @import "../../styles.scss";
-
+/* this is for underline effect in option menu list. Need to use Andrew custom class after his request
 p {
   position: relative;
   display:inline;
@@ -25,7 +25,7 @@ p {
     transform-origin: left;
   }
 }
-
+*/
 .mainWorkingFiled {
   height: 43.75rem;
   background-color: #c4c4c4;
@@ -49,7 +49,7 @@ p {
       justify-content: center;
       align-items: center;
     }
-    .univIcon{
+    .univIcon {
       margin: 0 auto;
       margin-top: 1.75rem;
       width: 2.063rem;
@@ -59,7 +59,7 @@ p {
       justify-content: center;
       align-items: center;
     }
-    .specIcon{
+    .specIcon {
       margin: 0 auto;
       margin-top: 1.75rem;
       width: 2.063rem;
@@ -79,7 +79,7 @@ p {
   }
 }
 
-.mainMenu{
+.mainMenu {
   width: 0rem;
   height: 43.75rem;
   left: 2.813rem;
@@ -89,7 +89,7 @@ p {
   transition: 0.4s;
   .optionList {
     ul {
-      margin-top:8.438rem;
+      margin-top: 8.438rem;
       width: 100%;
       overflow-x: hidden;
       li {
@@ -98,13 +98,13 @@ p {
         font-size: $font_16px;
         cursor: pointer;
         text-align: left;
-        padding-left:1rem;       
+        padding-left: 1rem;
       }
-      li:nth-of-type(2){
-        margin-top:2rem;
+      li:nth-of-type(2) {
+        margin-top: 2rem;
       }
-      li:nth-of-type(3){
-        margin-top:2rem;
+      li:nth-of-type(3) {
+        margin-top: 2rem;
       }
     }
   }

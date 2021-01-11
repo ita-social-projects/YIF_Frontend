@@ -30,69 +30,74 @@ let userIcon = (
   </svg>
 );
 
-let univListIcon=(
-  <svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-     viewBox="0 0 32 32"style={{enableBackground:'new :new 0 0 32 32'}}  xmlSpace="preserve" 
-     width='30px'>
-  <style type="text/css">
-    .st0{`fill:#FFFFFF`}
-  </style>
-  <g>
-    <path d="M31,26c-0.6,0-1-0.4-1-1V12c0-0.6,0.4-1,1-1s1,0.4,1,1v13C32,25.6,31.6,26,31,26z"/>
-  </g>
-  <g>
-    <path d="M16,21c-0.2,0-0.3,0-0.5-0.1l-15-8C0.2,12.7,0,12.4,0,12s0.2-0.7,0.5-0.9l15-8c0.3-0.2,0.6-0.2,0.9,0l15,8
-      c0.3,0.2,0.5,0.5,0.5,0.9s-0.2,0.7-0.5,0.9l-15,8C16.3,21,16.2,21,16,21z"/>
-  </g>
-  <path d="M17.4,22.6C17,22.9,16.5,23,16,23s-1-0.1-1.4-0.4L6,18.1V22c0,3.1,4.9,6,10,6s10-2.9,10-6v-3.9L17.4,22.6z"/>
+let univListIcon = (
+  <svg
+    version='1.1'
+    id='Icons'
+    xmlns='http://www.w3.org/2000/svg'
+    xmlnsXlink='http://www.w3.org/1999/xlink'
+    x='0px'
+    y='0px'
+    viewBox='0 0 32 32'
+    style={{ enableBackground: "new :new 0 0 32 32" }}
+    xmlSpace='preserve'
+    width='30px'
+  >
+    <style type='text/css'>.st0{`fill:#FFFFFF`}</style>
+    <g>
+      <path d='M31,26c-0.6,0-1-0.4-1-1V12c0-0.6,0.4-1,1-1s1,0.4,1,1v13C32,25.6,31.6,26,31,26z' />
+    </g>
+    <g>
+      <path
+        d='M16,21c-0.2,0-0.3,0-0.5-0.1l-15-8C0.2,12.7,0,12.4,0,12s0.2-0.7,0.5-0.9l15-8c0.3-0.2,0.6-0.2,0.9,0l15,8
+      c0.3,0.2,0.5,0.5,0.5,0.9s-0.2,0.7-0.5,0.9l-15,8C16.3,21,16.2,21,16,21z'
+      />
+    </g>
+    <path d='M17.4,22.6C17,22.9,16.5,23,16,23s-1-0.1-1.4-0.4L6,18.1V22c0,3.1,4.9,6,10,6s10-2.9,10-6v-3.9L17.4,22.6z' />
   </svg>
 );
 
-let specListIcon=(
-<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 426.667 426.667" style={{enableBackground:'new 0 0 426.667 426.667'}} xmlSpace="preserve" height='24px'
-   width='22px'>
-<g>
-	<g>
-		<path d="M362.667,42.667h-89.28C264.64,17.92,241.173,0,213.333,0s-51.307,17.92-60.053,42.667H64
+let specListIcon = (
+  <svg
+    version='1.1'
+    id='Capa_1'
+    xmlns='http://www.w3.org/2000/svg'
+    xmlnsXlink='http://www.w3.org/1999/xlink'
+    x='0px'
+    y='0px'
+    viewBox='0 0 426.667 426.667'
+    style={{ enableBackground: "new 0 0 426.667 426.667" }}
+    xmlSpace='preserve'
+    height='24px'
+    width='22px'
+  >
+    <g>
+      <g>
+        <path
+          d='M362.667,42.667h-89.28C264.64,17.92,241.173,0,213.333,0s-51.307,17.92-60.053,42.667H64
 			c-23.573,0-42.667,19.093-42.667,42.667V384c0,23.573,19.093,42.667,42.667,42.667h298.667c23.573,0,42.667-19.093,42.667-42.667
 			V85.333C405.333,61.76,386.24,42.667,362.667,42.667z M213.333,42.667c11.733,0,21.333,9.493,21.333,21.333
 			c0,11.84-9.6,21.333-21.333,21.333S192,75.84,192,64C192,52.16,201.6,42.667,213.333,42.667z M256,341.333H106.667v-42.667H256
-			V341.333z M320,256H106.667v-42.667H320V256z M320,170.667H106.667V128H320V170.667z"/>
-	</g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-</svg>
-
+			V341.333z M320,256H106.667v-42.667H320V256z M320,170.667H106.667V128H320V170.667z'
+        />
+      </g>
+    </g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+  </svg>
 );
 
 class UserWorksSpace extends React.Component<Props, {}> {
@@ -126,10 +131,10 @@ class UserWorksSpace extends React.Component<Props, {}> {
   showMenu = () => {
     this.resetNavBar();
     let mainMenu = document.querySelector(`.${styles.mainMenu}`);
-    this.setMenu(mainMenu,null);
+    this.setMenu(mainMenu, null);
   };
 
-  whiteBackground = (icon: Element | null)=>{
+  whiteBackground = (icon: Element | null) => {
     let icons = document.querySelectorAll(`article .${styles.icons}`);
 
     icons.forEach((icon) => {
@@ -137,7 +142,7 @@ class UserWorksSpace extends React.Component<Props, {}> {
       icon.classList.remove(styles.whiteBackground);
     });
     icon?.classList.toggle(styles.whiteBackground);
-  }
+  };
 
   hideBar = () => {
     this.resetNavBar();
@@ -155,9 +160,7 @@ class UserWorksSpace extends React.Component<Props, {}> {
 
   render() {
     let box;
-    switch (
-      this.state.chosenFrame 
-    ) {
+    switch (this.state.chosenFrame) {
       case 0: {
         box = <UserOption />;
         break;
