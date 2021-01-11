@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Banner from '.';
+import { act } from 'react-dom/test-utils';
 
 describe('banner elements', () => {
   let banner;
@@ -39,8 +40,12 @@ describe('banner events', () => {
     const { getByAltText } = render(<Banner />);
     const targetElem = getByAltText('img');
 
-    fireEvent.mouseMove(targetElem, { clientX: 10, clientY: 20 });
-    fireEvent.mouseMove(targetElem, { clientX: 20, clientY: 40 });
+    act(() => {
+      fireEvent.mouseMove(targetElem, { clientX: 10, clientY: 20 });
+    });
+    act(() => {
+      fireEvent.mouseMove(targetElem, { clientX: 20, clientY: 40 });
+    });
 
     expect(targetElem.style).toHaveProperty(
       'transform',

@@ -42,11 +42,8 @@ export default class BannerLower extends Component<any> {
           </p>
           <a
             className={style.animatedButton}
-            href='/somewhere'
+            href='/register'
             rel='call to action'
-            onClick={(e) => {
-              e.preventDefault();
-            }}
           >
             Зареєструйся
           </a>
