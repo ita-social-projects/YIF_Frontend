@@ -208,13 +208,15 @@ class UserWorksSpace extends React.Component<Props, {}> {
               <article className={styles.optionList}>
                 <ul>
                   <li onClick={() => this.onChangeFrame(0)}>
-                    <p>Меню&nbsp;користувача</p>
+                    <p className={styles.underlineAnimation}>
+                      Меню&nbsp;користувача
+                    </p>
                   </li>
                   <li onClick={() => this.onChangeFrame(1)}>
-                    <p>Університети</p>
+                    <p className={styles.underlineAnimation}>Університети</p>
                   </li>
                   <li onClick={() => this.onChangeFrame(2)}>
-                    <p>Спеціальності</p>
+                    <p className={styles.underlineAnimation}>Спеціальності</p>
                   </li>
                 </ul>
               </article>
