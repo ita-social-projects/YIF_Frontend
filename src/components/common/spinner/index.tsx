@@ -3,12 +3,10 @@ import style from './spinner.module.scss';
 
 const Spinner = () => {
   return (
-    <div id={style.content}>
-      <div className={style.loader}>
-        <div className={`${style.line} ${style.one}`}></div>
-        <div className={`${style.line} ${style.two}`}></div>
-        <div className={`${style.line} ${style.three}`}></div>
-      </div>
+    <div className={style.loader}>
+      <div className={`${style.line} ${style.one}`}></div>
+      <div className={`${style.line} ${style.two}`}></div>
+      <div className={`${style.line} ${style.three}`}></div>
     </div>
   );
 };
