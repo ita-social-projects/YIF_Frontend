@@ -6,10 +6,10 @@ export { default as Banner } from './banner';
 export { default as AboutUs } from './aboutUs';
 export { default as BannerLower } from './bannerLower';
 export { default as Partners } from './partners';
-export { default as Footer } from './footer/footer';
+export { default as Footer } from './footer';
 //For cabinet page
 //work space
-export { default as UserWorksSpace } from './forCabinetPage/userWorksSpace/index'
+export { default as UserWorksSpace } from './forCabinetPage/userWorksSpace/index';
 //maps
 export { default as UniversityMaps} from './forCabinetPage/maps/index'
 // options

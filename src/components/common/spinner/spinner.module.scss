@@ -1,15 +1,14 @@
-.content {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+@import '../../../styles/index.scss';
+
+$line: 3px solid $darkBlue;
+$animation: 1s linear infinite;
 
 .loader {
-  width: 100px; //3.75rem;
-  height: 100px; //3.75rem;
+  width: 4.375rem; //70px
+  height: 4.375rem; //70px;
   border-radius: 50%;
   perspective: 800px;
+  margin-bottom: 2.5rem; //40px
 }
 
 .line {
@@ -21,10 +20,10 @@
 }
 
 .one {
-  left: 0%;
-  top: 0%;
-  animation: rotate-one 1s linear infinite;
-  border-bottom: 5px solid #12335e;
+  left: 0;
+  top: 0;
+  animation: rotate-one $animation;
+  border-bottom: $line;
 }
 
 @keyframes rotate-one {
@@ -37,10 +36,10 @@
 }
 
 .two {
-  right: 0%;
-  top: 0%;
-  animation: rotate-two 1s linear infinite;
-  border-right: 5px solid #12335e;
+  right: 0;
+  top: 0;
+  animation: rotate-two $animation;
+  border-right: $line;
 }
 
 @keyframes rotate-two {
@@ -53,10 +52,10 @@
 }
 
 .three {
-  right: 0%;
-  bottom: 0%;
-  animation: rotate-three 1s linear infinite;
-  border-top: 5px solid #12335e;
+  right: 0;
+  bottom: 0;
+  animation: rotate-three $animation;
+  border-top: $line;
 }
 
 @keyframes rotate-three {
