@@ -4,12 +4,15 @@ import './index.scss';
 import { App } from './components';
 import { store } from './store/store';
 import { Provider } from 'react-redux';
+import { AuthProvider } from './services/tokenValidator';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <AuthProvider>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
