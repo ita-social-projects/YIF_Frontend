@@ -50,12 +50,7 @@ header {
       display: flex;
       align-items: center;
 
-      .animatedButton {
-        padding: 0.875rem 1.5rem; //14px 24px
-        border-radius: 0.625rem; //10px
-        font-size: $font_18px;
-      }
-
+      .animatedButton,
       .animatedButtonTransparent {
         padding: 0.875rem 1.5rem; //14px 24px
         border-radius: 0.625rem; //10px
@@ -67,7 +62,7 @@ header {
       }
 
       .avatar {
-        width: 50px;
+        width: 40px;
         border-radius: 50%;
       }
 
