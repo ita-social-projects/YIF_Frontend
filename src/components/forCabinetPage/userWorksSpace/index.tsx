@@ -5,7 +5,6 @@ import {
   UnivListOption,
   SpecListOption,
 } from "../../../components";
-
 type Props = {};
 
 let homeIcon = (
@@ -22,7 +21,7 @@ let homeIcon = (
 let userIcon = (
   <svg
     height='24px'
-    width='24px'
+    width='21px'
     viewBox='-42 0 512 512.002'
     xmlns='http://www.w3.org/2000/svg'
   >
@@ -33,7 +32,8 @@ let userIcon = (
 
 let univListIcon=(
   <svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-     viewBox="0 0 32 32"style={{enableBackground:'new :new 0 0 32 32'}}  xmlSpace="preserve">
+     viewBox="0 0 32 32"style={{enableBackground:'new :new 0 0 32 32'}}  xmlSpace="preserve" 
+     width='30px'>
   <style type="text/css">
     .st0{`fill:#FFFFFF`}
   </style>
@@ -50,7 +50,8 @@ let univListIcon=(
 
 let specListIcon=(
 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 426.667 426.667" style={{enableBackground:'new 0 0 426.667 426.667'}} xmlSpace="preserve">
+	 viewBox="0 0 426.667 426.667" style={{enableBackground:'new 0 0 426.667 426.667'}} xmlSpace="preserve" height='24px'
+   width='22px'>
 <g>
 	<g>
 		<path d="M362.667,42.667h-89.28C264.64,17.92,241.173,0,213.333,0s-51.307,17.92-60.053,42.667H64
@@ -125,9 +126,18 @@ class UserWorksSpace extends React.Component<Props, {}> {
   showMenu = () => {
     this.resetNavBar();
     let mainMenu = document.querySelector(`.${styles.mainMenu}`);
-    let homeIcon = document.querySelector(`.${styles.homeIcon}`);
-    this.setMenu(mainMenu, homeIcon);
+    this.setMenu(mainMenu,null);
   };
+
+  whiteBackground = (icon: Element | null)=>{
+    let icons = document.querySelectorAll(`article .${styles.icons}`);
+
+    icons.forEach((icon) => {
+      //remove white background and add hover effect for all icons
+      icon.classList.remove(styles.whiteBackground);
+    });
+    icon?.classList.toggle(styles.whiteBackground);
+  }
 
   hideBar = () => {
     this.resetNavBar();
@@ -178,13 +188,13 @@ class UserWorksSpace extends React.Component<Props, {}> {
               {userIcon}{" "}
             </div>
             <div
-              className={`${styles.userIcon} ${styles.hoverEffectIcons} ${styles.icons}`}
+              className={`${styles.univIcon} ${styles.hoverEffectIcons} ${styles.icons}`}
               onClick={() => this.onChangeFrame(1)}
             >
               {univListIcon}{" "}
             </div>
             <div
-              className={`${styles.userIcon} ${styles.hoverEffectIcons} ${styles.icons}`}
+              className={`${styles.specIcon} ${styles.hoverEffectIcons} ${styles.icons}`}
               onClick={() => this.onChangeFrame(2)}
             >
               {specListIcon}{" "}
@@ -195,13 +205,13 @@ class UserWorksSpace extends React.Component<Props, {}> {
               <article className={styles.optionList}>
                 <ul>
                   <li onClick={() => this.onChangeFrame(0)}>
-                    Меню&nbsp;користувача
+                    <p>Меню&nbsp;користувача</p>
                   </li>
                   <li onClick={() => this.onChangeFrame(1)}>
-                    Університети
+                    <p>Університети</p>
                   </li>
                   <li onClick={() => this.onChangeFrame(2)}>
-                    Спеціальності
+                    <p>Спеціальності</p>
                   </li>
                 </ul>
               </article>
