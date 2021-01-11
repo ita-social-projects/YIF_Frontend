@@ -55,7 +55,7 @@ describe('token validator', () => {
     wait(() => expect(button.textContent).toEqual(testToken));
 
     global.fetch.mockClear();
-  }, 20000);
+  });
 
   test('should fetch with error', async () => {
     jest.spyOn(global, 'fetch').mockImplementation(() =>
