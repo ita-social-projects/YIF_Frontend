@@ -61,7 +61,7 @@ const Header: React.FC = () => {
         {userEmail} {dropdownArrowUp}
       </span>
       <div className={styles.dropdownContent}>
-        <Link to='/cabinet'>Особистий кабінет</Link>
+        <Link to='/cabinet'>Особистий&nbsp;кабінет</Link>
         <button onClick={logout}>Вийти</button>
       </div>
     </>
