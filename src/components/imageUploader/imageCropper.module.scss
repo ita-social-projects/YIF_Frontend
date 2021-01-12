@@ -1,20 +1,35 @@
 @import '../../styles/index.scss';
 
 .imagePrevieContainer {
-  overflow: hidden;
   position: relative;
 
   width: 100%;
-  height: 100%;
+  height: 53vh;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  img {
+
+  .imgHolder {
+    position: relative;
     max-width: 55%;
-    height: 80%;
-    object-fit: contain;
+    width: auto;
+    max-height: 50vh;
+    margin: 0 auto;
+    img {
+      height: auto;
+      max-height: 50vh;
+      object-fit: contain;
+    }
+  }
+  .closeButton {
+    position: absolute;
+    width: 1.5rem;
+    height: auto;
+    top: 0.5rem;
+    right: 1rem;
+    cursor: pointer;
   }
 }
