@@ -1,0 +1,19 @@
+@import '../../styles.scss';
+
+@import url('~leaflet/dist/leaflet.css');
+
+body,
+#root,
+.leaflet-container {
+  width: 100%;
+  height: 23.75rem;
+}
+
+.mapContainer {
+  width: 100%;
+  height: 30rem;
+  font-size: $font_30px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
