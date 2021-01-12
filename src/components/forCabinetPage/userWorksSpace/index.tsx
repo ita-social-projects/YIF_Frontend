@@ -1,18 +1,10 @@
 import React, { Fragment } from "react";
 import styles from "./userWorkSpace.module.scss";
 import {
-  Option1MainMenu,
-  Option2MainMenu,
-  Option3MainMenu,
-  Option4MainMenu,
-  Option5MainMenu,
-  Option1UserMenu,
-  Option2UserMenu,
-  Option3UserMenu,
-  Option4UserMenu,
-  Option5UserMenu,
+  UserOption,
+  UnivListOption,
+  SpecListOption,
 } from "../../../components";
-
 type Props = {};
 
 let homeIcon = (
@@ -29,7 +21,7 @@ let homeIcon = (
 let userIcon = (
   <svg
     height='24px'
-    width='24px'
+    width='21px'
     viewBox='-42 0 512 512.002'
     xmlns='http://www.w3.org/2000/svg'
   >
@@ -38,11 +30,79 @@ let userIcon = (
   </svg>
 );
 
+let univListIcon = (
+  <svg
+    version='1.1'
+    id='Icons'
+    xmlns='http://www.w3.org/2000/svg'
+    xmlnsXlink='http://www.w3.org/1999/xlink'
+    x='0px'
+    y='0px'
+    viewBox='0 0 32 32'
+    style={{ enableBackground: "new :new 0 0 32 32" }}
+    xmlSpace='preserve'
+    width='30px'
+  >
+    <style type='text/css'>.st0{`fill:#FFFFFF`}</style>
+    <g>
+      <path d='M31,26c-0.6,0-1-0.4-1-1V12c0-0.6,0.4-1,1-1s1,0.4,1,1v13C32,25.6,31.6,26,31,26z' />
+    </g>
+    <g>
+      <path
+        d='M16,21c-0.2,0-0.3,0-0.5-0.1l-15-8C0.2,12.7,0,12.4,0,12s0.2-0.7,0.5-0.9l15-8c0.3-0.2,0.6-0.2,0.9,0l15,8
+      c0.3,0.2,0.5,0.5,0.5,0.9s-0.2,0.7-0.5,0.9l-15,8C16.3,21,16.2,21,16,21z'
+      />
+    </g>
+    <path d='M17.4,22.6C17,22.9,16.5,23,16,23s-1-0.1-1.4-0.4L6,18.1V22c0,3.1,4.9,6,10,6s10-2.9,10-6v-3.9L17.4,22.6z' />
+  </svg>
+);
+
+let specListIcon = (
+  <svg
+    version='1.1'
+    id='Capa_1'
+    xmlns='http://www.w3.org/2000/svg'
+    xmlnsXlink='http://www.w3.org/1999/xlink'
+    x='0px'
+    y='0px'
+    viewBox='0 0 426.667 426.667'
+    style={{ enableBackground: "new 0 0 426.667 426.667" }}
+    xmlSpace='preserve'
+    height='24px'
+    width='22px'
+  >
+    <g>
+      <g>
+        <path
+          d='M362.667,42.667h-89.28C264.64,17.92,241.173,0,213.333,0s-51.307,17.92-60.053,42.667H64
+			c-23.573,0-42.667,19.093-42.667,42.667V384c0,23.573,19.093,42.667,42.667,42.667h298.667c23.573,0,42.667-19.093,42.667-42.667
+			V85.333C405.333,61.76,386.24,42.667,362.667,42.667z M213.333,42.667c11.733,0,21.333,9.493,21.333,21.333
+			c0,11.84-9.6,21.333-21.333,21.333S192,75.84,192,64C192,52.16,201.6,42.667,213.333,42.667z M256,341.333H106.667v-42.667H256
+			V341.333z M320,256H106.667v-42.667H320V256z M320,170.667H106.667V128H320V170.667z'
+        />
+      </g>
+    </g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+  </svg>
+);
+
 class UserWorksSpace extends React.Component<Props, {}> {
   state = {
-    chosenBlock: -1,
-    homeMenuFrame: 0,
-    userMenuFrame: 0,
+    chosenFrame: -1,
   };
 
   resetNavBar = () => {
@@ -68,102 +128,53 @@ class UserWorksSpace extends React.Component<Props, {}> {
     menu?.classList.toggle(styles.mainMenuWidth);
   };
 
-  homeSelect = () => {
+  showMenu = () => {
     this.resetNavBar();
     let mainMenu = document.querySelector(`.${styles.mainMenu}`);
-    let homeIcon = document.querySelector(`.${styles.homeIcon}`);
-    this.setMenu(mainMenu, homeIcon);
+    this.setMenu(mainMenu, null);
   };
 
-  userSelect = () => {
-    this.resetNavBar();
-    let userIcon = document.querySelector(`.${styles.userIcon}`);
-    let userMenu = document.querySelector(`.${styles.userMenu}`);
-    this.setMenu(userMenu, userIcon);
+  whiteBackground = (icon: Element | null) => {
+    let icons = document.querySelectorAll(`article .${styles.icons}`);
+
+    icons.forEach((icon) => {
+      //remove white background and add hover effect for all icons
+      icon.classList.remove(styles.whiteBackground);
+    });
+    icon?.classList.toggle(styles.whiteBackground);
   };
 
   hideBar = () => {
     this.resetNavBar();
   };
 
-  onChangeFrame = (frame: number, chosenBlock: number) => {
+  onChangeFrame = (chosenFrame: number) => {
     const copyState = this.state;
-    copyState.chosenBlock = chosenBlock;
-    if (chosenBlock === 0) {
-      copyState.homeMenuFrame = frame;
-    } else if (chosenBlock === 1) {
-      copyState.userMenuFrame = frame;
-    }
+    copyState.chosenFrame = chosenFrame;
     this.setState(() => {
       return {
-        chosenBlock: copyState.chosenBlock,
-        homeMenuFrame: copyState.homeMenuFrame,
-        userMenuFrame: copyState.userMenuFrame,
+        chosenFrame: copyState.chosenFrame,
       };
     });
   };
 
   render() {
     let box;
-    switch (
-      this.state.chosenBlock //will show frame based on user selection
-    ) {
+    switch (this.state.chosenFrame) {
       case 0: {
-        switch (this.state.homeMenuFrame) {
-          case 0: {
-            box = <Option1MainMenu />;
-            break;
-          }
-          case 1: {
-            box = <Option2MainMenu />;
-            break;
-          }
-          case 2: {
-            box = <Option3MainMenu />;
-            break;
-          }
-          case 3: {
-            box = <Option4MainMenu />;
-            break;
-          }
-          case 4: {
-            box = <Option5MainMenu />;
-            break;
-          }
-          default:
-            break;
-        }
+        box = <UserOption />;
         break;
       }
       case 1: {
-        switch (this.state.userMenuFrame) {
-          case 0: {
-            box = <Option1UserMenu />;
-            break;
-          }
-          case 1: {
-            box = <Option2UserMenu />;
-            break;
-          }
-          case 2: {
-            box = <Option3UserMenu />;
-            break;
-          }
-          case 3: {
-            box = <Option4UserMenu />;
-            break;
-          }
-          case 4: {
-            box = <Option5UserMenu />;
-            break;
-          }
-          default:
-            break;
-        }
+        box = <UnivListOption />;
+        break;
+      }
+      case 2: {
+        box = <SpecListOption />;
         break;
       }
       default:
-        box = <Option1MainMenu />;
+        box = <UserOption />;
     }
 
     return (
@@ -172,70 +183,40 @@ class UserWorksSpace extends React.Component<Props, {}> {
           className={styles.mainWorkingFiled}
           onMouseLeave={this.hideBar}
         >
-          <article className={styles.mainMenuBar} onMouseEnter={this.hideBar}>
-            <div className={styles.logo}>YIF</div>
-            <div
-              className={`${styles.homeIcon} ${styles.hoverEffectIcons} ${styles.icons}`}
-              onClick={this.homeSelect}
-            >
-              {homeIcon}{" "}
-            </div>
+          <article className={styles.mainMenuBar} onMouseEnter={this.showMenu}>
             <div
               className={`${styles.userIcon} ${styles.hoverEffectIcons} ${styles.icons}`}
-              onClick={this.userSelect}
+              onClick={() => this.onChangeFrame(0)}
             >
               {userIcon}{" "}
+            </div>
+            <div
+              className={`${styles.univIcon} ${styles.hoverEffectIcons} ${styles.icons}`}
+              onClick={() => this.onChangeFrame(1)}
+            >
+              {univListIcon}{" "}
+            </div>
+            <div
+              className={`${styles.specIcon} ${styles.hoverEffectIcons} ${styles.icons}`}
+              onClick={() => this.onChangeFrame(2)}
+            >
+              {specListIcon}{" "}
             </div>
           </article>
           <article className={`${styles.mainMenu} ${styles.menus}`}>
             <section>
-              <article className={styles.userFiled}>
-                <div className={styles.icon}></div>
-                <p>Користувач</p>
-              </article>
               <article className={styles.optionList}>
                 <ul>
-                  <li onClick={() => this.onChangeFrame(0, 0)}>
-                    Опція 1 (головне меню)
+                  <li onClick={() => this.onChangeFrame(0)}>
+                    <p className={styles.underlineAnimation}>
+                      Меню&nbsp;користувача
+                    </p>
                   </li>
-                  <li onClick={() => this.onChangeFrame(1, 0)}>
-                    Опція 2 (головне меню)
+                  <li onClick={() => this.onChangeFrame(1)}>
+                    <p className={styles.underlineAnimation}>Університети</p>
                   </li>
-                  <li onClick={() => this.onChangeFrame(2, 0)}>
-                    Опція 3 (головне меню)
-                  </li>
-                  <li onClick={() => this.onChangeFrame(3, 0)}>
-                    Опція 4 (головне меню)
-                  </li>
-                  <li onClick={() => this.onChangeFrame(4, 0)}>
-                    Опція 5 (головне меню)
-                  </li>
-                </ul>
-              </article>
-            </section>
-          </article>
-          <article className={`${styles.userMenu} ${styles.menus}`}>
-            <section>
-              <article className={styles.userFiled}>
-                <div className={styles.icon}></div>
-                <p>Користувач</p>
-              </article>
-              <article className={styles.optionList}>
-                <ul>
-                  <li onClick={() => this.onChangeFrame(0, 1)}>
-                    Опція 1 (меню користувача)
-                  </li>
-                  <li onClick={() => this.onChangeFrame(1, 1)}>
-                    Опція 2 (меню користувача)
-                  </li>
-                  <li onClick={() => this.onChangeFrame(2, 1)}>
-                    Опція 3 (меню користувача)
-                  </li>
-                  <li onClick={() => this.onChangeFrame(3, 1)}>
-                    Опція 4 (меню користувача)
-                  </li>
-                  <li onClick={() => this.onChangeFrame(4, 1)}>
-                    Опція 5 (меню користувача)
+                  <li onClick={() => this.onChangeFrame(2)}>
+                    <p className={styles.underlineAnimation}>Спеціальності</p>
                   </li>
                 </ul>
               </article>
