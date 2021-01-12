@@ -1,28 +1,17 @@
 @import '../../styles/index.scss';
 
-// body {
-//   overflow: hidden;
-// }
-
 .container {
   z-index: 1000;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   padding: 2.5rem 5rem 0 5rem;
-  background-color: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(1px);
-
-  a {
-    margin: 0 0.875rem;
-    padding: 0.85rem 1.25rem;
-    border-radius: 0.625rem;
-    font-size: $font_16px;
-    font-family: $fontNunito;
-    font-weight: $regular;
-  }
+  // background-color: rgba(255, 255, 255, 0.15);
+  // backdrop-filter: blur(1px);
 
   .imageLoader {
     position: relative;
@@ -31,7 +20,6 @@
     min-width: 37.875rem !important;
     height: 100%;
     min-height: 9rem;
-    max-height: 34rem !important;
     margin: 0 auto;
     background-color: $white;
     border: 1px solid rgba(0, 0, 0, 0.3);
@@ -40,7 +28,16 @@
     justify-content: flex-start;
     align-items: center;
     text-align: center;
+
+    &.highlight {
+      border: 1px solid #9fa6fd;
+      outline: 3px solid #9fa6fd;
+      .draggableContainer {
+        background-color: #ececec8a;
+      }
+    }
   }
+
   .header {
     width: 100%;
     margin-bottom: 5px;
@@ -58,10 +55,11 @@
   }
   .draggableContainer {
     position: relative;
-    overflow-x: hidden;
+    padding: 0;
+    overflow: hidden;
     width: 100%;
     height: 100%;
-    min-height: 9rem !important;
+    min-height: 56vh !important;
 
     display: flex;
     flex-direction: column;
@@ -69,6 +67,7 @@
     align-items: center;
     text-align: center;
     background-color: $white;
+
     div {
       margin: 1.5vh 0;
     }
@@ -105,7 +104,7 @@
     .fileBrowserContainer {
       z-index: 1;
       a {
-        margin: 0 0.875rem;
+        margin: 0.875rem 0;
         padding: 0.5rem 0.75rem;
         border-radius: 0.625rem;
         font-size: $font_15px;
@@ -119,6 +118,27 @@
     padding: 2rem;
     background-color: $lightBlue_1;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
+  }
+}
+
+.errorContainer {
+  margin: 1.5vh auto;
+  width: 80%;
+  top: 0;
+  z-index: 2;
+  padding: 0.3rem;
+  position: absolute;
+  background-color: #616161;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: $white;
+  font-size: 0.8rem;
+  font-family: $fontOpenSans;
+  font-weight: $regular;
+  line-height: 1.2;
+  cursor: default;
+  span {
+    cursor: pointer;
+    border-bottom: 1px solid $white;
   }
 }
 
