@@ -1,6 +1,4 @@
 import React from "react";
-import { Link } from 'react-router-dom';
-import { fireEvent} from "@testing-library/react";
 import { MemoryRouter } from 'react-router-dom';
 import { unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
