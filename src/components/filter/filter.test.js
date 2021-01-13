@@ -1,13 +1,24 @@
 import React,{Fragment} from 'react'
 import { render} from '@testing-library/react';
 import {unmountComponentAtNode} from "react-dom"
+import { fireEvent} from "@testing-library/react";
 import { act } from "react-dom/test-utils";
+import ReactDOM from "react-dom";
 import { Provider } from 'react-redux';
 
 import { store } from '../../store/store';
-import Dropbox from './filter';
+import Filter from './filter';
 
 let container = null;
+
+const mockHistoryPush = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+    useHistory: () => ({
+      push: mockHistoryPush,
+    }),
+  }));
+
 
 beforeEach(()=>{
     container = document.createElement("div");
@@ -20,11 +31,18 @@ afterEach(()=>{
     container = null;
 })
 
-it("renders with or without a name",() =>{
-    act(()=>{
-        render(
-            <Provider store={store}><Dropbox /></Provider>,container);
-    });
-    expect(container.textContent).toBe("");
+it("ckeck filter page",() =>{
+  
+    act(() => {
+        ReactDOM.render(
+        <Provider store={store}>
+          <Filter />
+        </Provider>, container);
+      });
+
+    let button = container.querySelector('button');
+    fireEvent.click(button);
+    expect(mockHistoryPush).toHaveBeenCalledWith('/404'); 
 
 });
+
