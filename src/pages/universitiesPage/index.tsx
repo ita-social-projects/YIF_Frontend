@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, AboutUs, Footer, UniversityCard } from '../../components';
+import { Header, Footer, UniversityCard } from '../../components';
 import ErrorBoundry from '../../errorBoundry';
 import styles from './universitiesPage.module.scss';
 
