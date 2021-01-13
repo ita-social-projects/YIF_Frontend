@@ -105,8 +105,6 @@ class UserWorksSpace extends React.Component<Props, {}> {
   };
 
   setMenu = (menu: Element | null, icon: Element | null) => {
-    icon?.classList.toggle(styles.whiteBackground);
-    icon?.classList.toggle(styles.hoverEffectIcons);
     menu?.classList.toggle(styles.mainMenuWidth);
   };
 
@@ -115,21 +113,11 @@ class UserWorksSpace extends React.Component<Props, {}> {
     let mainMenu = document.querySelector(`.${styles.mainMenu}`);
     this.setMenu(mainMenu, null);
   };
-
-  whiteBackground = (icon: Element | null) => {
-    let icons = document.querySelectorAll(`article .${styles.icons}`);
-
-    icons.forEach((icon) => {
-      //remove white background and add hover effect for all icons
-      icon.classList.remove(styles.whiteBackground);
-    });
-    icon?.classList.toggle(styles.whiteBackground);
-  };
-
+  
   hideBar = () => {
     this.resetNavBar();
   };
-
+  
   onChangeFrame = (chosenFrame: number) => {
     const copyState = this.state;
     copyState.chosenFrame = chosenFrame;
@@ -140,6 +128,7 @@ class UserWorksSpace extends React.Component<Props, {}> {
     });
   };
 
+  
   render() {
     let box;
     switch (this.state.chosenFrame) {
