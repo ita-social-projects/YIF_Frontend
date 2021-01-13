@@ -12,7 +12,6 @@ import { ProtectedRoute, IsUserRedirect } from '../../services/customRoutes';
 
 const App = () => {
   const { user } = useAuth();
-  console.log(user);
 
   return (
     <Router>
@@ -20,19 +19,15 @@ const App = () => {
         <Route exact path='/'>
           <Home />
         </Route>
-        {/* <Route path='/cabinet' component={GraduateCabinet}/> */}
-        <ProtectedRoute user={user} pathname='login' path='/cabinet'>
-          <GraduateCabinet />
-        </ProtectedRoute>
-        {/* <Route path='/login'>
-          <LoginPage />
-        </Route> */}
         <IsUserRedirect user={user} pathname='cabinet' path='/login'>
           <LoginPage />
         </IsUserRedirect>
-        <Route path='/register'>
+        <IsUserRedirect user={user} pathname='cabinet' path='/register'>
           <RegistrationForm />
-        </Route>
+        </IsUserRedirect>
+        <ProtectedRoute user={user} pathname='login' path='/cabinet'>
+          <GraduateCabinet />
+        </ProtectedRoute>
         <Route path='/filterPage' component={FilterPage} />
         <Route path='/404' component={ErrorPage} status={404} />
         <Route component={ErrorPage} status={404} />
