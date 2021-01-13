@@ -16,7 +16,8 @@
   }
 
   &__link {
-    color: $red;
+    color: $darkBlue;
     margin-left: 5px;
+    border-bottom: 1px solid $darkBlue;
   }
 }
