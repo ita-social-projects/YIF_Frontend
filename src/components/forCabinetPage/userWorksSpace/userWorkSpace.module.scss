@@ -1,14 +1,14 @@
 @import "../../styles.scss";
 
 .mainWorkingFiled {
-  height: 43.75rem;
-  //background-color: #c4c4c4;
+  height: 50rem;
   position: relative;
   display: flex;
   justify-content: space-between;
   .mainMenuBar {
     width: 2.813rem;
-    height: 43.75rem;
+    height: 50rem;
+    height: 100%;
     background-color:$darkBlue;
     z-index: 0;
     position: absolute;
@@ -53,7 +53,7 @@
 
 .mainMenu {
   width: 0rem;
-  height: 43.75rem;
+  height: 50rem;
   left: 2.813rem;
   //background-color: rgba(255, 255, 255, 0.4);
   background-color:$lightBlue_3;
@@ -100,18 +100,6 @@
     fill-opacity: 100%;
   }
 }
-/*
-.whiteBackground {
-  background-color: $lightBlue_1;
-}
-*/
-/*
-.hoverEffectIcons {
-  &:hover {
-    background-color: $lightBlue_1;
-  }
-}
-*/
 .mainMenuWidth {
   width: 11.062rem;
   transition: 0.4s;

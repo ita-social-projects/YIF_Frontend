@@ -97,15 +97,7 @@ class UserWorksSpace extends React.Component<Props, {}> {
 
   resetNavBar = () => {
     //reset NavBar and it elements
-    //let icons = document.querySelectorAll(`article .${styles.icons}`);
     let menus = document.querySelectorAll(`.${styles.menus}`);
-    /*
-    icons.forEach((icon) => {
-      //remove white background and add hover effect for all icons
-      icon.classList.remove(styles.whiteBackground);
-      icon.classList.add(styles.hoverEffectIcons);
-    });
-    */
     menus.forEach((menu) => {
       // hide all side menus
       menu.classList.remove(styles.mainMenuWidth);
