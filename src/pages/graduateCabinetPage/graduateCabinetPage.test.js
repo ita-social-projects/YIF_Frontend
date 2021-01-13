@@ -1,8 +1,9 @@
 import React from "react";
 import { unmountComponentAtNode } from "react-dom";
+import { MemoryRouter } from 'react-router-dom';
 import { act } from "react-dom/test-utils";
 import ReactDOM from "react-dom";
-import FilterPage from "./index";
+import UserCabinet from "./index";
 
 let container = null;
 
@@ -17,10 +18,13 @@ beforeEach(() => {
     container = null;
   });
 
-it("Check filter page", () => {
+it("Check graduateUserCabinet page", () => {
  
     act(() => {
-      ReactDOM.render(<FilterPage />, container);
+      ReactDOM.render(
+      <MemoryRouter>
+      <UserCabinet />
+      </MemoryRouter>, container);
     });
 
 });
