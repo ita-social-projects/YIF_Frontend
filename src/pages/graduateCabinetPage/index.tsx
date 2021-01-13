@@ -6,16 +6,14 @@ import {
   UserWorksSpace,
   UniversityMaps,
 } from '../../components';
-import ImageUploader from '../../components/imageUploader';
 
 const UserCabinet = () => {
   return (
     <Fragment>
-      <Header></Header>
+      <Header />
       <UserWorksSpace />
       <UniversityMaps />
-      <ImageUploader />
-      <Footer></Footer>
+      <Footer background='#fff' />
     </Fragment>
   );
 };

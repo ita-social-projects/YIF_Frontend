@@ -1,174 +1,74 @@
 @import '../../styles/index.scss';
 
-.container {
-  z-index: 1000;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  padding: 2.5rem 5rem 0 5rem;
-  // background-color: rgba(255, 255, 255, 0.15);
-  // backdrop-filter: blur(1px);
+.avatarContainer {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 
-  .imageLoader {
-    position: relative;
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 50%;
+  background-color: $white;
+  cursor: pointer;
+  &:hover::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 100%;
-    max-width: 53rem;
-    min-width: 37.875rem !important;
-    height: 100%;
-    min-height: 9rem;
-    margin: 0 auto;
-    background-color: $white;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: center;
-
-    &.highlight {
-      border: 1px solid #9fa6fd;
-      outline: 3px solid #9fa6fd;
-      .draggableContainer {
-        background-color: #ececec8a;
-      }
-    }
-  }
-
-  .header {
-    width: 100%;
-    margin-bottom: 5px;
-    padding: 1rem;
-    text-align: start;
-    background-color: $lightBlue_1;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
-    h2 {
-      font-family: $fontNunito;
-      font-weight: $regular;
-      font-size: $font_30px;
-      line-height: 1.36;
-    }
-  }
-  .draggableContainer {
-    position: relative;
-    padding: 0;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    min-height: 56vh !important;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background-color: $white;
-
-    div {
-      margin: 1.5vh 0;
-    }
-    input {
-      width: 100%;
-      height: 100%;
-      top: 0px;
-      left: 0px;
-      position: absolute;
-      color: transparent;
-      opacity: 0;
-      &:hover {
-        cursor: pointer;
-      }
-    }
-
-    .helperImage {
-      img {
-        width: 10rem;
-        height: auto;
-      }
-    }
-
-    .helperText {
-      font-size: $font_18px;
-      font-family: $fontOpenSans;
-      color: #646464;
-      font-weight: $bold;
-      line-height: 2rem;
-      span {
-        font-size: $font_16px;
-      }
-    }
-    .fileBrowserContainer {
-      z-index: 1;
-      a {
-        margin: 0.875rem 0;
-        padding: 0.5rem 0.75rem;
-        border-radius: 0.625rem;
-        font-size: $font_15px;
-        font-family: $fontNunito;
-        font-weight: $regular;
-      }
-    }
-  }
-  .footer {
-    width: 100%;
-    padding: 2rem;
-    background-color: $lightBlue_1;
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    height: 35%;
+    background-color: $black;
+    opacity: 0.5;
+    background-image: url(/assets/icons/photo.svg);
+    background-repeat: no-repeat;
+    background-size: auto 55%;
+    background-position: 50% 50%;
   }
 }
-
-.errorContainer {
-  margin: 1.5vh auto;
-  width: 80%;
-  top: 0;
+.avatar {
+  width: 7.5rem;
+  border-radius: 50%;
+}
+.successContainer {
   z-index: 2;
-  padding: 0.3rem;
   position: absolute;
-  background-color: #616161;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  color: $white;
-  font-size: 0.8rem;
-  font-family: $fontOpenSans;
-  font-weight: $regular;
-  line-height: 1.2;
-  cursor: default;
+  top: 0;
+  width: 100%;
+  @include flex(row, center, flex-start);
+
   span {
-    cursor: pointer;
-    border-bottom: 1px solid $white;
+    padding: 0.8rem;
+    margin: 0 auto;
+    background-color: rgba($darkBlue, 0.3);
+    color: $white;
+    font-size: 11px;
+    font-weight: $regular;
+    font-family: $fontOpenSans;
   }
 }
 
-@include desktop {
-  /*  >= 1366px   */
+.elementShowHide {
+  opacity: 0;
+  animation-name: element-show-hide;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
 }
-
-@include laptop {
-  /*   1024px - 1365px   */
-}
-
-@include tablet {
-  /*   768px - 1023px   */
-}
-@include mobile-w {
-  /*   421px - 767px   */
-  .container {
-    padding: 2.5rem 0 0 0;
+@keyframes element-show-hide {
+  0% {
+    opacity: 0;
   }
-  .imageLoader {
-    width: 37.875rem !important;
+  30% {
+    opacity: 1;
   }
-}
-
-@include mobile {
-  /*   <= 420px   */
-  .container {
-    padding: 2.5rem 0 0 0;
+  80% {
+    opacity: 1;
   }
-  .imageLoader {
-    width: 37.875rem !important;
+  100% {
+    opacity: 0;
   }
 }
