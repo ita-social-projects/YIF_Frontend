@@ -13,7 +13,7 @@ const GetIcon = () => {
 };
 
 const UniversityMap = () => {
-  const zoom: number = 10;
+  const zoom: number = 9;
 
   const universitiesDB = [
     {
@@ -42,17 +42,8 @@ const UniversityMap = () => {
     },
   ];
 
-  //styles/larysashashuk/ckjsm88dr0pay19ozz5vvhvw3
-  //styles/larysashashuk/ckjsmrdwl3g881bqsjyn37awg
-
-  //styles/larysashashuk/ckjo9igia3m0819k9z7sc6s5b
-  //styles/larysashashuk/ckjsn6z244tub19rs3e6ttim7
-
-  const styleURLdark: string =
-    'https://api.mapbox.com/styles/v1/larysashashuk/ckjo83son1ad719qg5d52goq6/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibGFyeXNhc2hhc2h1ayIsImEiOiJja2pvOTR3OGUwYjZwMnJsMW01d3d0anF0In0.tKauPUafm3tudsOO3YgwFQ';
-
-  const styleURLlight: string =
-    'https://api.mapbox.com/styles/v1/larysashashuk/ckjo9igia3m0819k9z7sc6s5b/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibGFyeXNhc2hhc2h1ayIsImEiOiJja2pvOTR3OGUwYjZwMnJsMW01d3d0anF0In0.tKauPUafm3tudsOO3YgwFQ';
+  const styleURL: string =
+    'https://api.mapbox.com/styles/v1/larysashashuk/ckjwvqmbv0evv17peb192amng/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibGFyeXNhc2hhc2h1ayIsImEiOiJja2pvOTR3OGUwYjZwMnJsMW01d3d0anF0In0.tKauPUafm3tudsOO3YgwFQ';
 
   const universitiesList = universitiesDB.map((elem) => {
     const { id, title, lat, lng } = elem;
@@ -64,14 +55,16 @@ const UniversityMap = () => {
   });
 
   return (
-    <MapContainer
-      className={style.mapContainer}
-      zoom={zoom}
-      center={[50.505455275104225, 26.33024401561073]}
-    >
-      <TileLayer url={styleURLlight} />
-      {universitiesList}
-    </MapContainer>
+    <Fragment>
+      <MapContainer
+        className={style.mapContainer}
+        zoom={zoom}
+        center={[50.505455275104225, 26.33024401561073]}
+      >
+        <TileLayer url={styleURL} />
+        {universitiesList}
+      </MapContainer>
+    </Fragment>
   );
 };
 

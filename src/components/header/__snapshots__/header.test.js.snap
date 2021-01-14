@@ -18,11 +18,13 @@ Object {
             class="pages"
           >
             <a
+              class="underlineAnimation"
               href="/directions"
             >
               Напрями
             </a>
             <a
+              class="underlineAnimation"
               href="/universities"
             >
               Університети
@@ -62,11 +64,13 @@ Object {
           class="pages"
         >
           <a
+            class="underlineAnimation"
             href="/directions"
           >
             Напрями
           </a>
           <a
+            class="underlineAnimation"
             href="/universities"
           >
             Університети

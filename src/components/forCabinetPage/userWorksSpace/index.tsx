@@ -1,35 +1,16 @@
 import React, { Fragment } from "react";
 import styles from "./userWorkSpace.module.scss";
 import {
-  Option1MainMenu,
-  Option2MainMenu,
-  Option3MainMenu,
-  Option4MainMenu,
-  Option5MainMenu,
-  Option1UserMenu,
-  Option2UserMenu,
-  Option3UserMenu,
-  Option4UserMenu,
-  Option5UserMenu,
+  UserOption,
+  UnivListOption,
+  SpecListOption,
 } from "../../../components";
-
 type Props = {};
-
-let homeIcon = (
-  <svg
-    height='22px'
-    viewBox='0 0 512 512'
-    width='22px'
-    xmlns='http://www.w3.org/2000/svg'
-  >
-    <path d='m498.195312 222.695312c-.011718-.011718-.023437-.023437-.035156-.035156l-208.855468-208.847656c-8.902344-8.90625-20.738282-13.8125-33.328126-13.8125-12.589843 0-24.425781 4.902344-33.332031 13.808594l-208.746093 208.742187c-.070313.070313-.140626.144531-.210938.214844-18.28125 18.386719-18.25 48.21875.089844 66.558594 8.378906 8.382812 19.445312 13.238281 31.277344 13.746093.480468.046876.964843.070313 1.453124.070313h8.324219v153.699219c0 30.414062 24.746094 55.160156 55.167969 55.160156h81.710938c8.28125 0 15-6.714844 15-15v-120.5c0-13.878906 11.289062-25.167969 25.167968-25.167969h48.195313c13.878906 0 25.167969 11.289063 25.167969 25.167969v120.5c0 8.285156 6.714843 15 15 15h81.710937c30.421875 0 55.167969-24.746094 55.167969-55.160156v-153.699219h7.71875c12.585937 0 24.421875-4.902344 33.332031-13.808594 18.359375-18.371093 18.367187-48.253906.023437-66.636719zm0 0' />
-  </svg>
-);
 
 let userIcon = (
   <svg
     height='24px'
-    width='24px'
+    width='21px'
     viewBox='-42 0 512 512.002'
     xmlns='http://www.w3.org/2000/svg'
   >
@@ -38,24 +19,85 @@ let userIcon = (
   </svg>
 );
 
+let univListIcon = (
+  <svg
+    version='1.1'
+    id='Icons'
+    xmlns='http://www.w3.org/2000/svg'
+    xmlnsXlink='http://www.w3.org/1999/xlink'
+    x='0px'
+    y='0px'
+    viewBox='0 0 32 32'
+    style={{ enableBackground: "new :new 0 0 32 32" }}
+    xmlSpace='preserve'
+    width='30px'
+  >
+    <style type='text/css'>.st0{`fill:#FFFFFF`}</style>
+    <g>
+      <path d='M31,26c-0.6,0-1-0.4-1-1V12c0-0.6,0.4-1,1-1s1,0.4,1,1v13C32,25.6,31.6,26,31,26z' />
+    </g>
+    <g>
+      <path
+        d='M16,21c-0.2,0-0.3,0-0.5-0.1l-15-8C0.2,12.7,0,12.4,0,12s0.2-0.7,0.5-0.9l15-8c0.3-0.2,0.6-0.2,0.9,0l15,8
+      c0.3,0.2,0.5,0.5,0.5,0.9s-0.2,0.7-0.5,0.9l-15,8C16.3,21,16.2,21,16,21z'
+      />
+    </g>
+    <path d='M17.4,22.6C17,22.9,16.5,23,16,23s-1-0.1-1.4-0.4L6,18.1V22c0,3.1,4.9,6,10,6s10-2.9,10-6v-3.9L17.4,22.6z' />
+  </svg>
+);
+
+let specListIcon = (
+  <svg
+    version='1.1'
+    id='Capa_1'
+    xmlns='http://www.w3.org/2000/svg'
+    xmlnsXlink='http://www.w3.org/1999/xlink'
+    x='0px'
+    y='0px'
+    viewBox='0 0 426.667 426.667'
+    style={{ enableBackground: "new 0 0 426.667 426.667" }}
+    xmlSpace='preserve'
+    height='24px'
+    width='22px'
+  >
+    <g>
+      <g>
+        <path
+          d='M362.667,42.667h-89.28C264.64,17.92,241.173,0,213.333,0s-51.307,17.92-60.053,42.667H64
+			c-23.573,0-42.667,19.093-42.667,42.667V384c0,23.573,19.093,42.667,42.667,42.667h298.667c23.573,0,42.667-19.093,42.667-42.667
+			V85.333C405.333,61.76,386.24,42.667,362.667,42.667z M213.333,42.667c11.733,0,21.333,9.493,21.333,21.333
+			c0,11.84-9.6,21.333-21.333,21.333S192,75.84,192,64C192,52.16,201.6,42.667,213.333,42.667z M256,341.333H106.667v-42.667H256
+			V341.333z M320,256H106.667v-42.667H320V256z M320,170.667H106.667V128H320V170.667z'
+        />
+      </g>
+    </g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+    <g></g>
+  </svg>
+);
+
+
 class UserWorksSpace extends React.Component<Props, {}> {
   state = {
-    chosenBlock: -1,
-    homeMenuFrame: 0,
-    userMenuFrame: 0,
+    chosenFrame: -1,
   };
 
   resetNavBar = () => {
     //reset NavBar and it elements
-    let icons = document.querySelectorAll(`article .${styles.icons}`);
     let menus = document.querySelectorAll(`.${styles.menus}`);
-
-    icons.forEach((icon) => {
-      //remove white background and add hover effect for all icons
-      icon.classList.remove(styles.whiteBackground);
-      icon.classList.add(styles.hoverEffectIcons);
-    });
-
     menus.forEach((menu) => {
       // hide all side menus
       menu.classList.remove(styles.mainMenuWidth);
@@ -63,107 +105,48 @@ class UserWorksSpace extends React.Component<Props, {}> {
   };
 
   setMenu = (menu: Element | null, icon: Element | null) => {
-    icon?.classList.toggle(styles.whiteBackground);
-    icon?.classList.toggle(styles.hoverEffectIcons);
     menu?.classList.toggle(styles.mainMenuWidth);
   };
 
-  homeSelect = () => {
+  showMenu = () => {
     this.resetNavBar();
     let mainMenu = document.querySelector(`.${styles.mainMenu}`);
-    let homeIcon = document.querySelector(`.${styles.homeIcon}`);
-    this.setMenu(mainMenu, homeIcon);
+    this.setMenu(mainMenu, null);
   };
-
-  userSelect = () => {
-    this.resetNavBar();
-    let userIcon = document.querySelector(`.${styles.userIcon}`);
-    let userMenu = document.querySelector(`.${styles.userMenu}`);
-    this.setMenu(userMenu, userIcon);
-  };
-
+  
   hideBar = () => {
     this.resetNavBar();
   };
-
-  onChangeFrame = (frame: number, chosenBlock: number) => {
+  
+  onChangeFrame = (chosenFrame: number) => {
     const copyState = this.state;
-    copyState.chosenBlock = chosenBlock;
-    if (chosenBlock === 0) {
-      copyState.homeMenuFrame = frame;
-    } else if (chosenBlock === 1) {
-      copyState.userMenuFrame = frame;
-    }
+    copyState.chosenFrame = chosenFrame;
+    this.hideBar();
     this.setState(() => {
       return {
-        chosenBlock: copyState.chosenBlock,
-        homeMenuFrame: copyState.homeMenuFrame,
-        userMenuFrame: copyState.userMenuFrame,
+        chosenFrame: copyState.chosenFrame,
       };
     });
   };
 
+  
   render() {
     let box;
-    switch (
-      this.state.chosenBlock //will show frame based on user selection
-    ) {
+    switch (this.state.chosenFrame) {
       case 0: {
-        switch (this.state.homeMenuFrame) {
-          case 0: {
-            box = <Option1MainMenu />;
-            break;
-          }
-          case 1: {
-            box = <Option2MainMenu />;
-            break;
-          }
-          case 2: {
-            box = <Option3MainMenu />;
-            break;
-          }
-          case 3: {
-            box = <Option4MainMenu />;
-            break;
-          }
-          case 4: {
-            box = <Option5MainMenu />;
-            break;
-          }
-          default:
-            break;
-        }
+        box = <UserOption />;
         break;
       }
       case 1: {
-        switch (this.state.userMenuFrame) {
-          case 0: {
-            box = <Option1UserMenu />;
-            break;
-          }
-          case 1: {
-            box = <Option2UserMenu />;
-            break;
-          }
-          case 2: {
-            box = <Option3UserMenu />;
-            break;
-          }
-          case 3: {
-            box = <Option4UserMenu />;
-            break;
-          }
-          case 4: {
-            box = <Option5UserMenu />;
-            break;
-          }
-          default:
-            break;
-        }
+        box = <UnivListOption />;
+        break;
+      }
+      case 2: {
+        box = <SpecListOption />;
         break;
       }
       default:
-        box = <Option1MainMenu />;
+        box = <UserOption />;
     }
 
     return (
@@ -172,70 +155,40 @@ class UserWorksSpace extends React.Component<Props, {}> {
           className={styles.mainWorkingFiled}
           onMouseLeave={this.hideBar}
         >
-          <article className={styles.mainMenuBar} onMouseEnter={this.hideBar}>
-            <div className={styles.logo}>YIF</div>
+          <article className={styles.mainMenuBar} onMouseEnter={this.showMenu}>
             <div
-              className={`${styles.homeIcon} ${styles.hoverEffectIcons} ${styles.icons}`}
-              onClick={this.homeSelect}
-            >
-              {homeIcon}{" "}
-            </div>
-            <div
-              className={`${styles.userIcon} ${styles.hoverEffectIcons} ${styles.icons}`}
-              onClick={this.userSelect}
+              className={`${styles.userIcon} ${styles.icons}`}
+              onClick={() => this.onChangeFrame(0)}
             >
               {userIcon}{" "}
+            </div>
+            <div
+              className={`${styles.univIcon} ${styles.icons}`}
+              onClick={() => this.onChangeFrame(1)}
+            >
+              {univListIcon}{" "}
+            </div>
+            <div
+              className={`${styles.specIcon} ${styles.icons}`}
+              onClick={() => this.onChangeFrame(2)}
+            >
+              {specListIcon}{" "}
             </div>
           </article>
           <article className={`${styles.mainMenu} ${styles.menus}`}>
             <section>
-              <article className={styles.userFiled}>
-                <div className={styles.icon}></div>
-                <p>Користувач</p>
-              </article>
               <article className={styles.optionList}>
                 <ul>
-                  <li onClick={() => this.onChangeFrame(0, 0)}>
-                    Опція 1 (головне меню)
+                  <li onClick={() => this.onChangeFrame(0)}>
+                    <p className={styles.underlineAnimation}>
+                      Меню&nbsp;користувача
+                    </p>
                   </li>
-                  <li onClick={() => this.onChangeFrame(1, 0)}>
-                    Опція 2 (головне меню)
+                  <li onClick={() => this.onChangeFrame(1)}>
+                    <p className={styles.underlineAnimation}>Університети</p>
                   </li>
-                  <li onClick={() => this.onChangeFrame(2, 0)}>
-                    Опція 3 (головне меню)
-                  </li>
-                  <li onClick={() => this.onChangeFrame(3, 0)}>
-                    Опція 4 (головне меню)
-                  </li>
-                  <li onClick={() => this.onChangeFrame(4, 0)}>
-                    Опція 5 (головне меню)
-                  </li>
-                </ul>
-              </article>
-            </section>
-          </article>
-          <article className={`${styles.userMenu} ${styles.menus}`}>
-            <section>
-              <article className={styles.userFiled}>
-                <div className={styles.icon}></div>
-                <p>Користувач</p>
-              </article>
-              <article className={styles.optionList}>
-                <ul>
-                  <li onClick={() => this.onChangeFrame(0, 1)}>
-                    Опція 1 (меню користувача)
-                  </li>
-                  <li onClick={() => this.onChangeFrame(1, 1)}>
-                    Опція 2 (меню користувача)
-                  </li>
-                  <li onClick={() => this.onChangeFrame(2, 1)}>
-                    Опція 3 (меню користувача)
-                  </li>
-                  <li onClick={() => this.onChangeFrame(3, 1)}>
-                    Опція 4 (меню користувача)
-                  </li>
-                  <li onClick={() => this.onChangeFrame(4, 1)}>
-                    Опція 5 (меню користувача)
+                  <li onClick={() => this.onChangeFrame(2)}>
+                    <p className={styles.underlineAnimation}>Спеціальності</p>
                   </li>
                 </ul>
               </article>

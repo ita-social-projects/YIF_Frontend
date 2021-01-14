@@ -10,10 +10,10 @@ import {
 const UserCabinet = () => {
   return (
     <Fragment>
-      <Header></Header>
+      <Header />
       <UserWorksSpace />
       <UniversityMap />
-      <Footer></Footer>
+      <Footer background='#BAD0E5' />
     </Fragment>
   );
 };
