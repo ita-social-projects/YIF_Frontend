@@ -12,10 +12,9 @@ import {
 } from '../common/formElements';
 import useRegistration from '../../services/useRegistration';
 import Spinner from '../common/spinner';
+import { APIUrl } from '../../services/endpoints';
 
 const RegistrationForm: React.FC = () => {
-  const APIUrl: string =
-    'https://yifbackend.tk/api/Authentication/RegisterUser';
   const useYIFRegistration = useRegistration(APIUrl);
 
   return (

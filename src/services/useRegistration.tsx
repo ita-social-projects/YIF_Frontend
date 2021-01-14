@@ -46,7 +46,7 @@ const useRegistration = (endpoint: string) => {
     setSubmitted({ submitted: true });
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
 
-    requestData(endpoint, 'POST', {
+    requestData(`${endpoint}Authentication/RegisterUser`, 'POST', {
       email: email.email,
       username: email.email,
       password: password.password,
