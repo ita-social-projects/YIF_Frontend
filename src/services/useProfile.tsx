@@ -3,7 +3,7 @@ import { requestData } from '../services/requestDataFunction';
 import { useAuth } from './tokenValidator';
 
 const useProfile = (endpoint: string) => {
-  const { token, isExpired, user, getToken } = useAuth();
+  const { token, isExpired, isRefreshing, user, getToken } = useAuth();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [middleName, setMiddleName] = useState('');
@@ -51,9 +51,8 @@ const useProfile = (endpoint: string) => {
     e.preventDefault();
     setSubmitted(true);
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
-    if (isExpired) getToken();
+    if (isExpired && !isRefreshing) getToken();
     requestData(endpoint, 'POST', {
-      token,
       firstName,
       lastName,
       middleName,
@@ -68,7 +67,8 @@ const useProfile = (endpoint: string) => {
           setError({
             hasError: true,
             errorStatusCode: res.statusCode,
-            errorMessage: res.data.message || 'Something went wrong',
+            errorMessage:
+              res.data.message || 'Щось пішло не так, спробуйте знову.',
           });
         }
       })
@@ -76,7 +76,7 @@ const useProfile = (endpoint: string) => {
         setError({
           hasError: true,
           errorStatusCode: error.statusCode,
-          errorMessage: 'Something went wrong',
+          errorMessage: 'Щось пішло не так, спробуйте знову.',
         });
       });
   };

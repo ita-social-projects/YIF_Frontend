@@ -45,6 +45,9 @@ const Header: React.FC = () => {
   const handleClick = (event: React.MouseEvent) => {
     event.preventDefault();
     setIsDropdownOpen(() => !isDropdownOpen);
+    document
+      .getElementsByClassName(styles.dropdown)[0]
+      .classList.add(styles.dropdownOpen);
   };
 
   const logout = () => {
@@ -54,33 +57,40 @@ const Header: React.FC = () => {
 
   const dropdownContent = isDropdownOpen ? (
     <>
-      <span
-        className={`${styles.userName} ${styles.underlineAnimation}`}
-        onClick={handleClick}
-      >
-        {userEmail} {dropdownArrowUp}
-      </span>
+      <div className={`${styles.user} ${styles.border}`}>
+        <span className={`${styles.userName}`}>{userEmail}</span>
+        <img
+          src='assets/icons/avatar.jpg'
+          alt='avatar'
+          className={styles.avatar}
+          onClick={handleClick}
+        />
+        <span className={styles.arrow} onClick={handleClick}>
+          {dropdownArrowUp}
+        </span>
+      </div>
       <div className={styles.dropdownContent}>
         <Link to='/cabinet'>Особистий&nbsp;кабінет</Link>
         <button onClick={logout}>Вийти</button>
       </div>
     </>
   ) : (
-    <span
-      className={`${styles.userName} ${styles.underlineAnimation}`}
-      onClick={handleClick}
-    >
-      {userEmail} {dropdownArrowDown}
-    </span>
-  );
-
-  const entryContent = user ? (
-    <>
+    <div className={styles.user}>
+      <span className={`${styles.userName}`}>{userEmail}</span>
       <img
         src='assets/icons/avatar.jpg'
         alt='avatar'
         className={styles.avatar}
+        onClick={handleClick}
       />
+      <span className={styles.arrow} onClick={handleClick}>
+        {dropdownArrowDown}
+      </span>
+    </div>
+  );
+
+  const entryContent = user ? (
+    <>
       <div className={styles.dropdown}>{dropdownContent}</div>
     </>
   ) : (
