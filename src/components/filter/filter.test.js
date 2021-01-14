@@ -1,30 +1,46 @@
-import React,{Fragment} from 'react'
-import { render} from '@testing-library/react';
-import {unmountComponentAtNode} from "react-dom"
+import React, { Fragment } from "react";
+import { render } from "@testing-library/react";
+import { unmountComponentAtNode } from "react-dom";
+import { fireEvent } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-import { Provider } from 'react-redux';
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 
-import { store } from '../../store/store';
-import Dropbox from './filter';
+import { store } from "../../store/store";
+import Filter from "./filter";
 
 let container = null;
 
-beforeEach(()=>{
-    container = document.createElement("div");
-    document.body.appendChild(container);
-})
+const mockHistoryPush = jest.fn();
 
-afterEach(()=>{
-    unmountComponentAtNode(container);
-    container.remove();
-    container = null;
-})
+jest.mock("react-router-dom", () => ({
+  useHistory: () => ({
+    push: mockHistoryPush,
+  }),
+}));
 
-it("renders with or without a name",() =>{
-    act(()=>{
-        render(
-            <Provider store={store}><Dropbox /></Provider>,container);
-    });
-    expect(container.textContent).toBe("");
+beforeEach(() => {
+  container = document.createElement("div");
+  document.body.appendChild(container);
+});
 
+afterEach(() => {
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+});
+
+it("ckeck filter page", () => {
+  act(() => {
+    ReactDOM.render(
+      <Provider store={store}>
+        <Filter />
+      </Provider>,
+      container
+    );
+  });
+
+  let button = container.querySelector("button");
+  fireEvent.click(button);
+  expect(mockHistoryPush).toHaveBeenCalledWith("/404");
 });
