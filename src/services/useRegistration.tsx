@@ -3,8 +3,13 @@ import { useState } from 'react';
 import { requestData } from '../services/requestDataFunction';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from './tokenValidator';
+import {useCaptcha} from "./useCaptcha";
 
 const useRegistration = (endpoint: string) => {
+  const APIUrl: string =
+      'https://yifbackend.tk/api/Authentication/RegisterUser';
+
+  const captcha= useCaptcha(APIUrl);
   const { updateToken } = useAuth();
   const history = useHistory();
   const [email, setEmail] = useState({ email: '' });
@@ -12,7 +17,7 @@ const useRegistration = (endpoint: string) => {
   const [confirmPassword, setConfirmPassword] = useState({
     confirmPassword: '',
   });
-  const [reCaptcha,setReCaptcha] = useState({reCaptcha:''})
+
   const [submitted, setSubmitted] = useState({ submitted: false });
   const [error, setError] = useState({
     hasError: false,
@@ -41,26 +46,22 @@ const useRegistration = (endpoint: string) => {
     });
   };
 
-  const handleChangeRecaptchaToken = (token:string) => {
-    setReCaptcha({
-      reCaptcha: token,
-    });
-  };
-
-  const handleSubmit = (
+  const handleSubmit = async (
       e: React.ChangeEvent<HTMLFormElement>,
       pathToRedirect: string
   ) => {
     e.preventDefault();
+
     setSubmitted({ submitted: true });
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
 
+    const token = await captcha.getCaptchaToken();
     requestData(endpoint, 'POST', {
       email: email.email,
       username: email.email,
       password: password.password,
       confirmPassword: confirmPassword.confirmPassword,
-      reCaptcha: reCaptcha.reCaptcha,
+      recaptchaToken: token,
     })
         .then((res: any) => {
           const statusCode = res.statusCode.toString();
@@ -88,7 +89,6 @@ const useRegistration = (endpoint: string) => {
     handleChangeEmail,
     handleChangePassword,
     handleChangeConfirmPassword,
-    handleChangeRecaptchaToken,
     handleSubmit,
     email,
     password,

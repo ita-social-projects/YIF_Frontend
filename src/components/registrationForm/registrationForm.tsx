@@ -13,15 +13,13 @@ import {
 } from '../common/formElements';
 import useRegistration from '../../services/useRegistration';
 import Spinner from '../common/spinner';
-import {useCaptcha} from '../../services/useCaptcha';
+
 
 
 const RegistrationForm: React.FC = () => {
   const APIUrl: string =
       'https://yifbackend.tk/api/Authentication/RegisterUser';
   const useYIFRegistration = useRegistration(APIUrl);
-
-  const useYIFCaptcha= useCaptcha(APIUrl);
 
   return (
       <section role='section' className={classes.wrapper}>
@@ -66,7 +64,6 @@ const RegistrationForm: React.FC = () => {
                 <Form
                     onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
                       handleSubmit(e);
-                      useYIFCaptcha.handleLoaded(e);
                       if (touched.email && isValid) {
                         useYIFRegistration.handleSubmit(e, '/cabinet');
                       }
