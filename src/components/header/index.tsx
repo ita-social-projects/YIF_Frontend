@@ -45,9 +45,6 @@ const Header: React.FC = () => {
   const handleClick = (event: React.MouseEvent) => {
     event.preventDefault();
     setIsDropdownOpen(() => !isDropdownOpen);
-    document
-      .getElementsByClassName(styles.dropdown)[0]
-      .classList.add(styles.dropdownOpen);
   };
 
   const logout = () => {
