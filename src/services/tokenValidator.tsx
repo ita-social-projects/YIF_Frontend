@@ -56,8 +56,8 @@ function AuthProvider({ children }: any) {
   }, []);
 
   const getToken = useCallback(async () => {
-    // const url = 'https://yifbackend.tk/api/Authentication/RefreshToken';
-    const url = 'http://localhost:5000/api/Authentication/RefreshToken';
+    const url = 'https://yifbackend.tk/api/Authentication/RefreshToken';
+    // const url = 'http://localhost:5000/api/Authentication/RefreshToken';
     let currentToken = token;
     let currentRefreshToken = refreshToken;
     try {
