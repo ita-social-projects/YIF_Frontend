@@ -4,3 +4,4 @@ export { default as FormTextField } from './formTextField';
 export { default as FormInput } from './formInput';
 export { default as FormCloseButton } from './formCloseButton';
 export { default as FormInputError } from './formInputError';
+export { default as FormInputErrorWithButton } from './formInputError/formInpurErrorWithButton';
