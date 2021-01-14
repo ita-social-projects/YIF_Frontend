@@ -1,0 +1,16 @@
+@import '../../../styles.scss';
+
+.universityListSection {
+  width: inherit;
+  height: auto;
+  background-color: #f2f9ff;
+  padding-left: 4.5rem;
+}
+
+.container {
+  width: 100%;
+  height: auto;
+  @include flex(column, center, flex-start);
+  padding-bottom: 30px;
+  padding-right: 9.03vw;
+}

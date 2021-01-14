@@ -12,9 +12,8 @@ import { Formik, Form, Field } from 'formik';
 import { validationField } from '../../services/validateForm/ValidatorsField';
 import useLogin from '../../services/useLogin';
 import Spinner from '../common/spinner';
-
+import { APIUrl } from '../../services/endpoints';
 const LoginForm = () => {
-  const APIUrl: string = 'https://yifbackend.tk/api/Authentication/LoginUser';
   const useYIFLogin = useLogin(APIUrl);
   return (
     <section className={styles.loginFormPage}>
