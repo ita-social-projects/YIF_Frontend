@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import style from './bannerLower.module.scss';
+
 export default class BannerLower extends Component<any> {
   scrollRef: any = React.createRef();
 
