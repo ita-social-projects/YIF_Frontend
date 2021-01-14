@@ -6,7 +6,7 @@ const useProfile = (endpoint: string) => {
   const { token, isExpired, isRefreshing, user, getToken } = useAuth();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [middleName, setMiddleName] = useState('');
+  const [fathersName, setFathersName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState(user?.email);
   const [school, setSchool] = useState('');
@@ -27,9 +27,9 @@ const useProfile = (endpoint: string) => {
     setLastName(value);
   };
 
-  const handleMiddleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFathersNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setMiddleName(value);
+    setFathersName(value);
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +55,7 @@ const useProfile = (endpoint: string) => {
     requestData(endpoint, 'POST', {
       firstName,
       lastName,
-      middleName,
+      fathersName,
       email,
       phone,
       school,
@@ -83,13 +83,14 @@ const useProfile = (endpoint: string) => {
   return {
     handleFirstNameChange,
     handleLastNameChange,
-    handleMiddleNameChange,
+    handleFathersNameChange,
     handlePhoneChange,
     handleEmailChange,
     handleSchoolChange,
+    handleSubmit,
     firstName,
     lastName,
-    middleName,
+    fathersName,
     phone,
     email,
     school,
