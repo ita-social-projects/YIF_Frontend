@@ -16,7 +16,11 @@ describe('USE LOGIN HOOK', () => {
       error,
     } = useLogin(APIUrl);
     return (
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={(e: React.ChangeEvent<HTMLFormElement>) =>
+          handleSubmit(e, '')
+        }
+      >
         <input
           type='text'
           data-testid='email'
