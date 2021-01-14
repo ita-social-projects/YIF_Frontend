@@ -37,7 +37,7 @@ const useLogin = (endpoint: string) => {
     e.preventDefault();
     setSubmitted({ submitted: true });
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
-    requestData(endpoint, 'POST', {
+    requestData(`${endpoint}Authentication/LoginUser`, 'POST', {
       email: email.email,
       password: password.password,
     })
