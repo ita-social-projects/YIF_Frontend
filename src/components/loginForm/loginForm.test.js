@@ -61,3 +61,14 @@ it('should show password input', () => {
   expect(input).toBeInTheDocument();
   expect(input.tagName).toMatch(/input/i);
 });
+
+test('should show submit button', () => {
+  const { getByText } = render(
+    <MemoryRouter>
+      <LoginForm />
+    </MemoryRouter>
+  );
+  const button = getByText('Увійти');
+  expect(button).toBeInTheDocument();
+  expect(button.tagName).toMatch(/button/i);
+});
