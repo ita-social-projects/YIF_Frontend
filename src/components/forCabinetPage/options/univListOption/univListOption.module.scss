@@ -1,11 +1,16 @@
-@import "../../../styles.scss";
+@import '../../../styles.scss';
 
-.mainstyle {
+.universityListSection {
   width: inherit;
-  height: 100%;
-  background: #e6e6e6;
-  font-size: $font_30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: auto;
+  background-color: $white;
+  padding-left: 4.5rem;
+}
+
+.container {
+  width: 100%;
+  height: auto;
+  @include flex(column, center, flex-start);
+  padding-bottom: 30px;
+  padding-right: 9.03vw;
 }
