@@ -121,6 +121,7 @@ class UserWorksSpace extends React.Component<Props, {}> {
   onChangeFrame = (chosenFrame: number) => {
     const copyState = this.state;
     copyState.chosenFrame = chosenFrame;
+    this.hideBar();
     this.setState(() => {
       return {
         chosenFrame: copyState.chosenFrame,
