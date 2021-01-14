@@ -1,0 +1,57 @@
+
+@import '../../../../styles/index.scss';
+
+.wrapperErrorInput {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.inputWrapper {
+  font-family: $fontNunito;
+  font-weight: $regular;
+  font-size: 1.125rem;
+  color: $black;
+
+  .labelWrapper {
+    float: left;
+    flex-grow: 1;
+    padding-top: 1.25rem;
+
+  }
+}
+
+.imgContainer {
+  padding: 0 1.25rem;
+  cursor: pointer;
+}
+
+.inputContainer {
+  @include flex(row, flex-end, flex-start);
+  width: 350px;
+  height: 2.5rem;
+  border: 1px solid $black;
+  margin-bottom: 2.81rem;
+  background-color: $white;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: red;
+}
+.inputFailed {
+  border: 1px solid $red;
+  margin-bottom: 2px;
+}
+
+.formInput {
+  padding-bottom: 2px;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}

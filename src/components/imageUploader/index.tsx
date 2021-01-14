@@ -3,12 +3,15 @@ import React, { useState } from 'react';
 import ImageUploaderPopup from './imageUploaderPopup/imageUploaderPopup';
 import style from './imageUploader.module.scss';
 
-const ImageUploader = () => {
+const ImageUploader = (props: any) => {
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [isSuccessLoad, setSuccessLoad] = useState(false);
+
+  const { additionalStyles } = props;
   return (
     <>
       <div
+        style={additionalStyles}
         className={style.avatarContainer}
         onClick={() => {
           setPopupOpen(!isPopupOpen);
