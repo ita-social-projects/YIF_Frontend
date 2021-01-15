@@ -1,5 +1,7 @@
 @import '../styles.scss';
 
+$borderLine: solid 1px rgba(18, 51, 94, 0.22);
+
 header {
   box-sizing: border-box;
   height: 6.25rem; //100px
@@ -61,39 +63,62 @@ header {
         margin-right: 1.625rem;
       }
 
-      .avatar {
-        width: 40px;
-        border-radius: 50%;
-      }
-
       .dropdown {
         position: relative;
+        .user {
+          @include flex(row, center, flex-end);
+          min-width: 12.5rem; //200px
+          padding: 0.3125rem 0.625rem; //5px 10px
+          border: solid 1px $lightBlue_1;
+          box-sizing: border-box;
+
+          .avatar {
+            width: 2.5rem;
+            border-radius: 50%;
+            margin-left: 0.9375rem; //15px
+            cursor: pointer;
+          }
+        }
+        .border {
+          border: $borderLine;
+          border-radius: 0.3125rem 0.3125rem 0 0;
+        }
       }
 
-      .userName {
+      .arrow {
         cursor: pointer;
+        padding-left: 0.625rem;
       }
 
       .dropdownContent {
         position: absolute;
-        top: 1.875rem;
         right: 0;
+        width: 100%;
+        min-width: 12.5rem; //200px
 
         & > * {
-          font-size: 0.875rem;
+          font-size: 1rem;
+          text-align: right;
           display: block;
           width: 100%;
           cursor: pointer;
           padding-left: 0;
-          text-align: left;
-          padding: 2px 4px 3px;
+          padding: 0.625rem 0.625rem;
           line-height: 1rem;
           background: $lightBlue_1;
+          border-bottom: $borderLine;
+          border-left: $borderLine;
+          border-right: $borderLine;
+          box-sizing: border-box;
 
           &:hover {
             color: $white;
             background: $darkBlue;
           }
+        }
+
+        & > :last-child {
+          border-radius: 0 0 0.3125rem 0.3125rem;
         }
       }
     }

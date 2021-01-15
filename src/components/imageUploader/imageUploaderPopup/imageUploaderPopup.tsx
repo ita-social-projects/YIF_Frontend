@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './imageUploaderPopup.module.scss';
 import ImageCropper from '../imageCropper/imageCropper';
 import ButtonUploading from '../buttonUploading/buttonUploading';
@@ -32,10 +32,20 @@ const ImageUploaderPopup = (props: TProps) => {
   const [loadedImage, setLoadedImage] = useState(InitialLoadedImageState);
   const [error, setError] = useState('');
   const [isLoading, setLoading] = useState(false);
-  //const [cropData, setCropData] = useState('#');
   const [cropper, setCropper] = useState<any>();
 
   let fileInput: any = React.createRef();
+
+  const [didMount, setDidMount] = useState(false);
+
+  useEffect(() => {
+    setDidMount(true);
+    return () => setDidMount(false);
+  }, []);
+
+  if (!didMount) {
+    return null;
+  }
 
   const highlightArea = () => {
     document
@@ -122,12 +132,6 @@ const ImageUploaderPopup = (props: TProps) => {
       setError('Помилка завантаження.');
     };
   };
-
-  // const getCropData = () => {
-  //   if (typeof cropper !== 'undefined') {
-  //     setCropData(cropper.getCroppedCanvas().toDataURL());
-  //   }
-  // };
 
   return (
     <section className={style.container}>
@@ -221,8 +225,6 @@ const ImageUploaderPopup = (props: TProps) => {
             handleClick={() => {
               setLoading(true);
               const imageToUpload = cropper.getCroppedCanvas().toDataURL();
-
-              console.log(imageToUpload);
               requestImageProfile(`${APIUrl}Users/ChangePhoto`, 'POST', {
                 photoBase64: imageToUpload,
               })

@@ -1,5 +1,4 @@
 export { default as App } from './app';
-export { default as Counter } from './counter';
 export { default as Filter } from './filter/filter';
 export { default as Header } from './header';
 export { default as Banner } from './banner';
@@ -11,7 +10,7 @@ export { default as Footer } from './footer';
 //work space
 export { default as UserWorksSpace } from './forCabinetPage/userWorksSpace/index';
 //maps
-export { default as UniversityMaps } from './forCabinetPage/maps/index';
+export { default as UniversityMap } from './forCabinetPage/map/index';
 // options
 export { default as UserOption } from './forCabinetPage/options/userOption/index';
 export { default as UnivListOption } from './forCabinetPage/options/univListOption/index';

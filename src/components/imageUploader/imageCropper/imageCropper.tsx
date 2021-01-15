@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './imageCropper.module.scss';
 import { TLoadedImage } from '../imageUploaderPopup/imageUploaderPopup';
 import Spinner from '../../common/spinner';
