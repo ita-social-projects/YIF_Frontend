@@ -1,1 +1,1 @@
-export const APIUrl: string = 'https://yifbackend.tk/api/';
+export const APIUrl: string = 'https://localhost:44324/api/'; // 'https://yifbackend.tk/api/';
