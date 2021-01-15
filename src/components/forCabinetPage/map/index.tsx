@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import style from './maps.module.scss';
+import style from './map.module.scss';
 import L from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
