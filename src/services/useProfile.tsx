@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { requestData } from '../services/requestDataFunction';
+import { requestSecureData } from '../services/requestDataFunction';
 import { useAuth } from './tokenValidator';
+import { APIUrl } from '../../src/services/endpoints';
 
 const useProfile = (endpoint: string) => {
-  const { token, isExpired, isRefreshing, user, getToken } = useAuth();
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [fathersName, setFathersName] = useState('');
-  const [phone, setPhone] = useState('');
+  const { isExpired, isRefreshing, user, getToken } = useAuth();
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [middleName, setMiddleName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState(user?.email);
-  const [school, setSchool] = useState('');
+  const [schoolName, setSchoolName] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState({
     hasError: false,
@@ -19,22 +20,22 @@ const useProfile = (endpoint: string) => {
 
   const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setFirstName(value);
+    setName(value);
   };
 
   const handleLastNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setLastName(value);
+    setSurname(value);
   };
 
   const handleFathersNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setFathersName(value);
+    setMiddleName(value);
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setPhone(value);
+    setPhoneNumber(value);
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +45,7 @@ const useProfile = (endpoint: string) => {
 
   const handleSchoolChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setSchool(value);
+    setSchoolName(value);
   };
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
@@ -52,17 +53,19 @@ const useProfile = (endpoint: string) => {
     setSubmitted(true);
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
     if (isExpired && !isRefreshing) getToken();
-    requestData(endpoint, 'POST', {
-      firstName,
-      lastName,
-      fathersName,
+    requestSecureData(`${APIUrl}Users/SetCurrentProfile`, 'POST', {
+      name,
+      surname,
+      middleName,
       email,
-      phone,
-      school,
+      phoneNumber,
+      schoolName,
     })
       .then((res: any) => {
-        if (res.ok) {
+        const statusCode = res.statusCode.toString();
+        if (statusCode.match(/^[23]\d{2}$/)) {
           setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
+          localStorage.setItem('user', res.data);
         } else {
           setError({
             hasError: true,
@@ -88,12 +91,12 @@ const useProfile = (endpoint: string) => {
     handleEmailChange,
     handleSchoolChange,
     handleSubmit,
-    firstName,
-    lastName,
-    fathersName,
-    phone,
+    name,
+    surname,
+    middleName,
+    phoneNumber,
     email,
-    school,
+    schoolName,
     submitted,
     error,
   };
