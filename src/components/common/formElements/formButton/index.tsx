@@ -18,7 +18,6 @@ const FormButton: React.FC<Props> = (props) => {
                   ?`${styles.formButton} ${styles.buttonProfile} ${styles.animatedButton}`
                     : 'incorrect form'
       }
-
       type='submit'
     >
       {title}
