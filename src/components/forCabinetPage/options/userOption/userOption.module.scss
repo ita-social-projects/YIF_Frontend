@@ -1,10 +1,10 @@
-@import "../../../styles.scss";
+@import '../../../styles.scss';
 
 .mainStyle {
   width: inherit;
   height: 100%;
   background: $lightBlue_3;
-  padding: 1.25rem 2.5rem 2.81rem 2.5rem;
+  padding: 3rem 2.5rem 2.81rem 2.5rem;
   position: relative;
 
   .wrapperImg {
@@ -15,23 +15,26 @@
     background-color: white;
     top: 3rem;
     left: 2.5rem;
-      .imgAvatar{
-        border-radius: 100%;
+
+    .imgAvatar {
+      border-radius: 100%;
+    }
+  }
+  .titleContainer {
+    @include flex(column, center, center);
+
+      .title {
+        font-family: $fontNunito;
+        font-weight: $regular;
+        font-size: 1.625rem;
+        color: $black;
+        padding: 1.25rem 0 3.125rem 0;
+        text-align: center;
       }
   }
-
-  .title {
-    font-family: $fontNunito;
-    font-weight: $regular;
-    font-size: 1.625rem;
-    color: $black;
-    padding: 1.25rem 0 3.125rem 0;
-    text-align: center;
-  }
-
   .wrapper {
     height: 100%;
-    padding: 0.625rem 0 2.81rem 12.5rem ;
+    padding: 0.625rem 0 2.81rem 12.5rem;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -47,6 +50,4 @@
     display: flex;
     justify-content: flex-end;
   }
-
 }
-

@@ -13,12 +13,12 @@ import {
 } from '../common/formElements';
 import useRegistration from '../../services/useRegistration';
 import Spinner from '../common/spinner';
+import { APIUrl } from '../../services/endpoints';
 
 
 
 const RegistrationForm: React.FC = () => {
-  const APIUrl: string =
-      'https://yifbackend.tk/api/Authentication/RegisterUser';
+
   const useYIFRegistration = useRegistration(APIUrl);
 
   return (
@@ -64,7 +64,10 @@ const RegistrationForm: React.FC = () => {
                 <Form
                     onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
                       handleSubmit(e);
-                      if (touched.email && isValid) {
+                      if ( touched.email &&
+                          errors.email === undefined &&
+                          errors.password === undefined
+                          && errors.confirmPassword === undefined) {
                         useYIFRegistration.handleSubmit(e, '/cabinet');
                       }
                     }}

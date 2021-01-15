@@ -1,0 +1,73 @@
+@import '../../styles/index.scss';
+
+.avatarContainer {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 50%;
+  background-color: $white;
+  cursor: pointer;
+  &:hover::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 35%;
+    background-color: $black;
+    opacity: 0.5;
+    background-image: url(/assets/icons/photo.svg);
+    background-repeat: no-repeat;
+    background-size: auto 65%;
+    background-position: 50% 50%;
+  }
+}
+.avatar {
+  width: 7.5rem;
+  border-radius: 50%;
+}
+.successContainer {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  @include flex(row, center, flex-start);
+
+  span {
+    padding: 0.8rem;
+    margin: 0 auto;
+    background-color: rgba($darkBlue, 0.3);
+    color: $white;
+    font-size: 11px;
+    font-weight: $regular;
+    font-family: $fontOpenSans;
+  }
+}
+
+.elementShowHide {
+  opacity: 0;
+  animation-name: element-show-hide;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+}
+@keyframes element-show-hide {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

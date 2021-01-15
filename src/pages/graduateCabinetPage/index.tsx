@@ -13,7 +13,7 @@ const UserCabinet = () => {
       <Header />
       <UserWorksSpace />
       <UniversityMaps />
-      <Footer background='#fff' />
+      <Footer />
     </Fragment>
   );
 };
