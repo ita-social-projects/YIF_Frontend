@@ -1,7 +1,11 @@
 import React from 'react';
 import styles from './universityCard.module.scss';
 
-const UniversityCard = () => {
+interface Props {
+  liked: boolean;
+}
+
+const UniversityCard: React.FC<Props> = (props) => {
   const starSVG = (
     <svg
       width='50'
@@ -17,9 +21,19 @@ const UniversityCard = () => {
     </svg>
   );
 
+  const { liked } = props;
+
   return (
     <div className={styles.card}>
-      <div className={styles.card__icon}>{starSVG}</div>
+      <div
+        className={
+          liked
+            ? `${styles.card__icon} ${styles.card__icon__liked}`
+            : `${styles.card__icon}`
+        }
+      >
+        {starSVG}
+      </div>
       <h2 className={styles.card__title}>НУВГП</h2>
       <div className={styles.card__contentContainer}>
         <div className={styles.card__content}>

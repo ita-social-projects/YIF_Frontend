@@ -7,6 +7,10 @@
   padding: 1.25rem 2.5rem 2.81rem 2.5rem;
   position: relative;
 
+  .titleContainer {
+    @include flex(column, center, center);
+  }
+
   .title {
     font-family: $fontNunito;
     font-weight: $regular;

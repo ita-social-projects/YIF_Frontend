@@ -10,10 +10,10 @@ const UniversitiesPage = () => {
         <Header />
         <section className={styles.universitiesPage}>
           <h1 className={styles.title}>Список університетів</h1>
-          <UniversityCard />
-          <UniversityCard />
-          <UniversityCard />
-          <UniversityCard />
+          <UniversityCard liked={false} />
+          <UniversityCard liked={false} />
+          <UniversityCard liked={false} />
+          <UniversityCard liked={false} />
         </section>
         <Footer />
       </ErrorBoundry>
