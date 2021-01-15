@@ -122,22 +122,3 @@ describe('registrationForm', () => {
 
 });
 
-describe ('registrationPage', () => {
-
-  test('checking to render wrapper', () => {
-
-    let wrapper = null;
-    beforeEach(() => {
-      wrapper = document.createElement('section');
-      document.body.appendChild(wrapper);
-    });
-
-    afterEach(() => {
-      unmountComponentAtNode(wrapper);
-      wrapper.remove();
-      wrapper = null;
-    });
-
-  });
-
-});

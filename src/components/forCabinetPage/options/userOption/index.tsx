@@ -23,19 +23,19 @@ const UserOption = () => {
     <Fragment>
       <section className={styles.mainStyle}>
         <ImageUploader additionalStyles={avatarSyles} />
-        <div className={styles.titleContainer}>
-          <h4 className={styles.title}>Персональні дані</h4>
-          {useYIFProfile.submitted && !useYIFProfile.error.hasError && (
-            <Spinner />
-          )}
-          {useYIFProfile.error.hasError && (
-            <FormInputError
-              errorType='form'
-              errorMessage={useYIFProfile.error.errorMessage}
-            />
-          )}
-        </div>
         <div className={styles.wrapper}>
+          <div className={styles.titleContainer}>
+            <h4 className={styles.title}>Персональні дані</h4>
+            {useYIFProfile.submitted && !useYIFProfile.error.hasError && (
+              <div className={styles.spinner}><Spinner /></div>
+            )}
+            {useYIFProfile.error.hasError && (
+                <FormInputError
+                    errorType='form'
+                    errorMessage={useYIFProfile.error.errorMessage}
+                />
+            )}
+          </div>
           <Formik
             initialValues={{
               lastName: '',
@@ -193,9 +193,9 @@ const UserOption = () => {
               </Form>
             )}
           </Formik>
-          <div className={styles.img}>
-            <img src='assets/images/userProfile.svg' alt='user' />
-          </div>
+        </div>
+        <div className={styles.img}>
+          <img src='assets/images/userProfile.svg' alt='user' />
         </div>
       </section>
     </Fragment>
