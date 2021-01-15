@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import styles from './graduateCabinetPage.module.scss';
+//import styles from './graduateCabinetPage.module.scss';
 import {
   Header,
   Footer,
@@ -13,7 +13,7 @@ const UserCabinet = () => {
       <Header />
       <UserWorksSpace />
       <UniversityMap />
-      <Footer background='#BAD0E5' />
+      <Footer />
     </Fragment>
   );
 };

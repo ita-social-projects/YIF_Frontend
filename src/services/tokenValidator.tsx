@@ -22,6 +22,7 @@ type Values = {
   refreshToken: Token;
   user: User | null;
   isExpired: boolean;
+  isRefreshing: boolean;
   getToken: Function;
   updateToken: Function;
   removeToken: Function;
@@ -56,6 +57,7 @@ function AuthProvider({ children }: any) {
 
   const getToken = useCallback(async () => {
     const url = 'https://yifbackend.tk/api/Authentication/RefreshToken';
+    // const url = 'http://localhost:5000/api/Authentication/RefreshToken';
     let currentToken = token;
     let currentRefreshToken = refreshToken;
     try {
@@ -154,6 +156,7 @@ function AuthProvider({ children }: any) {
         refreshToken,
         user,
         isExpired,
+        isRefreshing,
         getToken,
         updateToken,
         removeToken,
