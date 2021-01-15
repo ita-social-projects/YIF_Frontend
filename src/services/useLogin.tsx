@@ -2,10 +2,15 @@ import { useState } from 'react';
 import { requestData } from '../services/requestDataFunction';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from './tokenValidator';
+import { APIUrl } from '../../src/services/endpoints';
+import {useCaptcha} from "./useCaptcha";
+
 
 const useLogin = (endpoint: string) => {
-  const { updateToken } = useAuth();
+
+  const captcha = useCaptcha(APIUrl);
   const history = useHistory();
+  const { updateToken } = useAuth();
   const [email, setEmail] = useState({ email: '' });
   const [password, setPassword] = useState({ password: '' });
   const [submitted, setSubmitted] = useState({ submitted: false });
@@ -30,16 +35,21 @@ const useLogin = (endpoint: string) => {
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken');
   };
-  const handleSubmit = (
+  const handleSubmit = async (
     e: React.ChangeEvent<HTMLFormElement>,
     pathToRedirect: string
   ) => {
     e.preventDefault();
     setSubmitted({ submitted: true });
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
+
+    const token = await captcha.getCaptchaToken();
+
+
     requestData(`${endpoint}Authentication/LoginUser`, 'POST', {
       email: email.email,
       password: password.password,
+      recaptchaToken: token,
     })
       .then((res: any) => {
         const statusCode = res.statusCode.toString();
