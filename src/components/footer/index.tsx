@@ -3,16 +3,12 @@ import styles from './footer.module.scss';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../services/tokenValidator';
 
-interface Props {
-  background?: string;
-}
-
-const Footer: React.FC<Props> = (props) => {
+const Footer: React.FC = () => {
   const { user } = useAuth();
 
   return (
     <footer>
-      <div className={styles.footer} style={{ background: props.background }}>
+      <div className={styles.footer}>
         <section className={styles.mainElements}>
           <article>
             {!user && (
