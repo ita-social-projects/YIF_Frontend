@@ -3,11 +3,10 @@ import { useState } from 'react';
 import { requestData } from '../services/requestDataFunction';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from './tokenValidator';
+import { APIUrl } from '../../src/services/endpoints';
 import {useCaptcha} from "./useCaptcha";
 
 const useRegistration = (endpoint: string) => {
-  const APIUrl: string =
-      'https://yifbackend.tk/api/Authentication/RegisterUser';
 
   const captcha= useCaptcha(APIUrl);
   const { updateToken } = useAuth();
@@ -57,7 +56,8 @@ const useRegistration = (endpoint: string) => {
 
     const token = await captcha.getCaptchaToken();
 
-    requestData(endpoint, 'POST', {
+    requestData(`${endpoint}Authentication/RegisterUser`, 'POST', {
+
       email: email.email,
       username: email.email,
       password: password.password,
@@ -74,17 +74,17 @@ const useRegistration = (endpoint: string) => {
             setError({
               hasError: true,
               errorStatusCode: res.statusCode,
-              errorMessage: res.data.message || 'something gone wrong',
+              errorMessage: res.data.message || 'Щось пішло не так, спробуйте знову.',
             });
           }
         })
-        .catch((error) => {
-          setError({
-            hasError: true,
-            errorStatusCode: error.statusCode,
-            errorMessage: 'something gone wrong',
-          });
+      .catch((error) => {
+        setError({
+          hasError: true,
+          errorStatusCode: error.statusCode,
+          errorMessage: 'Щось пішло не так, спробуйте знову.',
         });
+      });
   };
   return {
     handleChangeEmail,

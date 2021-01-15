@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { requestData } from '../services/requestDataFunction';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from './tokenValidator';
+import { APIUrl } from '../../src/services/endpoints';
 import {useCaptcha} from "./useCaptcha";
 
 
 const useLogin = (endpoint: string) => {
-  const APIUrl: string = 'https://yifbackend.tk/api/Authentication/LoginUser';
 
   const captcha = useCaptcha(APIUrl);
   const history = useHistory();
@@ -42,9 +42,11 @@ const useLogin = (endpoint: string) => {
     e.preventDefault();
     setSubmitted({ submitted: true });
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
+
     const token = await captcha.getCaptchaToken();
 
-    requestData(endpoint, 'POST', {
+
+    requestData(`${endpoint}Authentication/LoginUser`, 'POST', {
       email: email.email,
       password: password.password,
       recaptchaToken: token,
@@ -59,7 +61,8 @@ const useLogin = (endpoint: string) => {
           setError({
             hasError: true,
             errorStatusCode: res.statusCode,
-            errorMessage: res.data.message || 'something gone wrong',
+            errorMessage:
+              res.data.message || 'Щось пішло не так, спробуйте знову.',
           });
         }
       })
@@ -67,7 +70,7 @@ const useLogin = (endpoint: string) => {
         setError({
           hasError: true,
           errorStatusCode: error.statusCode,
-          errorMessage: 'something gone wrong',
+          errorMessage: 'Щось пішло не так, спробуйте знову.',
         });
       });
   };
