@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, wait } from '@testing-library/react';
 
 import useLogin from './useLogin';
 
@@ -53,13 +53,14 @@ describe('USE LOGIN HOOK', () => {
     fireEvent.change(emailInput, { target: { value: 'test@mail.com' } });
 
 
-   /* fireEvent.change(passwordInput, { target: { value: '*Qwerty123' } });
-    expect(passwordInput.value).toEqual('*Qwerty123');
+    fireEvent.change(passwordInput, { target: { value: '*Qwerty123' } });
+   wait (() =>expect(passwordInput.value).toEqual('*Qwerty123'));
 
-    fireEvent.click(loginButton);
-    expect(handleClick).toHaveBeenCalled();
+    /*fireEvent.click(loginButton);
+    wait (() =>expect(handleClick).toHaveBeenCalled());
 
     fireEvent.click(logoutButton);
-    expect(handleClick).toHaveBeenCalled();*/
+    wait (() =>expect(handleClick).toHaveBeenCalled());
+*/
   });
 });
