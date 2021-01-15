@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
-import styles from './graduateCabinetPage.module.scss';
+//import styles from './graduateCabinetPage.module.scss';
 import {
   Header,
   Footer,
   UserWorksSpace,
-  UniversityMaps,
+  UniversityMap,
 } from '../../components';
 
 const UserCabinet = () => {
@@ -12,7 +12,7 @@ const UserCabinet = () => {
     <Fragment>
       <Header />
       <UserWorksSpace />
-      <UniversityMaps />
+      <UniversityMap />
       <Footer />
     </Fragment>
   );
