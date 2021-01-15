@@ -1,4 +1,4 @@
-@import "../../../styles.scss";
+@import '../../../styles.scss';
 
 .mainStyle {
   width: inherit;
@@ -7,17 +7,8 @@
   padding: 1.25rem 2.5rem 2.81rem 2.5rem;
   position: relative;
 
-  .wrapperImg {
-    height: 7.5rem;
-    width: 7.5rem;
-    border-radius: 100%;
-    position: absolute;
-    background-color: white;
-    top: 1.25rem;
-    left: 2.5rem;
-      .imgAvatar{
-        border-radius: 100%;
-      }
+  .titleContainer {
+    @include flex(column, center, center);
   }
 
   .title {
@@ -31,7 +22,7 @@
 
   .wrapper {
     height: 100%;
-    padding: 0.625rem 0 2.81rem 12.5rem ;
+    padding: 0.625rem 0 2.81rem 12.5rem;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -47,6 +38,4 @@
     display: flex;
     justify-content: flex-end;
   }
-
 }
-
