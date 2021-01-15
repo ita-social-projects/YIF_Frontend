@@ -6,6 +6,7 @@
   background: $lightBlue_3;
   padding: 3rem 2.5rem 2.81rem 2.5rem;
   position: relative;
+  min-height: 55rem;
 
   .wrapperImg {
     height: 7.5rem;
@@ -21,31 +22,44 @@
     }
   }
   .titleContainer {
-    @include flex(column, center, center);
+   display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 
       .title {
         font-family: $fontNunito;
         font-weight: $regular;
         font-size: 1.625rem;
         color: $black;
-        padding: 1.25rem 0 3.125rem 0;
-        text-align: center;
+        padding: 0 3.75rem 1.125rem 0;
       }
+    .spinner {
+      padding-right: 23%;
+
+    }
+
   }
   .wrapper {
     height: 100%;
-    padding: 0.625rem 0 2.81rem 12.5rem;
+    padding: 0 0 2.81rem 12.5rem;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    width: 100%;
+    padding-right: 25rem;
   }
 
   .form {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    width: 50%;
   }
+
+  .img{
+    position: absolute;
+    top: 25%;
+    right: 0;
+  }
+
   .button {
     display: flex;
     justify-content: flex-end;
