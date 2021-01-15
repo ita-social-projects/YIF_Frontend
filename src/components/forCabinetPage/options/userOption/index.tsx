@@ -6,6 +6,8 @@ import { validationField } from '../../../../services/validateForm/ValidatorsFie
 import FormInputProfile from '../../../common/formElements/formInputProfile';
 import Spinner from '../../../common/spinner';
 import ImageUploader from '../../../imageUploader';
+import useProfile from '../../../../services/useProfile';
+import { APIUrl } from '../../../../services/endpoints';
 
 const UserOption = () => {
   const avatarSyles = {
@@ -13,12 +15,26 @@ const UserOption = () => {
     top: '1.25rem',
     left: '2.5rem',
   };
+
+  const url = `${APIUrl}Users/Profile`;
+  const useYIFProfile = useProfile(url);
+
   return (
     <Fragment>
       <section className={styles.mainStyle}>
         <ImageUploader additionalStyles={avatarSyles} />
-        <h4 className={styles.title}>Персональні дані</h4>
-        {/*The error component should be here and Spinner*/}
+        <div className={styles.titleContainer}>
+          <h4 className={styles.title}>Персональні дані</h4>
+          {useYIFProfile.submitted && !useYIFProfile.error.hasError && (
+            <Spinner />
+          )}
+          {useYIFProfile.error.hasError && (
+            <FormInputError
+              errorType='form'
+              errorMessage={useYIFProfile.error.errorMessage}
+            />
+          )}
+        </div>
         <div className={styles.wrapper}>
           <Formik
             initialValues={{
@@ -58,7 +74,17 @@ const UserOption = () => {
                 className={styles.form}
                 onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
                   handleSubmit(e);
-                  console.log(values);
+                  if (
+                    touched.firstName &&
+                    errors.firstName === undefined &&
+                    errors.lastName === undefined &&
+                    errors.fathersName === undefined &&
+                    errors.email === undefined &&
+                    errors.phone === undefined &&
+                    errors.school === undefined
+                  ) {
+                    useYIFProfile.handleSubmit(e);
+                  }
                 }}
               >
                 <div>
@@ -71,6 +97,7 @@ const UserOption = () => {
                     name='lastName'
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       handleChange(e);
+                      useYIFProfile.handleLastNameChange(e);
                     }}
                     onBlur={handleBlur}
                     value={values.lastName}
@@ -86,6 +113,7 @@ const UserOption = () => {
                     name='firstName'
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       handleChange(e);
+                      useYIFProfile.handleFirstNameChange(e);
                     }}
                     onBlur={handleBlur}
                     value={values.firstName}
@@ -101,6 +129,7 @@ const UserOption = () => {
                     name='fathersName'
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       handleChange(e);
+                      useYIFProfile.handleFathersNameChange(e);
                     }}
                     onBlur={handleBlur}
                     value={values.fathersName}
@@ -116,6 +145,7 @@ const UserOption = () => {
                     name='email'
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       handleChange(e);
+                      useYIFProfile.handleEmailChange(e);
                     }}
                     onBlur={handleBlur}
                     value={values.email}
@@ -131,6 +161,7 @@ const UserOption = () => {
                     name='phone'
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       handleChange(e);
+                      useYIFProfile.handlePhoneChange(e);
                     }}
                     onBlur={handleBlur}
                     value={values.phone}
@@ -146,6 +177,7 @@ const UserOption = () => {
                     name='school'
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       handleChange(e);
+                      useYIFProfile.handleSchoolChange(e);
                     }}
                     onBlur={handleBlur}
                     value={values.school}
