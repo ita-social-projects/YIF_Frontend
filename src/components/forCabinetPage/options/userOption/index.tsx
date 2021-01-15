@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import styles from './userOption.module.scss';
 import { FormButton, FormInputError } from '../../../common/formElements';
 import { Field, Form, Formik } from 'formik';
@@ -8,6 +8,7 @@ import Spinner from '../../../common/spinner';
 import ImageUploader from '../../../imageUploader';
 import useProfile from '../../../../services/useProfile';
 import { APIUrl } from '../../../../services/endpoints';
+import { useAuth } from '../../../../services/tokenValidator';
 
 const UserOption = () => {
   const avatarSyles = {
@@ -18,6 +19,7 @@ const UserOption = () => {
 
   const url = `${APIUrl}Users/Profile`;
   const useYIFProfile = useProfile(url);
+  const { user } = useAuth();
 
   return (
     <Fragment>
@@ -27,13 +29,15 @@ const UserOption = () => {
           <div className={styles.titleContainer}>
             <h4 className={styles.title}>Персональні дані</h4>
             {useYIFProfile.submitted && !useYIFProfile.error.hasError && (
-              <div className={styles.spinner}><Spinner /></div>
+              <div className={styles.spinner}>
+                <Spinner />
+              </div>
             )}
             {useYIFProfile.error.hasError && (
-                <FormInputError
-                    errorType='form'
-                    errorMessage={useYIFProfile.error.errorMessage}
-                />
+              <FormInputError
+                errorType='form'
+                errorMessage={useYIFProfile.error.errorMessage}
+              />
             )}
           </div>
           <Formik
@@ -41,7 +45,7 @@ const UserOption = () => {
               lastName: '',
               firstName: '',
               fathersName: '',
-              email: '',
+              email: user?.email || '',
               phone: '',
               school: '',
             }}
@@ -84,6 +88,7 @@ const UserOption = () => {
                     errors.school === undefined
                   ) {
                     useYIFProfile.handleSubmit(e);
+                    console.log('here');
                   }
                 }}
               >
