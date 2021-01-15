@@ -1,12 +1,17 @@
-import React, { Fragment } from "react";
-import style from "./univListOption.module.scss";
+import React, { Fragment } from 'react';
+import style from './univListOption.module.scss';
+import { UniversityCard } from '../../../index';
 
 const UnivListOption = () => {
   return (
     <Fragment>
-      <div className={style.mainstyle}>
-        <p>Список університетів</p>
-      </div>
+      <section className={style.universityListSection}>
+        <div className={style.container}>
+          <UniversityCard liked={true} />
+          <UniversityCard liked={true} />
+          <UniversityCard liked={true} />
+        </div>
+      </section>
     </Fragment>
   );
 };
