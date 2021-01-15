@@ -26,6 +26,8 @@ type Values = {
   getToken: Function;
   updateToken: Function;
   removeToken: Function;
+  userProfile: UserProfile;
+  updateUserProfile: Function;
 };
 
 type User = {
@@ -34,12 +36,27 @@ type User = {
   role: string;
 };
 
+type UserProfile = {
+  name: string;
+  surname: string;
+  middleName: string;
+  phoneNumber: string;
+  schoolName: string;
+  email: string;
+};
+
 const authContext = createContext({} as Values);
 
 function AuthProvider({ children }: any) {
   const [token, setToken] = useState<Token>(null);
   const [refreshToken, setRefreshToken] = useState<Token>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [userProfile, setUserProfile] = useState({} as UserProfile);
+
+  const updateUserProfile = useCallback(() => {
+    let userJSON: any = localStorage.getItem('user');
+    setUserProfile(JSON.parse(userJSON));
+  }, []);
 
   const updateToken = useCallback((token, refreshToken) => {
     setToken(token);
@@ -139,6 +156,7 @@ function AuthProvider({ children }: any) {
   useEffect(() => {
     setToken(localStorage.getItem('token'));
     setRefreshToken(localStorage.getItem('refreshToken'));
+    updateUserProfile();
 
     window.onstorage = (event: StorageEvent) => {
       if (event.key === 'token') setToken(localStorage.getItem('token'));
@@ -147,7 +165,7 @@ function AuthProvider({ children }: any) {
     };
 
     if (isExpired && !isRefreshing) getToken();
-  }, [getToken, isExpired, isRefreshing]);
+  }, [getToken, isExpired, isRefreshing, updateUserProfile]);
 
   return (
     <authContext.Provider
@@ -160,6 +178,8 @@ function AuthProvider({ children }: any) {
         getToken,
         updateToken,
         removeToken,
+        userProfile,
+        updateUserProfile,
       }}
     >
       {children}

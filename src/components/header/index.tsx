@@ -8,7 +8,6 @@ const Header: React.FC = () => {
   const userEmail = user?.email.substr(0, user?.email.indexOf('@'));
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
   const dropdownArrowDown = (
     <svg
       xmlns='http://www.w3.org/2000/svg'
