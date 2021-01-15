@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import styles from './userOption.module.scss';
 import { FormButton, FormInputError } from '../../../common/formElements';
 import { Field, Form, Formik } from 'formik';
@@ -19,7 +19,7 @@ const UserOption = () => {
 
   const url = `${APIUrl}Users/Profile`;
   const useYIFProfile = useProfile(url);
-  const { user } = useAuth();
+  const { user, userProfile } = useAuth();
 
   return (
     <Fragment>
@@ -42,12 +42,12 @@ const UserOption = () => {
           </div>
           <Formik
             initialValues={{
-              lastName: '',
-              firstName: '',
-              fathersName: '',
+              lastName: userProfile?.surname || '',
+              firstName: userProfile?.name || '',
+              fathersName: userProfile?.middleName || '',
               email: user?.email || '',
-              phone: '',
-              school: '',
+              phone: userProfile?.phoneNumber || '',
+              school: userProfile?.schoolName || '',
             }}
             validationSchema={validationField}
             onSubmit={(values, actions) => {
@@ -88,7 +88,6 @@ const UserOption = () => {
                     errors.school === undefined
                   ) {
                     useYIFProfile.handleSubmit(e);
-                    console.log('here');
                   }
                 }}
               >

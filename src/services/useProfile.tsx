@@ -4,7 +4,13 @@ import { useAuth } from './tokenValidator';
 import { APIUrl } from '../../src/services/endpoints';
 
 const useProfile = (endpoint: string) => {
-  const { isExpired, isRefreshing, user, getToken } = useAuth();
+  const {
+    isExpired,
+    isRefreshing,
+    user,
+    getToken,
+    updateUserProfile,
+  } = useAuth();
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [middleName, setMiddleName] = useState('');
@@ -65,7 +71,10 @@ const useProfile = (endpoint: string) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
           setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
-          localStorage.setItem('user', res.data);
+          setSubmitted(false);
+          console.log('succes kinda');
+          localStorage.setItem('user', JSON.stringify(res.data));
+          updateUserProfile();
         } else {
           setError({
             hasError: true,
@@ -73,6 +82,7 @@ const useProfile = (endpoint: string) => {
             errorMessage:
               res.data.message || 'Щось пішло не так, спробуйте знову.',
           });
+          console.log('bad');
         }
       })
       .catch((error) => {
@@ -81,6 +91,7 @@ const useProfile = (endpoint: string) => {
           errorStatusCode: error.statusCode,
           errorMessage: 'Щось пішло не так, спробуйте знову.',
         });
+        console.log('bad bad');
       });
   };
   return {
