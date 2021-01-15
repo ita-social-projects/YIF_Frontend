@@ -46,7 +46,7 @@ const useRegistration = (endpoint: string) => {
     setSubmitted({ submitted: true });
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
 
-    requestData(endpoint, 'POST', {
+    requestData(`${endpoint}Authentication/RegisterUser`, 'POST', {
       email: email.email,
       username: email.email,
       password: password.password,
@@ -62,7 +62,8 @@ const useRegistration = (endpoint: string) => {
           setError({
             hasError: true,
             errorStatusCode: res.statusCode,
-            errorMessage: res.data.message || 'something gone wrong',
+            errorMessage:
+              res.data.message || 'Щось пішло не так, спробуйте знову.',
           });
         }
       })
@@ -70,7 +71,7 @@ const useRegistration = (endpoint: string) => {
         setError({
           hasError: true,
           errorStatusCode: error.statusCode,
-          errorMessage: 'something gone wrong',
+          errorMessage: 'Щось пішло не так, спробуйте знову.',
         });
       });
   };
