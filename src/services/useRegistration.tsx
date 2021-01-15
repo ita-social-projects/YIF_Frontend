@@ -56,6 +56,7 @@ const useRegistration = (endpoint: string) => {
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
 
     const token = await captcha.getCaptchaToken();
+
     requestData(endpoint, 'POST', {
       email: email.email,
       username: email.email,
