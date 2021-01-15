@@ -165,7 +165,7 @@ const UserOption = () => {
             </Formik>
             <div className={styles.img}>
               <img
-                  src='assets/images/imgProfile.png'
+                  src='assets/images/userProfile.svg'
                   alt='user'
               /></div>
           </div>
