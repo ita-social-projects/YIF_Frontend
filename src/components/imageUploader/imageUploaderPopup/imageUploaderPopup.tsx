@@ -16,10 +16,11 @@ export type TLoadedImage = {
 type TProps = {
   setPopupOpen: Function;
   setSuccessLoad: Function;
+  setProfileImageSrc: Function;
 };
 
 const ImageUploaderPopup = (props: TProps) => {
-  const { setPopupOpen, setSuccessLoad } = props;
+  const { setPopupOpen, setSuccessLoad, setProfileImageSrc } = props;
 
   const InitialLoadedImageState: TLoadedImage = {
     name: '',
@@ -27,8 +28,12 @@ const ImageUploaderPopup = (props: TProps) => {
     type: '',
     data: '',
   };
+
   const [loadedImage, setLoadedImage] = useState(InitialLoadedImageState);
   const [error, setError] = useState('');
+  const [isLoading, setLoading] = useState(false);
+  //const [cropData, setCropData] = useState('#');
+  const [cropper, setCropper] = useState<any>();
 
   let fileInput: any = React.createRef();
 
@@ -52,7 +57,7 @@ const ImageUploaderPopup = (props: TProps) => {
     const { type } = file;
     if (supportedFilesTypes.indexOf(type)) {
       setError(
-        'Переконайтеся, що завантажуєте файли формату JPG або PNG, і повторіть спробу.'
+        'Переконайтеся, що завантажуєте файли формату JPG, JPEG або PNG, і повторіть спробу.'
       );
       return false;
     }
@@ -60,7 +65,7 @@ const ImageUploaderPopup = (props: TProps) => {
     const fileExtension = file.name.replace(/^.*\./, '');
     if (fileExtension === /(?:jpg|jpeg|png)/i) {
       setError(
-        'Переконайтеся, що завантажуєте файли формату JPG або PNG, і повторіть спробу.'
+        'Переконайтеся, що завантажуєте файли формату JPG, JPEG або PNG, і повторіть спробу.'
       );
       return false;
     }
@@ -118,7 +123,11 @@ const ImageUploaderPopup = (props: TProps) => {
     };
   };
 
-  // Progress BAR
+  // const getCropData = () => {
+  //   if (typeof cropper !== 'undefined') {
+  //     setCropData(cropper.getCroppedCanvas().toDataURL());
+  //   }
+  // };
 
   return (
     <section className={style.container}>
@@ -141,6 +150,9 @@ const ImageUploaderPopup = (props: TProps) => {
               setLoadedImage={(newState: TLoadedImage) =>
                 setLoadedImage(newState)
               }
+              isLoading={isLoading}
+              setError={(newState: string) => setError(newState)}
+              setCropper={(newState: any) => setCropper(newState)}
             />
           )}
 
@@ -207,8 +219,12 @@ const ImageUploaderPopup = (props: TProps) => {
             isTransperent={false}
             value={'Завантажити'}
             handleClick={() => {
+              setLoading(true);
+              const imageToUpload = cropper.getCroppedCanvas().toDataURL();
+
+              console.log(imageToUpload);
               requestImageProfile(`${APIUrl}Users/ChangePhoto`, 'POST', {
-                photoBase64: loadedImage.data,
+                photoBase64: imageToUpload,
               })
                 .then((res: any) => {
                   const statusCode = res.statusCode.toString();
@@ -217,14 +233,18 @@ const ImageUploaderPopup = (props: TProps) => {
                     setError('');
                     setSuccessLoad(true);
                     setPopupOpen(false);
+                    setLoading(false);
+                    setProfileImageSrc(imageToUpload);
                   } else {
                     setError(
                       res.data.message || 'Щось пішло не так, спробуйте знову.'
                     );
+                    setLoading(false);
                   }
                 })
                 .catch((err) => {
                   setError('Щось пішло не так, спробуйте знову.');
+                  setLoading(false);
                 });
             }}
           />
