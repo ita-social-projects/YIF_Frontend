@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../services/tokenValidator';
 
 const Header: React.FC = () => {
-  const { user, removeToken } = useAuth();
-  const userEmail = user?.email.substr(0, user?.email.indexOf('@'));
+  const { user, removeToken, userProfile } = useAuth();
+  const userEmail =
+    userProfile?.email.substr(0, userProfile?.email.indexOf('@')) ||
+    user?.email.substr(0, user?.email.indexOf('@'));
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownArrowDown = (

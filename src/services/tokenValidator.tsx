@@ -26,8 +26,8 @@ type Values = {
   getToken: Function;
   updateToken: Function;
   removeToken: Function;
-  userProfile: UserProfile;
-  updateUserProfile: Function;
+  userProfile: UserProfile | null;
+  getUserProfile: Function;
 };
 
 type User = {
@@ -51,12 +51,6 @@ function AuthProvider({ children }: any) {
   const [token, setToken] = useState<Token>(null);
   const [refreshToken, setRefreshToken] = useState<Token>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [userProfile, setUserProfile] = useState({} as UserProfile);
-
-  const updateUserProfile = useCallback(() => {
-    let userJSON: any = localStorage.getItem('user');
-    setUserProfile(JSON.parse(userJSON));
-  }, []);
 
   const updateToken = useCallback((token, refreshToken) => {
     setToken(token);
@@ -147,6 +141,16 @@ function AuthProvider({ children }: any) {
     [removeToken]
   );
 
+  const getUserProfile = useCallback(() => {
+    let userJSON = localStorage.getItem('user');
+    if (!userJSON) {
+      return null;
+    }
+    return JSON.parse(userJSON);
+  }, []);
+
+  const userProfile = useMemo(() => getUserProfile(), [getUserProfile]);
+
   const isExpired = useMemo(() => isTokenExpired(token), [
     isTokenExpired,
     token,
@@ -156,7 +160,6 @@ function AuthProvider({ children }: any) {
   useEffect(() => {
     setToken(localStorage.getItem('token'));
     setRefreshToken(localStorage.getItem('refreshToken'));
-    updateUserProfile();
 
     window.onstorage = (event: StorageEvent) => {
       if (event.key === 'token') setToken(localStorage.getItem('token'));
@@ -165,7 +168,7 @@ function AuthProvider({ children }: any) {
     };
 
     if (isExpired && !isRefreshing) getToken();
-  }, [getToken, isExpired, isRefreshing, updateUserProfile]);
+  }, [getToken, isExpired, isRefreshing, getUserProfile]);
 
   return (
     <authContext.Provider
@@ -179,7 +182,7 @@ function AuthProvider({ children }: any) {
         updateToken,
         removeToken,
         userProfile,
-        updateUserProfile,
+        getUserProfile,
       }}
     >
       {children}
