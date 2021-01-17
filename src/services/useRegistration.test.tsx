@@ -1,12 +1,10 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-
 import useRegistration from './useRegistration';
 
 describe('USE REGISTRATION HOOK', () => {
   const TestComponent: React.FC<any> = () => {
-    const APIUrl: string =
-      'https://yifbackend.tk/api/Authentication/RegisterUser';
+    const APIUrl: string = 'https://test.com/api/Authentication/RegisterUser';
     const {
       handleChangeEmail,
       handleChangePassword,
@@ -20,7 +18,7 @@ describe('USE REGISTRATION HOOK', () => {
     return (
       <form
         onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
-          handleSubmit(e, '');
+          handleSubmit(e, '/cabinet');
         }}
       >
         <input
@@ -41,7 +39,7 @@ describe('USE REGISTRATION HOOK', () => {
           value={confirmPassword.confirmPassword}
           onChange={handleChangeConfirmPassword}
         ></input>
-        <button type='submit' data-testid='login'>
+        <button type='submit' data-testid='login' id='login'>
           Registration
         </button>
         {error.hasError && (
@@ -54,10 +52,13 @@ describe('USE REGISTRATION HOOK', () => {
   it('shoud registr user', () => {
     const handleClick = jest.fn();
     const { getByTestId } = render(<TestComponent onClick={handleClick()} />);
-    const emailInput = getByTestId('email');
-    const passwordInput = getByTestId('password');
-    const confirmPasswordInput = getByTestId('confirmPassword');
-    const loginButton = getByTestId('login');
+    const emailInput = getByTestId('email') as HTMLInputElement;
+
+    const passwordInput = getByTestId('password') as HTMLInputElement;
+    const confirmPasswordInput = getByTestId(
+      'confirmPassword'
+    ) as HTMLInputElement;
+    const loginButton = getByTestId('login') as HTMLInputElement;
 
     fireEvent.change(emailInput, { target: { value: 'test@mail.com' } });
     expect(emailInput.value).toEqual('test@mail.com');
@@ -65,7 +66,9 @@ describe('USE REGISTRATION HOOK', () => {
     fireEvent.change(passwordInput, { target: { value: '*Qwerty123' } });
     expect(passwordInput.value).toEqual('*Qwerty123');
 
-    fireEvent.change(confirmPasswordInput, { target: { value: '*Qwerty123' } });
+    fireEvent.change(confirmPasswordInput, {
+      target: { value: '*Qwerty123' },
+    });
     expect(confirmPasswordInput.value).toEqual('*Qwerty123');
 
     fireEvent.click(loginButton);
