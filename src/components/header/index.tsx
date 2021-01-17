@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../services/tokenValidator';
 
 const Header: React.FC = () => {
-  const { user, removeToken } = useAuth();
-  const userEmail = user?.email.substr(0, user?.email.indexOf('@'));
+  const { user, removeToken, userProfile } = useAuth();
+  const userEmail =
+    userProfile?.email.substr(0, userProfile?.email.indexOf('@')) ||
+    user?.email.substr(0, user?.email.indexOf('@'));
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
   const dropdownArrowDown = (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -54,33 +55,40 @@ const Header: React.FC = () => {
 
   const dropdownContent = isDropdownOpen ? (
     <>
-      <span
-        className={`${styles.userName} ${styles.underlineAnimation}`}
-        onClick={handleClick}
-      >
-        {userEmail} {dropdownArrowUp}
-      </span>
+      <div className={`${styles.user} ${styles.border}`}>
+        <span className={`${styles.userName}`}>{userEmail}</span>
+        <img
+          src='assets/icons/avatar.jpg'
+          alt='avatar'
+          className={styles.avatar}
+          onClick={handleClick}
+        />
+        <span className={styles.arrow} onClick={handleClick}>
+          {dropdownArrowUp}
+        </span>
+      </div>
       <div className={styles.dropdownContent}>
-        <Link to='/cabinet'>Особистий кабінет</Link>
+        <Link to='/cabinet'>Особистий&nbsp;кабінет</Link>
         <button onClick={logout}>Вийти</button>
       </div>
     </>
   ) : (
-    <span
-      className={`${styles.userName} ${styles.underlineAnimation}`}
-      onClick={handleClick}
-    >
-      {userEmail} {dropdownArrowDown}
-    </span>
-  );
-
-  const entryContent = user ? (
-    <>
+    <div className={styles.user}>
+      <span className={`${styles.userName}`}>{userEmail}</span>
       <img
         src='assets/icons/avatar.jpg'
         alt='avatar'
         className={styles.avatar}
+        onClick={handleClick}
       />
+      <span className={styles.arrow} onClick={handleClick}>
+        {dropdownArrowDown}
+      </span>
+    </div>
+  );
+
+  const entryContent = user ? (
+    <>
       <div className={styles.dropdown}>{dropdownContent}</div>
     </>
   ) : (

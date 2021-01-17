@@ -1,9 +1,10 @@
 import React from 'react';
 import RegistrationForm from './registrationForm'
 import {MemoryRouter} from 'react-router-dom';
-import { render, screen} from "@testing-library/react";
+import {fireEvent, render, screen, wait} from "@testing-library/react";
 import RegistrationPage from "./index";
 import {unmountComponentAtNode} from "react-dom";
+import UserOption from "../forCabinetPage/options/userOption";
 
 
 describe('registrationForm', () => {
@@ -60,24 +61,64 @@ describe('registrationForm', () => {
     expect(wrapper.tagName).toMatch(/DIV/i);
   });
 
-});
+  test('renders with blank fields', () => {
+    const { container } = render(
+        <MemoryRouter>
+          <RegistrationForm />
+        </MemoryRouter>
+    );
 
-describe ('registrationPage', () => {
+    const passwordNode = container.querySelector('input[name="password"]');
+    const confirmPasswordNode = container.querySelector('input[name="confirmPassword"]');
+    const emailNode = container.querySelector('input[name="email"]');
 
-  test('checking to render wrapper', () => {
+    expect(passwordNode.tagName).toBe('INPUT');
+    expect(confirmPasswordNode.tagName).toBe('INPUT');
+    expect(emailNode.tagName).toBe('INPUT');
 
-    let wrapper = null;
-    beforeEach(() => {
-      wrapper = document.createElement('section');
-      document.body.appendChild(wrapper);
+    expect(passwordNode.getAttribute('value')).toBe('');
+    expect(confirmPasswordNode.getAttribute('value')).toBe('');
+    expect(emailNode.getAttribute('value')).toBe('');
+
+  });
+
+  test('Clicking the submit correct values after entering', async () => {
+    const { container } = render(
+        <MemoryRouter>
+          <RegistrationForm />
+        </MemoryRouter>
+    );
+
+    const passwordNode = container.querySelector('input[name="password"]');
+    const confirmPasswordNode = container.querySelector('input[name="confirmPassword"]');
+    const emailNode = container.querySelector('input[name="email"]');
+
+
+    await wait(() => {
+      fireEvent.change(passwordNode, {
+        target: {
+          value: 'mockemail',
+        },
+      });
     });
 
-    afterEach(() => {
-      unmountComponentAtNode(wrapper);
-      wrapper.remove();
-      wrapper = null;
+    await wait(() => {
+      fireEvent.change(confirmPasswordNode, {
+        target: {
+          value: 'mockemail',
+        },
+      });
+    });
+    await wait(() => {
+      fireEvent.change(emailNode, {
+        target: {
+          value: 'mockemail',
+        },
+      });
     });
 
   });
 
+
 });
+

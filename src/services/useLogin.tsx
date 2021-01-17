@@ -2,10 +2,13 @@ import { useState } from 'react';
 import { requestData } from '../services/requestDataFunction';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from './tokenValidator';
+import { APIUrl } from '../../src/services/endpoints';
+import { useCaptcha } from './useCaptcha';
 
 const useLogin = (endpoint: string) => {
-  const { updateToken } = useAuth();
+  const captcha = useCaptcha(APIUrl);
   const history = useHistory();
+  const { updateToken } = useAuth();
   const [email, setEmail] = useState({ email: '' });
   const [password, setPassword] = useState({ password: '' });
   const [submitted, setSubmitted] = useState({ submitted: false });
@@ -30,16 +33,22 @@ const useLogin = (endpoint: string) => {
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken');
   };
-  const handleSubmit = (
+  const handleSubmit = async (
     e: React.ChangeEvent<HTMLFormElement>,
     pathToRedirect: string
   ) => {
     e.preventDefault();
     setSubmitted({ submitted: true });
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
-    requestData(endpoint, 'POST', {
+
+    const token = await captcha.getCaptchaToken();
+
+    //`${endpoint}Authentication/LoginUser`
+    //`http://localhost:5000/api/Authentication/LoginUser`
+    requestData(`${endpoint}Authentication/LoginUser`, 'POST', {
       email: email.email,
       password: password.password,
+      recaptchaToken: token,
     })
       .then((res: any) => {
         const statusCode = res.statusCode.toString();
@@ -51,7 +60,8 @@ const useLogin = (endpoint: string) => {
           setError({
             hasError: true,
             errorStatusCode: res.statusCode,
-            errorMessage: res.data.message || 'something gone wrong',
+            errorMessage:
+              res.data.message || 'Щось пішло не так, спробуйте знову.',
           });
         }
       })
@@ -59,7 +69,7 @@ const useLogin = (endpoint: string) => {
         setError({
           hasError: true,
           errorStatusCode: error.statusCode,
-          errorMessage: 'something gone wrong',
+          errorMessage: 'Щось пішло не так, спробуйте знову.',
         });
       });
   };
