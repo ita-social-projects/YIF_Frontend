@@ -8,6 +8,7 @@ import Spinner from '../../../common/spinner';
 import ImageUploader from '../../../imageUploader';
 import useProfile from '../../../../services/useProfile';
 import { APIUrl } from '../../../../services/endpoints';
+import { useAuth } from '../../../../services/tokenValidator';
 
 const UserOption = () => {
   const avatarSyles = {
@@ -16,8 +17,12 @@ const UserOption = () => {
     left: '2.5rem',
   };
 
-  const url = `${APIUrl}Users/Profile`;
+  const url = `${APIUrl}Users/SetCurrentProfile`;
+  // const url = `http://localhost:5000/api/Users/SetCurrentProfile`;
   const useYIFProfile = useProfile(url);
+  const { user, userProfile } = useAuth();
+
+  const email = userProfile?.email || user?.email;
 
   return (
     <Fragment>
@@ -27,23 +32,25 @@ const UserOption = () => {
           <div className={styles.titleContainer}>
             <h4 className={styles.title}>Персональні дані</h4>
             {useYIFProfile.submitted && !useYIFProfile.error.hasError && (
-              <div className={styles.spinner}><Spinner /></div>
+              <div className={styles.spinner}>
+                <Spinner />
+              </div>
             )}
             {useYIFProfile.error.hasError && (
-                <FormInputError
-                    errorType='form'
-                    errorMessage={useYIFProfile.error.errorMessage}
-                />
+              <FormInputError
+                errorType='form'
+                errorMessage={useYIFProfile.error.errorMessage}
+              />
             )}
           </div>
           <Formik
             initialValues={{
-              lastName: '',
-              firstName: '',
-              fathersName: '',
-              email: '',
-              phone: '',
-              school: '',
+              lastName: userProfile?.surname || '',
+              firstName: userProfile?.name || '',
+              fathersName: userProfile?.middleName || '',
+              email: email || '',
+              phone: userProfile?.phoneNumber || '',
+              school: userProfile?.schoolName || '',
             }}
             validationSchema={validationField}
             onSubmit={(values, actions) => {
