@@ -3,11 +3,9 @@ import { requestData } from '../services/requestDataFunction';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from './tokenValidator';
 import { APIUrl } from '../../src/services/endpoints';
-import {useCaptcha} from "./useCaptcha";
-
+import { useCaptcha } from './useCaptcha';
 
 const useLogin = (endpoint: string) => {
-
   const captcha = useCaptcha(APIUrl);
   const history = useHistory();
   const { updateToken } = useAuth();
@@ -45,7 +43,8 @@ const useLogin = (endpoint: string) => {
 
     const token = await captcha.getCaptchaToken();
 
-
+    //`${endpoint}Authentication/LoginUser`
+    //`http://localhost:5000/api/Authentication/LoginUser`
     requestData(`${endpoint}Authentication/LoginUser`, 'POST', {
       email: email.email,
       password: password.password,
