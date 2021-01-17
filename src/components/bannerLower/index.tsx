@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import style from './bannerLower.module.scss';
+import { authContext } from '../../services/tokenValidator';
+import { Link } from 'react-router-dom';
 
 export default class BannerLower extends Component<any> {
   scrollRef: any = React.createRef();
@@ -28,6 +30,15 @@ export default class BannerLower extends Component<any> {
   };
 
   render() {
+    const entryContent = this.context.user ? (
+      <Link className={style.animatedButton} to='/cabinet'>
+        Увійти в кабінет
+      </Link>
+    ) : (
+      <Link className={style.animatedButton} to='/register'>
+        Зареєструйся
+      </Link>
+    );
     return (
       <section className={style.container}>
         <div
@@ -41,15 +52,11 @@ export default class BannerLower extends Component<any> {
             Їхні тіла були вкриті лускою й дихали вони через зябра. У низці
             міфів риби виконують функцію деміурга.
           </p>
-          <a
-            className={style.animatedButton}
-            href='/register'
-            rel='call to action'
-          >
-            Зареєструйся
-          </a>
+          {entryContent}
         </div>
       </section>
     );
   }
 }
+
+BannerLower.contextType = authContext;
