@@ -31,12 +31,12 @@ const Partners: React.FunctionComponent = () => {
 
   const goLeft: React.MouseEventHandler = () => {
     x === 0 ? setX(-100 * slideWidth) : setX(x + 100);
-    //console.log(x);
+
   };
 
   const goRight: React.MouseEventHandler = () => {
     x === -100 * slideWidth ? setX(0) : setX(x - 100);
-    //console.log(x);
+
   };
 
   return (
