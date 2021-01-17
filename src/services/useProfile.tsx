@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
-import { requestData } from '../services/requestDataFunction';
+import { requestSecureData } from '../services/requestDataFunction';
 import { useAuth } from './tokenValidator';
 
 const useProfile = (endpoint: string) => {
-  const { token, isExpired, isRefreshing, user, getToken } = useAuth();
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [fathersName, setFathersName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState(user?.email);
-  const [school, setSchool] = useState('');
+  const {
+    token,
+    isExpired,
+    user,
+    getToken,
+    userProfile,
+    getUserProfile,
+  } = useAuth();
+  const [name, setName] = useState(userProfile?.name);
+  const [surname, setSurname] = useState(userProfile?.surname);
+  const [middleName, setMiddleName] = useState(userProfile?.middleName);
+  const [phoneNumber, setPhoneNumber] = useState(userProfile?.phoneNumber);
+  const [email, setEmail] = useState(userProfile?.email || user?.email);
+  const [schoolName, setSchoolName] = useState(userProfile?.schoolName);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState({
     hasError: false,
@@ -19,22 +26,22 @@ const useProfile = (endpoint: string) => {
 
   const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setFirstName(value);
+    setName(value);
   };
 
   const handleLastNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setLastName(value);
+    setSurname(value);
   };
 
   const handleFathersNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setFathersName(value);
+    setMiddleName(value);
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setPhone(value);
+    setPhoneNumber(value);
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,25 +51,34 @@ const useProfile = (endpoint: string) => {
 
   const handleSchoolChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setSchool(value);
+    setSchoolName(value);
   };
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitted(true);
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
-    if (isExpired && !isRefreshing) getToken();
-    requestData(endpoint, 'POST', {
-      firstName,
-      lastName,
-      fathersName,
+    console.log(isExpired);
+    console.log(`before --- ${token}`);
+
+    getToken();
+    console.log(`after --- ${token}`);
+    requestSecureData(endpoint, 'POST', token!, {
+      name,
+      surname,
+      middleName,
       email,
-      phone,
-      school,
+      phoneNumber,
+      schoolName,
     })
       .then((res: any) => {
-        if (res.ok) {
+        const statusCode = res.statusCode.toString();
+        if (statusCode.match(/^[23]\d{2}$/)) {
           setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
+          setSubmitted(false);
+          console.log('success kinda');
+          localStorage.setItem('user', JSON.stringify(res.data));
+          getUserProfile();
         } else {
           setError({
             hasError: true,
@@ -70,6 +86,7 @@ const useProfile = (endpoint: string) => {
             errorMessage:
               res.data.message || 'Щось пішло не так, спробуйте знову.',
           });
+          console.log('bad');
         }
       })
       .catch((error) => {
@@ -78,6 +95,7 @@ const useProfile = (endpoint: string) => {
           errorStatusCode: error.statusCode,
           errorMessage: 'Щось пішло не так, спробуйте знову.',
         });
+        console.log('bad bad');
       });
   };
   return {
@@ -88,12 +106,12 @@ const useProfile = (endpoint: string) => {
     handleEmailChange,
     handleSchoolChange,
     handleSubmit,
-    firstName,
-    lastName,
-    fathersName,
-    phone,
+    name,
+    surname,
+    middleName,
+    phoneNumber,
     email,
-    school,
+    schoolName,
     submitted,
     error,
   };
