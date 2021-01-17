@@ -65,7 +65,6 @@ const ImageUploaderPopup = (props: TProps) => {
     const supportedFilesTypes = ['image/jpg', 'image/jpeg', 'image/png'];
     const file = files[0];
     const { type } = file;
-    console.log(supportedFilesTypes.includes(type));
     if (!supportedFilesTypes.includes(type)) {
       setError(
         'Переконайтеся, що завантажуєте файли формату JPG, JPEG або PNG, і повторіть спробу.'
@@ -85,7 +84,6 @@ const ImageUploaderPopup = (props: TProps) => {
 
   const onFileDrop = (e: React.DragEvent) => {
     const files = e.dataTransfer.files;
-    console.log(files);
     if (!isImageValid(files)) {
       return;
     }
@@ -219,11 +217,10 @@ const ImageUploaderPopup = (props: TProps) => {
               setLoading(true);
               const imageToUpload = cropper.getCroppedCanvas().toDataURL();
               requestImageProfile(`${APIUrl}Users/ChangePhoto`, 'POST', {
-                photoBase64: imageToUpload,
+                photo: imageToUpload,
               })
                 .then((res: any) => {
                   const statusCode = res.statusCode.toString();
-                  console.log(res);
                   if (statusCode.match(/^[23]\d{2}$/)) {
                     setError('');
                     setSuccessLoad(true);
