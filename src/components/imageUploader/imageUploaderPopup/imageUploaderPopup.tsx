@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import style from './imageUploaderPopup.module.scss';
 import ImageCropper from '../imageCropper/imageCropper';
 import ButtonUploading from '../buttonUploading/buttonUploading';
-import { FormInputErrorWithButton } from '../../common/formElements';
+import { FormInputErrorWithCloseBtn } from '../../common/formElements';
 import { APIUrl } from '../../../services/endpoints';
 import { requestImageProfile } from '../../../services/requestDataFunction';
 
@@ -57,23 +57,16 @@ const ImageUploaderPopup = (props: TProps) => {
     // Check if file only one.
     if (files.length > 1) {
       setError(
-        'На жаль, можна перетягувати лише одну фотографію. Перетягніть лише потрібну фотографію профілю.'
+        'На жаль, можна завантажувати лише одну фотографію. Перетягніть лише потрібну фотографію профілю.'
       );
       return false;
     }
     // Check if file type is jpg or png.
-    const supportedFilesTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    const supportedFilesTypes = ['image/jpg', 'image/jpeg', 'image/png'];
     const file = files[0];
     const { type } = file;
-    if (supportedFilesTypes.indexOf(type)) {
-      setError(
-        'Переконайтеся, що завантажуєте файли формату JPG, JPEG або PNG, і повторіть спробу.'
-      );
-      return false;
-    }
-    // Check file extension.
-    const fileExtension = file.name.replace(/^.*\./, '');
-    if (fileExtension === /(?:jpg|jpeg|png)/i) {
+    console.log(supportedFilesTypes.includes(type));
+    if (!supportedFilesTypes.includes(type)) {
       setError(
         'Переконайтеся, що завантажуєте файли формату JPG, JPEG або PNG, і повторіть спробу.'
       );
@@ -92,7 +85,7 @@ const ImageUploaderPopup = (props: TProps) => {
 
   const onFileDrop = (e: React.DragEvent) => {
     const files = e.dataTransfer.files;
-
+    console.log(files);
     if (!isImageValid(files)) {
       return;
     }
@@ -141,7 +134,7 @@ const ImageUploaderPopup = (props: TProps) => {
         </div>
         <div className={style.draggableContainer}>
           {error.length > 0 && (
-            <FormInputErrorWithButton
+            <FormInputErrorWithCloseBtn
               errorType='form'
               errorMessage={error}
               errorButtonHandler={() => setError('')}
