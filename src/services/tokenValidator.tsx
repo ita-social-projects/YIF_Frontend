@@ -22,15 +22,27 @@ type Values = {
   refreshToken: Token;
   user: User | null;
   isExpired: boolean;
+  isRefreshing: boolean;
   getToken: Function;
   updateToken: Function;
   removeToken: Function;
+  userProfile: UserProfile | null;
+  getUserProfile: Function;
 };
 
 type User = {
   email: string;
   id: string;
   role: string;
+};
+
+type UserProfile = {
+  name: string;
+  surname: string;
+  middleName: string;
+  phoneNumber: string;
+  schoolName: string;
+  email: string;
 };
 
 const authContext = createContext({} as Values);
@@ -56,6 +68,7 @@ function AuthProvider({ children }: any) {
 
   const getToken = useCallback(async () => {
     const url = 'https://yifbackend.tk/api/Authentication/RefreshToken';
+    // const url = 'http://localhost:5000/api/Authentication/RefreshToken';
     let currentToken = token;
     let currentRefreshToken = refreshToken;
     try {
@@ -128,6 +141,16 @@ function AuthProvider({ children }: any) {
     [removeToken]
   );
 
+  const getUserProfile = useCallback(() => {
+    let userJSON = localStorage.getItem('user');
+    if (!userJSON) {
+      return null;
+    }
+    return JSON.parse(userJSON);
+  }, []);
+
+  const userProfile = useMemo(() => getUserProfile(), [getUserProfile]);
+
   const isExpired = useMemo(() => isTokenExpired(token), [
     isTokenExpired,
     token,
@@ -145,7 +168,7 @@ function AuthProvider({ children }: any) {
     };
 
     if (isExpired && !isRefreshing) getToken();
-  }, [getToken, isExpired, isRefreshing]);
+  }, [getToken, isExpired, isRefreshing, getUserProfile]);
 
   return (
     <authContext.Provider
@@ -154,9 +177,12 @@ function AuthProvider({ children }: any) {
         refreshToken,
         user,
         isExpired,
+        isRefreshing,
         getToken,
         updateToken,
         removeToken,
+        userProfile,
+        getUserProfile,
       }}
     >
       {children}

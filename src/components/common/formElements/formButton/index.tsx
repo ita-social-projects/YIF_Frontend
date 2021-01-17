@@ -12,7 +12,11 @@ const FormButton: React.FC<Props> = (props) => {
       className={
         form === 'login'
           ? `${styles.formButton} ${styles.buttonLogin} ${styles.animatedButton}`
-          : `${styles.formButton} ${styles.animatedButton}`
+            : form === 'register'
+              ? `${styles.formButton} ${styles.animatedButton}`
+                : form === 'profile'
+                  ?`${styles.formButton} ${styles.buttonProfile} ${styles.animatedButton}`
+                    : 'incorrect form'
       }
       type='submit'
     >
