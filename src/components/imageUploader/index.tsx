@@ -6,6 +6,9 @@ import style from './imageUploader.module.scss';
 const ImageUploader = (props: any) => {
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [isSuccessLoad, setSuccessLoad] = useState(false);
+  const [profileImageSrc, setProfileImageSrc] = useState(
+    'assets/icons/avatar.jpg'
+  );
 
   const { additionalStyles } = props;
   return (
@@ -17,16 +20,15 @@ const ImageUploader = (props: any) => {
           setPopupOpen(!isPopupOpen);
         }}
       >
-        <img
-          src='assets/icons/avatar.jpg'
-          alt='avatar'
-          className={style.avatar}
-        />
+        <img src={profileImageSrc} alt='avatar' className={style.avatar} />
       </div>
       {isPopupOpen && (
         <ImageUploaderPopup
           setPopupOpen={(newState: any) => setPopupOpen(newState)}
           setSuccessLoad={(newState: any) => setSuccessLoad(newState)}
+          setProfileImageSrc={(newState: string) =>
+            setProfileImageSrc(newState)
+          }
         />
       )}
       {isSuccessLoad &&

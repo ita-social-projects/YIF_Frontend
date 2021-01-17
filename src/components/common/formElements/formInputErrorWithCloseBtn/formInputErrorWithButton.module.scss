@@ -14,6 +14,12 @@
   font-weight: $regular;
   font-family: $fontOpenSans;
   @include flex(row, center, flex-start);
+
+  opacity: 1;
+  animation-name: element-show;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  animation-direction: reverse;
 }
 
 .formError {
@@ -33,4 +39,13 @@
   @include flex(row, flex-end, flex-start);
   padding-right: 15px;
   align-self: center;
+}
+
+@keyframes element-show {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
