@@ -17,9 +17,12 @@ const UserOption = () => {
     left: '2.5rem',
   };
 
-  const url = `${APIUrl}Users/Profile`;
+  const url = `${APIUrl}Users/SetCurrentProfile`;
+  // const url = `http://localhost:5000/api/Users/SetCurrentProfile`;
   const useYIFProfile = useProfile(url);
   const { user, userProfile } = useAuth();
+
+  const email = userProfile?.email || user?.email;
 
   return (
     <Fragment>
@@ -45,7 +48,7 @@ const UserOption = () => {
               lastName: userProfile?.surname || '',
               firstName: userProfile?.name || '',
               fathersName: userProfile?.middleName || '',
-              email: user?.email || '',
+              email: email || '',
               phone: userProfile?.phoneNumber || '',
               school: userProfile?.schoolName || '',
             }}

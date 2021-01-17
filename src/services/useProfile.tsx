@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { requestSecureData } from '../services/requestDataFunction';
 import { useAuth } from './tokenValidator';
-import { APIUrl } from '../../src/services/endpoints';
 
 const useProfile = (endpoint: string) => {
   const {
+    token,
     isExpired,
-    isRefreshing,
     user,
     getToken,
-    updateUserProfile,
+    userProfile,
+    getUserProfile,
   } = useAuth();
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [middleName, setMiddleName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [email, setEmail] = useState(user?.email);
-  const [schoolName, setSchoolName] = useState('');
+  const [name, setName] = useState(userProfile?.name);
+  const [surname, setSurname] = useState(userProfile?.surname);
+  const [middleName, setMiddleName] = useState(userProfile?.middleName);
+  const [phoneNumber, setPhoneNumber] = useState(userProfile?.phoneNumber);
+  const [email, setEmail] = useState(userProfile?.email || user?.email);
+  const [schoolName, setSchoolName] = useState(userProfile?.schoolName);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState({
     hasError: false,
@@ -58,8 +58,12 @@ const useProfile = (endpoint: string) => {
     e.preventDefault();
     setSubmitted(true);
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
-    if (isExpired && !isRefreshing) getToken();
-    requestSecureData(`${APIUrl}Users/SetCurrentProfile`, 'POST', {
+    console.log(isExpired);
+    console.log(`before --- ${token}`);
+
+    getToken();
+    console.log(`after --- ${token}`);
+    requestSecureData(endpoint, 'POST', token!, {
       name,
       surname,
       middleName,
@@ -72,9 +76,9 @@ const useProfile = (endpoint: string) => {
         if (statusCode.match(/^[23]\d{2}$/)) {
           setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
           setSubmitted(false);
-          console.log('succes kinda');
+          console.log('success kinda');
           localStorage.setItem('user', JSON.stringify(res.data));
-          updateUserProfile();
+          getUserProfile();
         } else {
           setError({
             hasError: true,

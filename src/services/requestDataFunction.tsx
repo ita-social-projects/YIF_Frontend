@@ -1,5 +1,3 @@
-import { useAuth } from './tokenValidator';
-
 // To import this function(promise) -> import {RequestData} from [path]
 //------------------------------------------------------------
 // To use this function(promise)
@@ -79,15 +77,14 @@ export async function requestImageProfile<TData extends object>(
 export async function requestSecureData<TData extends object>(
   url: string,
   method: string,
+  token: string,
   body?: any
 ): Promise<Respone<TData>> {
-  const appJWTToken = localStorage.getItem('token');
-
   const res = await fetch(url, {
     method: method,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${appJWTToken}`,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(body),
   });
