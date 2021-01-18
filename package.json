@@ -84,6 +84,7 @@
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
       "!src/serviceWorker.ts",
+      "!src/components/imageUploader/imageUploaderPopup/imageUploaderPopup.tsx",
       "!src/index.tsx"
     ]
   }
