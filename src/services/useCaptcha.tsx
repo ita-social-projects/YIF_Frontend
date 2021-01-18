@@ -40,11 +40,9 @@ export const useCaptcha = (endpoint: string) => {
     }
 
     return () => {
-      let unwantedScript = document.getElementById('root')?.nextElementSibling;
       let unwantedDiv = document.querySelectorAll('.grecaptcha-badge')[0]
           .parentElement;
-      script.remove();
-      unwantedScript?.remove();
+        script.remove();
       unwantedDiv?.remove();
     };
   }, []);

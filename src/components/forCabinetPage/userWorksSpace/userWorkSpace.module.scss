@@ -1,14 +1,13 @@
 @import "../../styles.scss";
 
 .mainWorkingFiled {
-  height: 50rem;
+  height: 55rem;
   position: relative;
   display: flex;
   justify-content: space-between;
   .mainMenuBar {
     width: 2.813rem;
-    height: 50rem;
-    height: 100%;
+    height: 55rem;
     background-color:$darkBlue;
     z-index: 0;
     position: absolute;
@@ -54,7 +53,7 @@
 
 .mainMenu {
   width: 0rem;
-  height: 50rem;
+  height: 55rem;
   left: 2.813rem;
   //background-color: rgba(255, 255, 255, 0.4);
   background-color:$lightBlue_3;
