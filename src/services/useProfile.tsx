@@ -58,11 +58,7 @@ const useProfile = (endpoint: string) => {
     e.preventDefault();
     setSubmitted(true);
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
-    console.log(isExpired);
-    console.log(`before --- ${token}`);
-
     getToken();
-    console.log(`after --- ${token}`);
     requestSecureData(endpoint, 'POST', token!, {
       name,
       surname,
@@ -75,10 +71,10 @@ const useProfile = (endpoint: string) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
           setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
-          setSubmitted(false);
           console.log('success kinda');
           localStorage.setItem('user', JSON.stringify(res.data));
           getUserProfile();
+          setSubmitted(false);
         } else {
           setError({
             hasError: true,
