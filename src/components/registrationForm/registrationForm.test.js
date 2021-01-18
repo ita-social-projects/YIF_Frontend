@@ -2,9 +2,6 @@ import React from 'react';
 import RegistrationForm from './registrationForm'
 import {MemoryRouter} from 'react-router-dom';
 import {fireEvent, render, screen, wait} from "@testing-library/react";
-import RegistrationPage from "./index";
-import {unmountComponentAtNode} from "react-dom";
-import UserOption from "../forCabinetPage/options/userOption";
 
 
 describe('registrationForm', () => {
