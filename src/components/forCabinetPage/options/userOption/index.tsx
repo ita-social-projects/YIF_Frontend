@@ -10,6 +10,8 @@ import useProfile from '../../../../services/useProfile';
 import { APIUrl } from '../../../../services/endpoints';
 import { useAuth } from '../../../../services/tokenValidator';
 
+
+
 const UserOption = () => {
   const avatarSyles = {
     position: 'absolute',
