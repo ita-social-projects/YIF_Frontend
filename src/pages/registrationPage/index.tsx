@@ -1,6 +1,6 @@
 import React from "react";
-import {Header} from '../index';
-import RegistrationForm from "./registrationForm";
+import Header  from '../../components/header/index';
+import RegistrationForm from "../../components/registrationForm/registrationForm";
 
 
 const RegistrationPage: React.FC = () => {
