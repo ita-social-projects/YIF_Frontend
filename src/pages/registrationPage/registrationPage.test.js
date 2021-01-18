@@ -35,5 +35,4 @@ describe ('registrationPage', () => {
         div
     );
   });
-
 });
