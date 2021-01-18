@@ -113,11 +113,11 @@ class UserWorksSpace extends React.Component<Props, {}> {
     let mainMenu = document.querySelector(`.${styles.mainMenu}`);
     this.setMenu(mainMenu, null);
   };
-  
+
   hideBar = () => {
     this.resetNavBar();
   };
-  
+
   onChangeFrame = (chosenFrame: number) => {
     const copyState = this.state;
     copyState.chosenFrame = chosenFrame;
@@ -129,7 +129,7 @@ class UserWorksSpace extends React.Component<Props, {}> {
     });
   };
 
-  
+
   render() {
     let box;
     switch (this.state.chosenFrame) {
@@ -181,7 +181,7 @@ class UserWorksSpace extends React.Component<Props, {}> {
                 <ul>
                   <li onClick={() => this.onChangeFrame(0)}>
                     <p className={styles.underlineAnimation}>
-                      Меню&nbsp;користувача
+                      Персональні&nbsp;дані
                     </p>
                   </li>
                   <li onClick={() => this.onChangeFrame(1)}>
