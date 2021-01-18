@@ -7,7 +7,7 @@ import GraduateCabinet from '../../pages/graduateCabinetPage/index';
 import LoginPage from '../../pages/loginPage';
 import UniversitiesPage from '../../pages/universitiesPage';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import RegistrationForm from '../../components/registrationForm/index';
+import RegistrationForm from '../../pages/registrationPage';
 
 const App = () => {
   return (

@@ -13,7 +13,7 @@ import { useAuth } from '../../../../services/tokenValidator';
 const UserOption = () => {
   const avatarSyles = {
     position: 'absolute',
-    top: '3rem',
+    top: '2.5rem',
     left: '2.5rem',
   };
 
