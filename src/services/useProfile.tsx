@@ -5,7 +5,6 @@ import { useAuth } from './tokenValidator';
 const useProfile = (endpoint: string) => {
   const {
     token,
-    isExpired,
     user,
     getToken,
     userProfile,
