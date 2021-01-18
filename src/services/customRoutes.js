@@ -25,7 +25,7 @@ export function ProtectedRoute({ user, pathname, children, ...rest }) {
   );
 }
 
-export function IsUserRedirect({ user, pathname, children, ...rest }) {
+export function RedirectRoute({ user, pathname, children, ...rest }) {
   return (
     <Route
       {...rest}

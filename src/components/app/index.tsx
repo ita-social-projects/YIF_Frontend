@@ -9,7 +9,7 @@ import UniversitiesPage from '../../pages/universitiesPage';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RegistrationForm from '../../components/registrationForm/index';
 import { useAuth } from '../../services/tokenValidator';
-import { ProtectedRoute, IsUserRedirect } from '../../services/customRoutes';
+import { ProtectedRoute, RedirectRoute } from '../../services/customRoutes';
 
 const App = () => {
   const { user } = useAuth();
@@ -20,13 +20,19 @@ const App = () => {
         <Route exact path='/'>
           <Home />
         </Route>
-        <IsUserRedirect user={user} pathname='cabinet' path='/login'>
+        <RedirectRoute user={user} pathname='cabinet' path='/login'>
           <LoginPage />
-        </IsUserRedirect>
-        <IsUserRedirect user={user} pathname='cabinet' path='/register'>
+        </RedirectRoute>
+        <RedirectRoute user={user} pathname='cabinet' path='/register'>
           <RegistrationForm />
-        </IsUserRedirect>
-        <Route>
+        </RedirectRoute>
+        {/* <Route path='/login'>
+          <LoginPage />
+        </Route>
+        <Route path='/register'>
+          <RegistrationForm />
+        </Route> */}
+        <Route path='/universities'>
           <UniversitiesPage />
         </Route>
         <ProtectedRoute user={user} pathname='login' path='/cabinet'>
@@ -37,6 +43,27 @@ const App = () => {
         <Route component={ErrorPage} status={404} />
       </Switch>
     </Router>
+
+    // <Router>
+    //   <Switch>
+    //     <Route exact path='/'>
+    //       <Home />
+    //     </Route>
+    //     <Route path='/cabinet' component={GraduateCabinet} />
+    //     <Route path='/login'>
+    //       <LoginPage />
+    //     </Route>
+    //     <Route path='/universities'>
+    //       <UniversitiesPage />
+    //     </Route>
+    //     <Route path='/register'>
+    //       <RegistrationForm />
+    //     </Route>
+    //     <Route path='/filterPage' component={FilterPage} />
+    //     <Route path='/404' component={ErrorPage} status={404} />
+    //     <Route component={ErrorPage} status={404} />
+    //   </Switch>
+    // </Router>
   );
 };
 
