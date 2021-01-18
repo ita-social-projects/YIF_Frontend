@@ -2,18 +2,17 @@
 
 .mainStyle {
   width: inherit;
-  height: 100%;
   background: $lightBlue_3;
-  padding: 3rem 2.5rem 2.81rem 2.5rem;
+  padding: 2.5rem 25rem 0 2.5rem;
   position: relative;
-  min-height: 55rem;
+  height: auto;
 
   .wrapperImg {
     height: 7.5rem;
     width: 7.5rem;
     border-radius: 100%;
     position: absolute;
-    background-color: white;
+    background-color: $white;
     top: 3rem;
     left: 2.5rem;
 
@@ -21,7 +20,18 @@
       border-radius: 100%;
     }
   }
+
+  .wrapper {
+    height: 100%;
+    padding: 0 0 2.81rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 685px;
+  }
+
   .titleContainer {
+    width: inherit;
    display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -31,33 +41,27 @@
         font-weight: $regular;
         font-size: 1.625rem;
         color: $black;
-        padding: 0 3.75rem 1.125rem 0;
+        padding: 0 4.75rem 1.125rem 0;
       }
+
     .spinner {
       padding-right: 23%;
-
     }
-
-  }
-  .wrapper {
-    height: 100%;
-    padding: 0 0 2.81rem 12.5rem;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding-right: 25rem;
   }
 
   .form {
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    margin: 0 auto;
+    width: 685px;
   }
 
   .img{
     position: absolute;
-    top: 25%;
+    top: 20%;
     right: 0;
+    z-index: 0;
   }
 
   .button {

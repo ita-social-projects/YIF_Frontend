@@ -6,7 +6,7 @@ interface Props {
   errorButtonHandler: Function;
 }
 
-const FormInputErrorWithButton: React.FC<Props> = (props) => {
+const FormInputErrorWithCloseBtn: React.FC<Props> = (props) => {
   const { errorMessage, errorType, errorButtonHandler } = props;
   const warningIcon = (
     <svg
@@ -41,9 +41,11 @@ const FormInputErrorWithButton: React.FC<Props> = (props) => {
       }
     >
       <div className={styles.iconWrap}>{warningIcon}</div>
-      <p className={styles.errorMessage}>{errorMessage} <span onClick={() => errorButtonHandler()}>Закрити</span></p>
+      <p className={styles.errorMessage}>
+        {errorMessage} <span onClick={() => errorButtonHandler()}>Закрити</span>
+      </p>
     </div>
   );
 };
 
-export default FormInputErrorWithButton;
+export default FormInputErrorWithCloseBtn;
