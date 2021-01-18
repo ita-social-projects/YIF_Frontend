@@ -170,7 +170,7 @@ function AuthProvider({ children }: any) {
     };
 
     if (isExpired && !isRefreshing) getToken();
-  }, [isExpired, isRefreshing, getUserProfile, getToken]);
+  }, [getToken, isExpired, isRefreshing]);
 
   return (
     <authContext.Provider
