@@ -31,6 +31,20 @@ it('renders without crashing', () => {
                 placeholder='Електронна пошта'
                 value=''
               />
+              <Field
+                component={FormInput}
+                iconName='lock'
+                type='password'
+                name='password'
+                placeholder='Пароль'
+                value=''
+              />
+              <Field
+                component={FormInput}
+                name='password'
+                placeholder='Пароль'
+                value=''
+              />
             </Form>
           );
         }}
