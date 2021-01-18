@@ -84,9 +84,8 @@
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
       "!src/serviceWorker.ts",
-      "!src/index.tsx",
-      "!src/services/useLogin.tsx",
-      "!src/services/useRegistration.tsx"
+      "!src/components/imageUploader/imageUploaderPopup/imageUploaderPopup.tsx",
+      "!src/index.tsx"
     ]
   }
 }
