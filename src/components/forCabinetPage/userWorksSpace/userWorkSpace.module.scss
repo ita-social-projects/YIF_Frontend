@@ -1,14 +1,14 @@
-@import "../../styles.scss";
+@import '../../styles.scss';
 
 .mainWorkingFiled {
-  height: 55rem;
+  height: auto;
   position: relative;
   display: flex;
   justify-content: space-between;
   .mainMenuBar {
     width: 2.813rem;
-    height: 55rem;
-    background-color:$darkBlue;
+    height: 100%;
+    background-color: $darkBlue;
     z-index: 0;
     position: absolute;
     .userIcon {
@@ -56,7 +56,7 @@
   height: 55rem;
   left: 2.813rem;
   //background-color: rgba(255, 255, 255, 0.4);
-  background-color:$lightBlue_3;
+  background-color: $lightBlue_3;
   box-shadow: 0.188rem 0.188rem 0.25rem rgba(0, 0, 0, 0.25);
   position: absolute;
   z-index: 1;
@@ -66,8 +66,8 @@
       margin-top: 8.438rem;
       width: 100%;
       overflow-x: hidden;
-      font-size:$font_16px;
-      font-family:$fontOpenSans;
+      font-size: $font_16px;
+      font-family: $fontOpenSans;
       font-weight: $regular;
       li {
         height: 1.875rem;
@@ -76,8 +76,8 @@
         cursor: pointer;
         text-align: left;
         padding-left: 1rem;
-        p{
-          display:inline;
+        p {
+          display: inline;
         }
       }
       li:nth-of-type(2) {
@@ -91,10 +91,10 @@
 }
 
 // classes for manipulation with objects
-.icons{
+.icons {
   fill: $white;
   fill-opacity: 100%;
-  &:hover{
+  &:hover {
     background-color: $lightBlue_1;
     fill: $darkBlue;
     fill-opacity: 100%;
