@@ -1,9 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Header from '.';
+import { AuthProvider } from '../../services/tokenValidator';
 
-describe('header', () => {
+describe('header with no user', () => {
   let header;
   const links = [
     { text: 'Напрями', location: '/directions' },
@@ -39,5 +40,52 @@ describe('header', () => {
 
   test('should match snapshot', () => {
     expect(header).toMatchSnapshot();
+  });
+});
+
+describe('header with logged in user', () => {
+  let header;
+  localStorage.setItem(
+    'token',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjliNmRkNGY2LTIzMGEtNDA4Ni05YWQ5LTQyYTZlNTEwNmJmOCIsImVtYWlsIjoicm9tYW4uYXJrLmtvQGdtYWlsLmNvbSIsInJvbGVzIjoiR3JhZHVhdGUiLCJleHAiOjE2MDkzMzA2NjR9.EqY773v1vn7_OO72pu8GKpk4ylpQ-UZn8oNQMtP7WPg'
+  );
+
+  beforeEach(() => {
+    header = render(
+      <AuthProvider>
+        <MemoryRouter>
+          <Header />
+        </MemoryRouter>
+      </AuthProvider>
+    );
+  });
+
+  test('should render properly', () => {
+    expect(header).toMatchSnapshot();
+  });
+
+  test('should open dropdown content on click', () => {
+    const avatar = screen.getByRole('img');
+
+    act(() => {
+      fireEvent.click(avatar);
+    });
+    expect(header).toMatchSnapshot();
+  });
+
+  test('should clear local storage on logout', () => {
+    const avatar = screen.getByRole('img');
+
+    act(() => {
+      fireEvent.click(avatar);
+    });
+
+    const logout = screen.getByRole('button');
+
+    act(() => {
+      fireEvent.click(logout);
+    });
+
+    expect(localStorage.getItem('token')).toEqual(null);
   });
 });
