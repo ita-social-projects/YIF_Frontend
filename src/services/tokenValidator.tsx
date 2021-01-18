@@ -48,8 +48,10 @@ type UserProfile = {
 const authContext = createContext({} as Values);
 
 function AuthProvider({ children }: any) {
-  const [token, setToken] = useState<Token>(null);
-  const [refreshToken, setRefreshToken] = useState<Token>(null);
+  const [token, setToken] = useState<Token>(localStorage.getItem('token'));
+  const [refreshToken, setRefreshToken] = useState<Token>(
+    localStorage.getItem('refreshToken')
+  );
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const updateToken = useCallback((token, refreshToken) => {
@@ -168,7 +170,7 @@ function AuthProvider({ children }: any) {
     };
 
     if (isExpired && !isRefreshing) getToken();
-  }, [getToken, isExpired, isRefreshing, getUserProfile]);
+  }, []);
 
   return (
     <authContext.Provider
