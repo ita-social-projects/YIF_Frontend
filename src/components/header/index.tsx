@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './header.module.scss';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../services/tokenValidator';
@@ -10,6 +10,8 @@ const Header: React.FC = () => {
     user?.email.substr(0, user?.email.indexOf('@'));
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
   const dropdownArrowDown = (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -52,6 +54,20 @@ const Header: React.FC = () => {
     setIsDropdownOpen(() => !isDropdownOpen);
     removeToken();
   };
+
+  const handleClickOutside = (event: any) => {
+    if (ref.current && !ref.current.contains(event.target as Node)) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, true);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  }, []);
 
   const dropdownContent = isDropdownOpen ? (
     <>
@@ -116,7 +132,9 @@ const Header: React.FC = () => {
             Університети
           </Link>
         </div>
-        <div className={styles.entry}>{entryContent}</div>
+        <div className={styles.entry} ref={ref}>
+          {entryContent}
+        </div>
       </nav>
     </header>
   );
