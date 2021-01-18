@@ -6,7 +6,11 @@ body,
 #root,
 .leaflet-container {
   width: 100%;
-  height: 23.75rem;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
 }
 
 .mapContainer {
@@ -16,4 +20,11 @@ body,
   display: flex;
   justify-content: center;
   position: relative;
+
+  * {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: none;
+  }
 }
