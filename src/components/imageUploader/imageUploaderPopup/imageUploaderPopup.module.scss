@@ -1,7 +1,7 @@
 @import '../../../styles/index.scss';
 
 .container {
-  //z-index: 1000;
+  z-index: 1;
   position: absolute;
   top: 0;
   left: 0;
@@ -66,12 +66,8 @@
     align-items: center;
     text-align: center;
     background-color: $white;
-    z-index: 1;
 
     padding: 1rem;
-    // div {
-    //   margin: 1.5vh 0;
-    // }
 
     input {
       width: 100%;
@@ -107,7 +103,6 @@
       }
     }
     .fileBrowserContainer {
-      z-index: 1;
       a {
         margin: 0.875rem 0;
         padding: 0.5rem 0;
