@@ -6,7 +6,11 @@ body,
 #root,
 .leaflet-container {
   width: 100%;
-  height: 23.75rem;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
 }
 
 .mapContainer {
@@ -16,4 +20,23 @@ body,
   display: flex;
   justify-content: center;
   position: relative;
+}
+
+.popUpContent {
+  @include flex(column, flex-start, flex-start);
+}
+
+.popUpTitle {
+  font-family: $fontNunito;
+  font-size: calc((16 / 16) * 1rem);
+  margin: 10px 0 18px 0;
+}
+
+.popUpLink {
+  font-family: $fontNunito;
+  font-size: calc((15 / 16) * 1rem);
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
