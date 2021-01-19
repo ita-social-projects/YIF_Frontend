@@ -72,9 +72,9 @@ const ImageUploaderPopup = (props: TProps) => {
       return false;
     }
     // Check file size.
-    if (file.size > 10485760) {
+    if (file.size > 1572864) {
       setError(
-        'Переконайтеся, що завантажуєте зображення розміром не більше 10 MB, і повторіть спробу.'
+        'Переконайтеся, що завантажуєте зображення розміром не більше 1.5 MB, і повторіть спробу.'
       );
       return false;
     }
@@ -216,9 +216,15 @@ const ImageUploaderPopup = (props: TProps) => {
             handleClick={() => {
               setLoading(true);
               const imageToUpload = cropper.getCroppedCanvas().toDataURL();
-              requestImageProfile(`${APIUrl}Users/ChangePhoto`, 'POST', {
-                photo: imageToUpload,
-              })
+
+              //${APIUrl}Users/ChangePhoto https://jsonplaceholder.typicode.com/photos
+              requestImageProfile(
+                `https://jsonplaceholder.typicode.com/photos`,
+                'POST',
+                {
+                  photo: imageToUpload,
+                }
+              )
                 .then((res: any) => {
                   const statusCode = res.statusCode.toString();
                   if (statusCode.match(/^[23]\d{2}$/)) {

@@ -22,7 +22,6 @@ const ImageCropper = (props: TProps) => {
     setCropper,
   } = props;
   const [image, setImage] = useState(loadedImage.data?.toString());
-
   return (
     <div className={style.imagePrevieContainer}>
       <img
