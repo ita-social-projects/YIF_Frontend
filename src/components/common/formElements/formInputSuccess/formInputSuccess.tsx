@@ -1,11 +1,13 @@
 import React from 'react';
-import styles from './formInputMessage.module.scss'
+import styles from './formInputSuccess.module.scss'
+
 interface Props {
-  successMessage: any; // there should be text, you want to see in the error component
+  successMessage: any;
 }
 
-const FormInputSuccess: React.FC<Props> = (props) => {
+ export const FormInputSuccess: React.FC<Props> = (props) => {
   const { successMessage } = props;
+
   const successIcon = (
       <svg width="30"
            height="30"
@@ -25,5 +27,3 @@ const FormInputSuccess: React.FC<Props> = (props) => {
       </div>
   );
 };
-
-export default FormInputSuccess;
