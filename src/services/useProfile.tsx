@@ -22,6 +22,11 @@ const useProfile = (endpoint: string) => {
     errorStatusCode: '',
     errorMessage: '',
   });
+  const [success, setSuccess] = useState({
+    hasSuccess: false,
+    successStatusCode: '',
+    successMessage: '',
+  });
 
   const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -57,6 +62,7 @@ const useProfile = (endpoint: string) => {
     e.preventDefault();
     setSubmitted(true);
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
+    setSuccess({ hasSuccess: false, successStatusCode: '', successMessage: '' });
     getToken();
     requestSecureData(endpoint, 'POST', token!, {
       name,
@@ -70,6 +76,19 @@ const useProfile = (endpoint: string) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
           setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
+          setSuccess({
+            hasSuccess: true,
+            successStatusCode: res.statusCode,
+            successMessage:
+                res.data.message || 'Дані збережені',
+          });
+           setTimeout(() => {
+            setSuccess({
+              hasSuccess: false,
+              successStatusCode: '',
+              successMessage: '',
+            });
+          }, 3000);
           console.log('success kinda');
           localStorage.setItem('user', JSON.stringify(res.data));
           getUserProfile();
@@ -109,6 +128,7 @@ const useProfile = (endpoint: string) => {
     schoolName,
     submitted,
     error,
+    success,
   };
 };
 
