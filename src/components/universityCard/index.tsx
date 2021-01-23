@@ -2,7 +2,13 @@ import React from 'react';
 import styles from './universityCard.module.scss';
 
 interface Props {
-  liked: boolean;
+  liked?: boolean;
+  shortTitle: string;
+  link: string;
+  adress: string;
+  description: string;
+  introStart: string;
+  introDeadline: string;
 }
 
 const UniversityCard: React.FC<Props> = (props) => {
@@ -21,7 +27,15 @@ const UniversityCard: React.FC<Props> = (props) => {
     </svg>
   );
 
-  const { liked } = props;
+  const {
+    liked,
+    shortTitle,
+    link,
+    adress,
+    description,
+    introStart,
+    introDeadline,
+  } = props;
 
   return (
     <div className={styles.card}>
@@ -34,27 +48,27 @@ const UniversityCard: React.FC<Props> = (props) => {
       >
         {starSVG}
       </div>
-      <h2 className={styles.card__title}>НУВГП</h2>
+      <h2 className={styles.card__title}>{shortTitle}</h2>
       <div className={styles.card__contentContainer}>
         <div className={styles.card__content}>
           <div className={styles.card__content__wrapper}>
-            <a href='/404' className={styles.card__content__desc}>
+            <a
+              href={link}
+              target='_blank'
+              className={styles.card__content__desc}
+            >
               <span className={styles.card__content__subtitle}>Сайт:</span>
-              nuwee.com
+              {link}
             </a>
             <br />
             <p className={styles.card__content__desc}>
               <span className={styles.card__content__subtitle}>Адреса:</span>
-              м.Рівне, вул. Соборна 11
+              {adress}
             </p>
             <br />
             <p className={styles.card__content__desc}>
               <span className={styles.card__content__subtitle}>Опис:</span>
-              Символіка риби містить багато різноманітних, іноді полярно
-              протилежних значень. Існують легенди (записи яких збереглися в
-              античних храмах), згідно з якими людська раса походить від
-              cтворінь, які нагадують амфібій. Їхні тіла були вкриті лускою й
-              дихали вони через зябра.
+              {description}
             </p>
           </div>
           <a
@@ -69,12 +83,14 @@ const UniversityCard: React.FC<Props> = (props) => {
           <h3 className={styles.card__intro__title}>Вступна кампанія</h3>
           <div className={styles.card__intro__data}>
             <div className={styles.card__intro__data__block}>
-              <p className={styles.card__intro__data__numbers}>01.07.2021</p>
+              <p className={styles.card__intro__data__numbers}>{introStart}</p>
             </div>
             <div
               className={`${styles.card__intro__data__block} ${styles.card__intro__data__block__red}`}
             >
-              <p className={styles.card__intro__data__numbers}>21.08.2021</p>
+              <p className={styles.card__intro__data__numbers}>
+                {introDeadline}
+              </p>
             </div>
           </div>
         </div>
