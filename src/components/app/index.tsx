@@ -20,18 +20,31 @@ const App = () => {
         <Route exact path='/'>
           <Home />
         </Route>
-        <RedirectRoute user={user} pathname='cabinet' path='/login'>
+        {/* <RedirectRoute user={user} pathname='cabinet' path='/login'>
           <LoginPage />
         </RedirectRoute>
         <RedirectRoute user={user} pathname='cabinet' path='/register'>
           <RegistrationForm />
-        </RedirectRoute>
+        </RedirectRoute> */}
+        <Route path='/login'>
+          <LoginPage />
+        </Route>
+
+        <Route path='/register'>
+          <RegistrationForm />
+        </Route>
+
+        <Route path='/cabinet'>
+          <GraduateCabinet />
+        </Route>
+
         <Route path='/universities'>
           <UniversitiesPage />
         </Route>
-        <ProtectedRoute user={user} pathname='login' path='/cabinet'>
+        {/* <ProtectedRoute user={user} pathname='login' path='/cabinet'>
           <GraduateCabinet />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
+
         <Route path='/filterPage' component={FilterPage} />
         <Route path='/404' component={ErrorPage} status={404} />
         <Route component={ErrorPage} status={404} />
