@@ -9,6 +9,7 @@ import ImageUploader from '../../../imageUploader';
 import useProfile from '../../../../services/useProfile';
 import { APIUrl } from '../../../../services/endpoints';
 import { useAuth } from '../../../../services/tokenValidator';
+import {FormInputSuccess} from "../../../common/formElements/formInputSuccess/formInputSuccess";
 
 
 
@@ -43,6 +44,11 @@ const UserOption = () => {
                 errorType='form'
                 errorMessage={useYIFProfile.error.errorMessage}
               />
+            )}
+            {useYIFProfile.success.hasSuccess &&
+            (<FormInputSuccess
+                    successMessage={useYIFProfile.success.successMessage}
+                />
             )}
           </div>
           <Formik
