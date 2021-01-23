@@ -15,23 +15,52 @@ type Props={
 class DropboxElement extends React.Component<Props,{}>{
   
     // when component is mounted - upload data to our dropbox
+    
     componentDidMount(){
-        const ul = document.querySelectorAll(`.${styles.combolist_li}`);
+        const ul = document.querySelectorAll(`.${styles.combolist_li}`);    
         this.addElementsNew(ul[this.props.keyId],this.props.data);
         this.select();
     }
-
+    
     // dynamic uploading data to our dropbox from props
     addElementsNew=(element:Element,data:string[])=>{
-        for(let i:number = 0;i<data.length;i++){   
-            
+        for(let i:number = 0;i<data.length;i++){
             let li:Element = document.createElement('li');
             li.innerHTML=data[i];
             element.appendChild(li);
-
         }
     }
 
+    // dynamic uploading data to our dropbox from props
+    ElementsUpdate=(element:Element,data:string[])=>{
+        for(let i:number = 0;i<data.length;i++){
+            const li = element.querySelectorAll('li');
+            const liLength:number=li.length;
+            console.log(li.length);
+            if((li.length-1)===data.length){
+                li[i+1].innerHTML=data[i];
+            }
+            if((li.length-1)<data.length){
+                let liNew:Element = document.createElement('li');
+                element.appendChild(liNew);
+                li[i+1].innerHTML=data[i]; 
+            }
+            if((li.length-1)>data.length){
+                let difference = (li.length-1)-data.length;
+                for(let j:number=0;j<difference;j++){
+                    element.removeChild(li[(liLength-1)-j]);
+                    li[i+1].innerHTML=data[i];
+                } 
+            }
+        }
+    }
+    
+    componentDidUpdate(){
+        const ul = document.querySelectorAll(`.${styles.combolist_li}`);
+        this.ElementsUpdate(ul[this.props.keyId],this.props.data);
+        this.select();
+    }
+    
     // function that will call if we click on option in dropbox
     select =()=>{
         
@@ -45,9 +74,9 @@ class DropboxElement extends React.Component<Props,{}>{
             li[i].addEventListener('click',()=>{ 
                 
                 input[this.props.keyId].value=li[i].innerHTML;
-                listBox[this.props.keyId].classList.toggle(styles.show_list_box);
-                input[this.props.keyId].classList.toggle(styles.gray_color_text);
-                arrow[this.props.keyId].classList.toggle(styles.arrow_up);
+                listBox[this.props.keyId].classList.remove(styles.show_list_box);
+                input[this.props.keyId].classList.remove(styles.gray_color_text);
+                arrow[this.props.keyId].classList.remove(styles.arrow_up);
                 
             })
         }
