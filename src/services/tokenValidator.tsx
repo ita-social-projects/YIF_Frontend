@@ -7,6 +7,7 @@ import React, {
   createContext,
 } from 'react';
 import jwt_decode from 'jwt-decode';
+import { APIUrl } from './endpoints';
 
 type Decoded = {
   email: string;
@@ -20,29 +21,11 @@ type Token = string | null;
 type Values = {
   token: Token;
   refreshToken: Token;
-  user: User | null;
   isExpired: boolean;
   isRefreshing: boolean;
   getToken: Function;
   updateToken: Function;
   removeToken: Function;
-  userProfile: UserProfile | null;
-  getUserProfile: Function;
-};
-
-type User = {
-  email: string;
-  id: string;
-  role: string;
-};
-
-type UserProfile = {
-  name: string;
-  surname: string;
-  middleName: string;
-  phoneNumber: string;
-  schoolName: string;
-  email: string;
 };
 
 const authContext = createContext({} as Values);
@@ -68,10 +51,30 @@ function AuthProvider({ children }: any) {
     localStorage.removeItem('refreshToken');
   }, []);
 
+  const isTokenExpired = useCallback(
+    (token: Token) => {
+      if (!token) {
+        return false;
+      }
+      try {
+        const decoded: Decoded = jwt_decode(token);
+        return decoded.exp <= new Date().getTime() / 1000 ? true : false;
+      } catch (error) {
+        removeToken();
+        return false;
+      }
+    },
+    [removeToken]
+  );
+
+  const isExpired = useMemo(() => isTokenExpired(token), [
+    isTokenExpired,
+    token,
+  ]);
+
   const getToken = useCallback(async () => {
-    const url = 'https://yifbackend.tk/api/Authentication/RefreshToken';
-    // const url = 'http://localhost:5000/api/Authentication/RefreshToken';
-    let currentToken = token;
+    const url = `${APIUrl}Authentication/RefreshToken`;
+    let currentToken;
     let currentRefreshToken = refreshToken;
     try {
       setIsRefreshing(true);
@@ -104,87 +107,41 @@ function AuthProvider({ children }: any) {
       setIsRefreshing(false);
       console.error(error);
     }
+    // return currentToken;
   }, [token, refreshToken, updateToken, removeToken]);
-
-  const isTokenExpired = useCallback(
-    (token: Token) => {
-      if (!token) {
-        return false;
-      }
-      try {
-        const decoded: Decoded = jwt_decode(token);
-        return decoded.exp <= new Date().getTime() / 1000 ? true : false;
-      } catch (error) {
-        removeToken();
-        return false;
-      }
-    },
-    [removeToken]
-  );
-
-  const getUser = useCallback(
-    (token: Token) => {
-      if (!token) {
-        return null;
-      }
-      try {
-        const decoded: Decoded = jwt_decode(token);
-        const user = {
-          id: decoded.id,
-          role: decoded.roles,
-          email: decoded.email,
-        };
-        return user;
-      } catch (error) {
-        removeToken();
-        return null;
-      }
-    },
-    [removeToken]
-  );
-
-  const getUserProfile = useCallback(() => {
-    let userJSON = localStorage.getItem('user');
-    if (!userJSON) {
-      return null;
-    }
-    return JSON.parse(userJSON);
-  }, []);
-
-  const userProfile = useMemo(() => getUserProfile(), [getUserProfile]);
-
-  const isExpired = useMemo(() => isTokenExpired(token), [
-    isTokenExpired,
-    token,
-  ]);
-  const user = useMemo(() => getUser(token), [getUser, token]);
 
   useEffect(() => {
     setToken(localStorage.getItem('token'));
     setRefreshToken(localStorage.getItem('refreshToken'));
 
-    window.onstorage = (event: StorageEvent) => {
-      if (event.key === 'token') setToken(localStorage.getItem('token'));
-      if (event.key === 'refreshToken')
+    const handleStorageEvent = (e: StorageEvent) => {
+      if (e.key === 'token') {
+        setToken(localStorage.getItem('token'));
+      }
+      if (e.key === 'refreshToken') {
         setRefreshToken(localStorage.getItem('refreshToken'));
+      }
     };
 
-    if (isExpired && !isRefreshing) getToken();
+    window.addEventListener('storage', handleStorageEvent);
+
+    return () => window.removeEventListener('storage', handleStorageEvent);
   }, []);
+
+  useEffect(() => {
+    if (isExpired && !isRefreshing) getToken();
+  }, [isExpired, isRefreshing, getToken]);
 
   return (
     <authContext.Provider
       value={{
         token,
         refreshToken,
-        user,
         isExpired,
         isRefreshing,
         getToken,
         updateToken,
         removeToken,
-        userProfile,
-        getUserProfile,
       }}
     >
       {children}
