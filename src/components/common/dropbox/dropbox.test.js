@@ -5,6 +5,10 @@ import { act } from "react-dom/test-utils";
 import ReactDOM from "react-dom";
 import DropboxElement from "./dropbox";
 
+import { Provider } from "react-redux";
+
+import { store } from "../../../store/store";
+
 let container = null;
 
 beforeEach(() => {
@@ -22,6 +26,7 @@ it("Check dropbox component", () => {
   act(() => {
     ReactDOM.render(
       <>
+      <Provider store={store}>
         <DropboxElement
           data={"data"}
           keyId={0}
@@ -35,6 +40,7 @@ it("Check dropbox component", () => {
           width={21.75}
           listTitle={"listTitle1"}
         />
+        </Provider>
       </>,
       container
     );

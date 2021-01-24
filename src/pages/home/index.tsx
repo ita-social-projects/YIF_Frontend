@@ -23,7 +23,7 @@ const handleClick = () => {
 
 
 const Home = () => {
-  useGetAllListData('https://localhost:44324/api/University/Names','setUniversity');
+  useGetAllListData('https://localhost:44324/api/University/Abbreviations','setUniversity');
   useGetAllListData('https://localhost:44324/api/Specialty/Names','setSpeciality');
   useGetAllListData('https://localhost:44324/api/Direction/Names','setDirection');
   return (

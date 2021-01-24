@@ -30,7 +30,7 @@ export const useGetAllListData =(endpoint: string,action:string) =>{
         .catch((err:any)=>{
             console.log(err);
         })
-    })
+    },[])
 
     return ()=>{
         //let answer:string='succes';
