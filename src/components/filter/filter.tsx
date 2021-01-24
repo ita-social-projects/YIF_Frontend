@@ -1,6 +1,6 @@
 import React, { Fragment,useState,useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { selectData,selectChosenData } from '../../store/reducers/dropboxReducer';
+import { useSelector,useDispatch } from 'react-redux';
+import { selectData,selectChosenData ,chooseDirection, chooseSpeciality, chooseUniversity} from '../../store/reducers/dropboxReducer';
 import { requestData } from '../../services/requestDataFunction';
 import DropboxElement from '../common/dropbox/dropbox';
 import styles from './filter.module.scss';
@@ -13,6 +13,7 @@ const Filter = () => {
   const state = useSelector(selectData);
   const chosenData = useSelector(selectChosenData);
   const history = useHistory();
+  const dispatch = useDispatch();
   
   let university: string[] = state.university;
   let direction: string[] = state.direction;
@@ -57,9 +58,24 @@ const Filter = () => {
     event.preventDefault();
     requestData(`https://localhost:44324/api/University?DirectionName=${chosenData.direction}&SpecialityName=${chosenData.speciality}&UniversityAbbreviation=${chosenData.university}&page=${1}&page=${10}`,'GET')
     .then((res:any)=>{
+      //reset filter
+      dispatch(chooseDirection(''));
+      dispatch(chooseSpeciality(''));
+      dispatch(chooseUniversity(''));
+      history.push({
+        pathname:'/filterPage',
+        state:{
+          data: res.data,
+          statusCode: res.statusCode,
+        }
+      });
       console.log(res);
     })
     .catch((err:any)=>{
+      //reset filter
+      dispatch(chooseDirection(''));
+      dispatch(chooseSpeciality(''));
+      dispatch(chooseUniversity(''));
       console.log(err);
     })
     //history.push('/404');
