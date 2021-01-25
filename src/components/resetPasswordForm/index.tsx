@@ -13,7 +13,7 @@ import useResetPassword from '../../services/useResetPassword';
 import styles from './resetPassword.module.scss';
 import Spinner from '../common/spinner';
 import { APIUrl } from '../../services/endpoints';
-import FormInputMessage from '../common/formElements/formInputMessage/formInputMessage';
+import { FormInputSuccess } from '../common/formElements/formInputSuccess/formInputSuccess';
 
 const ResetPasswordForm = () => {
   const useYIFResetPassword = useResetPassword(APIUrl);
@@ -39,7 +39,7 @@ const ResetPasswordForm = () => {
             return true;
           }, 3000) && (
             <div className={styles.elementShowHide}>
-              <FormInputMessage successMessage='Лист з посиланням для зміни паролю відправлено на електронну адресу' />
+              <FormInputSuccess successMessage='Лист з посиланням для зміни паролю відправлено на електронну адресу' />
             </div>
           )}
         <Formik

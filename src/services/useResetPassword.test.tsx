@@ -49,7 +49,7 @@ describe('USE RESET PASSWORD', () => {
         <TestComponent />
       </Router>
     );
-    // window.grecaptcha = true;
+
     const emailInput = getByTestId('email') as HTMLInputElement;
     const loginButton = getByTestId('login') as HTMLInputElement;
 
