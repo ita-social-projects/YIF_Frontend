@@ -9,7 +9,6 @@ const useProfile = (endpoint: string) => {
   const user = useSelector(userSelector);
 
   const { token, getToken } = useAuth();
-  // const [jwt, setJwt] = useState(token);
   const [name, setName] = useState(user.name);
   const [surname, setSurname] = useState(user.surname);
   const [middleName, setMiddleName] = useState(user.middleName);
@@ -36,11 +35,6 @@ const useProfile = (endpoint: string) => {
     setPhoneNumber(user.phoneNumber);
     setSchoolName(user.schoolName);
   }, [user]);
-
-  // useEffect(() => {
-  //   setJwt(token);
-  // }, [token]);
-  // console.log(token);
 
   const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -72,7 +66,7 @@ const useProfile = (endpoint: string) => {
     setSchoolName(value);
   };
 
-  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitted(true);
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });

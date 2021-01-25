@@ -41,10 +41,6 @@ describe('header with no user', () => {
     //check the logo text
     expect(logoDom.textContent).toBe('YIF');
   });
-
-  /* test('should match snapshot', () => {
-    expect(header).toMatchSnapshot();
-  });*/
 });
 
 describe('header with logged in user', () => {
@@ -65,19 +61,6 @@ describe('header with logged in user', () => {
       </AuthProvider>
     );
   });
-
-  /* test('should render properly', () => {
-    expect(header).toMatchSnapshot();
-  });
-
-  test('should open dropdown content on click', () => {
-    const avatar = screen.getByRole('img');
-
-    act(() => {
-      fireEvent.click(avatar);
-    });
-    expect(header).toMatchSnapshot();
-  });*/
 
   test('should clear local storage on logout', () => {
     const avatar = screen.getByRole('img');
