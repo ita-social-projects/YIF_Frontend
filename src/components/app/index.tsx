@@ -13,7 +13,6 @@ import { ProtectedRoute, RedirectRoute } from '../../services/customRoutes';
 
 const App = () => {
   const { token } = useAuth();
-  // console.log(token);
 
   return (
     <Router>
