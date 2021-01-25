@@ -8,6 +8,7 @@ interface UserState {
   email: string;
   phoneNumber: string;
   schoolName: string;
+  photo: string;
 }
 
 const localStorageUser = localStorage.getItem('user');
@@ -30,6 +31,7 @@ const initialState = localStorageUser
   email: '',
   phoneNumber: '',
   schoolName: '',
+  photo: ''
 } as UserState
 
 
