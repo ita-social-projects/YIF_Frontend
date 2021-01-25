@@ -10,8 +10,10 @@ import { userSelector } from '../../store/reducers/setUserReducer';
 const Header: React.FC = () => {
   const { token, removeToken } = useAuth();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { email, photo } = useSelector(userSelector);
 
-  const { email } = useSelector(userSelector);
+  const userName = email.substr(0, email.indexOf('@'));
+  const avatar = photo ? photo : 'assets/icons/avatar.jpg';
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -76,9 +78,9 @@ const Header: React.FC = () => {
   const dropdownContent = isDropdownOpen ? (
     <>
       <div className={`${styles.user} ${styles.border}`}>
-        <span className={`${styles.userName}`}>{email}</span>
+        <span className={`${styles.userName}`}>{userName}</span>
         <img
-          src='assets/icons/avatar.jpg'
+          src={avatar}
           alt='avatar'
           className={styles.avatar}
           onClick={handleClick}
@@ -94,9 +96,9 @@ const Header: React.FC = () => {
     </>
   ) : (
     <div className={styles.user}>
-      <span className={`${styles.userName}`}>{email}</span>
+      <span className={`${styles.userName}`}>{userName}</span>
       <img
-        src='assets/icons/avatar.jpg'
+        src={avatar}
         alt='avatar'
         className={styles.avatar}
         onClick={handleClick}
