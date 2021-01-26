@@ -5,19 +5,23 @@
   width: calc((1180 / 1440) * 100%);
   max-width: 1440px;
   height: auto;
-  padding-bottom: 30px;
+  min-height: 1100px;
+  padding-bottom: 60px;
   @include flex(column, center, flex-start);
 
   @include tablet {
     width: 90%;
+    min-height: 500px;
   }
 
   @include mobile-w {
     width: 100%;
+    min-height: 500px;
   }
 
   @include mobile {
     width: 100%;
+    min-height: 500px;
   }
 }
 
@@ -45,4 +49,52 @@
     font-size: calc((40 / 16) * 1rem);
     padding: 0 20px;
   }
+}
+.pages {
+  @include flex(row, center, center);
+
+  .page {
+    @include flex(row, center, center);
+    margin: 5px;
+    width: 40px;
+    height: 40px;
+    font-family: $fontNunito;
+    font-size: 20px;
+    border: 1px solid $lightBlue_2;
+    border-radius: 5px;
+    background-color: $lightBlue_3;
+    cursor: pointer;
+
+    &__current {
+      background-color: $darkBlue;
+      border: 1px solid $darkBlue;
+      color: $white;
+    }
+  }
+}
+
+.arrow {
+  margin: 0 30px;
+  @include flex(row, center, center);
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: $lightBlue_3;
+  border: 1px solid $lightBlue_2;
+  cursor: pointer;
+
+  &__prev {
+    transform: scale(-1, 1);
+  }
+}
+
+.arrowUnable {
+  svg path {
+    fill: $lightBlue_2;
+  }
+}
+
+.spinnerContainer {
+  margin-top: 100px;
+  @include flex(row, center, center);
 }
