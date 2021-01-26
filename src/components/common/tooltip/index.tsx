@@ -1,24 +1,22 @@
 import React, { useState } from 'react';
 import classes from './tooltip.module.scss';
+import {useAuth} from "../../../services/tokenValidator";
 
 interface Props {
-  message: string;
-  direction: string;
   content: string;
 }
 
 
  const Tooltips: React.FC<Props> = (props) => {
    let timeout: any;
+   const { token } = useAuth();
    const [ active, setActive ] = useState(false);
 
    const showTip = () => {
-     timeout = setTimeout(() => {
-       setActive(true);
-     },  400);
+     if (!token) setActive(true);
+
    };
     const hideTip = () => {
-      clearInterval(timeout);
       setActive(false);
     }
 
@@ -29,7 +27,7 @@ interface Props {
         >
         {props.children}
         { active && (
-            <div className={`Tooltip ${props.direction || 'top'}`}>
+            <div className={classes.tooltip}>
 
               {props.content}
             </div>

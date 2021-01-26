@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './universityCard.module.scss';
-import {useAuth} from "../../services/tokenValidator";
+import Tooltips from "../common/tooltip";
 
 interface Props {
   liked?: boolean;
@@ -38,11 +38,10 @@ const UniversityCard: React.FC<Props> = (props) => {
     introDeadline,
   } = props;
 
-  const { token } = useAuth();
 
   return (
     <div className={styles.card}>
-
+     < Tooltips content='Ви повинні бути зареєстровані!' >
       <div
         className={
           liked
@@ -52,6 +51,7 @@ const UniversityCard: React.FC<Props> = (props) => {
       >
         {starSVG}
       </div>
+     </Tooltips>
       <h2 className={styles.card__title}>{shortTitle}</h2>
       <div className={styles.card__contentContainer}>
         <div className={styles.card__content}>
