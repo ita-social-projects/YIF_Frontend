@@ -3,6 +3,8 @@ import { fireEvent, render, screen, act } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Header from '.';
 import { AuthProvider } from '../../services/tokenValidator';
+import { store } from '../../store/store';
+import { Provider } from 'react-redux';
 
 describe('header with no user', () => {
   let header;
@@ -15,9 +17,11 @@ describe('header with no user', () => {
 
   beforeEach(() => {
     header = render(
-      <MemoryRouter>
-        <Header />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter>
+          <Header />
+        </MemoryRouter>
+      </Provider>
     );
   });
 
@@ -37,10 +41,6 @@ describe('header with no user', () => {
     //check the logo text
     expect(logoDom.textContent).toBe('YIF');
   });
-
- /* test('should match snapshot', () => {
-    expect(header).toMatchSnapshot();
-  });*/
 });
 
 describe('header with logged in user', () => {
@@ -53,28 +53,18 @@ describe('header with logged in user', () => {
   beforeEach(() => {
     header = render(
       <AuthProvider>
-        <MemoryRouter>
-          <Header />
-        </MemoryRouter>
+        <Provider store={store}>
+          <MemoryRouter>
+            <Header />
+          </MemoryRouter>
+        </Provider>
       </AuthProvider>
     );
   });
 
- /* test('should render properly', () => {
-    expect(header).toMatchSnapshot();
-  });
-
-  test('should open dropdown content on click', () => {
-    const avatar = screen.getByRole('img');
-
-    act(() => {
-      fireEvent.click(avatar);
-    });
-    expect(header).toMatchSnapshot();
-  });*/
-
   test('should clear local storage on logout', () => {
     const avatar = screen.getByRole('img');
+    screen.debug();
 
     act(() => {
       fireEvent.click(avatar);
