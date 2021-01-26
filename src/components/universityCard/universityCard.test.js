@@ -23,12 +23,12 @@ test('renders with props', () => {
     <MemoryRouter>
       <Provider store={store}>
         <UniversityCard
-          shortTitle='НУВГП'
-          link='nuwm.edu.ua'
-          adress='м. Рівне, вул. Соборна, 11'
+          abbreviation='НУВГП'
+          site='nuwm.edu.ua'
+          address='м. Рівне, вул. Соборна, 11'
           description='Тут буде опис університету'
-          introStart='01.07.2021'
-          introDeadline='21.08.2021'
+          startOfCampaign='01.07.2021'
+          endOfCampaign='21.08.2021'
         />
       </Provider>
     </MemoryRouter>
