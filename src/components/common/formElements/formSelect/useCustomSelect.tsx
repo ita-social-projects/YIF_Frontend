@@ -23,8 +23,8 @@ const useClickOutside = (initialIsVisible: boolean) => {
 
   return { container, isComponentVisible, setIsComponentVisible };
 }
-  const url = `http://localhost:5000/api/Users/SetCurrentProfile`;
-  //const url = `${APIUrl}Users/SetCurrentProfile`;
+
+  const url = `${APIUrl}Users/SetCurrentProfile`;
   const { handleSchoolChange } = useProfile(url);
 
 const [isOpen, setIsOpen] = useState(false);
