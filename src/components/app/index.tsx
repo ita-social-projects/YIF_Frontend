@@ -14,7 +14,7 @@ import ErrorBoundry from '../../errorBoundry';
 import { ResetPasswordPage } from '../../pages';
 
 const App = () => {
-  const { user } = useAuth();
+  const { token } = useAuth();
 
   return (
     <ErrorBoundry>
@@ -23,19 +23,19 @@ const App = () => {
           <Route exact path='/'>
             <Home />
           </Route>
-          <RedirectRoute user={user} pathname='cabinet' path='/login'>
+          <RedirectRoute user={token} pathname='cabinet' path='/login'>
             <LoginPage />
           </RedirectRoute>
-          <RedirectRoute user={user} pathname='cabinet' path='/resetPassword'>
+          <RedirectRoute user={token} pathname='cabinet' path='/resetPassword'>
             <ResetPasswordPage />
           </RedirectRoute>
-          <RedirectRoute user={user} pathname='cabinet' path='/register'>
+          <RedirectRoute user={token} pathname='cabinet' path='/register'>
             <RegistrationForm />
           </RedirectRoute>
           <Route path='/universities'>
             <UniversitiesPage />
           </Route>
-          <ProtectedRoute user={user} pathname='login' path='/cabinet'>
+          <ProtectedRoute user={token} pathname='login' path='/cabinet'>
             <GraduateCabinet />
           </ProtectedRoute>
           <Route path='/filterPage' component={FilterPage} />
@@ -44,6 +44,28 @@ const App = () => {
         </Switch>
       </Router>
     </ErrorBoundry>
+    // <Router>
+    //   <Switch>
+    //     <Route exact path='/'>
+    //       <Home />
+    //     </Route>
+    //     <Route path='/login'>
+    //       <LoginPage />
+    //     </Route>
+    //     <Route path='/register'>
+    //       <RegistrationForm />
+    //     </Route>
+    //     <Route path='/universities'>
+    //       <UniversitiesPage />
+    //     </Route>
+    //     <Route path='/cabinet'>
+    //       <GraduateCabinet />
+    //     </Route>
+    //     <Route path='/filterPage' component={FilterPage} />
+    //     <Route path='/404' component={ErrorPage} status={404} />
+    //     <Route component={ErrorPage} status={404} />
+    //   </Switch>
+    // </Router>
   );
 };
 

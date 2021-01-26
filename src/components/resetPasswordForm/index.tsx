@@ -66,7 +66,6 @@ const ResetPasswordForm = () => {
             <Form
               onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
                 handleSubmit(e);
-                console.log(errors.email);
                 if (touched.email && errors.email === undefined)
                   useYIFResetPassword.handleSubmit(e, '/login');
               }}
