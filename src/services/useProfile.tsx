@@ -66,12 +66,13 @@ const useProfile = (endpoint: string) => {
 
   const handleSchoolChange = (value: string) => {
       setSchoolName(value);
+    console.log(value)
       console.log(schoolName)
   };
 
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
-    console.log(schoolName)
+
     e.preventDefault();
     setSubmitted(true);
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
