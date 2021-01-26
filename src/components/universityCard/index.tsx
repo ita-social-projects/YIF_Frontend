@@ -4,12 +4,12 @@ import Tooltips from "../common/tooltip";
 
 interface Props {
   liked?: boolean;
-  shortTitle: string;
-  link: string;
-  adress: string;
+  abbreviation: string;
+  site: string;
+  address: string;
   description: string;
-  introStart: string;
-  introDeadline: string;
+  startOfCampaign: string;
+  endOfCampaign: string;
 }
 
 const UniversityCard: React.FC<Props> = (props) => {
@@ -30,12 +30,12 @@ const UniversityCard: React.FC<Props> = (props) => {
 
   const {
     liked,
-    shortTitle,
-    link,
-    adress,
+    abbreviation,
+    site,
+    address,
     description,
-    introStart,
-    introDeadline,
+    startOfCampaign,
+    endOfCampaign,
   } = props;
 
 
@@ -52,22 +52,22 @@ const UniversityCard: React.FC<Props> = (props) => {
         {starSVG}
       </div>
      </Tooltips>
-      <h2 className={styles.card__title}>{shortTitle}</h2>
+      <h2 className={styles.card__title}>{abbreviation}</h2>
       <div className={styles.card__contentContainer}>
         <div className={styles.card__content}>
           <div className={styles.card__content__wrapper}>
             <a
-              href={link}
+              href={site}
               target='_blank'
               className={styles.card__content__desc}
             >
               <span className={styles.card__content__subtitle}>Сайт:</span>
-              {link}
+              {site}
             </a>
             <br />
             <p className={styles.card__content__desc}>
               <span className={styles.card__content__subtitle}>Адреса:</span>
-              {adress}
+              {address}
             </p>
             <br />
             <p className={styles.card__content__desc}>
@@ -87,13 +87,15 @@ const UniversityCard: React.FC<Props> = (props) => {
           <h3 className={styles.card__intro__title}>Вступна кампанія</h3>
           <div className={styles.card__intro__data}>
             <div className={styles.card__intro__data__block}>
-              <p className={styles.card__intro__data__numbers}>{introStart}</p>
+              <p className={styles.card__intro__data__numbers}>
+                {startOfCampaign}
+              </p>
             </div>
             <div
               className={`${styles.card__intro__data__block} ${styles.card__intro__data__block__red}`}
             >
               <p className={styles.card__intro__data__numbers}>
-                {introDeadline}
+                {endOfCampaign}
               </p>
             </div>
           </div>

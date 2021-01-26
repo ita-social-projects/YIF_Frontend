@@ -22,15 +22,13 @@ const handleClick = () => {
 const Home = () => {
   return (
     <>
-      <ErrorBoundry>
-        <Header />
-        <Banner handleClick={handleClick} />
-        <Filter />
-        <AboutUs />
-        <BannerLower />
-        <Partners />
-        <Footer />
-      </ErrorBoundry>
+      <Header />
+      <Banner handleClick={handleClick} />
+      <Filter />
+      <AboutUs />
+      <BannerLower />
+      <Partners />
+      <Footer />
     </>
   );
 };
