@@ -5,7 +5,7 @@ import ErrorPage from '../../pages/errorPage';
 import FilterPage from '../../pages/filterPage/index';
 import GraduateCabinet from '../../pages/graduateCabinetPage/index';
 import LoginPage from '../../pages/loginPage';
-import UniversitiesPage from '../../pages/universitiesPage';
+import UniversitiesListPage from '../../pages/universitiesListPage';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RegistrationForm from '../../pages/registrationPage';
 import { useAuth } from '../../services/tokenValidator';
@@ -33,7 +33,7 @@ const App = () => {
             <RegistrationForm />
           </RedirectRoute>
           <Route path='/universities'>
-            <UniversitiesPage />
+            <UniversitiesListPage />
           </Route>
           <ProtectedRoute user={token} pathname='login' path='/cabinet'>
             <GraduateCabinet />
