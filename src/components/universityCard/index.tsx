@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './universityCard.module.scss';
+import {useAuth} from "../../services/tokenValidator";
 
 interface Props {
   liked?: boolean;
@@ -37,8 +38,11 @@ const UniversityCard: React.FC<Props> = (props) => {
     introDeadline,
   } = props;
 
+  const { token } = useAuth();
+
   return (
     <div className={styles.card}>
+
       <div
         className={
           liked
