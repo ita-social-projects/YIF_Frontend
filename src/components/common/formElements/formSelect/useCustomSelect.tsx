@@ -23,14 +23,13 @@ const useClickOutside = (initialIsVisible: boolean) => {
 
   return { container, isComponentVisible, setIsComponentVisible };
 }
-  //const url = `http://localhost:5000/api/Users/SetCurrentProfile`;
-  const url = `${APIUrl}Users/SetCurrentProfile`;
+  const url = `http://localhost:5000/api/Users/SetCurrentProfile`;
+  //const url = `${APIUrl}Users/SetCurrentProfile`;
   const { handleSchoolChange } = useProfile(url);
 
 const [isOpen, setIsOpen] = useState(false);
 const [selectedOption, setSelectedOption] = useState(null);
 let { container, isComponentVisible } = useClickOutside(true);
-const [value, setValue] = useState(null);
 
 
 const toggling = () => {
@@ -40,7 +39,6 @@ const toggling = () => {
 const onOptionClicked = (value: any) => () => {
   console.log(value)
   setSelectedOption(value);
-  setValue(value);
   handleSchoolChange(value);
   setIsOpen(false);
 };
@@ -61,7 +59,6 @@ return {
   container,
   selectedOption,
   isOpen,
-  value,
 }
 
 }

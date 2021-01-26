@@ -12,24 +12,24 @@ import { useAuth } from '../../services/tokenValidator';
 import { ProtectedRoute, RedirectRoute } from '../../services/customRoutes';
 
 const App = () => {
-  const { user } = useAuth();
+  const { token } = useAuth();
 
   return (
-    /*<Router>
+  /*  <Router>
       <Switch>
         <Route exact path='/'>
           <Home />
         </Route>
-        <RedirectRoute user={user} pathname='cabinet' path='/login'>
+        <RedirectRoute user={token} pathname='cabinet' path='/login'>
           <LoginPage />
         </RedirectRoute>
-        <RedirectRoute user={user} pathname='cabinet' path='/register'>
+        <RedirectRoute user={token} pathname='cabinet' path='/register'>
           <RegistrationForm />
         </RedirectRoute>
         <Route path='/universities'>
           <UniversitiesPage />
         </Route>
-        <ProtectedRoute user={user} pathname='login' path='/cabinet'>
+        <ProtectedRoute user={token} pathname='login' path='/cabinet'>
           <GraduateCabinet />
         </ProtectedRoute>
         <Route path='/filterPage' component={FilterPage} />
@@ -37,37 +37,29 @@ const App = () => {
         <Route component={ErrorPage} status={404} />
       </Switch>
     </Router>*/
+
       <Router>
-        <Switch>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-          {/* <RedirectRoute user={user} pathname='cabinet' path='/login'>
-          <LoginPage />
-        </RedirectRoute> */}
-          <Route path='/login'>
-            <LoginPage />
-          </Route>
-          <Route path='/register'>
-            <RegistrationForm />
-          </Route>
-          {/* <RedirectRoute user={user} pathname='cabinet' path='/register'>
-          <RegistrationForm />
-        </RedirectRoute> */}
-          <Route path='/universities'>
-            <UniversitiesPage />
-          </Route>
-          {/* <ProtectedRoute user={user} pathname='login' path='/cabinet'>
-          <GraduateCabinet />
-        </ProtectedRoute> */}
-          <Route path='/cabinet'>
-            <GraduateCabinet />
-          </Route>
-          <Route path='/filterPage' component={FilterPage} />
-          <Route path='/404' component={ErrorPage} status={404} />
-          <Route component={ErrorPage} status={404} />
-        </Switch>
-      </Router>
+       <Switch>
+         <Route exact path='/'>
+           <Home />
+         </Route>
+        <Route path='/login'>
+           <LoginPage />
+         </Route>
+         <Route path='/register'>
+           <RegistrationForm />
+        </Route>
+        <Route path='/universities'>
+          <UniversitiesPage />
+        </Route>
+         <Route path='/cabinet'>
+           <GraduateCabinet />
+         </Route>
+         <Route path='/filterPage' component={FilterPage} />
+        <Route path='/404' component={ErrorPage} status={404} />
+        <Route component={ErrorPage} status={404} />
+      </Switch>
+     </Router>
   );
 };
 

@@ -1,29 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { requestSecureData } from '../services/requestDataFunction';
 import { useAuth } from './tokenValidator';
+import { store } from '../store/store';
+import { setUserReducer, userSelector } from '../store/reducers/setUserReducer';
+import { useSelector } from 'react-redux';
 
 const useProfile = (endpoint: string) => {
 
-  const {
-    token,
-    user,
-    getToken,
-    userProfile,
-    getUserProfile,
-  } = useAuth();
+  const user = useSelector(userSelector);
 
-  const [name, setName] = useState(userProfile?.name);
-  const [surname, setSurname] = useState(userProfile?.surname);
-  const [middleName, setMiddleName] = useState(userProfile?.middleName);
-  const [phoneNumber, setPhoneNumber] = useState(userProfile?.phoneNumber);
-  const [email, setEmail] = useState(userProfile?.email || user?.email);
-  const [schoolName, setSchoolName] = useState( userProfile?.schoolName);
+  const { token, getToken } = useAuth();
+  const [name, setName] = useState(user.name);
+  const [surname, setSurname] = useState(user.surname);
+  const [middleName, setMiddleName] = useState(user.middleName);
+  const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
+  const [email, setEmail] = useState(user.email);
+  const [schoolName, setSchoolName] = useState(user.schoolName);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState({
     hasError: false,
     errorStatusCode: '',
     errorMessage: '',
   });
+  const [success, setSuccess] = useState({
+    hasSuccess: false,
+    successStatusCode: '',
+    successMessage: '',
+  });
+
+  useEffect(() => {
+    setName(user.name);
+    setSurname(user.surname);
+    setMiddleName(user.middleName);
+    setEmail(user.email);
+    setPhoneNumber(user.phoneNumber);
+    setSchoolName(user.schoolName);
+  }, [user]);
 
 
   const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,6 +75,11 @@ const useProfile = (endpoint: string) => {
     e.preventDefault();
     setSubmitted(true);
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
+    setSuccess({
+      hasSuccess: false,
+      successStatusCode: '',
+      successMessage: '',
+    });
     getToken();
     requestSecureData(endpoint, 'POST', token!, {
       name,
@@ -76,9 +93,20 @@ const useProfile = (endpoint: string) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
           setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
+          setSuccess({
+            hasSuccess: true,
+            successStatusCode: res.statusCode,
+            successMessage: res.data.message || 'Дані збережені',
+          });
+          setTimeout(() => {
+            setSuccess({
+              hasSuccess: false,
+              successStatusCode: '',
+              successMessage: '',
+            });
+          }, 3000);
           console.log('success kinda');
-          localStorage.setItem('user', JSON.stringify(res.data));
-          getUserProfile();
+          store.dispatch(setUserReducer(res.data));
           setSubmitted(false);
         } else {
           setError({
@@ -115,6 +143,7 @@ const useProfile = (endpoint: string) => {
     schoolName,
     submitted,
     error,
+    success,
   };
 };
 

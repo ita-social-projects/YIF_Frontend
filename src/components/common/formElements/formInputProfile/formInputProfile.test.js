@@ -5,8 +5,6 @@ import FormInputProfile from './index'
 import {Field, Form, Formik} from "formik";
 
 
-
-
 it ('renders without crashing', () => {
   const div =document.createElement('div');
   ReactDOM.render(
