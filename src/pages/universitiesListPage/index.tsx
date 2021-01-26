@@ -5,6 +5,7 @@ import styles from './universitiesListPage.module.scss';
 import { requestData } from '../../services/requestDataFunction';
 import Spinner from '../../components/common/spinner';
 import { paginationPagesCreator } from './paginationPagesCreator';
+import { APIUrl } from '../../services/endpoints';
 
 const UniversitiesListPage = () => {
   const [universitiesList, setList] = useState([
@@ -26,8 +27,10 @@ const UniversitiesListPage = () => {
   const [perPage] = useState(2);
   const [totalPages, setTotalPages] = useState(0);
 
+  //const urlLocalHost = 'http://localhost:5000/api/';
+
   useEffect(() => {
-    const endpoint = `http://localhost:5000/api/University?page=${currentPage}&pageSize=${perPage}`;
+    const endpoint = `${APIUrl}University?page=${currentPage}&pageSize=${perPage}`;
     setFetching(true);
     requestData(endpoint, 'GET').then((res: any) => {
       setTotalPages(res.data.totalPages);
