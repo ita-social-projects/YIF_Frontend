@@ -84,8 +84,6 @@
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
       "!src/serviceWorker.ts",
-      "!src/components/imageUploader/imageUploaderPopup/imageUploaderPopup.tsx",
-      "!src/components/common/formElements/formInputMessage/formInputMessage.tsx",
       "!src/index.tsx"
     ]
   }

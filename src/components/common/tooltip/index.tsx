@@ -8,7 +8,7 @@ interface Props {
 
 
  const Tooltips: React.FC<Props> = (props) => {
-   let timeout: any;
+
    const { token } = useAuth();
    const [ active, setActive ] = useState(false);
 
