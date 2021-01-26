@@ -1,10 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { MemoryRouter } from 'react-router-dom';
-import FormInputProfile from './index'
+import ReactDOM from "react-dom";
+import {MemoryRouter} from "react-router-dom";
 import {Field, Form, Formik} from "formik";
-
-
+import React from "react";
+import FormSelect from './index'
 
 
 it ('renders without crashing', () => {
@@ -15,7 +13,7 @@ it ('renders without crashing', () => {
             validate={(values) => {
               let errors = {};
               if (!values.lastName) {
-                errors.lastName = 'Заповніть поле';
+                errors.schoolName = '';
               }
               return errors;
             }}
@@ -24,12 +22,9 @@ it ('renders without crashing', () => {
             return (
                 <Form>
                   <Field
-                      component={FormInputProfile}
-                      iconName='lastName'
-                      type='lastName'
-                      name='lastName'
-                      placeholder='Прізвище'
-                      value=''
+                      component={FormSelect}
+                      type='school'
+                      name='school'
                   />
                 </Form>
             );
