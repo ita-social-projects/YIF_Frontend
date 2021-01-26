@@ -3,6 +3,7 @@ import { requestSecureData } from '../services/requestDataFunction';
 import { useAuth } from './tokenValidator';
 
 const useProfile = (endpoint: string) => {
+
   const {
     token,
     user,
@@ -10,18 +11,20 @@ const useProfile = (endpoint: string) => {
     userProfile,
     getUserProfile,
   } = useAuth();
+
   const [name, setName] = useState(userProfile?.name);
   const [surname, setSurname] = useState(userProfile?.surname);
   const [middleName, setMiddleName] = useState(userProfile?.middleName);
   const [phoneNumber, setPhoneNumber] = useState(userProfile?.phoneNumber);
   const [email, setEmail] = useState(userProfile?.email || user?.email);
-  const [schoolName, setSchoolName] = useState(userProfile?.schoolName);
+  const [schoolName, setSchoolName] = useState( userProfile?.schoolName);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState({
     hasError: false,
     errorStatusCode: '',
     errorMessage: '',
   });
+
 
   const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -48,12 +51,15 @@ const useProfile = (endpoint: string) => {
     setEmail(value);
   };
 
-  const handleSchoolChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setSchoolName(value);
+
+  const handleSchoolChange = (value: string) => {
+      setSchoolName(value);
+      console.log(schoolName)
   };
 
+
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    console.log(schoolName)
     e.preventDefault();
     setSubmitted(true);
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });

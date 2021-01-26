@@ -13,12 +13,12 @@ import {
 } from '../common/formElements';
 import useRegistration from '../../services/useRegistration';
 import Spinner from '../common/spinner';
-import { APIUrl } from '../../services/endpoints';
+//import { APIUrl } from '../../services/endpoints';
 
 
 
 const RegistrationForm: React.FC = () => {
-
+  const APIUrl = 'http://localhost:5000/api/';
   const useYIFRegistration = useRegistration(APIUrl);
 
   return (
