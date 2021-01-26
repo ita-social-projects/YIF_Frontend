@@ -4,62 +4,35 @@ import { useHistory } from 'react-router-dom';
 import { useAuth } from './tokenValidator';
 import { APIUrl } from '../../src/services/endpoints';
 import { useCaptcha } from './useCaptcha';
-import { getUser } from './getUser';
 
-const useRegistration = (endpoint: string) => {
+const useResetPasword = (endpoint: string) => {
   const captcha = useCaptcha(APIUrl);
-  const { updateToken } = useAuth();
   const history = useHistory();
-  const [email, setEmail] = useState({ email: '' });
-  const [password, setPassword] = useState({ password: '' });
-  const [confirmPassword, setConfirmPassword] = useState({
-    confirmPassword: '',
-  });
-
-  const [submitted, setSubmitted] = useState({ submitted: false });
+  const { updateToken } = useAuth();
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [error, setError] = useState({
     hasError: false,
     errorStatusCode: '',
     errorMessage: '',
   });
-
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setEmail({
-      email: value,
-    });
+    setEmail(value);
   };
-  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setPassword({
-      password: value,
-    });
-  };
-  const handleChangeConfirmPassword = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { value } = e.target;
-    setConfirmPassword({
-      confirmPassword: value,
-    });
-  };
-
   const handleSubmit = async (
     e: React.ChangeEvent<HTMLFormElement>,
     pathToRedirect: string
   ) => {
     e.preventDefault();
-
-    setSubmitted({ submitted: true });
+    setSubmitted(true);
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
 
     const token = await captcha.getCaptchaToken();
 
-    requestData(`${endpoint}Authentication/RegisterUser`, 'POST', {
-      email: email.email,
-      username: email.email,
-      password: password.password,
-      confirmPassword: confirmPassword.confirmPassword,
+    requestData(`${endpoint}Users/ResetPassword`, 'POST', {
+      userEmail: email,
       recaptchaToken: token,
     })
       .then((res: any) => {
@@ -67,8 +40,11 @@ const useRegistration = (endpoint: string) => {
         if (statusCode.match(/^[23]\d{2}$/)) {
           setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
           updateToken(res.data.token, res.data.refreshToken);
-          getUser(res.data.token);
-          history.push(pathToRedirect);
+          setSubmitted(false);
+          setSuccess(true);
+          setTimeout(() => {
+            history.push(pathToRedirect);
+          }, 3000);
         } else {
           setError({
             hasError: true,
@@ -88,15 +64,15 @@ const useRegistration = (endpoint: string) => {
   };
   return {
     handleChangeEmail,
-    handleChangePassword,
-    handleChangeConfirmPassword,
     handleSubmit,
     email,
-    password,
-    confirmPassword,
     submitted,
+    setSubmitted,
     error,
+    setError,
+    success,
+    setSuccess,
   };
 };
 
-export default useRegistration;
+export default useResetPasword;
