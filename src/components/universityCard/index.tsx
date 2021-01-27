@@ -11,9 +11,8 @@ interface Props {
   description: string;
   startOfCampaign: string;
   endOfCampaign: string;
-  getIdUniversity: FC;
-  clickHandler: FC;
-  universityId: string;
+  //getClickElem: FC;
+ // onClick: React.MouseEventHandler;
 }
 
 
@@ -49,11 +48,9 @@ const UniversityCard: React.FC<Props> = (props) => {
 
   const  clickHandler = (e: React.MouseEvent) => {
     e.preventDefault();
-    let parentElement = e.currentTarget.parentElement;
     setLiked(() => !isLiked);
-    console.log(parentElement)
-    return parentElement;
   }
+
   return (
     <div className={styles.card}>
      < Tooltips content='Ви маєте бути зареєстровані!' >
