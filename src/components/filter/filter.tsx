@@ -5,6 +5,7 @@ import { requestData } from '../../services/requestDataFunction';
 import DropboxElement from '../common/dropbox/dropbox';
 import styles from './filter.module.scss';
 import {useGetAllListData} from '../../services/useFilter';
+import { APIUrl } from '../../services/endpoints';
 
 import { useHistory } from 'react-router-dom';
 
@@ -56,19 +57,25 @@ const Filter = () => {
   //submit our form and redirect to the filterPage
   const onSubmit = (event: any) => {
     event.preventDefault();
-    requestData(`https://localhost:44324/api/University?DirectionName=${chosenData.direction}&SpecialityName=${chosenData.speciality}&UniversityAbbreviation=${chosenData.university}&page=${1}&pageSize=${3}`,'GET')
-    .then((res:any)=>{
+    /*
+    const maxPage:number = 2;
+    let URL = `${APIUrl}University?DirectionName=${chosenData.direction}&SpecialityName=${chosenData.speciality}&UniversityAbbreviation=${chosenData.university}&page=${1}&pageSize=${maxPage}`;
+    requestData(URL,'GET')
+    .then((res:any)=>{ 
+      history.push({
+        pathname:'/universities',
+        state:{
+          data: res.data,
+          statusCode: res.statusCode,
+          chosenDirection:chosenData.direction,
+          chosenSpeciality:chosenData.speciality,
+          chosenUniversity:chosenData.university,
+        }
+      });
       //reset filter
       dispatch(chooseDirection(''));
       dispatch(chooseSpeciality(''));
       dispatch(chooseUniversity(''));
-      history.push({
-        pathname:'/filterPage',
-        state:{
-          data: res.data,
-          statusCode: res.statusCode,
-        }
-      });
       console.log(res);
     })
     .catch((err:any)=>{
@@ -78,7 +85,20 @@ const Filter = () => {
       dispatch(chooseUniversity(''));
       console.log(err);
     })
-    //history.push('/404');
+    */
+      history.push({
+        pathname:'/universities',
+        state:{
+          chosenDirection:chosenData.direction,
+          chosenSpeciality:chosenData.speciality,
+          chosenUniversity:chosenData.university,
+        }
+      });
+      //reset filter
+      dispatch(chooseDirection(''));
+      dispatch(chooseSpeciality(''));
+      dispatch(chooseUniversity(''));
+
   };
 
   return (

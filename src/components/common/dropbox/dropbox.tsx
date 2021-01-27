@@ -6,6 +6,7 @@ import { chooseDirection, chooseSpeciality, chooseUniversity,setSpeciality,setDi
 import { selectData,selectChosenData } from '../../../store/reducers/dropboxReducer';
 import { isConstructSignatureDeclaration } from "typescript";
 import { requestData } from '../../../services/requestDataFunction';
+import { APIUrl } from '../../../services/endpoints';
 
 type Props = {
   data: string[]; // data from Props witch needed to upload in dropbox
@@ -117,16 +118,16 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
             case 'chooseUniversity':{
                 if(input[keyId].value===listTitle){
                     dispatch(chooseUniversity(''));
-                    requestNewData(`https://localhost:44324/api/Specialty/Names`,'setSpeciality',1,true);
-                    requestNewData(`https://localhost:44324/api/Direction/Names`,'setDirection',0,true);
+                    requestNewData(`${APIUrl}Specialty/Names`,'setSpeciality',1,true);
+                    requestNewData(`${APIUrl}Direction/Names`,'setDirection',0,true);
                 }
                 else{
                     dispatch(chooseUniversity(input[keyId].value))
                     // 0 - direction
                     // 1 - speciality
                     // 2 - university
-                    requestNewData(`https://localhost:44324/api/Specialty/Names?UniversityAbbreviation=${input[keyId].value}`,'setSpeciality',1);
-                    requestNewData(`https://localhost:44324/api/Direction/Names?UniversityAbbreviation=${input[keyId].value}`,'setDirection',0);
+                    requestNewData(`${APIUrl}Specialty/Names?UniversityAbbreviation=${input[keyId].value}`,'setSpeciality',1);
+                    requestNewData(`${APIUrl}Direction/Names?UniversityAbbreviation=${input[keyId].value}`,'setDirection',0);
                 }
                 
             }
@@ -134,16 +135,16 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
             case 'chooseSpeciality':{
                 if(input[keyId].value===listTitle){
                     dispatch(chooseSpeciality(''));
-                    requestNewData(`https://localhost:44324/api/University/Abbreviations`,'setUniversity',2,true);
-                    requestNewData(`https://localhost:44324/api/Direction/Names`,'setDirection',0,true);
+                    requestNewData(`${APIUrl}University/Abbreviations`,'setUniversity',2,true);
+                    requestNewData(`${APIUrl}Direction/Names`,'setDirection',0,true);
                 }
                 else{
                     dispatch(chooseSpeciality(input[keyId].value))
                     // 0 - direction
                     // 1 - speciality
                     // 2 - university
-                    requestNewData(`https://localhost:44324/api/University/Abbreviations?SpecialityName=${input[keyId].value}`,'setUniversity',2);
-                    requestNewData(`https://localhost:44324/api/Direction/Names?SpecialityName=${input[keyId].value}`,'setDirection',0);
+                    requestNewData(`${APIUrl}University/Abbreviations?SpecialityName=${input[keyId].value}`,'setUniversity',2);
+                    requestNewData(`${APIUrl}Direction/Names?SpecialityName=${input[keyId].value}`,'setDirection',0);
                 }
                 
             }
@@ -151,16 +152,16 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
             case 'chooseDirection':{
                 if(input[keyId].value===listTitle){
                     dispatch(chooseDirection(''));
-                    requestNewData(`https://localhost:44324/api/University/Abbreviations`,'setUniversity',2,true);
-                    requestNewData(`https://localhost:44324/api/Specialty/Names`,'setSpeciality',1,true);
+                    requestNewData(`${APIUrl}University/Abbreviations`,'setUniversity',2,true);
+                    requestNewData(`${APIUrl}Specialty/Names`,'setSpeciality',1,true);
                 }
                 else{
                     dispatch(chooseDirection(input[keyId].value))
                     // 0 - direction
                     // 1 - speciality
                     // 2 - university
-                    requestNewData(`https://localhost:44324/api/University/Abbreviations?DirectionName=${input[keyId].value}`,'setUniversity',2);
-                    requestNewData(`https://localhost:44324/api/Speciality/Names?DirectionName=${input[keyId].value}`,'setSpeciality',1);
+                    requestNewData(`${APIUrl}University/Abbreviations?DirectionName=${input[keyId].value}`,'setUniversity',2);
+                    requestNewData(`${APIUrl}Speciality/Names?DirectionName=${input[keyId].value}`,'setSpeciality',1);
                 }
             }
             break;
