@@ -8,7 +8,6 @@ import { paginationPagesCreator } from './paginationPagesCreator';
 import { APIUrl } from '../../services/endpoints';
 
 
-
 const UniversitiesListPage = () => {
   const [universitiesList, setList] = useState([
     {
@@ -82,14 +81,18 @@ const UniversitiesListPage = () => {
     let universityId = id;
     console.log(id);
   }
+  const getClickElem =(event:any) => {
+    console.log('fhfhfgf')
+    console.log(event);
+
+  }
 
 
   const universitiesCardList = universitiesList.map((item: any) => {
+
     return (
       <UniversityCard
-          universityId={item.id}
-          clickHandler = {item.id}
-          getIdUniversity={(item.id)}
+          // onClick={ event => getClickElem (event)
         key={item.id}
         abbreviation={item.abbreviation}
         site={item.site}
