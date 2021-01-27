@@ -33,13 +33,15 @@ interface getData_{
     reducers: {     
       setUniversity: (state, action: PayloadAction<string[]>) => {
         let i = 0;
-        action.payload.forEach((item)=>{
+          state.value.university.splice(0); // reset size of array
+          action.payload.forEach((item)=>{
           state.value.university[i]=item;
           i++;
         })
       },
       setSpeciality: (state, action: PayloadAction<string[]>) => {
         let i = 0;
+        state.value.speciality.splice(0);
         action.payload.forEach((item)=>{
           state.value.speciality[i]=item;
           i++;
@@ -47,6 +49,7 @@ interface getData_{
       },
       setDirection: (state, action: PayloadAction<string[]>) => {
         let i = 0;
+        state.value.direction.splice(0);
         action.payload.forEach((item)=>{
           state.value.direction[i]=item;
           i++;
