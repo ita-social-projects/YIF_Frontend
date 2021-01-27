@@ -118,8 +118,11 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
             case 'chooseUniversity':{
                 if(input[keyId].value===listTitle){
                     dispatch(chooseUniversity(''));
+                    requestNewData(`${APIUrl}University/Abbreviations`,'setUniversity',2,true);
+                    /*
                     requestNewData(`${APIUrl}Specialty/Names`,'setSpeciality',1,true);
                     requestNewData(`${APIUrl}Direction/Names`,'setDirection',0,true);
+                    */
                 }
                 else{
                     dispatch(chooseUniversity(input[keyId].value))
@@ -135,8 +138,11 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
             case 'chooseSpeciality':{
                 if(input[keyId].value===listTitle){
                     dispatch(chooseSpeciality(''));
+                    requestNewData(`${APIUrl}Specialty/Names`,'setSpeciality',1,true);
+                    /*
                     requestNewData(`${APIUrl}University/Abbreviations`,'setUniversity',2,true);
                     requestNewData(`${APIUrl}Direction/Names`,'setDirection',0,true);
+                    */
                 }
                 else{
                     dispatch(chooseSpeciality(input[keyId].value))
@@ -152,8 +158,11 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
             case 'chooseDirection':{
                 if(input[keyId].value===listTitle){
                     dispatch(chooseDirection(''));
+                    requestNewData(`${APIUrl}Direction/Names`,'setDirection',0,true);
+                    /*
                     requestNewData(`${APIUrl}University/Abbreviations`,'setUniversity',2,true);
                     requestNewData(`${APIUrl}Specialty/Names`,'setSpeciality',1,true);
+                    */
                 }
                 else{
                     dispatch(chooseDirection(input[keyId].value))
