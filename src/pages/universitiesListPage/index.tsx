@@ -7,11 +7,14 @@ import Spinner from '../../components/common/spinner';
 import { paginationPagesCreator } from './paginationPagesCreator';
 import { APIUrl } from '../../services/endpoints';
 
+
+
 const UniversitiesListPage = () => {
   const [universitiesList, setList] = useState([
     {
+      data: 'qqq',
       id: 'cdvdvdv',
-      liked: false,
+      //liked: false,
       abbreviation: 'НУВГП',
       site: 'nuwm.edu.ua',
       address: 'Україна, 33028, м. Рівне, вул. Соборна, 11',
@@ -26,6 +29,11 @@ const UniversitiesListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(2);
   const [totalPages, setTotalPages] = useState(0);
+  const [error, setError] = useState({
+    hasError: false,
+    errorStatusCode: '',
+    errorMessage: '',
+  });
 
   //const urlLocalHost = 'http://localhost:5000/api/';
 
@@ -50,9 +58,38 @@ const UniversitiesListPage = () => {
     });
   }, [currentPage]);
 
+
+  //const endpointLikedUniversity = `${APIUrl}University/Favorites/${universityId}`;
+
+    const sendLikedUnlikedUniversity = (endpoint:string, method:string) => {
+      requestData(endpoint, method)
+          .then((res: any) => {
+            const statusCode = res.statusCode.toString();
+            if (statusCode.match(/^[23]\d{2}$/)) {
+              setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
+            } else {
+              setError({
+                hasError: true,
+                errorStatusCode: res.statusCode,
+                errorMessage:
+                    res.data.message || 'Щось пішло не так, спробуйте знову.',
+              });
+            }
+          })
+    }
+
+  const getIdUniversity =(id:string) => {
+    let universityId = id;
+    console.log(id);
+  }
+
+
   const universitiesCardList = universitiesList.map((item: any) => {
     return (
       <UniversityCard
+          universityId={item.id}
+          clickHandler = {item.id}
+          getIdUniversity={(item.id)}
         key={item.id}
         abbreviation={item.abbreviation}
         site={item.site}
@@ -66,7 +103,7 @@ const UniversitiesListPage = () => {
         endOfCampaign={item.endOfCampaign.slice(0, 10)}
       />
     );
-  });
+  })
 
   const arrowIcon = (
     <svg

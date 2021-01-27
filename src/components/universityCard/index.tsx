@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {FC, useState} from 'react';
 import styles from './universityCard.module.scss';
 import Tooltips from "../common/tooltip";
+import {useAuth} from "../../services/tokenValidator";
 
 interface Props {
   liked?: boolean;
@@ -10,9 +11,17 @@ interface Props {
   description: string;
   startOfCampaign: string;
   endOfCampaign: string;
+  getIdUniversity: FC;
+  clickHandler: FC;
+  universityId: string;
 }
 
+
 const UniversityCard: React.FC<Props> = (props) => {
+
+  const [ isLiked, setLiked ] = useState(false);
+  const { token } = useAuth();
+
   const starSVG = (
     <svg
       width='50'
@@ -28,8 +37,8 @@ const UniversityCard: React.FC<Props> = (props) => {
     </svg>
   );
 
-  const {
-    liked,
+  let {
+    //liked,
     abbreviation,
     site,
     address,
@@ -38,13 +47,19 @@ const UniversityCard: React.FC<Props> = (props) => {
     endOfCampaign,
   } = props;
 
-
+  const  clickHandler = (e: React.MouseEvent) => {
+    e.preventDefault();
+    let parentElement = e.currentTarget.parentElement;
+    setLiked(() => !isLiked);
+    console.log(parentElement)
+    return parentElement;
+  }
   return (
     <div className={styles.card}>
-     < Tooltips content='Ви повинні бути зареєстровані!' >
-      <div
-        className={
-          liked
+     < Tooltips content='Ви маєте бути зареєстровані!' >
+      <div onClick={clickHandler}
+           className={
+          token && isLiked
             ? `${styles.card__icon} ${styles.card__icon__liked}`
             : `${styles.card__icon}`
         }
