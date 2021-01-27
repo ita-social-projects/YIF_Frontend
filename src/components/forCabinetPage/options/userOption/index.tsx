@@ -8,10 +8,9 @@ import Spinner from '../../../common/spinner';
 import ImageUploader from '../../../imageUploader';
 import useProfile from '../../../../services/useProfile';
 import { APIUrl } from '../../../../services/endpoints';
-import { useAuth } from '../../../../services/tokenValidator';
-import {FormInputSuccess} from "../../../common/formElements/formInputSuccess/formInputSuccess";
-
-
+import { FormInputSuccess } from '../../../common/formElements/formInputSuccess/formInputSuccess';
+import { userSelector } from '../../../../store/reducers/setUserReducer';
+import { useSelector } from 'react-redux';
 
 const UserOption = () => {
   const avatarSyles = {
@@ -21,12 +20,9 @@ const UserOption = () => {
   };
 
   const url = `${APIUrl}Users/SetCurrentProfile`;
-  // const url = `http://localhost:5000/api/Users/SetCurrentProfile`;
   const useYIFProfile = useProfile(url);
-  const { user, userProfile } = useAuth();
 
-  const email = userProfile?.email || user?.email;
-
+  const user = useSelector(userSelector);
   return (
     <Fragment>
       <section className={styles.mainStyle}>
@@ -45,34 +41,25 @@ const UserOption = () => {
                 errorMessage={useYIFProfile.error.errorMessage}
               />
             )}
-            {useYIFProfile.success.hasSuccess &&
-            (<FormInputSuccess
-                    successMessage={useYIFProfile.success.successMessage}
-                />
+            {useYIFProfile.success.hasSuccess && (
+              <FormInputSuccess
+                successMessage={useYIFProfile.success.successMessage}
+              />
             )}
           </div>
           <Formik
             initialValues={{
-              lastName: userProfile?.surname || '',
-              firstName: userProfile?.name || '',
-              fathersName: userProfile?.middleName || '',
-              email: email || '',
-              phone: userProfile?.phoneNumber || '',
-              school: userProfile?.schoolName || '',
+              lastName: user.surname,
+              firstName: user.name,
+              fathersName: user.middleName,
+              email: user.email,
+              phone: user.phoneNumber,
+              school: user.schoolName,
             }}
+            enableReinitialize
             validationSchema={validationField}
             onSubmit={(values, actions) => {
               actions.setSubmitting(false);
-              actions.resetForm({
-                values: {
-                  lastName: '',
-                  firstName: '',
-                  fathersName: '',
-                  email: '',
-                  phone: '',
-                  school: '',
-                },
-              });
             }}
           >
             {({
