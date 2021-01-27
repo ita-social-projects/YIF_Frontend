@@ -93,7 +93,7 @@
 // stand alone classes for visual effects
 //for options(li) 
 .show_list_box{
-  height: 13.13rem;
+  height: var(--heigth);//13.13rem;
   transition: height 0.5s;
 }
 //for text in input 

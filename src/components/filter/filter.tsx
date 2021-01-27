@@ -56,7 +56,7 @@ const Filter = () => {
   //submit our form and redirect to the filterPage
   const onSubmit = (event: any) => {
     event.preventDefault();
-    requestData(`https://localhost:44324/api/University?DirectionName=${chosenData.direction}&SpecialityName=${chosenData.speciality}&UniversityAbbreviation=${chosenData.university}&page=${1}&page=${10}`,'GET')
+    requestData(`https://localhost:44324/api/University?DirectionName=${chosenData.direction}&SpecialityName=${chosenData.speciality}&UniversityAbbreviation=${chosenData.university}&page=${1}&pageSize=${3}`,'GET')
     .then((res:any)=>{
       //reset filter
       dispatch(chooseDirection(''));
