@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useAuth } from './tokenValidator';
 import { APIUrl } from '../../src/services/endpoints';
 import { useCaptcha } from './useCaptcha';
+import { getUser } from './getUser';
 
 const useLogin = (endpoint: string) => {
   const captcha = useCaptcha(APIUrl);
@@ -43,8 +44,6 @@ const useLogin = (endpoint: string) => {
 
     const token = await captcha.getCaptchaToken();
 
-    //`${endpoint}Authentication/LoginUser`
-    //`http://localhost:5000/api/Authentication/LoginUser`
     requestData(`${endpoint}Authentication/LoginUser`, 'POST', {
       email: email.email,
       password: password.password,
@@ -55,7 +54,8 @@ const useLogin = (endpoint: string) => {
         if (statusCode.match(/^[23]\d{2}$/)) {
           setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
           updateToken(res.data.token, res.data.refreshToken);
-          history.push(pathToRedirect);
+          getUser(res.data.token);
+          history.push(pathToRedirect); //can be deleted ?
         } else {
           setError({
             hasError: true,

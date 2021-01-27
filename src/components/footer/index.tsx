@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../services/tokenValidator';
 
 const Footer: React.FC = () => {
-  const { user } = useAuth();
+  const { token } = useAuth();
 
   return (
     <footer>
       <div className={styles.footer}>
         <section className={styles.mainElements}>
           <article>
-            {!user && (
+            {!token && (
               <>
                 <Link to='/login'>
                   <button className={styles.animatedButtonTransparent}>

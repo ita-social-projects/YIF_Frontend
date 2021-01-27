@@ -28,15 +28,13 @@ const Home = () => {
   useGetAllListData('https://localhost:44324/api/Direction/Names','setDirection');
   return (
     <>
-      <ErrorBoundry>
-        <Header />
-        <Banner handleClick={handleClick} />
-        <Filter />
-        <AboutUs />
-        <BannerLower />
-        <Partners />
-        <Footer />
-      </ErrorBoundry>
+      <Header />
+      <Banner handleClick={handleClick} />
+      <Filter />
+      <AboutUs />
+      <BannerLower />
+      <Partners />
+      <Footer />
     </>
   );
 };

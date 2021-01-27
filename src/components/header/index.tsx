@@ -1,16 +1,46 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './header.module.scss';
 import { Link } from 'react-router-dom';
+import { store } from '../../store/store';
+import { removeUserReducer } from '../../store/reducers/setUserReducer';
 import { useAuth } from '../../services/tokenValidator';
+import { useSelector } from 'react-redux';
+import { userSelector } from '../../store/reducers/setUserReducer';
 
 const Header: React.FC = () => {
-  const { user, removeToken, userProfile } = useAuth();
-  const userEmail =
-    userProfile?.email.substr(0, userProfile?.email.indexOf('@')) ||
-    user?.email.substr(0, user?.email.indexOf('@'));
-
+  const { token, removeToken } = useAuth();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { email, photo } = useSelector(userSelector);
+
+  const userName = email.substr(0, email.indexOf('@'));
+  const avatar = photo ? photo : 'assets/icons/avatar.jpg';
+
   const ref = useRef<HTMLDivElement>(null);
+
+  const handleClick = (event: React.MouseEvent) => {
+    event.preventDefault();
+    setIsDropdownOpen(() => !isDropdownOpen);
+  };
+
+  const logout = () => {
+    setIsDropdownOpen(() => !isDropdownOpen);
+    removeToken();
+    store.dispatch(removeUserReducer());
+  };
+
+  const handleClickOutside = (event: any) => {
+    if (ref.current && !ref.current.contains(event.target as Node)) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, true);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  }, []);
 
   const dropdownArrowDown = (
     <svg
@@ -45,36 +75,12 @@ const Header: React.FC = () => {
     </svg>
   );
 
-  const handleClick = (event: React.MouseEvent) => {
-    event.preventDefault();
-    setIsDropdownOpen(() => !isDropdownOpen);
-  };
-
-  const logout = () => {
-    setIsDropdownOpen(() => !isDropdownOpen);
-    removeToken();
-  };
-
-  const handleClickOutside = (event: any) => {
-    if (ref.current && !ref.current.contains(event.target as Node)) {
-      setIsDropdownOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside, true);
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside, true);
-    };
-  }, []);
-
   const dropdownContent = isDropdownOpen ? (
     <>
       <div className={`${styles.user} ${styles.border}`}>
-        <span className={`${styles.userName}`}>{userEmail}</span>
+        <span className={`${styles.userName}`}>{userName}</span>
         <img
-          src='assets/icons/avatar.jpg'
+          src={avatar}
           alt='avatar'
           className={styles.avatar}
           onClick={handleClick}
@@ -90,9 +96,9 @@ const Header: React.FC = () => {
     </>
   ) : (
     <div className={styles.user}>
-      <span className={`${styles.userName}`}>{userEmail}</span>
+      <span className={`${styles.userName}`}>{userName}</span>
       <img
-        src='assets/icons/avatar.jpg'
+        src={avatar}
         alt='avatar'
         className={styles.avatar}
         onClick={handleClick}
@@ -103,7 +109,7 @@ const Header: React.FC = () => {
     </div>
   );
 
-  const entryContent = user ? (
+  const entryContent = token ? (
     <>
       <div className={styles.dropdown}>{dropdownContent}</div>
     </>

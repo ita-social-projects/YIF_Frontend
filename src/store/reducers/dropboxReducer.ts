@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../../store/store";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../../store/store';
 
 interface getData_{
     value:{
@@ -74,5 +74,4 @@ interface getData_{
   export const selectData = (state: RootState) => state.dropbox.value;
   export const selectChosenData = (state: RootState) => state.dropbox.chosenValue;
   
-  export default dropboxSlice.reducer;
-
+export default dropboxSlice.reducer;
