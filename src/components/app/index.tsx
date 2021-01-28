@@ -54,7 +54,7 @@ const App = () => {
     //       <RegistrationForm />
     //     </Route>
     //     <Route path='/universities'>
-    //       <UniversitiesPage />
+    //       <UniversitiesListPage />
     //     </Route>
     //     <Route path='/cabinet'>
     //       <GraduateCabinet />
