@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import { Header, Footer, UniversityCard } from '../../components';
 import ErrorBoundry from '../../errorBoundry';
 import styles from './universitiesListPage.module.scss';
@@ -13,7 +13,7 @@ const UniversitiesListPage = () => {
     {
       data: 'qqq',
       id: 'cdvdvdv',
-      //liked: false,
+      liked: false,
       abbreviation: 'НУВГП',
       site: 'nuwm.edu.ua',
       address: 'Україна, 33028, м. Рівне, вул. Соборна, 11',
@@ -23,6 +23,7 @@ const UniversitiesListPage = () => {
       endOfCampaign: '21.08.2021',
     },
   ]);
+
 
   const [isFetching, setFetching] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,6 +44,7 @@ const UniversitiesListPage = () => {
       setTotalPages(res.data.totalPages);
       const newList = res.data.responseList.map((item: any) => {
         return {
+          liked: item.liked,
           id: item.id,
           abbreviation: item.abbreviation,
           site: item.site,
@@ -77,14 +79,9 @@ const UniversitiesListPage = () => {
           })
     }
 
-  const getIdUniversity =(id:string) => {
-    let universityId = id;
-    console.log(id);
-  }
-  const getClickElem =(event:any) => {
-    console.log('fhfhfgf')
-    console.log(event);
 
+  const getClickElem = (event: React.MouseEvent) => {
+    console.log(event);
   }
 
 
@@ -92,7 +89,7 @@ const UniversitiesListPage = () => {
 
     return (
       <UniversityCard
-          // onClick={ event => getClickElem (event)
+          onClick={(event => console.log('ddd'))}
         key={item.id}
         abbreviation={item.abbreviation}
         site={item.site}
@@ -104,7 +101,7 @@ const UniversitiesListPage = () => {
         }
         startOfCampaign={item.startOfCampaign.slice(0, 10)}
         endOfCampaign={item.endOfCampaign.slice(0, 10)}
-      />
+          liked={item.liked}/>
     );
   })
 

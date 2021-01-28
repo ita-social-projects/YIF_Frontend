@@ -11,8 +11,8 @@ interface Props {
   description: string;
   startOfCampaign: string;
   endOfCampaign: string;
-  //getClickElem: FC;
- // onClick: React.MouseEventHandler;
+  //getClickElem: {onClick: (event: React.MouseEvent) => void};
+  onClick: React.MouseEventHandler;
 }
 
 
