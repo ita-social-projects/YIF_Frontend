@@ -83,28 +83,28 @@ it('look if after click on menu option or icon we render right component', () =>
   expect(mainFiled[3].textContent).toBe(container_option.textContent);
 
   //-------- choose univ List -----------
-  //--- click on menu option
-  fireEvent.click(menuList[1]);
-  act(() => {
-    ReactDOM.render(
-      <Provider store={store}>
-        <UnivListOption />
-      </Provider>,
-      container_option
-    );
-  });
-  expect(mainFiled[3].textContent).toBe(container_option.textContent);
-  //--- click on icon
-  fireEvent.click(icons[1]);
-  act(() => {
-    ReactDOM.render(
-      <Provider store={store}>
-        <UnivListOption />
-      </Provider>,
-      container_option
-    );
-  });
-  expect(mainFiled[3].textContent).toBe(container_option.textContent);
+  // //--- click on menu option
+  // fireEvent.click(menuList[1]);
+  // act(() => {
+  //   ReactDOM.render(
+  //     <Provider store={store}>
+  //       <UnivListOption />
+  //     </Provider>,
+  //     container_option
+  //   );
+  // });
+  // expect(mainFiled[3].textContent).toBe(container_option.textContent);
+  // //--- click on icon
+  // fireEvent.click(icons[1]);
+  // act(() => {
+  //   ReactDOM.render(
+  //     <Provider store={store}>
+  //       <UnivListOption />
+  //     </Provider>,
+  //     container_option
+  //   );
+  // });
+  // expect(mainFiled[3].textContent).toBe(container_option.textContent);
 
   //-------- choose spec List -----------
   //--- click on menu option
