@@ -1,8 +1,7 @@
-import { useState,useEffect } from 'react';
+import { useEffect } from 'react';
 import { requestData } from '../services/requestDataFunction';
 import { setUniversity,setSpeciality, setDirection} from '../store/reducers/dropboxReducer';
-import dropboxReducer from '../store/reducers/dropboxReducer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 export const useGetAllListData =(endpoint: string,action:string) =>{
     const dispatch = useDispatch();
@@ -13,17 +12,11 @@ export const useGetAllListData =(endpoint: string,action:string) =>{
             //store data to state
             let names:string[]=res.data;
             switch(action){
-                case 'setUniversity':{
-                    dispatch(setUniversity(names));
-                }
+                case 'setUniversity': dispatch(setUniversity(names));
                 break;
-                case 'setSpeciality':{
-                    dispatch(setSpeciality(names));
-                }
+                case 'setSpeciality': dispatch(setSpeciality(names));
                 break;
-                case 'setDirection':{
-                    dispatch(setDirection(names));
-                }
+                case 'setDirection':  dispatch(setDirection(names));
                 break;
             }
         })

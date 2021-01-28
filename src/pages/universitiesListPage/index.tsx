@@ -8,9 +8,6 @@ import Spinner from '../../components/common/spinner';
 import { paginationPagesCreator } from './paginationPagesCreator';
 import { APIUrl } from '../../services/endpoints';
 
-import { useSelector,useDispatch } from 'react-redux';
-import { selectData,selectChosenData ,chooseDirection, chooseSpeciality, chooseUniversity} from '../../store/reducers/dropboxReducer';
-
 const UniversitiesListPage = () => {
   const [universitiesList, setList] = useState([
     {
@@ -35,14 +32,14 @@ const UniversitiesListPage = () => {
   
   useEffect(() => {
     let URL:string='';
-    if((location.state!=undefined)){
+    if((location.state!==undefined)){
       URL = `${APIUrl}University?DirectionName=${location.state.chosenDirection}&SpecialityName=${location.state.chosenSpeciality}&UniversityAbbreviation=${location.state.chosenUniversity}&page=${currentPage}&pageSize=${perPage}`;
       console.log(location.state.chosenUniversity);
     }else
     if(location.state===undefined){
       URL = `${APIUrl}University?page=${currentPage}&pageSize=${perPage}`;
     }
-    //const endpoint = `${APIUrl}University?page=${currentPage}&pageSize=${perPage}`;
+
     const endpoint = URL;
     setFetching(true);
     requestData(endpoint, 'GET').then((res: any) => {
