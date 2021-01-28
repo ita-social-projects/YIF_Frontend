@@ -11,15 +11,14 @@ import { APIUrl } from '../../services/endpoints';
 const UniversitiesListPage = () => {
   const [universitiesList, setList] = useState([
     {
-      id: 'cdvdvdv',
+      id: '',
       liked: false,
-      abbreviation: 'НУВГП',
-      site: 'nuwm.edu.ua',
-      address: 'Україна, 33028, м. Рівне, вул. Соборна, 11',
-      description:
-        "Університет визнаний в Україні та за її межами єдиний в державі вищий навчальний заклад, який готує фахівців для галузі водного господарства, з потужною матеріально-технічною базою, висококваліфікованим кадровим потенціалом, багатотисячною студентською сім'єю.",
-      startOfCampaign: '01.07.2021',
-      endOfCampaign: '21.08.2021',
+      abbreviation: '',
+      site: '',
+      address: '',
+      description: '',
+      startOfCampaign: '',
+      endOfCampaign: '',
     },
   ]);
 
