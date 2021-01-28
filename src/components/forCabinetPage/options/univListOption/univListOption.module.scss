@@ -18,50 +18,6 @@
   padding-right: 9.03vw;
 }
 
-.placeholder {
-  @include flex(column, center, flex-start);
-  width: 100%;
-  margin-top: 100px;
-  margin-bottom: 20px;
-  font-family: $fontNunito;
-  font-size: $font_40px;
-  font-weight: $regular;
-  text-align: center;
-
-  @include laptop {
-    font-size: calc((30 / 16) * 1rem);
-  }
-
-  @include tablet {
-    font-size: calc((30 / 16) * 1rem);
-  }
-
-  @include mobile-w {
-    font-size: calc((30 / 16) * 1rem);
-  }
-
-  @include mobile {
-    font-size: calc((30 / 16) * 1rem);
-  }
-
-  &__imgContainer {
-    margin-top: 70px;
-    width: 40%;
-
-    @include tablet {
-      width: 80%;
-    }
-
-    @include mobile-w {
-      width: 80%;
-    }
-
-    @include mobile {
-      width: 80%;
-    }
-  }
-}
-
 .spinnerContainer {
   margin-top: 100px;
   @include flex(row, center, center);
