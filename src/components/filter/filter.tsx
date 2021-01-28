@@ -1,11 +1,8 @@
-import React, { Fragment,useState,useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import { selectData,selectChosenData ,chooseDirection, chooseSpeciality, chooseUniversity} from '../../store/reducers/dropboxReducer';
-import { requestData } from '../../services/requestDataFunction';
 import DropboxElement from '../common/dropbox/dropbox';
 import styles from './filter.module.scss';
-import {useGetAllListData} from '../../services/useFilter';
-import { APIUrl } from '../../services/endpoints';
 
 import { useHistory } from 'react-router-dom';
 
@@ -57,35 +54,6 @@ const Filter = () => {
   //submit our form and redirect to the filterPage
   const onSubmit = (event: any) => {
     event.preventDefault();
-    /*
-    const maxPage:number = 2;
-    let URL = `${APIUrl}University?DirectionName=${chosenData.direction}&SpecialityName=${chosenData.speciality}&UniversityAbbreviation=${chosenData.university}&page=${1}&pageSize=${maxPage}`;
-    requestData(URL,'GET')
-    .then((res:any)=>{ 
-      history.push({
-        pathname:'/universities',
-        state:{
-          data: res.data,
-          statusCode: res.statusCode,
-          chosenDirection:chosenData.direction,
-          chosenSpeciality:chosenData.speciality,
-          chosenUniversity:chosenData.university,
-        }
-      });
-      //reset filter
-      dispatch(chooseDirection(''));
-      dispatch(chooseSpeciality(''));
-      dispatch(chooseUniversity(''));
-      console.log(res);
-    })
-    .catch((err:any)=>{
-      //reset filter
-      dispatch(chooseDirection(''));
-      dispatch(chooseSpeciality(''));
-      dispatch(chooseUniversity(''));
-      console.log(err);
-    })
-    */
       history.push({
         pathname:'/universities',
         state:{

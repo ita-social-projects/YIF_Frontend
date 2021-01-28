@@ -81,8 +81,10 @@
       text-align: left;
       background-color:$lightBlue_3;
       padding-left: 1.25rem;
-      padding-top:1.06rem;
-      padding-bottom: 0.875rem;
+      display: flex;
+      align-items: center;
+      //padding-top:1.06rem;
+      //padding-bottom: 0.875rem;
     }
   }
   .combolist_li li:hover{

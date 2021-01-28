@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import {
   Header,
   Banner,
@@ -8,7 +8,6 @@ import {
   AboutUs,
   Footer,
 } from '../../components';
-import ErrorBoundry from '../../errorBoundry';
 import {useGetAllListData} from '../../services/useFilter';
 import { APIUrl } from '../../services/endpoints';
 

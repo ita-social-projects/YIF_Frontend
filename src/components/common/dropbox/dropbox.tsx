@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./dropbox.module.scss";
 import { ReactComponent as Arrow } from "./arrow.svg";
-import { useDispatch,useSelector} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { chooseDirection, chooseSpeciality, chooseUniversity,setSpeciality,setDirection,setUniversity } from "../../../store/reducers/dropboxReducer";
-import { selectData,selectChosenData } from '../../../store/reducers/dropboxReducer';
-import { isConstructSignatureDeclaration } from "typescript";
 import { requestData } from '../../../services/requestDataFunction';
 import { APIUrl } from '../../../services/endpoints';
 
@@ -21,18 +19,6 @@ type Props = {
 
 const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,inputWidth,reduxMethod,placeholder})=>{  
    const dispatch = useDispatch();
-   const state = useSelector(selectData);
-   const [updateCount,setUpdateCount]=useState(0);
-
-    // dynamic uploading data to our dropbox from props
-  const addElementsNew = (element: Element, data: string[]) => {
-    for (let i: number = 0; i < data.length; i++) {
-      let li: Element = document.createElement("li");
-      li.innerHTML = data[i];
-      element.appendChild(li);
-    }
-  };
-
 
   const ElementsUpdate = (element: Element, data: string[],listTitle:string) => {
     const li = element.querySelectorAll("li");
@@ -208,10 +194,10 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
     
     //set dynamic heigth for opened dropbox
     const liCount = listBox[keyId].querySelectorAll("li");
-    if(liCount.length<3){
+    if(liCount.length<=3){
       document.body.style.setProperty('--heigth', `${3.40*liCount.length}rem`);
     }else
-    if(liCount.length>=3){
+    if(liCount.length>3){
       document.body.style.setProperty('--heigth', `${13.13}rem`);
     }
     
@@ -221,31 +207,20 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
     arrow[keyId].classList.toggle(styles.arrow_up);
   };
 
-  const showListBox =(event: any)=>{
-    const combolistLi = document.querySelectorAll(`.${styles.combolist_li}`);
+  const showListBox =()=>{
+    //const combolistLi = document.querySelectorAll(`.${styles.combolist_li}`);
     const listBox = document.querySelectorAll(`.${styles.list_box}`);
     const input = document.querySelectorAll<HTMLInputElement>(
       `.${styles.dropbox_title} input`
     );
     const arrow = document.querySelectorAll(`.${styles.arrow}`);
 
-    let isClickInside = input[keyId].contains(event.target);
-
-    if (/*!isClickInside*/1) {
-      //hide all(after) dropboxes
-      for (let c: number = keyId; c < combolistLi.length; c++) {
-        listBox[c].classList.remove(styles.show_list_box);
-        input[c].classList.remove(styles.gray_color_text);
-        arrow[c].classList.remove(styles.arrow_up);
-      }
-    }
-    if(isClickInside){
       //set dynamic heigth for opened dropbox
       const liCount = listBox[keyId].querySelectorAll("li");
-      if(liCount.length<3){
+      if(liCount.length<=3){
         document.body.style.setProperty('--heigth', `${3.40*liCount.length}rem`);
       }else
-      if(liCount.length>=3){
+      if(liCount.length>3){
         document.body.style.setProperty('--heigth', `${13.13}rem`);
       }
 
@@ -253,10 +228,10 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
       listBox[keyId].classList.add(styles.show_list_box);
       input[keyId].classList.add(styles.gray_color_text);
       arrow[keyId].classList.add(styles.arrow_up);
-    }
+    
   }
 
-  const hideListBoxex =()=>{
+  const hideListBox =()=>{
     const combolistLi = document.querySelectorAll(`.${styles.combolist_li}`);
     const listBox = document.querySelectorAll(`.${styles.list_box}`);
     const input = document.querySelectorAll<HTMLInputElement>(
@@ -271,13 +246,40 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
       arrow[c].classList.remove(styles.arrow_up);
     }
   }
+
+  const clickMechanich = (event: any) => {
+
+    const input = document.querySelectorAll<HTMLInputElement>(
+      `.${styles.dropbox_title} input`
+    );
+    //const arrow = document.querySelectorAll(`.${styles.arrow}`);
+    //const filed = document.querySelectorAll<HTMLDivElement>(`.${styles.dropbox_title}`);
+
+    let insideInput = input[keyId].contains(event.target);
+    //let insideArrow = arrow[keyId].contains(event.target);
+    //let insideFiled = filed[keyId].contains(event.target);
     
+    if((insideInput)) {
+      showListBox();
+    }else
+    if ((!insideInput)) {
+      hideListBox();
+    } 
+  };
+
     useEffect(()=>{
         const ul = document.querySelectorAll(`.${styles.combolist_li}`);
         ElementsUpdate(ul[keyId],data,listTitle);
         select(reduxMethod); 
     },) 
 
+    useEffect(() => {
+      document.addEventListener('click', clickMechanich, true);
+      return () => {
+        document.removeEventListener('click', clickMechanich, true);
+      };
+    }, []);
+    
     return(
         <div className={styles.box}>
         <ul className={styles.dropboxMenu} style={{ width: `${width}rem` }}>
@@ -289,10 +291,9 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
                 style={{ width: `${inputWidth}rem` }}
                 placeholder={`Обери ${placeholder}`}
                 readOnly
-                onClick={showHideList}
-                onChange={()=>{console.log('onChange')}}
+                //onClick={showHideList}
               ></input>
-              <div className={styles.arrow} onClick={showHideList}>
+              <div className={styles.arrow} /*onClick={showHideList}*/>
                 <Arrow />
               </div>
             </div>
