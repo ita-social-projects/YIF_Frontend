@@ -5,13 +5,13 @@ import {useAuth} from "../../services/tokenValidator";
 
 interface Props {
   liked?: boolean;
+  data?: any;
   abbreviation: string;
   site: string;
   address: string;
   description: string;
   startOfCampaign: string;
   endOfCampaign: string;
-  //getClickElem: {onClick: (event: React.MouseEvent) => void};
   onClick: React.MouseEventHandler;
 }
 
@@ -38,6 +38,7 @@ const UniversityCard: React.FC<Props> = (props) => {
 
   let {
     //liked,
+    data,
     abbreviation,
     site,
     address,
@@ -46,15 +47,20 @@ const UniversityCard: React.FC<Props> = (props) => {
     endOfCampaign,
   } = props;
 
-  const  clickHandler = (e: React.MouseEvent) => {
+  const  clickHandler = (e: React.SyntheticEvent<EventTarget>) => {
     e.preventDefault();
-    setLiked(() => !isLiked);
+    //let itemImg = e.target.closest('path');
+    //if (itemImg )
+      setLiked(() => !isLiked);
+    console.log(e.currentTarget)
+
   }
 
+
   return (
-    <div className={styles.card}>
+    <div  data-id className={styles.card} onClick={clickHandler}>
      < Tooltips content='Ви маєте бути зареєстровані!' >
-      <div onClick={clickHandler}
+      <div
            className={
           token && isLiked
             ? `${styles.card__icon} ${styles.card__icon__liked}`
@@ -118,6 +124,6 @@ const UniversityCard: React.FC<Props> = (props) => {
       </div>
     </div>
   );
-};
+}
 
 export default UniversityCard;

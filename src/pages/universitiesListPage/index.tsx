@@ -11,7 +11,6 @@ import { APIUrl } from '../../services/endpoints';
 const UniversitiesListPage = () => {
   const [universitiesList, setList] = useState([
     {
-      data: 'qqq',
       id: 'cdvdvdv',
       liked: false,
       abbreviation: 'НУВГП',
@@ -59,7 +58,7 @@ const UniversitiesListPage = () => {
     });
   }, [currentPage]);
 
-
+console.log(universitiesList)
   //const endpointLikedUniversity = `${APIUrl}University/Favorites/${universityId}`;
 
     const sendLikedUnlikedUniversity = (endpoint:string, method:string) => {
@@ -79,17 +78,18 @@ const UniversitiesListPage = () => {
           })
     }
 
-
-  const getClickElem = (event: React.MouseEvent) => {
+  const getClickElem = (event: React.MouseEvent<HTMLElement>) => {
     console.log(event);
   }
-
 
   const universitiesCardList = universitiesList.map((item: any) => {
 
     return (
       <UniversityCard
-          onClick={(event => console.log('ddd'))}
+          onClick={(event: React.MouseEvent<HTMLElement>) => {
+            getClickElem(event)
+          }}
+          data-id={item.id}
         key={item.id}
         abbreviation={item.abbreviation}
         site={item.site}
