@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./dropbox.module.scss";
 import { ReactComponent as Arrow } from "./arrow.svg";
 import { useDispatch } from 'react-redux';
@@ -19,6 +19,8 @@ type Props = {
 
 const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,inputWidth,reduxMethod,placeholder})=>{  
    const dispatch = useDispatch();
+   //let isOpened:boolean[]=[false,false,false];
+   const [isOpened,setOpend] =useState(false);
 
   const ElementsUpdate = (element: Element, data: string[],listTitle:string) => {
     const li = element.querySelectorAll("li");
@@ -255,18 +257,14 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
     const input = document.querySelectorAll<HTMLInputElement>(
       `.${styles.dropbox_title} input`
     );
-    const arrow = document.querySelectorAll(`.${styles.arrow}`);
-    //const filed = document.querySelectorAll<HTMLDivElement>(`.${styles.dropbox_title}`);
-
     let insideInput = input[keyId].contains(event.target);
-    //let insideArrow = arrow[keyId].contains(event.target);
-    //let insideFiled = filed[keyId].contains(event.target);
-    
     if((insideInput)) {
       showListBox();
+      setOpend(true);
     }else
     if ((!insideInput)) {
       hideListBox();
+      setOpend(false);
     } 
   };
 
@@ -299,7 +297,17 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
                 readOnly
                 //onClick={showHideList}
               ></input>
-              <div className={styles.arrow} /*onClick={showHideList}*/ >
+              <div className={styles.arrow} 
+              onClick={()=>{
+                if(isOpened === true){
+                  hideListBox();
+                  setOpend(false);
+                }else if(isOpened === false){
+                  showListBox();
+                  setOpend(true);
+                }
+              }}
+              /*onClick={showHideList}*/ >
                 <Arrow />
               </div>
             </div>
