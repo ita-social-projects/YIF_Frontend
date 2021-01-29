@@ -9,6 +9,7 @@ import UnivListOption from '../options/univListOption/index';
 import SpecListOption from '../options/specListOption/index';
 import { store } from '../../../store/store';
 import { Provider } from 'react-redux';
+import { useAuth } from '../../../services/tokenValidator';
 
 let container = null;
 let container_option = null;
@@ -84,27 +85,29 @@ it('look if after click on menu option or icon we render right component', () =>
 
   //-------- choose univ List -----------
   // //--- click on menu option
-  // fireEvent.click(menuList[1]);
-  // act(() => {
-  //   ReactDOM.render(
-  //     <Provider store={store}>
-  //       <UnivListOption />
-  //     </Provider>,
-  //     container_option
-  //   );
-  // });
-  // expect(mainFiled[3].textContent).toBe(container_option.textContent);
-  // //--- click on icon
-  // fireEvent.click(icons[1]);
-  // act(() => {
-  //   ReactDOM.render(
-  //     <Provider store={store}>
-  //       <UnivListOption />
-  //     </Provider>,
-  //     container_option
-  //   );
-  // });
-  // expect(mainFiled[3].textContent).toBe(container_option.textContent);
+  /*
+  fireEvent.click(menuList[1]);
+   act(() => {
+     ReactDOM.render(
+       <Provider store={store}>
+         <UnivListOption />
+       </Provider>,
+       container_option
+     );
+   });
+   expect(mainFiled[3].textContent).toBe(container_option.textContent);
+   //--- click on icon
+   fireEvent.click(icons[1]);
+   act(() => {
+     ReactDOM.render(
+       <Provider store={store}>
+         <UnivListOption />
+       </Provider>,
+       container_option
+     );
+   });
+   expect(mainFiled[3].textContent).toBe(container_option.textContent);
+   */
 
   //-------- choose spec List -----------
   //--- click on menu option
