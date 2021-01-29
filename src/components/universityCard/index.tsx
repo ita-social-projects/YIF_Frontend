@@ -1,10 +1,14 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import styles from './universityCard.module.scss';
 import Tooltips from "../common/tooltip";
 import {useAuth} from "../../services/tokenValidator";
+import {requestData} from "../../services/requestDataFunction";
+import { APIUrl } from '../../services/endpoints';
+
 
 interface Props {
   liked?: boolean;
+  id: any;
   data?: any;
   abbreviation: string;
   site: string;
@@ -12,7 +16,6 @@ interface Props {
   description: string;
   startOfCampaign: string;
   endOfCampaign: string;
-  onClick: React.MouseEventHandler;
 }
 
 
@@ -20,9 +23,15 @@ const UniversityCard: React.FC<Props> = (props) => {
 
   const [ isLiked, setLiked ] = useState(false);
   const { token } = useAuth();
+  const [error, setError] = useState({
+    hasError: false,
+    errorStatusCode: '',
+    errorMessage: '',
+  });
 
   const starSVG = (
     <svg
+        className={styles.likedElem}
       width='50'
       height='50'
       viewBox='0 0 50 50'
@@ -37,7 +46,8 @@ const UniversityCard: React.FC<Props> = (props) => {
   );
 
   let {
-    //liked,
+    liked,
+     id,
     data,
     abbreviation,
     site,
@@ -47,18 +57,40 @@ const UniversityCard: React.FC<Props> = (props) => {
     endOfCampaign,
   } = props;
 
+
   const  clickHandler = (e: React.SyntheticEvent<EventTarget>) => {
     e.preventDefault();
-    //let itemImg = e.target.closest('path');
-    //if (itemImg )
-      setLiked(() => !isLiked);
-    console.log(e.currentTarget)
+    let itemImg = (e.target as Element).closest('svg');
+    if (itemImg ) setLiked(() => !isLiked);
+    let universityId = (e.currentTarget as Element).getAttribute('data-id');
+    let parentElem = itemImg?.parentElement;
 
+    if (parentElem?.classList.contains(`${styles.card__icon__liked}`)) {
+      itemImg && sendDeleteFavoriteUniversity(`${APIUrl}University/Favorites/${universityId}`, 'DELETE')
+    } else {
+      itemImg && sendDeleteFavoriteUniversity(`${APIUrl}University/Favorites/${universityId}`, 'POST');
+    }
+  };
+
+  let sendDeleteFavoriteUniversity = (endpointLikedUniversity:string, method: string) => {
+    requestData(endpointLikedUniversity, method)
+        .then((res: any) => {
+          const statusCode = res.statusCode.toString();
+          if (statusCode.match(/^[23]\d{2}$/)) {
+            setError({hasError: false, errorStatusCode: '', errorMessage: ''});
+          } else {
+            setError({
+              hasError: true,
+              errorStatusCode: res.statusCode,
+              errorMessage:
+                  res.data.message || 'Щось пішло не так, спробуйте знову.',
+            });
+          }
+        })
   }
 
-
   return (
-    <div  data-id className={styles.card} onClick={clickHandler}>
+    <div  data-id={props.id} className={styles.card} onClick={clickHandler}>
      < Tooltips content='Ви маєте бути зареєстровані!' >
       <div
            className={
