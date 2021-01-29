@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from "react-router-dom";
 import { Header, Footer, UniversityCard } from '../../components';
 import ErrorBoundry from '../../errorBoundry';
 import styles from './universitiesListPage.module.scss';
@@ -32,12 +33,22 @@ const UniversitiesListPage = () => {
     errorMessage: '',
   });
 
-  const urlLocalHost = 'http://localhost:5000/api/';
-
+  const location:any = useLocation();
+  
   useEffect(() => {
-    const endpoint = `${APIUrl}University?page=${currentPage}&pageSize=${perPage}`;
+    let URL:string='';
+    if((location.state!==undefined)){
+      URL = `${APIUrl}University?DirectionName=${location.state.chosenDirection}&SpecialityName=${location.state.chosenSpeciality}&UniversityAbbreviation=${location.state.chosenUniversity}&page=${currentPage}&pageSize=${perPage}`;
+      console.log(location.state.chosenUniversity);
+    }else
+    if(location.state===undefined){
+      URL = `${APIUrl}University?page=${currentPage}&pageSize=${perPage}`;
+    }
+
+    const endpoint = URL;
     setFetching(true);
     requestData(endpoint, 'GET').then((res: any) => {
+      console.log(res);
       setTotalPages(res.data.totalPages);
       const statusCode = res.statusCode.toString();
       if (statusCode.match(/^[23]\d{2}$/)) {
