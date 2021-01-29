@@ -43,7 +43,7 @@ describe('useFilter Hook',()=>{
         )
     };
 
-    let container= null;
+    let container:any= null;
 
     beforeEach(() => {
     container = document.createElement("div");
