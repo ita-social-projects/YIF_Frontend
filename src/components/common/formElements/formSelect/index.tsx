@@ -11,7 +11,7 @@ interface CustomInputProps {
 }
 
 const FormSelect: FC<CustomInputProps & FieldProps> = (props) => {
-  const { label , name, options, ...rest} = props;
+  const { label, field, name, options, ...rest} = props;
   const {
     getSchoolList,
     container,
