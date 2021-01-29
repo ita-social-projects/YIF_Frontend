@@ -82,7 +82,7 @@ const Filter = () => {
                 data={direction}
                 keyId={0}
                 listName={'Direction'}
-                listTitle={'Напрями'}
+                listTitle={'Скинути фільтр'}
                 placeholder={'напрям'}
                 reduxMethod={'chooseDirection'}
               ></DropboxElement>
@@ -93,7 +93,7 @@ const Filter = () => {
                 keyId={1}
                 listName={'Speciality'}
                 width={21.75}
-                listTitle={'Спеціальності'}
+                listTitle={'Скинути фільтр'}
                 placeholder={'спеціальність'}
                 reduxMethod={'chooseSpeciality'}
               ></DropboxElement>
@@ -103,7 +103,7 @@ const Filter = () => {
                 data={university}
                 keyId={2}
                 listName={'University'}
-                listTitle={'Університети'}
+                listTitle={'Скинути фільтр'}
                 placeholder={'університет'}
                 reduxMethod={'chooseUniversity'}
               ></DropboxElement>

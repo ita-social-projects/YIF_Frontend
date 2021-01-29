@@ -25,11 +25,7 @@ export const useGetAllListData =(endpoint: string,action:string) =>{
         })
     },[])
 
-    return ()=>{
-        //let answer:string='succes';
-        //dispatch({type:'SET_DATA',mass1});
-        //dispatch(SET_DATA(mass1)); 
-    };
+    
 }
 
 

@@ -20,7 +20,7 @@ type Props = {
 const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,inputWidth,reduxMethod,placeholder})=>{  
    const dispatch = useDispatch();
    //let isOpened:boolean[]=[false,false,false];
-   const [isOpened,setOpend] =useState(false);
+   //const [isOpened,setOpend] =useState(false);
 
   const ElementsUpdate = (element: Element, data: string[],listTitle:string) => {
     const li = element.querySelectorAll("li");
@@ -172,45 +172,6 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
   };
 
   // function that will make our option list hide/visible
-  /*
-  const showHideList = () => {
-    const combolistLi = document.querySelectorAll(`.${styles.combolist_li}`);
-    const listBox = document.querySelectorAll(`.${styles.list_box}`);
-    const input = document.querySelectorAll<HTMLInputElement>(
-      `.${styles.dropbox_title} input`
-    );
-    const arrow = document.querySelectorAll(`.${styles.arrow}`);
-
-    //hide all(before) dropboxes
-    for (let c: number = 0; c < keyId; c++) {
-      listBox[c].classList.remove(styles.show_list_box);
-      input[c].classList.remove(styles.gray_color_text);
-      arrow[c].classList.remove(styles.arrow_up);
-    }
-
-    //hide all(after) dropboxes
-    for (let c: number = keyId + 1; c < combolistLi.length; c++) {
-      listBox[c].classList.remove(styles.show_list_box);
-      input[c].classList.remove(styles.gray_color_text);
-      arrow[c].classList.remove(styles.arrow_up);
-    }
-    
-    //set dynamic heigth for opened dropbox
-    const liCount = listBox[keyId].querySelectorAll("li");
-    if(liCount.length<=3){
-      document.body.style.setProperty('--heigth', `${3.40*liCount.length}rem`);
-    }else
-    if(liCount.length>3){
-      document.body.style.setProperty('--heigth', `${13.13}rem`);
-    }
-    
-    //show dropbox that we need
-    listBox[keyId].classList.toggle(styles.show_list_box);
-    input[keyId].classList.toggle(styles.gray_color_text);
-    arrow[keyId].classList.toggle(styles.arrow_up);
- 
-  };
-*/
   const showListBox =()=>{
     //const combolistLi = document.querySelectorAll(`.${styles.combolist_li}`);
     const listBox = document.querySelectorAll(`.${styles.list_box}`);
@@ -260,11 +221,11 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
     let insideInput = input[keyId].contains(event.target);
     if((insideInput)) {
       showListBox();
-      setOpend(true);
+      //setOpend(true);
     }else
     if ((!insideInput)) {
       hideListBox();
-      setOpend(false);
+      //setOpend(false);
     } 
   };
 
@@ -295,10 +256,9 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
                 style={{ width: `${inputWidth}rem` }}
                 placeholder={`Обери ${placeholder}`}
                 readOnly
-                //onClick={showHideList}
               ></input>
               <div className={styles.arrow} 
-              onClick={()=>{
+              /*onClick={()=>{
                 if(isOpened === true){
                   hideListBox();
                   setOpend(false);
@@ -306,8 +266,8 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
                   showListBox();
                   setOpend(true);
                 }
-              }}
-              /*onClick={showHideList}*/ >
+              }}*/
+              >
                 <Arrow />
               </div>
             </div>
