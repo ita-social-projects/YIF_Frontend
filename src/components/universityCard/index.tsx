@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from 'react';
 import styles from './universityCard.module.scss';
 import Tooltips from "../common/tooltip";
 import {useAuth} from "../../services/tokenValidator";
-import {requestData} from "../../services/requestDataFunction";
+import { requestSecureData} from "../../services/requestDataFunction";
 import { APIUrl } from '../../services/endpoints';
 
 
@@ -22,7 +22,8 @@ interface Props {
 const UniversityCard: React.FC<Props> = (props) => {
 
   const [ isLiked, setLiked ] = useState(false);
-  const { token } = useAuth();
+  const { token, getToken } = useAuth();
+  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState({
     hasError: false,
     errorStatusCode: '',
@@ -73,11 +74,13 @@ const UniversityCard: React.FC<Props> = (props) => {
   };
 
   let sendDeleteFavoriteUniversity = (endpointLikedUniversity:string, method: string) => {
-    requestData(endpointLikedUniversity, method)
+    getToken();
+    requestSecureData(endpointLikedUniversity, method, token!)
         .then((res: any) => {
           const statusCode = res.statusCode.toString();
           if (statusCode.match(/^[23]\d{2}$/)) {
-            setError({hasError: false, errorStatusCode: '', errorMessage: ''});
+            setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
+            setSubmitted(false);
           } else {
             setError({
               hasError: true,
@@ -87,6 +90,13 @@ const UniversityCard: React.FC<Props> = (props) => {
             });
           }
         })
+        .catch((error) => {
+          setError({
+            hasError: true,
+            errorStatusCode: error.statusCode,
+            errorMessage: 'Щось пішло не так, спробуйте знову.',
+          });
+        });
   }
 
   return (
