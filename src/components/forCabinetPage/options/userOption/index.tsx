@@ -56,10 +56,11 @@ const UserOption = () => {
               phone: user.phoneNumber,
               school: user.schoolName,
             }}
-            enableReinitialize
+           enableReinitialize
             validationSchema={validationField}
             onSubmit={(values, actions) => {
               actions.setSubmitting(false);
+              console.log(values)
             }}
           >
             {({
@@ -71,6 +72,8 @@ const UserOption = () => {
               handleSubmit,
               isSubmitting,
               isValid,
+                setFieldTouched,
+                setFieldValue,
             }) => (
               <Form
                 className={styles.form}
@@ -178,8 +181,9 @@ const UserOption = () => {
                           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                             handleChange(e);
                             //useYIFProfile.handleSchoolChange(e);
+                           // setFieldValue('school', option)
                           }}
-                          onBlur={handleBlur}
+                          onBlur={() => setFieldTouched("school", true)}
                           value={values.school}
                       />
                     </div>
