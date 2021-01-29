@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import { render } from "@testing-library/react";
 import { unmountComponentAtNode } from "react-dom";
 import { fireEvent } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
@@ -39,9 +38,13 @@ it("ckeck filter page", () => {
       container
     );
   });
-/*
+
   let button = container.querySelector("button");
   fireEvent.click(button);
-  expect(mockHistoryPush).toHaveBeenCalledWith("/404");
-*/
+  expect(mockHistoryPush).toHaveBeenCalledWith({pathname:"/universities",state:{
+    chosenDirection: "",
+    chosenSpeciality: "",
+    chosenUniversity: "", 
+  }});
+
 });
