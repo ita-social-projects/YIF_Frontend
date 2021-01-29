@@ -170,6 +170,7 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
   };
 
   // function that will make our option list hide/visible
+  
   const showHideList = () => {
     const combolistLi = document.querySelectorAll(`.${styles.combolist_li}`);
     const listBox = document.querySelectorAll(`.${styles.list_box}`);
@@ -205,8 +206,9 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
     listBox[keyId].classList.toggle(styles.show_list_box);
     input[keyId].classList.toggle(styles.gray_color_text);
     arrow[keyId].classList.toggle(styles.arrow_up);
+ 
   };
-
+/*
   const showListBox =()=>{
     //const combolistLi = document.querySelectorAll(`.${styles.combolist_li}`);
     const listBox = document.querySelectorAll(`.${styles.list_box}`);
@@ -246,7 +248,8 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
       arrow[c].classList.remove(styles.arrow_up);
     }
   }
-
+  */
+  /*
   const clickMechanich = (event: any) => {
 
     const input = document.querySelectorAll<HTMLInputElement>(
@@ -266,19 +269,20 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
       hideListBox();
     } 
   };
-
+*/
     useEffect(()=>{
         const ul = document.querySelectorAll(`.${styles.combolist_li}`);
         ElementsUpdate(ul[keyId],data,listTitle);
         select(reduxMethod); 
     },) 
-
+    /*
     useEffect(() => {
+      
       document.addEventListener('click', clickMechanich, true);
-      return () => {
-        document.removeEventListener('click', clickMechanich, true);
-      };
+      
     }, []);
+    */
+
     
     return(
         <div className={styles.box}>
@@ -291,9 +295,9 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
                 style={{ width: `${inputWidth}rem` }}
                 placeholder={`Обери ${placeholder}`}
                 readOnly
-                //onClick={showHideList}
+                onClick={showHideList}
               ></input>
-              <div className={styles.arrow} /*onClick={showHideList}*/>
+              <div className={styles.arrow} onClick={showHideList} >
                 <Arrow />
               </div>
             </div>
