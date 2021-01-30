@@ -8,7 +8,8 @@ import {
   AboutUs,
   Footer,
 } from '../../components';
-import ErrorBoundry from '../../errorBoundry';
+import {useGetAllListData} from '../../services/useFilter';
+import { APIUrl } from '../../services/endpoints';
 
 const handleClick = () => {
   const elem = document.getElementById('filter') as HTMLDivElement;
@@ -19,7 +20,12 @@ const handleClick = () => {
   });
 };
 
+
+
 const Home = () => {
+  useGetAllListData(`${APIUrl}University/Abbreviations`,'setUniversity');
+  useGetAllListData(`${APIUrl}Specialty/Names`,'setSpeciality');
+  useGetAllListData(`${APIUrl}Direction/Names`,'setDirection');
   return (
     <>
       <Header />

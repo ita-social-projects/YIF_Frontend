@@ -2,7 +2,6 @@ import React from 'react';
 import './app.scss';
 import Home from '../../pages/home';
 import ErrorPage from '../../pages/errorPage';
-import FilterPage from '../../pages/filterPage/index';
 import GraduateCabinet from '../../pages/graduateCabinetPage/index';
 import LoginPage from '../../pages/loginPage';
 import UniversitiesListPage from '../../pages/universitiesListPage';
@@ -38,7 +37,6 @@ const App = () => {
           <ProtectedRoute user={token} pathname='login' path='/cabinet'>
             <GraduateCabinet />
           </ProtectedRoute>
-          <Route path='/filterPage' component={FilterPage} />
           <Route path='/404' component={ErrorPage} status={404} />
           <Route component={ErrorPage} status={404} />
         </Switch>
