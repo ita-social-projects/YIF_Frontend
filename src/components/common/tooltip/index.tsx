@@ -6,7 +6,6 @@ interface Props {
   content: string;
 }
 
-
  const Tooltips: React.FC<Props> = (props) => {
 
    const { token } = useAuth();

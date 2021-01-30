@@ -1,8 +1,8 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import styles from './universityCard.module.scss';
 import Tooltips from "../common/tooltip";
-import {useAuth} from "../../services/tokenValidator";
-import { requestSecureData} from "../../services/requestDataFunction";
+import { useAuth } from "../../services/tokenValidator";
+import { requestSecureData } from "../../services/requestDataFunction";
 import { APIUrl } from '../../services/endpoints';
 
 
@@ -32,7 +32,6 @@ const UniversityCard: React.FC<Props> = (props) => {
 
   const starSVG = (
     <svg
-        className={styles.likedElem}
       width='50'
       height='50'
       viewBox='0 0 50 50'
@@ -57,7 +56,6 @@ const UniversityCard: React.FC<Props> = (props) => {
     startOfCampaign,
     endOfCampaign,
   } = props;
-
 
   const  clickHandler = (e: React.SyntheticEvent<EventTarget>) => {
     e.preventDefault();
