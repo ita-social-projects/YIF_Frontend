@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-
 import ImageUploaderPopup from './imageUploaderPopup/imageUploaderPopup';
 import style from './imageUploader.module.scss';
+import { useSelector } from 'react-redux';
+import { userSelector } from '../../store/reducers/setUserReducer';
+import { FormInputSuccess } from '../common/formElements/formInputSuccess/formInputSuccess';
 
 const ImageUploader = (props: any) => {
+  const { photo } = useSelector(userSelector);
+  const avatar = photo ? photo : 'assets/icons/avatar.jpg';
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [isSuccessLoad, setSuccessLoad] = useState(false);
-  const [profileImageSrc, setProfileImageSrc] = useState(
-    'assets/icons/avatar.jpg'
-  );
-
+  const [profileImageSrc, setProfileImageSrc] = useState(avatar);
   const { additionalStyles } = props;
   return (
     <>
@@ -20,7 +21,7 @@ const ImageUploader = (props: any) => {
           setPopupOpen(!isPopupOpen);
         }}
       >
-        <img src={profileImageSrc} alt='avatar' className={style.avatar} />
+        <img src={avatar} alt='avatar' className={style.avatar} />
       </div>
       {isPopupOpen && (
         <ImageUploaderPopup
@@ -37,7 +38,7 @@ const ImageUploader = (props: any) => {
           return true;
         }, 3000) && (
           <div className={`${style.successContainer} ${style.elementShowHide}`}>
-            <span>Зображення завантажено успішно.</span>
+            <FormInputSuccess successMessage='Зображення завантажено успішно' />
           </div>
         )}
     </>
