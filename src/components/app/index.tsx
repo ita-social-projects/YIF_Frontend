@@ -2,10 +2,9 @@ import React from 'react';
 import './app.scss';
 import Home from '../../pages/home';
 import ErrorPage from '../../pages/errorPage';
-import FilterPage from '../../pages/filterPage/index';
 import GraduateCabinet from '../../pages/graduateCabinetPage/index';
 import LoginPage from '../../pages/loginPage';
-import UniversitiesPage from '../../pages/universitiesPage';
+import UniversitiesListPage from '../../pages/universitiesListPage';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RegistrationForm from '../../pages/registrationPage';
 import { useAuth } from '../../services/tokenValidator';
@@ -33,12 +32,11 @@ const App = () => {
             <RegistrationForm />
           </RedirectRoute>
           <Route path='/universities'>
-            <UniversitiesPage />
+            <UniversitiesListPage />
           </Route>
           <ProtectedRoute user={token} pathname='login' path='/cabinet'>
             <GraduateCabinet />
           </ProtectedRoute>
-          <Route path='/filterPage' component={FilterPage} />
           <Route path='/404' component={ErrorPage} status={404} />
           <Route component={ErrorPage} status={404} />
         </Switch>
@@ -56,7 +54,7 @@ const App = () => {
     //       <RegistrationForm />
     //     </Route>
     //     <Route path='/universities'>
-    //       <UniversitiesPage />
+    //       <UniversitiesListPage />
     //     </Route>
     //     <Route path='/cabinet'>
     //       <GraduateCabinet />
