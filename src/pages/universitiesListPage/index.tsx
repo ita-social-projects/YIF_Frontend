@@ -4,7 +4,7 @@ import ErrorBoundry from '../../errorBoundry';
 import styles from './universitiesListPage.module.scss';
 import { requestData } from '../../services/requestDataFunction';
 import Spinner from '../../components/common/spinner';
-import { paginationPagesCreator } from './paginationPagesCreator';
+import { PaginationPagesCreator } from './paginationPagesCreator';
 import ResponsePlaceholder from '../../components/common/responsePlaceholder';
 import { APIUrl } from '../../services/endpoints';
 
@@ -108,10 +108,10 @@ const UniversitiesListPage = () => {
     </svg>
   );
 
-  const pages = paginationPagesCreator(totalPages, currentPage);
+  const pages = PaginationPagesCreator(totalPages, currentPage);
 
   const pagination = (
-    <div className={styles.pages}>
+    <div data-testid='pagination' className={styles.pages}>
       <div
         className={
           currentPage === 1
