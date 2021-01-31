@@ -48,7 +48,9 @@ const UniversityCard: React.FC<Props> = (props) => {
       >
         {starSVG}
       </div>
-      <h2 className={styles.card__title}>{abbreviation}</h2>
+      <h2 data-testid='abbreviation' className={styles.card__title}>
+        {abbreviation}
+      </h2>
       <div className={styles.card__contentContainer}>
         <div className={styles.card__content}>
           <div className={styles.card__content__wrapper}>
