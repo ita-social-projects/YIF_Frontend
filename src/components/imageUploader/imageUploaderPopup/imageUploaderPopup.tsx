@@ -219,9 +219,13 @@ const ImageUploaderPopup = (props: TProps) => {
               setLoading(true);
               const imageToUpload = cropper.getCroppedCanvas().toDataURL();
 
-              requestImageProfile(`${APIUrl}Users/ChangePhoto`, 'POST', {
-                photo: imageToUpload,
-              })
+              requestImageProfile(
+                `${APIUrl}Users/Current/ChangePhoto`,
+                'POST',
+                {
+                  photo: imageToUpload,
+                }
+              )
                 .then((res: any) => {
                   const statusCode = res.statusCode.toString();
                   if (statusCode.match(/^[23]\d{2}$/)) {
