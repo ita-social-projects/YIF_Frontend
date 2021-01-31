@@ -46,7 +46,7 @@ export async function requestData<TData extends object>(
 // REQUEST FOR CHANGE IMAGE PROFILE:
 type ResponeProfileImage<T extends object> = {
   statusCode: number;
-  // data: T;
+  data: T;
 };
 
 export async function requestImageProfile<TData extends object>(
@@ -64,13 +64,11 @@ export async function requestImageProfile<TData extends object>(
     },
     body: JSON.stringify(body),
   });
-
   const statusCode = res.status;
-  //const parseBody = await res.json();
-
+  const parseBody = await res.json();
   return {
     statusCode,
-    //data: parseBody as TData,
+    data: parseBody as TData,
   };
 }
 

@@ -3,6 +3,7 @@ import styles from './formInputError.module.scss';
 interface Props {
   errorMessage: any; // there should be text, you want to see in the error component
   errorType: string; // there are 2 error types: input and form. If you use errorComponent for input use type 'input', if for form use type 'form'
+  redirectLink?: string;
 }
 
 const FormInputError: React.FC<Props> = (props) => {
@@ -29,6 +30,7 @@ const FormInputError: React.FC<Props> = (props) => {
       />
     </svg>
   );
+
   return (
     <div
       className={
@@ -40,7 +42,17 @@ const FormInputError: React.FC<Props> = (props) => {
       }
     >
       <div className={styles.iconWrap}>{warningIcon}</div>
-      <p className={styles.errorMessage}>{errorMessage}</p>
+      <p className={styles.errorMessage}>
+        {errorMessage}
+
+        {props.redirectLink && (
+          <span>
+            {' '}
+            Для відновлення доступу натисніть{' '}
+            <a href={props.redirectLink}>сюди</a>
+          </span>
+        )}
+      </p>
     </div>
   );
 };
