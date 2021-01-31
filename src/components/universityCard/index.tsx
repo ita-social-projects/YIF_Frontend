@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './universityCard.module.scss';
 import Tooltips from "../common/tooltip";
 import { useAuth } from "../../services/tokenValidator";
@@ -56,6 +56,13 @@ const UniversityCard: React.FC<Props> = (props) => {
     startOfCampaign,
     endOfCampaign,
   } = props;
+
+  useEffect(() => {
+    if (liked) setLiked(() => !isLiked);
+    return () => {
+      if (!liked) setLiked(() => isLiked);
+    }
+  },[]);
 
   const  clickHandler = (e: React.SyntheticEvent<EventTarget>) => {
     e.preventDefault();

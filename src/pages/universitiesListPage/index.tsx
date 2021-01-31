@@ -100,7 +100,7 @@ const UniversitiesListPage = () => {
   }, [currentPage]);
 
   const universitiesCardList = universitiesList.map((item: any) => {
-
+console.log(universitiesList)
     return (
       <UniversityCard
           id={item.id}
