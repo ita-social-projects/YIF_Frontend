@@ -36,6 +36,7 @@ const LoginForm = () => {
           <FormInputError
             errorType='form'
             errorMessage={useYIFLogin.error.errorMessage}
+            redirectLink={useYIFLogin.error.redirectLink}
           />
         )}
 
