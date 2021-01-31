@@ -106,7 +106,7 @@ const UniversityCard: React.FC<Props> = (props) => {
 
   return (
     <div  data-id={props.id} className={styles.card} onClick={clickHandler}>
-     < Tooltips content='Ви маєте бути зареєстровані!' >
+     < Tooltips content='Будь ласка, увійдіть!' >
       <div
            className={
           token && isLiked
