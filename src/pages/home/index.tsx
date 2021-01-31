@@ -8,7 +8,6 @@ import {
   AboutUs,
   Footer,
 } from '../../components';
-import ErrorBoundry from '../../errorBoundry';
 
 const handleClick = () => {
   const elem = document.getElementById('filter') as HTMLDivElement;
