@@ -28,7 +28,7 @@ let univListIcon = (
     x='0px'
     y='0px'
     viewBox='0 0 32 32'
-    //style={{ enableBackground: "new :new 0 0 32 32" }}
+    style={{ enableBackground: "new :new 0 0 32 32" }}
     xmlSpace='preserve'
     width='30px'
   >
@@ -55,7 +55,7 @@ let specListIcon = (
     x='0px'
     y='0px'
     viewBox='0 0 426.667 426.667'
-    //style={{ enableBackground: "new 0 0 426.667 426.667" }}
+    style={{ enableBackground: "new 0 0 426.667 426.667" }}
     xmlSpace='preserve'
     height='24px'
     width='22px'
