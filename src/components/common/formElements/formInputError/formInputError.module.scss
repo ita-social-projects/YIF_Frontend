@@ -11,6 +11,11 @@
   font-weight: $regular;
   font-family: $fontOpenSans;
   @include flex(row, center, flex-start);
+  a {
+    color: $darkBlue;
+    margin-left: 5px;
+    border-bottom: 1px solid $darkBlue;
+  }
 }
 
 .formError {

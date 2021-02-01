@@ -1,0 +1,35 @@
+@import '../../../styles/index';
+
+.tooltipWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+
+  .tooltip {
+    top: 50%;
+    left: auto;
+    transform: translate(-155%, 105%);
+    position: absolute;
+    border-radius: 4px;
+    padding: 0.8rem;
+    color: $white;
+    background-color: $darkBlue;
+    font-size: 0.875rem;//14px
+    font-family: $fontNunito;
+    line-height: 1;
+    z-index: 100;
+    white-space: nowrap;
+
+  }
+
+  .tooltip::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    border: solid transparent;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
+}
