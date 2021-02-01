@@ -76,6 +76,7 @@ function AuthProvider({ children }: any) {
     const url = `${APIUrl}Authentication/RefreshToken`;
     let currentToken;
     let currentRefreshToken = refreshToken;
+
     try {
       setIsRefreshing(true);
       let response = await fetch(url, {
@@ -103,9 +104,13 @@ function AuthProvider({ children }: any) {
         console.error(result.title);
       }
     } catch (error) {
-      removeToken();
-      setIsRefreshing(false);
-      console.error(error);
+      if (error.name === 'AbortError') {
+        console.log('fetch aborted');
+      } else {
+        removeToken();
+        setIsRefreshing(false);
+        console.error(error);
+      }
     }
     // return currentToken;
   }, [token, refreshToken, updateToken, removeToken]);
