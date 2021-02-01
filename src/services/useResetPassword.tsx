@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useAuth } from './tokenValidator';
 import { APIUrl } from '../../src/services/endpoints';
 import { useCaptcha } from './useCaptcha';
+import React from 'react';
 
 const useResetPasword = (endpoint: string) => {
   const captcha = useCaptcha(APIUrl);
@@ -31,8 +32,7 @@ const useResetPasword = (endpoint: string) => {
 
     const token = await captcha.getCaptchaToken();
 
-    requestData(`${endpoint}Users/ResetPassword`, 'POST', {
-      userEmail: email,
+    requestData(`${endpoint}Users/ResetPassword?${email}`, 'POST', {
       recaptchaToken: token,
     })
       .then((res: any) => {
