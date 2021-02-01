@@ -72,6 +72,7 @@ describe('UserOption ', () => {
     );
     const emailNameNode = container.querySelector('input[name="email"]');
     const phonedNode = container.querySelector('input[name="phone"]');
+    const schoolNameNode = container.querySelector('select[name="school"]')
 
     await wait(() => {
       fireEvent.change(lastNameNode, {
@@ -116,5 +117,13 @@ describe('UserOption ', () => {
         },
       });
     });
+    await wait(() => {
+      fireEvent.change(schoolNameNode, {
+        target: {
+          value: 'mockName',
+        },
+      });
+    });
   });
+
 });

@@ -37,7 +37,6 @@ const useProfile = (endpoint: string) => {
     setSchoolName(user.schoolName);
   }, [user]);
 
-
   const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setName(value);
@@ -63,16 +62,12 @@ const useProfile = (endpoint: string) => {
     setEmail(value);
   };
 
-
-  const handleSchoolChange = (value: string) => {
+  const handleSchoolChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
       setSchoolName(value);
-    console.log(value)
-      console.log(schoolName)
   };
 
-
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
-
     e.preventDefault();
     setSubmitted(true);
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
