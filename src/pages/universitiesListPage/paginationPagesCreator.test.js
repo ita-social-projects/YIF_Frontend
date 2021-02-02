@@ -1,39 +1,16 @@
-import React from 'react';
 import { PaginationPagesCreator } from './paginationPagesCreator';
-import { act } from 'react-dom/test-utils';
-import { render, screen } from '@testing-library/react';
-import ReactDOM, { unmountComponentAtNode } from 'react-dom';
 
-let container = null;
-
-beforeEach(() => {
-  container = document.createElement('div');
-  document.body.appendChild(container);
+it('renders without crashing, if total = 3', () => {
+  const request = PaginationPagesCreator(3, 1);
+  return expect(request).toMatchObject([1, 2, 3]);
 });
 
-afterEach(() => {
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
+it('renders without crashing, if total = 2', () => {
+  const requestSecond = PaginationPagesCreator(4, 3);
+  return expect(requestSecond).toMatchObject([2, 3, 4]);
 });
 
-test('renders without crashing', () => {
-  // ReactDOM.render(
-  //   <PaginationPagesCreator totalPages={3} currentPage={1} />,
-  //   container
-  // );
-
-  act(() => {
-    ReactDOM.render(
-      <PaginationPagesCreator totalPages={3} currentPage={1} />,
-      container
-    );
-  });
-
-  // let pagination = container.querySelector('.pages');
-  // let pages = pagination.querySelectorAll('span');
-
-  // expect(pages[0].textContent).toBe(1);
-  // expect(pages[1].textContent).toBe(2);
-  // expect(pages[2].textContent).toBe(3);
+it('renders without crashing, if total = 1', () => {
+  const requestThird = PaginationPagesCreator(4, 1);
+  return expect(requestThird).toMatchObject([1, 2, 3]);
 });

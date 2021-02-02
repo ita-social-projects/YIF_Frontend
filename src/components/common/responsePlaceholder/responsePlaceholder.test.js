@@ -13,5 +13,5 @@ test('render an error text from props', () => {
   expect(getByText(/error/i)).toBeInTheDocument();
   const text = screen.getByText(/error/i);
   expect(text).toBeInTheDocument();
-  expect(text.tagName).toMatch(/p/i);
+  expect(text.tagName).toMatch(/h3/i);
 });

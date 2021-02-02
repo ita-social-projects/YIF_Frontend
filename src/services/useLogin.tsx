@@ -17,6 +17,7 @@ const useLogin = (endpoint: string) => {
     hasError: false,
     errorStatusCode: '',
     errorMessage: '',
+    redirectLink: '',
   });
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -40,7 +41,12 @@ const useLogin = (endpoint: string) => {
   ) => {
     e.preventDefault();
     setSubmitted({ submitted: true });
-    setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
+    setError({
+      hasError: false,
+      errorStatusCode: '',
+      errorMessage: '',
+      redirectLink: '',
+    });
 
     const token = await captcha.getCaptchaToken();
 
@@ -52,7 +58,12 @@ const useLogin = (endpoint: string) => {
       .then((res: any) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
-          setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
+          setError({
+            hasError: false,
+            errorStatusCode: '',
+            errorMessage: '',
+            redirectLink: '',
+          });
           updateToken(res.data.token, res.data.refreshToken);
           getUser(res.data.token);
           history.push(pathToRedirect); //can be deleted ?
@@ -62,6 +73,7 @@ const useLogin = (endpoint: string) => {
             errorStatusCode: res.statusCode,
             errorMessage:
               res.data.message || 'Щось пішло не так, спробуйте знову.',
+            redirectLink: res.data.redirectLink || '',
           });
         }
       })
@@ -70,6 +82,7 @@ const useLogin = (endpoint: string) => {
           hasError: true,
           errorStatusCode: error.statusCode,
           errorMessage: 'Щось пішло не так, спробуйте знову.',
+          redirectLink: '',
         });
       });
   };
