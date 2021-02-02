@@ -1,55 +1,77 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../store/store';
 
-interface getData_ {
-  value: {
-    direction: string[];
-    speciality: string[];
-    university: string[];
-  };
-}
-
-const initialState: getData_ = {
-  value: {
-    direction: [
-      'Напрям 1',
-      'Напрям 2',
-      'Напрям 3',
-      'Напрям 4',
-      'Напрям 5',
-      'Напрям 6',
-    ],
-    speciality: [
-      'Спеціальність 1',
-      'Спеціальність 2',
-      'Спеціальність 3',
-      'Спеціальність 4',
-      'Спеціальність 5',
-      'Спеціальність 6',
-    ],
-    university: [
-      'Університет 1',
-      'Університет 2',
-      'Університет 3',
-      'Університет 4',
-      'Університет 5',
-      'Університет 6',
-    ],
-  },
-};
-
-export const dropboxSlice = createSlice({
-  name: 'dropbox',
-  initialState,
-  reducers: {
-    SET_DATA: (state, action: PayloadAction<object>) => {
-      Object.assign(state.value, action.payload);
+interface getData_{
+    value:{
+      direction:string[],
+      speciality:string[],
+      university:string[],
     },
-  },
-});
+    chosenValue:{
+      direction:string,
+      speciality:string,
+      university:string,
+    }
+  }
+  
+  const initialState: getData_ = {
+    value:{
+      direction:['Напрям 1'],
+      speciality:['Спеціальність 1'],
+      university:['Університет 1'],
+    },
+    chosenValue:{
+      direction:'',
+      speciality:'',
+      university:'',
+    }
+  };
+  
+  export const dropboxSlice = createSlice({
+    name: "dropbox",
+    initialState,
+    reducers: {     
+      setUniversity: (state, action: PayloadAction<string[]>) => {
+        let i = 0;
+          state.value.university.splice(0); // reset size of array
+          action.payload.forEach((item)=>{
+          state.value.university[i]=item;
+          i++;
+        })
+      },
+      setSpeciality: (state, action: PayloadAction<string[]>) => {
+        let i = 0;
+        state.value.speciality.splice(0);
+        action.payload.forEach((item)=>{
+          state.value.speciality[i]=item;
+          i++;
+        })
+      },
+      setDirection: (state, action: PayloadAction<string[]>) => {
+        let i = 0;
+        state.value.direction.splice(0);
+        action.payload.forEach((item)=>{
+          state.value.direction[i]=item;
+          i++;
+        })
+      },
+      chooseUniversity:(state, action: PayloadAction<string>)=>{
+        state.chosenValue.university = action.payload;
+      },
+      chooseSpeciality:(state, action: PayloadAction<string>)=>{
+        state.chosenValue.speciality = action.payload;
+      },
+      chooseDirection:(state, action: PayloadAction<string>)=>{
+        state.chosenValue.direction = action.payload;
+        console.log('chooseDeriction');
+      },
 
-export const { SET_DATA } = dropboxSlice.actions;
-
-export const selectData = (state: RootState) => state.dropbox.value;
-
+    },
+  });
+  
+  export const {setUniversity,setSpeciality,setDirection,chooseUniversity,chooseSpeciality,chooseDirection} = dropboxSlice.actions;
+  
+  export const selectData = (state: RootState) => state.dropbox.value;
+  export const selectChosenData = (state: RootState) => state.dropbox.chosenValue;
+  
 export default dropboxSlice.reducer;

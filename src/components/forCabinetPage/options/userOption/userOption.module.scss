@@ -68,4 +68,55 @@
     display: flex;
     justify-content: flex-end;
   }
+
+  .selectWrapper{
+    display: flex;
+    position: relative;
+  }
+  .labelSelect{
+    font-family: $fontNunito;
+    font-weight: $regular;
+    font-size: 1.125rem;
+    color: $black;
+    flex-grow: 1;
+    padding-top: 10px;
+  }
+
+  select {
+    font-size: 0.875rem;
+    padding: 15px 80px 6px 72px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 2.5rem;
+    border: 1px solid $gray;
+    background-color: $white;
+    border-radius: 3px;
+  }
+
+  .selectWrapper:after {
+    content: url(/assets/icons/downArrow.svg);
+    color: black;
+    padding: 0 8px;
+    position: absolute;
+    right: 8px;
+    top: 12px;
+    z-index: 1;
+    text-align: center;
+    width: 5%;
+    height: 70%;
+    pointer-events: none;
+    box-sizing: border-box;
+  }
+  .selectWrapper:before {
+    content: url(/assets/icons/school.svg);
+    padding: 0 8px;
+    position: absolute;
+    left: 51%;
+    top: 6px;
+    z-index: 1;
+    text-align: center;
+    pointer-events: none;
+    box-sizing: border-box;
+  }
 }

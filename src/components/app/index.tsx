@@ -2,7 +2,6 @@ import React from 'react';
 import './app.scss';
 import Home from '../../pages/home';
 import ErrorPage from '../../pages/errorPage';
-import FilterPage from '../../pages/filterPage/index';
 import GraduateCabinet from '../../pages/graduateCabinetPage/index';
 import LoginPage from '../../pages/loginPage';
 import UniversitiesListPage from '../../pages/universitiesListPage';
@@ -11,12 +10,13 @@ import RegistrationForm from '../../pages/registrationPage';
 import { useAuth } from '../../services/tokenValidator';
 import { ProtectedRoute, RedirectRoute } from '../../services/customRoutes';
 import ErrorBoundry from '../../errorBoundry';
-import { ResetPasswordPage } from '../../pages';
+import  ResetPasswordPage  from '../../pages/resetPasswordPage/index';
 
 const App = () => {
   const { token } = useAuth();
 
   return (
+
     <ErrorBoundry>
       <Router>
         <Switch>
@@ -38,12 +38,12 @@ const App = () => {
           <ProtectedRoute user={token} pathname='login' path='/cabinet'>
             <GraduateCabinet />
           </ProtectedRoute>
-          <Route path='/filterPage' component={FilterPage} />
           <Route path='/404' component={ErrorPage} status={404} />
           <Route component={ErrorPage} status={404} />
         </Switch>
       </Router>
     </ErrorBoundry>
+
     // <Router>
     //   <Switch>
     //     <Route exact path='/'>
@@ -66,6 +66,7 @@ const App = () => {
     //     <Route component={ErrorPage} status={404} />
     //   </Switch>
     // </Router>
+
   );
 };
 

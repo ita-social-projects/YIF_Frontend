@@ -5,6 +5,8 @@ import ButtonUploading from '../buttonUploading/buttonUploading';
 import { FormInputErrorWithCloseBtn } from '../../common/formElements';
 import { APIUrl } from '../../../services/endpoints';
 import { requestImageProfile } from '../../../services/requestDataFunction';
+import { store } from '../../../store/store';
+import { setUserPhoto } from '../../../store/reducers/setUserReducer';
 
 export type TLoadedImage = {
   name: string;
@@ -217,9 +219,13 @@ const ImageUploaderPopup = (props: TProps) => {
               setLoading(true);
               const imageToUpload = cropper.getCroppedCanvas().toDataURL();
 
-              requestImageProfile(`${APIUrl}Users/ChangePhoto`, 'POST', {
-                photo: imageToUpload,
-              })
+              requestImageProfile(
+                `${APIUrl}Users/Current/ChangePhoto`,
+                'POST',
+                {
+                  photo: imageToUpload,
+                }
+              )
                 .then((res: any) => {
                   const statusCode = res.statusCode.toString();
                   if (statusCode.match(/^[23]\d{2}$/)) {
@@ -227,7 +233,12 @@ const ImageUploaderPopup = (props: TProps) => {
                     setSuccessLoad(true);
                     setPopupOpen(false);
                     setLoading(false);
-                    setProfileImageSrc(imageToUpload);
+                    setProfileImageSrc(res.data.photo);
+                    store.dispatch(
+                      setUserPhoto({
+                        photo: res.data.photo,
+                      })
+                    );
                   } else {
                     setError(
                       res.data.message || 'Щось пішло не так, спробуйте знову.'
@@ -236,7 +247,7 @@ const ImageUploaderPopup = (props: TProps) => {
                   }
                 })
                 .catch((err) => {
-                  setError('Щось пішло не так, спробуйте знову.');
+                  setError('Щось пішло не так, ви можете спробувати знову.');
                   setLoading(false);
                 });
             }}

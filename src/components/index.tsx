@@ -20,3 +20,4 @@ export { default as SpecListOption } from './forCabinetPage/options/specListOpti
 
 export { default as LoginForm } from './loginForm';
 export { default as UniversityCard } from './universityCard';
+export { default as ToolTips} from './common/tooltip'

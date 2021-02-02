@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { render, screen } from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
 import UniversityCard from '.';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
@@ -78,4 +78,23 @@ test('check the button link', () => {
   expect(link).toBeInTheDocument();
   expect(link.tagName).toMatch(/a/i);
   expect(link).toHaveAttribute('href', '/404');
+});
+
+describe('handleClick', () => {
+  it('test function handleClick', async () => {
+    const handleClick = jest.fn();
+
+    const { container } = render(
+        <Provider store={store}>
+          <MemoryRouter>
+            <UniversityCard onClick={handleClick()} />
+          </MemoryRouter>
+        </Provider>
+    );
+
+    const div = container.querySelector('div');
+    expect(div).toBeInTheDocument();
+    fireEvent.click(div);
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
 });

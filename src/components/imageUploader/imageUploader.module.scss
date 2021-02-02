@@ -37,18 +37,10 @@
 .successContainer {
   position: absolute;
   top: 0;
-  width: 100%;
-  @include flex(row, center, flex-start);
-
-  span {
-    padding: 0.8rem;
-    margin: 0 auto;
-    background-color: rgba($darkBlue, 0.3);
-    color: $white;
-    font-size: 11px;
-    font-weight: $regular;
-    font-family: $fontOpenSans;
-  }
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  margin: 0 auto;
 }
 
 .elementShowHide {

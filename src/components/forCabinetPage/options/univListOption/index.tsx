@@ -66,6 +66,7 @@ const UnivListOption = () => {
   const universitiesCardList = universitiesList.map((item: any) => {
     return (
       <UniversityCard
+          id={item.id}
         liked={true}
         key={item.id}
         abbreviation={item.abbreviation}
