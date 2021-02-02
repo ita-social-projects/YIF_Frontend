@@ -104,13 +104,9 @@ function AuthProvider({ children }: any) {
         console.error(result.title);
       }
     } catch (error) {
-      if (error.name === 'AbortError') {
-        console.log('fetch aborted');
-      } else {
-        removeToken();
-        setIsRefreshing(false);
-        console.error(error);
-      }
+      removeToken();
+      setIsRefreshing(false);
+      console.error(error);
     }
     // return currentToken;
   }, [token, refreshToken, updateToken, removeToken]);
