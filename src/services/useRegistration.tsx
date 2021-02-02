@@ -21,6 +21,7 @@ const useRegistration = (endpoint: string) => {
     hasError: false,
     errorStatusCode: '',
     errorMessage: '',
+    redirectLink: '',
   });
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +52,12 @@ const useRegistration = (endpoint: string) => {
     e.preventDefault();
 
     setSubmitted({ submitted: true });
-    setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
+    setError({
+      hasError: false,
+      errorStatusCode: '',
+      errorMessage: '',
+      redirectLink: '',
+    });
 
     const token = await captcha.getCaptchaToken();
 
@@ -65,7 +71,12 @@ const useRegistration = (endpoint: string) => {
       .then((res: any) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
-          setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
+          setError({
+            hasError: false,
+            errorStatusCode: '',
+            errorMessage: '',
+            redirectLink: '',
+          });
           updateToken(res.data.token, res.data.refreshToken);
           getUser(res.data.token);
           history.push(pathToRedirect);
@@ -75,6 +86,7 @@ const useRegistration = (endpoint: string) => {
             errorStatusCode: res.statusCode,
             errorMessage:
               res.data.message || 'Щось пішло не так, спробуйте знову.',
+            redirectLink: res.data.redirectLink || '',
           });
         }
       })
@@ -83,6 +95,7 @@ const useRegistration = (endpoint: string) => {
           hasError: true,
           errorStatusCode: error.statusCode,
           errorMessage: 'Щось пішло не так, спробуйте знову.',
+          redirectLink: '',
         });
       });
   };

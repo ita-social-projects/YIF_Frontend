@@ -1,13 +1,20 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import ImageUploader from './index';
+import { store } from '../../store/store';
+import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('IMAGE UPLOADER AVATAR', () => {
   it('should render component', async () => {
     const handleClick = jest.fn();
 
     const { container } = render(
-      <ImageUploader onClick={handleClick()} additionalStyles={{}} />
+      <Provider store={store}>
+        <MemoryRouter>
+          <ImageUploader onClick={handleClick()} additionalStyles={{}} />
+        </MemoryRouter>
+      </Provider>
     );
 
     const div = container.querySelector('div')!;

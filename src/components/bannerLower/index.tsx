@@ -30,7 +30,7 @@ export default class BannerLower extends Component<any> {
   };
 
   render() {
-    const entryContent = this.context.user ? (
+    const entryContent = this.context.token ? (
       <Link className={style.animatedButton} to='/cabinet'>
         Увійти в кабінет
       </Link>
