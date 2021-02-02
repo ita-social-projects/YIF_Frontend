@@ -13,6 +13,16 @@ interface UserState {
 
 const localStorageUser = localStorage.getItem('user');
 
+const changeUserLocalStorage = (key: string, value: string) => {
+  const data = JSON.parse(localStorage.user);
+  for (let keyData in data) {
+    if (keyData === key) {
+      data[keyData] = value;
+      break;
+    }
+  }
+  localStorage.setItem('user', JSON.stringify(data));
+};
 const formatData = (data: any) => {
   let result = <any>{};
 
@@ -47,6 +57,13 @@ const userSlice = createSlice({
       }
       localStorage.setItem('user', JSON.stringify(state));
     },
+    setUserPhoto(state, action) {
+      changeUserLocalStorage('photo', action.payload.photo);
+      return {
+        ...state,
+        photo: action.payload.photo,
+      };
+    },
     removeUserReducer(state) {
       for (let prop in state) {
         state[prop] = '';
@@ -56,7 +73,11 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUserReducer, removeUserReducer } = userSlice.actions;
+export const {
+  setUserReducer,
+  removeUserReducer,
+  setUserPhoto,
+} = userSlice.actions;
 export default userSlice.reducer;
 
 export const userSelector = (state: RootState) => state.user;

@@ -1,6 +1,12 @@
 import React, { Fragment } from 'react';
-import { useSelector } from 'react-redux';
-import { selectData } from '../../store/reducers/dropboxReducer';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectData,
+  selectChosenData,
+  chooseDirection,
+  chooseSpeciality,
+  chooseUniversity,
+} from '../../store/reducers/dropboxReducer';
 import DropboxElement from '../common/dropbox/dropbox';
 import styles from './filter.module.scss';
 
@@ -8,7 +14,9 @@ import { useHistory } from 'react-router-dom';
 
 const Filter = () => {
   const state = useSelector(selectData);
+  const chosenData = useSelector(selectChosenData);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   let university: string[] = state.university;
   let direction: string[] = state.direction;
@@ -51,7 +59,18 @@ const Filter = () => {
   //submit our form and redirect to the filterPage
   const onSubmit = (event: any) => {
     event.preventDefault();
-    history.push('/404');
+    history.push({
+      pathname: '/universities',
+      state: {
+        chosenDirection: chosenData.direction,
+        chosenSpeciality: chosenData.speciality,
+        chosenUniversity: chosenData.university,
+      },
+    });
+    //reset filter
+    dispatch(chooseDirection(''));
+    dispatch(chooseSpeciality(''));
+    dispatch(chooseUniversity(''));
   };
 
   return (
@@ -67,7 +86,9 @@ const Filter = () => {
                 data={direction}
                 keyId={0}
                 listName={'Direction'}
-                listTitle={'Напрями'}
+                listTitle={'Всі'}
+                placeholder={'напрям'}
+                reduxMethod={'chooseDirection'}
               ></DropboxElement>
             </div>
             <div className={styles.box}>
@@ -76,7 +97,9 @@ const Filter = () => {
                 keyId={1}
                 listName={'Speciality'}
                 width={21.75}
-                listTitle={'Спеціальності'}
+                listTitle={'Всі'}
+                placeholder={'спеціальність'}
+                reduxMethod={'chooseSpeciality'}
               ></DropboxElement>
             </div>
             <div className={styles.box}>
@@ -84,7 +107,9 @@ const Filter = () => {
                 data={university}
                 keyId={2}
                 listName={'University'}
-                listTitle={'Університети'}
+                listTitle={'Всі'}
+                placeholder={'університет'}
+                reduxMethod={'chooseUniversity'}
               ></DropboxElement>
             </div>
             <button type={'submit'} className={styles.animatedButton}>

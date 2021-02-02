@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './formInputSuccess.module.scss'
 
 interface Props {
-  successMessage: any;
+  successMessage: string;
 }
 
  export const FormInputSuccess: React.FC<Props> = (props) => {
