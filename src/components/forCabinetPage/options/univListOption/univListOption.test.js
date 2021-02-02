@@ -54,7 +54,7 @@ it('renders without crashing', () => {
 // });
 // global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
-// it('ckeck success response', async () => {
+// it('check success response', async () => {
 //   await act(async () => {
 //     ReactDOM.render(
 //       <Provider store={store}>
