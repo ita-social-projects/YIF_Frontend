@@ -76,6 +76,7 @@ function AuthProvider({ children }: any) {
     const url = `${APIUrl}Authentication/RefreshToken`;
     let currentToken;
     let currentRefreshToken = refreshToken;
+
     try {
       setIsRefreshing(true);
       let response = await fetch(url, {

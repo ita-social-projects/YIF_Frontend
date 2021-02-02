@@ -52,10 +52,10 @@ const userSlice = createSlice({
   reducers: {
     setUserReducer(state, action) {
       const payload = formatData(action.payload);
-      for (let prop in state) {
+      for (let prop in payload) {
         state[prop] = payload[prop];
       }
-      localStorage.setItem('user', JSON.stringify(payload));
+      localStorage.setItem('user', JSON.stringify(state));
     },
     setUserPhoto(state, action) {
       changeUserLocalStorage('photo', action.payload.photo);
