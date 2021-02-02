@@ -64,7 +64,7 @@ const UniversityCard: React.FC<Props> = (props) => {
     }
   },[]);
 
-  const  clickHandler = (e: React.SyntheticEvent<EventTarget>) => {
+  const handleClick = (e: React.SyntheticEvent<EventTarget>) => {
     e.preventDefault();
     let itemImg = (e.target as Element).closest('svg');
     if (itemImg ) setLiked(() => !isLiked);
@@ -105,7 +105,7 @@ const UniversityCard: React.FC<Props> = (props) => {
   }
 
   return (
-    <div  data-id={props.id} className={styles.card} onClick={clickHandler}>
+    <div  data-id={props.id} data-testid='click' className={styles.card} onClick={handleClick}>
      < Tooltips content='Будь ласка, увійдіть!' >
       <div
            className={
