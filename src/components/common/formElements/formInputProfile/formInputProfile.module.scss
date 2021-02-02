@@ -29,7 +29,8 @@
   @include flex(row, flex-end, flex-start);
   width: 350px;
   height: 2.5rem;
-  border: 1px solid $black;
+  border: 1px solid $gray;
+  border-radius: 3px;
   margin-bottom: 2.81rem;
   background-color: $white;
 }
@@ -46,6 +47,7 @@
 }
 .inputFailed {
   border: 1px solid $red;
+  border-radius: 3px;
   margin-bottom: 2px;
 }
 
@@ -55,5 +57,7 @@
   width: 100%;
   cursor: pointer;
   padding-top: 10px;
-  font-size: inherit;
+  font-family: $fontNunito;
+  font-weight: $regular;
+  font-size: 0.875rem;
 }

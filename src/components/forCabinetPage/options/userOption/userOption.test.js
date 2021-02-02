@@ -43,20 +43,17 @@ describe('UserOption ', () => {
     );
     const emailNameNode = container.querySelector('input[name="email"]');
     const phonedNode = container.querySelector('input[name="phone"]');
-    const schoolNode = container.querySelector('input[name="school"]');
 
     expect(lastNameNode.tagName).toBe('INPUT');
     expect(firstNameNode.tagName).toBe('INPUT');
     expect(fathersNameNode.tagName).toBe('INPUT');
     expect(emailNameNode.tagName).toBe('INPUT');
     expect(phonedNode.tagName).toBe('INPUT');
-    expect(schoolNode.tagName).toBe('INPUT');
     expect(lastNameNode.getAttribute('value')).toBe('');
     expect(firstNameNode.getAttribute('value')).toBe('');
     expect(fathersNameNode.getAttribute('value')).toBe('');
     expect(emailNameNode.getAttribute('value')).toBe('');
     expect(phonedNode.getAttribute('value')).toBe('');
-    expect(schoolNode.getAttribute('value')).toBe('');
   });
 
   test('Clicking the submit correct values after entering', async () => {
@@ -75,7 +72,7 @@ describe('UserOption ', () => {
     );
     const emailNameNode = container.querySelector('input[name="email"]');
     const phonedNode = container.querySelector('input[name="phone"]');
-    const schoolNode = container.querySelector('input[name="school"]');
+    const schoolNameNode = container.querySelector('select[name="school"]')
 
     await wait(() => {
       fireEvent.change(lastNameNode, {
@@ -120,13 +117,13 @@ describe('UserOption ', () => {
         },
       });
     });
-
     await wait(() => {
-      fireEvent.change(schoolNode, {
+      fireEvent.change(schoolNameNode, {
         target: {
-          value: 'mockemail',
+          value: 'mockName',
         },
       });
     });
   });
+
 });

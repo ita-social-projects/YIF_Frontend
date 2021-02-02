@@ -1,6 +1,10 @@
 import { rejects } from 'assert';
 import { resolve } from 'path';
-import { requestData, requestImageProfile } from './requestDataFunction';
+import {
+  requestData,
+  requestImageProfile,
+  requestSecureData,
+} from './requestDataFunction';
 
 const mockJsonPromise = Promise.resolve('received data');
 const mockFetchPromise = Promise.resolve({
@@ -49,12 +53,34 @@ describe('requestImageProfile', () => {
   });
 
   it('method POST', () => {
-    requestImageProfile('URL', 'POST', { filed1: 'value1' });
+    requestSecureData('URL', 'POST', { filed1: 'value1' });
     expect(global.fetch).toHaveBeenCalledWith('URL', {
       body: JSON.stringify({ filed1: 'value1' }),
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
     });
     expect(global.fetch).toHaveBeenCalledTimes(5);
+  });
+});
+
+describe('request secure data', () => {
+  it('method GET', () => {
+    requestSecureData('URL', 'GET');
+    expect(global.fetch).toHaveBeenCalledWith('URL', {
+      body: undefined,
+      headers: { 'Content-Type': 'application/json' },
+      method: 'GET',
+    });
+    expect(global.fetch).toHaveBeenCalledTimes(6);
+  });
+
+  it('method POST', () => {
+    requestSecureData('URL', 'POST', { filed1: 'value1' });
+    expect(global.fetch).toHaveBeenCalledWith('URL', {
+      body: JSON.stringify({ filed1: 'value1' }),
+      headers: { 'Content-Type': 'application/json' },
+      method: 'POST',
+    });
+    expect(global.fetch).toHaveBeenCalledTimes(7);
   });
 });
