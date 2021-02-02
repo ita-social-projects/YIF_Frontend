@@ -20,7 +20,7 @@ const UserOption = () => {
     left: '2.5rem',
   };
 
-  const url = `${APIUrl}Users/SetCurrentProfile`;
+  const url = `${APIUrl}Users/Current/SetProfile`;
   const useYIFProfile = useProfile(url);
   const user = useSelector(userSelector);
   const [option, setOption] = useState();
