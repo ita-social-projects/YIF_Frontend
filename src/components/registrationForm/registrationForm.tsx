@@ -15,6 +15,7 @@ import Spinner from '../common/spinner';
 import { APIUrl } from '../../services/endpoints';
 
 const RegistrationForm: React.FC = () => {
+
   const useYIFRegistration = useRegistration(APIUrl);
 
   return (
