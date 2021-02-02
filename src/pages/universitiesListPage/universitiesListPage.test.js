@@ -52,7 +52,7 @@ const mockFetchPromise = Promise.resolve({
 });
 global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
-it('ckeck success response', async () => {
+it('check success response', async () => {
   const history = createMemoryHistory();
   await act(async () => {
     ReactDOM.render(
@@ -72,7 +72,7 @@ it('ckeck success response', async () => {
   expect(heading.innerHTML).toBe('Список університетів');
 });
 
-it('ckeck error ', async () => {
+it('check error ', async () => {
   const mockFetchPromiseError = Promise.resolve({
     json: () => mockJsonPromise,
     status: 404,
