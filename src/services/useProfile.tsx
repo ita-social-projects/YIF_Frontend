@@ -6,6 +6,7 @@ import { setUserReducer, userSelector } from '../store/reducers/setUserReducer';
 import { useSelector } from 'react-redux';
 
 const useProfile = (endpoint: string) => {
+
   const user = useSelector(userSelector);
 
   const { token, getToken } = useAuth();
@@ -63,7 +64,7 @@ const useProfile = (endpoint: string) => {
 
   const handleSchoolChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setSchoolName(value);
+      setSchoolName(value);
   };
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
