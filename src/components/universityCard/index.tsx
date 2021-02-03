@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './universityCard.module.scss';
-import Tooltips from "../common/tooltip";
-import { useAuth } from "../../services/tokenValidator";
-import { requestSecureData } from "../../services/requestDataFunction";
+import Tooltips from '../common/tooltip';
+import { useAuth } from '../../services/tokenValidator';
+import { requestSecureData } from '../../services/requestDataFunction';
 import { APIUrl } from '../../services/endpoints';
-
 
 interface Props {
   liked?: boolean;
@@ -18,10 +17,8 @@ interface Props {
   endOfCampaign: string;
 }
 
-
 const UniversityCard: React.FC<Props> = (props) => {
-
-  const [ isLiked, setLiked ] = useState(false);
+  const [isLiked, setLiked] = useState(false);
   const { token, getToken } = useAuth();
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState({
@@ -47,7 +44,7 @@ const UniversityCard: React.FC<Props> = (props) => {
 
   let {
     liked,
-     id,
+    id,
     data,
     abbreviation,
     site,
@@ -61,62 +58,78 @@ const UniversityCard: React.FC<Props> = (props) => {
     if (liked) setLiked(() => !isLiked);
     return () => {
       if (!liked) setLiked(() => isLiked);
-    }
-  },[]);
+    };
+  }, []);
 
   const handleClick = (e: React.SyntheticEvent<EventTarget>) => {
     e.preventDefault();
     let itemImg = (e.target as Element).closest('svg');
-    if (itemImg ) setLiked(() => !isLiked);
+    if (itemImg) setLiked(() => !isLiked);
     let universityId = (e.currentTarget as Element).getAttribute('data-id');
     let parentElem = itemImg?.parentElement;
 
     if (parentElem?.classList.contains(`${styles.card__icon__liked}`)) {
-      itemImg && sendDeleteFavoriteUniversity(`${APIUrl}University/Favorites/${universityId}`, 'DELETE')
+      itemImg &&
+        sendDeleteFavoriteUniversity(
+          `${APIUrl}University/Favorites/${universityId}`,
+          'DELETE'
+        );
     } else {
-      itemImg && sendDeleteFavoriteUniversity(`${APIUrl}University/Favorites/${universityId}`, 'POST');
+      itemImg &&
+        sendDeleteFavoriteUniversity(
+          `${APIUrl}University/Favorites/${universityId}`,
+          'POST'
+        );
     }
   };
 
-  let sendDeleteFavoriteUniversity = (endpointLikedUniversity:string, method: string) => {
+  let sendDeleteFavoriteUniversity = (
+    endpointLikedUniversity: string,
+    method: string
+  ) => {
     getToken();
     requestSecureData(endpointLikedUniversity, method, token!)
-        .then((res: any) => {
-          const statusCode = res.statusCode.toString();
-          if (statusCode.match(/^[23]\d{2}$/)) {
-            setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
-            setSubmitted(false);
-          } else {
-            setError({
-              hasError: true,
-              errorStatusCode: res.statusCode,
-              errorMessage:
-                  res.data.message || 'Щось пішло не так, спробуйте знову.',
-            });
-          }
-        })
-        .catch((error) => {
+      .then((res: any) => {
+        const statusCode = res.statusCode.toString();
+        if (statusCode.match(/^[23]\d{2}$/)) {
+          setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
+          setSubmitted(false);
+        } else {
           setError({
             hasError: true,
-            errorStatusCode: error.statusCode,
-            errorMessage: 'Щось пішло не так, спробуйте знову.',
+            errorStatusCode: res.statusCode,
+            errorMessage:
+              res.data.message || 'Щось пішло не так, спробуйте знову.',
           });
+        }
+      })
+      .catch((error) => {
+        setError({
+          hasError: true,
+          errorStatusCode: error.statusCode,
+          errorMessage: 'Щось пішло не так, спробуйте знову.',
         });
-  }
+      });
+  };
 
   return (
-    <div  data-id={props.id} data-testid='click' className={styles.card} onClick={handleClick}>
-     < Tooltips content='Будь ласка, увійдіть!' >
-      <div
-           className={
-          token && isLiked
-            ? `${styles.card__icon} ${styles.card__icon__liked}`
-            : `${styles.card__icon}`
-        }
-      >
-        {starSVG}
-      </div>
-     </Tooltips>
+    <div
+      data-testid='card'
+      data-id={props.id}
+      className={styles.card}
+      onClick={handleClick}
+    >
+      <Tooltips content='Будь ласка, увійдіть!'>
+        <div
+          className={
+            token && isLiked
+              ? `${styles.card__icon} ${styles.card__icon__liked}`
+              : `${styles.card__icon}`
+          }
+        >
+          {starSVG}
+        </div>
+      </Tooltips>
       <h2 className={styles.card__title}>{abbreviation}</h2>
       <div className={styles.card__contentContainer}>
         <div className={styles.card__content}>
@@ -171,6 +184,6 @@ const UniversityCard: React.FC<Props> = (props) => {
       </div>
     </div>
   );
-}
+};
 
 export default UniversityCard;
