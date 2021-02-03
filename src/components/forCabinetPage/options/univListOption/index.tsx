@@ -47,7 +47,6 @@ const UnivListOption = () => {
             endOfCampaign: item.endOfCampaign,
           };
         });
-        console.log(statusCode);
         setList(newList);
         setFetching(false);
       } else {
@@ -57,16 +56,14 @@ const UnivListOption = () => {
           errorMessage:
             res.data.message || 'Щось пішло не так, спробуйте знову.',
         });
-        console.log('bad');
       }
-      console.log(res);
     });
   }, []);
 
   const universitiesCardList = universitiesList.map((item: any) => {
     return (
       <UniversityCard
-          id={item.id}
+        id={item.id}
         liked={true}
         key={item.id}
         abbreviation={item.abbreviation}
