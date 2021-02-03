@@ -4,6 +4,8 @@ import { render, fireEvent, wait } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import useResetPassword from './useResetPassword';
 import { APIUrl } from '../../src/services/endpoints';
+import { useCaptcha } from './useCaptcha';
+
 const mockJsonPromise = Promise.resolve('received data');
 const mockFetchPromise = Promise.resolve({
   json: () => mockJsonPromise,
@@ -58,6 +60,7 @@ describe('USE RESET PASSWORD', () => {
     // await wait(() => {
     //   fireEvent.click(loginButton);
     // });
+
     // await wait(() => {
     //   expect(global.fetch).toHaveBeenCalledTimes(1);
     // });
