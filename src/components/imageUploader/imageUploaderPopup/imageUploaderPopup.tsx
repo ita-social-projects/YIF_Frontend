@@ -159,6 +159,7 @@ const ImageUploaderPopup = (props: TProps) => {
                 type='file'
                 ref={(input) => (fileInput = input)}
                 accept='image/*'
+                data-testid='fileElem'
                 id='fileElem'
                 onDragEnter={(e) => {
                   e.preventDefault();
