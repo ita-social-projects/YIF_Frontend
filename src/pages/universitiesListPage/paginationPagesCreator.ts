@@ -1,4 +1,4 @@
-export function paginationPagesCreator(
+export function PaginationPagesCreator(
   totalPages: number,
   currentPage: number
 ) {
