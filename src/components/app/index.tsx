@@ -10,12 +10,13 @@ import RegistrationForm from '../../pages/registrationPage';
 import { useAuth } from '../../services/tokenValidator';
 import { ProtectedRoute, RedirectRoute } from '../../services/customRoutes';
 import ErrorBoundry from '../../errorBoundry';
-import { ResetPasswordPage } from '../../pages';
+import  ResetPasswordPage  from '../../pages/resetPasswordPage/index';
 
 const App = () => {
   const { token } = useAuth();
 
   return (
+
     <ErrorBoundry>
       <Router>
         <Switch>
@@ -42,6 +43,7 @@ const App = () => {
         </Switch>
       </Router>
     </ErrorBoundry>
+
     // <Router>
     //   <Switch>
     //     <Route exact path='/'>
@@ -64,6 +66,7 @@ const App = () => {
     //     <Route component={ErrorPage} status={404} />
     //   </Switch>
     // </Router>
+
   );
 };
 

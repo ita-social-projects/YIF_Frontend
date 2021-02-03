@@ -1,25 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { render, fireEvent, wait } from '@testing-library/react';
+import { fireEvent, wait } from '@testing-library/react';
 import LoginForm from '.';
 import { MemoryRouter } from 'react-router-dom';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
+const div = document.createElement('div');
+const container = document.createElement('div');
+div.append(container);
+
+it('submits correct values', async () => {
   ReactDOM.render(
     <MemoryRouter>
       <LoginForm />
     </MemoryRouter>,
-    div
+    container
   );
-});
 
-it('submits correct values', async () => {
-  const { container } = render(
-    <MemoryRouter>
-      <LoginForm />
-    </MemoryRouter>
-  );
   const email = container.querySelector('input[name="email"]');
   const password = container.querySelector('input[name="password"]');
 
@@ -38,37 +34,17 @@ it('submits correct values', async () => {
       },
     });
   });
-});
 
-it('should show email input', () => {
-  const { getByPlaceholderText } = render(
-    <MemoryRouter>
-      <LoginForm />
-    </MemoryRouter>
-  );
-  const input = getByPlaceholderText('Електронна пошта');
-  expect(input).toBeInTheDocument();
-  expect(input.tagName).toMatch(/input/i);
-});
+  const handleClick = jest.fn();
+  const submitButton = container.querySelector('button');
 
-it('should show password input', () => {
-  const { getByPlaceholderText } = render(
-    <MemoryRouter>
-      <LoginForm />
-    </MemoryRouter>
-  );
-  const input = getByPlaceholderText('Пароль');
-  expect(input).toBeInTheDocument();
-  expect(input.tagName).toMatch(/input/i);
-});
+  submitButton.onclick = handleClick;
 
-test('should show submit button', () => {
-  const { getByText } = render(
-    <MemoryRouter>
-      <LoginForm />
-    </MemoryRouter>
-  );
-  const button = getByText('Увійти');
-  expect(button).toBeInTheDocument();
-  expect(button.tagName).toMatch(/button/i);
+  await wait(() => {
+    fireEvent.click(submitButton);
+  });
+
+  await wait(() => {
+    expect(handleClick).toHaveBeenCalled();
+  });
 });

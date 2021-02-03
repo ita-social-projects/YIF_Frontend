@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 import { Header, Footer, UniversityCard } from '../../components';
 import ErrorBoundry from '../../errorBoundry';
 import styles from './universitiesListPage.module.scss';
 import { requestData } from '../../services/requestDataFunction';
 import Spinner from '../../components/common/spinner';
-import { paginationPagesCreator } from './paginationPagesCreator';
+import { PaginationPagesCreator } from './paginationPagesCreator';
 import ResponsePlaceholder from '../../components/common/responsePlaceholder';
 import { APIUrl } from '../../services/endpoints';
 
@@ -33,25 +33,22 @@ const UniversitiesListPage = () => {
     errorMessage: '',
   });
 
-  const location:any = useLocation();
-  
+  const location: any = useLocation();
+
   useEffect(() => {
-    let URL:string='';
-    if((location.state!==undefined)){
+    let URL: string = '';
+    if (location.state !== undefined) {
       URL = `${APIUrl}University?DirectionName=${location.state.chosenDirection}&SpecialityName=${location.state.chosenSpeciality}&UniversityAbbreviation=${location.state.chosenUniversity}&page=${currentPage}&pageSize=${perPage}`;
-      console.log(location.state.chosenUniversity);
-    }else
-    if(location.state===undefined){
+    } else if (location.state === undefined) {
       URL = `${APIUrl}University?page=${currentPage}&pageSize=${perPage}`;
     }
 
     const endpoint = URL;
     setFetching(true);
     requestData(endpoint, 'GET').then((res: any) => {
-      console.log(res);
-      setTotalPages(res.data.totalPages);
       const statusCode = res.statusCode.toString();
       if (statusCode.match(/^[23]\d{2}$/)) {
+        setTotalPages(res.data.totalPages);
         const newList = res.data.responseList.map((item: any) => {
           return {
             liked: item.liked,
@@ -73,7 +70,6 @@ const UniversitiesListPage = () => {
           errorMessage:
             res.data.message || 'Щось пішло не так, спробуйте знову.',
         });
-        console.log('bad');
       }
     });
   }, [currentPage]);
@@ -81,6 +77,7 @@ const UniversitiesListPage = () => {
   const universitiesCardList = universitiesList.map((item: any) => {
     return (
       <UniversityCard
+        id={item.id}
         liked={item.liked}
         key={item.id}
         abbreviation={item.abbreviation}
@@ -119,11 +116,12 @@ const UniversitiesListPage = () => {
     </svg>
   );
 
-  const pages = paginationPagesCreator(totalPages, currentPage);
+  const pages = PaginationPagesCreator(totalPages, currentPage);
 
   const pagination = (
-    <div className={styles.pages}>
+    <div data-testid='pagination' className={styles.pages}>
       <div
+        id='prevPage'
         className={
           currentPage === 1
             ? `${styles.arrow} ${styles.arrow__prev} ${styles.arrowUnable}`
@@ -137,7 +135,6 @@ const UniversitiesListPage = () => {
           }
         }}
       >
-        {' '}
         {arrowIcon}
       </div>
       {pages.map((page, index) => {
@@ -156,6 +153,7 @@ const UniversitiesListPage = () => {
         );
       })}
       <div
+        id='nextPage'
         className={
           currentPage === totalPages
             ? `${styles.arrow} ${styles.arrow__next} ${styles.arrowUnable}`
@@ -189,7 +187,9 @@ const UniversitiesListPage = () => {
       <ErrorBoundry>
         <Header />
         <section className={styles.universitiesPage}>
-          <h1 className={styles.title}>Список університетів</h1>
+          <h1 data-testid='heading' className={styles.title}>
+            Список університетів
+          </h1>
           {error.hasError ? (
             <ResponsePlaceholder errorMessage={error.errorMessage} />
           ) : (
