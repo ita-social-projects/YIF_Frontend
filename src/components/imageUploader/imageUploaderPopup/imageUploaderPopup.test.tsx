@@ -4,10 +4,16 @@ import {
   fireEvent,
   cleanup,
   createEvent,
+  wait,
+  waitFor,
 } from '@testing-library/react';
+
 import ImageUploaderPopup from './imageUploaderPopup';
 
-afterEach(() => cleanup());
+let file: any;
+beforeEach(() => {
+  file = new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' });
+});
 
 describe('IMAGE UPLOADER POPUP', () => {
   it('should render component', () => {
@@ -38,42 +44,113 @@ describe('IMAGE UPLOADER POPUP', () => {
     fireEvent.click(buttonUpload[0]);
     fireEvent.click(buttonUpload[1]);
     expect(handleDrag).toHaveBeenCalled();
-
-    // ЗАКОМЕНТОВАНИЙ КОД НЕ ПРОХОДИТЬ:
-    // fireEvent.drop(divImageLoader, {
-    //   dataTransfer: {
-    //     files: [new File(['(0_0)'], 'chucknoris.png', { type: 'image/png' })]!,
-    //   },
-    // });
   });
-  // it('shoud drop', async () => {
-  //   const handleDrag = jest.fn();
 
-  //   const { container } = render(
-  //     <ImageUploaderPopup
-  //       setPopupOpen={handleDrag}
-  //       setSuccessLoad={handleDrag}
-  //       setProfileImageSrc={handleDrag}
-  //     />
-  //   );
-  //   const fileDropzone = container.querySelector('#fileElem')!;
-  //   expect(fileDropzone).toBeInTheDocument();
-  //   const fileDropEvent = createEvent.drop(fileDropzone);
-  //   const file = new File(['0-0'], 'chacknoris.png', {
-  //     type: 'image/png',
-  //   });
+  it('shoud drop with error of type', async () => {
+    const handleDrag = jest.fn();
+    file = new File(['(⌐□_□)'], 'chucknorris.gif', { type: 'image/gif' });
+    const { getByTestId, getByText } = render(
+      <ImageUploaderPopup
+        setPopupOpen={handleDrag}
+        setSuccessLoad={handleDrag}
+        setProfileImageSrc={handleDrag}
+      />
+    );
+    await wait(() =>
+      fireEvent.change(getByTestId('fileElem'), {
+        target: { files: [file] },
+      })
+    );
+    await wait(() => {
+      const errorBtn = getByText(/закрити/i);
+      expect(errorBtn).toBeInTheDocument();
+    });
+  });
 
-  //   const fileList = [file];
+  it('shoud drop with error of size', async () => {
+    const handleDrag = jest.fn();
+    let buffer = new ArrayBuffer(10485764);
+    let view = new Uint32Array(buffer);
+    file = new File([view], 'chucknorris.png', { type: 'image/png' });
 
-  //   Object.defineProperty(fileDropEvent, 'dataTransfer', {
-  //     value: {
-  //       files: {
-  //         item: (itemIndex: any) => fileList[itemIndex],
-  //         length: fileList.length,
-  //       },
-  //     },
-  //   });
+    const { getByTestId, getByText } = render(
+      <ImageUploaderPopup
+        setPopupOpen={handleDrag}
+        setSuccessLoad={handleDrag}
+        setProfileImageSrc={handleDrag}
+      />
+    );
+    await wait(() =>
+      fireEvent.change(getByTestId('fileElem'), {
+        target: { files: [file] },
+      })
+    );
+    await wait(() => {
+      const errorBtn = getByText(/закрити/i);
+      expect(errorBtn).toBeInTheDocument();
+    });
+  });
 
-  //   fireEvent(fileDropzone, fileDropEvent);
-  // });
+  it('shoud drop with error of length', async () => {
+    const handleDrag = jest.fn();
+    file = new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' });
+
+    const { getByTestId, getByText } = render(
+      <ImageUploaderPopup
+        setPopupOpen={handleDrag}
+        setSuccessLoad={handleDrag}
+        setProfileImageSrc={handleDrag}
+      />
+    );
+    await wait(() =>
+      fireEvent.change(getByTestId('fileElem'), {
+        target: { files: [file, file] },
+      })
+    );
+    await wait(() => {
+      const errorBtn = getByText(/закрити/i);
+      expect(errorBtn).toBeInTheDocument();
+    });
+  });
+
+  it('shoud change', async () => {
+    const handleDrag = jest.fn();
+    const { getByTestId } = render(
+      <ImageUploaderPopup
+        setPopupOpen={handleDrag}
+        setSuccessLoad={handleDrag}
+        setProfileImageSrc={handleDrag}
+      />
+    );
+    await wait(() =>
+      fireEvent.change(getByTestId('fileElem'), {
+        target: { files: [file] },
+      })
+    );
+    await wait(() => {});
+  });
+
+  it('shoud drop', async () => {
+    const handleDrag = jest.fn();
+    const { getByTestId } = render(
+      <ImageUploaderPopup
+        setPopupOpen={handleDrag}
+        setSuccessLoad={handleDrag}
+        setProfileImageSrc={handleDrag}
+      />
+    );
+
+    const fileDropzone = getByTestId('fileElem')!;
+    const fileDropEvent = createEvent.drop(fileDropzone);
+
+    Object.defineProperty(fileDropEvent, 'dataTransfer', {
+      value: {
+        files: [file],
+      },
+    });
+    await wait(() => {
+      fireEvent(fileDropzone, fileDropEvent);
+    });
+    await wait(() => {});
+  });
 });

@@ -32,7 +32,7 @@ const useResetPasword = (endpoint: string) => {
 
     const token = await captcha.getCaptchaToken();
 
-    requestData(`${endpoint}Users/ResetPassword?${email}`, 'POST', {
+    requestData(`${endpoint}Users/Reset?UserEmail=${email}`, 'POST', {
       recaptchaToken: token,
     })
       .then((res: any) => {
