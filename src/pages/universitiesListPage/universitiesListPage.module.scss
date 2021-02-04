@@ -98,3 +98,7 @@
   margin-top: 100px;
   @include flex(row, center, center);
 }
+
+.hiddenElement {
+  display: none;
+}
