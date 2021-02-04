@@ -47,8 +47,7 @@ const UniversityMap = () => {
     },
   ];
 
-  const styleURL: string =
-    'https://api.mapbox.com/styles/v1/youritfuture/ckkqtwz6r246m17p2r13tk6g8/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoieW91cml0ZnV0dXJlIiwiYSI6ImNra3F0djk4djBwd2cyb3A4d2ZqN3VvejQifQ.r3PFeuvd1goZcNvbZ0WDBg';
+  const styleURL: string = `https://api.mapbox.com/styles/v1/youritfuture/ckkqtwz6r246m17p2r13tk6g8/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_KEY}`;
 
   const universitiesList = universitiesDB.map((elem) => {
     const { id, title, link, lat, lng } = elem;
