@@ -78,6 +78,7 @@ const LoginForm = () => {
                 <Field
                   component={FormInput}
                   iconName='email'
+                  id='emailInput'
                   type='email'
                   name='email'
                   placeholder='Електронна пошта'
@@ -94,6 +95,7 @@ const LoginForm = () => {
                 <Field
                   component={FormInput}
                   iconName='lock'
+                  id='passwordInput'
                   type='password'
                   name='password'
                   placeholder='Пароль'
@@ -128,7 +130,7 @@ const LoginForm = () => {
                 </p>
               </div>
 
-              <FormButton title='Увійти' form='register' />
+              <FormButton id='loginForm' title='Увійти' form='register' />
             </Form>
           )}
         </Formik>
