@@ -120,6 +120,7 @@ const UniversitiesListPage = () => {
 
   const pagination = (
     <div
+      id='pagination'
       data-testid='pagination'
       className={totalPages ? `${styles.pages}` : `${styles.hiddenElement}`}
     >
