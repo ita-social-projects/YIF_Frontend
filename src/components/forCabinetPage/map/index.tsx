@@ -55,7 +55,7 @@ const UniversityMap = () => {
     return (
       <Marker position={[lat, lng]} icon={GetIcon()} key={id}>
         <Popup>
-          <div className={style.popUpContent}>
+          <div id='markerPopup' className={style.popUpContent}>
             <h4 className={style.popUpTitle}>{title}</h4>
             <a className={style.popUpLink} href={link} target='_blank'>
               Сайт
@@ -69,6 +69,7 @@ const UniversityMap = () => {
   return (
     <Fragment>
       <MapContainer
+        id='mapComponent'
         className={style.mapContainer}
         zoom={zoom}
         center={[50.505455275104225, 26.33024401561073]}
