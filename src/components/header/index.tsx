@@ -90,8 +90,12 @@ const Header: React.FC = () => {
         </span>
       </div>
       <div className={styles.dropdownContent}>
-        <Link to='/cabinet'>Особистий&nbsp;кабінет</Link>
-        <button onClick={logout}>Вийти</button>
+        <Link id='loginButtonHeaderUnauth' to='/cabinet'>
+          Особистий&nbsp;кабінет
+        </Link>
+        <button id='logoutButtonHeaderUnauth' onClick={logout}>
+          Вийти
+        </button>
       </div>
     </>
   ) : (
@@ -115,26 +119,42 @@ const Header: React.FC = () => {
     </>
   ) : (
     <>
-      <Link to='/login' className={styles.animatedButtonTransparent}>
+      <Link
+        id='loginButtonHeaderAuth'
+        to='/login'
+        className={styles.animatedButtonTransparent}
+      >
         Вхід
       </Link>
-      <Link to='/register' className={styles.animatedButton}>
+      <Link
+        id='logoutButtonHeaderAuth'
+        to='/register'
+        className={styles.animatedButton}
+      >
         Реєстрація
       </Link>
     </>
   );
 
   return (
-    <header>
+    <header id='header'>
       <Link to='/' className={styles.logo} data-testid='logo'>
         YIF
       </Link>
       <nav>
         <div className={styles.pages}>
-          <Link to='/directions' className={styles.underlineAnimation}>
+          <Link
+            id='directionsLink'
+            to='/directions'
+            className={styles.underlineAnimation}
+          >
             Напрями
           </Link>
-          <Link to='/universities' className={styles.underlineAnimation}>
+          <Link
+            id='universitiesLink'
+            to='/universities'
+            className={styles.underlineAnimation}
+          >
             Університети
           </Link>
         </div>
