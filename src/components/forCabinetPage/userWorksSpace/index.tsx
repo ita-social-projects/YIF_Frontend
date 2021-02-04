@@ -159,18 +159,21 @@ class UserWorksSpace extends React.Component<Props, {}> {
             <div
               className={`${styles.userIcon} ${styles.icons}`}
               onClick={() => this.onChangeFrame(0)}
+              id='userIconClick'
             >
               {userIcon}{" "}
             </div>
             <div
               className={`${styles.univIcon} ${styles.icons}`}
               onClick={() => this.onChangeFrame(1)}
+              id='univIconClick'
             >
               {univListIcon}{" "}
             </div>
             <div
               className={`${styles.specIcon} ${styles.icons}`}
               onClick={() => this.onChangeFrame(2)}
+              id='specIconClick'
             >
               {specListIcon}{" "}
             </div>
@@ -179,16 +182,16 @@ class UserWorksSpace extends React.Component<Props, {}> {
             <section>
               <article className={styles.optionList}>
                 <ul>
-                  <li onClick={() => this.onChangeFrame(0)}>
+                  <li onClick={() => this.onChangeFrame(0)} id='userLiClick'>
                     <p className={styles.underlineAnimation}>
                       Персональні&nbsp;дані
                     </p>
                   </li>
                   <li onClick={() => this.onChangeFrame(1)}>
-                    <p className={styles.underlineAnimation}>Університети</p>
+                    <p className={styles.underlineAnimation} id='univLiClick'>Університети</p>
                   </li>
                   <li onClick={() => this.onChangeFrame(2)}>
-                    <p className={styles.underlineAnimation}>Спеціальності</p>
+                    <p className={styles.underlineAnimation} id='specLiClick'>Спеціальності</p>
                   </li>
                 </ul>
               </article>

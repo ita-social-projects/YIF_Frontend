@@ -255,6 +255,7 @@ const DropboxElement:React.FC<Props>=({data,keyId,listName,listTitle,width,input
                 name={listName}
                 style={{ width: `${inputWidth}rem` }}
                 placeholder={`Обери ${placeholder}`}
+                id={`inputDropbox${keyId}`}
                 readOnly
               ></input>
               <div className={styles.arrow} 
