@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import styles from "./accordion.module.scss";
 
 interface Props {
-  id: number;
-  name: string;
-  specialties: { id: number; name: string }[];
+  id: string,
+  name: string,
+  specialties: Array<{ id: string, name: string, directionName: string }>
 }
 
 const AccordionItem = (props: Props) => {
@@ -14,6 +14,8 @@ const AccordionItem = (props: Props) => {
 
   const [opened, setOpened] = useState(false);
   const handlerClick = () => setOpened(!opened);
+
+  const filteredSpecialties = specialties.filter(specialty => specialty.directionName === name)
 
   return (
     <li
@@ -23,7 +25,7 @@ const AccordionItem = (props: Props) => {
     >
       <div className={styles.acc_item__line} onClick={handlerClick}>
         <div className={styles.acc_item__info}>
-          <span className={styles.acc_item__id}>{id}</span>
+          <span className={styles.acc_item__id}>{id.slice(0,2)}</span>
           <h3 className={styles.acc_item__name}>{name}</h3>
         </div>
 
@@ -31,10 +33,10 @@ const AccordionItem = (props: Props) => {
       </div>
       <div className={styles.acc_item__inner}>
         <ul className={styles.acc_item__content}>
-          {specialties.map((item) => (
+          {filteredSpecialties.map((item) => (
             <li key={item.id} className={styles.acc_item__subitem}>
               <div className={styles.acc_item__subitem_info}>
-                <span>{item.id}</span> <h5>{item.name}</h5>
+                <span>{item.id.slice(0,3)}</span> <h5>{item.name}</h5>
               </div>
               <Link to={`/specialty/${item.id}`}>Детальніше</Link>
             </li>
