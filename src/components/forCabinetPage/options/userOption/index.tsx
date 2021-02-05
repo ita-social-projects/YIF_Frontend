@@ -224,6 +224,7 @@ const UserOption = () => {
                       useYIFProfile.handleSchoolChange(e);
                     }}
                   >
+                    <option className={styles.selectField} value=''>Виберіть свою школу</option>
                     {listSchool.map((option, index) => {
                       return (
                         <option
