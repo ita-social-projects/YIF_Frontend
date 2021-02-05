@@ -33,10 +33,10 @@ const App = () => {
           <RedirectRoute user={token} pathname='cabinet' path='/register'>
             <RegistrationForm />
           </RedirectRoute>
-          <Route path='/universities' exact>
+          <Route path='/universities'>
             <UniversitiesListPage />
           </Route>
-          <Route path='/universities/:id'>
+          <Route path='/university/:id'>
             <UniversityPage />
           </Route>
           <Route path='/specialty/:id'>
