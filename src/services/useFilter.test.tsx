@@ -11,7 +11,7 @@ import { act } from "react-dom/test-utils";
 import { unmountComponentAtNode } from "react-dom";
 import ReactDOM from "react-dom";
 
-const mockJsonPromise = Promise.resolve(['data1','data2','data3']);
+const mockJsonPromise = Promise.resolve(['Success_data']);
 const mockFetchPromise = Promise.resolve({
   json: () => mockJsonPromise,
   status: 200,
@@ -21,7 +21,6 @@ global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 describe('useFilter Hook',()=>{
     const TestComponent = ()=>{
 
-        const [isFetching, setFetching] = useState(false);
 
         useGetAllListData(`${APIUrl}University/Abbreviations`,'setUniversity');
         useGetAllListData(`${APIUrl}Specialty/Names`,'setSpeciality');
@@ -56,8 +55,8 @@ describe('useFilter Hook',()=>{
     container = null;
     });
 
-    test('hook used successfuly', () => {
-       act(() => {
+    test('hook used successfuly', async () => {
+        await act( async () => {
             ReactDOM.render(
                 <Provider store={store}>
                     <TestComponent  />
@@ -67,10 +66,9 @@ describe('useFilter Hook',()=>{
             });
 
         let divs = container.querySelectorAll('div');
-        console.log('divs',divs[0].innerHTML);
-        expect(divs[1].innerHTML).toBe('Спеціальність 1');
-        expect(divs[2].innerHTML).toBe('Напрям 1');
-        expect(divs[3].innerHTML).toBe('Університет 1');
+        expect(divs[1].innerHTML).toBe('Success_data');
+        expect(divs[2].innerHTML).toBe('Success_data');
+        expect(divs[3].innerHTML).toBe('Success_data');
         expect(global.fetch).toHaveBeenCalledTimes(3);
       });
 

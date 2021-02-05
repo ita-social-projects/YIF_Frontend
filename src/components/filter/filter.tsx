@@ -79,7 +79,7 @@ const Filter = () => {
         <div className={styles.title_}>
           <h3>Обери своє майбутнє</h3>
         </div>
-        <form onSubmit={onSubmit} className={styles.form}>
+        <form onSubmit={onSubmit} className={styles.form} id='filterFormId'>
           <div className={styles.selectors}>
             <div className={styles.box}>
               <DropboxElement
@@ -112,7 +112,7 @@ const Filter = () => {
                 reduxMethod={'chooseUniversity'}
               ></DropboxElement>
             </div>
-            <button type={'submit'} className={styles.animatedButton}>
+            <button type={'submit'} className={styles.animatedButton} id='filterButtonSearch'>
               <span className={styles.searchText}>Пошук</span>
               <span className={styles.searchIcon}>{searchIcont}</span>
             </button>
