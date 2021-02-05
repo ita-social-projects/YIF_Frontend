@@ -13,13 +13,12 @@ interface ReCaptchaInstance {
 }
 
 export const useCaptcha = (endpoint: string) => {
-  const SITE_KEY = '6Le3gRkaAAAAADJIzK5jv3HegJ7VzkuS0XiBa-mK';
 
   const getCaptchaToken = (): Promise<string> => {
     return new Promise((resolve) => {
       window.grecaptcha.ready(() => {
         window.grecaptcha
-          .execute(SITE_KEY, { action: 'submit' })
+          .execute(`${process.env.REACT_APP_SITE_KEY}`, { action: 'submit' })
           .then((token: string) => {
             resolve(token);
           });
@@ -33,7 +32,7 @@ export const useCaptcha = (endpoint: string) => {
     if (!isScriptExist) {
       script = document.createElement('script');
       script.type = 'text/javascript';
-      script.src = `https://www.google.com/recaptcha/api.js?render=${SITE_KEY}`;
+      script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.REACT_APP_SITE_KEY}`;
       script.id = 'recaptcha-key';
       document.body.appendChild(script);
     }
