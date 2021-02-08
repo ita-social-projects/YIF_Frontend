@@ -7,18 +7,18 @@ const Footer: React.FC = () => {
   const { token } = useAuth();
 
   return (
-    <footer>
+    <footer id='footer'>
       <div className={styles.footer}>
         <section className={styles.mainElements}>
           <article>
             {!token && (
               <>
-                <Link to='/login'>
+                <Link id='loginButtonFooter' to='/login'>
                   <button className={styles.animatedButtonTransparent}>
                     Вхід
                   </button>
                 </Link>
-                <Link to='/register'>
+                <Link id='registerButtonFooter' to='/register'>
                   <button className={styles.animatedButton}>Реєстрація</button>
                 </Link>
               </>
@@ -40,6 +40,7 @@ const Footer: React.FC = () => {
               <Link
                 className={`${styles.linkstyle} ${styles.underlineAnimation}`}
                 to='/directions'
+                id='directionsLinkFooter'
               >
                 Напрями
               </Link>
@@ -48,6 +49,7 @@ const Footer: React.FC = () => {
               <Link
                 className={`${styles.linkstyle} ${styles.underlineAnimation}`}
                 to='/universities'
+                id='universitiesLinkFooter'
               >
                 Університети
               </Link>

@@ -115,6 +115,7 @@ const UniversityCard: React.FC<Props> = (props) => {
   return (
     <div
       data-testid='card'
+      id='universityCard'
       data-id={props.id}
       className={styles.card}
       onClick={handleClick}
@@ -154,6 +155,7 @@ const UniversityCard: React.FC<Props> = (props) => {
             </p>
           </div>
           <a
+            id='moreDetailsButton'
             href='/404'
             className={`${styles.card__content__link} ${styles.animatedButton}`}
           >

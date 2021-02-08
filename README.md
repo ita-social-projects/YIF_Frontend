@@ -4,20 +4,19 @@
 
 ## About the project
 
-This is a project that provides applicants with an opportunity to get acquainted with the list of educational institutions that provide education in our region. Applicants can get detailed information about the available specialties that are required for admission, training materials, etc.
-
+This is a project that gives applicants the opportunity to get acquainted with the list of educational institutions that provide education in our region. Here they can get detailed information about available specialities and detailed information required for admission to the university.
 
 ## Main parts of the project and technologies
 
-This project contains 4 main parts: client frontend, backend and database. All parts of the project are at https://github.com/ita-social-projects/YIF_Frontend
+This project contains 3 main parts: client frontend, backend and database. Parts of the project backend are at https://github.com/ita-social-projects/YIF_Backend
 
 Let's take a closer look at the technologies of each part.
 
 Client Frontend - We are using React, React-redux, Typescript
 
-Code quality - SonarCloud, Eslint
+Code quality - SonarCloud
 
-Testing - xUnit, jest
+Testing - Jest
 
 SDLC - Scrum/Kanban
 
@@ -25,7 +24,7 @@ Project Management platform - ClickUp
 
 React app file structure - “Grouping by features/functionality”
 
-Src should have, at less, those folders: components, pages, services, store, hoc, errorBoundry, errorIndicator. Also index.txs and app.tsx.
+Src should have, at less, those folders: components, pages, services, store, hoc, errorBoundry. Also index.tsx and app.tsx.
 
 Component test/style files should be located in the folder of this component.
  
@@ -38,11 +37,15 @@ Component test/style files should be located in the folder of this component. St
 
 Clone or download the project from https://github.com/ita-social-projects/YIF_Frontend
 
-- Install Node.js v10.19.0+
+- install Node.js v10.19.0+
+
+- install npm packages: npm install
+
+- run local : open terminal, write to start: npm start
 
 ---
 
-## How to run the project with docker-compose locally
+## How to deploy the project with docker-compose locally
 
 The instructions below will allow you to run application locally in the containers for developing and testing purpose.
 
