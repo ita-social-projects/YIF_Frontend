@@ -70,6 +70,7 @@ const Banner: React.FC<Props> = (props) => {
             через зябра.
           </p>
           <button
+            id='scrollToFilterButton'
             className={`${styles.button} ${styles.animatedButton}`}
             onClick={() => handleClick()}
           >

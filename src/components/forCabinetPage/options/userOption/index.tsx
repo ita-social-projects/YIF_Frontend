@@ -1,6 +1,6 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import styles from './userOption.module.scss';
-import {FormButton, FormInputError} from '../../../common/formElements';
+import { FormButton, FormInputError } from '../../../common/formElements';
 import { Field, Form, Formik } from 'formik';
 import { validationField } from '../../../../services/validateForm/ValidatorsField';
 import FormInputProfile from '../../../common/formElements/formInputProfile';
@@ -32,30 +32,30 @@ const UserOption = () => {
     errorMessage: '',
   });
 
-  useEffect ( () => {
-    requestData( `${APIUrl}School/GetAllSchoolNamesAsStringsAsync`, 'GET')
-        .then((res: any) => {
-          const statusCode = res.statusCode.toString();
-          if (statusCode.match(/^[23]\d{2}$/)) {
-            setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
-            setListSchool(res.data);
-          } else {
-            setError({
-              hasError: true,
-              errorStatusCode: res.statusCode,
-              errorMessage:
-                  res.data.message || 'Щось пішло не так, спробуйте знову.',
-            });
-          }
-        })
-        .catch((error) => {
+  useEffect(() => {
+    requestData(`${APIUrl}School/GetAllSchoolNamesAsStringsAsync`, 'GET')
+      .then((res: any) => {
+        const statusCode = res.statusCode.toString();
+        if (statusCode.match(/^[23]\d{2}$/)) {
+          setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
+          setListSchool(res.data);
+        } else {
           setError({
             hasError: true,
-            errorStatusCode: error.statusCode,
-            errorMessage: 'Щось пішло не так, спробуйте знову.',
+            errorStatusCode: res.statusCode,
+            errorMessage:
+              res.data.message || 'Щось пішло не так, спробуйте знову.',
           });
+        }
+      })
+      .catch((error) => {
+        setError({
+          hasError: true,
+          errorStatusCode: error.statusCode,
+          errorMessage: 'Щось пішло не так, спробуйте знову.',
         });
-  },[]);
+      });
+  }, []);
 
   return (
     <Fragment>
@@ -90,11 +90,11 @@ const UserOption = () => {
               phone: user.phoneNumber,
               school: user.schoolName,
             }}
-           enableReinitialize
+            enableReinitialize
             validationSchema={validationField}
             onSubmit={(values, actions) => {
               actions.setSubmitting(false);
-              console.log(values)
+              console.log(values);
             }}
           >
             {({
@@ -106,13 +106,13 @@ const UserOption = () => {
               handleSubmit,
               isSubmitting,
               isValid,
-                setFieldTouched,
-                setFieldValue,
+              setFieldTouched,
+              setFieldValue,
             }) => (
               <Form
                 className={styles.form}
                 onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
-                  console.log(values)
+                  console.log(values);
                   handleSubmit(e);
                   if (
                     touched.firstName &&
@@ -129,6 +129,7 @@ const UserOption = () => {
               >
                 <div>
                   <Field
+                    id='lastNameInput'
                     component={FormInputProfile}
                     data-testid='lastName'
                     fieldText='Last name'
@@ -145,6 +146,7 @@ const UserOption = () => {
                 </div>
                 <div>
                   <Field
+                    id='firstNameInput'
                     component={FormInputProfile}
                     data-testid='firstName'
                     fieldText='First name'
@@ -161,6 +163,7 @@ const UserOption = () => {
                 </div>
                 <div>
                   <Field
+                    id='fathersNameInput'
                     component={FormInputProfile}
                     data-testid='fathersName'
                     fieldText='Fathers name'
@@ -177,6 +180,7 @@ const UserOption = () => {
                 </div>
                 <div>
                   <Field
+                    id='emailUserInput'
                     component={FormInputProfile}
                     data-testid='email'
                     fieldText='email'
@@ -193,7 +197,7 @@ const UserOption = () => {
                 </div>
                 <div>
                   <Field
-
+                    id='phoneInput'
                     component={FormInputProfile}
                     data-testid='phone'
                     fieldText='phone'
@@ -211,39 +215,46 @@ const UserOption = () => {
                 <div className={styles.selectWrapper}>
                   <label className={styles.labelSelect}>Школа</label>
                   <Field
-                      data-testid='select'
-                      name='school'
-                      as='select'
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        handleChange(e);
-                        useYIFProfile.handleSchoolChange(e);
-                      }}
+                    id='selectInput'
+                    data-testid='select'
+                    name='school'
+                    as='select'
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      handleChange(e);
+                      useYIFProfile.handleSchoolChange(e);
+                    }}
                   >
-                    {
-                    listSchool.map((option, index) => {
+                    <option className={styles.selectField} value=''>Виберіть свою школу</option>
+                    {listSchool.map((option, index) => {
                       return (
-                          <option  className={styles.selectField} key={index} value={option}>{option}</option>
-                      )
-                    })
-                  }
+                        <option
+                          className={styles.selectField}
+                          key={index}
+                          value={option}
+                        >
+                          {option}
+                        </option>
+                      );
+                    })}
                   </Field>
-                    </div>
-                    <div className={styles.button}>
-                      <FormButton
-                          data-testid='button'
-                          form='profile'
-                          title='Відправити'
-                      />
-                    </div>
-                  </Form>
-              )}
-            </Formik>
-          </div>
-          <div className={styles.img}>
-            <img src='assets/images/userProfile.svg' alt='user' />
-          </div>
-        </section>
-      </Fragment>
+                </div>
+                <div className={styles.button}>
+                  <FormButton
+                    id='userProfileButton'
+                    data-testid='button'
+                    form='profile'
+                    title='Відправити'
+                  />
+                </div>
+              </Form>
+            )}
+          </Formik>
+        </div>
+        <div className={styles.img}>
+          <img src='assets/images/userProfile.svg' alt='user' />
+        </div>
+      </section>
+    </Fragment>
   );
 };
 

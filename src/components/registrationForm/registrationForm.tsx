@@ -15,7 +15,6 @@ import Spinner from '../common/spinner';
 import { APIUrl } from '../../services/endpoints';
 
 const RegistrationForm: React.FC = () => {
-
   const useYIFRegistration = useRegistration(APIUrl);
 
   return (
@@ -74,6 +73,7 @@ const RegistrationForm: React.FC = () => {
             >
               <div>
                 <Field
+                  id='registerInputEmail'
                   component={FormInput}
                   placeholder={'Електронна пошта'}
                   iconName='email'
@@ -89,6 +89,7 @@ const RegistrationForm: React.FC = () => {
               </div>
               <div>
                 <Field
+                  id='registerInputPassword'
                   component={FormInput}
                   placeholder={'Пароль'}
                   iconName='lock'
@@ -105,6 +106,7 @@ const RegistrationForm: React.FC = () => {
               <div>
                 {}
                 <Field
+                  id='registerInputResetPassword'
                   component={FormInput}
                   placeholder={'Підтвердіть пароль'}
                   iconName='lock'
@@ -119,6 +121,7 @@ const RegistrationForm: React.FC = () => {
                 />
               </div>
               <FormButton
+                id='registerFormButton'
                 data-testid='button'
                 form='register'
                 title='Реєстрація'

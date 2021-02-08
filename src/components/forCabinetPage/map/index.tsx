@@ -47,15 +47,14 @@ const UniversityMap = () => {
     },
   ];
 
-  const styleURL: string =
-    'https://api.mapbox.com/styles/v1/larysashashuk/ckjwvqmbv0evv17peb192amng/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibGFyeXNhc2hhc2h1ayIsImEiOiJja2pvOTR3OGUwYjZwMnJsMW01d3d0anF0In0.tKauPUafm3tudsOO3YgwFQ';
+  const styleURL: string = `https://api.mapbox.com/styles/v1/youritfuture/ckkqtwz6r246m17p2r13tk6g8/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_KEY}`;
 
   const universitiesList = universitiesDB.map((elem) => {
     const { id, title, link, lat, lng } = elem;
     return (
       <Marker position={[lat, lng]} icon={GetIcon()} key={id}>
         <Popup>
-          <div className={style.popUpContent}>
+          <div id='markerPopup' className={style.popUpContent}>
             <h4 className={style.popUpTitle}>{title}</h4>
             <a className={style.popUpLink} href={link} target='_blank'>
               Сайт
@@ -69,6 +68,7 @@ const UniversityMap = () => {
   return (
     <Fragment>
       <MapContainer
+        id='mapComponent'
         className={style.mapContainer}
         zoom={zoom}
         center={[50.505455275104225, 26.33024401561073]}

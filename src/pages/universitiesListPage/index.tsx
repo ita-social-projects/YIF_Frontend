@@ -119,7 +119,11 @@ const UniversitiesListPage = () => {
   const pages = PaginationPagesCreator(totalPages, currentPage);
 
   const pagination = (
-    <div data-testid='pagination' className={styles.pages}>
+    <div
+      id='pagination'
+      data-testid='pagination'
+      className={totalPages ? `${styles.pages}` : `${styles.hiddenElement}`}
+    >
       <div
         id='prevPage'
         className={

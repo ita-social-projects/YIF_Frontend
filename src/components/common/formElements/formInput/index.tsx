@@ -3,6 +3,7 @@ import { FieldProps } from 'formik';
 import styles from './formInput.module.scss';
 import { FormInputError } from '../index';
 interface CustomInputProps {
+  id: string; // id attribute
   type: string; //here should be the value that you expect to see in the HTML attribute 'type'
   iconName: string; //here are two options: 'email' and 'lock'. You have type 'email' if you want to see the mail icon and 'lock' for the lock icon
 }
@@ -12,6 +13,7 @@ const FormInput: FC<CustomInputProps & FieldProps> = ({
   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   type = 'email',
   iconName = 'email',
+  id,
   ...props
 }) => {
   const emailSVG = (
@@ -64,7 +66,13 @@ const FormInput: FC<CustomInputProps & FieldProps> = ({
             ? lockSVG
             : 'incorrect iconName'}
         </label>
-        <input className={styles.formInput} type={type} {...field} {...props} />
+        <input
+          id={id}
+          className={styles.formInput}
+          type={type}
+          {...field}
+          {...props}
+        />
       </div>
       {touched[field.name] && errors[field.name] ? (
         <FormInputError

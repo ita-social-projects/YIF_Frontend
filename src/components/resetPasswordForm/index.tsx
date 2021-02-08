@@ -72,6 +72,7 @@ const ResetPasswordForm = () => {
             >
               <div className={styles.field}>
                 <Field
+                  id='resetPasswortInput'
                   component={FormInput}
                   iconName='email'
                   type='email'
@@ -85,7 +86,11 @@ const ResetPasswordForm = () => {
                   value={values.email}
                 />
               </div>
-              <FormButton title='Відновити' form='resetPassword' />
+              <FormButton
+                id='resetPassworButton'
+                title='Відновити'
+                form='resetPassword'
+              />
             </Form>
           )}
         </Formik>
