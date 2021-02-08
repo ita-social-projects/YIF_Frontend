@@ -1,10 +1,9 @@
 import React from 'react';
 import { Router } from 'react-router-dom';
-import { render, fireEvent, wait } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import useResetPassword from './useResetPassword';
 import { APIUrl } from '../../src/services/endpoints';
-import { useCaptcha } from './useCaptcha';
 
 const mockJsonPromise = Promise.resolve('received data');
 const mockFetchPromise = Promise.resolve({
@@ -43,7 +42,6 @@ describe('USE RESET PASSWORD', () => {
   };
 
   it('should change email', async () => {
-    // const handleClick = jest.fn();
     const history = createMemoryHistory();
     history.push('/');
     const { getByTestId } = render(
@@ -53,16 +51,8 @@ describe('USE RESET PASSWORD', () => {
     );
 
     const emailInput = getByTestId('email') as HTMLInputElement;
-    const loginButton = getByTestId('login') as HTMLInputElement;
 
     fireEvent.change(emailInput, { target: { value: 'test@mail.com' } });
     expect(emailInput.value).toEqual('test@mail.com');
-    // await wait(() => {
-    //   fireEvent.click(loginButton);
-    // });
-
-    // await wait(() => {
-    //   expect(global.fetch).toHaveBeenCalledTimes(1);
-    // });
   });
 });
