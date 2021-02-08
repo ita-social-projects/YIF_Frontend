@@ -203,6 +203,7 @@ const ImageUploaderPopup = (props: TProps) => {
                     e.preventDefault();
                     fileInput.click();
                   }}
+                  id='imageUploaderPopup_button_choosePhoto'
                 >
                   Виберіть фото з комп'ютера
                 </a>
