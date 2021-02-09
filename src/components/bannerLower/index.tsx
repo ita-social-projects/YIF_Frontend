@@ -40,7 +40,7 @@ export default class BannerLower extends Component<any> {
       </Link>
     );
     return (
-      <section className={style.container}>
+      <section className={style.container} id='bannerLower_container'>
         <div
           ref={this.scrollRef}
           className={`${style.banner} ${style.animationBg} ${style.animationBounce}`}

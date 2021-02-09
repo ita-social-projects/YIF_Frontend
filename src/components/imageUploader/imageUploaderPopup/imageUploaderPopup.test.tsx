@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  render,
-  fireEvent,
-  cleanup,
-  createEvent,
-  wait,
-  waitFor,
-} from '@testing-library/react';
+import { render, fireEvent, createEvent, wait } from '@testing-library/react';
 
 import ImageUploaderPopup from './imageUploaderPopup';
 

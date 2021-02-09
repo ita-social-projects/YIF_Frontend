@@ -59,7 +59,6 @@ describe('USE REGISTRATION HOOK', () => {
     const confirmPasswordInput = getByTestId(
       'confirmPassword'
     ) as HTMLInputElement;
-    const loginButton = getByTestId('login') as HTMLInputElement;
 
     fireEvent.change(emailInput, { target: { value: 'test@mail.com' } });
     expect(emailInput.value).toEqual('test@mail.com');
@@ -69,8 +68,5 @@ describe('USE REGISTRATION HOOK', () => {
 
     fireEvent.change(confirmPasswordInput, { target: { value: '*Qwerty123' } });
     expect(confirmPasswordInput.value).toEqual('*Qwerty123');
-
-    // fireEvent.click(loginButton);
-    // expect(handleClick).toHaveBeenCalled();
   });
 });
