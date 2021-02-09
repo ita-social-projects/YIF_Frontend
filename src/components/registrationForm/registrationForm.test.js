@@ -2,67 +2,20 @@ import React from 'react';
 import RegistrationForm from './registrationForm'
 import {MemoryRouter} from 'react-router-dom';
 import {fireEvent, render, screen, wait} from "@testing-library/react";
+import ReactDOM from "react-dom";
 
 
-describe('registrationForm', () => {
+  const div = document.createElement('div');
+  const container = document.createElement('div');
+  div.append(container);
 
-  test('render a title', () => {
-    const {getByText} = render(
-        <MemoryRouter>
-          <RegistrationForm/>
-        </MemoryRouter>
-    );
-    const text = screen.getByText(/зареєстровані/i)
-    expect(text).toBeInTheDocument();
-    expect(text.tagName).toMatch(/P/i);
 
-  });
-
-  test('checking placeholderText', () => {
-    const {getByText} = render(
-        <MemoryRouter>
-          < RegistrationForm/>
-        </MemoryRouter>
-    );
-    const inputEmail = screen.getByPlaceholderText('Електронна пошта');
-    const inputPassword = screen.getByPlaceholderText('Пароль');
-    const inputConfirmPassword = screen.getByPlaceholderText('Підтвердіть пароль');
-    expect(inputEmail).toBeInTheDocument();
-    expect(inputPassword).toBeInTheDocument();
-    expect(inputConfirmPassword).toBeInTheDocument();
-
-  });
-
-  test('checking to render img', () => {
-    const {getByText} = render(
-        <MemoryRouter>
-          < RegistrationForm/>
-        </MemoryRouter>
-    );
-    const img = screen.getByAltText('win');
-    expect(img).toBeInTheDocument();
-
-  });
-
-  test('checking to render wrapper', () => {
-    const {getByText} = render(
-        <MemoryRouter>
-          < RegistrationForm/>
-        </MemoryRouter>
-    );
-    const section = screen.getByRole('section');
-    expect(section).toBeInTheDocument();
-    expect(section.tagName).toMatch(/SECTION/i);
-    const wrapper = screen.getByRole('wrapper');
-    expect(wrapper).toBeInTheDocument();
-    expect(wrapper.tagName).toMatch(/DIV/i);
-  });
-
-  test('renders with blank fields', () => {
-    const { container } = render(
+  it('renders with blank fields', () => {
+    ReactDOM.render(
         <MemoryRouter>
           <RegistrationForm />
-        </MemoryRouter>
+        </MemoryRouter>,
+        container
     );
 
     const passwordNode = container.querySelector('input[name="password"]');
@@ -79,11 +32,12 @@ describe('registrationForm', () => {
 
   });
 
-  test('Clicking the submit correct values after entering', async () => {
-    const { container } = render(
+  it('submit correct values', async () => {
+    ReactDOM.render(
         <MemoryRouter>
-          <RegistrationForm />
-        </MemoryRouter>
+          <RegistrationForm/>
+        </MemoryRouter>,
+        container
     );
 
     const passwordNode = container.querySelector('input[name="password"]');
@@ -114,8 +68,20 @@ describe('registrationForm', () => {
       });
     });
 
-  });
+    const handleClick = jest.fn();
+    const submitButton = container.querySelector('button');
+
+    submitButton.onclick = handleClick;
+
+    await wait(() => {
+      fireEvent.click(submitButton);
+    });
+
+    await wait(() => {
+      expect(handleClick).toHaveBeenCalled();
+    });
 
 
 });
+
 
