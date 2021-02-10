@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 import styles from './universityCard.module.scss';
 import Tooltips from '../common/tooltip';
 import { useAuth } from '../../services/tokenValidator';
@@ -154,13 +155,13 @@ const UniversityCard: React.FC<Props> = (props) => {
               {description}
             </p>
           </div>
-          <a
+          <Link
             id='moreDetailsButton'
-            href='/404'
+            to={`/university/${id}`}
             className={`${styles.card__content__link} ${styles.animatedButton}`}
           >
             Детальніше
-          </a>
+          </Link>
         </div>
 
         <div className={styles.card__intro}>
