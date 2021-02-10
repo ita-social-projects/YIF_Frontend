@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import UserOption from './index.tsx';
 import {
   render,
@@ -10,6 +10,7 @@ import {
 import { MemoryRouter } from 'react-router-dom';
 import { store } from '../../../../store/store';
 import { Provider } from 'react-redux';
+
 
 describe('UserOption ', () => {
   test('render a title', () => {
@@ -125,5 +126,4 @@ describe('UserOption ', () => {
       });
     });
   });
-
 });
