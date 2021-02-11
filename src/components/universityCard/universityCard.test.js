@@ -77,7 +77,7 @@ test('check the button link', () => {
   const link = screen.getByText(/Детальніше/i);
   expect(link).toBeInTheDocument();
   expect(link.tagName).toMatch(/a/i);
-  expect(link).toHaveAttribute('href', '/404');
+  expect(link).toHaveAttribute('href', expect.stringContaining('/university/'));
 });
 
 describe('handleClick', () => {
