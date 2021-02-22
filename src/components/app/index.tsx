@@ -5,19 +5,19 @@ import ErrorPage from '../../pages/errorPage';
 import GraduateCabinet from '../../pages/graduateCabinetPage/index';
 import LoginPage from '../../pages/loginPage';
 import UniversitiesListPage from '../../pages/universitiesListPage';
+import DirectionsListPage from '../../pages/directionsListPage';
 import UniversityPage from '../../pages/universityPage';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RegistrationForm from '../../pages/registrationPage';
 import { useAuth } from '../../services/tokenValidator';
 import { ProtectedRoute, RedirectRoute } from '../../services/customRoutes';
 import ErrorBoundry from '../../errorBoundry';
-import  ResetPasswordPage  from '../../pages/resetPasswordPage/index';
+import ResetPasswordPage from '../../pages/resetPasswordPage/index';
 
 const App = () => {
   const { token } = useAuth();
 
   return (
-
     <ErrorBoundry>
       <Router>
         <Switch>
@@ -33,6 +33,9 @@ const App = () => {
           <RedirectRoute user={token} pathname='cabinet' path='/register'>
             <RegistrationForm />
           </RedirectRoute>
+          <Route path='/directions'>
+            <DirectionsListPage />
+          </Route>
           <Route path='/universities'>
             <UniversitiesListPage />
           </Route>
@@ -73,7 +76,6 @@ const App = () => {
     //     <Route component={ErrorPage} status={404} />
     //   </Switch>
     // </Router>
-
   );
 };
 
