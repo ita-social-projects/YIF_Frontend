@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM, { unmountComponentAtNode } from 'react-dom';
+import { MemoryRouter } from 'react-router-dom';
 import UnivListOption from './index.tsx';
 // import { Provider } from 'react-redux';
 // import { store } from '../../../../store/store.ts';
@@ -7,7 +8,12 @@ import UnivListOption from './index.tsx';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<UnivListOption />, div);
+  ReactDOM.render(
+    <MemoryRouter>
+      <UnivListOption />
+    </MemoryRouter>,
+    div
+  );
 });
 
 // let container = null;

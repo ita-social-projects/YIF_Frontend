@@ -1,0 +1,77 @@
+@import '../../styles/index.scss';
+
+.card {
+  max-width: 90rem;
+  height: auto;
+  margin-top: 1.875rem;
+  background-color: $lightBlue_2;
+  border-radius: 15px;
+  padding: 3.125rem 3.75rem;
+  @include flex(column, flex-start, space-between);
+  position: relative;
+
+  &__title {
+    font-family: $fontNunito;
+    font-weight: $bold;
+    font-size: $font_40px;
+  }
+
+  &__content {
+    width: 100%;
+    @include flex(column, flex-start, flex-start);
+
+    &__wrapper {
+      margin-top: 3.125rem;
+    }
+
+    &__desc {
+      font-family: $fontOpenSans;
+      font-weight: $regular;
+      font-size: $font_18px;
+      line-height: 1.7rem;
+      color: $black;
+      display: block;
+    }
+
+    &__subtitle {
+      font-family: $fontNunito;
+      font-weight: $bold;
+      font-size: $font_30px;
+      padding-right: 10px;
+      margin: 1.25rem 0 1.563rem 0;
+    }
+
+    &__list {
+      font-family: $fontNunito;
+
+      &__subitem {
+        @include flex(row, center, space-between);
+        background-color: $lightBlue_3;
+        border-radius: 5px;
+        padding: 0.938rem 0.938rem 1.563rem;
+        margin-bottom: 5px;
+
+        h5 {
+          font-size: $font_18px;
+        }
+
+        span {
+          font-size: 1.25rem;
+          margin-right: 1.563rem;
+        }
+
+        a {
+          font-size: $font_18px;
+          color: $white;
+          padding: 0.938rem 1.25rem;
+          border-radius: 5px;
+          background-color: $darkBlue;
+        }
+
+        &_info {
+          display: flex;
+        }
+      }
+    }
+  }
+}
