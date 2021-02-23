@@ -1,12 +1,12 @@
 @import '../../styles/index.scss';
 
 .card {
-  max-width: 1440px;
+  max-width: 90rem;
   height: auto;
-  margin-top: 30px;
+  margin-top: 1.875rem;
   background-color: $lightBlue_2;
   border-radius: 15px;
-  padding: 50px 60px;
+  padding: 3.125rem 3.75rem;
   @include flex(column, flex-start, space-between);
   position: relative;
 
@@ -21,7 +21,7 @@
     @include flex(column, flex-start, flex-start);
 
     &__wrapper {
-      margin-top: 50px;
+      margin-top: 3.125rem;
     }
 
     &__desc {
@@ -38,7 +38,7 @@
       font-weight: $bold;
       font-size: $font_30px;
       padding-right: 10px;
-      margin: 20px 0 25px 0;
+      margin: 1.25rem 0 1.563rem 0;
     }
 
     &__list {
@@ -48,7 +48,7 @@
         @include flex(row, center, space-between);
         background-color: $lightBlue_3;
         border-radius: 5px;
-        padding: 15px 15px 15px 25px;
+        padding: 0.938rem 0.938rem 1.563rem;
         margin-bottom: 5px;
 
         h5 {
@@ -56,14 +56,14 @@
         }
 
         span {
-          font-size: 20px;
-          margin-right: 25px;
+          font-size: 1.25rem;
+          margin-right: 1.563rem;
         }
 
         a {
           font-size: $font_18px;
           color: $white;
-          padding: 15px 20px;
+          padding: 0.938rem 1.25rem;
           border-radius: 5px;
           background-color: $darkBlue;
         }
