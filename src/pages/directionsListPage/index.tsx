@@ -1,93 +1,63 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header, Footer } from '../../components';
 import DirectionCard from '../../components/directionCard';
+import { requestData } from '../../services/requestDataFunction';
+import ErrorBoundry from '../../errorBoundry';
+import { APIUrl } from '../../services/endpoints';
+import Spinner from '../../components/common/spinner';
 import styles from './directionsListPage.module.scss';
+import ResponsePlaceholder from '../../components/common/responsePlaceholder';
 
 const DirectionsListPage = () => {
-  const directionsList = [
+  const [directionsList, setList] = useState([
     {
-      id: '05',
-      name: 'Соціальні та поведінкові науки',
-      description:
-        'Символіка риби містить багато різноманітних, іноді полярно протилежних значень. З часів глибокої давнини риба асоціювалась із Вчителями, світовими Спасителями, праотцями, мудрістю. До символу риби мають відношення індуїстський Вішну, єгипетський Гор, халдейський Оаннес, а також Христос. Учні, послідовники, які живуть у «воді вчення», часто уподібнюються рибам.',
-      specialties: [
-        { id: '051', name: 'Економіка (Економічна кібернетика)' },
-        { id: '051', name: 'Економіка (Інформаційні технології в бізнесі)' },
-      ],
+      id: '',
+      code: '',
+      name: '',
+      description: '',
+      specialties: [],
     },
+  ]);
+  const [error, setError] = useState({
+    hasError: false,
+    errorStatusCode: '',
+    errorMessage: '',
+  });
+  const [isFetching, setFetching] = useState(false);
 
-    {
-      id: '11',
-      name: 'Математика та статистика',
-      description:
-        'Символіка риби містить багато різноманітних, іноді полярно протилежних значень. З часів глибокої давнини риба асоціювалась із Вчителями, світовими Спасителями, праотцями, мудрістю. До символу риби мають відношення індуїстський Вішну, єгипетський Гор, халдейський Оаннес, а також Христос. Учні, послідовники, які живуть у «воді вчення», часто уподібнюються рибам.',
-      specialties: [{ id: '113', name: 'Прикладна математика' }],
-    },
-
-    {
-      id: '12',
-      name: 'Інформаційні технології',
-      description:
-        'Символіка риби містить багато різноманітних, іноді полярно протилежних значень. З часів глибокої давнини риба асоціювалась із Вчителями, світовими Спасителями, праотцями, мудрістю. До символу риби мають відношення індуїстський Вішну, єгипетський Гор, халдейський Оаннес, а також Христос. Учні, послідовники, які живуть у «воді вчення», часто уподібнюються рибам.',
-      specialties: [
-        {
-          id: '121',
-          name: 'Інженерія програмного забезпечення (Інтернет речей)',
-        },
-        { id: '122', name: 'Комп’ютерні науки' },
-        { id: '122', name: 'Комп’ютерні науки (Прикладна інформатика)' },
-        { id: '123', name: 'Комп’ютерна інженерія' },
-        { id: '126', name: 'Інформаційні системи та технології' },
-      ],
-    },
-
-    {
-      id: '14',
-      name: 'Електрична інженерія',
-      description:
-        'Символіка риби містить багато різноманітних, іноді полярно протилежних значень. З часів глибокої давнини риба асоціювалась із Вчителями, світовими Спасителями, праотцями, мудрістю. До символу риби мають відношення індуїстський Вішну, єгипетський Гор, халдейський Оаннес, а також Христос. Учні, послідовники, які живуть у «воді вчення», часто уподібнюються рибам.',
-      specialties: [
-        {
-          id: '141',
-          name: 'Електроенергетика, електротехніка та електромеханіка',
-        },
-        {
-          id: '141',
-          name:
-            'Електроенергетика, електротехніка та електромеханіка (Smart-енергетика та електромобільність)',
-        },
-        {
-          id: '141',
-          name:
-            'Електроенергетика, електротехніка та електромеханіка (Енергетичний менеджмент та енергоефективні технології)',
-        },
-      ],
-    },
-
-    {
-      id: '15',
-      name: 'Автоматизація та приладобудування',
-      description:
-        'Символіка риби містить багато різноманітних, іноді полярно протилежних значень. З часів глибокої давнини риба асоціювалась із Вчителями, світовими Спасителями, праотцями, мудрістю. До символу риби мають відношення індуїстський Вішну, єгипетський Гор, халдейський Оаннес, а також Христос. Учні, послідовники, які живуть у «воді вчення», часто уподібнюються рибам.',
-      specialties: [
-        {
-          id: '151',
-          name: 'Автоматизація та комп’ютерно-інтегровані технології',
-        },
-        {
-          id: '151',
-          name:
-            'Автоматизація та комп’ютерно-інтегровані технології (Робототехніка та штучний інтелект)',
-        },
-      ],
-    },
-  ];
+  function fetchData() {
+    const endpoint: string = `${APIUrl}Direction/All?page=1&pageSize=10`;
+    setFetching(true);
+    requestData(endpoint, 'GET').then((res: any) => {
+      const statusCode = res.statusCode.toString();
+      if (statusCode.match(/^[23]\d{2}$/)) {
+        const newList = res.data.map((item: any) => {
+          return {
+            id: item.id,
+            code: item.code,
+            name: item.name,
+            description: item.description,
+            specialties: item.specialties,
+          };
+        });
+        setList(newList);
+        setFetching(false);
+      } else {
+        setError({
+          hasError: true,
+          errorStatusCode: res.statusCode,
+          errorMessage:
+            res.data.message || 'Щось пішло не так, спробуйте знову.',
+        });
+      }
+    });
+  }
 
   const directionsCardList = directionsList.map((item: any) => {
     return (
       <DirectionCard
         key={item.id}
-        id={item.id}
+        code={item.code}
         name={item.name}
         description={item.description}
         specialties={item.specialties}
@@ -95,16 +65,35 @@ const DirectionsListPage = () => {
     );
   });
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const result = isFetching ? (
+    <div className={styles.spinnerContainer}>
+      {' '}
+      <Spinner />
+    </div>
+  ) : (
+    directionsCardList
+  );
+
   return (
     <>
-      <Header />
-      <section className={styles.directionsPage}>
-        <h1 data-testid='heading' className={styles.title}>
-          Освітні напрямки
-        </h1>
-        {directionsCardList}
-      </section>
-      <Footer />
+      <ErrorBoundry>
+        <Header />
+        <section className={styles.directionsPage}>
+          <h1 data-testid='heading' className={styles.title}>
+            Освітні напрямки
+          </h1>
+          {error.hasError ? (
+            <ResponsePlaceholder errorMessage={error.errorMessage} />
+          ) : (
+            <>{result}</>
+          )}
+        </section>
+        <Footer />
+      </ErrorBoundry>
     </>
   );
 };

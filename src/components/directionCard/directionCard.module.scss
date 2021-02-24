@@ -1,7 +1,8 @@
 @import '../../styles/index.scss';
 
 .card {
-  max-width: 90rem;
+  width: 100%;
+  max-width: 73.75rem;
   height: auto;
   margin-top: 1.875rem;
   background-color: $lightBlue_2;
@@ -22,6 +23,7 @@
 
     &__wrapper {
       margin-top: 3.125rem;
+      width: 100%;
     }
 
     &__desc {
@@ -46,6 +48,7 @@
 
       &__subitem {
         @include flex(row, center, space-between);
+
         background-color: $lightBlue_3;
         border-radius: 5px;
         padding: 0.938rem 0.938rem 1.563rem;
@@ -66,6 +69,7 @@
           padding: 0.938rem 1.25rem;
           border-radius: 5px;
           background-color: $darkBlue;
+          margin-left: 1rem;
         }
 
         &_info {
