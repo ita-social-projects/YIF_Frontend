@@ -3,34 +3,36 @@ import { Link } from 'react-router-dom';
 import styles from './directionCard.module.scss';
 
 interface Props {
-  id: any;
+  code: any;
   name: string;
   description: string;
   specialties: any;
 }
 
 const DirectionCard: React.FC<Props> = (props) => {
-  let { id, name, description, specialties } = props;
+  let { code, name, description, specialties } = props;
 
-  const result = specialties.map((item: any, idx: number) => (
-    <li key={idx} className={styles.card__content__list__subitem}>
-      <div className={styles.card__content__list__subitem_info}>
-        <span>{item.id}</span>
-        <h5>{item.name}</h5>
-      </div>
-      <Link to={`/specialty/${item.id}`}>Детальніше</Link>
-    </li>
-  ));
+  const result = specialties
+    .sort((a: any, b: any) => a.code - b.code)
+    .map((item: any) => (
+      <li key={item.id} className={styles.card__content__list__subitem}>
+        <div className={styles.card__content__list__subitem_info}>
+          <span>{item.code}</span>
+          <h5>{item.name}</h5>
+        </div>
+        <Link to={`/specialty/${item.code}`}>Детальніше</Link>
+      </li>
+    ));
 
   return (
     <div
       data-testid='card'
       id='directionCard'
-      data-id={id}
+      data-id={code}
       className={styles.card}
     >
       <h2 className={styles.card__title}>
-        {id} {name}
+        {props.code} {name}
       </h2>
 
       <div className={styles.card__content}>
