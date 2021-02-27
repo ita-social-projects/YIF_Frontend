@@ -13,6 +13,7 @@ import { useAuth } from '../../services/tokenValidator';
 import { ProtectedRoute, RedirectRoute } from '../../services/customRoutes';
 import ErrorBoundry from '../../errorBoundry';
 import ResetPasswordPage from '../../pages/resetPasswordPage/index';
+import AddUniversity from '../../pages/addUniversity';
 
 const App = () => {
   const { token } = useAuth();
@@ -44,6 +45,9 @@ const App = () => {
           </Route>
           <Route path='/specialty/:id'>
             <ErrorPage />
+          </Route>
+          <Route path='/adduniv'>
+            <AddUniversity />
           </Route>
           <ProtectedRoute user={token} pathname='login' path='/cabinet'>
             <GraduateCabinet />
