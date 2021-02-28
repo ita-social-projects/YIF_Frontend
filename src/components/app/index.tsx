@@ -13,6 +13,7 @@ import { useAuth } from '../../services/tokenValidator';
 import { ProtectedRoute, RedirectRoute } from '../../services/customRoutes';
 import ErrorBoundry from '../../errorBoundry';
 import ResetPasswordPage from '../../pages/resetPasswordPage/index';
+import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccountPage';
 
 const App = () => {
   const { token } = useAuth();
@@ -41,6 +42,9 @@ const App = () => {
           </Route>
           <Route path='/university/:id'>
             <UniversityPage />
+          </Route>
+          <Route path='/superAdminAccount'>
+            <SuperAdminAccountPage />
           </Route>
           <Route path='/specialty/:id'>
             <ErrorPage />
