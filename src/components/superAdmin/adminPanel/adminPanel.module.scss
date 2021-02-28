@@ -1,0 +1,44 @@
+@import '../../styles.scss';
+.adminPanel {
+  color: $lightBlue_3;
+  background-color: $darkBlue2;
+  box-shadow: 5px 0 10px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 0 10px 10px 0;
+  margin: 0.62rem 0 0.62rem 0; // 10px  0 10px 0
+  padding: 3.75rem 1.25rem; // 60px 20px
+  width: 240px;
+  min-height: 100vh;
+  .superAdminName {
+    padding: 1.25rem 0 0 0; // 20px
+    text-align: center;
+    color: $lightBlue_4;
+  }
+
+  .containerAvatar {
+    font-size: 0;
+    @include size(4.37rem); // 70px
+    margin: 0 auto;
+
+    img {
+      border-radius: 50%;
+    }
+  }
+
+  .navList {
+    padding: 3.12rem 0 0 1.25rem; // 50px 0 0 20px
+
+    ul {
+      padding: 0.312rem 0 3.12rem 1.87rem; // 5px 0 50px 30px
+      font-size: $font_15px;
+    }
+
+    .hasLink {
+      display: flex;
+
+      a {
+        color: $lightBlue_3;
+        padding: 0.437rem 0 0.312rem 0; // 7px 0 5px 0
+      }
+    }
+  }
+}
