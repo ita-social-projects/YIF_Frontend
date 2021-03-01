@@ -13,6 +13,7 @@ import { useAuth } from '../../services/tokenValidator';
 import { ProtectedRoute, RedirectRoute } from '../../services/customRoutes';
 import ErrorBoundry from '../../errorBoundry';
 import ResetPasswordPage from '../../pages/resetPasswordPage/index';
+import AddUniversity from '../../pages/superAdminPages/addUniversityPage';
 import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccountPage';
 
 const App = () => {
@@ -48,6 +49,9 @@ const App = () => {
           </Route>
           <Route path='/specialty/:id'>
             <ErrorPage />
+          </Route>
+          <Route path='/adduniv'>
+            <AddUniversity />
           </Route>
           <ProtectedRoute user={token} pathname='login' path='/cabinet'>
             <GraduateCabinet />
