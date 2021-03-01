@@ -2,7 +2,7 @@ import React from 'react';
 import AddUniversityForm from './index';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from '../../store/store';
+import { store } from '../../../store/store';
 import ReactDOM from 'react-dom';
 
 const container = document.createElement('container');

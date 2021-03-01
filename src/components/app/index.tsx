@@ -13,7 +13,7 @@ import { useAuth } from '../../services/tokenValidator';
 import { ProtectedRoute, RedirectRoute } from '../../services/customRoutes';
 import ErrorBoundry from '../../errorBoundry';
 import ResetPasswordPage from '../../pages/resetPasswordPage/index';
-import AddUniversity from '../../pages/addUniversity';
+import AddUniversity from '../../pages/superAdminPages/addUniversityPage';
 import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccountPage';
 
 const App = () => {
