@@ -31,7 +31,6 @@
   margin-bottom: 1.25rem;
   font-family: $fontNunito;
   font-size: 3rem;
-  font-weight: $regular;
   text-align: center;
   background: #5a758c;
   line-height: 2.813rem;
@@ -39,13 +38,12 @@
   padding: 1.25rem 5rem;
   color: #fff;
   display: block;
-  font-weight: 600;
   width: 100%;
   position: relative;
   span {
     position: absolute;
-    right: 0.813rem;
-    top: 0.813rem;
+    right: 1.563rem;
+    top: 1.563rem;
     line-height: 0;
   }
 }

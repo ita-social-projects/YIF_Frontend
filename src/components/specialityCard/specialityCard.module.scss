@@ -31,10 +31,7 @@
     display: block;
     margin-top: 2.5rem;
     &__line {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
+      @include flex(row, center, space-between);
       padding: 1.563rem 3.125rem 1.563rem 1.563rem;
       z-index: 2;
       position: relative;
@@ -82,7 +79,7 @@
     &__star {
       position: absolute;
       right: 1.563rem;
-      top: 1.563;
+      top: 1.563rem;
     }
   }
   &__more {
