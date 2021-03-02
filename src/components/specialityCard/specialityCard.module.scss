@@ -1,0 +1,156 @@
+@import '../../styles/index.scss';
+.specialityCard {
+  width: 100%;
+  &:nth-child(n + 2) {
+    margin-top: 2.5rem;
+  }
+}
+.card {
+  position: relative;
+  padding: 1.875rem 3.75rem;
+  border-radius: 15px;
+  background-color: $lightBlue_2;
+  width: 100%;
+  &:nth-child(n + 2) {
+    margin-top: 2.5rem;
+  }
+  &__top {
+    display: flex;
+    align-items: center;
+  }
+  &__content__link {
+    display: block;
+    padding: 5px 3.625rem;
+    margin-left: 5rem;
+    font-family: $fontNunito;
+    font-weight: $light;
+    font-size: 1.875rem;
+    border-radius: 10px;
+  }
+  &__content {
+    display: block;
+    margin-top: 2.5rem;
+    &__line {
+      @include flex(row, center, space-between);
+      padding: 1.563rem 3.125rem 1.563rem 1.563rem;
+      z-index: 2;
+      position: relative;
+      background-color: #f2f9ff;
+      border-radius: 5px;
+      margin: 0.313rem 0;
+      h3 {
+        font-family: $fontNunito;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 1.875rem;
+        line-height: 2.563rem;
+        color: $black;
+      }
+      & > div {
+        width: calc(100% / 3);
+        font-family: $fontNunito;
+        font-style: normal;
+        font-weight: $light;
+        &:nth-child(2) {
+          text-align: center;
+        }
+        &:nth-child(3) {
+          text-align: right;
+        }
+      }
+    }
+    &_subject {
+      font-size: 1.125rem;
+      line-height: 1.563rem;
+      color: $black;
+    }
+    &_mark {
+      font-size: 1.25rem;
+      line-height: 1.688rem;
+      color: $darkBlue;
+      text-align: center;
+    }
+    &_coefficient {
+      padding-right: 4.375rem;
+      font-size: 1.25rem;
+      line-height: 1.688rem;
+      color: $darkBlue;
+    }
+    &__star {
+      position: absolute;
+      right: 1.563rem;
+      top: 1.563rem;
+    }
+  }
+  &__more {
+    text-align: center;
+    margin-top: 1.875rem;
+    &__btn {
+      display: block;
+      font-family: $fontNunito;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 1.875rem;
+      color: $black;
+      cursor: pointer;
+    }
+    svg {
+      margin-top: 0.313rem;
+      transform: rotate(0deg);
+      transition: all 0.3s;
+    }
+    .card__details {
+      display: none;
+    }
+    &__opened {
+      display: block;
+      .card__details__btn {
+        display: none;
+      }
+      .card__details {
+        display: block;
+        transition: all 0.3s;
+      }
+      svg {
+        transform: rotate(180deg);
+        transition: all 0.3s;
+      }
+    }
+  }
+}
+
+.title {
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  font-family: $fontNunito;
+  font-size: 3rem;
+  font-weight: $regular;
+  text-align: center;
+  span {
+    position: relative;
+    right: auto;
+    top: 0.438rem;
+    line-height: 0;
+    left: 1.25rem;
+  }
+}
+
+.spinnerContainer {
+  margin-top: 6.25rem;
+  @include flex(row, center, center);
+}
+
+.card {
+  &__icon {
+    position: absolute;
+    top: 1.875rem;
+    right: 1.875rem;
+    cursor: pointer;
+
+    &__liked {
+      svg path {
+        fill: #f8b50b;
+      }
+    }
+  }
+}
