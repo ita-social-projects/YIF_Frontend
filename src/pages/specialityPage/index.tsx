@@ -120,3 +120,4 @@ const SpecialityPage = () => {
 
 
 export default SpecialityPage;
+
