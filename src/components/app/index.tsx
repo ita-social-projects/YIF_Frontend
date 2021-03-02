@@ -5,6 +5,7 @@ import ErrorPage from '../../pages/errorPage';
 import GraduateCabinet from '../../pages/graduateCabinetPage/index';
 import LoginPage from '../../pages/loginPage';
 import UniversitiesListPage from '../../pages/universitiesListPage';
+import SpecialityPage from '../../pages/specialityPage';
 import DirectionsListPage from '../../pages/directionsListPage';
 import UniversityPage from '../../pages/universityPage';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -48,7 +49,7 @@ const App = () => {
             <SuperAdminAccountPage />
           </Route>
           <Route path='/specialty/:id'>
-            <ErrorPage />
+            <SpecialityPage />
           </Route>
           <Route path='/adduniv'>
             <AddUniversity />

@@ -20,7 +20,7 @@ const DirectionCard: React.FC<Props> = (props) => {
           <span>{item.code}</span>
           <h5>{item.name}</h5>
         </div>
-        <Link to={`/specialty/${item.code}`}>Детальніше</Link>
+        <Link to={`/specialty/${item.id}`}>Детальніше</Link>
       </li>
     ));
 
