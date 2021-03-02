@@ -5,6 +5,7 @@ import ErrorPage from '../../pages/errorPage';
 import GraduateCabinet from '../../pages/graduateCabinetPage/index';
 import LoginPage from '../../pages/loginPage';
 import UniversitiesListPage from '../../pages/universitiesListPage';
+import SpecialityPage from '../../pages/specialityPage';
 import DirectionsListPage from '../../pages/directionsListPage';
 import UniversityPage from '../../pages/universityPage';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -13,6 +14,8 @@ import { useAuth } from '../../services/tokenValidator';
 import { ProtectedRoute, RedirectRoute } from '../../services/customRoutes';
 import ErrorBoundry from '../../errorBoundry';
 import ResetPasswordPage from '../../pages/resetPasswordPage/index';
+import AddUniversity from '../../pages/superAdminPages/addUniversityPage';
+import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccountPage';
 
 const App = () => {
   const { token } = useAuth();
@@ -42,8 +45,14 @@ const App = () => {
           <Route path='/university/:id'>
             <UniversityPage />
           </Route>
+          <Route path='/superAdminAccount'>
+            <SuperAdminAccountPage />
+          </Route>
           <Route path='/specialty/:id'>
-            <ErrorPage />
+            <SpecialityPage />
+          </Route>
+          <Route path='/adduniv'>
+            <AddUniversity />
           </Route>
           <ProtectedRoute user={token} pathname='login' path='/cabinet'>
             <GraduateCabinet />

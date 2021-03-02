@@ -41,7 +41,7 @@ test('renders with props', () => {
     <MemoryRouter>
       <Provider store={store}>
         <DirectionCard
-          id='05'
+          code='05'
           name='Соціальні та поведінкові науки'
           description='Опис'
           specialties={directionsList[0].specialties}

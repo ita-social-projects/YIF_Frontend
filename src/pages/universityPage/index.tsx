@@ -17,7 +17,7 @@ const UniversityPage = () => {
   const [isFetching, setFetching] = useState(true);
   const [universityInfo, setUniversityInfo] = useState({});
   const [directions, setDirections] = useState([]);
-  const [specialties, setSpecialties] = useState([]);
+  // const [specialties, setSpecialties] = useState([]);
   const { id } = useParams<ParamTypes>();
 
   useEffect(() => {
@@ -30,16 +30,16 @@ const UniversityPage = () => {
     });
 
     //Fetch directions
-    const endpointForDirections = `${APIUrl}Direction`;
+    const endpointForDirections = `${APIUrl}Direction/All`;
     requestData(endpointForDirections, 'GET').then((res: any) => {
-      setDirections(res.data.responseList);
+      setDirections(res.data);
     });
 
     //Fetch specialties
-    const endpointForSpecialties = `${APIUrl}Specialty/All`;
-    requestData(endpointForSpecialties, 'GET').then((res: any) => {
-      setSpecialties(res.data);
-    });
+    // const endpointForSpecialties = `${APIUrl}Specialty/All`;
+    // requestData(endpointForSpecialties, "GET").then((res: any) => {
+    //   setSpecialties(res.data);
+    // });
 
     setFetching(false);
   }, [id]);
@@ -138,7 +138,7 @@ const UniversityPage = () => {
                   {directions.map((item, key) => (
                     <AccordionItem
                       key={key}
-                      specialties={specialties}
+                      // specialties={item.specialties}
                       {...item}
                     />
                   ))}

@@ -1,0 +1,270 @@
+@import '../../styles.scss';
+
+.superAdminAccount {
+  position: relative;
+  width: 100%;
+  font-size: 1.562rem; // 25px
+  text-align: center;
+  margin: 0 20px;
+
+  h1 {
+    padding: 3.12rem 0 4.37rem 0; // 50px 0 70px 0
+  }
+
+  .adminTableContainer {
+    margin: 0 auto 12.5rem auto; // 200px
+    background-color: $lightBlue_4;
+    font-size: $font_16px;
+    border-radius: 10px;
+    padding: 0 0 0.62rem 0; // 0 0 10px 0
+    max-width: 62.5rem; // 1000px
+    text-align: left;
+    box-shadow: 0 5px 15px 0 rgba($darkBlue, 0.1);
+  }
+
+  .adminTableHeader {
+    color: $white;
+    transition: transform 0.35s;
+
+    .filterActive svg {
+      transform: rotate(180deg);
+    }
+
+    .search {
+      max-width: 21.87rem; // 350px
+      padding: 0.93rem 0.93rem 0 0.93rem; //15px
+
+      label {
+        transition: background-color 0.35s;
+        display: flex;
+        height: 2.3rem; // 40px
+        overflow: hidden;
+
+        svg {
+          @include size(1.96rem); // 31px
+          cursor: pointer;
+          margin: 0.125rem 0.62rem 0.62rem; // 2px 10px 10px 10px
+
+          path {
+            transition: fill 0.35s;
+            fill: $white;
+          }
+        }
+        input {
+          background-color: $lightBlue_2;
+          width: 100%;
+          padding: 0 0.62rem; //10px
+          border-radius: 5px;
+          color: $darkBlue;
+          transition: background-color 0.35s;
+
+          &::placeholder {
+            color: $lightBlue_4;
+          }
+
+          &:focus {
+            background-color: $white;
+          }
+        }
+      }
+    }
+  }
+  .adminTableTitle {
+    padding: 0.62rem 3.12rem 0.62rem 3.12rem; // 15px 50px 10px 50px
+    font-size: 1.25rem; // 20px
+    position: relative;
+    @include flex(row, center, space-around);
+    li {
+      cursor: pointer;
+      margin: 0 0.93rem 0 0; // 15px
+      transition: color 0.35s;
+
+      &:hover {
+        color: rgba($white, 0.7);
+
+        path {
+          fill: rgba($white, 0.7);
+        }
+      }
+    }
+
+    .universiti,
+    .email {
+      flex-grow: 2.5;
+    }
+
+    .name {
+      flex-grow: 4.6;
+      margin: 0 0 0 2.81rem; // 45px
+    }
+
+    .ban {
+      flex-grow: 0.4;
+
+      svg:first-of-type {
+        @include size(2.18rem); // 35px
+
+        path {
+          transition: fill 0.35s;
+
+          &:hover {
+            fill: rgba($white, 0.7);
+          }
+        }
+      }
+
+      svg:last-of-type {
+        margin: 0 0 0.37rem 0; // 6px
+      }
+    }
+  }
+  .adminList {
+    .adminItem ul:nth-of-type(odd) {
+      background-color: $lightBlue_1;
+    }
+
+    .adminItem ul:nth-of-type(even) {
+      background-color: $lightBlue_2;
+    }
+
+    .adminItem ul {
+      transition: background-color 0.35s;
+      color: $darkBlue;
+      cursor: pointer;
+      padding: 0.31rem 2.5rem; // 5px 40px
+      @include flex(row, center, space-between);
+
+      &:hover {
+        background-color: $lightBlue_3;
+      }
+
+      li {
+        margin: 0 0.93rem 0 0; // 15px
+
+        path {
+          fill: $darkBlue;
+        }
+      }
+
+      li:last-of-type {
+        margin: 0;
+      }
+
+      .adminUniversity {
+        position: relative;
+        .abbreviationUniversity {
+          display: block;
+          cursor: pointer;
+          padding: 0.5rem 0; //8px
+        }
+
+        .abbreviationUniversity:hover ~ .fullNameUniversity {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .fullNameUniversity {
+          opacity: 0;
+          visibility: hidden;
+          transition: 0.35s;
+          font-size: 0.937rem; // 15px
+          border-radius: 20px;
+          word-wrap: break-word;
+          position: absolute;
+          box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.2);
+          bottom: 2.18rem; // 35px
+          left: 21%;
+          max-width: 15.62rem; // 250px
+
+          z-index: 1;
+          background-color: $gray;
+          color: $darkBlue2;
+          padding: 0.937rem; // 15px
+
+          &::before,
+          &::after {
+            content: '';
+            position: absolute;
+            left: 1.25rem; // -20px
+            bottom: -1.25rem; // -20px
+            border: 10px solid transparent;
+            border-top: 10px solid $gray;
+          }
+
+          &::after {
+            border-top: 10px solid $gray;
+            bottom: -1.187rem; // 19px
+          }
+        }
+      }
+      .adminName {
+        width: 15%;
+      }
+
+      .adminEmail,
+      .adminUniversity {
+        width: 35%;
+        padding-left: 5rem; // 80px
+      }
+
+      .adminBan,
+      .adminRemove {
+        width: 1.25rem; // 20px
+      }
+
+      .adminLogo {
+        width: 2.81rem; // 45px
+      }
+
+      .adminBan {
+        padding-right: 3.312rem; // 53px
+
+        path {
+          transition: fill 0.35s;
+        }
+        &.banned,
+        &:hover {
+          path {
+            fill: $red;
+          }
+        }
+      }
+      .adminRemove {
+        path {
+          transition: stroke 0.35s;
+        }
+
+        &:hover {
+          path {
+            stroke: $red;
+          }
+        }
+      }
+
+      .adminLogo {
+        font-size: 0;
+
+        svg {
+          margin: 0 0 0 0.25rem; //4px
+          path {
+            fill: $lightBlue_4;
+          }
+        }
+
+        img {
+          border-radius: 50%;
+          @include size(2.18rem); // 35px
+        }
+      }
+    }
+  }
+  .imgContainer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0.93rem 0.93rem 0 0; // 15px
+    font-size: 0;
+    text-align: right;
+    @include size(12.5rem 1.25rem); // 200px 20px
+  }
+}
