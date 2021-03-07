@@ -220,6 +220,7 @@ const ImageUploaderPopup = (props: TProps) => {
             handleClick={() => {
               setLoading(true);
               const imageToUpload = cropper.getCroppedCanvas().toDataURL();
+              console.log('imageToUpload', imageToUpload);
 
               requestImageProfile(
                 `${APIUrl}Users/Current/ChangePhoto`,

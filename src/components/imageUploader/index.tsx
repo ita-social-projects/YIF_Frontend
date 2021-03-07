@@ -6,12 +6,12 @@ import { userSelector } from '../../store/reducers/setUserReducer';
 import { FormInputSuccess } from '../common/formElements/formInputSuccess/formInputSuccess';
 
 const ImageUploader = (props: any) => {
+  const { additionalStyles, defaultPicture } = props;
   const { photo } = useSelector(userSelector);
-  const avatar = photo ? photo : 'assets/icons/avatar.jpg';
+  const avatar = photo ? photo : defaultPicture;
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [isSuccessLoad, setSuccessLoad] = useState(false);
   const [profileImageSrc, setProfileImageSrc] = useState(avatar);
-  const { additionalStyles } = props;
   return (
     <>
       <div

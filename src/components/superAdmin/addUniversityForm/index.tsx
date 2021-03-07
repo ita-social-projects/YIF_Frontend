@@ -2,6 +2,8 @@ import React from 'react';
 import { Field, Formik, Form } from 'formik';
 import { ReactComponent as DefaultPicture } from './defaultUnivPicture.svg';
 import styles from './addUniversityForm.module.scss';
+import ImageUploader from '../../imageUploader';
+import UniversityMap from './map';
 
 const questionIcon = (
   <svg
@@ -51,7 +53,20 @@ const picturesIcon = (
   </svg>
 );
 
+const mockedData = [
+  {
+    lat: '29.000',
+    lon: '50.000',
+  },
+];
+
 const AddUniversityForm = () => {
+  const avatarSyles = {
+    position: 'absolute',
+    width: '10.5rem',
+    height: '10.5rem',
+  };
+
   return (
     <div className={styles.wrapper}>
       <Formik
@@ -164,12 +179,17 @@ const AddUniversityForm = () => {
             </div>
             <div className={styles.pictureWrapper}>
               <div className={styles.uploadContainer}>
-                <div className={styles.uploadContainer__img}>
+                {/* <div className={styles.uploadContainer__img}>
                   <DefaultPicture />
                 </div>
                 <button className={styles.uploadContainer__button}>
                   Виберіть зображення {picturesIcon}
-                </button>
+                </button> */}
+
+                <ImageUploader
+                  additionalStyles={avatarSyles}
+                  defaultPicture='assets/images/defaultUnivPicture.svg'
+                />
               </div>
             </div>
           </div>
@@ -178,10 +198,12 @@ const AddUniversityForm = () => {
             <h2 className={styles.bottomWrapper__subtitle}>
               Виберіть місце розташування
             </h2>
-            <img
+            {/* <img
               className={styles.bottomWrapper__map}
               src='./assets/images/map.png'
-            />
+            /> */}
+
+            <UniversityMap data={mockedData} />
             <div
               className={`${styles.bottomWrapper__halfWidth} ${styles.mailContainer}`}
             >
