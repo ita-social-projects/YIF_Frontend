@@ -9,12 +9,35 @@ import { store } from '../../store/store';
 const specialitiesList = [
   {
     id: '64ef8f57-de92-41f4-a034-51e47abfb5de',
-    abbreviation: 'ОА',
+    universityAbbreviation: 'ОА',
     description: 'We are the best university ever',
-    subjects:[
-      {name: 'Українська мова та література', mark: '150', coefficient: '0,25' },
-      {name: 'Математика', mark: '150', coefficient: '0,45' },
-      {name: 'Історія', mark: '150', coefficient: '0,35',}
+    examRequirements: [
+      {
+        name: 'Українська мова та література',
+        mark: '150',
+        coefficient: '0,25',
+      },
+      { name: 'Математика', mark: '150', coefficient: '0,45' },
+      { name: 'Історія', mark: '150', coefficient: '0,35' },
+    ],
+    educationFormToDescriptions: [
+      {
+        educationFormName: 'денна',
+      },
+      {
+        educationFormName: 'заочна',
+      },
+      {
+        educationFormName: 'вечірня',
+      },
+    ],
+    paymentFormToDescriptions: [
+      {
+        paymentFormName: 'контракт',
+      },
+      {
+        paymentFormName: 'бюджет',
+      },
     ],
   },
 ];
@@ -26,18 +49,21 @@ it('renders without crashing', () => {
       <Provider store={store}>
         <SpecialityCard
           id='64ef8f57-de92-41f4-a034-51e47abfb5de'
-          abbreviation='ОА'
+          universityAbbreviation='ОА'
           description='Опис'
-          subjects={specialitiesList[0].subjects}
+          examRequirements={specialitiesList[0].examRequirements}
+          educationFormToDescriptions={
+            specialitiesList[0].educationFormToDescriptions
+          }
+          paymentFormToDescriptions={
+            specialitiesList[0].paymentFormToDescriptions
+          }
         />
       </Provider>
     </MemoryRouter>,
     div
   );
-  
 });
-
-
 
 test('renders with props', () => {
   const { getByText, getByTestId } = render(
@@ -45,9 +71,15 @@ test('renders with props', () => {
       <Provider store={store}>
         <SpecialityCard
           id='64ef8f57-de92-41f4-a034-51e47abfb5de'
-          abbreviation='ОА'
+          universityAbbreviation='ОА'
           description='Опис'
-          subjects={specialitiesList[0].subjects}
+          examRequirements={specialitiesList[0].examRequirements}
+          educationFormToDescriptions={
+            specialitiesList[0].educationFormToDescriptions
+          }
+          paymentFormToDescriptions={
+            specialitiesList[0].paymentFormToDescriptions
+          }
         />
       </Provider>
     </MemoryRouter>
@@ -72,11 +104,7 @@ test('renders with props', () => {
   expect(coefficient).toBeInTheDocument();
   expect(coefficient.tagName).toMatch(/h3/i);
 
-  
-  expect(getByTestId("open")).toBeInTheDocument();
-  const div = getByTestId("open");
+  expect(getByTestId('open')).toBeInTheDocument();
+  const div = getByTestId('open');
   fireEvent.click(div);
-
-    
 });
-

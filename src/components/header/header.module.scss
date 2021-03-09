@@ -20,6 +20,10 @@ header {
     font-size: $font_40px;
     font-weight: 800;
     margin: 0 3vw 0 9.03vw;
+
+    img {
+      max-width: 5rem;
+    }
   }
 
   nav {

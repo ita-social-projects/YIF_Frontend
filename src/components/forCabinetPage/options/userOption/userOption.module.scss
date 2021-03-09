@@ -32,17 +32,17 @@
 
   .titleContainer {
     width: inherit;
-   display: flex;
+    display: flex;
     flex-direction: column;
     align-items: flex-end;
 
-      .title {
-        font-family: $fontNunito;
-        font-weight: $regular;
-        font-size: 1.625rem;
-        color: $black;
-        padding: 0 4.75rem 1.125rem 0;
-      }
+    .title {
+      font-family: $fontNunito;
+      font-weight: $regular;
+      font-size: 1.625rem;
+      color: $black;
+      padding: 0 4.75rem 1.125rem 0;
+    }
 
     .spinner {
       padding-right: 23%;
@@ -57,7 +57,7 @@
     width: 685px;
   }
 
-  .img{
+  .img {
     position: absolute;
     top: 20%;
     right: 0;
@@ -69,11 +69,11 @@
     justify-content: flex-end;
   }
 
-  .selectWrapper{
+  .selectWrapper {
     display: flex;
     position: relative;
   }
-  .labelSelect{
+  .labelSelect {
     font-family: $fontNunito;
     font-weight: $regular;
     font-size: 1.125rem;
@@ -101,7 +101,7 @@
     position: absolute;
     right: 8px;
     top: 12px;
-    z-index: 1;
+    // z-index: 1;
     text-align: center;
     width: 5%;
     height: 70%;
@@ -114,7 +114,7 @@
     position: absolute;
     left: 51%;
     top: 6px;
-    z-index: 1;
+    // z-index: 1;
     text-align: center;
     pointer-events: none;
     box-sizing: border-box;

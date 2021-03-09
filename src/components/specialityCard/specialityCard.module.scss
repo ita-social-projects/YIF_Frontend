@@ -7,7 +7,7 @@
 }
 .card {
   position: relative;
-  padding: 1.875rem 3.75rem;
+  padding: 1.875rem 5.75rem;
   border-radius: 15px;
   background-color: $lightBlue_2;
   width: 100%;
@@ -20,7 +20,7 @@
   }
   &__content__link {
     display: block;
-    padding: 5px 3.625rem;
+    padding: 0.313rem 3.625rem;
     margin-left: 5rem;
     font-family: $fontNunito;
     font-weight: $light;
@@ -55,7 +55,10 @@
           text-align: center;
         }
         &:nth-child(3) {
-          text-align: right;
+          text-align: center;
+          max-width: 10.938rem;
+          margin-right: 0;
+          margin-left: auto;
         }
       }
     }
@@ -71,7 +74,6 @@
       text-align: center;
     }
     &_coefficient {
-      padding-right: 4.375rem;
       font-size: 1.25rem;
       line-height: 1.688rem;
       color: $darkBlue;
@@ -101,6 +103,10 @@
     }
     .card__details {
       display: none;
+      text-align: left;
+      font-size: 1.125rem;
+      line-height: 1.563rem;
+      color: $black;
     }
     &__opened {
       display: block;
