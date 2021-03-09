@@ -7,7 +7,11 @@ interface Props {
   id: string;
   code: string;
   name: string;
-  specialties: Array<{ id: string; name: string; code: string }>;
+  specialties: Array<{
+    specialtyId: string;
+    specialtyName: string;
+    specialtyCode: string;
+  }>;
 }
 
 const AccordionItem = (props: Props) => {
@@ -35,13 +39,14 @@ const AccordionItem = (props: Props) => {
       <div className={styles.acc_item__inner}>
         <ul className={styles.acc_item__content}>
           {specialties
-            .sort((a: any, b: any) => a.code - b.code)
+            .sort((a: any, b: any) => a.specialtyCode - b.specialtyCode)
             .map((item) => (
-              <li key={item.id} className={styles.acc_item__subitem}>
+              <li key={item.specialtyId} className={styles.acc_item__subitem}>
                 <div className={styles.acc_item__subitem_info}>
-                  <span>{item.code}</span> <h5>{item.name}</h5>
+                  <span>{item.specialtyCode}</span>{' '}
+                  <h5>{item.specialtyName}</h5>
                 </div>
-                <Link to={`/specialty/${item.id}`}>Детальніше</Link>
+                <Link to={`/specialty/${item.specialtyId}`}>Детальніше</Link>
               </li>
             ))}
         </ul>
