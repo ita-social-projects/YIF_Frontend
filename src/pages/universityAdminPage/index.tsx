@@ -3,7 +3,7 @@ import { Footer, Header } from '../../components';
 import Aside from '../../components/universityAdmin/aside';
 import UniversityInfo from '../../components/universityAdmin/universityInfo';
 import styles from './universityAdminPage.module.scss';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Moderators from '../../components/universityAdmin/moderators';
 import OurSpecialties from '../../components/universityAdmin/ourSpecialties';
 
