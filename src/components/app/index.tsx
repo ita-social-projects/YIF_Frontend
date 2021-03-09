@@ -16,6 +16,10 @@ import ErrorBoundry from '../../errorBoundry';
 import ResetPasswordPage from '../../pages/resetPasswordPage/index';
 import AddUniversity from '../../pages/superAdminPages/addUniversityPage';
 import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccountPage';
+import UniversityAdminPage from '../../pages/universityAdminPage';
+import UniversityInfo from '../universityAdmin/universityInfo';
+import OurSpecialties from '../universityAdmin/ourSpecialties';
+import Moderators from '../universityAdmin/moderators';
 
 const App = () => {
   const { token } = useAuth();
@@ -53,6 +57,18 @@ const App = () => {
           </Route>
           <Route path='/adduniv'>
             <AddUniversity />
+          </Route>
+          <Route path='/universityAdmin'>
+            <UniversityAdminPage />
+          </Route>
+          <Route path='/universityInfo'>
+            <UniversityAdminPage />
+          </Route>
+          <Route path='/ourSpecialties'>
+            <UniversityAdminPage />
+          </Route>
+          <Route path='/moderators'>
+            <UniversityAdminPage />
           </Route>
           <ProtectedRoute user={token} pathname='login' path='/cabinet'>
             <GraduateCabinet />

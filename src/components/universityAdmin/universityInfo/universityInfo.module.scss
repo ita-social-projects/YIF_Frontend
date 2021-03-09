@@ -1,0 +1,62 @@
+@import '../../../styles/index.scss';
+
+.universityInfo {
+  background: $lightBlue_3 url(/assets/images/univer30.svg) bottom -2rem right 8.125vw
+    no-repeat;
+  font-family: $fontOpenSans;
+  font-size: $font_18px;
+  max-width: 100rem;
+  min-height: 110vh;
+
+  .wrapper {
+    padding: 3.125rem 8.125vw 0 6.25vh;
+    margin-bottom: 15rem;
+  }
+  .main_info {
+    @include flex(row, flex-start, space-between);
+
+    img {
+      width: 25rem;
+      height: 14rem;
+      border-radius: 3%;
+      opacity: 80%;
+      margin-top: 0.5rem;
+    }
+
+    p {
+      margin: 1.25rem 0;
+      line-height: 1.563rem;
+    }
+  }
+
+  a {
+    width: 15rem;
+    text-align: center;
+    padding: 0.938rem 1.25rem;
+    border-radius: 5px;
+    display: inline-block;
+  }
+
+  button {
+    background-color: rgba($color: #fff, $alpha: 0);
+    margin-top: 2.5rem;
+  }
+
+  h1 {
+    font-size: $font_30px;
+    font-weight: $semiBold;
+    font-family: $fontNunito;
+  }
+
+  h2 {
+    font-family: $fontNunito;
+    font-size: $font_40px;
+    font-weight: $extraBold;
+    height: 3.438rem;
+  }
+
+  span {
+    font-weight: $semiBold;
+    margin-right: 0.5rem;
+  }
+}
