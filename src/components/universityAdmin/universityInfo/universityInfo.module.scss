@@ -1,0 +1,65 @@
+@import '../../../styles/index.scss';
+
+.wrapper {
+  background: $lightBlue_3 url(/assets/images/univer30.svg) bottom -2rem right 8.125vw
+    no-repeat;
+  font-family: $fontOpenSans;
+  font-size: $font_18px;
+  max-width: 100rem;
+  min-height: 110vh;
+
+  .infoContainer {
+    padding: 3.125rem 8.125vw 0 6.25vh;
+    margin-bottom: 15rem;
+
+    &__abbr {
+      font-family: $fontNunito;
+      font-size: $font_40px;
+      font-weight: $extraBold;
+      height: 3.438rem;
+    }
+
+    &__mainInfo {
+      @include flex(row, flex-start, space-between);
+    }
+    &__textInfo {
+      &__fullName {
+        font-size: $font_30px;
+        font-weight: $semiBold;
+        font-family: $fontNunito;
+      }
+
+      &__infoField {
+        margin: 1.25rem 0;
+        line-height: 1.563rem;
+
+        span {
+          font-weight: $semiBold;
+          margin-right: 0.5rem;
+        }
+      }
+    }
+
+    img {
+      width: 25rem;
+      height: 14rem;
+      border-radius: 3%;
+      opacity: 80%;
+      margin-top: 0.5rem;
+    }
+  }
+
+  a {
+    background-color: $darkBlue;
+    color: #fff;
+    width: 15rem;
+    text-align: center;
+    padding: 0.938rem 1.25rem;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 2.5rem;
+    &:hover {
+      background-color: $darkBlue2;
+    }
+  }
+}
