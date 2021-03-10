@@ -88,6 +88,7 @@ The instructions below will allow you to run application locally in the containe
 ![@team](https://avatars.githubusercontent.com/u/78432338?s=200&u=71dc67ff658babe90269e13a2e0fdd0a5ccdb43a&v=4)
 ![@team](https://avatars.githubusercontent.com/u/43788876?s=200&u=fa99cc6199ff97d5a09d777af8e03524b742f836&v=4)
 ![@team](https://avatars.githubusercontent.com/u/25075314?s=200&u=3342f20428dabeb39db6f86854844b8a9efa36c9&v=4)
+![@team](https://avatars.githubusercontent.com/u/58710581?s=200&u=6ced364dc8dfb6e9750ee49c41a3c61e632d85dd&v=4)
 
 - You can just grab their GitHub profile image URL
 - You should probably resize their picture using `?s=200` at the end of the image URL.
