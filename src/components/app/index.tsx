@@ -16,6 +16,7 @@ import ErrorBoundry from '../../errorBoundry';
 import ResetPasswordPage from '../../pages/resetPasswordPage/index';
 import AddUniversity from '../../pages/superAdminPages/addUniversityPage';
 import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccountPage';
+import NewPasswordPage from '../../pages/newPasswordPage';
 
 const App = () => {
   const { token } = useAuth();
@@ -53,6 +54,9 @@ const App = () => {
           </Route>
           <Route path='/adduniv'>
             <AddUniversity />
+          </Route>
+          <Route path='/newPassword'>
+            <NewPasswordPage />
           </Route>
           <ProtectedRoute user={token} pathname='login' path='/cabinet'>
             <GraduateCabinet />
