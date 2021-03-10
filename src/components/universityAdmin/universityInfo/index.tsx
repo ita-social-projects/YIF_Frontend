@@ -23,19 +23,19 @@ const UniversityInfo = () => {
             <h1 className={styles.infoContainer__textInfo__fullName}>
               {univ.fullName}
             </h1>
-            <p className={styles.infoContainer__textInfo__infoField}>
+            <p>
               <span>Сайт:</span>
               {univ.site}
             </p>
-            <p className={styles.infoContainer__textInfo__infoField}>
+            <p>
               <span>Email:</span>
               {univ.email}
             </p>
-            <p className={styles.infoContainer__textInfo__infoField}>
+            <p>
               <span>Телефон:</span>
               {univ.phoneNumber}
             </p>
-            <p className={styles.infoContainer__textInfo__infoField}>
+            <p>
               <span>Адреса:</span>
               {univ.adress}
             </p>
@@ -45,7 +45,7 @@ const UniversityInfo = () => {
             alt='НУВГП'
           />
         </div>
-        <p className={styles.infoContainer__textInfo__fullName__infoField}>
+        <p className={styles.description}>
           <span>Опис:</span>
           {univ.desc}
         </p>

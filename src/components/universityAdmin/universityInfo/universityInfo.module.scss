@@ -7,6 +7,7 @@
   font-size: $font_18px;
   max-width: 100rem;
   min-height: 110vh;
+  margin: 0 auto;
 
   .infoContainer {
     padding: 3.125rem 8.125vw 0 6.25vh;
@@ -28,16 +29,6 @@
         font-weight: $semiBold;
         font-family: $fontNunito;
       }
-
-      &__infoField {
-        margin: 1.25rem 0;
-        line-height: 1.563rem;
-
-        span {
-          font-weight: $semiBold;
-          margin-right: 0.5rem;
-        }
-      }
     }
 
     img {
@@ -46,6 +37,20 @@
       border-radius: 3%;
       opacity: 80%;
       margin-top: 0.5rem;
+    }
+
+    .description {
+      margin-top: 0px;
+    }
+
+    p {
+      margin: 1.25rem 0;
+      line-height: 1.563rem;
+
+      span {
+        font-weight: $semiBold;
+        margin-right: 0.5rem;
+      }
     }
   }
 
