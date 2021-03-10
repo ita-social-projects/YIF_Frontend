@@ -139,7 +139,7 @@ const Header: React.FC = () => {
   return (
     <header id='header'>
       <Link to='/' className={styles.logo} data-testid='logo'>
-        YIF
+        <img src='/logo.svg' alt='YITF Logo' />
       </Link>
       <nav>
         <div className={styles.pages}>

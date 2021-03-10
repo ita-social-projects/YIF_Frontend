@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM, { unmountComponentAtNode } from 'react-dom';
-import { queryAllByTestId, queryByTestId } from '@testing-library/react';
+import { queryAllByTestId } from '@testing-library/react';
 import SpecialityPage from '.';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 import { Router } from 'react-router-dom';
-import { MemoryRouter } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import { createMemoryHistory } from 'history';
+
 let container = null;
 beforeEach(() => {
   container = document.createElement('div');
@@ -22,8 +22,37 @@ afterEach(() => {
 
 const data = [
   {
-    id: '21e63ba5-5dba-4719-bf9c-8ca48ad59050',
-    code: '11',
+    id: '64ef8f57-de92-41f4-a034-51e47abfb5de',
+    universityAbbreviation: 'ОА',
+    description: 'We are the best university ever',
+    examRequirements: [
+      {
+        name: 'Українська мова та література',
+        mark: '150',
+        coefficient: '0,25',
+      },
+      { name: 'Математика', mark: '150', coefficient: '0,45' },
+      { name: 'Історія', mark: '150', coefficient: '0,35' },
+    ],
+    educationFormToDescriptions: [
+      {
+        educationFormName: 'денна',
+      },
+      {
+        educationFormName: 'заочна',
+      },
+      {
+        educationFormName: 'вечірня',
+      },
+    ],
+    paymentFormToDescriptions: [
+      {
+        paymentFormName: 'контракт',
+      },
+      {
+        paymentFormName: 'бюджет',
+      },
+    ],
   },
 ];
 
@@ -36,35 +65,17 @@ const mockFetchPromise = Promise.resolve({
 global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
 it('check success response', async () => {
-    const history = createMemoryHistory();
-    await act(async () => {
-      ReactDOM.render(
-        <Router history={history}>
-          <Provider store={store}>
-            <SpecialityPage />
-          </Provider>
-        </Router>,
-        container
-      );
-    });
-  
-  
-  
-  
+  const history = createMemoryHistory();
+  await act(async () => {
+    ReactDOM.render(
+      <Router history={history}>
+        <Provider store={store}>
+          <SpecialityPage />
+        </Provider>
+      </Router>,
+      container
+    );
   });
-
-it('check success render', () => {
-  const container = document.createElement('container');
-  ReactDOM.render(
-    <MemoryRouter>
-      <Provider store={store}>
-        <SpecialityPage />
-      </Provider>
-    </MemoryRouter>,
-    container
-  );
-
   const cards = queryAllByTestId(container, 'card');
-  expect(cards).toHaveLength(3);
-
+  expect(cards).toHaveLength(1);
 });

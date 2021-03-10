@@ -46,12 +46,14 @@ export default class BannerLower extends Component<any> {
           className={`${style.banner} ${style.animationBg} ${style.animationBounce}`}
         >
           <h2>Your IT Future</h2>
-          <p>
+          {/* <p>
             Існують легенди (записи яких збереглися в античних храмах), згідно з
             якими людська раса походить від cтворінь, які нагадують амфібій.
             Їхні тіла були вкриті лускою й дихали вони через зябра. У низці
             міфів риби виконують функцію деміурга.
-          </p>
+          </p> */}
+
+          <p> Обери свою ІТ – спеціальність у вищому навчальному закладі! </p>
           {entryContent}
         </div>
       </section>

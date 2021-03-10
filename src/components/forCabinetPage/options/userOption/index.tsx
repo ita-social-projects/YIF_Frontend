@@ -60,7 +60,10 @@ const UserOption = () => {
   return (
     <Fragment>
       <section className={styles.mainStyle}>
-        <ImageUploader additionalStyles={avatarSyles} />
+        <ImageUploader
+          additionalStyles={avatarSyles}
+          defaultPicture='assets/icons/avatar.jpg'
+        />
         <div className={styles.wrapper}>
           <div className={styles.titleContainer}>
             <h4 className={styles.title}>Персональні дані</h4>
@@ -224,7 +227,9 @@ const UserOption = () => {
                       useYIFProfile.handleSchoolChange(e);
                     }}
                   >
-                    <option className={styles.selectField} value=''>Виберіть свою школу</option>
+                    <option className={styles.selectField} value=''>
+                      Виберіть свою школу
+                    </option>
                     {listSchool.map((option, index) => {
                       return (
                         <option

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import styles from "./specialityPage.module.scss";
-import { Header, Footer } from "../../components";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import styles from './specialityPage.module.scss';
+import { Header, Footer } from '../../components';
 import SpecialityCard from '../../components/specialityCard';
-import { requestData } from "../../services/requestDataFunction";
-import { APIUrl } from "../../services/endpoints";
+import { requestData } from '../../services/requestDataFunction';
+import { APIUrl } from '../../services/endpoints';
 
 const starSVG = (
   <svg
@@ -21,103 +21,62 @@ const starSVG = (
   </svg>
 );
 
-
 const SpecialityPage = () => {
+  const [specialityList, setSpecialityList] = useState([
+    {
+      id: '',
+      universityAbbreviation: '',
+      universityId: '',
+      specialtyCode: '',
+      specialtyName: '',
+      examRequirements: [],
+      educationFormToDescriptions: [],
+      paymentFormToDescriptions: [],
+    },
+  ]);
+
   const [isFetching, setFetching] = useState(false);
-  const [specialityInfo, setSpecialityInfo] = useState({});
-  const [universityInfo, setUniversityInfo] = useState({});
   const { id } = useParams<any>();
 
   useEffect(() => {
     setFetching(true);
-      const endpointForSpecialties = `${APIUrl}Specialty/${id}`;
-      requestData(endpointForSpecialties, "GET").then((res: any) => {
-        setSpecialityInfo(res.data);
-      });
-      // const endpoint = `${APIUrl}University/`;
-      // requestData(endpoint, "GET").then((res: any) => {
-      //   console.log(res.data)
-      //   setUniversityInfo(res.data);
-      // });
-      
+    const endpointForSpecialties = `${APIUrl}Specialty/Descriptions/${id}`;
+    requestData(endpointForSpecialties, 'GET').then((res: any) => {
+      setSpecialityList(res.data);
+    });
     setFetching(false);
   }, [id]);
-    
-    const specialityList = [
-      {
-        abbreviation: 'ОА',
-        id: '64ef8f57-de92-41f4-a034-51e47abfb5de',
-        description: 'Національний університет «Острозька академія» — наступник першого вищого навчального закладу ' +
-            'східнослов’янських народів — Острозької слов’яно-греко-латинської академії. Заснував академію ' +
-            'у 1576 році князь Василь-Костянтин Острозький.',
-        subjects:[
-          {name: 'Українська мова та література', mark: '150', coefficient: '0,25' },
-          {name: 'Математика', mark: '120', coefficient: '0,45' },
-          {name: 'Історія', mark: '140', coefficient: '0,35',}
-        ],
-      },
-      {
-        abbreviation: 'РДГУ',
-        id: 'cc6c95ee-a6b5-4249-b9af-c513edd4078d',
-        description: 'Рівненський державний гуманітарний університет (РДГУ) – багатопрофільний заклад вищої освіти, ' +
-            'який здійснює підготовку фахівців з педагогічних, природничих, культурно-мистецьких, економічних ' +
-            'спеціальностей. Історія РДГУ розпочинається з відкриття Ровенського вчительського інституту в 1940 р., ' +
-            'Ровенського інституту культури в 1979 р. та їх об’єднання в 1998 р. у Рівненський державний гуманітарний ' +
-            'університет, що дає закладу змогу поєднати багаторічний досвід з інноваційним потенціалом ' +
-            'сучасних технологій навчання студентів.',
-        subjects:[
-          {name: 'Українська мова та література', mark: '120', coefficient: '0,45'},
-          {name: 'Біологія', mark: '110', coefficient: '0,45'},
-          {name: 'Історія', mark: '110', coefficient: '0,35',}
-        ]
-      },
-      {
-        abbreviation: 'КПІ',
-        id: 'c4723684-a978-432b-b2ba-da8e4966d5f4',
-        description: 'Заклад вищої освіти інженерного профілю, заснований в Києві у 1898 р., на сьогодні це один із ' +
-            'найбільших університетів України за кількістю студентів з широким спектром спеціальностей і освітніх ' +
-            'програм для підготовки фахівців з технічних і гуманітарних наук',
-        subjects:[
-          {name: 'Українська мова та література', mark: '160', coefficient: '0,35'},
-          {name: 'Історія', mark: '130', coefficient: '0,45'},
-          {name: 'Матматика', mark: '120', coefficient: '0,35'}
-        ]
-      }
-  ]
 
-  const { name, code }: any = specialityInfo;
-  const specialityCardList = specialityList.map((item: any) => {
+  const name = specialityList[0].specialtyName;
+  const code = specialityList[0].specialtyCode;
+  const specialityCardList = specialityList.map((item: any, index: number) => {
     return (
       <SpecialityCard
-      key={item.id}
-      id={item.id}
-      abbreviation={item.abbreviation}
-      subjects={item.subjects}
-      description={item.description}
-    />
+        key={index}
+        code={item.specialtyCode}
+        universityAbbreviation={item.universityAbbreviation}
+        examRequirements={item.examRequirements}
+        educationFormToDescriptions={item.educationFormToDescriptions}
+        paymentFormToDescriptions={item.paymentFormToDescriptions}
+        universityId={item.universityId}
+      />
     );
   });
-  
 
   return (
-    
     <>
-        <Header />
-        <section className={styles.specialityPage} >
-              
-              <h1 className={styles.title}>{code}<br/> {name} 
-                <span className={styles.card__icon}>
-                  {starSVG}
-                </span>
-              </h1>
-              
-              {specialityCardList}
-        </section>
-        <Footer />
+      <Header />
+      <section className={styles.specialityPage}>
+        <h1 className={styles.title}>
+          {code}
+          <br /> {name}
+          <span className={styles.card__icon}>{starSVG}</span>
+        </h1>
+        {specialityCardList}
+      </section>
+      <Footer />
     </>
   );
 };
 
-
 export default SpecialityPage;
-
