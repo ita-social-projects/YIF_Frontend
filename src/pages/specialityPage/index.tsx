@@ -43,7 +43,6 @@ const SpecialityPage = () => {
     const endpointForSpecialties = `${APIUrl}Specialty/Descriptions/${id}`;
     requestData(endpointForSpecialties, 'GET').then((res: any) => {
       setSpecialityList(res.data);
-      console.log(res.data);
     });
     setFetching(false);
   }, [id]);
