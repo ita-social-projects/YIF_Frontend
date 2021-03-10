@@ -15,7 +15,10 @@ const DirectionCard: React.FC<Props> = (props) => {
   const specialtiesList = specialties
     .sort((a: any, b: any) => a.specialtyCode - b.specialtyCode)
     .map((item: any) => (
-      <li key={item.id} className={styles.card__content__list__subitem}>
+      <li
+        key={item.specialtyId}
+        className={styles.card__content__list__subitem}
+      >
         <div className={styles.card__content__list__subitem_info}>
           <span>{item.specialtyCode}</span>
           <h5>{item.specialtyName}</h5>
@@ -25,12 +28,7 @@ const DirectionCard: React.FC<Props> = (props) => {
     ));
 
   return (
-    <div
-      data-testid='card'
-      id='directionCard'
-      data-id={code}
-      className={styles.card}
-    >
+    <div data-testid="card" id={code} data-id={code} className={styles.card}>
       <h2 className={styles.card__title}>
         {props.code} {name}
       </h2>
