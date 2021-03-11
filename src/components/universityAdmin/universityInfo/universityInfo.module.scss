@@ -29,6 +29,10 @@
         font-weight: $semiBold;
         font-family: $fontNunito;
       }
+      a {
+        color: $black;
+        text-decoration: underline;
+      }
     }
 
     img {
@@ -53,7 +57,7 @@
       }
     }
   }
-  a {
+  .buttonLink {
     width: 15rem;
     text-align: center;
     padding: 0.938rem 1.25rem;

@@ -25,15 +25,19 @@ const UniversityInfo = () => {
             </h1>
             <p>
               <span>Сайт:</span>
-              {univ.site}
+              <a href={univ.site} target='_blank'>
+                {univ.site}
+              </a>
             </p>
             <p>
               <span>Email:</span>
-              {univ.email}
+              <a href={`mailto:${univ.email}`} target='_blank'>
+                {univ.email}
+              </a>
             </p>
             <p>
               <span>Телефон:</span>
-              {univ.phoneNumber}
+              <a href={`tel:${univ.phoneNumber}`}>{univ.phoneNumber}</a>
             </p>
             <p>
               <span>Адреса:</span>
@@ -49,7 +53,10 @@ const UniversityInfo = () => {
           <span>Опис:</span>
           {univ.desc}
         </p>
-        <Link className={styles.animatedButton} to={`/moderators`}>
+        <Link
+          className={`${styles.animatedButton} ${styles.buttonLink}`}
+          to={`/moderators`}
+        >
           Редагувати
         </Link>
       </div>
