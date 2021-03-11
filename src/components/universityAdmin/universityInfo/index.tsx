@@ -49,7 +49,9 @@ const UniversityInfo = () => {
           <span>Опис:</span>
           {univ.desc}
         </p>
-        <Link to={`/moderators`}>Редагувати</Link>
+        <Link className={styles.animatedButton} to={`/moderators`}>
+          Редагувати
+        </Link>
       </div>
     </main>
   );

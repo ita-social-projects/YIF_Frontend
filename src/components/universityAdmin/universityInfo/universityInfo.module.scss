@@ -40,7 +40,7 @@
     }
 
     .description {
-      margin-top: 0px;
+      margin-top: 0;
     }
 
     p {
@@ -53,18 +53,12 @@
       }
     }
   }
-
   a {
-    background-color: $darkBlue;
-    color: #fff;
     width: 15rem;
     text-align: center;
     padding: 0.938rem 1.25rem;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     display: inline-block;
-    margin-top: 2.5rem;
-    &:hover {
-      background-color: $darkBlue2;
-    }
+    margin-top: 1.25rem;
   }
 }
