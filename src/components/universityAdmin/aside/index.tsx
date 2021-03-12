@@ -10,7 +10,7 @@ function Aside() {
           Університет
         </Link>
         <Link className={styles.underlineAnimation} to='/ourSpecialties'>
-          Наші спеціальності
+          Спеціальності
         </Link>
         <Link className={styles.underlineAnimation} to='/moderators'>
           Модератори
