@@ -3,45 +3,43 @@ import styles from './universityInfo.module.scss';
 import { Link } from 'react-router-dom';
 
 const UniversityInfo = () => {
-  const univ = {
-    abbr: 'НУВГП',
-    fullName:
+  const { name, abbreviation, site, address, phone, email, description } = {
+    name:
       'Національний університет водного господарства та природокористування',
-    site: 'https://nuwm.edu.ua/ ',
+    abbreviation: 'НУВГП',
+    site: 'https://nuwm.edu.ua/',
+    address: 'вулиця Соборна, 11, Рівне, Рівненська область, 33000',
+    phone: '380362633209',
     email: 'mail@nuwm.edu.ua',
-    phoneNumber: '380362633209',
-    adress: 'вулиця Соборна, 11, Рівне, Рівненська область, 33000',
-    desc:
+    description:
       'Єдиний в Україні вищий навчальний заклад водогосподарського профілю. Заклад є навчально-науковим комплексом, що здійснює підготовку висококваліфікованих фахівців, науково-педагогічних кадрів, забезпечує підвищення кваліфікації фахівців та проводить науково-дослідну роботу.',
   };
   return (
     <main className={styles.wrapper}>
       <div className={styles.infoContainer}>
-        <h2 className={styles.infoContainer__abbr}>{univ.abbr}</h2>
+        <h2 className={styles.infoContainer__abbr}>{abbreviation}</h2>
         <div className={styles.infoContainer__mainInfo}>
           <div className={styles.infoContainer__textInfo}>
-            <h1 className={styles.infoContainer__textInfo__fullName}>
-              {univ.fullName}
-            </h1>
+            <h1 className={styles.infoContainer__textInfo__fullName}>{name}</h1>
             <p>
               <span>Сайт:</span>
-              <a href={univ.site} target='_blank'>
-                {univ.site}
+              <a href={site} target='_blank'>
+                {site}
               </a>
             </p>
             <p>
               <span>Email:</span>
-              <a href={`mailto:${univ.email}`} target='_blank'>
-                {univ.email}
+              <a href={`mailto:${email}`} target='_blank'>
+                {email}
               </a>
             </p>
             <p>
               <span>Телефон:</span>
-              <a href={`tel:${univ.phoneNumber}`}>{univ.phoneNumber}</a>
+              <a href={`tel:${phone}`}>{phone}</a>
             </p>
             <p>
               <span>Адреса:</span>
-              {univ.adress}
+              {address}
             </p>
           </div>
           <img
@@ -51,7 +49,7 @@ const UniversityInfo = () => {
         </div>
         <p className={styles.description}>
           <span>Опис:</span>
-          {univ.desc}
+          {description}
         </p>
         <Link
           className={`${styles.animatedButton} ${styles.buttonLink}`}
