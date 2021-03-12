@@ -1,4 +1,4 @@
-@import "../../styles/index.scss";
+@import '../../styles/index.scss';
 
 .universityPage {
   font-family: $fontOpenSans, serif;
@@ -117,4 +117,8 @@
       }
     }
   }
+}
+
+.universityMap {
+  margin-bottom: 5px;
 }

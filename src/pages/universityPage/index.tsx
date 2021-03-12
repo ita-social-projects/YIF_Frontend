@@ -152,17 +152,19 @@ const UniversityPage = () => {
             <Spinner />
           </div>
         ) : (
-          <UniversityMap
-            data={[
-              {
-                id,
-                name,
-                site,
-                lat,
-                lon,
-              },
-            ]}
-          />
+          <div className={styles.universityMap}>
+            <UniversityMap
+              data={[
+                {
+                  id,
+                  name,
+                  site,
+                  lat,
+                  lon,
+                },
+              ]}
+            />
+          </div>
         )}
 
         <Footer />
