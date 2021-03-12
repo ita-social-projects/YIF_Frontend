@@ -97,7 +97,7 @@ const UniversityPage = () => {
                 >
                   {starSVG}
                 </div>
-                <div className={styles.universityPage_header}>
+                <div className={styles.universityPage__header}>
                   <h2 className={styles.universityPage__subtitle}>{name}</h2>
                   <img
                     src="../assets/images/defaultUniversityImage.jpg"
