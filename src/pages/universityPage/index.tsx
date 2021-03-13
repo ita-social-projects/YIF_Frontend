@@ -51,6 +51,7 @@ const UniversityPage = () => {
     email,
     endOfCampaign,
     isFavorite,
+    imagePath,
     lat,
     lon,
     name,
@@ -100,7 +101,9 @@ const UniversityPage = () => {
                 <div className={styles.universityPage__header}>
                   <h2 className={styles.universityPage__subtitle}>{name}</h2>
                   <img
-                    src="../assets/images/defaultUniversityImage.jpg"
+                    src={
+                      imagePath || '../assets/images/defaultUniversityImage.jpg'
+                    }
                     alt="University Building"
                     className={styles.universityPage__img}
                   />
