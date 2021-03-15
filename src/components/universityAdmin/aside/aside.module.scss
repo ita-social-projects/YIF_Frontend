@@ -1,0 +1,19 @@
+@import '../../../styles/index.scss';
+
+.assideMenu {
+  background-color: $darkBlue;
+  flex-basis: 15rem;
+
+  nav {
+    @include flex(column, flex-start, center);
+    margin: 14.375rem 1.23rem 0;
+    width: 12.5rem;
+  }
+
+  a {
+    margin: 1rem 0;
+    color: #fff;
+    font-family: $fontNunito;
+    font-size: $font_18px;
+  }
+}
