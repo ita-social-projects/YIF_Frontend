@@ -7,12 +7,12 @@ const Partners: React.FunctionComponent = () => {
     <PartnersComponent src='assets/icons/logoNUWGP.png' />,
     <PartnersComponent src='assets/icons/logoSoftServe.png' />,
     <PartnersComponent src='assets/icons/logoRDGU.png' />,
-    <PartnersComponent src='assets/icons/logoItCluster.png' />,
-    <PartnersComponent src='assets/icons/ba.png' />,
-    <PartnersComponent src='assets/icons/step.svg' />,
-    <PartnersComponent src='assets/icons/logoItCluster.png' />,
-    <PartnersComponent src='assets/icons/logoSoftServe.png' />,
-    <PartnersComponent src='assets/icons/ba.png' />,
+    // <PartnersComponent src='assets/icons/logoItCluster.png' />,
+    // <PartnersComponent src='assets/icons/ba.png' />,
+    // <PartnersComponent src='assets/icons/step.svg' />,
+    // <PartnersComponent src='assets/icons/logoItCluster.png' />,
+    // <PartnersComponent src='assets/icons/logoSoftServe.png' />,
+    // <PartnersComponent src='assets/icons/ba.png' />,
   ];
 
   let arrow = (
@@ -58,7 +58,7 @@ const Partners: React.FunctionComponent = () => {
             </div>
           </div>
         </div>
-        <button
+        {/* <button
           data-testid='buttonLeft'
           className={classes.left}
           onClick={goLeft}
@@ -71,7 +71,7 @@ const Partners: React.FunctionComponent = () => {
           onClick={goRight}
         >
           {arrow}
-        </button>
+        </button> */}
       </div>
   );
 };
