@@ -1,65 +1,57 @@
 import React from 'react';
 import NewPasswordForm from './index';
-import { MemoryRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { store } from '../../store/store';
-import ReactDOM from 'react-dom';
-import { fireEvent, wait, screen } from '@testing-library/react';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
+import userEvent from '@testing-library/user-event';
+import { screen, render, cleanup, wait } from '@testing-library/react';
 
-it('renders without crashing', () => {
-  const container = document.createElement('div');
-  ReactDOM.render(
-    <MemoryRouter>
-      <Provider store={store}>
+afterEach(cleanup);
+
+describe('NewPasswordForm', () => {
+  const history = createMemoryHistory();
+  it('render component', () => {
+    const { getByPlaceholderText, getByRole } = render(
+      <Router history={history}>
         <NewPasswordForm />
-      </Provider>
-    </MemoryRouter>,
-    container
-  );
-});
+      </Router>
+    );
+    expect(getByPlaceholderText('Пароль')).toBeInTheDocument();
+    expect(getByPlaceholderText('Підтвердіть пароль')).toBeInTheDocument();
+    expect(getByRole('button')).toBeVisible();
+  });
 
-it('submits correct values', async () => {
-  const container = document.createElement('div');
-  ReactDOM.render(
-    <MemoryRouter>
-      <Provider store={store}>
+  it('can change focus with TAB', () => {
+    const { getByPlaceholderText, getByRole } = render(
+      <Router history={history}>
         <NewPasswordForm />
-      </Provider>
-    </MemoryRouter>,
-    container
-  );
+      </Router>
+    );
+    expect(document.body).toHaveFocus();
+    userEvent.tab();
+    userEvent.tab();
+    expect(getByPlaceholderText('Пароль')).toHaveFocus();
+    userEvent.tab();
+    expect(getByPlaceholderText('Підтвердіть пароль')).toHaveFocus();
+    userEvent.tab();
+    expect(getByRole('button')).toHaveFocus();
+  });
 
-  const password = container.querySelector('input[name="password"]');
-  const confirmPassword = container.querySelector(
-    'input[name="confirmPassword"]'
-  );
-
-  await wait(() => {
-    fireEvent.change(password, {
-      target: {
-        value: 'password',
-      },
+  it('input receives corect value', async () => {
+    const { getByPlaceholderText } = render(
+      <Router history={history}>
+        <NewPasswordForm />
+      </Router>
+    );
+    userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
+    userEvent.type(
+      screen.getByPlaceholderText('Підтвердіть пароль'),
+      'Qwerty1@'
+    );
+    await wait(() => {
+      expect(getByPlaceholderText('Пароль')).toHaveValue('Qwerty1@');
+      expect(getByPlaceholderText('Підтвердіть пароль')).toHaveValue(
+        'Qwerty1@'
+      );
     });
-  });
-
-  await wait(() => {
-    fireEvent.change(confirmPassword, {
-      target: {
-        value: 'confirmPassword',
-      },
-    });
-  });
-
-  const handleClick = jest.fn();
-  const submitButton = container.querySelector('button');
-
-  submitButton.onclick = handleClick;
-
-  await wait(() => {
-    fireEvent.click(submitButton);
-  });
-
-  await wait(() => {
-    expect(handleClick).toHaveBeenCalled();
   });
 });
