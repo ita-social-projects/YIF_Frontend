@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {fireEvent, render, screen} from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import UniversityCard from '.';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
@@ -27,8 +27,8 @@ test('renders with props', () => {
           site='nuwm.edu.ua'
           address='м. Рівне, вул. Соборна, 11'
           description='Тут буде опис університету'
-          startOfCampaign='01.07.2021'
-          endOfCampaign='21.08.2021'
+          startOfCampaign='2021-08-13T00:00:00'
+          endOfCampaign='2021-08-31T00:00:00'
         />
       </Provider>
     </MemoryRouter>
@@ -54,13 +54,13 @@ test('renders with props', () => {
   expect(description).toBeInTheDocument();
   expect(description.tagName).toMatch(/p/i);
 
-  expect(getByText(/01.07.2021/i)).toBeInTheDocument();
-  const introStart = screen.getByText(/01.07.2021/i);
+  expect(getByText(/13.7.2021/i)).toBeInTheDocument();
+  const introStart = screen.getByText(/13.7.2021/i);
   expect(introStart).toBeInTheDocument();
   expect(introStart.tagName).toMatch(/p/i);
 
-  expect(getByText(/21.08.2021/i)).toBeInTheDocument();
-  const introDeadline = screen.getByText(/21.08.2021/i);
+  expect(getByText(/31.7.2021/i)).toBeInTheDocument();
+  const introDeadline = screen.getByText(/31.7.2021/i);
   expect(introDeadline).toBeInTheDocument();
   expect(introDeadline.tagName).toMatch(/p/i);
 });
@@ -85,11 +85,11 @@ describe('handleClick', () => {
     const handleClick = jest.fn();
 
     const { container } = render(
-        <Provider store={store}>
-          <MemoryRouter>
-            <UniversityCard onClick={handleClick()} />
-          </MemoryRouter>
-        </Provider>
+      <Provider store={store}>
+        <MemoryRouter>
+          <UniversityCard onClick={handleClick()} />
+        </MemoryRouter>
+      </Provider>
     );
 
     const div = container.querySelector('div');
