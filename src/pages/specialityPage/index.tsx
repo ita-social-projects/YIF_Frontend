@@ -5,6 +5,7 @@ import { Header, Footer } from '../../components';
 import SpecialityCard from '../../components/specialityCard';
 import { requestData } from '../../services/requestDataFunction';
 import { APIUrl } from '../../services/endpoints';
+import Spinner from "../../components/common/spinner";
 
 const starSVG = (
   <svg
@@ -29,13 +30,15 @@ const SpecialityPage = () => {
       universityId: '',
       specialtyCode: '',
       specialtyName: '',
+      description: '',
+      educationalProgramLink: '',
       examRequirements: [],
       educationFormToDescriptions: [],
       paymentFormToDescriptions: [],
     },
   ]);
 
-  const [isFetching, setFetching] = useState(false);
+  const [isFetching, setFetching] = useState(true);
   const { id } = useParams<any>();
 
   useEffect(() => {
@@ -43,9 +46,10 @@ const SpecialityPage = () => {
     const endpointForSpecialties = `${APIUrl}Specialty/Descriptions/${id}`;
     requestData(endpointForSpecialties, 'GET').then((res: any) => {
       setSpecialityList(res.data);
-    });
-    setFetching(false);
-  }, [id]);
+
+    }).finally(()=> setFetching(false));
+
+  }, []);
 
   const name = specialityList[0].specialtyName;
   const code = specialityList[0].specialtyCode;
@@ -58,6 +62,8 @@ const SpecialityPage = () => {
         examRequirements={item.examRequirements}
         educationFormToDescriptions={item.educationFormToDescriptions}
         paymentFormToDescriptions={item.paymentFormToDescriptions}
+        educationalProgramLink={item.educationalProgramLink}
+        description={item.description}
         universityId={item.universityId}
       />
     );
@@ -67,12 +73,20 @@ const SpecialityPage = () => {
     <>
       <Header />
       <section className={styles.specialityPage}>
+        {isFetching ? (
+            <div className={styles.spinnerContainer}>
+              <Spinner />
+            </div>
+        ) : (
+        <>
         <h1 className={styles.title}>
           {code}
           <br /> {name}
           <span className={styles.card__icon}>{starSVG}</span>
         </h1>
         {specialityCardList}
+        </>
+       )}
       </section>
       <Footer />
     </>
