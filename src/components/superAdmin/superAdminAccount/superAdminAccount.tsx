@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './superAdminAccount.module.scss';
 import cloneDeep from 'lodash.clonedeep';
 import { requestSecureData } from '../../../services/requestDataFunction';
@@ -39,6 +39,7 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
   const { token, getToken } = useAuth();
   const [currentKey, setCurrentKey] = useState('');
   const [searchValue, setSearchValue] = useState('');
+  const [sortSwitch, setSortSwitch] = useState({ a: -1, b: 1 });
   const textInput: any = useRef(null);
 
   const defineErrorMessage = (
@@ -215,11 +216,19 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
   };
 
   const handleSort = (key: string) => {
+    let sortSwitchA = 0;
+    let sortSwitchB = 0;
+
     if (key === currentKey) {
-      setSortedUniversityAdmins(cloneDeep(universityAdmins));
-      setCurrentKey('');
-      return;
+      setSortSwitch({ a: sortSwitch.b, b: sortSwitch.a });
+      sortSwitchA = sortSwitch.b;
+      sortSwitchB = sortSwitch.a;
+    } else {
+      setSortSwitch({ a: -1, b: 1 });
+      sortSwitchA = -1;
+      sortSwitchB = 1;
     }
+
     const sortedArr = cloneDeep(sortedUniversityAdmins).sort(
       (a: any, b: any) => {
         let prevV = !a[key];
@@ -234,10 +243,10 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
         }
 
         if (prevV < nextV) {
-          return -1;
+          return sortSwitchA;
         }
         if (prevV > nextV) {
-          return 1;
+          return sortSwitchB;
         }
         // names must be equal
         return 0;
@@ -247,6 +256,10 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
     setCurrentKey(key);
     setSortedUniversityAdmins(sortedArr);
   };
+
+  useEffect(() => {
+    handleSort('isBanned');
+  }, []);
 
   return (
     <div className={styles.superAdminAccount}>
