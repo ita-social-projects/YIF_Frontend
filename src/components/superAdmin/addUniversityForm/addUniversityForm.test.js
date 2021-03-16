@@ -21,8 +21,6 @@ it('renders with blank fields', () => {
     'input[name="universityName"]'
   );
 
-  const buttonSubmit = container.querySelector('.bottomWrapper__submitButton');
-
   const universityAbbreviation = container.querySelector(
     'input[name="universityAbbreviation"]'
   );
@@ -44,7 +42,6 @@ it('renders with blank fields', () => {
   const adminEmail = container.querySelector('input[name="adminEmail"]');
 
   expect(universityName.tagName).toBe('INPUT');
-  expect(buttonSubmit.tagName).toBe('BUTTON');
   expect(universityAbbreviation.tagName).toBe('INPUT');
   expect(universityAdress.tagName).toBe('INPUT');
   expect(universitySite.tagName).toBe('INPUT');

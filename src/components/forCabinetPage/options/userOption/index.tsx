@@ -12,6 +12,9 @@ import { FormInputSuccess } from '../../../common/formElements/formInputSuccess/
 import { userSelector } from '../../../../store/reducers/setUserReducer';
 import { useSelector } from 'react-redux';
 import { requestData } from '../../../../services/requestDataFunction';
+import { requestImageProfile } from '../../../../services/requestDataFunction';
+import { store } from '../../../../store/store';
+import { setUserPhoto } from '../../../../store/reducers/setUserReducer';
 
 const UserOption = () => {
   const avatarSyles = {
@@ -23,14 +26,54 @@ const UserOption = () => {
   const url = `${APIUrl}Users/Current/SetProfile`;
   const useYIFProfile = useProfile(url);
   const user = useSelector(userSelector);
-  const [option, setOption] = useState();
-  const [isLoaded, setIsLoaded] = useState(false);
   const [listSchool, setListSchool] = useState([]);
   const [error, setError] = useState({
     hasError: false,
     errorStatusCode: '',
     errorMessage: '',
   });
+
+  const [isLoading, setLoading] = useState(false);
+  const [isSuccessLoad, setSuccessLoad] = useState(false);
+  const [profileImageSrc, setProfileImageSrc] = useState();
+
+  const [pic, setPic] = useState('');
+  const settingPic = (value: string) => {
+    setPic(value);
+  };
+
+  const { photo } = useSelector(userSelector);
+  const defaultPicture = 'assets/images/defaultUnivPicture.svg';
+  const avatar = photo ? photo : defaultPicture;
+
+  const imageHandler = (image: string) => {
+    setLoading(true);
+
+    requestImageProfile(`${APIUrl}Users/Current/ChangePhoto`, 'POST', {
+      photo: image,
+    })
+      .then((res: any) => {
+        const statusCode = res.statusCode.toString();
+        if (statusCode.match(/^[23]\d{2}$/)) {
+          // setError('');
+          setSuccessLoad(true);
+          setLoading(false);
+          setProfileImageSrc(res.data.photo);
+          store.dispatch(
+            setUserPhoto({
+              photo: res.data.photo,
+            })
+          );
+        } else {
+          setError(res.data.message || 'Щось пішло не так, спробуйте знову.');
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        // setError('Щось пішло не так, ви можете спробувати знову.');
+        setLoading(false);
+      });
+  };
 
   useEffect(() => {
     requestData(`${APIUrl}School/GetAllSchoolNamesAsStringsAsync`, 'GET')
@@ -62,7 +105,10 @@ const UserOption = () => {
       <section className={styles.mainStyle}>
         <ImageUploader
           additionalStyles={avatarSyles}
-          defaultPicture='assets/icons/avatar.jpg'
+          avatar={avatar}
+          aspectRatio={1}
+          text='профілю'
+          imageHandler={imageHandler}
         />
         <div className={styles.wrapper}>
           <div className={styles.titleContainer}>

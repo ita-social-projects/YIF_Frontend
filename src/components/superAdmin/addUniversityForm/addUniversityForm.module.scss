@@ -34,6 +34,7 @@
         height: 2.5rem;
         border-radius: 0.3rem;
         border: 1px solid #afbecf;
+        padding: 0 1rem;
       }
 
       .fullWidth {
@@ -60,6 +61,7 @@
         height: 9rem;
         border-radius: 0.3rem;
         border: 1px solid #afbecf;
+        padding: 1rem;
       }
 
       .pictureWrapper {
@@ -73,7 +75,6 @@
           height: 100%;
           border: 1px solid #afbecf;
           border-radius: 0.3rem;
-          padding-top: 1.1rem;
 
           &__img {
             width: 10rem;
@@ -107,6 +108,7 @@
 
       &__subtitle {
         font-size: $font_30px;
+        margin-bottom: 0.5rem;
       }
 
       &__map {
@@ -121,18 +123,6 @@
       &__halfWidth {
         margin-top: 1rem;
         align-self: flex-end;
-      }
-
-      &__submitButton {
-        margin-top: 4.5rem;
-        color: white;
-        width: 20rem;
-        height: 2.5rem;
-        background-color: #12335e;
-        border-radius: 0.3rem;
-        &:hover {
-          cursor: pointer;
-        }
       }
 
       .mailContainer {
@@ -195,6 +185,7 @@
           height: 2.5rem;
           border-radius: 0.3rem;
           border: 1px solid #afbecf;
+          padding: 0 1rem;
         }
       }
     }

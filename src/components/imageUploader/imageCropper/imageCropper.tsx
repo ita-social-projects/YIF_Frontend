@@ -11,6 +11,8 @@ type TProps = {
   setLoadedImage: Function;
   setError: Function;
   setCropper: Function;
+  aspectRatio: number;
+  text: string;
 };
 
 const ImageCropper = (props: TProps) => {
@@ -20,6 +22,7 @@ const ImageCropper = (props: TProps) => {
     isLoading,
     setError,
     setCropper,
+    aspectRatio,
   } = props;
   const [image, setImage] = useState(loadedImage.data?.toString());
   return (
@@ -44,7 +47,7 @@ const ImageCropper = (props: TProps) => {
         ) : (
           <Cropper
             style={{ height: '100%', width: '100%' }}
-            aspectRatio={1}
+            aspectRatio={aspectRatio}
             initialAspectRatio={1}
             preview='.img-preview'
             src={image}
