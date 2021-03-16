@@ -6,4 +6,9 @@
   font-size: $font_18px;
   font-weight: $regular;
   background-color: $lightBlue_3;
+
+  .spinnerContainer {
+    @include flex(row, center, center);
+    width: 100%;
+  }
 }
