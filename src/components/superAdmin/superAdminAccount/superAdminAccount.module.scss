@@ -20,14 +20,25 @@
     max-width: 62.5rem; // 1000px
     text-align: left;
     box-shadow: 0 5px 15px 0 rgba($darkBlue, 0.1);
+
+    mark {
+      color: $white;
+      background-color: $darkBlue2;
+    }
   }
 
   .adminTableHeader {
     color: $white;
     transition: transform 0.35s;
 
-    .filterActive svg {
-      transform: rotate(180deg);
+    .filterActive {
+      color: rgba($white, 0.7);
+      svg:last-of-type {
+        transform: rotate(180deg);
+      }
+      svg path {
+        fill: rgba($white, 0.7);
+      }
     }
 
     .search {
@@ -39,6 +50,23 @@
         display: flex;
         height: 2.3rem; // 40px
         overflow: hidden;
+        position: relative;
+
+        img.clearInput {
+          position: absolute;
+          right: 0.62rem; // 10px
+          bottom: 0.62rem; // 10px
+          @include size(15px);
+          cursor: pointer;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.35s;
+
+          &.active {
+            opacity: 1;
+            visibility: visible;
+          }
+        }
 
         svg {
           @include size(1.96rem); // 31px
@@ -119,6 +147,13 @@
     }
   }
   .adminList {
+    .noUniversityAdmins {
+      text-align: center;
+      padding: 0.62rem; // 10px
+      font-size: $font_18px;
+      color: $darkBlue;
+      background-color: $lightBlue_1;
+    }
     .adminItem ul:nth-of-type(odd) {
       background-color: $lightBlue_1;
     }
@@ -266,5 +301,17 @@
     font-size: 0;
     text-align: right;
     @include size(12.5rem 1.25rem); // 200px 20px
+  }
+  .flashMessageRight,
+  .flashMessageLeft {
+    position: absolute;
+    width: 350px;
+    top: 60px;
+    left: 5px;
+    right: 0;
+  }
+  .flashMessageRight {
+    right: 5px;
+    left: auto;
   }
 }

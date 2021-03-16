@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './superAdminAccount.module.scss';
+import cloneDeep from 'lodash.clonedeep';
+import { requestSecureData } from '../../../services/requestDataFunction';
+import { APIUrl } from '../../../services/endpoints';
+import { useAuth } from '../../../services/tokenValidator';
+import { FormInputSuccess } from '../../common/formElements/formInputSuccess/formInputSuccess';
+import { FormInputError } from '../../common/formElements';
+import TableItem from './tableItem/tableItem';
+import Search from './search/search';
+
+import { ReactComponent as IconLock } from './icons/iconLock.svg';
+import { ReactComponent as IconArrow } from './icons/iconArrow.svg';
 
 const iconIllustrAdmin = 'assets/images/superAdminAccount.svg';
 
-interface IUniversityAdmin {
+export interface IUniversityAdmin {
   id: string;
-  name?: string;
-  email: string;
-  photo?: string;
-  universityAbbreviation: string;
-  universityName: string;
+  user: {
+    id: string;
+    userName: string;
+    email: string;
+    phoneNumber: string;
+    photo?: string;
+  };
+  university: {
+    id: string;
+    name: string;
+    abbreviation: string;
+  };
   isBanned: boolean;
-  isDisabled: boolean;
 }
 
 interface Props {
@@ -19,168 +36,299 @@ interface Props {
 }
 
 const SuperAdminAccount: React.FC<Props> = (props) => {
-  const { universityAdmins } = props;
+  const { token, getToken } = useAuth();
+  const [currentKey, setCurrentKey] = useState('');
+  const [searchValue, setSearchValue] = useState('');
+  const textInput: any = useRef(null);
 
-  const avatar = (
-    <svg
-      width='30'
-      height='30'
-      viewBox='0 0 582 606'
-      fill='none'
-      xmlns='http://www.w3.org/2000/svg'
-    >
-      <path
-        d='M280.82 575.482L248.713 523.508C237.526 505.4 244.146 482.287 263.542 471.843L270.626 468.011C270.162 463.871 269.964 459.668 269.964 455.528C269.964 451.387 270.162 447.247 270.626 443.044L263.542 439.274C254.274 434.269 247.456 425.926 244.675 416.285C241.895 406.582 243.351 396.262 248.713 387.548L280.82 335.574C286.183 326.922 295.12 320.557 305.447 317.961C308.889 317.096 312.398 316.663 315.973 316.663C323.056 316.663 330.073 318.394 336.23 321.731L343.379 325.562C350.661 320.927 358.407 316.849 366.417 313.326V305.416C366.417 304.798 366.814 304.241 366.814 303.623C345.365 288.421 318.488 276.617 283.799 270.375V251.65C331.596 230.329 364.894 185.153 364.894 132.437C364.894 59.328 301.342 0 222.962 0C144.581 0 81.095 59.328 81.095 132.499C81.095 185.276 114.394 230.452 162.19 251.711V270.437C0.595796 299.359 0 445.454 0 529.935C0 595.876 308.955 594.022 305.513 593.156C295.053 590.561 286.183 584.195 280.82 575.482Z'
-        fill='black'
-      />
-      <path
-        d='M555.087 455.528C555.087 444.404 552.969 433.898 549.923 423.639L581.766 406.52L549.592 354.547L518.147 371.48C502.061 356.215 481.605 345.277 458.634 339.715V305.477H394.353V339.715C371.448 345.277 350.926 356.153 334.84 371.48L303.395 354.547L271.221 406.52L303.064 423.639C300.085 433.898 297.9 444.404 297.9 455.528C297.9 466.652 300.018 477.158 303.064 487.417L271.221 504.597L303.395 556.571L334.84 539.638C350.926 554.902 371.448 565.841 394.42 571.403V605.64L458.7 605.578V571.403C481.605 565.903 502.193 554.902 518.28 539.638L549.725 556.571L581.832 504.597L550.056 487.478C553.035 477.22 555.087 466.714 555.087 455.528ZM426.527 528.019C383.629 528.019 348.94 495.636 348.94 455.59C348.94 415.605 383.629 383.16 426.527 383.16C469.424 383.16 504.113 415.605 504.113 455.59C504.113 495.574 469.424 528.019 426.527 528.019Z'
-        fill='black'
-      />
-    </svg>
-  );
+  const defineErrorMessage = (
+    hasError = false,
+    errorStatusCode = '',
+    errorMessage = 'Щось пішло не так, спробуйте знову.'
+  ) => {
+    return {
+      hasError,
+      errorStatusCode,
+      errorMessage,
+    };
+  };
+  const defineSuccessMessage = (
+    hasSuccess = false,
+    successStatusCode = '',
+    successMessage = 'Дані збережені'
+  ) => {
+    return {
+      hasSuccess,
+      successStatusCode,
+      successMessage,
+    };
+  };
 
-  const iconArrow = (
-    <svg
-      width='14'
-      height='8'
-      viewBox='0 0 14 8'
-      fill='none'
-      xmlns='http://www.w3.org/2000/svg'
-    >
-      <path
-        d='M2.538 0.313594L7.1985 4.48024L11.859 0.313594C11.9702 0.214173 12.1022 0.135308 12.2475 0.0815012C12.3928 0.0276946 12.5486 1.04758e-09 12.7058 0C12.8631 -1.04758e-09 13.0188 0.0276946 13.1641 0.0815012C13.3094 0.135308 13.4414 0.214173 13.5526 0.313594C13.6638 0.413016 13.7521 0.531047 13.8122 0.660947C13.8724 0.790848 13.9034 0.930074 13.9034 1.07068C13.9034 1.21128 13.8724 1.35051 13.8122 1.48041C13.7521 1.61031 13.6638 1.72834 13.5526 1.82776L8.03931 6.75686C7.92819 6.85641 7.7962 6.93539 7.65089 6.98928C7.50558 7.04317 7.34981 7.07091 7.1925 7.07091C7.03518 7.07091 6.87941 7.04317 6.7341 6.98928C6.5888 6.93539 6.4568 6.85641 6.34568 6.75686L0.832352 1.82776C0.721 1.72841 0.632657 1.61041 0.572381 1.48049C0.512105 1.35058 0.481079 1.21132 0.481079 1.07068C0.481079 0.930034 0.512105 0.790771 0.572381 0.66086C0.632657 0.53095 0.721 0.412943 0.832352 0.313594C1.3008 -0.0944788 2.06955 -0.105218 2.538 0.313594Z'
-        fill='#ffffff'
-      />
-    </svg>
-  );
+  const [error, setError] = useState(defineErrorMessage());
+  const [success, setSuccess] = useState(defineSuccessMessage());
 
-  const iconRemove = (
-    <svg
-      width='20'
-      height='20'
-      viewBox='0 0 20 20'
-      fill='none'
-      xmlns='http://www.w3.org/2000/svg'
-    >
-      <g>
-        <path d='M0.271973 0.497253L19.3095 19.5348' stroke='#12335E' />
-        <path d='M0.497253 19.5348L19.5348 0.497314' stroke='#12335E' />
-      </g>
-      <defs>
-        <clipPath id='clip0'>
-          <rect width='20' height='20' fill='white' />
-        </clipPath>
-      </defs>
-    </svg>
+  const [universityAdmins, setUniversityAdmins] = useState<IUniversityAdmin[]>(
+    props.universityAdmins
   );
+  const [sortedUniversityAdmins, setSortedUniversityAdmins] = useState<
+    IUniversityAdmin[]
+  >(props.universityAdmins);
 
-  const iconLock = (
-    <svg
-      width='25'
-      height='25'
-      viewBox='0 0 25 25'
-      fill='none'
-      xmlns='http://www.w3.org/2000/svg'
-    >
-      <path
-        d='M3.89506 23.4167H20.8534C21.2789 23.4167 21.6243 23.118 21.6243 22.75V11.3433C21.6243 10.9753 21.2789 10.6767 20.8534 10.6767H20.488C20.488 9.99001 20.488 9.01801 20.488 9.00468C20.4402 5.18801 16.8011 2.08334 12.375 2.08334C7.93577 2.08334 4.29667 5.19734 4.26121 9.03001V10.6767H3.89583C3.47033 10.6767 3.125 10.9753 3.125 11.3433V22.75C3.12423 23.118 3.46879 23.4167 3.89506 23.4167ZM20.0826 22.0833H4.6659V12.01H20.0826V22.0833ZM5.80211 9.03534C5.83063 5.93734 8.77829 3.41668 12.3743 3.41668C15.9594 3.41668 18.9078 5.93001 18.9456 9.01601C18.9456 9.05934 18.9456 10.004 18.9456 10.6767H5.80133L5.80211 9.03534Z'
-        fill='#ffffff'
-      />
-      <path
-        d='M10.6912 19.8467C10.6912 20.2146 11.0365 20.5133 11.462 20.5133H13.2827C13.7082 20.5133 14.0536 20.2146 14.0536 19.8467V17.6926C14.6818 17.2573 15.0564 16.6 15.0564 15.896C15.0564 14.6187 13.8524 13.5793 12.3724 13.5793C10.8924 13.5793 9.68832 14.6187 9.68832 15.896C9.68832 16.6 10.0629 17.2573 10.6912 17.6926V19.8467ZM12.3731 14.9133C13.0029 14.9133 13.5155 15.3547 13.5155 15.8967C13.5155 16.2506 13.2858 16.5793 12.915 16.7533C12.6668 16.87 12.5126 17.0946 12.5126 17.3387V19.18H12.2337V17.3387C12.2337 17.0946 12.0795 16.8693 11.8313 16.7533C11.4613 16.5793 11.2307 16.2506 11.2307 15.8967C11.23 15.354 11.7426 14.9133 12.3731 14.9133Z'
-        fill='#ffffff'
-      />
-    </svg>
-  );
+  const setNewUniversityAdminsState = (
+    state: IUniversityAdmin[],
+    id: string,
+    action: string
+  ): IUniversityAdmin[] => {
+    if (action === 'setNewBanStatus') {
+      return cloneDeep(state).map((admin) => {
+        if (admin.id === id) {
+          admin.isBanned = !admin.isBanned;
+          return admin;
+        }
+        return admin;
+      });
+    } else if (action === 'removeAdmin') {
+      return cloneDeep(state).filter((admin) => admin.id !== id);
+    }
+    return state;
+  };
 
-  const iconSearch = (
-    <svg
-      width='32'
-      height='32'
-      viewBox='0 0 40 40'
-      fill='none'
-      xmlns='http://www.w3.org/2000/svg'
-    >
-      <g>
-        <path
-          d='M27.6997 4.74556C21.3713 -1.58263 11.0743 -1.58251 4.746 4.74556C-1.58233 11.0739 -1.58233 21.3708 4.746 27.699C10.1147 33.0677 18.0994 33.8808 24.3346 30.1405C24.3346 30.1405 24.7853 29.8718 25.1479 30.2346C27.2179 32.3047 33.4287 38.5154 33.4287 38.5154C35.0768 40.1636 37.3814 40.556 38.8433 39.0944L39.0947 38.8427C40.5566 37.3811 40.1643 35.0763 38.5161 33.4283C38.5161 33.4283 32.3185 27.2307 30.2527 25.1649C29.8725 24.7846 30.1411 24.334 30.1411 24.334C33.8814 18.099 33.0684 10.1143 27.6997 4.74556ZM24.7031 24.7025C20.0271 29.3785 12.4188 29.3784 7.74285 24.7024C3.06699 20.0264 3.06686 12.4181 7.74285 7.74228C12.4187 3.0663 20.0271 3.0663 24.7031 7.74228C29.3788 12.4183 29.3788 20.0264 24.7031 24.7025Z'
-          fill='white'
-          fillOpacity='1'
-        ></path>
-        <path
-          d='M15.2598 23.6674C15.2598 23.885 15.217 24.1063 15.127 24.3195C14.7664 25.1714 13.7835 25.57 12.9315 25.2094C7.5763 22.9433 5.06319 16.7431 7.32928 11.388C7.68982 10.5361 8.67275 10.1376 9.52476 10.4981C10.3768 10.8588 10.7751 11.8415 10.4146 12.6937C8.86861 16.3474 10.5833 20.578 14.237 22.1239C14.876 22.3944 15.2598 23.0147 15.2598 23.6674Z'
-          fill='white'
-          fillOpacity='1'
-        ></path>
-      </g>
-      <defs>
-        <clipPath id='clip0'>
-          <rect
-            width='40'
-            height='40'
-            fill='white'
-            transform='translate(0 40) rotate(-90)'
-          ></rect>
-        </clipPath>
-      </defs>
-    </svg>
-  );
+  // request to server
+  const setBanStatus = (id: string) => {
+    const endpoint = `${APIUrl}SuperAdmin/DisableUniversityAdmin/${id}`;
+    getToken();
+    requestSecureData(endpoint, 'POST', token!, {
+      id,
+    })
+      .then((res: any) => {
+        const statusCode = res.statusCode.toString();
+        if (statusCode.match(/^[23]\d{2}$/)) {
+          setSortedUniversityAdmins(
+            setNewUniversityAdminsState(
+              sortedUniversityAdmins,
+              id,
+              'setNewBanStatus'
+            )
+          );
+          // sorted state
+          setUniversityAdmins(
+            setNewUniversityAdminsState(universityAdmins, id, 'setNewBanStatus')
+          ); // main state
 
-  const UniversityAdminItem = universityAdmins.map(
-    (admin: IUniversityAdmin) => (
-      <ul key={admin.id}>
-        <li className={styles.adminLogo}>
-          {admin.photo ? <img src={admin.photo} alt='admin avatar' /> : avatar}
-        </li>
-        <li className={styles.adminName}>
-          {admin.name ? admin.name : 'NoName'}
-        </li>
-        <li className={styles.adminEmail}>{admin.email}</li>
-        <li className={styles.adminUniversity}>
-          <span className={styles.abbreviationUniversity}>
-            {admin.universityAbbreviation}
-          </span>
-          <div className={styles.fullNameUniversity}>
-            {admin.universityName}
-          </div>
-        </li>
-        <li
-          className={`${styles.adminBan} ${
-            admin.isBanned ? styles.banned : ''
-          }`}
-        >
-          {iconLock}
-        </li>
-        <li className={styles.adminRemove}>{iconRemove}</li>
-      </ul>
-    )
-  );
+          setSuccess(
+            defineSuccessMessage(true, res.statusCode, res.data.message)
+          );
+          setTimeout(() => {
+            setSuccess(defineSuccessMessage());
+          }, 3000);
+        } else {
+          setError(defineErrorMessage(true, res.statusCode, res.data.message));
+          setTimeout(() => {
+            setError(defineErrorMessage());
+          }, 3000);
+        }
+      })
+      .catch((error) => {
+        setError(
+          defineErrorMessage(
+            true,
+            error.statusCode,
+            'Щось пішло не так, спробуйте знову.'
+          )
+        );
+        setTimeout(() => {
+          setError(defineErrorMessage());
+        }, 3000);
+      });
+  };
+
+  const removeAdminUniversiti = (id: string) => {
+    const endpoint = `${APIUrl}SuperAdmin/DeleteUniversityAdmin/${id}`;
+    getToken();
+    requestSecureData(endpoint, 'DELETE', token!)
+      .then((res: any) => {
+        const statusCode = res.statusCode.toString();
+        if (statusCode.match(/^[23]\d{2}$/)) {
+          setSortedUniversityAdmins(
+            setNewUniversityAdminsState(
+              sortedUniversityAdmins,
+              id,
+              'removeAdmin'
+            )
+          ); // sorted state
+          setUniversityAdmins(
+            setNewUniversityAdminsState(universityAdmins, id, 'removeAdmin')
+          ); // main state
+
+          setSuccess(
+            defineSuccessMessage(true, res.statusCode, res.data.message)
+          );
+          setTimeout(() => {
+            setSuccess(defineSuccessMessage());
+          }, 3000);
+        } else {
+          setError(defineErrorMessage(true, res.statusCode, res.data.message));
+          setTimeout(() => {
+            setError(defineErrorMessage());
+          }, 3000);
+        }
+      })
+      .catch((error) => {
+        setError(
+          defineErrorMessage(
+            true,
+            error.statusCode,
+            'Щось пішло не так, спробуйте знову.'
+          )
+        );
+        setTimeout(() => {
+          setError(defineErrorMessage());
+        }, 3000);
+      });
+  };
+
+  const clearInput = () => {
+    setSortedUniversityAdmins(universityAdmins);
+    textInput.current.value = '';
+    setSearchValue('');
+    setCurrentKey('');
+  };
+
+  const handlerSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setSearchValue(value);
+
+    let sorted = cloneDeep(universityAdmins).filter((admin): any => {
+      if (value === '') {
+        return admin;
+      } else if (
+        admin.university.abbreviation
+          .toLocaleLowerCase()
+          .includes(value.toLocaleLowerCase()) ||
+        admin.user.email.toLocaleLowerCase().includes(value.toLocaleLowerCase())
+      ) {
+        return admin;
+      }
+      return null;
+    });
+    setSortedUniversityAdmins(sorted);
+  };
+
+  const handleSort = (key: string) => {
+    if (key === currentKey) {
+      setSortedUniversityAdmins(cloneDeep(universityAdmins));
+      setCurrentKey('');
+      return;
+    }
+    const sortedArr = cloneDeep(sortedUniversityAdmins).sort(
+      (a: any, b: any) => {
+        let prevV = !a[key];
+        let nextV = !b[key];
+
+        if (key === 'abbreviation') {
+          prevV = a.university[key] ? a.university[key].toUpperCase() : '';
+          nextV = b.university[key] ? b.university[key].toUpperCase() : '';
+        } else if (key !== 'isBanned') {
+          prevV = a.user[key] ? a.user[key].toUpperCase() : ''; // ignore upper and lowercase
+          nextV = b.user[key] ? b.user[key].toUpperCase() : ''; // ignore upper and lowercase
+        }
+
+        if (prevV < nextV) {
+          return -1;
+        }
+        if (prevV > nextV) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      }
+    );
+
+    setCurrentKey(key);
+    setSortedUniversityAdmins(sortedArr);
+  };
 
   return (
     <div className={styles.superAdminAccount}>
       <h1>Адміністратори університетів</h1>
+      {error.hasError && (
+        <div className={styles.flashMessageRight}>
+          {' '}
+          <FormInputError errorType='form' errorMessage={error.errorMessage} />
+        </div>
+      )}
+      {success.hasSuccess && (
+        <div className={styles.flashMessageLeft}>
+          {' '}
+          <FormInputSuccess successMessage={success.successMessage} />
+        </div>
+      )}
       <div className={styles.adminTableContainer}>
         <div className={styles.adminTableHeader}>
-          <div className={styles.search}>
-            <label>
-              {iconSearch}
-              <input type='text' placeholder='Пошук' />
-            </label>
-          </div>
+          <Search
+            searchValue={searchValue}
+            handlerSearch={handlerSearch}
+            clearInput={clearInput}
+            textInput={textInput}
+          />
           <ul className={styles.adminTableTitle}>
-            <li className={styles.name}>Ім'я {iconArrow}</li>
-            <li className={styles.email}>Електронна адреса {iconArrow}</li>
-            <li className={`${styles.universiti} ${styles.filterActive}`}>
-              Університет {iconArrow}
+            <li
+              data-testid='sortByUserName'
+              className={`${styles.name} ${
+                currentKey === 'userName' && styles.filterActive
+              }`}
+              onClick={() => handleSort('userName')}
+            >
+              Ім'я <IconArrow />
             </li>
-            <li className={styles.ban}>
-              {iconLock} {iconArrow}
+            <li
+              data-testid='sortByUserEmail'
+              className={`${styles.email} ${
+                currentKey === 'email' && styles.filterActive
+              }`}
+              onClick={() => handleSort('email')}
+            >
+              Електронна адреса <IconArrow />
+            </li>
+            <li
+              data-testid='sortByAbbreviation'
+              className={`${styles.universiti} ${
+                currentKey === 'abbreviation' && styles.filterActive
+              }`}
+              onClick={() => handleSort('abbreviation')}
+            >
+              Університет <IconArrow />
+            </li>
+            <li
+              data-testid='sortByBanned'
+              className={`${styles.ban} ${
+                currentKey === 'isBanned' && styles.filterActive
+              }`}
+              onClick={() => handleSort('isBanned')}
+            >
+              <IconLock /> <IconArrow />
             </li>
           </ul>
         </div>
         <ul className={styles.adminList}>
-          <li className={styles.adminItem}>{UniversityAdminItem}</li>
+          <li className={styles.adminItem}>
+            {sortedUniversityAdmins.length ? (
+              sortedUniversityAdmins.map((admin: IUniversityAdmin) => (
+                <TableItem
+                  admin={admin}
+                  searchValue={searchValue}
+                  key={admin.id}
+                  setBanStatus={setBanStatus}
+                  removeAdminUniversiti={removeAdminUniversiti}
+                />
+              ))
+            ) : (
+              <div className={styles.noUniversityAdmins}>
+                {' '}
+                Не знайдено жодного адміністратора
+              </div>
+            )}
+          </li>
         </ul>
       </div>
       <div className={styles.imgContainer}>

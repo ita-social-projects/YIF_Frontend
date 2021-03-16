@@ -70,7 +70,7 @@ const LoginForm = () => {
                   errors.email === undefined &&
                   errors.password === undefined
                 ) {
-                  useYIFLogin.handleSubmit(e, '/cabinet');
+                  useYIFLogin.handleSubmit(e);
                 }
               }}
             >
