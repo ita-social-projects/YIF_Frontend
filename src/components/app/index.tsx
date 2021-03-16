@@ -25,13 +25,13 @@ const App = () => {
           <Route exact path='/'>
             <Home />
           </Route>
-          <RedirectRoute user={token} pathname='cabinet' path='/login'>
+          <RedirectRoute user={token} pathname='/' path='/login'>
             <LoginPage />
           </RedirectRoute>
-          <RedirectRoute user={token} pathname='cabinet' path='/resetPassword'>
+          <RedirectRoute user={token} pathname='/' path='/resetPassword'>
             <ResetPasswordPage />
           </RedirectRoute>
-          <RedirectRoute user={token} pathname='cabinet' path='/register'>
+          <RedirectRoute user={token} pathname='/' path='/register'>
             <RegistrationForm />
           </RedirectRoute>
           <Route path='/directions'>
@@ -43,13 +43,17 @@ const App = () => {
           <Route path='/university/:id'>
             <UniversityPage />
           </Route>
-          <Route path='/superAdminAccount'>
+          <ProtectedRoute
+            user={token}
+            path='/superAdminAccount'
+            allowed={['SuperAdmin']}
+          >
             <SuperAdminAccountPage />
-          </Route>
+          </ProtectedRoute>
           <Route path='/specialty/:id'>
             <ErrorPage />
           </Route>
-          <ProtectedRoute user={token} pathname='login' path='/cabinet'>
+          <ProtectedRoute user={token} path='/cabinet' allowed={['Graduate']}>
             <GraduateCabinet />
           </ProtectedRoute>
           <Route path='/404' component={ErrorPage} status={404} />

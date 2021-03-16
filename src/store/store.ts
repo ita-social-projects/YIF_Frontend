@@ -1,6 +1,7 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import dropboxReducer from '../store/reducers/dropboxReducer';
 import errorBoundryStatusReducer from './reducers/errorBoundryStatus.reducer';
+import setRoleReducer from './reducers/setRoleReducer';
 import setUserReducer from './reducers/setUserReducer';
 
 export const store = configureStore({
@@ -8,6 +9,7 @@ export const store = configureStore({
     dropbox: dropboxReducer,
     errorBoundryStatus: errorBoundryStatusReducer,
     user: setUserReducer,
+    currentRole: setRoleReducer,
   },
 });
 

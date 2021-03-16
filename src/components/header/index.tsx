@@ -6,6 +6,8 @@ import { removeUserReducer } from '../../store/reducers/setUserReducer';
 import { useAuth } from '../../services/tokenValidator';
 import { useSelector } from 'react-redux';
 import { userSelector } from '../../store/reducers/setUserReducer';
+import useRole from '../../services/useRole';
+const { pathToRedirect } = useRole();
 
 const Header: React.FC = () => {
   const { token, removeToken } = useAuth();
@@ -90,7 +92,7 @@ const Header: React.FC = () => {
         </span>
       </div>
       <div className={styles.dropdownContent}>
-        <Link id='loginButtonHeaderUnauth' to='/cabinet'>
+        <Link id='loginButtonHeaderUnauth' to={pathToRedirect()}>
           Особистий&nbsp;кабінет
         </Link>
         <button id='logoutButtonHeaderUnauth' onClick={logout}>
