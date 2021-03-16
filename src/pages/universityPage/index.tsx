@@ -51,6 +51,7 @@ const UniversityPage = () => {
     email,
     endOfCampaign,
     isFavorite,
+    imagePath,
     lat,
     lon,
     name,
@@ -97,7 +98,17 @@ const UniversityPage = () => {
                 >
                   {starSVG}
                 </div>
-                <h2 className={styles.universityPage__subtitle}>{name}</h2>
+                <div className={styles.universityPage__header}>
+                  <h2 className={styles.universityPage__subtitle}>{name}</h2>
+                  <img
+                    src={
+                      imagePath || '../assets/images/defaultUniversityImage.jpg'
+                    }
+                    alt="University Building"
+                    className={styles.universityPage__img}
+                  />
+                </div>
+
                 <div>
                   <div className={styles.universityPage__main_info}>
                     <ul>
