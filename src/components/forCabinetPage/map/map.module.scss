@@ -11,10 +11,12 @@ body,
   margin: 0;
   outline: none;
   border: none;
+  background: #f2f9ff;
 }
 
 .mapContainer {
   width: 100%;
+  margin: 0 auto;
   height: 23.75rem;
   font-size: $font_30px;
   display: flex;
@@ -39,4 +41,9 @@ body,
   &:hover {
     text-decoration: underline;
   }
+}
+
+.spinnerContainer {
+  margin-top: 100px;
+  @include flex(row, center, center);
 }

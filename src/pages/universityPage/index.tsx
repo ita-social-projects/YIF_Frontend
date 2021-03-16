@@ -1,50 +1,63 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import styles from "./universityPage.module.scss";
-import { Header, Footer } from "../../components";
-import ErrorBoundry from "../../errorBoundry";
-import AccordionItem from "../../components/accordion";
-import CampaingCard from "../../components/campaignCard";
-import Spinner from "../../components/common/spinner";
-import { requestData } from "../../services/requestDataFunction";
-import { APIUrl } from "../../services/endpoints";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import styles from './universityPage.module.scss';
+import { Header, Footer, UniversityMap } from '../../components';
+import ErrorBoundry from '../../errorBoundry';
+import AccordionItem from '../../components/accordion';
+import CampaingCard from '../../components/campaignCard';
+import Spinner from '../../components/common/spinner';
+import { requestData } from '../../services/requestDataFunction';
+import { APIUrl } from '../../services/endpoints';
 
 interface ParamTypes {
   id: string;
 }
 
 const UniversityPage = () => {
-  const [isFetching, setFetching] = useState(false);
+  const [isFetching, setFetching] = useState(true);
   const [universityInfo, setUniversityInfo] = useState({});
   const [directions, setDirections] = useState([]);
-  const [specialties, setSpecialties] = useState([]);
+  // const [specialties, setSpecialties] = useState([]);
   const { id } = useParams<ParamTypes>();
 
   useEffect(() => {
     setFetching(true);
 
-      //Fetch university
-      const endpoint = `${APIUrl}University/${id}`;
-      requestData(endpoint, "GET").then((res: any) => {
-        setUniversityInfo(res.data);
-      });
+    //Fetch university
+    const endpoint = `${APIUrl}University/${id}`;
+    requestData(endpoint, 'GET').then((res: any) => {
+      setUniversityInfo(res.data);
+    });
 
-      //Fetch directions
-      const endpointForDirections = `${APIUrl}Direction`;
-      requestData(endpointForDirections, "GET").then((res: any) => {
-        setDirections(res.data.responseList);
-      });
+    //Fetch directions
+    const endpointForDirections = `${APIUrl}Direction/All`;
+    requestData(endpointForDirections, 'GET').then((res: any) => {
+      setDirections(res.data);
+    });
 
-      //Fetch specialties
-      const endpointForSpecialties = `${APIUrl}Specialty/All`;
-      requestData(endpointForSpecialties, "GET").then((res: any) => {
-        setSpecialties(res.data);
-      });
+    //Fetch specialties
+    // const endpointForSpecialties = `${APIUrl}Specialty/All`;
+    // requestData(endpointForSpecialties, "GET").then((res: any) => {
+    //   setSpecialties(res.data);
+    // });
 
     setFetching(false);
   }, [id]);
 
-  const { abbreviation, address, description, email, endOfCampaign, isFavorite, name, phone, site, startOfCampaign}: any = universityInfo;
+  const {
+    abbreviation,
+    address,
+    description,
+    email,
+    endOfCampaign,
+    isFavorite,
+    lat,
+    lon,
+    name,
+    phone,
+    site,
+    startOfCampaign,
+  }: any = universityInfo;
 
   const starSVG = (
     <svg
@@ -65,6 +78,7 @@ const UniversityPage = () => {
     <>
       <ErrorBoundry>
         <Header />
+
         <section className={styles.universityPage}>
           {isFetching ? (
             <div className={styles.spinnerContainer}>
@@ -88,7 +102,7 @@ const UniversityPage = () => {
                   <div className={styles.universityPage__main_info}>
                     <ul>
                       <li>
-                        <b>Сайт:</b>{" "}
+                        <b>Сайт:</b>{' '}
                         <a href={site} target="_blank">
                           {site}
                         </a>
@@ -100,13 +114,13 @@ const UniversityPage = () => {
                         <b>Приймальна комісія:</b>
                       </li>
                       <li>
-                        <b>Телефон:</b>{" "}
+                        <b>Телефон:</b>{' '}
                         <a href={`tel:${phone}`} target="_blank">
                           {phone}
                         </a>
                       </li>
                       <li>
-                        <b>Ел. пошта:</b>{" "}
+                        <b>Ел. пошта:</b>{' '}
                         <a href={`mailto:${email}`} target="_blank">
                           {email}
                         </a>
@@ -124,7 +138,7 @@ const UniversityPage = () => {
                   {directions.map((item, key) => (
                     <AccordionItem
                       key={key}
-                      specialties={specialties}
+                      // specialties={item.specialties}
                       {...item}
                     />
                   ))}
@@ -133,6 +147,26 @@ const UniversityPage = () => {
             </>
           )}
         </section>
+        {isFetching ? (
+          <div className={styles.spinnerContainer}>
+            <Spinner />
+          </div>
+        ) : (
+          <div className={styles.universityMap}>
+            <UniversityMap
+              data={[
+                {
+                  id,
+                  name,
+                  site,
+                  lat,
+                  lon,
+                },
+              ]}
+            />
+          </div>
+        )}
+
         <Footer />
       </ErrorBoundry>
     </>

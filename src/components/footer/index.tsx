@@ -23,16 +23,16 @@ const Footer: React.FC = () => {
                 </Link>
               </>
             )}
-            <p>Рівне, вул. Словацького, 55</p>
+            <p>Рівне, вул. Словацького, 4-6</p>
             <p>
               <Link to='mailto:#' className={styles.underlineAnimation}>
-                exampleYourITFuture@example.com
+                support@youritfuture.com
               </Link>
             </p>
           </article>
           <article>
             <Link to='/' className={styles.logo} data-testid='logo'>
-              YIF
+              <img src='/logo.svg' alt='YITF Logo' />
             </Link>
           </article>
           <article>

@@ -66,6 +66,10 @@
         color: $black;
         font-size: $font_40px;
         font-weight: $extraBold;
+
+        img {
+          max-width: 5rem;
+        }
       }
     }
 

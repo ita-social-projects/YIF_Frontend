@@ -5,6 +5,7 @@ import Tooltips from '../common/tooltip';
 import { useAuth } from '../../services/tokenValidator';
 import { requestSecureData } from '../../services/requestDataFunction';
 import { APIUrl } from '../../services/endpoints';
+import CampaingCard from '../../components/campaignCard';
 
 interface Props {
   liked?: boolean;
@@ -164,23 +165,7 @@ const UniversityCard: React.FC<Props> = (props) => {
           </Link>
         </div>
 
-        <div className={styles.card__intro}>
-          <h3 className={styles.card__intro__title}>Вступна кампанія</h3>
-          <div className={styles.card__intro__data}>
-            <div className={styles.card__intro__data__block}>
-              <p className={styles.card__intro__data__numbers}>
-                {startOfCampaign}
-              </p>
-            </div>
-            <div
-              className={`${styles.card__intro__data__block} ${styles.card__intro__data__block__red}`}
-            >
-              <p className={styles.card__intro__data__numbers}>
-                {endOfCampaign}
-              </p>
-            </div>
-          </div>
-        </div>
+        <CampaingCard start={startOfCampaign} end={endOfCampaign} />
       </div>
       <div className={styles.card__img}>
         <img src='assets/images/universityCard.svg' alt='UniversityCard' />
