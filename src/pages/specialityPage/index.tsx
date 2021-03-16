@@ -29,6 +29,8 @@ const SpecialityPage = () => {
       universityId: '',
       specialtyCode: '',
       specialtyName: '',
+      description: '',
+      educationalProgramLink: '',
       examRequirements: [],
       educationFormToDescriptions: [],
       paymentFormToDescriptions: [],
@@ -58,6 +60,8 @@ const SpecialityPage = () => {
         examRequirements={item.examRequirements}
         educationFormToDescriptions={item.educationFormToDescriptions}
         paymentFormToDescriptions={item.paymentFormToDescriptions}
+        educationalProgramLink={item.educationalProgramLink}
+        description={item.description}
         universityId={item.universityId}
       />
     );
