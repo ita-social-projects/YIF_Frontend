@@ -8,6 +8,11 @@ import React, {
 } from 'react';
 import jwt_decode from 'jwt-decode';
 import { APIUrl } from './endpoints';
+import {
+  setRoleReducer,
+  removeRoleReducer,
+} from '../store/reducers/setRoleReducer';
+import { store } from '../store/store';
 
 type Decoded = {
   email: string;
@@ -49,6 +54,7 @@ function AuthProvider({ children }: any) {
     setRefreshToken(null);
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken');
+    store.dispatch(removeRoleReducer());
   }, []);
 
   const isTokenExpired = useCallback(
@@ -58,6 +64,7 @@ function AuthProvider({ children }: any) {
       }
       try {
         const decoded: Decoded = jwt_decode(token);
+        store.dispatch(setRoleReducer(decoded.roles[1]));
         return decoded.exp <= new Date().getTime() / 1000 ? true : false;
       } catch (error) {
         removeToken();

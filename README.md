@@ -83,6 +83,12 @@ The instructions below will allow you to run application locally in the containe
 ![@team](https://avatars1.githubusercontent.com/u/60184096?s=200&u=354406f2bcd0522f17e5c94d2b7c6d34596f0ec9&v=4)
 ![@team](https://avatars0.githubusercontent.com/u/58741436?s=200&u=ffc14f01ed18eab531f52e6b06865ee410b57965&v=4)
 ![@team](https://avatars2.githubusercontent.com/u/60231618?s=200&u=5a15300a5626ca41ca26910dc1660a74d3dc4847&v=4)
+![@team](https://avatars.githubusercontent.com/u/62015447?s=200&u=9fe9b41f285d57ee1925b1ff266f2f02046bbb26&v=4)
+![@team](https://avatars.githubusercontent.com/u/30364013?s=200&u=b3a5ded0cdac28bbc515c5cc365345ee5235fdc5&v=4)
+![@team](https://avatars.githubusercontent.com/u/78432338?s=200&u=71dc67ff658babe90269e13a2e0fdd0a5ccdb43a&v=4)
+![@team](https://avatars.githubusercontent.com/u/43788876?s=200&u=fa99cc6199ff97d5a09d777af8e03524b742f836&v=4)
+![@team](https://avatars.githubusercontent.com/u/25075314?s=200&u=3342f20428dabeb39db6f86854844b8a9efa36c9&v=4)
+![@team](https://avatars.githubusercontent.com/u/58710581?s=200&u=6ced364dc8dfb6e9750ee49c41a3c61e632d85dd&v=4)
 
 - You can just grab their GitHub profile image URL
 - You should probably resize their picture using `?s=200` at the end of the image URL.

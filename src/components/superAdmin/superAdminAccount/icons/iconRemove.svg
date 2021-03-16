@@ -1,0 +1,17 @@
+ <svg
+      width='20'
+      height='20'
+      viewBox='0 0 20 20'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+    >
+      <g>
+        <path d='M0.271973 0.497253L19.3095 19.5348' stroke='#12335E' />
+        <path d='M0.497253 19.5348L19.5348 0.497314' stroke='#12335E' />
+      </g>
+      <defs>
+        <clipPath id='clip0'>
+          <rect width='20' height='20' fill='white' />
+        </clipPath>
+      </defs>
+    </svg>
