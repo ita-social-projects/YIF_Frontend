@@ -18,18 +18,18 @@ const RegistrationForm: React.FC = () => {
   const useYIFRegistration = useRegistration(APIUrl);
 
   return (
-    <section role='section' className={classes.wrapper}>
-      <div role='wrapper' className={classes.form}>
+    <section role="section" className={classes.wrapper}>
+      <div role="wrapper" className={classes.form}>
         <div className={classes.wrapperImg}>
-          <img src='/assets/images/imgRegistration.svg' alt='win' />
+          <img src="/assets/images/imgRegistration.svg" alt="win" />
         </div>
         <FormCloseButton />
-        <FormTitle title='Реєстрація' />
+        <FormTitle title="Реєстрація" />
         {useYIFRegistration.submitted.submitted &&
           !useYIFRegistration.error.hasError && <Spinner />}
         {useYIFRegistration.error.hasError && (
           <FormInputError
-            errorType='form'
+            errorType="form"
             errorMessage={useYIFRegistration.error.errorMessage}
             redirectLink={useYIFRegistration.error.redirectLink}
           />
@@ -73,12 +73,12 @@ const RegistrationForm: React.FC = () => {
             >
               <div>
                 <Field
-                  id='registerInputEmail'
+                  id="registerInputEmail"
                   component={FormInput}
                   placeholder={'Електронна пошта'}
-                  iconName='email'
-                  type='email'
-                  name='email'
+                  iconName="email"
+                  type="email"
+                  name="email"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     handleChange(e);
                     useYIFRegistration.handleChangeEmail(e);
@@ -89,12 +89,13 @@ const RegistrationForm: React.FC = () => {
               </div>
               <div>
                 <Field
-                  id='registerInputPassword'
+                  id="registerInputPassword"
                   component={FormInput}
                   placeholder={'Пароль'}
-                  iconName='lock'
-                  type='password'
-                  name='password'
+                  iconName="lock"
+                  showIconPassword={true}
+                  type="password"
+                  name="password"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     handleChange(e);
                     useYIFRegistration.handleChangePassword(e);
@@ -106,12 +107,13 @@ const RegistrationForm: React.FC = () => {
               <div>
                 {}
                 <Field
-                  id='registerInputResetPassword'
+                  id="registerInputResetPassword"
                   component={FormInput}
                   placeholder={'Підтвердіть пароль'}
-                  iconName='lock'
-                  type='password'
-                  name='confirmPassword'
+                  iconName="lock"
+                  showIconPassword={true}
+                  type="password"
+                  name="confirmPassword"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     handleChange(e);
                     useYIFRegistration.handleChangeConfirmPassword(e);
@@ -121,12 +123,12 @@ const RegistrationForm: React.FC = () => {
                 />
               </div>
               <FormButton
-                id='registerFormButton'
-                data-testid='button'
-                form='register'
-                title='Реєстрація'
+                id="registerFormButton"
+                data-testid="button"
+                form="register"
+                title="Реєстрація"
               />
-              <FormTextField text='Вже зареєстровані?' url={'/login'} />
+              <FormTextField text="Вже зареєстровані?" url={'/login'} />
             </Form>
           )}
         </Formik>
