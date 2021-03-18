@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Spinner from '../common/spinner';
 import { Field, Formik, Form } from 'formik';
 import styles from './newPassword.module.scss';
-import useRecoverPassword from './../../services/usePasswordRecover';
+import parseURL from '../../services/parseURL';
+import { APIUrl } from '../../services/endpoints';
+
+import { useCaptcha } from '../../services/useCaptcha';
+
+import { requestData } from '../../services/requestDataFunction';
+import { useHistory } from 'react-router-dom';
+import passwordValidationSchema from './recoverPasswordValidation';
 import { FormInputSuccess } from '../common/formElements/formInputSuccess/formInputSuccess';
 import {
   FormCloseButton,
@@ -11,20 +18,60 @@ import {
   FormInput,
   FormInputError,
 } from '../common/formElements/index';
-import { type } from 'os';
 
-function NewPasswordForm() {
-  const {
-    status,
-    error,
-    submiting,
-    handleFormSubmit,
-    passwordValidationSchema,
-  } = useRecoverPassword();
+type FormikValues = {
+  newPassword: string;
+  confirmNewPassword: string;
+};
+const NewPasswordForm: React.FC = () => {
+  const [submiting, setSubmiting] = useState(false);
+  const [status, setStatus] = useState(false);
+  const [error, setError] = useState(false);
+  const redirect = useHistory();
+  const captcha = useCaptcha(APIUrl);
+  function success() {
+    setStatus(true);
+    setTimeout(() => {
+      redirect.push('/login');
+    }, 3000);
+  }
+  function fail() {
+    setError(true);
+    setTimeout(() => {
+      setError(false);
+    }, 2000);
+  }
+  const handleFormSubmit = async (values: FormikValues) => {
+    const recaptchaToken = await captcha.getCaptchaToken();
+    const { newPassword, confirmNewPassword } = values;
+    const { userId, token } = parseURL(window.location.search);
+    setSubmiting(true);
+    requestData(`${APIUrl}Users/Restore`, 'PUT', {
+      userId,
+      token,
+      newPassword,
+      confirmNewPassword,
+      recaptchaToken,
+    })
+      .then((res) =>
+        res.statusCode.toString().match(/^[23]\d{2}$/) ? success() : fail()
+      )
+      .catch((e) => {
+        fail();
+        console.log(e);
+      });
+  };
+
   return (
     <section className={styles.newPasswordContainer}>
       <div className={styles.newPasswordFormWrapper}>
         <FormCloseButton styles={{ top: '15px', right: '15px' }} />
+
+        {submiting && !status && !error && (
+          <div>
+            <Spinner />
+          </div>
+        )}
         {status && !error && (
           <div className={styles.elementShowHide}>
             <FormInputSuccess successMessage='Ваш пароль змінено! Ви можете увійти за допомогою нового паролю!' />
@@ -36,51 +83,50 @@ function NewPasswordForm() {
             errorMessage={'Щось пішло не так, спробуйте знову!'}
           />
         )}
-        {submiting && (
-          <div>
-            <Spinner />
-          </div>
-        )}
+
         {!submiting && !status && !error && (
           <Formik
-            initialValues={{ password: '', confirmPassword: '' }}
+            initialValues={{ newPassword: '', confirmNewPassword: '' }}
             validationSchema={passwordValidationSchema}
             onSubmit={handleFormSubmit}
           >
             {() => (
-              <Form>
-                <FormTitle title='Введіть ваш новий пароль!' />
-                <div>
-                  <Field
-                    component={FormInput}
-                    placeholder={'Пароль'}
-                    iconName='lock'
-                    type='password'
-                    name='password'
-                  />
-                </div>
-                <div>
-                  <Field
-                    component={FormInput}
-                    placeholder={'Підтвердіть пароль'}
-                    iconName='lock'
-                    type='password'
-                    name='confirmPassword'
-                  />
-                </div>
-                <FormButton
-                  id='registerFormButton'
-                  data-testid='button'
-                  form='register'
-                  title='Зберегти'
-                />
-              </Form>
+              <>
+                {
+                  <Form>
+                    <FormTitle title='Введіть ваш новий пароль!' />
+                    <div>
+                      <Field
+                        component={FormInput}
+                        placeholder={'Пароль'}
+                        iconName='lock'
+                        type='password'
+                        name='newPassword'
+                      />
+                    </div>
+                    <div>
+                      <Field
+                        component={FormInput}
+                        placeholder={'Підтвердіть пароль'}
+                        iconName='lock'
+                        type='password'
+                        name='confirmNewPassword'
+                      />
+                    </div>
+                    <FormButton
+                      title={'Зберегти'}
+                      id='registerFormButton'
+                      data-testid='button'
+                      form='register'
+                    />
+                  </Form>
+                }
+              </>
             )}
           </Formik>
         )}
       </div>
     </section>
   );
-}
-
+};
 export default NewPasswordForm;
