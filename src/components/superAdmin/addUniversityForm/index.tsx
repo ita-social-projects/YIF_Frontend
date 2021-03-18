@@ -4,6 +4,10 @@ import { FormButton, FormInputError } from '../../common/formElements';
 import styles from './addUniversityForm.module.scss';
 import ImageUploader from '../../imageUploader';
 import UniversityMap from './map';
+import useAddUniversity from '../../../services/useAddUniversity';
+import { APIUrl } from '../../../services/endpoints';
+import { validationField } from '../../../services/validateForm/ValidatorsField';
+import Spinner from '../../common/spinner';
 
 const questionIcon = (
   <svg
@@ -26,24 +30,7 @@ const AddUniversityForm = () => {
     height: '14rem',
     width: '100%',
     borderRadius: '0.3rem',
-  };
-
-  const validateEmail = (value: string) => {
-    let error;
-    if (!value) {
-      error = 'Required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-      error = 'Invalid email address';
-    }
-    return error;
-  };
-
-  const validateUsername = (value: string) => {
-    let error;
-    if (value === 'admin') {
-      error = 'Nice try!';
-    }
-    return error;
+    padding: '1rem',
   };
 
   const [lat, setLat] = useState(0);
@@ -53,49 +40,86 @@ const AddUniversityForm = () => {
   const defaultPicture = 'assets/images/defaultUnivPicture.svg';
   const avatar = picture ? picture : defaultPicture;
 
-  const settingLat = (value: number) => {
-    setLat(value);
-  };
-  const settingLng = (value: number) => {
-    setLng(value);
-  };
-
   const imageHandler = (value: string) => {
     setPicture(value);
   };
 
+  const settingLat = (value: number) => {
+    setLat(value);
+  };
+
+  const settingLng = (value: number) => {
+    setLng(value);
+  };
+
+  const useYIFAddUniversity = useAddUniversity(APIUrl, lat, lng, picture);
+
   return (
     <div className={styles.wrapper}>
+      {useYIFAddUniversity.submitted.submitted &&
+        !useYIFAddUniversity.error.hasError && <Spinner />}
+
       <Formik
         enableReinitialize={true}
         initialValues={{
           universityName: '',
           universityAbbreviation: '',
-          universityAdress: '',
           universitySite: '',
-          universityEmail: '',
+          universityAdress: '',
           universityPhone: '',
+          universityEmail: '',
           universityDescription: '',
+          lat: '',
+          lon: '',
+          picture: '',
           adminEmail: '',
         }}
-        onSubmit={(values) => {
-          console.log('name: ', values.universityName);
-          console.log('abbreviation: ', values.universityAbbreviation);
-          console.log('site: ', values.universitySite);
-          console.log('address: ', values.universityAdress);
-          console.log('phone: ', values.universityPhone);
-          console.log('email: ', values.universityEmail);
-          console.log('description: ', values.universityDescription);
-          console.log('lat: ', lat);
-          console.log('lon: ', lng);
-          console.log('universityAdminEmail: ', values.adminEmail);
-          console.log('pic: ', picture);
+        validationSchema={validationField}
+        onSubmit={(values, actions) => {
+          actions.setSubmitting(false);
+          actions.resetForm({
+            values,
+          });
         }}
       >
-        {({ errors, touched, isValidating }) => (
-          <Form className={styles.form}>
+        {({
+          values,
+          errors,
+          touched,
+          isValidating,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+        }) => (
+          <Form
+            className={styles.form}
+            onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
+              handleSubmit(e);
+              if (
+                errors.universityName === undefined &&
+                errors.universityAbbreviation === undefined &&
+                errors.universityAdress === undefined &&
+                errors.universityPhone === undefined &&
+                errors.universityEmail === undefined &&
+                // errors.universityDescription === undefined &&
+                errors.lat === undefined
+                // errors.location === undefined
+                // errors.photo === undefined &&
+                // errors.adminEmail === undefined
+              ) {
+                useYIFAddUniversity.handleSubmit(e, '/superAdminAccount');
+              }
+            }}
+          >
             <div className={styles.topWrapper}>
               <h1 className={styles.topWrapper__title}>Новий університет</h1>
+              {useYIFAddUniversity.error.hasError && (
+                <FormInputError
+                  errorType='form'
+                  errorMessage={useYIFAddUniversity.error.errorMessage}
+                  redirectLink={useYIFAddUniversity.error.redirectLink}
+                />
+              )}
               <div className={styles.fullWidth}>
                 <label
                   className={styles.topWrapper__label}
@@ -107,8 +131,19 @@ const AddUniversityForm = () => {
                   className={styles.topWrapper__input}
                   id='universityName'
                   name='universityName'
-                  // validate={validateUsername}
+                  value={values.universityName}
+                  onBlur={handleBlur}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChange(e);
+                    useYIFAddUniversity.handleChangeName(e);
+                  }}
                 />
+                {errors.universityName && touched.universityName ? (
+                  <FormInputError
+                    errorType='input'
+                    errorMessage={errors.universityName}
+                  />
+                ) : null}
               </div>
               <div className={styles.halfWidth}>
                 <label
@@ -121,7 +156,20 @@ const AddUniversityForm = () => {
                   className={styles.topWrapper__input}
                   id='universityAbbreviation'
                   name='universityAbbreviation'
+                  value={values.universityAbbreviation}
+                  onBlur={handleBlur}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChange(e);
+                    useYIFAddUniversity.handleChangeAbbreviation(e);
+                  }}
                 />
+                {errors.universityAbbreviation &&
+                touched.universityAbbreviation ? (
+                  <FormInputError
+                    errorType='input'
+                    errorMessage={errors.universityAbbreviation}
+                  />
+                ) : null}
               </div>
               <div className={styles.halfWidth}>
                 <label
@@ -134,7 +182,19 @@ const AddUniversityForm = () => {
                   className={styles.topWrapper__input}
                   id='universityAdress'
                   name='universityAdress'
+                  value={values.universityAdress}
+                  onBlur={handleBlur}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChange(e);
+                    useYIFAddUniversity.handleChangeAdress(e);
+                  }}
                 />
+                {errors.universityAdress && touched.universityAdress ? (
+                  <FormInputError
+                    errorType='input'
+                    errorMessage={errors.universityAdress}
+                  />
+                ) : null}
               </div>
               <div className={styles.halfWidth}>
                 <label
@@ -147,7 +207,19 @@ const AddUniversityForm = () => {
                   className={styles.topWrapper__input}
                   id='universitySite'
                   name='universitySite'
+                  value={values.universitySite}
+                  onBlur={handleBlur}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChange(e);
+                    useYIFAddUniversity.handleChangeSite(e);
+                  }}
                 />
+                {errors.universitySite && touched.universitySite ? (
+                  <FormInputError
+                    errorType='input'
+                    errorMessage={errors.universitySite}
+                  />
+                ) : null}
               </div>
               <div className={styles.halfWidth}>
                 <label
@@ -160,18 +232,23 @@ const AddUniversityForm = () => {
                   className={styles.topWrapper__input}
                   id='universityEmail'
                   name='universityEmail'
-                  // validate={validateEmail}
+                  value={values.universityEmail}
+                  onBlur={handleBlur}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChange(e);
+                    useYIFAddUniversity.handleChangeEmail(e);
+                  }}
                 />
-                {errors.universityEmail && touched.universityEmail && (
-                  <div>{errors.universityEmail}</div>
-                )}
+                {errors.universityEmail && touched.universityEmail ? (
+                  <FormInputError
+                    errorType='input'
+                    errorMessage={errors.universityEmail}
+                  />
+                ) : null}
               </div>
               <div className={styles.topWrapper__column}>
                 <div className={styles.topWrapper__column__fullWidth}>
-                  <label
-                    className={styles.topWrapper__label}
-                    htmlFor='universityPhone'
-                  >
+                  <label className={styles.topWrapper__label} htmlFor='phone'>
                     Телефон
                   </label>
                   <Field
@@ -179,7 +256,19 @@ const AddUniversityForm = () => {
                     id='universityPhone'
                     name='universityPhone'
                     type='phone'
+                    value={values.universityPhone}
+                    onBlur={handleBlur}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      handleChange(e);
+                      useYIFAddUniversity.handleChangePhone(e);
+                    }}
                   />
+                  {errors.universityPhone && touched.universityPhone ? (
+                    <FormInputError
+                      errorType='input'
+                      errorMessage={errors.universityPhone}
+                    />
+                  ) : null}
                 </div>
                 <div className={styles.fullWidth}>
                   <label
@@ -194,6 +283,12 @@ const AddUniversityForm = () => {
                     name='universityDescription'
                     className={styles.topWrapper__textarea}
                     type='textarea'
+                    value={values.universityDescription}
+                    onBlur={handleBlur}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                      handleChange(e);
+                      useYIFAddUniversity.handleChangeDescription(e);
+                    }}
                   />
                 </div>
               </div>
@@ -240,6 +335,12 @@ const AddUniversityForm = () => {
                   id='adminEmail'
                   name='adminEmail'
                   type='email'
+                  value={values.adminEmail}
+                  onBlur={handleBlur}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChange(e);
+                    useYIFAddUniversity.handleChangeAdminEmail(e);
+                  }}
                 />
               </div>
               <FormButton
