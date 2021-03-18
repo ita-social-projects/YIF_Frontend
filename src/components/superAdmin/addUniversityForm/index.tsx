@@ -54,6 +54,8 @@ const AddUniversityForm = () => {
 
   const useYIFAddUniversity = useAddUniversity(APIUrl, lat, lng, picture);
 
+  console.log('picture', picture);
+
   return (
     <div className={styles.wrapper}>
       {useYIFAddUniversity.submitted.submitted &&
@@ -69,8 +71,7 @@ const AddUniversityForm = () => {
           universityPhone: '',
           universityEmail: '',
           universityDescription: '',
-          lat: '',
-          lon: '',
+          location: '',
           picture: '',
           adminEmail: '',
         }}
@@ -96,16 +97,16 @@ const AddUniversityForm = () => {
             onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
               handleSubmit(e);
               if (
+                touched.location &&
                 errors.universityName === undefined &&
                 errors.universityAbbreviation === undefined &&
                 errors.universityAdress === undefined &&
                 errors.universityPhone === undefined &&
                 errors.universityEmail === undefined &&
-                // errors.universityDescription === undefined &&
-                errors.lat === undefined
-                // errors.location === undefined
-                // errors.photo === undefined &&
-                // errors.adminEmail === undefined
+                errors.universityDescription === undefined &&
+                errors.location === undefined &&
+                errors.picture === undefined &&
+                errors.adminEmail === undefined
               ) {
                 useYIFAddUniversity.handleSubmit(e, '/superAdminAccount');
               }
@@ -290,6 +291,13 @@ const AddUniversityForm = () => {
                       useYIFAddUniversity.handleChangeDescription(e);
                     }}
                   />
+                  {errors.universityDescription &&
+                  touched.universityDescription ? (
+                    <FormInputError
+                      errorType='input'
+                      errorMessage={errors.universityDescription}
+                    />
+                  ) : null}
                 </div>
               </div>
               <div className={styles.pictureWrapper}>
@@ -303,6 +311,12 @@ const AddUniversityForm = () => {
                     imageHandler={imageHandler}
                   />
                 </div>
+                {!picture && errors.picture && touched.picture ? (
+                  <FormInputError
+                    errorType='input'
+                    errorMessage={errors.picture}
+                  />
+                ) : null}
               </div>
             </div>
 
@@ -311,6 +325,13 @@ const AddUniversityForm = () => {
                 Виберіть місце розташування
               </h2>
               <UniversityMap settingLat={settingLat} settingLng={settingLng} />
+
+              {lat === 0 && lng === 0 && errors.location && touched.location ? (
+                <FormInputError
+                  errorType='input'
+                  errorMessage={errors.location}
+                />
+              ) : null}
 
               <div
                 className={`${styles.bottomWrapper__halfWidth} ${styles.mailContainer}`}
@@ -342,6 +363,12 @@ const AddUniversityForm = () => {
                     useYIFAddUniversity.handleChangeAdminEmail(e);
                   }}
                 />
+                {errors.adminEmail && touched.adminEmail ? (
+                  <FormInputError
+                    errorType='input'
+                    errorMessage={errors.adminEmail}
+                  />
+                ) : null}
               </div>
               <FormButton
                 id='userProfileButton'

@@ -126,6 +126,7 @@
       }
 
       .mailContainer {
+        margin-top: 2.5rem;
         position: relative;
 
         &__text {
@@ -155,7 +156,7 @@
             border-radius: 20px;
             position: absolute;
             box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.2);
-            bottom: 5.2rem;
+            top: -5.2rem;
             right: -2.5rem;
             max-width: 17rem;
             z-index: 1;
