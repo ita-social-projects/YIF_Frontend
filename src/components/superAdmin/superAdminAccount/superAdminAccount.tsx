@@ -231,8 +231,8 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
 
     const sortedArr = cloneDeep(sortedUniversityAdmins).sort(
       (a: any, b: any) => {
-        let prevV = !a[key];
-        let nextV = !b[key];
+        let prevV = a[key];
+        let nextV = b[key];
 
         if (key === 'abbreviation') {
           prevV = a.university[key] ? a.university[key].toUpperCase() : '';
