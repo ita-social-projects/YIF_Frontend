@@ -70,11 +70,6 @@ const useAddUniversity = (
     setAdminEmail(value);
   };
 
-  const handleChangeLat = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setLat(value);
-  };
-
   const handleSubmit = async (
     e: React.ChangeEvent<HTMLFormElement>,
     pathToRedirect: string
