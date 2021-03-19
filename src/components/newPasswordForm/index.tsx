@@ -104,6 +104,7 @@ const NewPasswordForm: React.FC = () => {
                         iconName='lock'
                         type='password'
                         name='newPassword'
+                        showIconPassword={true}
                       />
                     </div>
                     <div>
@@ -113,6 +114,7 @@ const NewPasswordForm: React.FC = () => {
                         iconName='lock'
                         type='password'
                         name='confirmNewPassword'
+                        showIconPassword={true}
                       />
                     </div>
                     <FormButton
