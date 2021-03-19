@@ -16,7 +16,7 @@ const FormCloseButton: React.FC<Props> = (props) => {
       className={styles.closeButton}
       style={props.styles}
     >
-      <img src='assets/icons/close.svg' alt='close icon' />
+      <img src='/assets/icons/close.svg' alt='close icon' />
     </Link>
   );
 };

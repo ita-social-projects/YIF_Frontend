@@ -16,7 +16,7 @@ import ErrorBoundry from '../../errorBoundry';
 import ResetPasswordPage from '../../pages/resetPasswordPage/index';
 import AddUniversity from '../../pages/superAdminPages/addUniversityPage';
 import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccountPage';
-import UniversityInfo from '../universityAdmin/universityInfo';
+import NewPasswordPage from '../../pages/newPasswordPage';
 import UniversityAdminPage from '../../pages/universityAdminPage';
 
 const App = () => {
@@ -71,6 +71,9 @@ const App = () => {
           </Route>
           <Route path='/moderators'>
             <UniversityAdminPage />
+          </Route>
+          <Route path='/newPassword'>
+            <NewPasswordPage />
           </Route>
           <ProtectedRoute user={token} path='/cabinet' allowed={['Graduate']}>
             <GraduateCabinet />
