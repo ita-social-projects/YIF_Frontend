@@ -36,6 +36,7 @@ const NewPasswordForm: React.FC = () => {
   }
 
   function fail() {
+    setSubmiting(false);
     setError(true);
     setTimeout(() => {
       setError(false);
@@ -55,7 +56,6 @@ const NewPasswordForm: React.FC = () => {
       recaptchaToken,
     })
       .then((res) => {
-        setSubmiting(false);
         res.statusCode.toString().match(/^[23]\d{2}$/) ? success() : fail();
       })
       .catch((e) => {

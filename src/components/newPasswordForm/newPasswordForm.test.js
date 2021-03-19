@@ -1,10 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { render, cleanup, wait } from '@testing-library/react';
 import NewPasswordForm from './index';
-import { screen, wait } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
-import { render, unmountComponentAtNode } from 'react-dom';
-import { act } from 'react-dom/test-utils';
 
 jest.mock('../../services/useCaptcha', () => ({
   _esModule: true,
@@ -22,116 +20,81 @@ const mockFetchPromise = Promise.resolve({
 });
 global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
-let container = null;
-beforeEach(() => {
-  // window.grecaptcha = {
-  //   ready: jest.fn().mockImplementation((cb) => cb()),
-  //   execute: jest.fn().mockImplementation(() => Promise.resolve('qwerty')),
-  // };
-  container = document.createElement('div');
-  document.body.appendChild(container);
-});
-
-afterEach(() => {
-  delete window.grecaptcha;
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
+afterEach(cleanup);
 
 describe('NewPasswordForm', () => {
-  it('input get corect values', async () => {
-    act(() => {
-      render(
-        <Router>
-          <NewPasswordForm />
-        </Router>,
-        container
-      );
-    });
-    await wait(() => {
-      userEvent.type(screen.getByPlaceholderText('Пароль'), 'Qwerty1@');
-      userEvent.type(
-        screen.getByPlaceholderText('Підтвердіть пароль'),
-        'Qwerty1@'
-      );
-    });
-    expect(screen.getByPlaceholderText('Пароль')).toHaveValue('Qwerty1@');
-    expect(screen.getByPlaceholderText('Підтвердіть пароль')).toHaveValue(
-      'Qwerty1@'
+  test('render component correctly', () => {
+    const { getByText, getByRole, getByPlaceholderText } = render(
+      <Router>
+        <NewPasswordForm />
+      </Router>
     );
+    expect(getByText('Введіть ваш новий пароль!')).toBeInTheDocument();
+    expect(getByRole('button')).toBeInTheDocument();
+    expect(getByPlaceholderText('Пароль')).toBeInTheDocument();
+    expect(getByRole('link')).toBeVisible();
   });
 
-  it('error message when input have incorect values', async () => {
-    act(() => {
-      render(
-        <Router>
-          <NewPasswordForm />
-        </Router>,
-        container
-      );
-    });
+  test('inputs get correct values', async () => {
+    const { getByPlaceholderText } = render(
+      <Router>
+        <NewPasswordForm />
+      </Router>
+    );
     await wait(() => {
-      userEvent.type(screen.getByPlaceholderText('Пароль'), 'Qwerty1#');
-      userEvent.type(
-        screen.getByPlaceholderText('Підтвердіть пароль'),
-        'Qwerty1@'
-      );
-      userEvent.click(screen.getByRole('button'));
+      userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
+      userEvent.type(getByPlaceholderText('Підтвердіть пароль'), 'Qwerty1@');
     });
-    expect(screen.getByText('Паролі мають співпадати')).toBeInTheDocument();
+    expect(getByPlaceholderText('Пароль')).toHaveValue('Qwerty1@');
+    expect(getByPlaceholderText('Підтвердіть пароль')).toHaveValue('Qwerty1@');
   });
 
-  it('success message when password changed', async (done) => {
-    act(() => {
-      render(
-        <Router>
-          <NewPasswordForm />
-        </Router>,
-        container
-      );
-    });
+  test('shows an input error message', async () => {
+    const { getByPlaceholderText, getByRole, queryByText } = render(
+      <Router>
+        <NewPasswordForm />
+      </Router>
+    );
     await wait(() => {
-      userEvent.type(screen.getByPlaceholderText('Пароль'), 'Qwerty1@');
-      userEvent.type(
-        screen.getByPlaceholderText('Підтвердіть пароль'),
-        'Qwerty1@'
-      );
-      userEvent.click(screen.getByRole('button'));
-      done();
+      userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
+      userEvent.type(getByPlaceholderText('Підтвердіть пароль'), 'Qwerty1№');
+      userEvent.click(getByRole('button'));
     });
-    await wait(() => {
-      expect(
-        screen.getByText(
-          'Ваш пароль змінено! Ви можете увійти за допомогою нового паролю!'
-        )
-      ).toBeInTheDocument();
-    });
+    expect(queryByText('Паролі мають співпадати')).toBeInTheDocument();
   });
 
-  it('error when reject', async (done) => {
-    global.fetch.mockImplementationOnce(() => Promise.reject('API is down'));
-    act(() => {
-      render(
-        <Router>
-          <NewPasswordForm />
-        </Router>,
-        container
-      );
-    });
+  test('shows a notification of a successful password change', async () => {
+    const { getByPlaceholderText, getByRole, queryByText } = render(
+      <Router>
+        <NewPasswordForm />
+      </Router>
+    );
     await wait(() => {
-      userEvent.type(screen.getByPlaceholderText('Пароль'), 'Qwerty1@');
-      userEvent.type(
-        screen.getByPlaceholderText('Підтвердіть пароль'),
-        'Qwerty1@'
-      );
-      userEvent.click(screen.getByRole('button'));
-      done();
+      userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
+      userEvent.type(getByPlaceholderText('Підтвердіть пароль'), 'Qwerty1@');
+      userEvent.click(getByRole('button'));
     });
+    expect(
+      queryByText(
+        'Ваш пароль змінено! Ви можете увійти за допомогою нового паролю!'
+      )
+    ).toBeInTheDocument();
+  });
+
+  test('shows an error message when something went wrong', async () => {
+    global.fetch.mockImplementationOnce(() => Promise.reject('Some error'));
+    const { getByPlaceholderText, getByRole, queryByText } = render(
+      <Router>
+        <NewPasswordForm />
+      </Router>
+    );
     await wait(() => {
-      expect(
-        screen.getByText('Щось пішло не такб спробуйте знову!')
-      ).toBeInTheDocument();
+      userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
+      userEvent.type(getByPlaceholderText('Підтвердіть пароль'), 'Qwerty1@');
+      userEvent.click(getByRole('button'));
     });
+    expect(
+      queryByText('Щось пішло не так, спробуйте знову!')
+    ).toBeInTheDocument();
   });
 });
