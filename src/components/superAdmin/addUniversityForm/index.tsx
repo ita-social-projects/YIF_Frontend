@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Field, Formik, Form } from 'formik';
 import { FormButton, FormInputError } from '../../common/formElements';
+import { FormInputSuccess } from '../../common/formElements/formInputSuccess/formInputSuccess';
 import styles from './addUniversityForm.module.scss';
 import ImageUploader from '../../imageUploader';
 import UniversityMap from './map';
@@ -54,16 +55,12 @@ const AddUniversityForm = () => {
 
   const useYIFAddUniversity = useAddUniversity(APIUrl, lat, lng, picture);
 
-  console.log('picture', picture);
-
   return (
     <div className={styles.wrapper}>
-      {useYIFAddUniversity.submitted.submitted &&
-        !useYIFAddUniversity.error.hasError && <Spinner />}
-
       <Formik
-        enableReinitialize={true}
+        enableReinitialize
         initialValues={{
+          IOEType: '',
           universityName: '',
           universityAbbreviation: '',
           universitySite: '',
@@ -71,8 +68,8 @@ const AddUniversityForm = () => {
           universityPhone: '',
           universityEmail: '',
           universityDescription: '',
-          location: '',
-          picture: '',
+          lat: lat,
+          picture: picture,
           adminEmail: '',
         }}
         validationSchema={validationField}
@@ -95,25 +92,33 @@ const AddUniversityForm = () => {
           <Form
             className={styles.form}
             onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
+              console.log(`values`, values);
+              console.log(`lat === 0 `, lat === 0);
+              console.log(`lat`, lat);
+              console.log(`lng === 0`, lng === 0);
+              console.log(`errors.location`, errors.lat);
+              console.log(`touched.location`, touched.lat);
+              console.log(`errors.universityName`, errors.universityName);
+
               handleSubmit(e);
               if (
-                touched.location &&
+                touched.universityName &&
                 errors.universityName === undefined &&
                 errors.universityAbbreviation === undefined &&
                 errors.universityAdress === undefined &&
                 errors.universityPhone === undefined &&
                 errors.universityEmail === undefined &&
-                errors.universityDescription === undefined &&
-                errors.location === undefined &&
+                errors.lat === undefined &&
                 errors.picture === undefined &&
+                errors.universityDescription === undefined &&
                 errors.adminEmail === undefined
               ) {
-                useYIFAddUniversity.handleSubmit(e, '/superAdminAccount');
+                useYIFAddUniversity.handleSubmit(e);
               }
             }}
           >
             <div className={styles.topWrapper}>
-              <h1 className={styles.topWrapper__title}>Новий університет</h1>
+              <h1 className={styles.topWrapper__title}>Новий заклад освіти</h1>
               {useYIFAddUniversity.error.hasError && (
                 <FormInputError
                   errorType='form'
@@ -121,6 +126,32 @@ const AddUniversityForm = () => {
                   redirectLink={useYIFAddUniversity.error.redirectLink}
                 />
               )}
+              <div className={styles.fullWidth}>
+                <label
+                  className={styles.topWrapper__label}
+                  htmlFor='universityName'
+                >
+                  Тип закладу освіти
+                </label>
+                <Field
+                  // className={styles.topWrapper__input}
+                  id='IOEType'
+                  name='IOEType'
+                  type='radio'
+                  value={values.IOEType}
+                  onBlur={handleBlur}
+                  // onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  //   handleChange(e);
+                  //   useYIFAddUniversity.handleChangeName(e);
+                  // }}
+                />
+                {errors.universityName && touched.universityName ? (
+                  <FormInputError
+                    errorType='input'
+                    errorMessage={errors.universityName}
+                  />
+                ) : null}
+              </div>
               <div className={styles.fullWidth}>
                 <label
                   className={styles.topWrapper__label}
@@ -326,11 +357,16 @@ const AddUniversityForm = () => {
               </h2>
               <UniversityMap settingLat={settingLat} settingLng={settingLng} />
 
-              {lat === 0 && lng === 0 && errors.location && touched.location ? (
-                <FormInputError
-                  errorType='input'
-                  errorMessage={errors.location}
-                />
+              <Field
+                id='lat'
+                name='lat'
+                type='hidden'
+                value={lat}
+                onBlur={handleBlur}
+              />
+
+              {lat === 0 && lng === 0 && errors.lat && touched.lat ? (
+                <FormInputError errorType='input' errorMessage={errors.lat} />
               ) : null}
 
               <div
@@ -375,6 +411,24 @@ const AddUniversityForm = () => {
                 form='addUniversity'
                 title='Додати'
               />
+
+              {useYIFAddUniversity.submitted &&
+                !useYIFAddUniversity.error.hasError && (
+                  <div className={styles.spinner}>
+                    <Spinner />
+                  </div>
+                )}
+              {useYIFAddUniversity.error.hasError && (
+                <FormInputError
+                  errorType='form'
+                  errorMessage={useYIFAddUniversity.error.errorMessage}
+                />
+              )}
+              {useYIFAddUniversity.success.hasSuccess && (
+                <FormInputSuccess
+                  successMessage={useYIFAddUniversity.success.successMessage}
+                />
+              )}
             </div>
           </Form>
         )}

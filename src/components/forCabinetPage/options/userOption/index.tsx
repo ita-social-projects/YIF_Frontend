@@ -161,7 +161,6 @@ const UserOption = () => {
               <Form
                 className={styles.form}
                 onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
-                  console.log(values);
                   handleSubmit(e);
                   if (
                     touched.firstName &&

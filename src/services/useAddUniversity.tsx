@@ -19,13 +19,19 @@ const useAddUniversity = (
   const [universityPhone, setUniversityPhone] = useState('');
   const [universityDescription, setUniversityDescription] = useState('');
   const [adminEmail, setAdminEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
-  const [submitted, setSubmitted] = useState({ submitted: false });
   const [error, setError] = useState({
     hasError: false,
     errorStatusCode: '',
     errorMessage: '',
     redirectLink: '',
+  });
+
+  const [success, setSuccess] = useState({
+    hasSuccess: false,
+    successStatusCode: '',
+    successMessage: '',
   });
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,18 +76,20 @@ const useAddUniversity = (
     setAdminEmail(value);
   };
 
-  const handleSubmit = async (
-    e: React.ChangeEvent<HTMLFormElement>,
-    pathToRedirect: string
-  ) => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setSubmitted({ submitted: true });
+    setSubmitted(true);
     setError({
       hasError: false,
       errorStatusCode: '',
       errorMessage: '',
       redirectLink: '',
+    });
+    setSuccess({
+      hasSuccess: false,
+      successStatusCode: '',
+      successMessage: '',
     });
 
     getToken();
@@ -115,14 +123,27 @@ const useAddUniversity = (
             errorMessage: '',
             redirectLink: '',
           });
-          history.push(pathToRedirect);
+          setSuccess({
+            hasSuccess: true,
+            successStatusCode: res.statusCode,
+            successMessage: res.data.message || 'Університет успішно додано',
+          });
+          setTimeout(() => {
+            setSuccess({
+              hasSuccess: false,
+              successStatusCode: '',
+              successMessage: '',
+            });
+          }, 3000);
+          setSubmitted(false);
+          // history.push(pathToRedirect);
         } else {
           setError({
             hasError: true,
             errorStatusCode: res.statusCode,
             errorMessage:
               res.data.message || 'Щось пішло не так, спробуйте знову.',
-            redirectLink: res.data.redirectLink || '',
+            redirectLink: '',
           });
         }
       })
@@ -150,6 +171,7 @@ const useAddUniversity = (
     lng,
     submitted,
     error,
+    success,
   };
 };
 
