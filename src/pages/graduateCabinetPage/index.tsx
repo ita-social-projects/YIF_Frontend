@@ -32,8 +32,9 @@ const UserCabinet = () => {
   return (
     <Fragment>
       <Header />
-      <UserWorksSpace />
-      <UniversityMap data={universitiesList} />
+      <UserWorksSpace>
+        <UniversityMap data={universitiesList} />
+      </UserWorksSpace>
       <Footer />
     </Fragment>
   );

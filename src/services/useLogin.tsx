@@ -4,11 +4,13 @@ import { useHistory } from 'react-router-dom';
 import { useAuth } from './tokenValidator';
 import { APIUrl } from '../../src/services/endpoints';
 import { useCaptcha } from './useCaptcha';
+import useRole from './useRole';
 import { getUser } from './getUser';
 
 const useLogin = (endpoint: string) => {
   const captcha = useCaptcha(APIUrl);
   const history = useHistory();
+  const { pathToRedirect } = useRole();
   const { updateToken } = useAuth();
   const [email, setEmail] = useState({ email: '' });
   const [password, setPassword] = useState({ password: '' });
@@ -35,10 +37,7 @@ const useLogin = (endpoint: string) => {
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken');
   };
-  const handleSubmit = async (
-    e: React.ChangeEvent<HTMLFormElement>,
-    pathToRedirect: string
-  ) => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitted({ submitted: true });
     setError({
@@ -66,7 +65,7 @@ const useLogin = (endpoint: string) => {
           });
           updateToken(res.data.token, res.data.refreshToken);
           getUser(res.data.token);
-          history.push(pathToRedirect); //can be deleted ?
+          history.push(pathToRedirect()); //can be deleted ?
         } else {
           setError({
             hasError: true,

@@ -17,6 +17,7 @@ import ResetPasswordPage from '../../pages/resetPasswordPage/index';
 import AddUniversity from '../../pages/superAdminPages/addUniversityPage';
 import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccountPage';
 import NewPasswordPage from '../../pages/newPasswordPage';
+import UniversityAdminPage from '../../pages/universityAdminPage';
 
 const App = () => {
   const { token } = useAuth();
@@ -28,13 +29,13 @@ const App = () => {
           <Route exact path='/'>
             <Home />
           </Route>
-          <RedirectRoute user={token} pathname='cabinet' path='/login'>
+          <RedirectRoute user={token} pathname='/' path='/login'>
             <LoginPage />
           </RedirectRoute>
-          <RedirectRoute user={token} pathname='cabinet' path='/resetPassword'>
+          <RedirectRoute user={token} pathname='/' path='/resetPassword'>
             <ResetPasswordPage />
           </RedirectRoute>
-          <RedirectRoute user={token} pathname='cabinet' path='/register'>
+          <RedirectRoute user={token} pathname='/' path='/register'>
             <RegistrationForm />
           </RedirectRoute>
           <Route path='/directions'>
@@ -46,19 +47,35 @@ const App = () => {
           <Route path='/university/:id'>
             <UniversityPage />
           </Route>
-          <Route path='/superAdminAccount'>
+          <ProtectedRoute
+            user={token}
+            path='/superAdminAccount'
+            allowed={['SuperAdmin']}
+          >
             <SuperAdminAccountPage />
-          </Route>
+          </ProtectedRoute>
           <Route path='/specialty/:id'>
             <SpecialityPage />
           </Route>
           <Route path='/adduniv'>
             <AddUniversity />
           </Route>
+          <Route path='/universityAdmin'>
+            <UniversityAdminPage />
+          </Route>
+          <Route path='/universityInfo'>
+            <UniversityAdminPage />
+          </Route>
+          <Route path='/ourSpecialties'>
+            <UniversityAdminPage />
+          </Route>
+          <Route path='/moderators'>
+            <UniversityAdminPage />
+          </Route>
           <Route path='/newPassword'>
             <NewPasswordPage />
           </Route>
-          <ProtectedRoute user={token} pathname='login' path='/cabinet'>
+          <ProtectedRoute user={token} path='/cabinet' allowed={['Graduate']}>
             <GraduateCabinet />
           </ProtectedRoute>
           <Route path='/404' component={ErrorPage} status={404} />

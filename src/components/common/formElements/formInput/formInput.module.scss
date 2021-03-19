@@ -10,6 +10,14 @@
   height: 40px;
   border-bottom: 1px solid $black;
   margin-bottom: 45px;
+
+  &__hideShowPasswordIcon {
+    cursor: pointer;
+    margin: 0 5px;
+    path {
+      fill: #12335e;
+    }
+  }
 }
 
 .inputFailed {
