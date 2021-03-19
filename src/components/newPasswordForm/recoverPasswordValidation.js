@@ -11,7 +11,7 @@ const passwordValidationSchema = Yup.object().shape({
 
   confirmNewPassword: Yup.string()
     .min(8, 'Пароль має містити мінімум 8 символів')
-    .oneOf([Yup.ref('password'), null], 'Паролі мають співпадати')
+    .oneOf([Yup.ref('newPassword'), null], 'Паролі мають співпадати')
     .required('Заповніть поле'),
 });
 

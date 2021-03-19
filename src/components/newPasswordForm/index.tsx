@@ -4,9 +4,7 @@ import { Field, Formik, Form } from 'formik';
 import styles from './newPassword.module.scss';
 import parseURL from '../../services/parseURL';
 import { APIUrl } from '../../services/endpoints';
-
 import { useCaptcha } from '../../services/useCaptcha';
-
 import { requestData } from '../../services/requestDataFunction';
 import { useHistory } from 'react-router-dom';
 import passwordValidationSchema from './recoverPasswordValidation';
@@ -29,33 +27,37 @@ const NewPasswordForm: React.FC = () => {
   const [error, setError] = useState(false);
   const redirect = useHistory();
   const captcha = useCaptcha(APIUrl);
+
   function success() {
     setStatus(true);
     setTimeout(() => {
       redirect.push('/login');
     }, 3000);
   }
+
   function fail() {
     setError(true);
     setTimeout(() => {
       setError(false);
     }, 2000);
   }
+
   const handleFormSubmit = async (values: FormikValues) => {
     const recaptchaToken = await captcha.getCaptchaToken();
     const { newPassword, confirmNewPassword } = values;
-    const { userId, token } = parseURL(window.location.search);
+    const { id, token } = parseURL(window.location.search);
     setSubmiting(true);
     requestData(`${APIUrl}Users/Restore`, 'PUT', {
-      userId,
+      userId: id,
       token,
       newPassword,
       confirmNewPassword,
       recaptchaToken,
     })
-      .then((res) =>
-        res.statusCode.toString().match(/^[23]\d{2}$/) ? success() : fail()
-      )
+      .then((res) => {
+        setSubmiting(false);
+        res.statusCode.toString().match(/^[23]\d{2}$/) ? success() : fail();
+      })
       .catch((e) => {
         fail();
         console.log(e);
