@@ -19,7 +19,7 @@ const FormButton: React.FC<Props> = (props) => {
           ? `${styles.formButton} ${styles.animatedButton}`
           : form === 'profile'
           ? `${styles.formButton} ${styles.buttonProfile} ${styles.animatedButton}`
-          : form === 'addUniversity'
+          : form === 'AddInstitutionOfEducation'
           ? `${styles.formButton} ${styles.buttonLogin} ${styles.animatedButton}`
           : form === 'resetPassword'
           ? `${styles.formButton} ${styles.buttonProfile} ${styles.animatedButton}`

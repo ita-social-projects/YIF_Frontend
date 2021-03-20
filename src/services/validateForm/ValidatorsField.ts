@@ -87,15 +87,15 @@ export const validationField = Yup.object().shape({
       'Занадто велика кількість символів,перевірте правильність ведення електронної пошти'
     ),
 
-  lat: Yup.number().lessThan(1, 'Вкажіть розташування'),
-
-  picture: Yup.string().required('Оберіть зображення'),
-
   institutionOfEducationDescription: Yup.string()
     .required('Заповніть поле')
     .min(50, 'Кількість символів повинна бути більше 50'),
 
-  adminEmail: Yup.string()
+  institutionOfEducationLat: Yup.string().required('Вкажіть розташування'),
+
+  institutionOfEducationPicture: Yup.string().required('Оберіть зображення'),
+
+  institutionOfEducationAdminEmail: Yup.string()
     .email('Введіть дійсну електронну адресу')
     .required('Заповніть поле')
     .max(

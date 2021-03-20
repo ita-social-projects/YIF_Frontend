@@ -3,41 +3,56 @@ import { requestSecureData } from './requestDataFunction';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from './tokenValidator';
 
-const useAddinstitutionOfEducation = (
+const useAddInstitutionOfEducation = (
   endpoint: string,
   lat: number,
-  lng: number,
+  lon: number,
   picture: string
 ) => {
   const { token, getToken } = useAuth();
   const history = useHistory();
-  const [institutionOfEducationName, setinstitutionOfEducationName] = useState(
+  const [institutionOfEducationName, setInstitutionOfEducationName] = useState(
     ''
   );
+
+  const [institutionOfEducationType, setInstitutionOfEducationType] = useState(
+    ''
+  );
+
   const [
     institutionOfEducationAbbreviation,
-    setinstitutionOfEducationAbbreviation,
+    setInstitutionOfEducationAbbreviation,
   ] = useState('');
+
   const [
     institutionOfEducationAdress,
-    setinstitutionOfEducationAdress,
+    setInstitutionOfEducationAdress,
   ] = useState('');
-  const [institutionOfEducationSite, setinstitutionOfEducationSite] = useState(
+
+  const [institutionOfEducationSite, setInstitutionOfEducationSite] = useState(
     ''
   );
+
   const [
     institutionOfEducationEmail,
-    setinstitutionOfEducationEmail,
+    setInstitutionOfEducationEmail,
   ] = useState('');
+
   const [
     institutionOfEducationPhone,
-    setinstitutionOfEducationPhone,
+    setInstitutionOfEducationPhone,
   ] = useState('');
+
   const [
     institutionOfEducationDescription,
-    setinstitutionOfEducationDescription,
+    setInstitutionOfEducationDescription,
   ] = useState('');
-  const [adminEmail, setAdminEmail] = useState('');
+
+  const [
+    institutionOfEducationAdminEmail,
+    setInstitutionOfEducationAdminEmail,
+  ] = useState('');
+
   const [submitted, setSubmitted] = useState(false);
 
   const [error, setError] = useState({
@@ -55,47 +70,55 @@ const useAddinstitutionOfEducation = (
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setinstitutionOfEducationName(value);
+    setInstitutionOfEducationName(value);
+  };
+
+  const handleChangeType = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setInstitutionOfEducationType(value);
   };
 
   const handleChangeAbbreviation = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setinstitutionOfEducationAbbreviation(value);
+    setInstitutionOfEducationAbbreviation(value);
   };
 
   const handleChangeAdress = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setinstitutionOfEducationAdress(value);
+    setInstitutionOfEducationAdress(value);
   };
 
   const handleChangeSite = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setinstitutionOfEducationSite(value);
+    setInstitutionOfEducationSite(value);
   };
 
   const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setinstitutionOfEducationEmail(value);
+    setInstitutionOfEducationEmail(value);
   };
 
   const handleChangePhone = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setinstitutionOfEducationPhone(value);
+    setInstitutionOfEducationPhone(value);
   };
 
   const handleChangeDescription = (
     e: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     const { value } = e.target;
-    setinstitutionOfEducationDescription(value);
+    setInstitutionOfEducationDescription(value);
   };
 
   const handleChangeAdminEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setAdminEmail(value);
+    setInstitutionOfEducationAdminEmail(value);
   };
 
-  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (
+    e: React.ChangeEvent<HTMLFormElement>,
+    pathToRedirect: string
+  ) => {
     e.preventDefault();
 
     setSubmitted(true);
@@ -126,11 +149,12 @@ const useAddinstitutionOfEducation = (
         email: institutionOfEducationEmail,
         description: institutionOfEducationDescription,
         lat: lat,
-        lon: lng,
+        lon: lon,
+        institutionOfEducationType: institutionOfEducationType,
         imageApiModel: {
           photo: picture,
         },
-        institutionOfEducationAdminEmail: adminEmail,
+        institutionOfEducationAdminEmail: institutionOfEducationAdminEmail,
       }
     )
       .then((res: any) => {
@@ -148,14 +172,9 @@ const useAddinstitutionOfEducation = (
             successMessage: res.data.message || 'Університет успішно додано',
           });
           setTimeout(() => {
-            setSuccess({
-              hasSuccess: false,
-              successStatusCode: '',
-              successMessage: '',
-            });
+            history.push(pathToRedirect);
           }, 3000);
           setSubmitted(false);
-          // history.push(pathToRedirect);
         } else {
           setError({
             hasError: true,
@@ -177,6 +196,7 @@ const useAddinstitutionOfEducation = (
   };
   return {
     handleChangeName,
+    handleChangeType,
     handleChangeAbbreviation,
     handleChangeAdress,
     handleChangeSite,
@@ -185,13 +205,10 @@ const useAddinstitutionOfEducation = (
     handleChangeDescription,
     handleChangeAdminEmail,
     handleSubmit,
-    picture,
-    lat,
-    lng,
     submitted,
     error,
     success,
   };
 };
 
-export default useAddinstitutionOfEducation;
+export default useAddInstitutionOfEducation;

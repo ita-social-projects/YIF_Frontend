@@ -17,7 +17,7 @@
       height: auto;
       position: relative;
       flex-wrap: wrap;
-      @include flex(row, center, center);
+      @include flex(row, flex-start, center);
       max-width: 52.5rem;
 
       &__title {
@@ -189,6 +189,12 @@
           border: 1px solid #afbecf;
           padding: 0 1rem;
         }
+      }
+
+      .errorContainer {
+        width: 20rem;
+        margin: 2rem;
+        @include flex(column, center, center);
       }
     }
   }

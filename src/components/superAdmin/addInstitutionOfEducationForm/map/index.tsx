@@ -15,12 +15,8 @@ const GetIcon = () => {
 const UniversityMap = (props: any) => {
   const [position, setPosition] = useState<[number, number]>([0, 0]);
 
-  const settingLat = (value: any) => {
-    props.settingLat(value);
-  };
-
-  const settingLng = (value: any) => {
-    props.settingLng(value);
+  const setLocation = (value: [number, number]) => {
+    props.setLocation(value);
   };
 
   const setFieldValue = (name: string, value: number) => {
@@ -30,15 +26,15 @@ const UniversityMap = (props: any) => {
   const styleURL: string = `https://api.mapbox.com/styles/v1/youritfuture/cklig66bm1iis17oth9p6vklg/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_KEY}`;
 
   const LocationMarker = () => {
-    const map = useMapEvents({
+    useMapEvents({
       click(e: LeafletMouseEvent) {
         const lng: number = e.latlng.lng;
         const lat: number = e.latlng.lat;
         setPosition([lat, lng]);
-        settingLat(lat);
-        settingLng(lng);
+        setLocation([lat, lng]);
         if (props.setFieldValue) {
-          setFieldValue('lat', lat);
+          setFieldValue('institutionOfEducationLat', lat);
+          setFieldValue('institutionOfEducationLon', lng);
         }
       },
     });

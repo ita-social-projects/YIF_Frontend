@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Field, Formik, Form } from 'formik';
 import { FormButton, FormInputError } from '../../common/formElements';
 import { FormInputSuccess } from '../../common/formElements/formInputSuccess/formInputSuccess';
-import styles from './addinstitutionOfEducationForm.module.scss';
+import styles from './addInstitutionOfEducationForm.module.scss';
 import ImageUploader from '../../imageUploader';
-import institutionOfEducationMap from './map';
-import useAddinstitutionOfEducation from '../../../services/useAddinstitutionOfEducation';
+import InstitutionOfEducationMap from './map';
+import useAddInstitutionOfEducation from '../../../services/useAddInstitutionOfEducation';
 import { APIUrl } from '../../../services/endpoints';
 import { validationField } from '../../../services/validateForm/ValidatorsField';
 import Spinner from '../../common/spinner';
@@ -27,53 +27,49 @@ const questionIcon = (
 );
 
 const AddInstitutionOfEducationForm = () => {
-  const avatarSyles = {
+  const avatarStyles = {
     height: '14rem',
     width: '100%',
     borderRadius: '0.3rem',
     padding: '1rem',
   };
 
-  const [lat, setLat] = useState(0);
-  const [lng, setLng] = useState(0);
   const [picture, setPicture] = useState('');
+  const [lat, setLat] = useState(0);
+  const [lon, setLon] = useState(0);
+
+  const setLocation = (value: [number, number]) => {
+    setLat(value[0]);
+    setLon(value[1]);
+  };
+
+  const setFieldValue = (name: string, value: number) => {
+    setFieldValue(name, value);
+  };
 
   const defaultPicture = '/assets/images/defaultUnivPicture.svg';
   const avatar = picture ? picture : defaultPicture;
 
-  const imageHandler = (value: string) => {
-    setPicture(value);
-  };
-
   const imagePicker = ({ form, field }: any) => {
     return (
       <ImageUploader
-        additionalStyles={avatarSyles}
+        additionalStyles={avatarStyles}
         defaultPicture={defaultPicture}
         avatar={avatar}
         aspectRatio={16 / 9}
         text='університету'
-        imageHandler={imageHandler}
-        onImageChange={(picture: string) => {
-          console.log(`click`);
-          form.setFieldValue(field.name, picture);
+        imageHandler={(newPicture: string) => {
+          setPicture(newPicture);
+          form.setFieldValue(field.name, newPicture);
         }}
       />
     );
   };
 
-  const settingLat = (value: number) => {
-    setLat(value);
-  };
-
-  const settingLng = (value: number) => {
-    setLng(value);
-  };
-
-  const useYIFAddinstitutionOfEducation = useAddinstitutionOfEducation(
+  const useYIFAddInstitutionOfEducation = useAddInstitutionOfEducation(
     APIUrl,
     lat,
-    lng,
+    lon,
     picture
   );
 
@@ -82,7 +78,7 @@ const AddInstitutionOfEducationForm = () => {
       <Formik
         enableReinitialize
         initialValues={{
-          IOEType: '',
+          institutionOfEducationType: '',
           institutionOfEducationName: '',
           institutionOfEducationAbbreviation: '',
           institutionOfEducationSite: '',
@@ -90,9 +86,10 @@ const AddInstitutionOfEducationForm = () => {
           institutionOfEducationPhone: '',
           institutionOfEducationEmail: '',
           institutionOfEducationDescription: '',
-          lat: 0,
-          picture: '',
-          adminEmail: '',
+          institutionOfEducationPicture: '',
+          institutionOfEducationLat: '',
+          institutionOfEducationLon: '',
+          institutionOfEducationAdminEmail: '',
         }}
         validationSchema={validationField}
         onSubmit={(values, actions) => {
@@ -106,7 +103,6 @@ const AddInstitutionOfEducationForm = () => {
           values,
           errors,
           touched,
-          isValidating,
           handleChange,
           handleBlur,
           handleSubmit,
@@ -118,18 +114,21 @@ const AddInstitutionOfEducationForm = () => {
               console.log(`values`, values);
               handleSubmit(e);
               if (
-                touched.adminEmail &&
+                touched.institutionOfEducationAdminEmail &&
                 errors.institutionOfEducationName === undefined &&
                 errors.institutionOfEducationAbbreviation === undefined &&
                 errors.institutionOfEducationAdress === undefined &&
                 errors.institutionOfEducationPhone === undefined &&
                 errors.institutionOfEducationEmail === undefined &&
-                // errors.lat === undefined &&
-                // errors.picture === undefined &&
+                errors.institutionOfEducationLat === undefined &&
+                errors.institutionOfEducationPicture === undefined &&
                 errors.institutionOfEducationDescription === undefined &&
-                errors.adminEmail === undefined
+                errors.institutionOfEducationAdminEmail === undefined
               ) {
-                useYIFAddinstitutionOfEducation.handleSubmit(e);
+                useYIFAddInstitutionOfEducation.handleSubmit(
+                  e,
+                  '/SuperAdminAccount'
+                );
               }
             }}
           >
@@ -138,17 +137,6 @@ const AddInstitutionOfEducationForm = () => {
                 <h1 className={styles.topWrapper__title}>
                   Новий заклад освіти
                 </h1>
-                {useYIFAddinstitutionOfEducation.error.hasError && (
-                  <FormInputError
-                    errorType='form'
-                    errorMessage={
-                      useYIFAddinstitutionOfEducation.error.errorMessage
-                    }
-                    redirectLink={
-                      useYIFAddinstitutionOfEducation.error.redirectLink
-                    }
-                  />
-                )}
               </div>
 
               <div className={styles.halfWidth}>
@@ -166,7 +154,7 @@ const AddInstitutionOfEducationForm = () => {
                   onBlur={handleBlur}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     handleChange(e);
-                    useYIFAddinstitutionOfEducation.handleChangeName(e);
+                    useYIFAddInstitutionOfEducation.handleChangeName(e);
                   }}
                 />
                 {errors.institutionOfEducationName &&
@@ -179,16 +167,21 @@ const AddInstitutionOfEducationForm = () => {
               </div>
 
               <div className={styles.halfWidth}>
-                <label className={styles.topWrapper__label} htmlFor='IOEType'>
+                <label
+                  className={styles.topWrapper__label}
+                  htmlFor='institutionOfEducationType'
+                >
                   Тип закладу освіти
                 </label>
                 <Field
                   className={styles.topWrapper__input}
                   as='select'
-                  id='IOEType'
-                  name='IOEType'
+                  id='institutionOfEducationType'
+                  name='institutionOfEducationType'
+                  value={values.institutionOfEducationType}
                 >
-                  <option value='institutionOfEducation'>Університет</option>
+                  <option value=''></option>
+                  <option value='university'>Університет</option>
                   <option value='college'>Коледж</option>
                 </Field>
               </div>
@@ -208,7 +201,7 @@ const AddInstitutionOfEducationForm = () => {
                   onBlur={handleBlur}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     handleChange(e);
-                    useYIFAddinstitutionOfEducation.handleChangeAbbreviation(e);
+                    useYIFAddInstitutionOfEducation.handleChangeAbbreviation(e);
                   }}
                 />
                 {errors.institutionOfEducationAbbreviation &&
@@ -235,7 +228,7 @@ const AddInstitutionOfEducationForm = () => {
                   onBlur={handleBlur}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     handleChange(e);
-                    useYIFAddinstitutionOfEducation.handleChangeAdress(e);
+                    useYIFAddInstitutionOfEducation.handleChangeAdress(e);
                   }}
                 />
                 {errors.institutionOfEducationAdress &&
@@ -262,7 +255,7 @@ const AddInstitutionOfEducationForm = () => {
                   onBlur={handleBlur}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     handleChange(e);
-                    useYIFAddinstitutionOfEducation.handleChangeSite(e);
+                    useYIFAddInstitutionOfEducation.handleChangeSite(e);
                   }}
                 />
                 {errors.institutionOfEducationSite &&
@@ -289,7 +282,7 @@ const AddInstitutionOfEducationForm = () => {
                   onBlur={handleBlur}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     handleChange(e);
-                    useYIFAddinstitutionOfEducation.handleChangeEmail(e);
+                    useYIFAddInstitutionOfEducation.handleChangeEmail(e);
                   }}
                 />
                 {errors.institutionOfEducationEmail &&
@@ -314,7 +307,7 @@ const AddInstitutionOfEducationForm = () => {
                     onBlur={handleBlur}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       handleChange(e);
-                      useYIFAddinstitutionOfEducation.handleChangePhone(e);
+                      useYIFAddInstitutionOfEducation.handleChangePhone(e);
                     }}
                   />
                   {errors.institutionOfEducationPhone &&
@@ -342,7 +335,7 @@ const AddInstitutionOfEducationForm = () => {
                     onBlur={handleBlur}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
                       handleChange(e);
-                      useYIFAddinstitutionOfEducation.handleChangeDescription(
+                      useYIFAddInstitutionOfEducation.handleChangeDescription(
                         e
                       );
                     }}
@@ -359,15 +352,16 @@ const AddInstitutionOfEducationForm = () => {
               <div className={styles.pictureWrapper}>
                 <div className={styles.uploadContainer}>
                   <Field
-                    name='picture'
-                    value={picture}
+                    name='institutionOfEducationPicture'
                     component={imagePicker}
                   />
                 </div>
-                {!picture && errors.picture && touched.picture ? (
+                {!picture &&
+                errors.institutionOfEducationPicture &&
+                touched.institutionOfEducationPicture ? (
                   <FormInputError
                     errorType='input'
-                    errorMessage={errors.picture}
+                    errorMessage={errors.institutionOfEducationPicture}
                   />
                 ) : null}
               </div>
@@ -378,27 +372,25 @@ const AddInstitutionOfEducationForm = () => {
                 Виберіть місце розташування
               </h2>
               <Field
-                id='lat'
                 name='lat'
-                value={lat}
-                type='input'
-                component={institutionOfEducationMap}
-                settingLat={settingLat}
-                settingLng={settingLng}
                 setFieldValue={setFieldValue}
-              >
-                {lat === 0 && lng === 0 && errors.lat && touched.lat ? (
-                  <FormInputError errorType='input' errorMessage={errors.lat} />
-                ) : null}
-              </Field>
-
+                component={InstitutionOfEducationMap}
+                setLocation={setLocation}
+              />
+              {errors.institutionOfEducationLat &&
+              touched.institutionOfEducationLat ? (
+                <FormInputError
+                  errorType='input'
+                  errorMessage={errors.institutionOfEducationLat}
+                />
+              ) : null}
               <div
                 className={`${styles.bottomWrapper__halfWidth} ${styles.mailContainer}`}
               >
                 <div className={styles.mailContainer__text}>
                   <label
                     className={styles.mailContainer__label}
-                    htmlFor='adminEmail'
+                    htmlFor='institutionOfEducationAdminEmail'
                   >
                     Введіть електронну адресу адміністратора
                   </label>
@@ -412,51 +404,53 @@ const AddInstitutionOfEducationForm = () => {
 
                 <Field
                   className={styles.mailContainer__input}
-                  id='adminEmail'
-                  name='adminEmail'
+                  id='institutionOfEducationAdminEmail'
+                  name='institutionOfEducationAdminEmail'
                   type='email'
-                  value={values.adminEmail}
+                  value={values.institutionOfEducationAdminEmail}
                   onBlur={handleBlur}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    console.log(`dva`);
                     handleChange(e);
-                    useYIFAddinstitutionOfEducation.handleChangeAdminEmail(e);
+                    useYIFAddInstitutionOfEducation.handleChangeAdminEmail(e);
                   }}
                 />
-                {errors.adminEmail && touched.adminEmail ? (
+                {errors.institutionOfEducationAdminEmail &&
+                touched.institutionOfEducationAdminEmail ? (
                   <FormInputError
                     errorType='input'
-                    errorMessage={errors.adminEmail}
+                    errorMessage={errors.institutionOfEducationAdminEmail}
                   />
                 ) : null}
               </div>
               <FormButton
                 id='userProfileButton'
-                form='addinstitutionOfEducation'
+                form='AddInstitutionOfEducation'
                 title='Додати'
               />
 
-              {useYIFAddinstitutionOfEducation.submitted &&
-                !useYIFAddinstitutionOfEducation.error.hasError && (
-                  <div className={styles.spinner}>
-                    <Spinner />
-                  </div>
+              <div className={styles.errorContainer}>
+                {useYIFAddInstitutionOfEducation.submitted &&
+                  !useYIFAddInstitutionOfEducation.error.hasError && (
+                    <div className={styles.spinner}>
+                      <Spinner />
+                    </div>
+                  )}
+                {useYIFAddInstitutionOfEducation.error.hasError && (
+                  <FormInputError
+                    errorType='form'
+                    errorMessage={
+                      useYIFAddInstitutionOfEducation.error.errorMessage
+                    }
+                  />
                 )}
-              {useYIFAddinstitutionOfEducation.error.hasError && (
-                <FormInputError
-                  errorType='form'
-                  errorMessage={
-                    useYIFAddinstitutionOfEducation.error.errorMessage
-                  }
-                />
-              )}
-              {useYIFAddinstitutionOfEducation.success.hasSuccess && (
-                <FormInputSuccess
-                  successMessage={
-                    useYIFAddinstitutionOfEducation.success.successMessage
-                  }
-                />
-              )}
+                {useYIFAddInstitutionOfEducation.success.hasSuccess && (
+                  <FormInputSuccess
+                    successMessage={
+                      useYIFAddInstitutionOfEducation.success.successMessage
+                    }
+                  />
+                )}
+              </div>
             </div>
           </Form>
         )}
