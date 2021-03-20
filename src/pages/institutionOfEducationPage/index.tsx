@@ -82,7 +82,7 @@ const InstitutionOfEducationPage = () => {
       return (
         <AccordionItem
           key={key}
-          header={
+          headerContent={
             <>
               <span className={styles.acc_item__id}>{code}</span>
               <h3 className={styles.acc_item__name}>{name}</h3>
@@ -90,7 +90,7 @@ const InstitutionOfEducationPage = () => {
           }
           headerStyle={styles.acc_item__header}
           bodyStyle={styles.acc_item__body}
-          body={specialties
+          bodyContent={specialties
             .sort((a: any, b: any) => a.specialtyCode - b.specialtyCode)
             .map((item: any) => (
               <li key={item.specialtyId} className={styles.acc_item__subitem}>
