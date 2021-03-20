@@ -285,7 +285,7 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
 
   return (
     <div className={styles.superAdminAccount}>
-      <h1>Адміністратори університетів</h1>
+      <h1>Адміністратори закладів освіти</h1>
       {error.hasError && (
         <div className={styles.flashMessageRight}>
           {' '}
@@ -332,7 +332,7 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
               }`}
               onClick={() => handleSort('abbreviation')}
             >
-              Університет <IconArrow />
+             Заклад освіти <IconArrow />
             </li>
             <li
               data-testid='sortByBanned'

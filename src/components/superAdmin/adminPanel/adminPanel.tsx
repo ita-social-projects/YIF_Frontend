@@ -17,12 +17,7 @@ const AdminPanel: React.FC = () => {
           <ul>
             <li className={styles.hasLink}>
               <Link className={styles.underlineAnimation} to='#'>
-                Університетів
-              </Link>
-            </li>
-            <li className={styles.hasLink}>
-              <Link className={styles.underlineAnimation} to='#'>
-                Шкіл
+                Закладів освіти
               </Link>
             </li>
           </ul>
@@ -30,6 +25,11 @@ const AdminPanel: React.FC = () => {
         <li className={styles.hasLink}>
           <Link className={styles.underlineAnimation} to='#'>
             Університети
+          </Link>
+        </li>
+        <li className={styles.hasLink}>
+          <Link className={styles.underlineAnimation} to='#'>
+            Коледжі
           </Link>
         </li>
         <li className={styles.hasLink}>

@@ -187,7 +187,7 @@ class UserWorksSpace extends React.Component<Props, {}> {
                   </li>
                   <li onClick={() => this.onChangeFrame(1)}>
                     <p className={styles.underlineAnimation} id='univLiClick'>
-                      Університети
+                      Заклади освіти
                     </p>
                   </li>
                   <li onClick={() => this.onChangeFrame(2)}>

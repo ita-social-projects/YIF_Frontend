@@ -48,10 +48,10 @@ const Footer: React.FC = () => {
             <p>
               <Link
                 className={`${styles.linkstyle} ${styles.underlineAnimation}`}
-                to='/institutionOfEducation'
+                to='/institutionsOfEducation'
                 id='universitiesLinkFooter'
               >
-                Університети
+                Заклади освіти
               </Link>
             </p>
           </article>

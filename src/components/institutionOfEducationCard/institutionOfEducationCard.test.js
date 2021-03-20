@@ -26,7 +26,7 @@ test('renders with props', () => {
           abbreviation='НУВГП'
           site='nuwm.edu.ua'
           address='м. Рівне, вул. Соборна, 11'
-          description='Тут буде опис університету'
+          description='Тут буде опис закладу освіти'
           startOfCampaign='2021-08-13T00:00:00'
           endOfCampaign='2021-08-31T00:00:00'
         />
@@ -49,8 +49,8 @@ test('renders with props', () => {
   expect(adress).toBeInTheDocument();
   expect(adress.tagName).toMatch(/p/i);
 
-  expect(getByText(/Тут буде опис університету/i)).toBeInTheDocument();
-  const description = screen.getByText(/Тут буде опис університету/i);
+  expect(getByText(/Тут буде опис закладу освіти/i)).toBeInTheDocument();
+  const description = screen.getByText(/Тут буде опис закладу освіти/i);
   expect(description).toBeInTheDocument();
   expect(description.tagName).toMatch(/p/i);
 

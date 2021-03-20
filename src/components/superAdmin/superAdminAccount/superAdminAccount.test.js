@@ -67,7 +67,7 @@ describe('check SuperAdminAccount component', () => {
         institutionOfEducationAdmins={institutionOfEducationAdmins}
       />
     );
-    expect(queryByText(/Адміністратори університетів/i)).toBeInTheDocument();
+    expect(queryByText(/Адміністратори закладів освіти/i)).toBeInTheDocument();
     expect(queryByText(/Ім'я/i)).toBeInTheDocument();
     expect(queryByText(/Електронна адреса/i)).toBeInTheDocument();
   });

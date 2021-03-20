@@ -10,7 +10,7 @@ function Aside() {
           className={styles.underlineAnimation}
           to='/institutionOfEducationInfo'
         >
-          Університет
+          Заклади освіти
         </Link>
         <Link className={styles.underlineAnimation} to='/ourSpecialties'>
           Спеціальності
