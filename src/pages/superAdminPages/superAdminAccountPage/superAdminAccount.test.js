@@ -7,7 +7,7 @@ import { act } from 'react-dom/test-utils';
 import { store } from '../../../store/store';
 import { authContext } from '../../../services/tokenValidator';
 
-const universityAdmins = [
+const institutionOfEducationAdmins = [
   {
     id: '1183f8eb-e8a1-4ad6-bbac-df64e685917d',
     user: {
@@ -16,7 +16,7 @@ const universityAdmins = [
       email: 'nuweeAdmin@gmail.com',
       phoneNumber: '+380-31-415-9265',
     },
-    university: {
+    institutionOfEducation: {
       id: '96487fd4-72ea-4830-84cf-9e4d9bf8950f',
       name:
         'Національний університет водного господарства та природокористування',
@@ -29,12 +29,12 @@ const universityAdmins = [
 afterEach(cleanup);
 
 describe('check SuperAdminAccount component', () => {
-  it('check func fetchUniversitiesAdmins', async () => {
-    const fetchUniversitiesAdmins = jest.fn();
+  it('check func fetchInstitutionOfEducationAdmins', async () => {
+    const fetchInstitutionOfEducationAdmins = jest.fn();
 
     jest.spyOn(global, 'fetch').mockImplementation(() =>
       Promise.resolve({
-        json: () => Promise.resolve(universityAdmins),
+        json: () => Promise.resolve(institutionOfEducationAdmins),
       })
     );
     await act(async () => {
@@ -53,25 +53,25 @@ describe('check SuperAdminAccount component', () => {
               }}
             >
               <SuperAdminAccountPage
-                universityAdmins={universityAdmins}
-                onClick={fetchUniversitiesAdmins()}
+                institutionOfEducationAdmins={institutionOfEducationAdmins}
+                onClick={fetchInstitutionOfEducationAdmins()}
               />
             </authContext.Provider>
           </MemoryRouter>
         </Provider>
       );
 
-      expect(fetchUniversitiesAdmins).toHaveBeenCalledTimes(1);
+      expect(fetchInstitutionOfEducationAdmins).toHaveBeenCalledTimes(1);
     });
 
     global.fetch.mockRestore();
   });
-  it('check error fetchUniversitiesAdmins ', async () => {
-    const fetchUniversitiesAdmins = jest.fn();
+  it('check error fetchInstitutionOfEducationAdmins ', async () => {
+    const fetchInstitutionOfEducationAdmins = jest.fn();
 
     jest.spyOn(global, 'fetch').mockImplementation(() =>
       Promise.resolve({
-        json: () => Promise.reject(universityAdmins),
+        json: () => Promise.reject(institutionOfEducationAdmins),
       })
     );
     await act(async () => {
@@ -90,15 +90,15 @@ describe('check SuperAdminAccount component', () => {
               }}
             >
               <SuperAdminAccountPage
-                universityAdmins={universityAdmins}
-                onClick={fetchUniversitiesAdmins()}
+                institutionOfEducationAdmins={institutionOfEducationAdmins}
+                onClick={fetchInstitutionOfEducationAdmins()}
               />
             </authContext.Provider>
           </MemoryRouter>
         </Provider>
       );
 
-      expect(fetchUniversitiesAdmins).toHaveBeenCalledTimes(1);
+      expect(fetchInstitutionOfEducationAdmins).toHaveBeenCalledTimes(1);
     });
 
     global.fetch.mockRestore();

@@ -153,11 +153,11 @@ const Header: React.FC = () => {
             Напрями
           </Link>
           <Link
-            id='universitiesLink'
-            to='/universities'
+            id='institutionsOfEducationLink'
+            to='/institutionsOfEducation'
             className={styles.underlineAnimation}
           >
-            Університети
+            Заклади освіти
           </Link>
         </div>
         <div className={styles.entry} ref={ref}>

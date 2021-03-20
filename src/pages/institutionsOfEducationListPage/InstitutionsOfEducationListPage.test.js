@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM, { unmountComponentAtNode } from 'react-dom';
 import { queryAllByTestId, queryByTestId } from '@testing-library/react';
-import UniversitiesListPage from '.';
+import InstitutionsOfEducationListPage from '.';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 import { act } from 'react-dom/test-utils';
@@ -58,7 +58,7 @@ it('check success response', async () => {
     ReactDOM.render(
       <Router history={history}>
         <Provider store={store}>
-          <UniversitiesListPage />
+          <InstitutionsOfEducationListPage />
         </Provider>
       </Router>,
       container
@@ -69,7 +69,7 @@ it('check success response', async () => {
   expect(cards).toHaveLength(2);
 
   const heading = queryByTestId(container, 'heading');
-  expect(heading.innerHTML).toBe('Список університетів');
+  expect(heading.innerHTML).toBe('Список закладів освіти');
 });
 
 it('check error ', async () => {
@@ -84,7 +84,7 @@ it('check error ', async () => {
     ReactDOM.render(
       <Router history={history}>
         <Provider store={store}>
-          <UniversitiesListPage />
+          <InstitutionsOfEducationListPage />
         </Provider>
       </Router>,
       container

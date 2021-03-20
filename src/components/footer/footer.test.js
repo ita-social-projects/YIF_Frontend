@@ -37,7 +37,7 @@ it('check footer as a whole component', () => {
   expect(links[2].href).toBe('http://localhost/mailto:');
   expect(links[3].href).toBe('http://localhost/');
   expect(links[4].href).toBe('http://localhost/directions');
-  expect(links[5].href).toBe('http://localhost/universities');
+  expect(links[5].href).toBe('http://localhost/institutionOfEducation');
 
   expect(links[2].textContent).toBe('support@youritfuture.com');
   // expect(links[3].textContent).toBe("YIF");

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-import UniversityCard from '.';
+import InstitutionOfEducationCard from '.';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { store } from '../../store/store';
@@ -11,7 +11,7 @@ it('renders without crashing', () => {
   ReactDOM.render(
     <MemoryRouter>
       <Provider store={store}>
-        <UniversityCard />
+        <InstitutionOfEducationCard />
       </Provider>
     </MemoryRouter>,
     div
@@ -22,7 +22,7 @@ test('renders with props', () => {
   const { getByText } = render(
     <MemoryRouter>
       <Provider store={store}>
-        <UniversityCard
+        <InstitutionOfEducationCard
           abbreviation='НУВГП'
           site='nuwm.edu.ua'
           address='м. Рівне, вул. Соборна, 11'
@@ -69,7 +69,7 @@ test('check the button link', () => {
   const { getByText } = render(
     <MemoryRouter>
       <Provider store={store}>
-        <UniversityCard />
+        <InstitutionOfEducationCard />
       </Provider>
     </MemoryRouter>
   );
@@ -77,7 +77,10 @@ test('check the button link', () => {
   const link = screen.getByText(/Детальніше/i);
   expect(link).toBeInTheDocument();
   expect(link.tagName).toMatch(/a/i);
-  expect(link).toHaveAttribute('href', expect.stringContaining('/university/'));
+  expect(link).toHaveAttribute(
+    'href',
+    expect.stringContaining('/institutionOfEducation/')
+  );
 });
 
 describe('handleClick', () => {
@@ -87,7 +90,7 @@ describe('handleClick', () => {
     const { container } = render(
       <Provider store={store}>
         <MemoryRouter>
-          <UniversityCard onClick={handleClick()} />
+          <InstitutionOfEducationCard onClick={handleClick()} />
         </MemoryRouter>
       </Provider>
     );

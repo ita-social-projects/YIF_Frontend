@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, Formik, Form } from 'formik';
 import { ReactComponent as DefaultPicture } from './defaultUnivPicture.svg';
-import styles from './addUniversityForm.module.scss';
+import styles from './addInstitutionOfEducationForm.module.scss';
 
 const questionIcon = (
   <svg
@@ -51,7 +51,7 @@ const picturesIcon = (
   </svg>
 );
 
-const AddUniversityForm = () => {
+const AddInstitutionOfEducationForm = () => {
   return (
     <div className={styles.wrapper}>
       <Formik
@@ -68,66 +68,66 @@ const AddUniversityForm = () => {
             <div className={styles.fullWidth}>
               <label
                 className={styles.topWrapper__label}
-                htmlFor='universityName'
+                htmlFor='institutionOfEducationName'
               >
                 Назва
               </label>
               <Field
                 className={styles.topWrapper__input}
-                id='universityName'
-                name='universityName'
+                id='institutionOfEducationName'
+                name='institutionOfEducationName'
               />
             </div>
             <div className={styles.halfWidth}>
               <label
                 className={styles.topWrapper__label}
-                htmlFor='universityAbbreviation'
+                htmlFor='institutionOfEducationAbbreviation'
               >
                 Аббревіатура
               </label>
               <Field
                 className={styles.topWrapper__input}
-                id='universityAbbreviation'
-                name='universityAbbreviation'
+                id='institutionOfEducationAbbreviation'
+                name='institutionOfEducationAbbreviation'
               />
             </div>
             <div className={styles.halfWidth}>
               <label
                 className={styles.topWrapper__label}
-                htmlFor='universityAdress'
+                htmlFor='institutionOfEducationAdress'
               >
                 Адреса
               </label>
               <Field
                 className={styles.topWrapper__input}
-                id='universityAdress'
-                name='universityAdress'
+                id='institutionOfEducationAdress'
+                name='institutionOfEducationAdress'
               />
             </div>
             <div className={styles.halfWidth}>
               <label
                 className={styles.topWrapper__label}
-                htmlFor='universitySite'
+                htmlFor='institutionOfEducationSite'
               >
                 Сайт
               </label>
               <Field
                 className={styles.topWrapper__input}
-                id='universitySite'
-                name='universitySite'
+                id='institutionOfEducationSite'
+                name='institutionOfEducationSite'
               />
             </div>
             <div className={styles.halfWidth}>
               <label
                 className={styles.topWrapper__label}
-                htmlFor='universityEmail'
+                htmlFor='institutionOfEducationEmail'
               >
                 Електронна адреса
               </label>
               <Field
                 className={styles.topWrapper__input}
-                id='universityEmail'
-                name='universityEmail'
+                id='institutionOfEducationEmail'
+                name='institutionOfEducationEmail'
                 type='email'
               />
             </div>
@@ -135,28 +135,28 @@ const AddUniversityForm = () => {
               <div className={styles.topWrapper__column__fullWidth}>
                 <label
                   className={styles.topWrapper__label}
-                  htmlFor='universityPhone'
+                  htmlFor='institutionOfEducationPhone'
                 >
                   Телефон
                 </label>
                 <Field
                   className={styles.topWrapper__input}
-                  id='universityPhone'
-                  name='universityPhone'
+                  id='institutionOfEducationPhone'
+                  name='institutionOfEducationPhone'
                   type='phone'
                 />
               </div>
               <div className={styles.fullWidth}>
                 <label
                   className={styles.topWrapper__label}
-                  htmlFor='universityDescription'
+                  htmlFor='institutionOfEducationDescription'
                 >
                   Опис
                 </label>
                 <Field
                   as='textarea'
-                  id='universityDescription'
-                  name='universityDescription'
+                  id='institutionOfEducationDescription'
+                  name='institutionOfEducationDescription'
                   className={styles.topWrapper__textarea}
                   type='textarea'
                 />
@@ -220,4 +220,4 @@ const AddUniversityForm = () => {
   );
 };
 
-export default AddUniversityForm;
+export default AddInstitutionOfEducationForm;

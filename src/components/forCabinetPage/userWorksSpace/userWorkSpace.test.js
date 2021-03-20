@@ -5,11 +5,10 @@ import { act } from 'react-dom/test-utils';
 import ReactDOM from 'react-dom';
 import UserWorkSpace from './index';
 import UserOption from '../options/userOption/index';
-import UnivListOption from '../options/univListOption/index';
+import InstitutionOfEducationListOption from '../options/institutionOfEducationListOption/index';
 import SpecListOption from '../options/specListOption/index';
 import { store } from '../../../store/store';
 import { Provider } from 'react-redux';
-import { useAuth } from '../../../services/tokenValidator';
 
 let container = null;
 let container_option = null;

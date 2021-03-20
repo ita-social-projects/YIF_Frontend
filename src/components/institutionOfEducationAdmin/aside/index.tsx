@@ -6,7 +6,10 @@ function Aside() {
   return (
     <aside className={styles.assideMenu}>
       <nav>
-        <Link className={styles.underlineAnimation} to='/universityInfo'>
+        <Link
+          className={styles.underlineAnimation}
+          to='/institutionOfEducationInfo'
+        >
           Університет
         </Link>
         <Link className={styles.underlineAnimation} to='/ourSpecialties'>

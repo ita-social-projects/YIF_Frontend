@@ -4,20 +4,20 @@ import Home from '../../pages/home';
 import ErrorPage from '../../pages/errorPage';
 import GraduateCabinet from '../../pages/graduateCabinetPage/index';
 import LoginPage from '../../pages/loginPage';
-import UniversitiesListPage from '../../pages/universitiesListPage';
+import InstitutionsOfEducationListPage from '../../pages/institutionsOfEducationListPage';
 import SpecialityPage from '../../pages/specialityPage';
 import DirectionsListPage from '../../pages/directionsListPage';
-import UniversityPage from '../../pages/universityPage';
+import InstitutionOfEducationPage from '../../pages/institutionOfEducationPage';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RegistrationForm from '../../pages/registrationPage';
 import { useAuth } from '../../services/tokenValidator';
 import { ProtectedRoute, RedirectRoute } from '../../services/customRoutes';
 import ErrorBoundry from '../../errorBoundry';
 import ResetPasswordPage from '../../pages/resetPasswordPage/index';
-import AddUniversity from '../../pages/superAdminPages/addUniversityPage';
+import AddInstitutionOfEducation from '../../pages/superAdminPages/addInstitutionOfEducationPage';
 import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccountPage';
-import UniversityInfo from '../universityAdmin/universityInfo';
-import UniversityAdminPage from '../../pages/universityAdminPage';
+import InstitutionOfEducationInfo from '../institutionOfEducationAdmin/institutionOfEducationInfo';
+import InstitutionOfEducationAdminPage from '../../pages/institutionOfEducationAdminPage';
 
 const App = () => {
   const { token } = useAuth();
@@ -41,11 +41,11 @@ const App = () => {
           <Route path='/directions'>
             <DirectionsListPage />
           </Route>
-          <Route path='/universities'>
-            <UniversitiesListPage />
+          <Route path='/institutionsOfEducation'>
+            <InstitutionsOfEducationListPage />
           </Route>
-          <Route path='/university/:id'>
-            <UniversityPage />
+          <Route path='/institutionOfEducation/:id'>
+            <InstitutionOfEducationPage />
           </Route>
           <ProtectedRoute
             user={token}
@@ -57,20 +57,20 @@ const App = () => {
           <Route path='/specialty/:id'>
             <SpecialityPage />
           </Route>
-          <Route path='/adduniv'>
-            <AddUniversity />
+          <Route path='/addInstitutionOfEducation'>
+            <AddInstitutionOfEducation />
           </Route>
-          <Route path='/universityAdmin'>
-            <UniversityAdminPage />
+          <Route path='/institutionOfEducationAdmin'>
+            <InstitutionOfEducationAdminPage />
           </Route>
-          <Route path='/universityInfo'>
-            <UniversityAdminPage />
+          <Route path='/institutionOfEducationInfo'>
+            <InstitutionOfEducationAdminPage />
           </Route>
           <Route path='/ourSpecialties'>
-            <UniversityAdminPage />
+            <InstitutionOfEducationAdminPage />
           </Route>
           <Route path='/moderators'>
-            <UniversityAdminPage />
+            <InstitutionOfEducationAdminPage />
           </Route>
           <ProtectedRoute user={token} path='/cabinet' allowed={['Graduate']}>
             <GraduateCabinet />
