@@ -194,7 +194,7 @@ const InstitutionsOfEducationListPage = () => {
         <Header />
         <section className={styles.institutionsOfEducationPage}>
           <h1 data-testid='heading' className={styles.title}>
-            Список закладів освіти
+            Заклади освіти
           </h1>
           {error.hasError ? (
             <ResponsePlaceholder errorMessage={error.errorMessage} />

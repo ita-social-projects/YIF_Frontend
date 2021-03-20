@@ -69,7 +69,7 @@ it('check success response', async () => {
   expect(cards).toHaveLength(2);
 
   const heading = queryByTestId(container, 'heading');
-  expect(heading.innerHTML).toBe('Список закладів освіти');
+  expect(heading.innerHTML).toBe('Заклади освіти');
 });
 
 it('check error ', async () => {
