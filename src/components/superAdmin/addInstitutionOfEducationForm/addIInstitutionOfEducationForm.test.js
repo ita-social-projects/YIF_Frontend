@@ -41,7 +41,9 @@ it('renders with blank fields', () => {
   const institutionOfEducationDescription = container.querySelector(
     'textarea[name="institutionOfEducationDescription"]'
   );
-  const adminEmail = container.querySelector('input[name="adminEmail"]');
+  const institutionOfEducationAdminEmail = container.querySelector(
+    'input[name="institutionOfEducationAdminEmail"]'
+  );
 
   expect(institutionOfEducationName.tagName).toBe('INPUT');
   expect(institutionOfEducationAbbreviation.tagName).toBe('INPUT');
@@ -50,7 +52,7 @@ it('renders with blank fields', () => {
   expect(institutionOfEducationEmail.tagName).toBe('INPUT');
   expect(institutionOfEducationDescription.tagName).toBe('TEXTAREA');
   expect(institutionOfEducationPhone.tagName).toBe('INPUT');
-  expect(adminEmail.tagName).toBe('INPUT');
+  expect(institutionOfEducationAdminEmail.tagName).toBe('INPUT');
 
   expect(institutionOfEducationName.getAttribute('value')).toBe('');
   expect(institutionOfEducationAbbreviation.getAttribute('value')).toBe('');
@@ -59,5 +61,5 @@ it('renders with blank fields', () => {
   expect(institutionOfEducationEmail.getAttribute('value')).toBe('');
   expect(institutionOfEducationDescription.getAttribute('value')).toBe(null);
   expect(institutionOfEducationPhone.getAttribute('value')).toBe('');
-  expect(adminEmail.getAttribute('value')).toBe('');
+  expect(institutionOfEducationAdminEmail.getAttribute('value')).toBe('');
 });
