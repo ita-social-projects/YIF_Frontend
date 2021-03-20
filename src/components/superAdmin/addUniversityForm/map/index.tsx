@@ -23,6 +23,10 @@ const UniversityMap = (props: any) => {
     props.settingLng(value);
   };
 
+  const setFieldValue = (name: string, value: number) => {
+    props.setFieldValue(name, value);
+  };
+
   const styleURL: string = `https://api.mapbox.com/styles/v1/youritfuture/cklig66bm1iis17oth9p6vklg/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_KEY}`;
 
   const LocationMarker = () => {
@@ -33,6 +37,9 @@ const UniversityMap = (props: any) => {
         setPosition([lat, lng]);
         settingLat(lat);
         settingLng(lng);
+        if (props.setFieldValue) {
+          setFieldValue('lat', lat);
+        }
       },
     });
     return <Marker position={position} icon={GetIcon()}></Marker>;

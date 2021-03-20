@@ -68,8 +68,8 @@ const AddUniversityForm = () => {
           universityPhone: '',
           universityEmail: '',
           universityDescription: '',
-          lat: lat,
-          picture: picture,
+          lat: 0,
+          picture: '',
           adminEmail: '',
         }}
         validationSchema={validationField}
@@ -88,28 +88,21 @@ const AddUniversityForm = () => {
           handleChange,
           handleBlur,
           handleSubmit,
+          setFieldValue,
         }) => (
           <Form
             className={styles.form}
             onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
-              console.log(`values`, values);
-              console.log(`lat === 0 `, lat === 0);
-              console.log(`lat`, lat);
-              console.log(`lng === 0`, lng === 0);
-              console.log(`errors.location`, errors.lat);
-              console.log(`touched.location`, touched.lat);
-              console.log(`errors.universityName`, errors.universityName);
-
               handleSubmit(e);
               if (
-                touched.universityName &&
+                touched.adminEmail &&
                 errors.universityName === undefined &&
                 errors.universityAbbreviation === undefined &&
                 errors.universityAdress === undefined &&
                 errors.universityPhone === undefined &&
                 errors.universityEmail === undefined &&
-                errors.lat === undefined &&
-                errors.picture === undefined &&
+                // errors.lat === undefined &&
+                // errors.picture === undefined &&
                 errors.universityDescription === undefined &&
                 errors.adminEmail === undefined
               ) {
@@ -118,41 +111,20 @@ const AddUniversityForm = () => {
             }}
           >
             <div className={styles.topWrapper}>
-              <h1 className={styles.topWrapper__title}>Новий заклад освіти</h1>
-              {useYIFAddUniversity.error.hasError && (
-                <FormInputError
-                  errorType='form'
-                  errorMessage={useYIFAddUniversity.error.errorMessage}
-                  redirectLink={useYIFAddUniversity.error.redirectLink}
-                />
-              )}
               <div className={styles.fullWidth}>
-                <label
-                  className={styles.topWrapper__label}
-                  htmlFor='universityName'
-                >
-                  Тип закладу освіти
-                </label>
-                <Field
-                  // className={styles.topWrapper__input}
-                  id='IOEType'
-                  name='IOEType'
-                  type='radio'
-                  value={values.IOEType}
-                  onBlur={handleBlur}
-                  // onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  //   handleChange(e);
-                  //   useYIFAddUniversity.handleChangeName(e);
-                  // }}
-                />
-                {errors.universityName && touched.universityName ? (
+                <h1 className={styles.topWrapper__title}>
+                  Новий заклад освіти
+                </h1>
+                {useYIFAddUniversity.error.hasError && (
                   <FormInputError
-                    errorType='input'
-                    errorMessage={errors.universityName}
+                    errorType='form'
+                    errorMessage={useYIFAddUniversity.error.errorMessage}
+                    redirectLink={useYIFAddUniversity.error.redirectLink}
                   />
-                ) : null}
+                )}
               </div>
-              <div className={styles.fullWidth}>
+
+              <div className={styles.halfWidth}>
                 <label
                   className={styles.topWrapper__label}
                   htmlFor='universityName'
@@ -176,6 +148,21 @@ const AddUniversityForm = () => {
                     errorMessage={errors.universityName}
                   />
                 ) : null}
+              </div>
+
+              <div className={styles.halfWidth}>
+                <label className={styles.topWrapper__label} htmlFor='IOEType'>
+                  Тип закладу освіти
+                </label>
+                <Field
+                  className={styles.topWrapper__input}
+                  as='select'
+                  id='IOEType'
+                  name='IOEType'
+                >
+                  <option value='university'>Університет</option>
+                  <option value='college'>Коледж</option>
+                </Field>
               </div>
               <div className={styles.halfWidth}>
                 <label
@@ -355,19 +342,20 @@ const AddUniversityForm = () => {
               <h2 className={styles.bottomWrapper__subtitle}>
                 Виберіть місце розташування
               </h2>
-              <UniversityMap settingLat={settingLat} settingLng={settingLng} />
-
               <Field
                 id='lat'
                 name='lat'
-                type='hidden'
                 value={lat}
-                onBlur={handleBlur}
-              />
-
-              {lat === 0 && lng === 0 && errors.lat && touched.lat ? (
-                <FormInputError errorType='input' errorMessage={errors.lat} />
-              ) : null}
+                type='input'
+                component={UniversityMap}
+                settingLat={settingLat}
+                settingLng={settingLng}
+                // setFieldValue={setFieldValue}
+              >
+                {lat === 0 && lng === 0 && errors.lat && touched.lat ? (
+                  <FormInputError errorType='input' errorMessage={errors.lat} />
+                ) : null}
+              </Field>
 
               <div
                 className={`${styles.bottomWrapper__halfWidth} ${styles.mailContainer}`}
@@ -395,6 +383,7 @@ const AddUniversityForm = () => {
                   value={values.adminEmail}
                   onBlur={handleBlur}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    console.log(`dva`);
                     handleChange(e);
                     useYIFAddUniversity.handleChangeAdminEmail(e);
                   }}

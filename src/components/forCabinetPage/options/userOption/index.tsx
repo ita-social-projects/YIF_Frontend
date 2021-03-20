@@ -43,7 +43,7 @@ const UserOption = () => {
   };
 
   const { photo } = useSelector(userSelector);
-  const defaultPicture = 'assets/images/defaultUnivPicture.svg';
+  const defaultPicture = 'assets/icons/avatar.jpg';
   const avatar = photo ? photo : defaultPicture;
 
   const imageHandler = (image: string) => {

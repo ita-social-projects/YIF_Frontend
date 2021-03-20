@@ -87,7 +87,7 @@ export const validationField = Yup.object().shape({
       'Занадто велика кількість символів,перевірте правильність ведення електронної пошти'
     ),
 
-  location: Yup.string().required('Вкажіть розташування'),
+  lat: Yup.number().lessThan(1, 'Вкажіть розташування'),
 
   picture: Yup.string().required('Оберіть зображення'),
 
