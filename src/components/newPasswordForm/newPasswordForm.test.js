@@ -1,7 +1,7 @@
 import React from 'react';
 import NewPasswordForm from './index';
 import userEvent from '@testing-library/user-event';
-import { render, wait, screen, act } from '@testing-library/react';
+import { render, wait, act } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 jest.mock('../../services/useCaptcha', () => ({
@@ -21,7 +21,6 @@ const mockFetchPromise = Promise.resolve({
 global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
 const mockHistoryPush = jest.fn();
-
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useHistory: () => ({
@@ -91,7 +90,7 @@ describe('NewPasswordForm', () => {
   });
 
   test('redirects to the page after a successful password change ', async () => {
-    const { getByPlaceholderText, getByRole, queryByText } = render(
+    const { getByPlaceholderText, getByRole } = render(
       <Router>
         <NewPasswordForm />
       </Router>
@@ -120,5 +119,29 @@ describe('NewPasswordForm', () => {
     expect(
       queryByText('Щось пішло не так, спробуйте знову!')
     ).toBeInTheDocument();
+  });
+
+  test('error message disappears after 2 sec', async () => {
+    global.fetch.mockImplementationOnce(() => Promise.reject('Some error'));
+    const { getByPlaceholderText, getByRole, queryByText, getByText } = render(
+      <Router>
+        <NewPasswordForm />
+      </Router>
+    );
+    await wait(() => {
+      userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
+      userEvent.type(getByPlaceholderText('Підтвердіть пароль'), 'Qwerty1@');
+      userEvent.click(getByRole('button'));
+    });
+    expect(
+      getByText('Щось пішло не так, спробуйте знову!')
+    ).toBeInTheDocument();
+    act(() => {
+      //  The code on the line below gives a warning: Can't perform a React state update on an unmounted component.
+      jest.runAllTimers();
+    });
+    expect(
+      queryByText('Щось пішло не так, спробуйте знову!')
+    ).not.toBeInTheDocument();
   });
 });
