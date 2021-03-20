@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import UniversityInfo from '.';
+import InstitutionOfEducationInfo from '.';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { store } from '../../../store/store';
@@ -10,7 +10,7 @@ it('renders without crashing', () => {
   ReactDOM.render(
     <MemoryRouter>
       <Provider store={store}>
-        <UniversityInfo />
+        <InstitutionOfEducationInfo />
       </Provider>
     </MemoryRouter>,
     div

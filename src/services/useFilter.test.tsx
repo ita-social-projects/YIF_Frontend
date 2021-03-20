@@ -6,7 +6,7 @@ import { Fragment } from 'react';
 import { Provider } from "react-redux";
 import { store } from "../store/store";
 import { useSelector,useDispatch } from 'react-redux';
-import { selectData,selectChosenData ,chooseDirection, chooseSpeciality, chooseUniversity} from '../store/reducers/dropboxReducer';
+import { selectData,selectChosenData ,chooseDirection, chooseSpeciality, chooseInstitutionOfEducation} from '../store/reducers/dropboxReducer';
 import { act } from "react-dom/test-utils";
 import { unmountComponentAtNode } from "react-dom";
 import ReactDOM from "react-dom";
@@ -22,12 +22,12 @@ describe('useFilter Hook',()=>{
     const TestComponent = ()=>{
 
 
-        useGetAllListData(`${APIUrl}University/Abbreviations`,'setUniversity');
+        useGetAllListData(`${APIUrl}InstitutionOfEducation/Abbreviations`,'setInstitutionOfEducation');
         useGetAllListData(`${APIUrl}Specialty/Names`,'setSpeciality');
         useGetAllListData(`${APIUrl}Direction/Names`,'setDirection');
 
         const state = useSelector(selectData);
-        let university: string[] = state.university;
+        let institutionOfEducation: string[] = state.institutionOfEducation;
         let direction: string[] = state.direction;
         let speciality: string[] = state.speciality;
         return(
@@ -36,7 +36,7 @@ describe('useFilter Hook',()=>{
                     Success!
                     <div>{speciality}</div>
                     <div>{direction}</div>
-                    <div>{university}</div>
+                    <div>{institutionOfEducation}</div>
                 </div>
             </Fragment>
         )

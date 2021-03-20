@@ -21,7 +21,10 @@ const handleClick = () => {
 };
 
 const Home = () => {
-  useGetAllListData(`${APIUrl}University/Abbreviations`, 'setUniversity');
+  useGetAllListData(
+    `${APIUrl}InstitutionOfEducation/Abbreviations`,
+    'setInstitutionOfEducation'
+  );
   useGetAllListData(`${APIUrl}Specialty/Names`, 'setSpeciality');
   useGetAllListData(`${APIUrl}Direction/Names`, 'setDirection');
   return (

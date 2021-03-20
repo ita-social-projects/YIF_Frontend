@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
-import styles from './universityCard.module.scss';
+import { Link } from 'react-router-dom';
+import styles from './institutionOfEducationCard.module.scss';
 import Tooltips from '../common/tooltip';
 import { useAuth } from '../../services/tokenValidator';
 import { requestSecureData } from '../../services/requestDataFunction';
 import { APIUrl } from '../../services/endpoints';
-import CampaingCard from '../../components/campaignCard';
+import CampaingCard from '../campaignCard';
 
 interface Props {
   liked?: boolean;
@@ -19,7 +19,7 @@ interface Props {
   endOfCampaign: string;
 }
 
-const UniversityCard: React.FC<Props> = (props) => {
+const InstitutionOfEducationCard: React.FC<Props> = (props) => {
   const [isLiked, setLiked] = useState(false);
   const { token, getToken } = useAuth();
   const [submitted, setSubmitted] = useState(false);
@@ -67,30 +67,32 @@ const UniversityCard: React.FC<Props> = (props) => {
     e.preventDefault();
     let itemImg = (e.target as Element).closest('svg');
     if (itemImg) setLiked(() => !isLiked);
-    let universityId = (e.currentTarget as Element).getAttribute('data-id');
+    let institutionOfEducationId = (e.currentTarget as Element).getAttribute(
+      'data-id'
+    );
     let parentElem = itemImg?.parentElement;
 
     if (parentElem?.classList.contains(`${styles.card__icon__liked}`)) {
       itemImg &&
-        sendDeleteFavoriteUniversity(
-          `${APIUrl}University/Favorites/${universityId}`,
+        sendDeleteFavoriteInstitutionOfEducation(
+          `${APIUrl}InstitutionOfEducation/Favorites/${institutionOfEducationId}`,
           'DELETE'
         );
     } else {
       itemImg &&
-        sendDeleteFavoriteUniversity(
-          `${APIUrl}University/Favorites/${universityId}`,
+        sendDeleteFavoriteInstitutionOfEducation(
+          `${APIUrl}InstitutionOfEducation/Favorites/${institutionOfEducationId}`,
           'POST'
         );
     }
   };
 
-  let sendDeleteFavoriteUniversity = (
-    endpointLikedUniversity: string,
+  let sendDeleteFavoriteInstitutionOfEducation = (
+    endpointLikedInstitutionOfEducation: string,
     method: string
   ) => {
     getToken();
-    requestSecureData(endpointLikedUniversity, method, token!)
+    requestSecureData(endpointLikedInstitutionOfEducation, method, token!)
       .then((res: any) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
@@ -117,7 +119,7 @@ const UniversityCard: React.FC<Props> = (props) => {
   return (
     <div
       data-testid='card'
-      id='universityCard'
+      id='institutionOfEducationCard'
       data-id={props.id}
       className={styles.card}
       onClick={handleClick}
@@ -158,7 +160,7 @@ const UniversityCard: React.FC<Props> = (props) => {
           </div>
           <Link
             id='moreDetailsButton'
-            to={`/university/${id}`}
+            to={`/institutionOfEducation/${id}`}
             className={`${styles.card__content__link} ${styles.animatedButton}`}
           >
             Детальніше
@@ -174,4 +176,4 @@ const UniversityCard: React.FC<Props> = (props) => {
   );
 };
 
-export default UniversityCard;
+export default InstitutionOfEducationCard;

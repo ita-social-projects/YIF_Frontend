@@ -6,8 +6,11 @@ function Aside() {
   return (
     <aside className={styles.assideMenu}>
       <nav>
-        <Link className={styles.underlineAnimation} to='/universityInfo'>
-          Університет
+        <Link
+          className={styles.underlineAnimation}
+          to='/institutionOfEducationInfo'
+        >
+          Заклади освіти
         </Link>
         <Link className={styles.underlineAnimation} to='/ourSpecialties'>
           Спеціальності

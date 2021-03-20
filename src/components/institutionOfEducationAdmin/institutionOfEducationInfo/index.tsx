@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './universityInfo.module.scss';
+import styles from './institutionOfEducationInfo.module.scss';
 import { Link } from 'react-router-dom';
 
-const UniversityInfo = () => {
+const InstitutionOfEducationInfo = () => {
   const { name, abbreviation, site, address, phone, email, description } = {
     name:
       'Національний університет водного господарства та природокористування',
@@ -62,4 +62,4 @@ const UniversityInfo = () => {
   );
 };
 
-export default UniversityInfo;
+export default InstitutionOfEducationInfo;

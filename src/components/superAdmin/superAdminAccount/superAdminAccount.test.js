@@ -7,7 +7,7 @@ import { act } from 'react-dom/test-utils';
 import { store } from '../../../store/store';
 import { authContext } from '../../../services/tokenValidator';
 
-const universityAdmins = [
+const institutionOfEducationAdmins = [
   {
     id: '1183f8eb-e8a1-4ad6-bbasadc-df64e685917d',
     user: {
@@ -16,7 +16,7 @@ const universityAdmins = [
       email: 'nuweeAdmin@gmail.com',
       phoneNumber: '+380-31-415-9265',
     },
-    university: {
+    institutionOfEducation: {
       id: '96487fd4-72ea-4830-84cf-9e4d9bf8950f',
       name:
         'Національний університет водного господарства та природокористування',
@@ -32,7 +32,7 @@ const universityAdmins = [
       email: 'min@gmail.com',
       phoneNumber: '+380-31-415-9265',
     },
-    university: {
+    institutionOfEducation: {
       id: '96487fd4-72ea-4bbv830-84cf-9e4d9bf8950f',
       name:
         'Національний університет водного господарства та природокористування',
@@ -48,7 +48,7 @@ const universityAdmins = [
       email: 'mn@gmail.com',
       phoneNumber: '+380-31-415-9265',
     },
-    university: {
+    institutionOfEducation: {
       id: '96487xcfd4-72ea-4bbv830-84cf-9e4d9bf8950f',
       name:
         'Національний університет водного господарства та природокористування',
@@ -63,9 +63,11 @@ afterEach(cleanup);
 describe('check SuperAdminAccount component', () => {
   it('renders correctly', () => {
     const { queryByText } = render(
-      <SuperAdminAccount universityAdmins={universityAdmins} />
+      <SuperAdminAccount
+        institutionOfEducationAdmins={institutionOfEducationAdmins}
+      />
     );
-    expect(queryByText(/Адміністратори університетів/i)).toBeInTheDocument();
+    expect(queryByText(/Адміністратори закладів освіти/i)).toBeInTheDocument();
     expect(queryByText(/Ім'я/i)).toBeInTheDocument();
     expect(queryByText(/Електронна адреса/i)).toBeInTheDocument();
   });
@@ -74,7 +76,7 @@ describe('check SuperAdminAccount component', () => {
     const handleSort = jest.fn();
     const { queryByTestId } = render(
       <SuperAdminAccount
-        universityAdmins={universityAdmins}
+        institutionOfEducationAdmins={institutionOfEducationAdmins}
         handleSort={handleSort('')}
       />
     );
@@ -105,7 +107,7 @@ describe('check SuperAdminAccount component', () => {
 
     render(
       <SuperAdminAccount
-        universityAdmins={universityAdmins}
+        institutionOfEducationAdmins={institutionOfEducationAdmins}
         handlerSearch={handlerSearch}
         clearInput={clearInput}
         setBanStatus={setBanStatus}
@@ -124,7 +126,7 @@ describe('check SuperAdminAccount component', () => {
     expect(setBanStatus).toBeCalledTimes(0);
   });
 
-  it('check fetchUniversitiesAdmins error from catch ', async () => {
+  it('check fetchInstitutionOfEducationesAdmins error from catch ', async () => {
     const mockJsonPromise = Promise.reject({});
 
     const mockFetchPromiseSuccess = Promise.resolve({
@@ -148,7 +150,9 @@ describe('check SuperAdminAccount component', () => {
                 removeToken: () => {},
               }}
             >
-              <SuperAdminAccount universityAdmins={universityAdmins} />
+              <SuperAdminAccount
+                institutionOfEducationAdmins={institutionOfEducationAdmins}
+              />
             </authContext.Provider>
           </MemoryRouter>
         </Provider>
@@ -170,7 +174,7 @@ describe('check SuperAdminAccount component', () => {
     global.fetch.mockRestore();
   });
 
-  it('check fetchUniversitiesAdmins error from server ', async () => {
+  it('check fetchInstitutionOfEducationesAdmins error from server ', async () => {
     const mockJsonPromise = Promise.resolve({});
 
     const mockFetchPromiseSuccess = Promise.resolve({
@@ -194,7 +198,9 @@ describe('check SuperAdminAccount component', () => {
                 removeToken: () => {},
               }}
             >
-              <SuperAdminAccount universityAdmins={universityAdmins} />
+              <SuperAdminAccount
+                institutionOfEducationAdmins={institutionOfEducationAdmins}
+              />
             </authContext.Provider>
           </MemoryRouter>
         </Provider>
@@ -217,7 +223,7 @@ describe('check SuperAdminAccount component', () => {
     global.fetch.mockRestore();
   });
 
-  it('check if fetchUniversitiesAdmins is successful', async () => {
+  it('check if fetchInstitutionOfEducationesAdmins is successful', async () => {
     const mockJsonPromise = Promise.resolve({ message: 'success' });
 
     const mockFetchPromiseSuccess = Promise.resolve({
@@ -241,7 +247,9 @@ describe('check SuperAdminAccount component', () => {
                 removeToken: () => {},
               }}
             >
-              <SuperAdminAccount universityAdmins={universityAdmins} />
+              <SuperAdminAccount
+                institutionOfEducationAdmins={institutionOfEducationAdmins}
+              />
             </authContext.Provider>
           </MemoryRouter>
         </Provider>

@@ -10,7 +10,7 @@ const admin = {
     email: 'nuweeAdmin@gmail.com',
     phoneNumber: '+380-31-415-9265',
   },
-  university: {
+  institutionOfEducation: {
     id: '96487fd4-72ea-4830-84cf-9e4d9bf8950f',
     name:
       'Національний університет водного господарства та природокористування',
@@ -26,7 +26,7 @@ const admin2 = {
     phoneNumber: '+380-31-415-9265',
     photo: 'somePath',
   },
-  university: {
+  institutionOfEducation: {
     id: '96487fd4-72ea-4830-84cf-9e4d9bf8950f',
     name:
       'Національний університет водного господарства та природокористування',
@@ -60,14 +60,17 @@ describe('check TableItem component', () => {
     expect(setBanStatus).toBeCalledTimes(1);
   });
 
-  it('check func removeAdminUniversiti', () => {
-    const removeAdminUniversiti = jest.fn();
+  it('check func removeAdmininstitutionOfEducation', () => {
+    const removeAdminInstitutionOfEducation = jest.fn();
     const { queryByTestId } = render(
-      <TableItem admin={admin} removeAdminUniversiti={removeAdminUniversiti} />
+      <TableItem
+        admin={admin}
+        removeAdminInstitutionOfEducation={removeAdminInstitutionOfEducation}
+      />
     );
     const removeAdmin = queryByTestId('removeAdmin');
 
     fireEvent.click(removeAdmin);
-    expect(removeAdminUniversiti).toBeCalledTimes(1);
+    expect(removeAdminInstitutionOfEducation).toBeCalledTimes(1);
   });
 });

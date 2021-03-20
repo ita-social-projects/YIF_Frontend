@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Header, Footer, UniversityCard } from '../../components';
+import { Header, Footer, InstitutionOfEducationCard } from '../../components';
 import ErrorBoundry from '../../errorBoundry';
-import styles from './universitiesListPage.module.scss';
+import styles from './institutionsOfEducationListPage.module.scss';
 import { requestData } from '../../services/requestDataFunction';
 import Spinner from '../../components/common/spinner';
 import { PaginationPagesCreator } from './paginationPagesCreator';
 import ResponsePlaceholder from '../../components/common/responsePlaceholder';
 import { APIUrl } from '../../services/endpoints';
 
-const UniversitiesListPage = () => {
-  const [universitiesList, setList] = useState([
+const InstitutionsOfEducationListPage = () => {
+  const [InstitutionsOfEducationList, setList] = useState([
     {
       id: '',
       liked: false,
@@ -38,9 +38,9 @@ const UniversitiesListPage = () => {
   useEffect(() => {
     let URL: string = '';
     if (location.state !== undefined) {
-      URL = `${APIUrl}University?DirectionName=${location.state.chosenDirection}&SpecialityName=${location.state.chosenSpeciality}&UniversityAbbreviation=${location.state.chosenUniversity}&page=${currentPage}&pageSize=${perPage}`;
+      URL = `${APIUrl}InstitutionOfEducation?DirectionName=${location.state.chosenDirection}&SpecialityName=${location.state.chosenSpeciality}&InstitutionOfEducationAbbreviation=${location.state.chosenInstitutionOfEducation}&page=${currentPage}&pageSize=${perPage}`;
     } else if (location.state === undefined) {
-      URL = `${APIUrl}University?page=${currentPage}&pageSize=${perPage}`;
+      URL = `${APIUrl}InstitutionOfEducation?page=${currentPage}&pageSize=${perPage}`;
     }
 
     const endpoint = URL;
@@ -74,25 +74,27 @@ const UniversitiesListPage = () => {
     });
   }, [currentPage]);
 
-  const universitiesCardList = universitiesList.map((item: any) => {
-    return (
-      <UniversityCard
-        id={item.id}
-        liked={item.liked}
-        key={item.id}
-        abbreviation={item.abbreviation}
-        site={item.site}
-        address={item.address}
-        description={
-          item.description.length > 265
-            ? item.description.slice(0, 265).concat('...')
-            : item.description
-        }
-        startOfCampaign={item.startOfCampaign.slice(0, 10)}
-        endOfCampaign={item.endOfCampaign.slice(0, 10)}
-      />
-    );
-  });
+  const InstitutionsOfEducationCardList = InstitutionsOfEducationList.map(
+    (item: any) => {
+      return (
+        <InstitutionOfEducationCard
+          id={item.id}
+          liked={item.liked}
+          key={item.id}
+          abbreviation={item.abbreviation}
+          site={item.site}
+          address={item.address}
+          description={
+            item.description.length > 265
+              ? item.description.slice(0, 265).concat('...')
+              : item.description
+          }
+          startOfCampaign={item.startOfCampaign.slice(0, 10)}
+          endOfCampaign={item.endOfCampaign.slice(0, 10)}
+        />
+      );
+    }
+  );
 
   const arrowIcon = (
     <svg
@@ -183,16 +185,16 @@ const UniversitiesListPage = () => {
       <Spinner />
     </div>
   ) : (
-    universitiesCardList
+    InstitutionsOfEducationCardList
   );
 
   return (
     <>
       <ErrorBoundry>
         <Header />
-        <section className={styles.universitiesPage}>
+        <section className={styles.institutionsOfEducationPage}>
           <h1 data-testid='heading' className={styles.title}>
-            Список університетів
+            Заклади освіти
           </h1>
           {error.hasError ? (
             <ResponsePlaceholder errorMessage={error.errorMessage} />
@@ -209,4 +211,4 @@ const UniversitiesListPage = () => {
   );
 };
 
-export default UniversitiesListPage;
+export default InstitutionsOfEducationListPage;
