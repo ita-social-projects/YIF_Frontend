@@ -121,27 +121,4 @@ describe('NewPasswordForm', () => {
       queryByText('Щось пішло не так, спробуйте знову!')
     ).toBeInTheDocument();
   });
-
-  // test('the error message disappears after two seconds', async () => {
-  //   global.fetch.mockImplementationOnce(() => Promise.reject('Some error'));
-  //   const { getByPlaceholderText, getByRole, queryByText } = render(
-  //     <Router>
-  //       <NewPasswordForm />
-  //     </Router>
-  //   );
-  //   await wait(() => {
-  //     userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
-  //     userEvent.type(getByPlaceholderText('Підтвердіть пароль'), 'Qwerty1@');
-  //     userEvent.click(getByRole('button'));
-  //   });
-  //   expect(
-  //     queryByText('Щось пішло не так, спробуйте знову!')
-  //   ).toBeInTheDocument();
-  //   act(() => {
-  //     jest.runAllTimers();
-  //   });
-  //   expect(
-  //     queryByText('Щось пішло не так, спробуйте знову!')
-  //   ).not.toBeInTheDocument();
-  // });
 });
