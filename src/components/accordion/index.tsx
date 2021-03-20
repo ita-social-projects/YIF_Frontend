@@ -1,55 +1,37 @@
 import React, { useState } from 'react';
 
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import styles from './accordion.module.scss';
 
-interface Props {
-  id: string;
-  code: string;
-  name: string;
-  specialties: Array<{
-    specialtyId: string;
-    specialtyName: string;
-    specialtyCode: string;
-  }>;
-}
+// interface Props {
+//   id: string;
+//   code: string;
+//   name: string;
+//   specialties: Array<{
+//     specialtyId: string;
+//     specialtyName: string;
+//     specialtyCode: string;
+//   }>;
+// }
 
-const AccordionItem = (props: Props) => {
-  const { id, code, name, specialties } = props;
-
+const AccordionItem = (props: any) => {
   const [opened, setOpened] = useState(false);
   const handlerClick = () => setOpened(!opened);
-
-  // const filteredSpecialties = specialties.filter(specialty => specialty.directionName === name)
+  const { header, headerStyle, body, bodyStyle } = props;
 
   return (
-    <li
-      className={`${styles.acc_item} ${
-        opened ? `${styles.acc_item__opened}` : ''
-      }`}
-    >
-      <div className={styles.acc_item__line} onClick={handlerClick}>
-        <div className={styles.acc_item__info}>
-          <span className={styles.acc_item__id}>{code}</span>
-          <h3 className={styles.acc_item__name}>{name}</h3>
-        </div>
+    <li className={`${styles.acc_item} ${opened && styles.acc_item__opened}`}>
+      <div
+        className={`${styles.acc_item__line} ${headerStyle}`}
+        onClick={handlerClick}
+      >
+        <div className={styles.acc_item__info}>{header}</div>
 
         <div className={styles.acc_item__icon}>{opened ? '-' : '+'}</div>
       </div>
+
       <div className={styles.acc_item__inner}>
-        <ul className={styles.acc_item__content}>
-          {specialties
-            .sort((a: any, b: any) => a.specialtyCode - b.specialtyCode)
-            .map((item) => (
-              <li key={item.specialtyId} className={styles.acc_item__subitem}>
-                <div className={styles.acc_item__subitem_info}>
-                  <span>{item.specialtyCode}</span>{' '}
-                  <h5>{item.specialtyName}</h5>
-                </div>
-                <Link to={`/specialty/${item.specialtyId}`}>Детальніше</Link>
-              </li>
-            ))}
-        </ul>
+        <ul className={`${styles.acc_item__content} ${bodyStyle}`}>{body}</ul>
       </div>
     </li>
   );
