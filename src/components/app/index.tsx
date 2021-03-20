@@ -18,6 +18,7 @@ import AddInstitutionOfEducation from '../../pages/superAdminPages/addInstitutio
 import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccountPage';
 import InstitutionOfEducationInfo from '../institutionOfEducationAdmin/institutionOfEducationInfo';
 import InstitutionOfEducationAdminPage from '../../pages/institutionOfEducationAdminPage';
+import NewPasswordPage from '../../pages/newPasswordPage';
 
 const App = () => {
   const { token } = useAuth();
@@ -71,6 +72,9 @@ const App = () => {
           </Route>
           <Route path='/moderators'>
             <InstitutionOfEducationAdminPage />
+          </Route>
+          <Route path='/newPassword'>
+            <NewPasswordPage />
           </Route>
           <ProtectedRoute user={token} path='/cabinet' allowed={['Graduate']}>
             <GraduateCabinet />
