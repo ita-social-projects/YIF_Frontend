@@ -1,8 +1,8 @@
 import React from 'react';
-import { render, cleanup, wait } from '@testing-library/react';
 import NewPasswordForm from './index';
-import { BrowserRouter as Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
+import { render, wait, screen, act } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 jest.mock('../../services/useCaptcha', () => ({
   _esModule: true,
@@ -20,7 +20,7 @@ const mockFetchPromise = Promise.resolve({
 });
 global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
-afterEach(cleanup);
+jest.useFakeTimers();
 
 describe('NewPasswordForm', () => {
   test('render component correctly', () => {
@@ -96,5 +96,28 @@ describe('NewPasswordForm', () => {
     expect(
       queryByText('Щось пішло не так, спробуйте знову!')
     ).toBeInTheDocument();
+  });
+
+  test('the error message disappears after two seconds', async () => {
+    global.fetch.mockImplementationOnce(() => Promise.reject('Some error'));
+    const { getByPlaceholderText, getByRole, queryByText } = render(
+      <Router>
+        <NewPasswordForm />
+      </Router>
+    );
+    await wait(() => {
+      userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
+      userEvent.type(getByPlaceholderText('Підтвердіть пароль'), 'Qwerty1@');
+      userEvent.click(getByRole('button'));
+    });
+    expect(
+      queryByText('Щось пішло не так, спробуйте знову!')
+    ).toBeInTheDocument();
+    act(() => {
+      jest.runAllTimers();
+    });
+    expect(
+      queryByText('Щось пішло не так, спробуйте знову!')
+    ).not.toBeInTheDocument();
   });
 });

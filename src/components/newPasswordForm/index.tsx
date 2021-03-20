@@ -60,7 +60,6 @@ const NewPasswordForm: React.FC = () => {
       })
       .catch((e) => {
         fail();
-        console.log(e);
       });
   };
 
