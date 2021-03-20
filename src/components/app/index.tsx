@@ -18,6 +18,7 @@ import AddUniversity from '../../pages/superAdminPages/addUniversityPage';
 import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccountPage';
 import UniversityInfo from '../universityAdmin/universityInfo';
 import UniversityAdminPage from '../../pages/universityAdminPage';
+import AddUniversityForm from '../superAdmin/addUniversityForm';
 
 const App = () => {
   const { token } = useAuth();
@@ -57,9 +58,9 @@ const App = () => {
           <Route path='/specialty/:id'>
             <SpecialityPage />
           </Route>
-          <Route path='/adduniv'>
+          <ProtectedRoute user={token} path='/adduniv' allowed={['SuperAdmin']}>
             <AddUniversity />
-          </Route>
+          </ProtectedRoute>
           <Route path='/universityAdmin'>
             <UniversityAdminPage />
           </Route>

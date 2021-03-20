@@ -38,11 +38,28 @@ const AddUniversityForm = () => {
   const [lng, setLng] = useState(0);
   const [picture, setPicture] = useState('');
 
-  const defaultPicture = 'assets/images/defaultUnivPicture.svg';
+  const defaultPicture = '/assets/images/defaultUnivPicture.svg';
   const avatar = picture ? picture : defaultPicture;
 
   const imageHandler = (value: string) => {
     setPicture(value);
+  };
+
+  const imagePicker = ({ form, field }: any) => {
+    return (
+      <ImageUploader
+        additionalStyles={avatarSyles}
+        defaultPicture={defaultPicture}
+        avatar={avatar}
+        aspectRatio={16 / 9}
+        text='університету'
+        imageHandler={imageHandler}
+        onImageChange={(picture: string) => {
+          console.log(`click`);
+          form.setFieldValue(field.name, picture);
+        }}
+      />
+    );
   };
 
   const settingLat = (value: number) => {
@@ -93,6 +110,7 @@ const AddUniversityForm = () => {
           <Form
             className={styles.form}
             onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
+              console.log(`values`, values);
               handleSubmit(e);
               if (
                 touched.adminEmail &&
@@ -164,6 +182,7 @@ const AddUniversityForm = () => {
                   <option value='college'>Коледж</option>
                 </Field>
               </div>
+
               <div className={styles.halfWidth}>
                 <label
                   className={styles.topWrapper__label}
@@ -190,6 +209,7 @@ const AddUniversityForm = () => {
                   />
                 ) : null}
               </div>
+
               <div className={styles.halfWidth}>
                 <label
                   className={styles.topWrapper__label}
@@ -215,6 +235,7 @@ const AddUniversityForm = () => {
                   />
                 ) : null}
               </div>
+
               <div className={styles.halfWidth}>
                 <label
                   className={styles.topWrapper__label}
@@ -240,6 +261,7 @@ const AddUniversityForm = () => {
                   />
                 ) : null}
               </div>
+
               <div className={styles.halfWidth}>
                 <label
                   className={styles.topWrapper__label}
@@ -320,13 +342,10 @@ const AddUniversityForm = () => {
               </div>
               <div className={styles.pictureWrapper}>
                 <div className={styles.uploadContainer}>
-                  <ImageUploader
-                    additionalStyles={avatarSyles}
-                    defaultPicture={defaultPicture}
-                    avatar={avatar}
-                    aspectRatio={16 / 9}
-                    text='університету'
-                    imageHandler={imageHandler}
+                  <Field
+                    name='picture'
+                    value={picture}
+                    component={imagePicker}
                   />
                 </div>
                 {!picture && errors.picture && touched.picture ? (
@@ -350,7 +369,7 @@ const AddUniversityForm = () => {
                 component={UniversityMap}
                 settingLat={settingLat}
                 settingLng={settingLng}
-                // setFieldValue={setFieldValue}
+                setFieldValue={setFieldValue}
               >
                 {lat === 0 && lng === 0 && errors.lat && touched.lat ? (
                   <FormInputError errorType='input' errorMessage={errors.lat} />

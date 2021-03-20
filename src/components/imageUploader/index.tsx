@@ -6,7 +6,14 @@ import { userSelector } from '../../store/reducers/setUserReducer';
 import { FormInputSuccess } from '../common/formElements/formInputSuccess/formInputSuccess';
 
 const ImageUploader = (props: any) => {
-  const { additionalStyles, avatar, aspectRatio, text, imageHandler } = props;
+  const {
+    additionalStyles,
+    avatar,
+    aspectRatio,
+    text,
+    imageHandler,
+    onImageChange,
+  } = props;
 
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [isSuccessLoad, setSuccessLoad] = useState(false);
