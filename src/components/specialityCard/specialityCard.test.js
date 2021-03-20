@@ -9,8 +9,8 @@ import { store } from '../../store/store';
 const specialitiesList = [
   {
     id: '64ef8f57-de92-41f4-a034-51e47abfb5de',
-    universityAbbreviation: 'ОА',
-    description: 'We are the best university ever',
+    institutionOfEducationAbbreviation: 'ОА',
+    description: 'We are the best institution Of Education ever',
     examRequirements: [
       {
         name: 'Українська мова та література',
@@ -49,7 +49,7 @@ it('renders without crashing', () => {
       <Provider store={store}>
         <SpecialityCard
           id='64ef8f57-de92-41f4-a034-51e47abfb5de'
-          universityAbbreviation='ОА'
+          institutionOfEducationAbbreviation='ОА'
           description='Опис'
           examRequirements={specialitiesList[0].examRequirements}
           educationFormToDescriptions={
@@ -71,7 +71,7 @@ test('renders with props', () => {
       <Provider store={store}>
         <SpecialityCard
           id='64ef8f57-de92-41f4-a034-51e47abfb5de'
-          universityAbbreviation='ОА'
+          institutionOfEducationAbbreviation='ОА'
           description='Опис'
           examRequirements={specialitiesList[0].examRequirements}
           educationFormToDescriptions={

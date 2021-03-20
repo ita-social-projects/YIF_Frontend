@@ -10,7 +10,7 @@ describe('header with no user', () => {
   let header;
   const links = [
     { text: 'Напрями', location: '/directions' },
-    { text: 'Університети', location: '/universities' },
+    { text: 'Заклади освіти', location: '/institutionsOfEducation' },
     { text: 'Вхід', location: '/login' },
     { text: 'Реєстрація', location: '/register' },
   ];

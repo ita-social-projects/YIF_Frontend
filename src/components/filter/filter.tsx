@@ -5,7 +5,7 @@ import {
   selectChosenData,
   chooseDirection,
   chooseSpeciality,
-  chooseUniversity,
+  chooseInstitutionOfEducation,
 } from '../../store/reducers/dropboxReducer';
 import DropboxElement from '../common/dropbox/dropbox';
 import styles from './filter.module.scss';
@@ -18,7 +18,7 @@ const Filter = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  let university: string[] = state.university;
+  let institutionOfEducation: string[] = state.institutionOfEducation;
   let direction: string[] = state.direction;
   let speciality: string[] = state.speciality;
 
@@ -60,17 +60,17 @@ const Filter = () => {
   const onSubmit = (event: any) => {
     event.preventDefault();
     history.push({
-      pathname: '/universities',
+      pathname: '/institutionsOfEducation',
       state: {
         chosenDirection: chosenData.direction,
         chosenSpeciality: chosenData.speciality,
-        chosenUniversity: chosenData.university,
+        chosenInstitutionOfEducation: chosenData.institutionOfEducation,
       },
     });
     //reset filter
     dispatch(chooseDirection(''));
     dispatch(chooseSpeciality(''));
-    dispatch(chooseUniversity(''));
+    dispatch(chooseInstitutionOfEducation(''));
   };
 
   return (
@@ -104,15 +104,19 @@ const Filter = () => {
             </div>
             <div className={styles.box}>
               <DropboxElement
-                data={university}
+                data={institutionOfEducation}
                 keyId={2}
-                listName={'University'}
+                listName={'InstitutionOfEducation'}
                 listTitle={'Всі'}
                 placeholder={'університет'}
-                reduxMethod={'chooseUniversity'}
+                reduxMethod={'chooseInstitutionOfEducation'}
               ></DropboxElement>
             </div>
-            <button type={'submit'} className={styles.animatedButton} id='filterButtonSearch'>
+            <button
+              type={'submit'}
+              className={styles.animatedButton}
+              id='filterButtonSearch'
+            >
               <span className={styles.searchText}>Пошук</span>
               <span className={styles.searchIcon}>{searchIcont}</span>
             </button>

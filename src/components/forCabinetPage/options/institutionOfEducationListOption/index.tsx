@@ -1,14 +1,14 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import style from './univListOption.module.scss';
-import { UniversityCard } from '../../../index';
+import style from './institutionOfEducationListOption.module.scss';
+import { InstitutionOfEducationCard } from '../../../index';
 import { requestSecureData } from '../../../../services/requestDataFunction';
-import Spinner from '../../../../components/common/spinner';
+import Spinner from '../../../common/spinner';
 import { useAuth } from '../../../../services/tokenValidator';
 import ResponsePlaceholder from '../../../common/responsePlaceholder';
 import { APIUrl } from '../../../../services/endpoints';
 
-const UnivListOption = () => {
-  const [universitiesList, setList] = useState([
+const InstitutionOfEducationListOption = () => {
+  const [institutionOfEducationList, setList] = useState([
     {
       id: '',
       liked: false,
@@ -30,7 +30,7 @@ const UnivListOption = () => {
   const { token, getToken } = useAuth();
 
   useEffect(() => {
-    const endpoint = `${APIUrl}University/Favorites`;
+    const endpoint = `${APIUrl}InstitutionOfEducation/Favorites`;
     setFetching(true);
     getToken();
     requestSecureData(endpoint, 'GET', token!).then((res: any) => {
@@ -60,25 +60,27 @@ const UnivListOption = () => {
     });
   }, []);
 
-  const universitiesCardList = universitiesList.map((item: any) => {
-    return (
-      <UniversityCard
-        id={item.id}
-        liked={true}
-        key={item.id}
-        abbreviation={item.abbreviation}
-        site={item.site}
-        address={item.address}
-        description={
-          item.description.length > 265
-            ? item.description.slice(0, 265).concat('...')
-            : item.description
-        }
-        startOfCampaign={item.startOfCampaign.slice(0, 10)}
-        endOfCampaign={item.endOfCampaign.slice(0, 10)}
-      />
-    );
-  });
+  const institutionOfEducationCardList = institutionOfEducationList.map(
+    (item: any) => {
+      return (
+        <InstitutionOfEducationCard
+          id={item.id}
+          liked={true}
+          key={item.id}
+          abbreviation={item.abbreviation}
+          site={item.site}
+          address={item.address}
+          description={
+            item.description.length > 265
+              ? item.description.slice(0, 265).concat('...')
+              : item.description
+          }
+          startOfCampaign={item.startOfCampaign.slice(0, 10)}
+          endOfCampaign={item.endOfCampaign.slice(0, 10)}
+        />
+      );
+    }
+  );
 
   const result = isFetching ? (
     <div className={style.spinnerContainer}>
@@ -86,12 +88,12 @@ const UnivListOption = () => {
       <Spinner />
     </div>
   ) : (
-    universitiesCardList
+    institutionOfEducationCardList
   );
 
   return (
     <Fragment>
-      <section className={style.universityListSection}>
+      <section className={style.institutionOfEducationListSection}>
         <div className={style.container}>
           {error.hasError ? (
             <ResponsePlaceholder errorMessage={error.errorMessage} />
@@ -104,4 +106,4 @@ const UnivListOption = () => {
   );
 };
 
-export default UnivListOption;
+export default InstitutionOfEducationListOption;

@@ -33,8 +33,8 @@ it('check SuperAdminPanel as a whole component', () => {
   expect(links).toHaveLength(4);
 
   // check links
-  expect(links[0].innerHTML).toBe('Університетів');
-  expect(links[1].innerHTML).toBe('Шкіл');
-  expect(links[2].innerHTML).toBe('Університети');
+  expect(links[0].innerHTML).toBe('Закладів освіти');
+  expect(links[1].innerHTML).toBe('Університети');
+  expect(links[2].innerHTML).toBe('Коледжі');
   expect(links[3].innerHTML).toBe('Школи');
 });
