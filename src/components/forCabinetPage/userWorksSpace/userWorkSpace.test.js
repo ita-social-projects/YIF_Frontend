@@ -5,11 +5,10 @@ import { act } from 'react-dom/test-utils';
 import ReactDOM from 'react-dom';
 import UserWorkSpace from './index';
 import UserOption from '../options/userOption/index';
-import UnivListOption from '../options/univListOption/index';
+import InstitutionOfEducationListOption from '../options/institutionOfEducationListOption/index';
 import SpecListOption from '../options/specListOption/index';
 import { store } from '../../../store/store';
 import { Provider } from 'react-redux';
-import { useAuth } from '../../../services/tokenValidator';
 
 let container = null;
 let container_option = null;
@@ -42,7 +41,7 @@ it('renders list of options', () => {
 
   let menuList = container.querySelectorAll('li');
   expect(menuList[0].textContent).toBe(`Персональні${'\u00a0'}дані`);
-  expect(menuList[1].textContent).toBe('Університети');
+  expect(menuList[1].textContent).toBe('Заклади освіти');
   expect(menuList[2].textContent).toBe('Спеціальності');
 });
 

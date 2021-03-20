@@ -15,7 +15,7 @@ const Header: React.FC = () => {
   const { email, photo } = useSelector(userSelector);
 
   const userName = email.substr(0, email.indexOf('@'));
-  const avatar = photo ? photo : 'assets/icons/avatar.jpg';
+  const avatar = photo ? photo : '/assets/icons/avatar.jpg';
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -153,11 +153,11 @@ const Header: React.FC = () => {
             Напрями
           </Link>
           <Link
-            id='universitiesLink'
-            to='/universities'
+            id='institutionsOfEducationLink'
+            to='/institutionsOfEducation'
             className={styles.underlineAnimation}
           >
-            Університети
+            Заклади освіти
           </Link>
         </div>
         <div className={styles.entry} ref={ref}>

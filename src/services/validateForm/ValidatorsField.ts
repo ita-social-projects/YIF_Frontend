@@ -42,22 +42,22 @@ export const validationField = Yup.object().shape({
     .min(12, 'Номер телефону має містити не менше ніж 12 символів')
     .max(13, 'Кількість введених символів перевищує допустиме значення'),
 
-  universityName: Yup.string()
+  institutionOfEducationName: Yup.string()
     .min(2, 'Замала кількість введених символів')
     .max(50, 'Кількість введених символів перевищує допустиме значення')
     .required('Заповніть поле'),
 
-  universityAbbreviation: Yup.string()
+  institutionOfEducationAbbreviation: Yup.string()
     .min(2, 'Замала кількість введених символів')
     .max(10, 'Кількість введених символів перевищує допустиме значення')
     .required('Заповніть поле'),
 
-  universityAdress: Yup.string()
+  institutionOfEducationAdress: Yup.string()
     .min(2, 'Замала кількість введених символів')
     .max(50, 'Кількість введених символів перевищує допустиме значення')
     .required('Заповніть поле'),
 
-  universitySite: Yup.string()
+  institutionOfEducationSite: Yup.string()
     .matches(
       /^(http\:\/\/|https\:\/\/)/i,
       'Aдреса повинна починатись з http:// або https://'
@@ -70,7 +70,7 @@ export const validationField = Yup.object().shape({
     .max(50, 'Кількість введених символів перевищує допустиме значення')
     .required('Заповніть поле'),
 
-  universityPhone: Yup.string()
+  institutionOfEducationPhone: Yup.string()
     .matches(
       /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/,
       'Номер телефону введено невірно, введіть будь ласка в такому форматі +380670000000'
@@ -79,7 +79,7 @@ export const validationField = Yup.object().shape({
     .max(13, 'Кількість введених символів перевищує допустиме значення')
     .required('Вкажіть номер телефону'),
 
-  universityEmail: Yup.string()
+  institutionOfEducationEmail: Yup.string()
     .email('Введіть дійсну електронну адресу')
     .required('Заповніть поле')
     .max(
@@ -91,7 +91,7 @@ export const validationField = Yup.object().shape({
 
   picture: Yup.string().required('Оберіть зображення'),
 
-  universityDescription: Yup.string()
+  institutionOfEducationDescription: Yup.string()
     .required('Заповніть поле')
     .min(50, 'Кількість символів повинна бути більше 50'),
 

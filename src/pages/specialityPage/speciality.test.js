@@ -23,8 +23,8 @@ afterEach(() => {
 const data = [
   {
     id: '64ef8f57-de92-41f4-a034-51e47abfb5de',
-    universityAbbreviation: 'ОА',
-    description: 'We are the best university ever',
+    institutionOfEducationAbbreviation: 'ОА',
+    description: 'We are the best institution Of Education ever',
     examRequirements: [
       {
         name: 'Українська мова та література',

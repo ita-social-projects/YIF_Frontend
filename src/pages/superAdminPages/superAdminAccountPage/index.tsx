@@ -14,22 +14,25 @@ import { useAuth } from '../../../services/tokenValidator';
 
 const SuperAdminAccountPage: React.FC = () => {
   const [isFetching, setFetching] = useState(true);
-  const [universityAdmins, setUniversityAdmins] = useState([]);
+  const [
+    institutionOfEducationAdmins,
+    setInstitutionOfEducationAdmins,
+  ] = useState([]);
   const { token, getToken } = useAuth();
 
-  const fetchUniversitiesAdmins = () => {
-    const endpoint = `${APIUrl}SuperAdmin/GetAllUniversities`;
+  const fetchInstitutionOfEducationAdmins = () => {
+    const endpoint = `${APIUrl}SuperAdmin/GetAllInstitutionOfEducations`;
     getToken();
     requestSecureData(endpoint, 'GET', token!)
       .then((res: any) => {
-        setUniversityAdmins(res.data);
+        setInstitutionOfEducationAdmins(res.data);
         setFetching(false);
       })
       .catch((e) => console.log(e));
   };
 
   useEffect(() => {
-    fetchUniversitiesAdmins();
+    fetchInstitutionOfEducationAdmins();
   }, []);
   return (
     <>
@@ -42,7 +45,9 @@ const SuperAdminAccountPage: React.FC = () => {
               <Spinner />
             </div>
           ) : (
-            <SuperAdminAccount universityAdmins={universityAdmins} />
+            <SuperAdminAccount
+              institutionOfEducationAdmins={institutionOfEducationAdmins}
+            />
           )}
         </section>
         <Footer />

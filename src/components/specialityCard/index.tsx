@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 
 interface Props {
   code: number;
-  universityAbbreviation: string;
+  institutionOfEducationAbbreviation: string;
   examRequirements: any;
-  universityId: string;
+  institutionOfEducationId: string;
   description: string;
   educationalProgramLink: string;
   educationFormToDescriptions: any;
@@ -54,13 +54,13 @@ const SpecialityCard: React.FC<Props> = (props) => {
   const [opened, setOpened] = useState(false);
   let {
     code,
-    universityAbbreviation,
+    institutionOfEducationAbbreviation,
     examRequirements,
     educationFormToDescriptions,
     paymentFormToDescriptions,
     educationalProgramLink,
     description,
-    universityId,
+    institutionOfEducationId,
   } = props;
   const handlerClick = () => setOpened(!opened);
   const result = examRequirements.map((item: any, idx: number) => (
@@ -74,13 +74,21 @@ const SpecialityCard: React.FC<Props> = (props) => {
   ));
   const paymentForm = educationFormToDescriptions.map(
     (item: any, idx: number) => (
-      <span key={idx}>{idx != (educationFormToDescriptions.length-1) ? item.educationFormName + ' / ' : item.educationFormName} </span>
+      <span key={idx}>
+        {idx != educationFormToDescriptions.length - 1
+          ? item.educationFormName + ' / '
+          : item.educationFormName}{' '}
+      </span>
     )
   );
 
   const educationForm = paymentFormToDescriptions.map(
     (item: any, idx: number) => (
-      <span key={idx}>{idx != (paymentFormToDescriptions.length-1) ? item.paymentFormName + ' / ' : item.paymentFormName}</span>
+      <span key={idx}>
+        {idx != paymentFormToDescriptions.length - 1
+          ? item.paymentFormName + ' / '
+          : item.paymentFormName}
+      </span>
     )
   );
   return (
@@ -93,11 +101,13 @@ const SpecialityCard: React.FC<Props> = (props) => {
       <div className={`container`}>
         <div className={styles.card}>
           <div className={styles.card__top}>
-            <h2 className={styles.subtitle}>{universityAbbreviation} </h2>
+            <h2 className={styles.subtitle}>
+              {institutionOfEducationAbbreviation}{' '}
+            </h2>
 
             <Link
               id='moreDetailsButton'
-              to={`/university/${universityId}`}
+              to={`/institutionOfEducation/${institutionOfEducationId}`}
               className={`${styles.card__content__link} ${styles.animatedButton}`}
             >
               Детальніше
@@ -124,9 +134,15 @@ const SpecialityCard: React.FC<Props> = (props) => {
             }`}
           >
             <div className={styles.card__details}>
-              <p><strong>Форма навчання:</strong> {paymentForm} </p>
-              <p><strong>Форма оплати:</strong> {educationForm} </p>
-              <p><strong>Освітня програма:</strong> {educationalProgramLink} </p>
+              <p>
+                <strong>Форма навчання:</strong> {paymentForm}{' '}
+              </p>
+              <p>
+                <strong>Форма оплати:</strong> {educationForm}{' '}
+              </p>
+              <p>
+                <strong>Освітня програма:</strong> {educationalProgramLink}{' '}
+              </p>
               <p>{description}</p>
             </div>
             <div

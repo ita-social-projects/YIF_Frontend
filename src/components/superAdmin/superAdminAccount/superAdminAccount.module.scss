@@ -116,7 +116,7 @@
       }
     }
 
-    .universiti,
+    .institutionOfEducation,
     .email {
       flex-grow: 2.5;
     }
@@ -147,7 +147,7 @@
     }
   }
   .adminList {
-    .noUniversityAdmins {
+    .noneInstitutionOfEducationAdmins {
       text-align: center;
       padding: 0.62rem; // 10px
       font-size: $font_18px;
@@ -185,20 +185,21 @@
         margin: 0;
       }
 
-      .adminUniversity {
+      .adminInstitutionOfEducation {
         position: relative;
-        .abbreviationUniversity {
+        .abbreviationInstitutionOfEducation {
           display: block;
           cursor: pointer;
           padding: 0.5rem 0; //8px
         }
 
-        .abbreviationUniversity:hover ~ .fullNameUniversity {
+        .abbreviationInstitutionOfEducation:hover
+          ~ .fullNameInstitutionOfEducation {
           opacity: 1;
           visibility: visible;
         }
 
-        .fullNameUniversity {
+        .fullNameInstitutionOfEducation {
           opacity: 0;
           visibility: hidden;
           transition: 0.35s;
@@ -237,9 +238,12 @@
       }
 
       .adminEmail,
-      .adminUniversity {
+      .adminInstitutionOfEducation {
         width: 35%;
-        padding-left: 5rem; // 80px
+        padding-left: 4.5rem;
+      }
+      .adminInstitutionOfEducation {
+        padding-left: 3.6rem;
       }
 
       .adminBan,

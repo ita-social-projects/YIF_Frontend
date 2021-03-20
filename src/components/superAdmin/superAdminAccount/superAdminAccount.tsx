@@ -14,7 +14,7 @@ import { ReactComponent as IconArrow } from './icons/iconArrow.svg';
 
 const iconIllustrAdmin = 'assets/images/superAdminAccount.svg';
 
-export interface IUniversityAdmin {
+export interface IInstitutionOfEducationAdmin {
   id: string;
   user: {
     id: string;
@@ -23,7 +23,7 @@ export interface IUniversityAdmin {
     phoneNumber: string;
     photo?: string;
   };
-  university: {
+  institutionOfEducation: {
     id: string;
     name: string;
     abbreviation: string;
@@ -32,7 +32,7 @@ export interface IUniversityAdmin {
 }
 
 interface Props {
-  universityAdmins: IUniversityAdmin[];
+  institutionOfEducationAdmins: IInstitutionOfEducationAdmin[];
 }
 
 const SuperAdminAccount: React.FC<Props> = (props) => {
@@ -68,18 +68,24 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
   const [error, setError] = useState(defineErrorMessage());
   const [success, setSuccess] = useState(defineSuccessMessage());
 
-  const [universityAdmins, setUniversityAdmins] = useState<IUniversityAdmin[]>(
-    props.universityAdmins
+  const [
+    institutionOfEducationAdmins,
+    setInstitutionOfEducationAdmins,
+  ] = useState<IInstitutionOfEducationAdmin[]>(
+    props.institutionOfEducationAdmins
   );
-  const [sortedUniversityAdmins, setSortedUniversityAdmins] = useState<
-    IUniversityAdmin[]
-  >(props.universityAdmins);
+  const [
+    sortedInstitutionOfEducationAdmins,
+    setSortedInstitutionOfEducationAdmins,
+  ] = useState<IInstitutionOfEducationAdmin[]>(
+    props.institutionOfEducationAdmins
+  );
 
-  const setNewUniversityAdminsState = (
-    state: IUniversityAdmin[],
+  const setNewInstitutionOfEducationAdminsState = (
+    state: IInstitutionOfEducationAdmin[],
     id: string,
     action: string
-  ): IUniversityAdmin[] => {
+  ): IInstitutionOfEducationAdmin[] => {
     if (action === 'setNewBanStatus') {
       return cloneDeep(state).map((admin) => {
         if (admin.id === id) {
@@ -96,7 +102,7 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
 
   // request to server
   const setBanStatus = (id: string) => {
-    const endpoint = `${APIUrl}SuperAdmin/DisableUniversityAdmin/${id}`;
+    const endpoint = `${APIUrl}SuperAdmin/DisableInstitutionOfEducationAdmin/${id}`;
     getToken();
     requestSecureData(endpoint, 'POST', token!, {
       id,
@@ -104,16 +110,20 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
       .then((res: any) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
-          setSortedUniversityAdmins(
-            setNewUniversityAdminsState(
-              sortedUniversityAdmins,
+          setSortedInstitutionOfEducationAdmins(
+            setNewInstitutionOfEducationAdminsState(
+              sortedInstitutionOfEducationAdmins,
               id,
               'setNewBanStatus'
             )
           );
           // sorted state
-          setUniversityAdmins(
-            setNewUniversityAdminsState(universityAdmins, id, 'setNewBanStatus')
+          setInstitutionOfEducationAdmins(
+            setNewInstitutionOfEducationAdminsState(
+              institutionOfEducationAdmins,
+              id,
+              'setNewBanStatus'
+            )
           ); // main state
 
           setSuccess(
@@ -143,22 +153,26 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
       });
   };
 
-  const removeAdminUniversiti = (id: string) => {
-    const endpoint = `${APIUrl}SuperAdmin/DeleteUniversityAdmin/${id}`;
+  const removeAdminInstitutionOfEducation = (id: string) => {
+    const endpoint = `${APIUrl}SuperAdmin/DeleteInstitutionOfEducationAdmin/${id}`;
     getToken();
     requestSecureData(endpoint, 'DELETE', token!)
       .then((res: any) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
-          setSortedUniversityAdmins(
-            setNewUniversityAdminsState(
-              sortedUniversityAdmins,
+          setSortedInstitutionOfEducationAdmins(
+            setNewInstitutionOfEducationAdminsState(
+              sortedInstitutionOfEducationAdmins,
               id,
               'removeAdmin'
             )
           ); // sorted state
-          setUniversityAdmins(
-            setNewUniversityAdminsState(universityAdmins, id, 'removeAdmin')
+          setInstitutionOfEducationAdmins(
+            setNewInstitutionOfEducationAdminsState(
+              institutionOfEducationAdmins,
+              id,
+              'removeAdmin'
+            )
           ); // main state
 
           setSuccess(
@@ -189,7 +203,7 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
   };
 
   const clearInput = () => {
-    setSortedUniversityAdmins(universityAdmins);
+    setInstitutionOfEducationAdmins(institutionOfEducationAdmins);
     textInput.current.value = '';
     setSearchValue('');
     setCurrentKey('');
@@ -199,20 +213,24 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
     const { value } = e.target;
     setSearchValue(value);
 
-    let sorted = cloneDeep(universityAdmins).filter((admin): any => {
-      if (value === '') {
-        return admin;
-      } else if (
-        admin.university.abbreviation
-          .toLocaleLowerCase()
-          .includes(value.toLocaleLowerCase()) ||
-        admin.user.email.toLocaleLowerCase().includes(value.toLocaleLowerCase())
-      ) {
-        return admin;
+    let sorted = cloneDeep(institutionOfEducationAdmins).filter(
+      (admin): any => {
+        if (value === '') {
+          return admin;
+        } else if (
+          admin.institutionOfEducation.abbreviation
+            .toLocaleLowerCase()
+            .includes(value.toLocaleLowerCase()) ||
+          admin.user.email
+            .toLocaleLowerCase()
+            .includes(value.toLocaleLowerCase())
+        ) {
+          return admin;
+        }
+        return null;
       }
-      return null;
-    });
-    setSortedUniversityAdmins(sorted);
+    );
+    setSortedInstitutionOfEducationAdmins(sorted);
   };
 
   const handleSort = (key: string) => {
@@ -229,14 +247,18 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
       sortSwitchB = 1;
     }
 
-    const sortedArr = cloneDeep(sortedUniversityAdmins).sort(
+    const sortedArr = cloneDeep(sortedInstitutionOfEducationAdmins).sort(
       (a: any, b: any) => {
         let prevV = a[key];
         let nextV = b[key];
 
         if (key === 'abbreviation') {
-          prevV = a.university[key] ? a.university[key].toUpperCase() : '';
-          nextV = b.university[key] ? b.university[key].toUpperCase() : '';
+          prevV = a.institutionOfEducation[key]
+            ? a.institutionOfEducation[key].toUpperCase()
+            : '';
+          nextV = b.institutionOfEducation[key]
+            ? b.institutionOfEducation[key].toUpperCase()
+            : '';
         } else if (key !== 'isBanned') {
           prevV = a.user[key] ? a.user[key].toUpperCase() : ''; // ignore upper and lowercase
           nextV = b.user[key] ? b.user[key].toUpperCase() : ''; // ignore upper and lowercase
@@ -254,7 +276,7 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
     );
 
     setCurrentKey(key);
-    setSortedUniversityAdmins(sortedArr);
+    setSortedInstitutionOfEducationAdmins(sortedArr);
   };
 
   useEffect(() => {
@@ -263,7 +285,7 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
 
   return (
     <div className={styles.superAdminAccount}>
-      <h1>Адміністратори університетів</h1>
+      <h1>Адміністратори закладів освіти</h1>
       {error.hasError && (
         <div className={styles.flashMessageRight}>
           {' '}
@@ -305,12 +327,12 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
             </li>
             <li
               data-testid='sortByAbbreviation'
-              className={`${styles.universiti} ${
+              className={`${styles.institutionOfEducation} ${
                 currentKey === 'abbreviation' && styles.filterActive
               }`}
               onClick={() => handleSort('abbreviation')}
             >
-              Університет <IconArrow />
+             Заклад освіти <IconArrow />
             </li>
             <li
               data-testid='sortByBanned'
@@ -325,18 +347,22 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
         </div>
         <ul className={styles.adminList}>
           <li className={styles.adminItem}>
-            {sortedUniversityAdmins.length ? (
-              sortedUniversityAdmins.map((admin: IUniversityAdmin) => (
-                <TableItem
-                  admin={admin}
-                  searchValue={searchValue}
-                  key={admin.id}
-                  setBanStatus={setBanStatus}
-                  removeAdminUniversiti={removeAdminUniversiti}
-                />
-              ))
+            {sortedInstitutionOfEducationAdmins.length ? (
+              sortedInstitutionOfEducationAdmins.map(
+                (admin: IInstitutionOfEducationAdmin) => (
+                  <TableItem
+                    admin={admin}
+                    searchValue={searchValue}
+                    key={admin.id}
+                    setBanStatus={setBanStatus}
+                    removeAdminInstitutionOfEducation={
+                      removeAdminInstitutionOfEducation
+                    }
+                  />
+                )
+              )
             ) : (
-              <div className={styles.noUniversityAdmins}>
+              <div className={styles.noneInstitutionOfEducationAdmins}>
                 {' '}
                 Не знайдено жодного адміністратора
               </div>

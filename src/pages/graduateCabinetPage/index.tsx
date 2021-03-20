@@ -4,16 +4,16 @@ import {
   Header,
   Footer,
   UserWorksSpace,
-  UniversityMap,
+  InstitutionOfEducationMap,
 } from '../../components';
 import { requestData } from '../../services/requestDataFunction';
 import { APIUrl } from '../../services/endpoints';
 
 const UserCabinet = () => {
-  const [universitiesList, setList] = useState([{}]);
+  const [institutionsOfEducationList, setList] = useState([{}]);
 
   useEffect(() => {
-    const endpoint: string = `${APIUrl}University`;
+    const endpoint: string = `${APIUrl}InstitutionOfEducation`;
 
     requestData(endpoint, 'GET').then((res: any) => {
       const filteredList = res.data.responseList.map((item: any) => {
@@ -33,7 +33,7 @@ const UserCabinet = () => {
     <Fragment>
       <Header />
       <UserWorksSpace>
-        <UniversityMap data={universitiesList} />
+        <InstitutionOfEducationMap data={institutionsOfEducationList} />
       </UserWorksSpace>
       <Footer />
     </Fragment>
