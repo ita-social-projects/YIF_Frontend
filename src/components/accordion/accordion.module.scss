@@ -1,32 +1,17 @@
-@import "../../styles/index.scss";
+@import '../../styles/index.scss';
 
-$element: ".acc_item";
+$element: '.acc_item';
 
 #{$element} {
   font-family: $fontNunito, sans-serif;
   margin-bottom: 5px;
 
   &__line {
-    @include flex(row, center, space-between);
     cursor: pointer;
-    padding: 25px;
+    border-radius: 5px;
     z-index: 2;
     position: relative;
-    background-color: $lightBlue_3;
-    border-radius: 5px;
-  }
-
-  &__id {
-    width: 65px;
-  }
-
-  &__id,
-  &__name {
-    font-size: 25px;
-    font-weight: 300;
-  }
-
-  &__info {
+    padding: 25px;
     @include flex(row, center, space-between);
   }
 
@@ -40,49 +25,26 @@ $element: ".acc_item";
     overflow: hidden;
     z-index: 1;
     position: relative;
+    transition: 0.1s;
+  }
+
+  &__info {
+    @include flex(row, center, space-between);
   }
 
   &__content {
-    opacity: 0;
-    transform: translateY(-1rem);
-    background-color: $lightBlue_3;
+    transform: translateY(-100%);
     border-radius: 5px;
-  }
-
-  &__subitem {
-    @include flex(row, center, space-between);
-    padding: 15px 15px 15px 25px;
-
-    h5 {
-      font-size: 18px;
-    }
-
-    span {
-      font-size: 20px;
-      width: 65px;
-    }
-
-    a {
-      font-size: 18px;
-      color: $white;
-      padding: 15px 20px;
-      border-radius: 5px;
-      background-color: $darkBlue;
-    }
-
-    &_info {
-      display: flex;
-    }
+    transition: 0.2s;
   }
 
   &__opened {
     #{$element}__inner {
-      max-height: 100rem;
+      max-height: 100%;
       margin-top: 5px;
     }
 
     #{$element}__content {
-      opacity: 1;
       transform: translateY(0);
     }
   }

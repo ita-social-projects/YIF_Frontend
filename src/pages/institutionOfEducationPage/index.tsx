@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import styles from './institutionOfEducationPage.module.scss';
 import { Header, Footer, InstitutionOfEducationMap } from '../../components';
 import ErrorBoundry from '../../errorBoundry';
@@ -75,6 +75,35 @@ const InstitutionOfEducationPage = () => {
       />
     </svg>
   );
+
+  const renderDirectionsAccordion = () =>
+    directions.map((item, key) => {
+      const { code, name, specialties }: any = item;
+      return (
+        <AccordionItem
+          key={key}
+          headerContent={
+            <>
+              <span className={styles.acc_item__id}>{code}</span>
+              <h3 className={styles.acc_item__name}>{name}</h3>
+            </>
+          }
+          headerStyle={styles.acc_item__header}
+          bodyStyle={styles.acc_item__body}
+          bodyContent={specialties
+            .sort((a: any, b: any) => a.specialtyCode - b.specialtyCode)
+            .map((item: any) => (
+              <li key={item.specialtyId} className={styles.acc_item__subitem}>
+                <div className={styles.acc_item__subitem_info}>
+                  <span>{item.specialtyCode}</span>{' '}
+                  <h5>{item.specialtyName}</h5>
+                </div>
+                <Link to={`/specialty/${item.specialtyId}`}>Детальніше</Link>
+              </li>
+            ))}
+        />
+      );
+    });
 
   return (
     <>
@@ -152,15 +181,7 @@ const InstitutionOfEducationPage = () => {
                 <h3 className={styles.institutionOfEducationPage__subtitle}>
                   Напрями:
                 </h3>
-                <ul>
-                  {directions.map((item, key) => (
-                    <AccordionItem
-                      key={key}
-                      // specialties={item.specialties}
-                      {...item}
-                    />
-                  ))}
-                </ul>
+                <ul>{renderDirectionsAccordion()}</ul>
               </div>
             </>
           )}
