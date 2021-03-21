@@ -16,7 +16,7 @@ import ErrorBoundry from '../../errorBoundry';
 import ResetPasswordPage from '../../pages/resetPasswordPage/index';
 import AddInstitutionOfEducation from '../../pages/superAdminPages/addInstitutionOfEducationPage';
 import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccountPage';
-import InstitutionOfEducationInfo from '../institutionOfEducationAdmin/institutionOfEducationInfo';
+//import InstitutionOfEducationInfo from '../institutionOfEducationAdmin/institutionOfEducationInfo';
 import InstitutionOfEducationAdminPage from '../../pages/institutionOfEducationAdminPage';
 import NewPasswordPage from '../../pages/newPasswordPage';
 
@@ -73,6 +73,9 @@ const App = () => {
           <Route path='/moderators'>
             <InstitutionOfEducationAdminPage />
           </Route>
+          {/* <Route path='/admin/addSpecialties'>
+            <InstitutionOfEducationAdminPage />
+          </Route> */}
           <Route path='/newPassword'>
             <NewPasswordPage />
           </Route>
