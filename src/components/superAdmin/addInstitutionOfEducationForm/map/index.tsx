@@ -15,10 +15,6 @@ const GetIcon = () => {
 const UniversityMap = (props: any) => {
   const [position, setPosition] = useState<[number, number]>([0, 0]);
 
-  const setLocation = (value: [number, number]) => {
-    props.setLocation(value);
-  };
-
   const setFieldValue = (name: string, value: number) => {
     props.setFieldValue(name, value);
   };
@@ -31,7 +27,6 @@ const UniversityMap = (props: any) => {
         const lng: number = e.latlng.lng;
         const lat: number = e.latlng.lat;
         setPosition([lat, lng]);
-        setLocation([lat, lng]);
         if (props.setFieldValue) {
           setFieldValue('institutionOfEducationLat', lat);
           setFieldValue('institutionOfEducationLon', lng);

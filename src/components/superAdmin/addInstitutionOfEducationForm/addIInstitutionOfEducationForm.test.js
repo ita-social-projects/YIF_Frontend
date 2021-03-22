@@ -20,9 +20,6 @@ it('renders with blank fields', () => {
   const institutionOfEducationName = container.querySelector(
     'input[name="institutionOfEducationName"]'
   );
-
-  const buttonSubmit = container.querySelector('.bottomWrapper__submitButton');
-
   const institutionOfEducationAbbreviation = container.querySelector(
     'input[name="institutionOfEducationAbbreviation"]'
   );
@@ -63,3 +60,54 @@ it('renders with blank fields', () => {
   expect(institutionOfEducationPhone.getAttribute('value')).toBe('');
   expect(institutionOfEducationAdminEmail.getAttribute('value')).toBe('');
 });
+
+// it('submit correct values', async () => {
+//   ReactDOM.render(
+//     <MemoryRouter>
+//       <RegistrationForm />
+//     </MemoryRouter>,
+//     container
+//   );
+
+//   const passwordNode = container.querySelector('input[name="password"]');
+//   const confirmPasswordNode = container.querySelector(
+//     'input[name="confirmPassword"]'
+//   );
+//   const emailNode = container.querySelector('input[name="email"]');
+
+//   await wait(() => {
+//     fireEvent.change(passwordNode, {
+//       target: {
+//         value: 'mockemail',
+//       },
+//     });
+//   });
+
+//   await wait(() => {
+//     fireEvent.change(confirmPasswordNode, {
+//       target: {
+//         value: 'mockemail',
+//       },
+//     });
+//   });
+//   await wait(() => {
+//     fireEvent.change(emailNode, {
+//       target: {
+//         value: 'mockemail',
+//       },
+//     });
+//   });
+
+//   const handleClick = jest.fn();
+//   const submitButton = container.querySelector('button');
+
+//   submitButton.onclick = handleClick;
+
+//   await wait(() => {
+//     fireEvent.click(submitButton);
+//   });
+
+//   await wait(() => {
+//     expect(handleClick).toHaveBeenCalled();
+//   });
+// });

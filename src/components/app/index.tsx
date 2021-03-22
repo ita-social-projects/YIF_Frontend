@@ -58,13 +58,16 @@ const App = () => {
           <Route path='/specialty/:id'>
             <SpecialityPage />
           </Route>
-          <ProtectedRoute
+          {/* <ProtectedRoute
             user={token}
             path='/addInstitutionOfEducation'
             allowed={['SuperAdmin']}
           >
             <AddInstitutionOfEducation />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
+          <Route>
+            <AddInstitutionOfEducation />
+          </Route>
           <Route path='/institutionOfEducationAdmin'>
             <InstitutionOfEducationAdminPage />
           </Route>
