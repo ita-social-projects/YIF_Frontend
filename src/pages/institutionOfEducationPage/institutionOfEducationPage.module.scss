@@ -135,3 +135,54 @@
 .institutionOfEducationMap {
   margin-bottom: 5px;
 }
+
+.acc_item {
+  &__header {
+    background-color: $lightBlue_3;
+  }
+
+  &__body {
+    background-color: $lightBlue_3;
+  }
+
+  &__id {
+    width: 65px;
+  }
+
+  &__id,
+  &__name {
+    font-size: 25px;
+    font-weight: 300;
+  }
+
+  &__subitem {
+    @include flex(row, center, space-between);
+    padding: 15px 15px 15px 25px;
+
+    h5 {
+      font-size: 18px;
+    }
+
+    span {
+      font-size: 20px;
+      width: 65px;
+    }
+
+    a {
+      font-size: 18px;
+      color: $white;
+      padding: 15px 20px;
+      border-radius: 5px;
+      background-color: $darkBlue;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: $lightBlue_4;
+      }
+    }
+
+    &_info {
+      display: flex;
+    }
+  }
+}
