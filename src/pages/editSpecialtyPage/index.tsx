@@ -4,8 +4,9 @@ import { Formik, Form, Field } from 'formik';
 import { Footer, Header } from '../../components';
 import Aside from '../../components/institutionOfEducationAdmin/aside';
 import styles from './editSpecialty.module.scss';
-import * as Yup from 'yup';
+
 import { FormButton } from '../../components/common/formElements/index';
+import editSpecialtyValidation from './editSpecialtyValidation';
 
 const EditSpecialty = () => {
   const [initialValues, setinitialValues] = useState({});
@@ -41,7 +42,7 @@ const EditSpecialty = () => {
 
   useEffect(() => {
     const reqva: any = {};
-    let result = examRequirements.map((i) => {
+    examRequirements.map((i) => {
       const { examName, coefficient, minimumScore } = i;
       reqva[`${examName}` + `${minimumScore}`] = minimumScore;
       reqva[`${examName}`] = coefficient;
@@ -57,20 +58,6 @@ const EditSpecialty = () => {
     setFetching(false);
   }, []);
 
-  const editSpecialtyValidation = Yup.object().shape({
-    specialtyName: Yup.string()
-      .min(5, 'Мінімум 5 символів!')
-      .required('Заповніть поле'),
-    paymentForm: Yup.string()
-      .min(5, 'Мінімум 5 символів!')
-      .required('Заповніть поле'),
-    educationalProgramLink: Yup.string()
-      .min(5, 'Мінімум 5 символів!')
-      .required('Заповніть поле'),
-    educationFormName: Yup.string()
-      .min(5, 'Мінімум 5 символів!')
-      .required('Заповніть поле'),
-  });
   return (
     <>
       {!fetching && (
@@ -79,12 +66,14 @@ const EditSpecialty = () => {
           <div className={styles.editSpecialty}>
             <Aside />
             <main className={styles.mainContent}>
-              <h1>
+              <h1 className={styles.title}>
                 Дані про спеціальність у вашому університеті, які ви можете
                 змінити
               </h1>
-              <h3>Натисніть на поле для вводу, щоб ввести нові дані</h3>
-              <h2>Основна інформація</h2>
+              <h3 className={styles.subtitle}>
+                Натисніть на поле для вводу, щоб ввести нові дані
+              </h3>
+              <h2 className={styles.infoTitle}>Основна інформація</h2>
               <Formik
                 initialValues={initialValues}
                 validationSchema={editSpecialtyValidation}
@@ -121,7 +110,7 @@ const EditSpecialty = () => {
                         area='true'
                       />
                     </div>
-                    <h2>Вимоги до ЗНО</h2>
+                    <h2 className={styles.infoTitle}>Вимоги до ЗНО</h2>
                     {examRequirements.map((exam) => {
                       const { examName, minimumScore } = exam;
                       return (
