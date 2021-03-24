@@ -47,12 +47,14 @@ export const validationField = Yup.object().shape({
     .max(50, 'Кількість введених символів перевищує допустиме значення')
     .required('Заповніть поле'),
 
+  institutionOfEducationType: Yup.string().required('Оберіть тип закладу'),
+
   institutionOfEducationAbbreviation: Yup.string()
     .min(2, 'Замала кількість введених символів')
     .max(10, 'Кількість введених символів перевищує допустиме значення')
     .required('Заповніть поле'),
 
-  institutionOfEducationAdress: Yup.string()
+  institutionOfEducationAddress: Yup.string()
     .min(2, 'Замала кількість введених символів')
     .max(50, 'Кількість введених символів перевищує допустиме значення')
     .required('Заповніть поле'),

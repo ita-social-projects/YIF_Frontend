@@ -1,13 +1,19 @@
 import React from 'react';
 import AddInstitutionOfEducationForm from './index';
 import { MemoryRouter } from 'react-router-dom';
+import { fireEvent, render, screen, wait } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { store } from '../../../store/store';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { requestSecureData } from '../../../services/requestDataFunction';
+import { act } from 'react-dom/test-utils';
+import { waitForElement } from '@testing-library/dom';
 
 const container = document.createElement('container');
 
-it('renders with blank fields', () => {
+test('renders with blank fields', () => {
   ReactDOM.render(
     <MemoryRouter>
       <Provider store={store}>
@@ -17,97 +23,102 @@ it('renders with blank fields', () => {
     container
   );
 
-  const institutionOfEducationName = container.querySelector(
+  const name = container.querySelector(
     'input[name="institutionOfEducationName"]'
   );
-  const institutionOfEducationAbbreviation = container.querySelector(
+  const abbreviation = container.querySelector(
     'input[name="institutionOfEducationAbbreviation"]'
   );
-  const institutionOfEducationAdress = container.querySelector(
-    'input[name="institutionOfEducationAdress"]'
+  const address = container.querySelector(
+    'input[name="institutionOfEducationAddress"]'
   );
-  const institutionOfEducationSite = container.querySelector(
+  const site = container.querySelector(
     'input[name="institutionOfEducationSite"]'
   );
-  const institutionOfEducationEmail = container.querySelector(
+  const email = container.querySelector(
     'input[name="institutionOfEducationEmail"]'
   );
-  const institutionOfEducationPhone = container.querySelector(
+  const phone = container.querySelector(
     'input[name="institutionOfEducationPhone"]'
   );
-  const institutionOfEducationDescription = container.querySelector(
+  const description = container.querySelector(
     'textarea[name="institutionOfEducationDescription"]'
   );
-  const institutionOfEducationAdminEmail = container.querySelector(
+  const adminEmail = container.querySelector(
     'input[name="institutionOfEducationAdminEmail"]'
   );
 
-  expect(institutionOfEducationName.tagName).toBe('INPUT');
-  expect(institutionOfEducationAbbreviation.tagName).toBe('INPUT');
-  expect(institutionOfEducationAdress.tagName).toBe('INPUT');
-  expect(institutionOfEducationSite.tagName).toBe('INPUT');
-  expect(institutionOfEducationEmail.tagName).toBe('INPUT');
-  expect(institutionOfEducationDescription.tagName).toBe('TEXTAREA');
-  expect(institutionOfEducationPhone.tagName).toBe('INPUT');
-  expect(institutionOfEducationAdminEmail.tagName).toBe('INPUT');
+  expect(name.tagName).toBe('INPUT');
+  expect(abbreviation.tagName).toBe('INPUT');
+  expect(address.tagName).toBe('INPUT');
+  expect(site.tagName).toBe('INPUT');
+  expect(email.tagName).toBe('INPUT');
+  expect(description.tagName).toBe('TEXTAREA');
+  expect(phone.tagName).toBe('INPUT');
+  expect(adminEmail.tagName).toBe('INPUT');
 
-  expect(institutionOfEducationName.getAttribute('value')).toBe('');
-  expect(institutionOfEducationAbbreviation.getAttribute('value')).toBe('');
-  expect(institutionOfEducationAdress.getAttribute('value')).toBe('');
-  expect(institutionOfEducationSite.getAttribute('value')).toBe('');
-  expect(institutionOfEducationEmail.getAttribute('value')).toBe('');
-  expect(institutionOfEducationDescription.getAttribute('value')).toBe(null);
-  expect(institutionOfEducationPhone.getAttribute('value')).toBe('');
-  expect(institutionOfEducationAdminEmail.getAttribute('value')).toBe('');
+  expect(name.getAttribute('value')).toBe('');
+  expect(abbreviation.getAttribute('value')).toBe('');
+  expect(address.getAttribute('value')).toBe('');
+  expect(site.getAttribute('value')).toBe('');
+  expect(email.getAttribute('value')).toBe('');
+  expect(description.getAttribute('value')).toBe(null);
+  expect(phone.getAttribute('value')).toBe('');
+  expect(adminEmail.getAttribute('value')).toBe('');
 });
 
-// it('submit correct values', async () => {
-//   ReactDOM.render(
-//     <MemoryRouter>
-//       <RegistrationForm />
-//     </MemoryRouter>,
-//     container
-//   );
+xtest('submit without errors', () => {
+  const { container } = render(<AddInstitutionOfEducationForm />);
 
-//   const passwordNode = container.querySelector('input[name="password"]');
-//   const confirmPasswordNode = container.querySelector(
-//     'input[name="confirmPassword"]'
-//   );
-//   const emailNode = container.querySelector('input[name="email"]');
+  const mockJsonPromise = Promise.resolve('Університет додано!');
 
-//   await wait(() => {
-//     fireEvent.change(passwordNode, {
-//       target: {
-//         value: 'mockemail',
-//       },
-//     });
-//   });
+  const mockFetchPromise = Promise.resolve({
+    json: () => mockJsonPromise,
+    status: 200,
+  });
+  global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
-//   await wait(() => {
-//     fireEvent.change(confirmPasswordNode, {
-//       target: {
-//         value: 'mockemail',
-//       },
-//     });
-//   });
-//   await wait(() => {
-//     fireEvent.change(emailNode, {
-//       target: {
-//         value: 'mockemail',
-//       },
-//     });
-//   });
+  const mockHistoryPush = jest.fn();
+  jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+    useHistory: () => ({
+      push: mockHistoryPush,
+    }),
+  }));
 
-//   const handleClick = jest.fn();
-//   const submitButton = container.querySelector('button');
+  jest.useFakeTimers();
 
-//   submitButton.onclick = handleClick;
+  // await wait(() => {
+  userEvent.click(screen.getByRole('button', { name: /Додати/i }));
+  // });
+  jest.runAllTimers();
+  expect(mockHistoryPush).toHaveBeenCalledWith('/SuperAdminAccount');
 
-//   await wait(() => {
-//     fireEvent.click(submitButton);
-//   });
+  // await wait(() => expect(handleSubmit).toHaveBeenCalledTimes(0));
+});
 
-//   await wait(() => {
-//     expect(handleClick).toHaveBeenCalled();
-//   });
-// });
+test('inputs get correct values', async () => {
+  const { getByLabelText, getByTestId } = render(
+    <Router>
+      <AddInstitutionOfEducationForm />
+    </Router>
+  );
+
+  await wait(() => {
+    userEvent.type(getByLabelText('Назва'), 'UniversityOfTheWorld');
+    userEvent.selectOptions(getByTestId('select-type'), ['university']);
+    userEvent.type(getByLabelText('Аббревіатура'), 'UOTW');
+    userEvent.type(getByLabelText('Адреса'), 'world');
+    userEvent.type(getByLabelText('Сайт'), 'http://world.com.ua');
+    userEvent.type(getByLabelText('Електронна адреса'), 'email@gmail.com');
+    userEvent.type(getByLabelText('Телефон'), '+380999999999');
+    userEvent.type(
+      getByLabelText('Опис'),
+      'Description of the university of the world, the best university in the world'
+    );
+    // userEvent.click(screen.getByRole('button', { name: /Додати/i }));
+  });
+
+  expect(getByLabelText('Назва')).toHaveValue('UniversityOfTheWorld');
+  expect(getByTestId('value2').selected).toBe(true);
+});

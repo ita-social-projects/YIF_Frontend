@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { requestSecureData } from '../../../services/requestDataFunction';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../../services/tokenValidator';
@@ -6,69 +6,21 @@ import { Field, Formik, Form } from 'formik';
 import { FormButton, FormInputError } from '../../common/formElements';
 import { FormInputSuccess } from '../../common/formElements/formInputSuccess/formInputSuccess';
 import styles from './addInstitutionOfEducationForm.module.scss';
-import ImageUploader from '../../imageUploader';
+import ImagePickerField from './functions/ImagePickerField';
 import InstitutionOfEducationMap from './map';
 import { APIUrl } from '../../../services/endpoints';
 import { validationField } from '../../../services/validateForm/ValidatorsField';
 import Spinner from '../../common/spinner';
-
-const questionIcon = (
-  <svg
-    width='20'
-    height='20'
-    viewBox='0 0 20 20'
-    fill='none'
-    xmlns='http://www.w3.org/2000/svg'
-  >
-    <circle cx='10' cy='10' r='10' fill='#12335E' />
-    <path
-      d='M9.25781 12.8516V12.4297C9.25781 11.8203 9.35156 11.3203 9.53906 10.9297C9.72656 10.5339 10.0755 10.1172 10.5859 9.67969C11.2943 9.08073 11.7396 8.63021 11.9219 8.32812C12.1094 8.02604 12.2031 7.66146 12.2031 7.23438C12.2031 6.70312 12.0312 6.29427 11.6875 6.00781C11.349 5.71615 10.8594 5.57031 10.2188 5.57031C9.80729 5.57031 9.40625 5.61979 9.01562 5.71875C8.625 5.8125 8.17708 5.98698 7.67188 6.24219L7.21094 5.1875C8.19531 4.67188 9.22396 4.41406 10.2969 4.41406C11.2917 4.41406 12.0651 4.65885 12.6172 5.14844C13.1693 5.63802 13.4453 6.32812 13.4453 7.21875C13.4453 7.59896 13.3932 7.9349 13.2891 8.22656C13.1901 8.51302 13.0417 8.78646 12.8438 9.04688C12.6458 9.30208 12.2188 9.71615 11.5625 10.2891C11.0365 10.737 10.6875 11.1094 10.5156 11.4062C10.349 11.7031 10.2656 12.099 10.2656 12.5938V12.8516H9.25781ZM8.875 15.1719C8.875 14.4635 9.1875 14.1094 9.8125 14.1094C10.1146 14.1094 10.3464 14.2005 10.5078 14.3828C10.6745 14.5651 10.7578 14.8281 10.7578 15.1719C10.7578 15.5052 10.6745 15.7656 10.5078 15.9531C10.3411 16.1354 10.1094 16.2266 9.8125 16.2266C9.54167 16.2266 9.31771 16.1458 9.14062 15.9844C8.96354 15.8177 8.875 15.5469 8.875 15.1719Z'
-      fill='white'
-    />
-  </svg>
-);
+import questionIcon from './icon/questionIcon';
 
 const AddInstitutionOfEducationForm = () => {
-  const avatarStyles = {
-    height: '14rem',
-    width: '100%',
-    borderRadius: '0.3rem',
-    padding: '1rem',
-  };
-  const [picture, setPicture] = useState('');
-  const defaultPicture = '/assets/images/defaultUnivPicture.svg';
-  const avatar = picture ? picture : defaultPicture;
-
   const { token, getToken } = useAuth();
   const history = useHistory();
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState({
-    hasError: false,
-    errorStatusCode: '',
-    errorMessage: '',
-    redirectLink: '',
+  const [resultMessage, setResultMessage] = useState({
+    status: '',
+    message: '',
   });
-  const [success, setSuccess] = useState({
-    hasSuccess: false,
-    successStatusCode: '',
-    successMessage: '',
-  });
-
-  const imagePicker = ({ form, field }: any) => {
-    return (
-      <ImageUploader
-        additionalStyles={avatarStyles}
-        defaultPicture={defaultPicture}
-        avatar={avatar}
-        aspectRatio={16 / 9}
-        text='університету'
-        imageHandler={(newPicture: string) => {
-          setPicture(newPicture);
-          form.setFieldValue(field.name, newPicture);
-        }}
-      />
-    );
-  };
 
   const submitHandler = (
     e: React.ChangeEvent<HTMLFormElement>,
@@ -78,19 +30,12 @@ const AddInstitutionOfEducationForm = () => {
     e.preventDefault();
 
     setSubmitted(true);
-    setError({
-      hasError: false,
-      errorStatusCode: '',
-      errorMessage: '',
-      redirectLink: '',
-    });
-    setSuccess({
-      hasSuccess: false,
-      successStatusCode: '',
-      successMessage: '',
+    setResultMessage({
+      status: '',
+      message: '',
     });
 
-    getToken();
+    // getToken();
 
     requestSecureData(
       `${APIUrl}SuperAdmin/AddinstitutionOfEducationAndAdmin`,
@@ -100,7 +45,7 @@ const AddInstitutionOfEducationForm = () => {
         name: values.institutionOfEducationName,
         abbreviation: values.institutionOfEducationAbbreviation,
         site: values.institutionOfEducationSite,
-        address: values.institutionOfEducationAdress,
+        address: values.institutionOfEducationAddress,
         phone: values.institutionOfEducationPhone,
         email: values.institutionOfEducationEmail,
         description: values.institutionOfEducationDescription,
@@ -117,37 +62,25 @@ const AddInstitutionOfEducationForm = () => {
       .then((res: any) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
-          setError({
-            hasError: false,
-            errorStatusCode: '',
-            errorMessage: '',
-            redirectLink: '',
-          });
-          setSuccess({
-            hasSuccess: true,
-            successStatusCode: res.statusCode,
-            successMessage: res.data.message || 'Університет успішно додано',
+          setResultMessage({
+            status: 'success',
+            message: res.data.message || 'Університет успішно додано',
           });
           setTimeout(() => {
             history.push(pathToRedirect);
           }, 3000);
           setSubmitted(false);
         } else {
-          setError({
-            hasError: true,
-            errorStatusCode: res.statusCode,
-            errorMessage:
-              res.data.message || 'Щось пішло не так, спробуйте знову.',
-            redirectLink: '',
+          setResultMessage({
+            status: 'error',
+            message: res.data.message || 'Щось пішло не так, спробуйте знову.',
           });
         }
       })
       .catch((error) => {
-        setError({
-          hasError: true,
-          errorStatusCode: error.statusCode,
-          errorMessage: 'Щось пішло не так, спробуйте знову.',
-          redirectLink: '',
+        setResultMessage({
+          status: 'error',
+          message: 'Щось пішло не так, спробуйте знову.',
         });
       });
   };
@@ -161,7 +94,7 @@ const AddInstitutionOfEducationForm = () => {
           institutionOfEducationName: '',
           institutionOfEducationAbbreviation: '',
           institutionOfEducationSite: '',
-          institutionOfEducationAdress: '',
+          institutionOfEducationAddress: '',
           institutionOfEducationPhone: '',
           institutionOfEducationEmail: '',
           institutionOfEducationDescription: '',
@@ -186,8 +119,9 @@ const AddInstitutionOfEducationForm = () => {
               if (
                 touched.institutionOfEducationAdminEmail &&
                 errors.institutionOfEducationName === undefined &&
+                errors.institutionOfEducationType === undefined &&
                 errors.institutionOfEducationAbbreviation === undefined &&
-                errors.institutionOfEducationAdress === undefined &&
+                errors.institutionOfEducationAddress === undefined &&
                 errors.institutionOfEducationPhone === undefined &&
                 errors.institutionOfEducationEmail === undefined &&
                 errors.institutionOfEducationLat === undefined &&
@@ -217,6 +151,7 @@ const AddInstitutionOfEducationForm = () => {
                   className={styles.topWrapper__input}
                   id='institutionOfEducationName'
                   name='institutionOfEducationName'
+                  aria-labelledby='institutionOfEducationName'
                 />
                 {errors.institutionOfEducationName &&
                 touched.institutionOfEducationName ? (
@@ -238,13 +173,25 @@ const AddInstitutionOfEducationForm = () => {
                   className={styles.topWrapper__input}
                   as='select'
                   id='institutionOfEducationType'
+                  data-testid='select-type'
                   name='institutionOfEducationType'
                   value={values.institutionOfEducationType}
                 >
-                  <option value=''></option>
-                  <option value='university'>Університет</option>
-                  <option value='college'>Коледж</option>
+                  <option data-testid='value1' value=''></option>
+                  <option data-testid='value2' value='university'>
+                    Університет
+                  </option>
+                  <option data-testid='value3' value='college'>
+                    Коледж
+                  </option>
                 </Field>
+                {errors.institutionOfEducationType &&
+                touched.institutionOfEducationType ? (
+                  <FormInputError
+                    errorType='input'
+                    errorMessage={errors.institutionOfEducationType}
+                  />
+                ) : null}
               </div>
 
               <div className={styles.halfWidth}>
@@ -271,20 +218,20 @@ const AddInstitutionOfEducationForm = () => {
               <div className={styles.halfWidth}>
                 <label
                   className={styles.topWrapper__label}
-                  htmlFor='institutionOfEducationAdress'
+                  htmlFor='institutionOfEducationAddress'
                 >
                   Адреса
                 </label>
                 <Field
                   className={styles.topWrapper__input}
-                  id='institutionOfEducationAdress'
-                  name='institutionOfEducationAdress'
+                  id='institutionOfEducationAddress'
+                  name='institutionOfEducationAddress'
                 />
-                {errors.institutionOfEducationAdress &&
-                touched.institutionOfEducationAdress ? (
+                {errors.institutionOfEducationAddress &&
+                touched.institutionOfEducationAddress ? (
                   <FormInputError
                     errorType='input'
-                    errorMessage={errors.institutionOfEducationAdress}
+                    errorMessage={errors.institutionOfEducationAddress}
                   />
                 ) : null}
               </div>
@@ -332,7 +279,10 @@ const AddInstitutionOfEducationForm = () => {
               </div>
               <div className={styles.topWrapper__column}>
                 <div className={styles.topWrapper__column__fullWidth}>
-                  <label className={styles.topWrapper__label} htmlFor='phone'>
+                  <label
+                    className={styles.topWrapper__label}
+                    htmlFor='institutionOfEducationPhone'
+                  >
                     Телефон
                   </label>
                   <Field
@@ -376,11 +326,10 @@ const AddInstitutionOfEducationForm = () => {
                 <div className={styles.uploadContainer}>
                   <Field
                     name='institutionOfEducationPicture'
-                    component={imagePicker}
+                    component={ImagePickerField}
                   />
                 </div>
-                {!picture &&
-                errors.institutionOfEducationPicture &&
+                {errors.institutionOfEducationPicture &&
                 touched.institutionOfEducationPicture ? (
                   <FormInputError
                     errorType='input'
@@ -396,6 +345,7 @@ const AddInstitutionOfEducationForm = () => {
               </h2>
               <Field
                 name='lat'
+                data-testid='lat'
                 setFieldValue={setFieldValue}
                 component={InstitutionOfEducationMap}
               />
@@ -444,20 +394,20 @@ const AddInstitutionOfEducationForm = () => {
                 title='Додати'
               />
 
-              <div className={styles.errorContainer}>
-                {submitted && !error.hasError && (
+              <div className={styles.resultMessageContainer}>
+                {submitted && resultMessage.status === 'success' && (
                   <div className={styles.spinner}>
                     <Spinner />
                   </div>
                 )}
-                {error.hasError && (
+                {resultMessage.status === 'error' && (
                   <FormInputError
                     errorType='form'
-                    errorMessage={error.errorMessage}
+                    errorMessage={resultMessage.message}
                   />
                 )}
-                {success.hasSuccess && (
-                  <FormInputSuccess successMessage={success.successMessage} />
+                {resultMessage.status === 'success' && (
+                  <FormInputSuccess successMessage={resultMessage.message} />
                 )}
               </div>
             </div>
