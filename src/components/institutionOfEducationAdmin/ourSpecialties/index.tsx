@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import AddSpecialties from './addSpecialties/index';
-import OurSpecialtiesList from './ourSpecialtiesList';
+import OurSpecialtiesList from './specialtiesList/index';
 
 const OurSpecialties = () => {
-  const [block, setBlock] = useState(0);
+  const [block, setBlock] = useState('add');
 
-  const onChangeBlock = (num: number) => {
+  const onChangeBlock = (num: string) => {
     setBlock(num);
   };
 
   return (
     <>
-      {block === 0 ? (
-        <OurSpecialtiesList onChangeBlock={onChangeBlock(1)} />
-      ) : (
-        <AddSpecialties onChangeBlock={onChangeBlock(0)} />
-      )}
+      {block === 'list' ? (
+        <OurSpecialtiesList onChangeBlock={() => onChangeBlock('add')} />
+      ) : block === 'add' ? (
+        <AddSpecialties onChangeBlock={() => onChangeBlock('list')} />
+      ) : null}
     </>
   );
 };
