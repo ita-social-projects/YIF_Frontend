@@ -1,0 +1,58 @@
+@import '../../styles/index.scss';
+.mainInfo {
+  background-color: #bad0e5;
+  border-radius: 0.5rem;
+  padding: 20px;
+  width: 1050px;
+}
+
+.customInput {
+  border-radius: 0.5rem;
+  padding: 1rem 1rem 1rem 2rem;
+  background-color: #bad0e5;
+  width: 100%;
+  @include flex(row, center, space-between);
+  margin-bottom: 1.25rem;
+  span {
+    font-family: $fontOpenSans;
+    min-width: 18rem;
+  }
+}
+
+.editSpecialty {
+  display: flex;
+  min-height: 100vh;
+  .mainContent {
+    margin: 0 auto;
+    @include flex(column, center, flex-start);
+  }
+
+  .heading {
+    font-family: $fontNunito;
+    font-weight: $semiBold;
+    text-align: center;
+  }
+
+  h1 {
+    @extend .heading;
+    font-size: $font_30px;
+    margin-top: 50px;
+  }
+
+  h2 {
+    @extend .heading, h1;
+    border-bottom: 2px solid #000;
+    margin-bottom: 30px;
+    width: max-content;
+  }
+
+  h3 {
+    @extend .heading;
+    font-size: $font_18px;
+  }
+
+  button {
+    margin-bottom: 15rem;
+    width: 12.5rem;
+  }
+}
