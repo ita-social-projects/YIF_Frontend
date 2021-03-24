@@ -1,35 +1,34 @@
 import React from 'react';
 import ImagePickerField from './ImagePickerField';
-import { fireEvent, render, screen } from '@testing-library/react';
-import { store } from '../../../../store/store';
-import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 
 describe('Test ImagePicker', () => {
-  xit('should render component', async () => {
-    const setFieldValue = jest.fn();
-    const useStateSpy = jest.spyOn(React, 'useState');
+  it('should render component with default picture', async () => {
+    render(<ImagePickerField />);
+    // screen.debug();
+  });
 
+  it('should render component with setted picture', async () => {
+    const picture = `\[]-[]/`;
+    React.useState = jest.fn().mockReturnValue([picture, {}]);
+
+    render(<ImagePickerField />);
+  });
+
+  it('should click picture', async () => {
     const setPicture = jest.fn();
-
-    useStateSpy.mockImplementationOnce((init) => ['init', setPicture]);
-
-    const picture = 'dasdasda';
+    const imageHandler = jest.fn((picture) => setPicture(picture));
+    const picture = `\[]-[]/`;
+    React.useState = jest.fn().mockReturnValue([picture, {}]);
 
     const { getByTestId } = render(
-      <ImagePickerField
-        handleImage={() => console.log(`raz`)}
-        setFieldValue={setFieldValue}
-        setPicture={setPicture}
-      />
+      <ImagePickerField imageHandler={imageHandler} />
     );
 
-    const imageBox = getByTestId('ImageUploader');
-    // expect(imageBox).toBeInTheDocument();
+    act(() => {
+      fireEvent.click(getByTestId('picture'));
+    });
 
-    // console.log(`imageBox`, imageBox);
-    fireEvent.click(imageBox);
-    // expect(handleClick).toHaveBeenCalledTimes(1);
     // expect(setPicture).toHaveBeenCalledTimes(1);
   });
 });

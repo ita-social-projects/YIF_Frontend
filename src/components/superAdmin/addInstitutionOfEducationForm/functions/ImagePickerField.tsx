@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ImageUploader from '../../../imageUploader';
 
 const ImagePickerField = ({ form, field }: any) => {
-  const [picture, setPicture] = useState('');
+  const [picture, setPicture] = React.useState('');
   const defaultPicture = '/assets/images/defaultUnivPicture.svg';
   const avatar = picture ? picture : defaultPicture;
   const aspectRatio = 16 / 9;
@@ -16,19 +16,17 @@ const ImagePickerField = ({ form, field }: any) => {
   };
 
   return (
-    <div>
-      <ImageUploader
-        additionalStyles={avatarStyles}
-        defaultPicture={defaultPicture}
-        avatar={avatar}
-        aspectRatio={aspectRatio}
-        text={nameOfObject}
-        imageHandler={(newPicture: string) => {
-          setPicture(newPicture);
-          form.setFieldValue(field.name, newPicture);
-        }}
-      />
-    </div>
+    <ImageUploader
+      additionalStyles={avatarStyles}
+      defaultPicture={defaultPicture}
+      avatar={avatar}
+      aspectRatio={aspectRatio}
+      text={nameOfObject}
+      imageHandler={(newPicture: string) => {
+        setPicture(newPicture);
+        form.setFieldValue(field.name, newPicture);
+      }}
+    />
   );
 };
 

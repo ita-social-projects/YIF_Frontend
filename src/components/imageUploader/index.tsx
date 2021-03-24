@@ -16,6 +16,7 @@ const ImageUploader = (props: any) => {
       <div
         style={additionalStyles}
         className={style.avatarContainer}
+        data-testid='picture'
         onClick={() => {
           setPopupOpen(!isPopupOpen);
         }}

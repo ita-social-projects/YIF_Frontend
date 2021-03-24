@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
+import styles from './addInstitutionOfEducationForm.module.scss';
+import { APIUrl } from '../../../services/endpoints';
 import { requestSecureData } from '../../../services/requestDataFunction';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../../services/tokenValidator';
 import { Field, Formik, Form } from 'formik';
 import { FormButton, FormInputError } from '../../common/formElements';
 import { FormInputSuccess } from '../../common/formElements/formInputSuccess/formInputSuccess';
-import styles from './addInstitutionOfEducationForm.module.scss';
+import { validationField } from '../../../services/validateForm/ValidatorsField';
 import ImagePickerField from './functions/ImagePickerField';
 import InstitutionOfEducationMap from './map';
-import { APIUrl } from '../../../services/endpoints';
-import { validationField } from '../../../services/validateForm/ValidatorsField';
 import Spinner from '../../common/spinner';
 import questionIcon from './icon/questionIcon';
 
@@ -35,7 +35,7 @@ const AddInstitutionOfEducationForm = () => {
       message: '',
     });
 
-    // getToken();
+    getToken();
 
     requestSecureData(
       `${APIUrl}SuperAdmin/AddinstitutionOfEducationAndAdmin`,
@@ -117,17 +117,17 @@ const AddInstitutionOfEducationForm = () => {
             onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
               handleSubmit(e);
               if (
-                touched.institutionOfEducationAdminEmail &&
+                touched.institutionOfEducationName &&
                 errors.institutionOfEducationName === undefined &&
-                errors.institutionOfEducationType === undefined &&
+                // errors.institutionOfEducationType === undefined &&
                 errors.institutionOfEducationAbbreviation === undefined &&
                 errors.institutionOfEducationAddress === undefined &&
                 errors.institutionOfEducationPhone === undefined &&
                 errors.institutionOfEducationEmail === undefined &&
-                errors.institutionOfEducationLat === undefined &&
-                errors.institutionOfEducationPicture === undefined &&
-                errors.institutionOfEducationDescription === undefined &&
-                errors.institutionOfEducationAdminEmail === undefined
+                errors.institutionOfEducationLat === undefined
+                // errors.institutionOfEducationPicture === undefined &&
+                // errors.institutionOfEducationDescription === undefined &&
+                // errors.institutionOfEducationAdminEmail === undefined
               ) {
                 submitHandler(e, '/SuperAdminAccount', values);
               }
@@ -149,9 +149,10 @@ const AddInstitutionOfEducationForm = () => {
                 </label>
                 <Field
                   className={styles.topWrapper__input}
+                  data-testid='institutionOfEducationName'
                   id='institutionOfEducationName'
                   name='institutionOfEducationName'
-                  aria-labelledby='institutionOfEducationName'
+                  placeholder='Назва'
                 />
                 {errors.institutionOfEducationName &&
                 touched.institutionOfEducationName ? (
@@ -289,7 +290,7 @@ const AddInstitutionOfEducationForm = () => {
                     className={styles.topWrapper__input}
                     id='institutionOfEducationPhone'
                     name='institutionOfEducationPhone'
-                    type='phone'
+                    // type='phone'
                   />
                   {errors.institutionOfEducationPhone &&
                   touched.institutionOfEducationPhone ? (
