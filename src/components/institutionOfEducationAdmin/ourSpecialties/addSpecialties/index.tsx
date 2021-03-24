@@ -5,34 +5,42 @@ import cloneDeep from 'lodash.clonedeep';
 import styles from './addSpecialties.module.scss';
 
 const AddSpecialties = (props: any) => {
-  const [directions, setDirections] = useState(DirectionsList);
+  const [directions, setDirections] = useState([{}]);
+  const [checked, setCheked] = useState(false);
+  const [value, setValue] = useState(false);
+  const [fetching, setFetching] = useState(true);
 
-  let clonedDirections = cloneDeep(directions);
-
-  clonedDirections.forEach((item: any) => {
-    item.specialties.forEach((item: any) => {
-      item.checked = false;
+  useEffect(() => {
+    let clonedDirections = DirectionsList;
+    clonedDirections.forEach((item: any) => {
+      item.specialties.forEach((item: any) => {
+        item.checked = false;
+      });
     });
-  });
+    setDirections(clonedDirections);
+    setFetching(false);
+    console.log('f');
+  }, []);
 
   const onClickHandler = (elemId: any, itemId: any) => {
-    clonedDirections.find((elem: any) => {
+    directions.find((elem: any) => {
       if (elem.id === elemId) {
         elem.specialties.find((item: any) => {
           if (item.specialtyId === itemId) {
+            console.log(item);
             item.checked = !item.checked;
+            console.log(item);
+            setCheked(!checked);
             return item;
           }
         });
         return elem;
       }
     });
-    setDirections(clonedDirections);
-    console.log(clonedDirections);
   };
 
   const renderDirectionsAccordion = () =>
-    directions.map((elem, key) => {
+    directions.map((elem: any, key) => {
       const { code, name, specialties }: any = elem;
       return (
         <AccordionItem
@@ -70,22 +78,26 @@ const AddSpecialties = (props: any) => {
     });
 
   return (
-    <div className={styles.AddSpecialties}>
-      <div className={styles.AddSpecialties__inner}>
-        <h2 className={styles.AddSpecialties__title}>
-          Додайте спеціальності, які є у вашому університеті
-        </h2>
-        <ul className={styles.AddSpecialties__list}>
-          {renderDirectionsAccordion()}
-        </ul>
-        <button
-          className={`${styles.AddSpecialties__button} ${styles.animatedButton}`}
-          onClick={props.onChangeBlock}
-        >
-          Готово
-        </button>
-      </div>
-    </div>
+    <>
+      {!fetching && (
+        <div className={styles.AddSpecialties}>
+          <div className={styles.AddSpecialties__inner}>
+            <h2 className={styles.AddSpecialties__title}>
+              Додайте спеціальності, які є у вашому університеті
+            </h2>
+            <ul className={styles.AddSpecialties__list}>
+              {renderDirectionsAccordion()}
+            </ul>
+            <button
+              className={`${styles.AddSpecialties__button} ${styles.animatedButton}`}
+              onClick={props.onChangeBlock}
+            >
+              Готово
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

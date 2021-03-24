@@ -73,9 +73,9 @@ const App = () => {
           <Route path='/moderators'>
             <InstitutionOfEducationAdminPage />
           </Route>
-          {/* <Route path='/admin/addSpecialties'>
+          <Route path='/addSpecialties'>
             <InstitutionOfEducationAdminPage />
-          </Route> */}
+          </Route>
           <Route path='/newPassword'>
             <NewPasswordPage />
           </Route>
