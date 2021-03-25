@@ -19,6 +19,7 @@ import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccount
 import InstitutionOfEducationInfo from '../institutionOfEducationAdmin/institutionOfEducationInfo';
 import InstitutionOfEducationAdminPage from '../../pages/institutionOfEducationAdminPage';
 import NewPasswordPage from '../../pages/newPasswordPage';
+import EditSpecialty from '../../pages/editSpecialtyPage';
 
 const App = () => {
   const { token } = useAuth();
@@ -75,6 +76,9 @@ const App = () => {
           </Route>
           <Route path='/newPassword'>
             <NewPasswordPage />
+          </Route>
+          <Route path='/editSpecialty'>
+            <EditSpecialty />
           </Route>
           <ProtectedRoute user={token} path='/cabinet' allowed={['Graduate']}>
             <GraduateCabinet />

@@ -1,0 +1,73 @@
+@import '../../../styles/index.scss';
+
+.fontRules {
+  font-size: font_18px;
+  font-family: $fontOpenSans;
+  font-weight: $regular;
+}
+
+.inputStyle {
+  @extend .fontRules;
+  border: 1px solid $gray;
+  min-height: 2.5rem;
+  margin-left: 1rem;
+  border-radius: 0.3rem;
+}
+
+.customInput {
+  @include flex(column, flex-end, center);
+  width: 100%;
+  position: relative;
+  padding: 1rem;
+}
+
+.inputField {
+  @extend .fontRules;
+  width: 100%;
+  @include flex(row, center, space-between);
+
+  input {
+    @extend .fontRules;
+    @extend .inputStyle;
+    width: 50rem;
+    padding-left: 1rem;
+  }
+
+  textarea {
+    @extend input;
+    line-height: 1.9rem;
+    width: 50rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+.smallField {
+  @include flex(row, center, flex-end);
+  label {
+    font-family: $fontNunito;
+    font-size: $font_15px;
+  }
+}
+.smallInput {
+  @extend .inputStyle;
+  margin-left: 1rem;
+  width: 10rem;
+  text-align: center;
+}
+
+.errorStyle {
+  @include flex(row, center, flex-start);
+  background-color: rgba($red, 0.4);
+  font-size: $font_15px;
+  font-family: $fontNunito;
+  height: 2rem;
+  padding-left: 1rem;
+  position: absolute;
+  top: 3.5rem;
+  border-radius: 0.3rem;
+}
+
+.inputError {
+  @extend .errorStyle;
+  width: 50rem;
+}
