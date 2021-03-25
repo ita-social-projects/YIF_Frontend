@@ -5,37 +5,32 @@ import styles from './directionCard.module.scss';
 interface Props {
   code: any;
   name: string;
-  description: string;
   specialties: any;
 }
 
 const DirectionCard: React.FC<Props> = (props) => {
-  let { code, name, description, specialties } = props;
+  let { code, name, specialties } = props;
 
   const specialtiesList = specialties
-    .sort((a: any, b: any) => a.specialtyCode - b.specialtyCode)
+    .sort((a: any, b: any) => a.code - b.code)
     .map((item: any) => (
-      <li
-        key={item.specialtyId}
-        className={styles.card__content__list__subitem}
-      >
+      <li key={item.id} className={styles.card__content__list__subitem}>
         <div className={styles.card__content__list__subitem_info}>
-          <span>{item.specialtyCode}</span>
-          <h5>{item.specialtyName}</h5>
+          <span>{item.code}</span>
+          <h5>{item.name}</h5>
         </div>
-        <Link to={`/specialty/${item.specialtyId}`}>Детальніше</Link>
+        <Link to={`/specialty/${item.id}`}>Детальніше</Link>
       </li>
     ));
 
   return (
-    <div data-testid="card" id={code} data-id={code} className={styles.card}>
+    <div data-testid='card' id={code} data-id={code} className={styles.card}>
       <h2 className={styles.card__title}>
         {props.code} {name}
       </h2>
 
       <div className={styles.card__content}>
         <div className={styles.card__content__wrapper}>
-          <p className={styles.card__content__desc}>{description}</p>
           <h3 className={styles.card__content__subtitle}>Спеціальності:</h3>
           <ul className={styles.card__content__list}>{specialtiesList}</ul>
         </div>

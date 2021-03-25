@@ -91,14 +91,13 @@ const InstitutionOfEducationPage = () => {
           headerStyle={styles.acc_item__header}
           bodyStyle={styles.acc_item__body}
           bodyContent={specialties
-            .sort((a: any, b: any) => a.specialtyCode - b.specialtyCode)
+            .sort((a: any, b: any) => a.code - b.code)
             .map((item: any) => (
-              <li key={item.specialtyId} className={styles.acc_item__subitem}>
+              <li key={item.id} className={styles.acc_item__subitem}>
                 <div className={styles.acc_item__subitem_info}>
-                  <span>{item.specialtyCode}</span>{' '}
-                  <h5>{item.specialtyName}</h5>
+                  <span>{item.code}</span> <h5>{item.name}</h5>
                 </div>
-                <Link to={`/specialty/${item.specialtyId}`}>Детальніше</Link>
+                <Link to={`/specialty/${item.id}`}>Детальніше</Link>
               </li>
             ))}
         />

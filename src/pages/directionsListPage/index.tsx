@@ -14,7 +14,6 @@ const DirectionsListPage = () => {
       id: '',
       code: '',
       name: '',
-      description: '',
       specialties: [],
     },
   ]);
@@ -36,7 +35,6 @@ const DirectionsListPage = () => {
             id: item.id,
             code: item.code,
             name: item.name,
-            description: item.description,
             specialties: item.specialties,
           };
         });
@@ -59,7 +57,6 @@ const DirectionsListPage = () => {
         key={item.id}
         code={item.code}
         name={item.name}
-        description={item.description}
         specialties={item.specialties}
       />
     );
