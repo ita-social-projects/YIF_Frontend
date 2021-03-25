@@ -6,9 +6,7 @@ import styles from './addSpecialties.module.scss';
 
 const AddSpecialties = (props: any) => {
   const [directions, setDirections] = useState([{}]);
-  const [checked, setCheked] = useState(false);
-  const [value, setValue] = useState(false);
-  const [fetching, setFetching] = useState(true);
+  const [isFetching, setFetching] = useState(true);
 
   useEffect(() => {
     let clonedDirections = DirectionsList;
@@ -19,24 +17,22 @@ const AddSpecialties = (props: any) => {
     });
     setDirections(clonedDirections);
     setFetching(false);
-    console.log('f');
   }, []);
 
   const onClickHandler = (elemId: any, itemId: any) => {
-    directions.find((elem: any) => {
+    let clonedDirections = cloneDeep(directions);
+    clonedDirections.find((elem: any) => {
       if (elem.id === elemId) {
         elem.specialties.find((item: any) => {
           if (item.specialtyId === itemId) {
-            console.log(item);
             item.checked = !item.checked;
-            console.log(item);
-            setCheked(!checked);
             return item;
           }
         });
         return elem;
       }
     });
+    setDirections(clonedDirections);
   };
 
   const renderDirectionsAccordion = () =>
@@ -79,7 +75,7 @@ const AddSpecialties = (props: any) => {
 
   return (
     <>
-      {!fetching && (
+      {!isFetching && (
         <div className={styles.AddSpecialties}>
           <div className={styles.AddSpecialties__inner}>
             <h2 className={styles.AddSpecialties__title}>
