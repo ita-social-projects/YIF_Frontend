@@ -1,0 +1,47 @@
+@import '../../../styles/index.scss';
+
+.editInfoSection {
+  display: flex;
+  width: 100%;
+}
+
+.heading {
+  font-family: $fontNunito;
+  font-weight: $semiBold;
+  text-align: center;
+}
+
+.title {
+  @extend .heading;
+  font-size: $font_30px;
+  margin-top: 3.125rem;
+}
+
+.infoTitle {
+  @extend .heading, .title;
+  border-bottom: 0.125rem solid #000;
+  margin-bottom: 1.875rem;
+}
+
+.subtitle {
+  @extend .heading;
+  font-size: $font_18px;
+}
+
+.mainContent {
+  margin: 0 auto;
+  @include flex(column, center, flex-start);
+  button {
+    margin-bottom: 15rem;
+    width: 12.5rem;
+  }
+}
+
+.infoBox {
+  @include flex(column, center, space-between);
+  width: 100%;
+  background-color: #bad0e5;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  //   width: 65.625rem;
+}

@@ -20,6 +20,7 @@ import InstitutionOfEducationInfo from '../institutionOfEducationAdmin/instituti
 import InstitutionOfEducationAdminPage from '../../pages/institutionOfEducationAdminPage';
 import NewPasswordPage from '../../pages/newPasswordPage';
 import EditSpecialty from '../../pages/editSpecialtyPage';
+import EditInstitutionOfEducationInfoPage from '../institutionOfEducationAdmin/editInstitutionOfEducationInfo';
 
 const App = () => {
   const { token } = useAuth();
@@ -79,6 +80,9 @@ const App = () => {
           </Route>
           <Route path='/editSpecialty'>
             <EditSpecialty />
+          </Route>
+          <Route path='/editInstitutionofEducationInfo'>
+            <InstitutionOfEducationAdminPage />
           </Route>
           <ProtectedRoute user={token} path='/cabinet' allowed={['Graduate']}>
             <GraduateCabinet />
