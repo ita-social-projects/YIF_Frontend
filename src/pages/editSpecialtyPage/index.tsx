@@ -4,7 +4,6 @@ import { Formik, Form, Field } from 'formik';
 import { Footer, Header } from '../../components';
 import Aside from '../../components/institutionOfEducationAdmin/aside';
 import styles from './editSpecialty.module.scss';
-
 import { FormButton } from '../../components/common/formElements/index';
 import editSpecialtyValidation from './editSpecialtyValidation';
 
@@ -41,11 +40,11 @@ const EditSpecialty = () => {
   };
 
   useEffect(() => {
-    const reqva: any = {};
+    const requirements: any = {};
     examRequirements.map((i) => {
       const { examName, coefficient, minimumScore } = i;
-      reqva[`${examName}` + `${minimumScore}`] = minimumScore;
-      reqva[`${examName}`] = coefficient;
+      requirements[`${examName}` + `${minimumScore}`] = minimumScore;
+      requirements[`${examName}`] = coefficient;
     });
     setinitialValues({
       specialtyName: specialtyName,
@@ -53,7 +52,7 @@ const EditSpecialty = () => {
       educationFormName: 'денна, заочна, вечірня',
       educationalProgramLink: educationalProgramLink,
       description: description,
-      ...reqva,
+      ...requirements,
     });
     setFetching(false);
   }, []);
@@ -82,12 +81,7 @@ const EditSpecialty = () => {
                 {() => (
                   <Form className={styles.mainContent}>
                     <div className={styles.mainInfo}>
-                      <Field
-                        id='name'
-                        label='Назва:'
-                        name='specialtyName'
-                        as={Input}
-                      />
+                      <Input id='name' label='Назва:' name='specialtyName' />
                       <Input
                         id='paymentForm'
                         label='Оплата:'
@@ -121,6 +115,10 @@ const EditSpecialty = () => {
                             label='Мінімум балів:'
                             name={`${examName}${minimumScore}`}
                             requirement='true'
+                            type='number'
+                            min='0'
+                            max='200'
+                            step='1'
                           />
                           <Input
                             id={`${examName}`}

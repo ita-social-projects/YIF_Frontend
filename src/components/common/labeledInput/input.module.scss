@@ -11,6 +11,7 @@
   border: 1px solid $gray;
   min-height: 2.5rem;
   margin-left: 1rem;
+  border-radius: 0.3rem;
 }
 
 .customInput {
@@ -18,16 +19,13 @@
   width: 100%;
   position: relative;
   padding: 1rem;
+  border-radius: 0.3rem;
 }
 
 .inputField {
   @extend .fontRules;
   width: 100%;
   @include flex(row, center, space-between);
-
-  label {
-    cursor: pointer;
-  }
 
   input {
     @extend .fontRules;
@@ -38,8 +36,9 @@
 
   textarea {
     @extend input;
-    line-height: 1.8rem;
+    line-height: 1.9rem;
     width: 50rem;
+    padding: 0.5rem 1rem;
   }
 }
 
@@ -48,7 +47,6 @@
   label {
     font-family: $fontNunito;
     font-size: $font_15px;
-    cursor: pointer;
   }
 }
 .smallInput {
@@ -67,6 +65,7 @@
   padding-left: 1rem;
   position: absolute;
   top: 3.5rem;
+  border-radius: 0.3rem;
 }
 
 .inputError {
