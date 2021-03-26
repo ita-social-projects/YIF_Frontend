@@ -65,7 +65,7 @@ const App = () => {
           >
             <AddInstitutionOfEducation />
           </ProtectedRoute> */}
-          <Route>
+          <Route path='/addInstitutionOfEducation'>
             <AddInstitutionOfEducation />
           </Route>
           <Route path='/institutionOfEducationAdmin'>
