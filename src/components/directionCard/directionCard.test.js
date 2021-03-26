@@ -10,16 +10,14 @@ const directionsList = [
   {
     id: '05',
     name: 'Соціальні та поведінкові науки',
-    description:
-      'Символіка риби містить багато різноманітних, іноді полярно протилежних значень. З часів глибокої давнини риба асоціювалась із Вчителями, світовими Спасителями, праотцями, мудрістю. До символу риби мають відношення індуїстський Вішну, єгипетський Гор, халдейський Оаннес, а також Христос. Учні, послідовники, які живуть у «воді вчення», часто уподібнюються рибам.',
     specialties: [
       {
-        specialtyId: '051',
-        specialtyName: 'Економіка (Економічна кібернетика)',
+        id: '051',
+        name: 'Економіка (Економічна кібернетика)',
       },
       {
-        specialtyId: '052',
-        specialtyName: 'Економіка (Інформаційні технології в бізнесі)',
+        id: '052',
+        name: 'Економіка (Інформаційні технології в бізнесі)',
       },
     ],
   },
@@ -33,7 +31,6 @@ it('renders without crashing', () => {
         <DirectionCard
           id='05'
           name='Соціальні та поведінкові науки'
-          description='Опис'
           specialties={directionsList[0].specialties}
         />
       </Provider>
@@ -49,7 +46,6 @@ test('renders with props', () => {
         <DirectionCard
           code='05'
           name='Соціальні та поведінкові науки'
-          description='Опис'
           specialties={directionsList[0].specialties}
         />
       </Provider>
@@ -59,11 +55,6 @@ test('renders with props', () => {
   const title = screen.getByText(/05 Соціальні та поведінкові науки/i);
   expect(title).toBeInTheDocument();
   expect(title.tagName).toMatch(/h2/i);
-
-  expect(getByText(/Опис/i)).toBeInTheDocument();
-  const description = screen.getByText(/Опис/i);
-  expect(description).toBeInTheDocument();
-  expect(description.tagName).toMatch(/p/i);
 
   expect(getByText(/Економічна кібернетика/i)).toBeInTheDocument();
   const specialty = screen.getByText(/Економічна кібернетика/i);
