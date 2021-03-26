@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
+import AddSpecialties from './addSpecialties/index';
+import OurSpecialtiesList from './specialtiesList/index';
 
-function OurSpecialties() {
+const OurSpecialties = () => {
+  const [block, setBlock] = useState('list');
+
+  const onChangeBlock = (num: string) => {
+    setBlock(num);
+  };
+
   return (
-    <main>
-      <h1>OurSpecialties</h1>
-    </main>
+    <>
+      {block === 'list' ? (
+        <OurSpecialtiesList onChangeBlock={() => onChangeBlock('add')} />
+      ) : block === 'add' ? (
+        <AddSpecialties onChangeBlock={() => onChangeBlock('list')} />
+      ) : null}
+    </>
   );
 }
 

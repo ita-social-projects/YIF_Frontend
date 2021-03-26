@@ -1,0 +1,140 @@
+@import '../../../../styles/index.scss';
+.specialityAdminPage {
+  margin: 0 auto;
+  width: calc((1180 / 1440) * 100%);
+  max-width: 1440px;
+  height: auto;
+  min-height: 1100px;
+  padding-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  &__title {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 5rem;
+    font-weight: 400;
+  }
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .animatedButton {
+    max-width: 200px;
+    display: block;
+    text-align: center;
+    padding: 12px 9px;
+    margin-left: 5rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    border-radius: 10px;
+    margin-top: 36px;
+  }
+}
+
+.acc_item {
+  &__header {
+    margin-top: 20px;
+    background: #bad0e5;
+    font-weight: 800;
+  }
+  &__inner {
+    margin-top: 20px;
+  }
+  &__body {
+    margin-top: 15px;
+  }
+  &__subtitle {
+    font-weight: 600;
+    font-size: 18px;
+    color: #000000;
+    margin-bottom: 20px;
+  }
+  &__underline {
+    text-decoration: underline;
+  }
+  &__block {
+    margin-top: 10px;
+  }
+  &__id {
+    width: 65px;
+  }
+
+  &__name {
+    font-weight: 800;
+    font-size: 30px;
+    color: #000000;
+  }
+
+  &__subitem {
+    position: relative;
+    padding: 25px;
+    margin-top: 20px;
+    background: #d6e5f2;
+    a {
+      font-size: 18px;
+      color: $white;
+      padding: 15px 20px;
+      border-radius: 5px;
+      background-color: $darkBlue;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: $lightBlue_4;
+      }
+    }
+
+    &_info {
+      display: flex;
+    }
+  }
+  &__underline {
+    cursor: pointer;
+  }
+}
+.read__more {
+  &__btn {
+    display: block;
+    font-family: $fontNunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.875rem;
+    color: $black;
+    cursor: pointer;
+  }
+  svg {
+    margin-top: 0.313rem;
+    transform: rotate(0deg);
+    transition: all 0.3s;
+  }
+  &__details {
+    display: none;
+    transition: all 0.1s;
+    p {
+      margin-top: 10px;
+    }
+  }
+  &__opened {
+    .read__more__details {
+      display: block;
+      transition: all 0.1s;
+      max-height: 100%;
+    }
+  }
+  .delete__icon {
+    position: absolute;
+    right: 50px;
+    bottom: 42px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 600;
+    color: #ec615b;
+  }
+  .animatedButton {
+    margin: 20px 0 0 0;
+    border-radius: 10px;
+  }
+}
