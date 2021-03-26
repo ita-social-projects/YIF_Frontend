@@ -1,7 +1,13 @@
 import React from 'react';
 import AddInstitutionOfEducationForm from './index';
 import { MemoryRouter } from 'react-router-dom';
-import { fireEvent, render, wait, act } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  wait,
+  act,
+  getByText,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { store } from '../../../store/store';
@@ -50,12 +56,23 @@ describe('AddIOEForm Test', () => {
       userEvent.type(getByLabelText('Назва'), 'UniversityOfTheWorld');
       fireEvent.focusIn(getByLabelText('Назва'));
       fireEvent.focusOut(getByLabelText('Назва'));
+      userEvent.selectOptions(getByLabelText('Тип закладу освіти'), [
+        'university',
+      ]);
       userEvent.type(getByLabelText('Аббревіатура'), 'UOTW');
       userEvent.type(getByLabelText('Адреса'), 'Address');
       userEvent.type(getByLabelText('Сайт'), 'http://site.com');
       userEvent.type(getByLabelText('Електронна адреса'), 'mail@mail.com');
       userEvent.type(getByLabelText('Телефон'), '+380999999999');
       userEvent.click(getByRole('presentation'));
+      userEvent.type(
+        getByLabelText('Опис'),
+        'there should be at least fifty symbols there should be at least fifty symbols'
+      );
+      userEvent.type(
+        getByLabelText('Введіть електронну адресу адміністратора'),
+        'vadim.ilchenko@gmailaa.com'
+      );
     });
 
     await wait(() => {
@@ -92,12 +109,23 @@ describe('AddIOEForm Test', () => {
       userEvent.type(getByLabelText('Назва'), 'UniversityOfTheWorld');
       fireEvent.focusIn(getByLabelText('Назва'));
       fireEvent.focusOut(getByLabelText('Назва'));
+      userEvent.selectOptions(getByLabelText('Тип закладу освіти'), [
+        'university',
+      ]);
       userEvent.type(getByLabelText('Аббревіатура'), 'UOTW');
       userEvent.type(getByLabelText('Адреса'), 'Address');
       userEvent.type(getByLabelText('Сайт'), 'http://site.com');
       userEvent.type(getByLabelText('Електронна адреса'), 'mail@mail.com');
       userEvent.type(getByLabelText('Телефон'), '+380999999999');
       userEvent.click(getByRole('presentation'));
+      userEvent.type(
+        getByLabelText('Опис'),
+        'there should be at least fifty symbols there should be at least fifty symbols'
+      );
+      userEvent.type(
+        getByLabelText('Введіть електронну адресу адміністратора'),
+        'vadim.ilchenko@gmailaa.com'
+      );
     });
 
     await wait(() => {
@@ -141,12 +169,23 @@ describe('AddIOEForm Test', () => {
       userEvent.type(getByLabelText('Назва'), 'UniversityOfTheWorld');
       fireEvent.focusIn(getByLabelText('Назва'));
       fireEvent.focusOut(getByLabelText('Назва'));
+      userEvent.selectOptions(getByLabelText('Тип закладу освіти'), [
+        'university',
+      ]);
       userEvent.type(getByLabelText('Аббревіатура'), 'UOTW');
       userEvent.type(getByLabelText('Адреса'), 'Address');
       userEvent.type(getByLabelText('Сайт'), 'http://site.com');
       userEvent.type(getByLabelText('Електронна адреса'), 'mail@mail.com');
       userEvent.type(getByLabelText('Телефон'), '+380999999999');
       userEvent.click(getByRole('presentation'));
+      userEvent.type(
+        getByLabelText('Опис'),
+        'there should be at least fifty symbols there should be at least fifty symbols'
+      );
+      userEvent.type(
+        getByLabelText('Введіть електронну адресу адміністратора'),
+        'vadim.ilchenko@gmailaa.com'
+      );
     });
 
     await wait(() => {
@@ -158,8 +197,8 @@ describe('AddIOEForm Test', () => {
     ).toBeInTheDocument();
   });
 
-  test('inputs get correct values', async () => {
-    const { getByLabelText, getByRole, getByPlaceholderText } = render(
+  test('should get validation errors if no values entered', async () => {
+    const { getByText, getByRole } = render(
       <Router>
         <authContext.Provider
           value={{
@@ -176,20 +215,9 @@ describe('AddIOEForm Test', () => {
         </authContext.Provider>
       </Router>
     );
-
     await wait(() => {
-      userEvent.type(getByLabelText('Назва'), 'UniversityOfTheWorld');
-      userEvent.type(getByLabelText('Аббревіатура'), 'UOTW');
-
-      fireEvent.focusIn(getByPlaceholderText('Назва'));
-      fireEvent.focusOut(getByPlaceholderText('Назва'));
-      fireEvent.change(getByLabelText('Аббревіатура'), {
-        target: { value: 'UOTW' },
-      });
-      userEvent.click(getByRole('presentation'));
+      userEvent.click(getByRole('button', { name: /Додати/i }));
     });
-
-    expect(getByLabelText('Назва')).toHaveValue('UniversityOfTheWorld');
-    userEvent.click(getByRole('button', { name: /Додати/i }));
+    expect(getByText('Оберіть тип закладу')).toBeInTheDocument();
   });
 });

@@ -318,4 +318,16 @@
     right: 5px;
     left: auto;
   }
+
+  .addButton {
+    width: 350px;
+    padding: 10px 0;
+    border-radius: 5px;
+    margin-top: 35px;
+    text-align: center;
+    font-family: $fontOpenSans;
+    font-weight: $regular;
+    font-size: $font_18px;
+    border: 1px solid $darkBlue;
+  }
 }

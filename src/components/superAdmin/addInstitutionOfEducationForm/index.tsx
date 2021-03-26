@@ -119,15 +119,16 @@ const AddInstitutionOfEducationForm = () => {
               if (
                 touched.institutionOfEducationName &&
                 errors.institutionOfEducationName === undefined &&
-                // errors.institutionOfEducationType === undefined &&
+                errors.institutionOfEducationType === undefined &&
                 errors.institutionOfEducationAbbreviation === undefined &&
                 errors.institutionOfEducationAddress === undefined &&
-                errors.institutionOfEducationPhone === undefined &&
+                errors.institutionOfEducationSite === undefined &&
                 errors.institutionOfEducationEmail === undefined &&
-                errors.institutionOfEducationLat === undefined
-                // errors.institutionOfEducationPicture === undefined &&
-                // errors.institutionOfEducationDescription === undefined &&
-                // errors.institutionOfEducationAdminEmail === undefined
+                errors.institutionOfEducationPhone === undefined &&
+                errors.institutionOfEducationLat === undefined &&
+                errors.institutionOfEducationDescription === undefined &&
+                errors.institutionOfEducationAdminEmail === undefined
+                // errors.institutionOfEducationPicture === undefined
               ) {
                 submitHandler(e, '/SuperAdminAccount', values);
               }
@@ -149,10 +150,8 @@ const AddInstitutionOfEducationForm = () => {
                 </label>
                 <Field
                   className={styles.topWrapper__input}
-                  data-testid='institutionOfEducationName'
                   id='institutionOfEducationName'
                   name='institutionOfEducationName'
-                  placeholder='Назва'
                 />
                 {errors.institutionOfEducationName &&
                 touched.institutionOfEducationName ? (
@@ -178,11 +177,11 @@ const AddInstitutionOfEducationForm = () => {
                   name='institutionOfEducationType'
                   value={values.institutionOfEducationType}
                 >
-                  <option data-testid='value1' value=''></option>
-                  <option data-testid='value2' value='university'>
+                  <option data-testid='empty' value=''></option>
+                  <option data-testid='university' value='university'>
                     Університет
                   </option>
-                  <option data-testid='value3' value='college'>
+                  <option data-testid='college' value='college'>
                     Коледж
                   </option>
                 </Field>
