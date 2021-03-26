@@ -80,7 +80,7 @@ const AddInstitutionOfEducationForm = () => {
       .catch((error) => {
         setResultMessage({
           status: 'error',
-          message: 'Щось пішло не так, спробуйте знову.',
+          message: error || 'Щось пішло не так, спробуйте знову.',
         });
       });
   };

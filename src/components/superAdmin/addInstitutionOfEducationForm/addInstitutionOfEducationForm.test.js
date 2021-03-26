@@ -132,9 +132,7 @@ describe('AddIOEForm Test', () => {
       userEvent.click(getByRole('button', { name: /Додати/i }));
     });
     jest.runAllTimers();
-    expect(
-      queryByText('Щось пішло не так, спробуйте знову.')
-    ).toBeInTheDocument();
+    expect(queryByText('Some error')).toBeInTheDocument();
   });
 
   test('shows a response error message', async () => {
