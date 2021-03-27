@@ -8,6 +8,7 @@ import { FormInputSuccess } from '../../common/formElements/formInputSuccess/for
 import { FormInputError } from '../../common/formElements';
 import TableItem from './tableItem/tableItem';
 import Search from './search/search';
+import { Link, Router } from 'react-router-dom';
 
 import { ReactComponent as IconLock } from './icons/iconLock.svg';
 import { ReactComponent as IconArrow } from './icons/iconArrow.svg';
@@ -332,7 +333,7 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
               }`}
               onClick={() => handleSort('abbreviation')}
             >
-             Заклад освіти <IconArrow />
+              Заклад освіти <IconArrow />
             </li>
             <li
               data-testid='sortByBanned'
@@ -370,6 +371,11 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
           </li>
         </ul>
       </div>
+      <Link to='/addInstitutionOfEducation'>
+        <button className={`${styles.addButton} ${styles.animatedButton}`}>
+          Додати заклад освіти
+        </button>
+      </Link>
       <div className={styles.imgContainer}>
         <img src={iconIllustrAdmin} alt='search something' />
       </div>

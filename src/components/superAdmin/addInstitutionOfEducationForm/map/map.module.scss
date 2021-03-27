@@ -1,0 +1,50 @@
+@import '../../../styles.scss';
+
+@import url('~leaflet/dist/leaflet.css');
+
+body,
+#root,
+.leaflet-container {
+  width: 100%;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+  background: #f2f9ff;
+}
+
+.mapContainer {
+  width: 100%;
+  margin: 0 auto;
+  height: 23.75rem;
+  font-size: $font_30px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.popUpContent {
+  @include flex(column, flex-start, flex-start);
+}
+
+.popUpTitle {
+  font-family: $fontNunito;
+  font-size: calc((16 / 16) * 1rem);
+  margin: 10px 0 18px 0;
+}
+
+.popUpLink {
+  font-family: $fontNunito;
+  font-size: calc((15 / 16) * 1rem);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.spinnerContainer {
+  margin-top: 100px;
+  @include flex(row, center, center);
+}

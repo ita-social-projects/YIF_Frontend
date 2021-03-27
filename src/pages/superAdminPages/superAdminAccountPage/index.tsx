@@ -21,11 +21,12 @@ const SuperAdminAccountPage: React.FC = () => {
   const { token, getToken } = useAuth();
 
   const fetchInstitutionOfEducationAdmins = () => {
-    const endpoint = `${APIUrl}SuperAdmin/GetAllInstitutionOfEducations`;
+    const endpoint = `${APIUrl}SuperAdmin/GetAllInstitutionOfEducationsAdmins`;
     getToken();
     requestSecureData(endpoint, 'GET', token!)
       .then((res: any) => {
-        setInstitutionOfEducationAdmins(res.data);
+        console.log(`res`, res);
+        setInstitutionOfEducationAdmins(res.data.responseList);
         setFetching(false);
       })
       .catch((e) => console.log(e));

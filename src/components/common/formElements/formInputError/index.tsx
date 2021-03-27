@@ -34,7 +34,9 @@ const FormInputError: React.FC<Props> = (props) => {
   return (
     <div
       className={
-        errorType === 'input'
+        errorType === 'inputFull'
+          ? `${styles.errorInputFull}`
+          : errorType === 'input'
           ? `${styles.error}`
           : errorType === 'form'
           ? `${styles.error} ${styles.formError}`

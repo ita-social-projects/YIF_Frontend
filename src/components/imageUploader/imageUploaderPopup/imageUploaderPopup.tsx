@@ -3,10 +3,6 @@ import style from './imageUploaderPopup.module.scss';
 import ImageCropper from '../imageCropper/imageCropper';
 import ButtonUploading from '../buttonUploading/buttonUploading';
 import { FormInputErrorWithCloseBtn } from '../../common/formElements';
-import { APIUrl } from '../../../services/endpoints';
-import { requestImageProfile } from '../../../services/requestDataFunction';
-import { store } from '../../../store/store';
-import { setUserPhoto } from '../../../store/reducers/setUserReducer';
 
 export type TLoadedImage = {
   name: string;
@@ -17,12 +13,13 @@ export type TLoadedImage = {
 
 type TProps = {
   setPopupOpen: Function;
-  setSuccessLoad: Function;
-  setProfileImageSrc: Function;
+  imageHandler: Function;
+  aspectRatio: number;
+  text: string;
 };
 
 const ImageUploaderPopup = (props: TProps) => {
-  const { setPopupOpen, setSuccessLoad, setProfileImageSrc } = props;
+  const { setPopupOpen, aspectRatio, text, imageHandler } = props;
 
   const InitialLoadedImageState: TLoadedImage = {
     name: '',
@@ -35,6 +32,7 @@ const ImageUploaderPopup = (props: TProps) => {
   const [error, setError] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [cropper, setCropper] = useState<any>();
+  const role: string = 'Graduate';
 
   let fileInput: any = React.createRef();
 
@@ -59,7 +57,7 @@ const ImageUploaderPopup = (props: TProps) => {
     // Check if file only one.
     if (files.length > 1) {
       setError(
-        'На жаль, можна завантажувати лише одну фотографію. Перетягніть лише потрібну фотографію профілю.'
+        `На жаль, можна завантажувати лише одну фотографію. Перетягніть лише потрібну фотографію ${text}.`
       );
       return false;
     }
@@ -112,6 +110,8 @@ const ImageUploaderPopup = (props: TProps) => {
         size: file.size,
         type: file.type,
         data: fileReader.result,
+        aspectRatio: aspectRatio,
+        text: text,
       };
       setLoadedImage(fileLoaded);
       setError('');
@@ -130,7 +130,7 @@ const ImageUploaderPopup = (props: TProps) => {
     <section className={style.container}>
       <div className={style.imageLoader} id='imageLoaderContainer'>
         <div className={style.header}>
-          <h2>Оберіть фотографію профілю</h2>
+          <h2>Оберіть фотографію {text}</h2>
         </div>
         <div className={style.draggableContainer}>
           {error.length > 0 && (
@@ -150,6 +150,8 @@ const ImageUploaderPopup = (props: TProps) => {
               isLoading={isLoading}
               setError={(newState: string) => setError(newState)}
               setCropper={(newState: any) => setCropper(newState)}
+              aspectRatio={aspectRatio}
+              text={text}
             />
           )}
 
@@ -188,11 +190,11 @@ const ImageUploaderPopup = (props: TProps) => {
               <div className={style.helperImage}>
                 <img
                   src='assets/icons/imageUpload.svg'
-                  alt='Перетягніть фотографію профілю сюди'
+                  alt={`Перетягніть фотографію ${text} сюди`}
                 />
               </div>
               <div className={style.helperText}>
-                Перетягніть фотографію профілю сюди <br />
+                Перетягніть фотографію {text} сюди <br />
                 <span>- або -</span>
               </div>
               <div className={style.fileBrowserContainer}>
@@ -218,40 +220,9 @@ const ImageUploaderPopup = (props: TProps) => {
             isTransperent={false}
             value={'Завантажити'}
             handleClick={() => {
-              setLoading(true);
               const imageToUpload = cropper.getCroppedCanvas().toDataURL();
-
-              requestImageProfile(
-                `${APIUrl}Users/Current/ChangePhoto`,
-                'POST',
-                {
-                  photo: imageToUpload,
-                }
-              )
-                .then((res: any) => {
-                  const statusCode = res.statusCode.toString();
-                  if (statusCode.match(/^[23]\d{2}$/)) {
-                    setError('');
-                    setSuccessLoad(true);
-                    setPopupOpen(false);
-                    setLoading(false);
-                    setProfileImageSrc(res.data.photo);
-                    store.dispatch(
-                      setUserPhoto({
-                        photo: res.data.photo,
-                      })
-                    );
-                  } else {
-                    setError(
-                      res.data.message || 'Щось пішло не так, спробуйте знову.'
-                    );
-                    setLoading(false);
-                  }
-                })
-                .catch((err) => {
-                  setError('Щось пішло не так, ви можете спробувати знову.');
-                  setLoading(false);
-                });
+              imageHandler(imageToUpload);
+              setPopupOpen(false);
             }}
           />
           <ButtonUploading

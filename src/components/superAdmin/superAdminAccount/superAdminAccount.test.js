@@ -63,9 +63,13 @@ afterEach(cleanup);
 describe('check SuperAdminAccount component', () => {
   it('renders correctly', () => {
     const { queryByText } = render(
-      <SuperAdminAccount
-        institutionOfEducationAdmins={institutionOfEducationAdmins}
-      />
+      <Provider store={store}>
+        <MemoryRouter>
+          <SuperAdminAccount
+            institutionOfEducationAdmins={institutionOfEducationAdmins}
+          />
+        </MemoryRouter>
+      </Provider>
     );
     expect(queryByText(/Адміністратори закладів освіти/i)).toBeInTheDocument();
     expect(queryByText(/Ім'я/i)).toBeInTheDocument();
@@ -75,10 +79,14 @@ describe('check SuperAdminAccount component', () => {
   it('check func handleSort', () => {
     const handleSort = jest.fn();
     const { queryByTestId } = render(
-      <SuperAdminAccount
-        institutionOfEducationAdmins={institutionOfEducationAdmins}
-        handleSort={handleSort('')}
-      />
+      <Provider store={store}>
+        <MemoryRouter>
+          <SuperAdminAccount
+            institutionOfEducationAdmins={institutionOfEducationAdmins}
+            handleSort={handleSort('')}
+          />
+        </MemoryRouter>
+      </Provider>
     );
     const sortByUserName = queryByTestId('sortByUserName');
 
@@ -106,12 +114,16 @@ describe('check SuperAdminAccount component', () => {
     const setBanStatus = jest.fn();
 
     render(
-      <SuperAdminAccount
-        institutionOfEducationAdmins={institutionOfEducationAdmins}
-        handlerSearch={handlerSearch}
-        clearInput={clearInput}
-        setBanStatus={setBanStatus}
-      />
+      <Provider store={store}>
+        <MemoryRouter>
+          <SuperAdminAccount
+            institutionOfEducationAdmins={institutionOfEducationAdmins}
+            handlerSearch={handlerSearch}
+            clearInput={clearInput}
+            setBanStatus={setBanStatus}
+          />
+        </MemoryRouter>
+      </Provider>
     );
     const searchBox = screen.queryByRole('textbox');
     fireEvent.change(searchBox, { target: { value: 'NuweeAdmin' } });
