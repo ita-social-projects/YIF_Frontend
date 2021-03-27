@@ -16,7 +16,6 @@ import ErrorBoundry from '../../errorBoundry';
 import ResetPasswordPage from '../../pages/resetPasswordPage/index';
 import AddInstitutionOfEducation from '../../pages/superAdminPages/addInstitutionOfEducationPage';
 import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccountPage';
-import InstitutionOfEducationInfo from '../institutionOfEducationAdmin/institutionOfEducationInfo';
 import InstitutionOfEducationAdminPage from '../../pages/institutionOfEducationAdminPage';
 import NewPasswordPage from '../../pages/newPasswordPage';
 import EditSpecialty from '../../pages/editSpecialtyPage';
@@ -59,9 +58,13 @@ const App = () => {
           <Route path='/specialty/:id'>
             <SpecialityPage />
           </Route>
-          <Route path='/addInstitutionOfEducation'>
+          <ProtectedRoute
+            user={token}
+            path='/addInstitutionOfEducation'
+            allowed={['SuperAdmin']}
+          >
             <AddInstitutionOfEducation />
-          </Route>
+          </ProtectedRoute>
           <Route path='/institutionOfEducationAdmin'>
             <InstitutionOfEducationAdminPage />
           </Route>
