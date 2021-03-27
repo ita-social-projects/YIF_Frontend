@@ -18,6 +18,8 @@ describe('IMAGE CROPPER', () => {
         isLoading={true}
         setError={() => null}
         setCropper={() => null}
+        aspectRatio={1}
+        text={''}
       />
     );
 
@@ -41,6 +43,8 @@ describe('IMAGE CROPPER', () => {
         isLoading={false}
         setError={() => null}
         setCropper={() => null}
+        aspectRatio={1}
+        text={''}
       />
     );
 
