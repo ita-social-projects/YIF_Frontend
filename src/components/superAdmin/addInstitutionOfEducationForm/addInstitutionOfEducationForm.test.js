@@ -52,7 +52,7 @@ describe('AddIOEForm Test', () => {
       </Router>
     );
 
-    await wait(() => {
+    act(() => {
       userEvent.type(getByLabelText('Назва'), 'UniversityOfTheWorld');
       fireEvent.focusIn(getByLabelText('Назва'));
       fireEvent.focusOut(getByLabelText('Назва'));
@@ -75,7 +75,7 @@ describe('AddIOEForm Test', () => {
       );
     });
 
-    await wait(() => {
+    await act(async () => {
       userEvent.click(getByRole('button', { name: /Додати/i }));
     });
 
@@ -105,7 +105,7 @@ describe('AddIOEForm Test', () => {
       </Provider>
     );
 
-    await wait(() => {
+    act(() => {
       userEvent.type(getByLabelText('Назва'), 'UniversityOfTheWorld');
       fireEvent.focusIn(getByLabelText('Назва'));
       fireEvent.focusOut(getByLabelText('Назва'));
@@ -128,7 +128,7 @@ describe('AddIOEForm Test', () => {
       );
     });
 
-    await wait(() => {
+    await act(async () => {
       userEvent.click(getByRole('button', { name: /Додати/i }));
     });
     jest.runAllTimers();
@@ -163,7 +163,7 @@ describe('AddIOEForm Test', () => {
       </Provider>
     );
 
-    await wait(() => {
+    act(() => {
       userEvent.type(getByLabelText('Назва'), 'UniversityOfTheWorld');
       fireEvent.focusIn(getByLabelText('Назва'));
       fireEvent.focusOut(getByLabelText('Назва'));
@@ -186,7 +186,7 @@ describe('AddIOEForm Test', () => {
       );
     });
 
-    await wait(() => {
+    await act(async () => {
       userEvent.click(getByRole('button', { name: /Додати/i }));
     });
     jest.runAllTimers();
@@ -213,7 +213,7 @@ describe('AddIOEForm Test', () => {
         </authContext.Provider>
       </Router>
     );
-    await wait(() => {
+    await act(async () => {
       userEvent.click(getByRole('button', { name: /Додати/i }));
     });
     expect(getByText('Оберіть тип закладу')).toBeInTheDocument();
