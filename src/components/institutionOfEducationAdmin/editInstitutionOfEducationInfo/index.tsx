@@ -5,8 +5,7 @@ import { Footer, Header } from '../..';
 import Aside from '../aside';
 import styles from './editInstitutionOfEducationInfoPage.module.scss';
 import { FormButton } from '../../common/formElements/index';
-import { InstitutionOfEducationMap } from '../../../components';
-import IUpload from './iupload/iupload';
+import UniversityMap from '../../superAdmin/addInstitutionOfEducationForm/map';
 
 const EditInstitutionOfEducationInfoPage = () => {
   const [initialValues, setinitialValues] = useState({});
@@ -43,25 +42,26 @@ const EditInstitutionOfEducationInfoPage = () => {
 
   const map = [
     {
-      id: id,
-      name: name,
-      site: site,
-      lat: lat,
-      lon: lon,
+      id,
+      name,
+      site,
+      lat,
+      lon,
     },
   ];
 
   useEffect(() => {
     setinitialValues({
-      name: name,
-      abbreviation: abbreviation,
-      site: site,
-      address: address,
-      phone: phone,
-      email: email,
-      description: description,
-      institutionOfEducationType: 0,
-      color: '',
+      institutionOfEducationType,
+      name,
+      abbreviation,
+      site,
+      address,
+      phone,
+      email,
+      description,
+      institutionOfEducationLat: lat,
+      institutionOfEducationLon: lon,
     });
     setFetching(false);
   }, []);
@@ -78,9 +78,6 @@ const EditInstitutionOfEducationInfoPage = () => {
               <h3 className={styles.subtitle}>
                 Натисніть на поле для вводу, щоб ввести нові дані
               </h3>
-              <div className={styles.uploader}>
-                <IUpload />
-              </div>
               <h2 className={styles.infoTitle}>Основна інформація</h2>
 
               <Formik
@@ -89,19 +86,19 @@ const EditInstitutionOfEducationInfoPage = () => {
                   console.log(values);
                 }}
               >
-                {() => (
+                {({ setFieldValue }) => (
                   <Form className={styles.mainContent}>
                     <div className={styles.infoBox}>
                       <div className={styles.selectField}>
                         <span>Тип закладу:</span>
                         <Field
                           as='select'
-                          name='type'
+                          name='institutionOfEducationType'
                           className={styles.selector}
                         >
-                          <option value='Університет'>Університет</option>
-                          <option value='Коледж'>Коледж</option>
-                          <option value='Щось інше..'>Щось інше..</option>
+                          <option value='0'>Університет</option>
+                          <option value='1'>Коледж</option>
+                          <option value='2'>Щось інше..</option>
                         </Field>
                       </div>
                       <Input id='name' label='Повна назва:' name='name' />
@@ -142,7 +139,12 @@ const EditInstitutionOfEducationInfoPage = () => {
                       />
                     </div>
                     <h2 className={styles.infoTitle}>Місце розташування</h2>
-                    <InstitutionOfEducationMap data={map} />
+                    <Field
+                      name='pos'
+                      setFieldValue={setFieldValue}
+                      as={UniversityMap}
+                    />
+
                     <FormButton
                       title={'Зберегти'}
                       id='registerFormButton'
