@@ -38,10 +38,38 @@
 }
 
 .infoBox {
-  @include flex(column, center, space-between);
+  @include flex(column, flex-end, space-between);
   width: 100%;
   background-color: #bad0e5;
   border-radius: 0.5rem;
   padding: 1.25rem;
-  //   width: 65.625rem;
+}
+
+.selector {
+  font-family: $fontOpenSans;
+  background-color: #fff;
+  border: 1px solid $gray;
+  min-height: 2.5rem;
+  font-size: $font_18px;
+  text-align: center;
+  margin-right: 1rem;
+  padding: 0 1rem;
+}
+
+.selectField {
+  margin-bottom: 1rem;
+  span {
+    margin-right: 1rem;
+    font-family: $fontOpenSans;
+    font-size: $font_18px;
+  }
+}
+
+.uploader {
+  img {
+    border-radius: 10px;
+    opacity: 0.8;
+  }
+  width: 75rem;
+  padding: 50px 70px 0 70px;
 }

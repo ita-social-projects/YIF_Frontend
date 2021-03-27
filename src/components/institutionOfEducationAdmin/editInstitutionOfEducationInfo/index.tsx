@@ -6,6 +6,7 @@ import Aside from '../aside';
 import styles from './editInstitutionOfEducationInfoPage.module.scss';
 import { FormButton } from '../../common/formElements/index';
 import { InstitutionOfEducationMap } from '../../../components';
+import IUpload from './iupload/iupload';
 
 const EditInstitutionOfEducationInfoPage = () => {
   const [initialValues, setinitialValues] = useState({});
@@ -77,7 +78,11 @@ const EditInstitutionOfEducationInfoPage = () => {
               <h3 className={styles.subtitle}>
                 Натисніть на поле для вводу, щоб ввести нові дані
               </h3>
+              <div className={styles.uploader}>
+                <IUpload />
+              </div>
               <h2 className={styles.infoTitle}>Основна інформація</h2>
+
               <Formik
                 initialValues={initialValues}
                 onSubmit={(values) => {
@@ -87,11 +92,18 @@ const EditInstitutionOfEducationInfoPage = () => {
                 {() => (
                   <Form className={styles.mainContent}>
                     <div className={styles.infoBox}>
-                      <Field as='select' name='type'>
-                        <option value='1'>R</option>
-                        <option value='2'>G</option>
-                        <option value='3'>B</option>
-                      </Field>
+                      <div className={styles.selectField}>
+                        <span>Тип закладу:</span>
+                        <Field
+                          as='select'
+                          name='type'
+                          className={styles.selector}
+                        >
+                          <option value='Університет'>Університет</option>
+                          <option value='Коледж'>Коледж</option>
+                          <option value='Щось інше..'>Щось інше..</option>
+                        </Field>
+                      </div>
                       <Input id='name' label='Повна назва:' name='name' />
                       <Input
                         id='paymentForm'
