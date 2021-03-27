@@ -61,11 +61,11 @@ export const validationField = Yup.object().shape({
 
   institutionOfEducationSite: Yup.string()
     .matches(
-      /^(http\:\/\/|https\:\/\/)/i,
+      /^(http:\/\/|https:\/\/)/i,
       'Aдреса повинна починатись з http:// або https://'
     )
     .matches(
-      /^(http\:\/\/|https\:\/\/)([a-z0-9][a-z0-9\-]*\.)+[a-z0-9][a-z0-9\-]*$/i,
+      /^(http:\/\/|https:\/\/)([a-z0-9][a-z0-9-]*\.)+[a-z0-9][a-z0-9-]*$/i,
       'Адресу сайту введено не вірно'
     )
     .min(2, 'Замала кількість введених символів')

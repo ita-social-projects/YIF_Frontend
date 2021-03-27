@@ -156,7 +156,7 @@ const AddInstitutionOfEducationForm = () => {
                 {errors.institutionOfEducationName &&
                 touched.institutionOfEducationName ? (
                   <FormInputError
-                    errorType='input'
+                    errorType='inputFull'
                     errorMessage={errors.institutionOfEducationName}
                   />
                 ) : null}
@@ -188,7 +188,7 @@ const AddInstitutionOfEducationForm = () => {
                 {errors.institutionOfEducationType &&
                 touched.institutionOfEducationType ? (
                   <FormInputError
-                    errorType='input'
+                    errorType='inputFull'
                     errorMessage={errors.institutionOfEducationType}
                   />
                 ) : null}
@@ -209,7 +209,7 @@ const AddInstitutionOfEducationForm = () => {
                 {errors.institutionOfEducationAbbreviation &&
                 touched.institutionOfEducationAbbreviation ? (
                   <FormInputError
-                    errorType='input'
+                    errorType='inputFull'
                     errorMessage={errors.institutionOfEducationAbbreviation}
                   />
                 ) : null}
@@ -230,7 +230,7 @@ const AddInstitutionOfEducationForm = () => {
                 {errors.institutionOfEducationAddress &&
                 touched.institutionOfEducationAddress ? (
                   <FormInputError
-                    errorType='input'
+                    errorType='inputFull'
                     errorMessage={errors.institutionOfEducationAddress}
                   />
                 ) : null}
@@ -251,7 +251,7 @@ const AddInstitutionOfEducationForm = () => {
                 {errors.institutionOfEducationSite &&
                 touched.institutionOfEducationSite ? (
                   <FormInputError
-                    errorType='input'
+                    errorType='inputFull'
                     errorMessage={errors.institutionOfEducationSite}
                   />
                 ) : null}
@@ -272,7 +272,7 @@ const AddInstitutionOfEducationForm = () => {
                 {errors.institutionOfEducationEmail &&
                 touched.institutionOfEducationEmail ? (
                   <FormInputError
-                    errorType='input'
+                    errorType='inputFull'
                     errorMessage={errors.institutionOfEducationEmail}
                   />
                 ) : null}
@@ -289,12 +289,11 @@ const AddInstitutionOfEducationForm = () => {
                     className={styles.topWrapper__input}
                     id='institutionOfEducationPhone'
                     name='institutionOfEducationPhone'
-                    // type='phone'
                   />
                   {errors.institutionOfEducationPhone &&
                   touched.institutionOfEducationPhone ? (
                     <FormInputError
-                      errorType='input'
+                      errorType='inputFull'
                       errorMessage={errors.institutionOfEducationPhone}
                     />
                   ) : null}
@@ -316,7 +315,7 @@ const AddInstitutionOfEducationForm = () => {
                   {errors.institutionOfEducationDescription &&
                   touched.institutionOfEducationDescription ? (
                     <FormInputError
-                      errorType='input'
+                      errorType='inputFull'
                       errorMessage={errors.institutionOfEducationDescription}
                     />
                   ) : null}
@@ -332,7 +331,7 @@ const AddInstitutionOfEducationForm = () => {
                 {errors.institutionOfEducationPicture &&
                 touched.institutionOfEducationPicture ? (
                   <FormInputError
-                    errorType='input'
+                    errorType='inputFull'
                     errorMessage={errors.institutionOfEducationPicture}
                   />
                 ) : null}
@@ -352,7 +351,7 @@ const AddInstitutionOfEducationForm = () => {
               {errors.institutionOfEducationLat &&
               touched.institutionOfEducationLat ? (
                 <FormInputError
-                  errorType='input'
+                  errorType='inputFull'
                   errorMessage={errors.institutionOfEducationLat}
                 />
               ) : null}
@@ -383,7 +382,7 @@ const AddInstitutionOfEducationForm = () => {
                 {errors.institutionOfEducationAdminEmail &&
                 touched.institutionOfEducationAdminEmail ? (
                   <FormInputError
-                    errorType='input'
+                    errorType='inputFull'
                     errorMessage={errors.institutionOfEducationAdminEmail}
                   />
                 ) : null}
