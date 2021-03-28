@@ -6,78 +6,74 @@
   height: auto;
   min-height: 1100px;
   padding-bottom: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+
   &__title {
-    margin-top: 50px;
-    margin-bottom: 20px;
-    font-family: 'Nunito', sans-serif;
+    margin-top: 3.125rem;
+    margin-bottom: 1.25rem;
+    font-family: $fontNunito;
     font-size: 5rem;
     font-weight: 400;
   }
   &__top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include flex(row, center, space-between);
   }
   .animatedButton {
     max-width: 200px;
     display: block;
     text-align: center;
-    padding: 12px 9px;
+    padding: 0.75rem 0.563rem;
     margin-left: 5rem;
-    font-family: 'Nunito', sans-serif;
+    font-family: $fontNunito;
     font-weight: 300;
-    font-size: 18px;
+    font-size: 1.125rem;
     border-radius: 10px;
-    margin-top: 36px;
+    margin-top: 2.25rem;
   }
 }
 
 .acc_item {
   &__header {
-    margin-top: 20px;
+    margin-top: 1.25rem;
     background: #bad0e5;
     font-weight: 800;
   }
   &__inner {
-    margin-top: 20px;
+    margin-top: 1.25rem;
   }
   &__body {
-    margin-top: 15px;
+    margin-top: 0.938px;
   }
   &__subtitle {
     font-weight: 600;
-    font-size: 18px;
+    font-size: 1.125rem;
     color: #000000;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
   }
   &__underline {
     text-decoration: underline;
   }
   &__block {
-    margin-top: 10px;
+    margin-top: 0.625rem;
   }
   &__id {
-    width: 65px;
+    width: 4.063rem;
   }
 
   &__name {
     font-weight: 800;
-    font-size: 30px;
+    font-size: 1.875rem;
     color: #000000;
   }
 
   &__subitem {
     position: relative;
-    padding: 25px;
-    margin-top: 20px;
+    padding: 1.563rem;
+    margin-top: 1.25rem;
     background: #d6e5f2;
     a {
-      font-size: 18px;
+      font-size: 1.125rem;
       color: $white;
-      padding: 15px 20px;
+      padding: 0.938rem 1.25rem;
       border-radius: 5px;
       background-color: $darkBlue;
       transition: 0.3s;
@@ -114,8 +110,17 @@
     display: none;
     transition: all 0.1s;
     p {
-      margin-top: 10px;
+      margin-top: 0.625rem;
     }
+    &__description {
+      padding-right: 6.25rem;
+    }
+  }
+  &__show {
+    display: inline;
+  }
+  &__hide {
+    display: none;
   }
   &__opened {
     .read__more__details {
@@ -123,13 +128,19 @@
       transition: all 0.1s;
       max-height: 100%;
     }
+    .read__more__show {
+      display: none;
+    }
+    .read__more__hide {
+      display: inline;
+    }
   }
   .delete__icon {
     position: absolute;
     right: 50px;
     bottom: 42px;
     text-align: center;
-    font-size: 10px;
+    font-size: 0.625rem;
     font-weight: 600;
     color: #ec615b;
   }
