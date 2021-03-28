@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import AccordionItem from '../../../components/accordion';
 import styles from './ourSpecialties.module.scss';
-import DetailsItem from './SpecialtyDetails';
+import SpecialtyDetails from './SpecialtyDetails';
 
 const OurSpecialties = () => {
   const specialtyList = [
@@ -68,8 +68,8 @@ const OurSpecialties = () => {
           headerStyle={styles.acc_item__header}
           bodyStyle={styles.acc_item__body}
           bodyContent={details.map((item: any, index: number) => (
-            <DetailsItem
-              index={index}
+            <SpecialtyDetails
+              key={index}
               code={item.code}
               name={item.name}
               id={item.id}

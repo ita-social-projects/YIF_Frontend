@@ -3,7 +3,6 @@ import styles from './ourSpecialties.module.scss';
 import { Link } from 'react-router-dom';
 
 interface Props {
-  index: number;
   code: number;
   name: string;
   id: string;
@@ -13,7 +12,6 @@ interface Props {
   educationalProgramLink: string;
 }
 const SpecialtyDetails: React.FC<Props> = ({
-  index,
   code,
   name,
   id,
@@ -43,7 +41,7 @@ const SpecialtyDetails: React.FC<Props> = ({
   );
 
   return (
-    <li key={index} className={styles.acc_item__subitem}>
+    <li className={styles.acc_item__subitem}>
       <h3 className={styles.acc_item__subtitle}>
         {code} {name}
       </h3>
@@ -56,6 +54,11 @@ const SpecialtyDetails: React.FC<Props> = ({
         <p>
           <strong>Форма навчання:</strong> {educationForm}
         </p>
+      </div>
+      <div className={styles.acc_item__block}>
+        <p>
+            <strong>Освітня програма:</strong> {educationalProgramLink}
+          </p>
       </div>
       <div
         className={`${styles.acc_item__block} ${styles.read__more} ${
@@ -77,9 +80,6 @@ const SpecialtyDetails: React.FC<Props> = ({
           </span>
         </div>
         <div className={styles.read__more__details}>
-          <p>
-            <strong>Освітня програма:</strong> {educationalProgramLink}
-          </p>
           <p className={`${styles.read__more__details__description}`}>{description}</p>
         </div>
         <div className={styles.delete__icon}>

@@ -6,52 +6,6 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { store } from '../../../store/store';
 
-
-const specialtyList = [
-  {
-  direction: 'Інформаційні технології',
-  details: [
-    {
-      name: "Комп'ютерні науки",
-      code: '124',
-      paymentForm: 'бюджет, контракт',
-      educationForm: 'денна, заочна, вечірня',
-      description: 'Опис',
-      educationalProgramLink: 'example.com',
-    },
-    {
-      name: 'Інженерія програмного забезпечення (Інтернет речей)',
-      code: '122',
-      paymentForm: 'бюджет, контракт',
-      educationForm: 'денна, вечірня',
-      description: 'Опис',
-      educationalProgramLink: 'example.com',
-    },
-    {
-      name: 'Соціальні та поведінкові науки',
-      code: '123',
-      paymentForm: 'бюджет, контракт',
-      educationForm: 'денна',
-      description: 'Опис',
-      educationalProgramLink: 'example.com',
-    }
-    ]
-  },
-  {
-  direction: 'Математика та статистика',
-  details: [
-    {
-      name: 'Математика та статистика',
-      code: '121',
-      paymentForm: 'бюджет, контракт',
-      educationForm: 'денна, заочна, вечірня',
-      description: 'Опис',
-      educationalProgramLink: 'example.com',
-    }
-  ]
-  }
-]
-
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(

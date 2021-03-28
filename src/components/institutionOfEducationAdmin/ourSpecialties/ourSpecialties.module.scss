@@ -3,10 +3,9 @@
   margin: 0 auto;
   width: calc((1180 / 1440) * 100%);
   max-width: 1440px;
-  height: auto;
   min-height: 1100px;
-  padding-bottom: 60px;
-
+  padding: 0 3.125rem 3.75rem;
+  box-sizing: content-box;
   &__title {
     margin-top: 3.125rem;
     margin-bottom: 1.25rem;
@@ -35,7 +34,7 @@
   &__header {
     margin-top: 1.25rem;
     background: #bad0e5;
-    font-weight: 800;
+    font-weight: $extraBold;
   }
   &__inner {
     margin-top: 1.25rem;
@@ -44,7 +43,7 @@
     margin-top: 0.938px;
   }
   &__subtitle {
-    font-weight: 600;
+    font-weight: $bold;
     font-size: 1.125rem;
     color: #000000;
     margin-bottom: 1.25rem;
@@ -60,7 +59,7 @@
   }
 
   &__name {
-    font-weight: 800;
+    font-weight: $extraBold;
     font-size: 1.875rem;
     color: #000000;
   }
@@ -70,6 +69,7 @@
     padding: 1.563rem;
     margin-top: 1.25rem;
     background: #d6e5f2;
+    border-radius: 5px;
     a {
       font-size: 1.125rem;
       color: $white;
@@ -137,11 +137,11 @@
   }
   .delete__icon {
     position: absolute;
-    right: 50px;
-    bottom: 42px;
+    right: 25px;
+    bottom: 26px;
     text-align: center;
     font-size: 0.625rem;
-    font-weight: 600;
+    font-weight: $bold;
     color: #ec615b;
   }
   .animatedButton {
