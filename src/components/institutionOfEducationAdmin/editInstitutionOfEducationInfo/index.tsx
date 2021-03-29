@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Input from '../../common/labeledInput/index';
 import { Formik, Form, Field } from 'formik';
-import { Footer, Header } from '../..';
-import Aside from '../aside';
 import styles from './editInstitutionOfEducationInfoPage.module.scss';
 import { FormButton } from '../../common/formElements/index';
 import UniversityMap from '../../superAdmin/addInstitutionOfEducationForm/map';
+import ImageUploader from './imageUploader/index';
 
 const EditInstitutionOfEducationInfoPage = () => {
   const [initialValues, setinitialValues] = useState({});
@@ -40,15 +39,8 @@ const EditInstitutionOfEducationInfoPage = () => {
     institutionOfEducationType: 0,
   };
 
-  const map = [
-    {
-      id,
-      name,
-      site,
-      lat,
-      lon,
-    },
-  ];
+  const map = [lat, lon];
+  const foto = 'https://nuwm.edu.ua/images/content/admin/nuwmvsh.jpg';
 
   useEffect(() => {
     setinitialValues({
@@ -70,6 +62,7 @@ const EditInstitutionOfEducationInfoPage = () => {
     <>
       {!fetching && (
         <>
+          {console.log('render')}
           <div className={styles.editInfoSection}>
             <main className={styles.mainContent}>
               <h1 className={styles.title}>
@@ -78,8 +71,12 @@ const EditInstitutionOfEducationInfoPage = () => {
               <h3 className={styles.subtitle}>
                 Натисніть на поле для вводу, щоб ввести нові дані
               </h3>
+              <ImageUploader
+                foto={foto}
+                aspectRatio={16 / 9}
+                text={'університету'}
+              />
               <h2 className={styles.infoTitle}>Основна інформація</h2>
-
               <Formik
                 initialValues={initialValues}
                 onSubmit={(values) => {
@@ -96,9 +93,9 @@ const EditInstitutionOfEducationInfoPage = () => {
                           name='institutionOfEducationType'
                           className={styles.selector}
                         >
-                          <option value='0'>Університет</option>
+                          <option value='0'>Виберіть тип...</option>
                           <option value='1'>Коледж</option>
-                          <option value='2'>Щось інше..</option>
+                          <option value='2'>Університет</option>
                         </Field>
                       </div>
                       <Input id='name' label='Повна назва:' name='name' />
@@ -141,6 +138,7 @@ const EditInstitutionOfEducationInfoPage = () => {
                     <h2 className={styles.infoTitle}>Місце розташування</h2>
                     <Field
                       name='pos'
+                      map={map}
                       setFieldValue={setFieldValue}
                       as={UniversityMap}
                     />
