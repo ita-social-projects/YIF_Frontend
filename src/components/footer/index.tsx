@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './footer.module.scss';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../services/tokenValidator';
+import ScrollToTopButton from './scrollToTopButton/scrollToTopButton';
 
 const Footer: React.FC = () => {
   const { token } = useAuth();
@@ -60,6 +61,7 @@ const Footer: React.FC = () => {
           <p>&#169; 2020-2021 SoftServe IT Academy</p>
         </div>
       </div>
+      <ScrollToTopButton />
     </footer>
   );
 };

@@ -19,6 +19,7 @@ import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccount
 import InstitutionOfEducationAdminPage from '../../pages/institutionOfEducationAdminPage';
 import NewPasswordPage from '../../pages/newPasswordPage';
 import EditSpecialty from '../../pages/editSpecialtyPage';
+import ScrollToTop from '../common/scrollToTop/scrollToTop';
 
 const App = () => {
   const { token } = useAuth();
@@ -26,6 +27,7 @@ const App = () => {
   return (
     <ErrorBoundry>
       <Router>
+        <ScrollToTop />
         <Switch>
           <Route exact path='/'>
             <Home />

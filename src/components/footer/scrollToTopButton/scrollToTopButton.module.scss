@@ -1,0 +1,12 @@
+@import '../../../styles/index.scss';
+
+.button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1rem;
+  border: 1px solid $darkBlue;
+  background-color: $lightBlue_3;
+}
