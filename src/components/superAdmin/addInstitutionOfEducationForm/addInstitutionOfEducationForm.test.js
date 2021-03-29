@@ -5,14 +5,14 @@ import {
   fireEvent,
   render,
   wait,
-  act,
-  getByText,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { store } from '../../../store/store';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { authContext } from '../../../services/tokenValidator';
+
+jest.setTimeout(15000)
 
 const mockJsonPromise = Promise.resolve('Університет додано!');
 
