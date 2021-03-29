@@ -25,7 +25,6 @@ const SuperAdminAccountPage: React.FC = () => {
     getToken();
     requestSecureData(endpoint, 'GET', token!)
       .then((res: any) => {
-        console.log(`res`, res);
         setInstitutionOfEducationAdmins(res.data.responseList);
         setFetching(false);
       })

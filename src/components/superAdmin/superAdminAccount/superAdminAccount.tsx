@@ -105,7 +105,7 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
   const setBanStatus = (id: string) => {
     const endpoint = `${APIUrl}SuperAdmin/DisableInstitutionOfEducationAdmin/${id}`;
     getToken();
-    requestSecureData(endpoint, 'POST', token!, {
+    requestSecureData(endpoint, 'PATCH', token!, {
       id,
     })
       .then((res: any) => {
