@@ -1,36 +1,42 @@
 import React from 'react';
 import { Footer, Header } from '../../components';
 import Aside from '../../components/institutionOfEducationAdmin/aside';
-import InstitutionOfEducationInfo from '../../components/institutionOfEducationAdmin/institutionOfEducationInfo';
+import InstitutionOfEducationInfo from './institutionOfEducationInfo';
 import styles from './institutionOfEducationAdminPage.module.scss';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import Moderators from '../../components/institutionOfEducationAdmin/moderators';
-import EditInstitutionOfEducationInfoPage from '../../components/institutionOfEducationAdmin/editInstitutionOfEducationInfo';
-import OurSpecialties from '../../components/institutionOfEducationAdmin/ourSpecialties';
+import { Route, Redirect, Switch, useRouteMatch } from 'react-router-dom';
+import Moderators from './moderators';
+import EditInstitutionOfEducationInfoPage from './editInstitutionOfEducationInfo';
+import OurSpecialties from './ourSpecialties';
+import EditSpecialty from './editSpecialtyPage';
 
 function InstitutionOfEducationAdminPage() {
+  const { path } = useRouteMatch();
   return (
     <>
       <Header />
-      <Router>
-        <section className={styles.institutionOfEducationAdminContent}>
-          <Aside />
-          <Route exact path='/institutionOfEducationAdmin'>
-            <Redirect to='/ourSpecialties' />
+      <section className={styles.institutionOfEducationAdminContent}>
+        <Aside />
+        <Switch>
+          <Route exact path={`/institutionOfEducationAccount`}>
+            <Redirect to={`${path}/ourSpecialties`} />
           </Route>
-          <Route
-            path='/institutionOfEducationInfo'
-            component={InstitutionOfEducationInfo}
-          />
-          <Route
-            path='/editInstitutionofEducationInfo'
-            component={EditInstitutionOfEducationInfoPage}
-          />
-          <Route path='/ourspecialties' component={OurSpecialties} />
-
-          <Route path='/moderators' component={Moderators} />
-        </section>
-      </Router>
+          <Route exact path={`${path}/institutionOfEducationInfo`}>
+            <InstitutionOfEducationInfo />
+          </Route>
+          <Route path={`${path}/institutionOfEducationInfo/edit/:id`}>
+            <EditInstitutionOfEducationInfoPage />
+          </Route>
+          <Route exact path={`${path}/ourSpecialties`}>
+            <OurSpecialties />
+          </Route>
+          <Route path={`${path}/ourSpecialties/edit`}>
+            <EditSpecialty />
+          </Route>
+          <Route path={`${path}/moderators`}>
+            <Moderators />
+          </Route>
+        </Switch>
+      </section>
       <Footer />
     </>
   );

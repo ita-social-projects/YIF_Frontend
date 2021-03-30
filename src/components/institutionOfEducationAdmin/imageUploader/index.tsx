@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ImageUploaderPopup from '../../../imageUploader/imageUploaderPopup/imageUploaderPopup';
+import ImageUploaderPopup from '../../imageUploader/imageUploaderPopup/imageUploaderPopup';
 import style from './imup.module.scss';
 
 const ImageUploader = (props: any) => {

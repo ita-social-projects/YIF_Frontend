@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Input from '../../common/labeledInput/index';
+import Input from '../../../components/common/labeledInput/index';
 import { Formik, Form, Field } from 'formik';
 import styles from './editInstitutionOfEducationInfoPage.module.scss';
-import { FormButton } from '../../common/formElements/index';
-import UniversityMap from '../../superAdmin/addInstitutionOfEducationForm/map';
-import ImageUploader from './imageUploader/index';
+import { FormButton } from '../../../components/common/formElements/index';
+import UniversityMap from '../../../components/superAdmin/addInstitutionOfEducationForm/map';
+import ImageUploader from '../../../components/institutionOfEducationAdmin/imageUploader';
 
 const EditInstitutionOfEducationInfoPage = () => {
   const [initialValues, setinitialValues] = useState({});
@@ -21,9 +21,7 @@ const EditInstitutionOfEducationInfoPage = () => {
     institutionOfEducationType,
     lat,
     lon,
-    id,
   } = {
-    id: 'e2bd4ad9-060b-4d53-8222-9f3e5efbcfc7',
     name:
       'Національний університет водного господарства та природокористування',
     abbreviation: 'НУВГП',
@@ -33,13 +31,12 @@ const EditInstitutionOfEducationInfoPage = () => {
     email: 'mail@nuwm.edu.ua',
     description:
       'Єдиний в Україні вищий навчальний заклад водогосподарського профілю. Заклад є навчально-науковим комплексом, що здійснює підготовку висококваліфікованих фахівців, науково-педагогічних кадрів, забезпечує підвищення кваліфікації фахівців та проводить науково-дослідну роботу.',
-    // "imagePath": "",
     lat: 50.61798,
     lon: 26.258654,
     institutionOfEducationType: 0,
   };
 
-  const map = [lat, lon];
+  const curentPosition = [lat, lon];
   const foto = 'https://nuwm.edu.ua/images/content/admin/nuwmvsh.jpg';
 
   useEffect(() => {
@@ -77,12 +74,7 @@ const EditInstitutionOfEducationInfoPage = () => {
                 text={'університету'}
               />
               <h2 className={styles.infoTitle}>Основна інформація</h2>
-              <Formik
-                initialValues={initialValues}
-                onSubmit={(values) => {
-                  console.log(values);
-                }}
-              >
+              <Formik initialValues={initialValues} onSubmit={(values) => {}}>
                 {({ setFieldValue }) => (
                   <Form className={styles.mainContent}>
                     <div className={styles.infoBox}>
@@ -94,8 +86,8 @@ const EditInstitutionOfEducationInfoPage = () => {
                           className={styles.selector}
                         >
                           <option value='0'>Виберіть тип...</option>
-                          <option value='1'>Коледж</option>
-                          <option value='2'>Університет</option>
+                          <option value='1'>Університет</option>
+                          <option value='2'>Коледж</option>
                         </Field>
                       </div>
                       <Input id='name' label='Повна назва:' name='name' />
@@ -111,7 +103,6 @@ const EditInstitutionOfEducationInfoPage = () => {
                         area='true'
                       />
                     </div>
-
                     <h2 className={styles.infoTitle}>Контактна інформація</h2>
                     <div className={styles.infoBox}>
                       <Input
@@ -138,11 +129,10 @@ const EditInstitutionOfEducationInfoPage = () => {
                     <h2 className={styles.infoTitle}>Місце розташування</h2>
                     <Field
                       name='pos'
-                      map={map}
+                      curentPosition={curentPosition}
                       setFieldValue={setFieldValue}
                       as={UniversityMap}
                     />
-
                     <FormButton
                       title={'Зберегти'}
                       id='registerFormButton'

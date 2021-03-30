@@ -1,9 +1,13 @@
 import React from 'react';
 import styles from './institutionOfEducationInfo.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 const InstitutionOfEducationInfo = () => {
-  const { name, abbreviation, site, address, phone, email, description } = {
+  const { path, url } = useRouteMatch();
+  console.log(path);
+  console.log(url);
+  const { id, name, abbreviation, site, address, phone, email, description } = {
+    id: 'e2bd4ad9-060b-4d53-8222-9f3e5efbcfc7',
     name:
       'Національний університет водного господарства та природокористування',
     abbreviation: 'НУВГП',
@@ -53,7 +57,7 @@ const InstitutionOfEducationInfo = () => {
         </p>
         <Link
           className={`${styles.animatedButton} ${styles.buttonLink}`}
-          to={`/moderators`}
+          to={`${path}/edit/${id}`}
         >
           Редагувати
         </Link>
