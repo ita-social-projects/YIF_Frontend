@@ -1,21 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import styles from './aside.module.scss';
 
 function Aside() {
+  const { path } = useRouteMatch();
   return (
     <aside className={styles.assideMenu}>
       <nav>
         <Link
           className={styles.underlineAnimation}
-          to='/institutionOfEducationInfo'
+          to={`${path}/institutionofEducationInfo`}
         >
-          Заклади освіти
+          Заклад освіти
         </Link>
-        <Link className={styles.underlineAnimation} to='/ourSpecialties'>
+        <Link
+          className={styles.underlineAnimation}
+          to={`${path}/ourSpecialties`}
+        >
           Спеціальності
         </Link>
-        <Link className={styles.underlineAnimation} to='/moderators'>
+        <Link className={styles.underlineAnimation} to={`${path}/moderators`}>
           Модератори
         </Link>
       </nav>

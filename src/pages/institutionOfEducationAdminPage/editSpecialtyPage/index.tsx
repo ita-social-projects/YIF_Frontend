@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Input from '../../components/common/labeledInput/index';
-import { Formik, Form, Field } from 'formik';
-import { Footer, Header } from '../../components';
-import Aside from '../../components/institutionOfEducationAdmin/aside';
+import Input from '../../../components/common/labeledInput/index';
+import { Formik, Form } from 'formik';
 import styles from './editSpecialty.module.scss';
-import { FormButton } from '../../components/common/formElements/index';
+import { FormButton } from '../../../components/common/formElements/index';
 import editSpecialtyValidation from './editSpecialtyValidation';
 
 const EditSpecialty = () => {
@@ -61,9 +59,7 @@ const EditSpecialty = () => {
     <>
       {!fetching && (
         <>
-          <Header />
           <div className={styles.editSpecialty}>
-            <Aside />
             <main className={styles.mainContent}>
               <h1 className={styles.title}>
                 Дані про спеціальність у вашому університеті, які ви можете
@@ -144,7 +140,6 @@ const EditSpecialty = () => {
               </Formik>
             </main>
           </div>
-          <Footer />
         </>
       )}
     </>

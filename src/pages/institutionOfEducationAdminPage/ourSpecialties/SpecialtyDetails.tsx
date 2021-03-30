@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './ourSpecialties.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 interface Props {
   code: number;
@@ -24,6 +24,8 @@ const SpecialtyDetails: React.FC<Props> = ({
   const handleClick = (e: any) => {
     setOpened(!opened);
   };
+
+  const { path } = useRouteMatch();
 
   const deleteIcon = (
     <svg
@@ -57,8 +59,8 @@ const SpecialtyDetails: React.FC<Props> = ({
       </div>
       <div className={styles.acc_item__block}>
         <p>
-            <strong>Освітня програма:</strong> {educationalProgramLink}
-          </p>
+          <strong>Освітня програма:</strong> {educationalProgramLink}
+        </p>
       </div>
       <div
         className={`${styles.acc_item__block} ${styles.read__more} ${
@@ -74,20 +76,27 @@ const SpecialtyDetails: React.FC<Props> = ({
             data-testid='check-open'
           >
             {' '}
-            <span className={`${styles.read__more__show}`}> натисніть, щоб показати</span>
-            <span className={`${styles.read__more__hide}`}> натисніть, щоб приховати</span>
-            {' '}
+            <span className={`${styles.read__more__show}`}>
+              {' '}
+              натисніть, щоб показати
+            </span>
+            <span className={`${styles.read__more__hide}`}>
+              {' '}
+              натисніть, щоб приховати
+            </span>{' '}
           </span>
         </div>
         <div className={styles.read__more__details}>
-          <p className={`${styles.read__more__details__description}`}>{description}</p>
+          <p className={`${styles.read__more__details__description}`}>
+            {description}
+          </p>
         </div>
         <div className={styles.delete__icon}>
           {deleteIcon} <br /> видалити
         </div>
         <Link
           id='edit-btn'
-          to={`/editSpecialty`}
+          to={`${path}/edit`}
           className={` ${styles.animatedButton}`}
         >
           Редагувати
@@ -98,4 +107,3 @@ const SpecialtyDetails: React.FC<Props> = ({
 };
 
 export default SpecialtyDetails;
-
