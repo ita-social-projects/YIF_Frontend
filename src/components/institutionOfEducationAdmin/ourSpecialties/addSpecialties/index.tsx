@@ -71,10 +71,12 @@ const AddSpecialties = () => {
         <Accordion
           key={id}
           headerContent={
-            <div data-testid='direction'>
+            <>
               <span className={styles.acc_item__id}>{code}</span>
-              <h3 className={styles.acc_item__name}>{name}</h3>
-            </div>
+              <h3 data-testid='direction' className={styles.acc_item__name}>
+                {name}
+              </h3>
+            </>
           }
           headerStyle={styles.acc_item__header}
           bodyStyle={styles.acc_item__body}
@@ -124,7 +126,7 @@ const AddSpecialties = () => {
                   {renderDirectionsAccordion()}
                 </ul>
                 <Link
-                  to='/institutionOfEducationAdmin/ourSpecialties'
+                  to='/ourSpecialties'
                   className={`${styles.AddSpecialties__button} ${styles.animatedButton}`}
                 >
                   Готово

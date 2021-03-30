@@ -89,7 +89,7 @@ const OurSpecialties = () => {
         <h1 className={styles.specialityAdminPage__title}>Спеціальності</h1>
         <Link
           id='edit-btn'
-          to={`/addSpecialty`}
+          to={`/addSpecialties`}
           className={` ${styles.animatedButton}`}
         >
           Додати спеціальність

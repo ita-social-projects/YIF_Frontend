@@ -73,7 +73,7 @@ const App = () => {
           <Route path='/institutionOfEducationInfo'>
             <InstitutionOfEducationAdminPage />
           </Route>
-          <Route path='/institutionOfEducationAdmin/ourSpecialties'>
+          <Route path='/ourSpecialties'>
             <InstitutionOfEducationAdminPage />
           </Route>
           <Route path='/moderators'>

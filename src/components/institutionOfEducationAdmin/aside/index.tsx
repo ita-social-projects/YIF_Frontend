@@ -12,10 +12,7 @@ function Aside() {
         >
           Заклади освіти
         </Link>
-        <Link
-          className={styles.underlineAnimation}
-          to='/institutionOfEducationAdmin/ourSpecialties'
-        >
+        <Link className={styles.underlineAnimation} to='/ourSpecialties'>
           Спеціальності
         </Link>
         <Link className={styles.underlineAnimation} to='/moderators'>
