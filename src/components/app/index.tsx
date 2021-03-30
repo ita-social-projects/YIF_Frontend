@@ -18,7 +18,6 @@ import AddInstitutionOfEducation from '../../pages/superAdminPages/addInstitutio
 import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccountPage';
 import InstitutionOfEducationAdminPage from '../../pages/institutionOfEducationAdminPage';
 import NewPasswordPage from '../../pages/newPasswordPage';
-import EditSpecialty from '../../pages/editSpecialtyPage';
 import ScrollToTop from '../common/scrollToTop/scrollToTop';
 
 const App = () => {
@@ -67,26 +66,18 @@ const App = () => {
           >
             <AddInstitutionOfEducation />
           </ProtectedRoute>
-          <Route path='/institutionOfEducationAdmin'>
+          <ProtectedRoute
+            user={token}
+            path='/institutionOfEducationAccount'
+            allowed={['SuperAdmin']}
+          >
             <InstitutionOfEducationAdminPage />
-          </Route>
-          <Route path='/institutionOfEducationInfo'>
-            <InstitutionOfEducationAdminPage />
-          </Route>
-          <Route path='/ourSpecialties'>
-            <InstitutionOfEducationAdminPage />
-          </Route>
-          <Route path='/moderators'>
-            <InstitutionOfEducationAdminPage />
-          </Route>
+          </ProtectedRoute>
           <Route path='/addSpecialties'>
             <InstitutionOfEducationAdminPage />
           </Route>
           <Route path='/newPassword'>
             <NewPasswordPage />
-          </Route>
-          <Route path='/editSpecialty'>
-            <EditSpecialty />
           </Route>
           <ProtectedRoute user={token} path='/cabinet' allowed={['Graduate']}>
             <GraduateCabinet />

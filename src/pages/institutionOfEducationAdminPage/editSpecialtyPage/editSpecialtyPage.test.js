@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { render, wait, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from '../../store/store';
+import { store } from '../../../store/store';
 
 describe('EditSpecialty', () => {
   test('render component correctly', () => {

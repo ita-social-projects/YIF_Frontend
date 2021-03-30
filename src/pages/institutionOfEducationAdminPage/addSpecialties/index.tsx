@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ErrorBoundry from '../../../../errorBoundry';
-import ResponsePlaceholder from '../../../../components/common/responsePlaceholder';
-import Accordion from '../../../accordion/index';
+import ErrorBoundry from '../../../errorBoundry';
+import ResponsePlaceholder from '../../../components/common/responsePlaceholder';
+import Accordion from '../../../components/accordion';
 import cloneDeep from 'lodash.clonedeep';
-import Spinner from '../../../common/spinner';
+import Spinner from '../../../components/common/spinner';
 import styles from './addSpecialties.module.scss';
-import { requestData } from '../../../../services/requestDataFunction';
-import { APIUrl } from '../../../../services/endpoints';
+import { requestData } from '../../../services/requestDataFunction';
+import { APIUrl } from '../../../services/endpoints';
 
 const AddSpecialties = () => {
   const [directions, setDirections] = useState([{}]);

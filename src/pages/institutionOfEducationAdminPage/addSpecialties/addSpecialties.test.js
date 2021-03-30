@@ -4,7 +4,7 @@ import { queryAllByTestId, queryByTestId } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import AddSpecialties from '.';
 import { Provider } from 'react-redux';
-import { store } from '../../../../store/store';
+import { store } from '../../../store/store';
 import { Router } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import { createMemoryHistory } from 'history';
