@@ -3,9 +3,8 @@ import styles from './institutionOfEducationInfo.module.scss';
 import { Link, useRouteMatch } from 'react-router-dom';
 
 const InstitutionOfEducationInfo = () => {
-  const { path, url } = useRouteMatch();
-  console.log(path);
-  console.log(url);
+  const { path } = useRouteMatch();
+
   const { id, name, abbreviation, site, address, phone, email, description } = {
     id: 'e2bd4ad9-060b-4d53-8222-9f3e5efbcfc7',
     name:
