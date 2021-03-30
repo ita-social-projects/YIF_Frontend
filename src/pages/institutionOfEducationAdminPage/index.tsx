@@ -6,6 +6,7 @@ import styles from './institutionOfEducationAdminPage.module.scss';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Moderators from '../../components/institutionOfEducationAdmin/moderators';
 import OurSpecialties from '../../components/institutionOfEducationAdmin/ourSpecialties';
+import AddSpecialties from '../../components/institutionOfEducationAdmin/ourSpecialties/addSpecialties';
 
 function InstitutionOfEducationAdminPage() {
   return (
@@ -18,8 +19,12 @@ function InstitutionOfEducationAdminPage() {
             path='/institutionOfEducationInfo'
             component={InstitutionOfEducationInfo}
           />
-
-          <Route path='/ourspecialties' component={OurSpecialties} />
+          <Route path='/institutionOfEducationAdmin/ourSpecialties'>
+            <OurSpecialties />
+          </Route>
+          <Route path='/institutionOfEducationAdmin/addSpecialties'>
+            <AddSpecialties />
+          </Route>
 
           <Route path='/moderators' component={Moderators} />
         </section>

@@ -1,5 +1,10 @@
 @import '../../../styles.scss';
 
+.spinnerContainer {
+  width: 100%;
+  @include flex(row, center, center);
+}
+
 .AddSpecialties {
   width: 100%;
   padding: 50px;
@@ -7,7 +12,7 @@
   &__inner {
     @include flex(column, center, start);
     margin: 0 auto;
-    max-width: 1140px;
+    max-width: 1040px;
   }
 
   &__title {
@@ -39,7 +44,7 @@
 
   &__body {
     background-color: $lightBlue_2;
-    padding: 15px 25px 5px 40px;
+    padding: 10px 30px 5px 50px;
   }
 
   &__id {

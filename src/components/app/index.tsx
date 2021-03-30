@@ -68,13 +68,13 @@ const App = () => {
           <Route path='/institutionOfEducationInfo'>
             <InstitutionOfEducationAdminPage />
           </Route>
-          <Route path='/ourSpecialties'>
+          <Route path='/institutionOfEducationAdmin/ourSpecialties'>
             <InstitutionOfEducationAdminPage />
           </Route>
           <Route path='/moderators'>
             <InstitutionOfEducationAdminPage />
           </Route>
-          <Route path='/addSpecialties'>
+          <Route path='/institutionOfEducationAdmin/addSpecialties'>
             <InstitutionOfEducationAdminPage />
           </Route>
           <Route path='/newPassword'>
