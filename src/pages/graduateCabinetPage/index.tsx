@@ -13,7 +13,7 @@ const UserCabinet = () => {
   const [institutionsOfEducationList, setList] = useState([{}]);
 
   useEffect(() => {
-    const endpoint: string = `${APIUrl}InstitutionOfEducation`;
+    const endpoint: string = `${APIUrl}InstitutionOfEducation/Anonymous`;
 
     requestData(endpoint, 'GET').then((res: any) => {
       const filteredList = res.data.responseList.map((item: any) => {

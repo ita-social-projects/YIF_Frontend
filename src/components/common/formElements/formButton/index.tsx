@@ -11,12 +11,15 @@ const FormButton: React.FC<Props> = (props) => {
   return (
     <button
       id={id}
+      data-testid='button'
       className={
         form === 'login'
           ? `${styles.formButton} ${styles.buttonLogin} ${styles.animatedButton}`
           : form === 'register'
           ? `${styles.formButton} ${styles.animatedButton}`
           : form === 'profile'
+          ? `${styles.formButton} ${styles.buttonProfile} ${styles.animatedButton}`
+          : form === 'AddInstitutionOfEducation'
           ? `${styles.formButton} ${styles.buttonLogin} ${styles.animatedButton}`
           : form === 'resetPassword'
           ? `${styles.formButton} ${styles.buttonProfile} ${styles.animatedButton}`

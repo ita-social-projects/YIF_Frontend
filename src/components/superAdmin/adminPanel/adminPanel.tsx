@@ -16,7 +16,10 @@ const AdminPanel: React.FC = () => {
           Адміністратори
           <ul>
             <li className={styles.hasLink}>
-              <Link className={styles.underlineAnimation} to='#'>
+              <Link
+                className={styles.underlineAnimation}
+                to='/SuperAdminAccount'
+              >
                 Закладів освіти
               </Link>
             </li>

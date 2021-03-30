@@ -40,7 +40,7 @@ const InstitutionsOfEducationListPage = () => {
     if (location.state !== undefined) {
       URL = `${APIUrl}InstitutionOfEducation?DirectionName=${location.state.chosenDirection}&SpecialityName=${location.state.chosenSpeciality}&InstitutionOfEducationAbbreviation=${location.state.chosenInstitutionOfEducation}&page=${currentPage}&pageSize=${perPage}`;
     } else if (location.state === undefined) {
-      URL = `${APIUrl}InstitutionOfEducation?page=${currentPage}&pageSize=${perPage}`;
+      URL = `${APIUrl}InstitutionOfEducation/Anonymous?page=${currentPage}&pageSize=${perPage}`;
     }
 
     const endpoint = URL;

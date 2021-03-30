@@ -15,8 +15,9 @@ describe('IMAGE UPLOADER POPUP', () => {
     const { container } = render(
       <ImageUploaderPopup
         setPopupOpen={handleDrag}
-        setSuccessLoad={handleDrag}
-        setProfileImageSrc={handleDrag}
+        imageHandler={handleDrag}
+        aspectRatio={1}
+        text='text'
       />
     );
     const divImageLoader = container.querySelector('#fileElem')!;
@@ -36,7 +37,7 @@ describe('IMAGE UPLOADER POPUP', () => {
     expect(buttonUpload[0]).toBeInTheDocument();
     fireEvent.click(buttonUpload[0]);
     fireEvent.click(buttonUpload[1]);
-    expect(handleDrag).toHaveBeenCalled();
+    expect(handleDrag).toHaveBeenCalledTimes(5);
   });
 
   it('shoud drop with error of type', async () => {
@@ -45,8 +46,9 @@ describe('IMAGE UPLOADER POPUP', () => {
     const { getByTestId, getByText } = render(
       <ImageUploaderPopup
         setPopupOpen={handleDrag}
-        setSuccessLoad={handleDrag}
-        setProfileImageSrc={handleDrag}
+        imageHandler={handleDrag}
+        aspectRatio={1}
+        text='text'
       />
     );
     await wait(() =>
@@ -69,8 +71,9 @@ describe('IMAGE UPLOADER POPUP', () => {
     const { getByTestId, getByText } = render(
       <ImageUploaderPopup
         setPopupOpen={handleDrag}
-        setSuccessLoad={handleDrag}
-        setProfileImageSrc={handleDrag}
+        imageHandler={handleDrag}
+        aspectRatio={1}
+        text='text'
       />
     );
     await wait(() =>
@@ -91,8 +94,9 @@ describe('IMAGE UPLOADER POPUP', () => {
     const { getByTestId, getByText } = render(
       <ImageUploaderPopup
         setPopupOpen={handleDrag}
-        setSuccessLoad={handleDrag}
-        setProfileImageSrc={handleDrag}
+        imageHandler={handleDrag}
+        aspectRatio={1}
+        text='text'
       />
     );
     await wait(() =>
@@ -111,8 +115,9 @@ describe('IMAGE UPLOADER POPUP', () => {
     const { getByTestId } = render(
       <ImageUploaderPopup
         setPopupOpen={handleDrag}
-        setSuccessLoad={handleDrag}
-        setProfileImageSrc={handleDrag}
+        imageHandler={handleDrag}
+        aspectRatio={1}
+        text='text'
       />
     );
     await wait(() =>
@@ -128,8 +133,9 @@ describe('IMAGE UPLOADER POPUP', () => {
     const { getByTestId } = render(
       <ImageUploaderPopup
         setPopupOpen={handleDrag}
-        setSuccessLoad={handleDrag}
-        setProfileImageSrc={handleDrag}
+        imageHandler={handleDrag}
+        aspectRatio={1}
+        text='text'
       />
     );
 
