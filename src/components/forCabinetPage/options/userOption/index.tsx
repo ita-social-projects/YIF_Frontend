@@ -112,7 +112,7 @@ const UserOption = () => {
         />
         <div className={styles.wrapper}>
           <div className={styles.titleContainer}>
-            <h4 className={styles.title}>Персональні дані</h4>
+            <h4 className={styles.title}>Мої дані</h4>
             {useYIFProfile.submitted && !useYIFProfile.error.hasError && (
               <div className={styles.spinner}>
                 <Spinner />
