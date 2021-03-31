@@ -126,7 +126,7 @@ const AddSpecialties = () => {
                   {renderDirectionsAccordion()}
                 </ul>
                 <Link
-                  to='/ourSpecialties'
+                  to='/institutionOfEducationAccount/ourSpecialties'
                   className={`${styles.AddSpecialties__button} ${styles.animatedButton}`}
                 >
                   Готово

@@ -73,9 +73,6 @@ const App = () => {
           >
             <InstitutionOfEducationAdminPage />
           </ProtectedRoute>
-          <Route path='/addSpecialties'>
-            <InstitutionOfEducationAdminPage />
-          </Route>
           <Route path='/newPassword'>
             <NewPasswordPage />
           </Route>

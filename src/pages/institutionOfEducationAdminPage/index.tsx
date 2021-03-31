@@ -20,16 +20,19 @@ function InstitutionOfEducationAdminPage() {
           <Route exact path={`/institutionOfEducationAccount`}>
             <Redirect to={`${path}/ourSpecialties`} />
           </Route>
+
           <Route exact path={`${path}/institutionOfEducationInfo`}>
             <InstitutionOfEducationInfo />
           </Route>
+
           <Route path={`${path}/institutionOfEducationInfo/edit/:id`}>
             <EditInstitutionOfEducationInfoPage />
           </Route>
+
           <Route exact path={`${path}/ourSpecialties`}>
             <OurSpecialties />
           </Route>
-          <Route path={`${path}/ourSpecialties/add`}>
+          <Route path={`${path}/addSpecialties`}>
             <AddSpecialties />
           </Route>
           <Route path={`${path}/ourSpecialties/edit`}>
