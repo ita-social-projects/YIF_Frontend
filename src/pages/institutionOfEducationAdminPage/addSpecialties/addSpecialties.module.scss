@@ -1,0 +1,106 @@
+@import '../../../styles/index.scss';
+
+.spinnerContainer {
+  width: 100%;
+  @include flex(row, center, center);
+}
+
+.AddSpecialties {
+  width: 100%;
+  padding: 50px;
+
+  &__inner {
+    @include flex(column, center, start);
+    margin: 0 auto;
+    max-width: 1040px;
+  }
+
+  &__title {
+    font-family: $fontNunito;
+    font-weight: $semiBold;
+    font-size: $font_30px;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+
+  &__list {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+
+  &__button {
+    padding: 15px 70px;
+    border-radius: 10px;
+    font-family: $fontNunito;
+    font-size: $font_18px;
+    font-weight: $regular;
+  }
+}
+
+.acc_item {
+  &__header {
+    background-color: $lightBlue_2;
+  }
+
+  &__body {
+    background-color: $lightBlue_2;
+    padding: 10px 30px 5px 50px;
+  }
+
+  &__id {
+    margin-right: 30px;
+  }
+
+  &__id,
+  &__name {
+    font-family: $fontOpenSans;
+    font-size: $font_18px;
+    font-weight: $bold;
+  }
+
+  &__subitem {
+    @include flex(row, center, space-between);
+    padding: 5px 10px;
+    min-height: 50px;
+    background-color: $lightBlue_1;
+    margin-bottom: 5px;
+    border-radius: 5px;
+
+    &_info {
+      @include flex(row, center, space-between);
+    }
+
+    h5,
+    span {
+      font-size: $font_16px;
+      font-family: $fontOpenSans;
+      font-weight: $semiBold;
+    }
+
+    span {
+      margin-right: 30px;
+    }
+
+    &_btn {
+      font-size: $font_16px;
+      color: $white;
+      padding: 10px 30px;
+      border-radius: 5px;
+      background-color: $darkBlue;
+      transition: 0.3s;
+      cursor: pointer;
+
+      &:hover {
+        background-color: lighten($color: $darkBlue, $amount: 10);
+      }
+    }
+
+    &_btn_checked {
+      background-color: $red;
+
+      &:hover {
+        background-color: darken($color: $red, $amount: 10);
+      }
+    }
+  }
+}

@@ -8,7 +8,7 @@ import Moderators from './moderators';
 import EditInstitutionOfEducationInfoPage from './editInstitutionOfEducationInfo';
 import OurSpecialties from './ourSpecialties';
 import EditSpecialty from './editSpecialtyPage';
-
+import AddSpecialties from './addSpecialties';
 function InstitutionOfEducationAdminPage() {
   const { path } = useRouteMatch();
   return (
@@ -20,14 +20,20 @@ function InstitutionOfEducationAdminPage() {
           <Route exact path={`/institutionOfEducationAccount`}>
             <Redirect to={`${path}/ourSpecialties`} />
           </Route>
+
           <Route exact path={`${path}/institutionOfEducationInfo`}>
             <InstitutionOfEducationInfo />
           </Route>
+
           <Route path={`${path}/institutionOfEducationInfo/edit/:id`}>
             <EditInstitutionOfEducationInfoPage />
           </Route>
+
           <Route exact path={`${path}/ourSpecialties`}>
             <OurSpecialties />
+          </Route>
+          <Route path={`${path}/addSpecialties`}>
+            <AddSpecialties />
           </Route>
           <Route path={`${path}/ourSpecialties/edit`}>
             <EditSpecialty />
