@@ -72,7 +72,6 @@ describe('check SuperAdminAccount component', () => {
       </Provider>
     );
     expect(queryByText(/Адміністратори закладів освіти/i)).toBeInTheDocument();
-    expect(queryByText(/Ім'я/i)).toBeInTheDocument();
     expect(queryByText(/Електронна адреса/i)).toBeInTheDocument();
   });
 
@@ -89,9 +88,6 @@ describe('check SuperAdminAccount component', () => {
       </Provider>
     );
     const sortByUserName = queryByTestId('sortByUserName');
-
-    fireEvent.click(sortByUserName);
-    expect(handleSort).toBeCalledTimes(1);
 
     const sortByUserEmail = queryByTestId('sortByUserEmail');
 
