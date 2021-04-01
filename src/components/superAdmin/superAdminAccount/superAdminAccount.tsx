@@ -309,15 +309,6 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
           />
           <ul className={styles.adminTableTitle}>
             <li
-              data-testid='sortByUserName'
-              className={`${styles.name} ${
-                currentKey === 'userName' && styles.filterActive
-              }`}
-              onClick={() => handleSort('userName')}
-            >
-              Ім'я <IconArrow />
-            </li>
-            <li
               data-testid='sortByUserEmail'
               className={`${styles.email} ${
                 currentKey === 'email' && styles.filterActive

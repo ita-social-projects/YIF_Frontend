@@ -24,16 +24,6 @@ const TableItem: React.FC<Props> = (props) => {
 
   return (
     <ul>
-      <li className={styles.adminLogo}>
-        {admin.user.photo ? (
-          <img src={admin.user.photo} alt='admin avatar' />
-        ) : (
-          <Avatar />
-        )}
-      </li>
-      <li className={styles.adminName}>
-        {admin.user.userName ? admin.user.userName : 'NoName'}
-      </li>
       <li className={styles.adminEmail}>
         {ReactParser(
           admin.user.email.replace(
@@ -55,20 +45,22 @@ const TableItem: React.FC<Props> = (props) => {
           {admin.institutionOfEducation.name}
         </div>
       </li>
-      <li
-        data-testid='setBunStatus'
-        className={`${styles.adminBan} ${admin.isBanned && styles.banned}`}
-        onClick={() => setBanStatus(admin.id)}
-      >
-        <IconLock />
-      </li>
-      <li
-        data-testid='removeAdmin'
-        className={styles.adminRemove}
-        onClick={() => removeAdminInstitutionOfEducation(admin.id)}
-      >
-        <IconRemove />
-      </li>
+      <div className={styles.actionItem}>
+        <li
+          data-testid='setBunStatus'
+          className={`${styles.adminBan} ${admin.isBanned && styles.banned}`}
+          onClick={() => setBanStatus(admin.id)}
+        >
+          <IconLock />
+        </li>
+        <li
+          data-testid='removeAdmin'
+          className={styles.adminRemove}
+          onClick={() => removeAdminInstitutionOfEducation(admin.id)}
+        >
+          <IconRemove />
+        </li>
+      </div>
     </ul>
   );
 };
