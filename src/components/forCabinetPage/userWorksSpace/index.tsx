@@ -144,7 +144,7 @@ class UserWorksSpace extends React.Component<Props, {}> {
         break;
       }
       default:
-        box = <UserOption />;
+        box = <SpecListOption />;
     }
 
     return (
@@ -182,7 +182,7 @@ class UserWorksSpace extends React.Component<Props, {}> {
                 <ul>
                   <li onClick={() => this.onChangeFrame(0)} id='userLiClick'>
                     <p className={styles.underlineAnimation}>
-                      Персональні&nbsp;дані
+                      Мої&nbsp;дані
                     </p>
                   </li>
                   <li onClick={() => this.onChangeFrame(1)}>
@@ -192,7 +192,7 @@ class UserWorksSpace extends React.Component<Props, {}> {
                   </li>
                   <li onClick={() => this.onChangeFrame(2)}>
                     <p className={styles.underlineAnimation} id='specLiClick'>
-                      Спеціальності
+                      Обрані спеціальності
                     </p>
                   </li>
                 </ul>
