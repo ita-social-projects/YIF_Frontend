@@ -1,0 +1,17 @@
+@import '../../../styles/index.scss';
+
+main {
+  margin: 0 auto;
+  .title {
+    font-family: $fontNunito;
+    font-size: $font_80px;
+    margin-top: 50px;
+  }
+
+  .subtitle {
+    font-family: $fontNunito;
+    font-size: $font_18px;
+    margin-top: 40px;
+    text-align: center;
+  }
+}

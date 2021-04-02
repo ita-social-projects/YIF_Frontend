@@ -1,0 +1,17 @@
+@import '../../../styles/index.scss';
+
+.container {
+  @include flex(row, center, space-between);
+  width: 60rem;
+  height: 4rem;
+  margin-bottom: 15px;
+  background-color: $lightBlue_1;
+  padding: 0 2rem 0 3rem;
+  border-radius: 0.5rem;
+
+  .actionItems {
+    @include flex(row, center, space-between);
+    width: 4rem;
+    height: 100%;
+  }
+}
