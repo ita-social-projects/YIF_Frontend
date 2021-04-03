@@ -11,6 +11,9 @@ const useRole = () => {
       case 'SuperAdmin':
         path = '/superAdminAccount';
         break;
+      case 'InstitutionOfEducationAdmin':
+        path = '/institutionOfEducationAccount';
+        break;
     }
 
     return path;
