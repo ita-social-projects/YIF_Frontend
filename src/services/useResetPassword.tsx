@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { requestData } from '../services/requestDataFunction';
 import { useHistory } from 'react-router-dom';
-import { useAuth } from './tokenValidator';
 import { APIUrl } from '../../src/services/endpoints';
 import { useCaptcha } from './useCaptcha';
 import React from 'react';
@@ -9,7 +8,6 @@ import React from 'react';
 const useResetPasword = (endpoint: string) => {
   const captcha = useCaptcha(APIUrl);
   const history = useHistory();
-  const { updateToken } = useAuth();
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -39,7 +37,6 @@ const useResetPasword = (endpoint: string) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
           setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
-          updateToken(res.data.token, res.data.refreshToken);
           setSubmitted(false);
           setSuccess(true);
           setTimeout(() => {

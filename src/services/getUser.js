@@ -8,15 +8,12 @@ export const getUser = (token) => {
     .then((res) => {
       const statusCode = res.statusCode.toString();
       if (statusCode.match(/^[23]\d{2}$/)) {
-        console.log('get user: good');
         store.dispatch(setUserReducer(res.data));
       } else {
         console.log(res.data.message);
-        console.log('get user: bad');
       }
     })
     .catch((error) => {
       console.log(error);
-      console.log('get user: bad bad');
     });
 };
