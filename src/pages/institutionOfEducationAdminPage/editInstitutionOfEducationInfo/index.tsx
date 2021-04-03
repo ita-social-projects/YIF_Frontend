@@ -36,7 +36,7 @@ const EditInstitutionOfEducationInfoPage = () => {
     institutionOfEducationType: 0,
   };
 
-  const curentPosition = [lat, lon];
+  const currentPosition = [lat, lon];
   const foto = 'https://nuwm.edu.ua/images/content/admin/nuwmvsh.jpg';
 
   useEffect(() => {
@@ -129,7 +129,7 @@ const EditInstitutionOfEducationInfoPage = () => {
                     <h2 className={styles.infoTitle}>Місце розташування</h2>
                     <Field
                       name='pos'
-                      curentPosition={curentPosition}
+                      currentPosition={currentPosition}
                       setFieldValue={setFieldValue}
                       as={UniversityMap}
                     />

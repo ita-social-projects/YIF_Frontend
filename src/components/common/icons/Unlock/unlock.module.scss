@@ -1,23 +1,24 @@
 @import '../../../../styles/index.scss';
 
 .container {
-  cursor: pointer;
-  position: relative;
+  @include flex(column, center, flex-end);
   height: 1.625rem;
   width: 1.625rem;
-  @include flex(column, center, flex-end);
+  position: relative;
+  cursor: pointer;
+
   .unlock {
-    width: 26px;
+    width: 1.625rem;
     fill: rgba(0, 0, 0, 0.6);
-    :hover {
-      fill: rgb(0, 0, 0);
-    }
+  }
+  :hover {
+    fill: rgb(0, 0, 0);
   }
   &:hover:after {
     content: 'Заблокувати';
     position: absolute;
-    top: 29px;
-    left: -18px;
+    top: 1.813rem;
+    left: -1.125rem;
     font-family: $fontNunito;
     font-size: 0.6rem;
   }

@@ -1,20 +1,20 @@
 @import '../../../../styles/index.scss';
 
 .container {
-  position: relative;
-  cursor: pointer;
   @include flex(column, center, flex-end);
   height: 1.625rem;
   width: 1.625rem;
+  position: relative;
+  cursor: pointer;
   .lock {
-    width: 26px;
+    width: 1.625rem;
     fill: rgba(0, 0, 0, 0.8);
   }
   &:hover::after {
     content: 'Розблокувати';
     position: absolute;
-    top: 29px;
-    left: -18px;
+    top: 1.813rem;
+    left: -1.125rem;
     font-family: $fontNunito;
     font-size: 0.6rem;
   }

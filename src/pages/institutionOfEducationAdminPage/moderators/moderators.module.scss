@@ -1,17 +1,41 @@
 @import '../../../styles/index.scss';
 
-main {
+.moderators {
+  padding: 2.5rem 3.125rem 10rem 3.125rem;
   margin: 0 auto;
+  width: 100vw;
+
+  .container {
+    @include flex(column, flex-start, flex-start);
+  }
+
   .title {
     font-family: $fontNunito;
     font-size: $font_80px;
-    margin-top: 50px;
+    width: 100%;
   }
 
   .subtitle {
+    width: 100%;
+    // max-width: 40rem;
     font-family: $fontNunito;
     font-size: $font_18px;
-    margin-top: 40px;
+    margin-top: 2.5rem;
     text-align: center;
+  }
+  .addModeratorForm {
+    @include flex(row, center, center);
+    width: 100%;
+  }
+
+  .emailInput {
+    @include flex(row, center, center);
+    width: 100%;
+    margin: 1rem 0 3.125rem 0;
+  }
+
+  .moderatorList {
+    @include flex(column, center, center);
+    width: 100%;
   }
 }

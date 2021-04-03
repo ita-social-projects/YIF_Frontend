@@ -8,20 +8,20 @@ interface Props {
   email: string;
   isLocked: boolean;
   deleteHandler: () => void;
-  lockHandler: () => void;
+  blockHandler: () => void;
 }
 
 const Moderator: React.FC<Props> = ({
   email,
   isLocked,
   deleteHandler,
-  lockHandler,
+  blockHandler,
 }) => {
   let blockIcon;
   if (isLocked) {
-    blockIcon = <Lock handleClick={lockHandler} />;
+    blockIcon = <Lock handleClick={blockHandler} />;
   } else {
-    blockIcon = <Unlock handleClick={lockHandler} />;
+    blockIcon = <Unlock handleClick={blockHandler} />;
   }
 
   return (
