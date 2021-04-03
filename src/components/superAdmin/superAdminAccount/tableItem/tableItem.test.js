@@ -38,7 +38,6 @@ const admin2 = {
 describe('check TableItem component', () => {
   it('renders correctly', () => {
     const { queryByText, rerender } = render(<TableItem admin={admin} />);
-    expect(queryByText(/Admin1/i)).toBeInTheDocument();
     expect(queryByText(/nuweeAdmin@gmail.com/i)).toBeInTheDocument();
     expect(
       queryByText(

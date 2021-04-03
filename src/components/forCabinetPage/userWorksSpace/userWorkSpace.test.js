@@ -40,9 +40,9 @@ it('renders list of options', () => {
   });
 
   let menuList = container.querySelectorAll('li');
-  expect(menuList[0].textContent).toBe(`Персональні${'\u00a0'}дані`);
+  expect(menuList[0].textContent).toBe(`Мої${'\u00a0'}дані`);
   expect(menuList[1].textContent).toBe('Заклади освіти');
-  expect(menuList[2].textContent).toBe('Спеціальності');
+  expect(menuList[2].textContent).toBe('Обрані спеціальності');
 });
 
 it('look if after click on menu option or icon we render right component', () => {

@@ -132,6 +132,7 @@ const InstitutionOfEducationCard: React.FC<Props> = (props) => {
               : `${styles.card__icon}`
           }
         >
+          
           {starSVG}
         </div>
       </Tooltips>

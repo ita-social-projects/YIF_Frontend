@@ -78,6 +78,7 @@
             fill: $white;
           }
         }
+
         input {
           background-color: $lightBlue_2;
           width: 100%;
@@ -98,10 +99,11 @@
     }
   }
   .adminTableTitle {
-    padding: 0.62rem 3.12rem 0.62rem 3.12rem; // 15px 50px 10px 50px
+    padding: 0.62rem 2.5rem;
     font-size: 1.25rem; // 20px
     position: relative;
     @include flex(row, center, space-around);
+
     li {
       cursor: pointer;
       margin: 0 0.93rem 0 0; // 15px
@@ -121,13 +123,8 @@
       flex-grow: 2.5;
     }
 
-    .name {
-      flex-grow: 4.6;
-      margin: 0 0 0 2.81rem; // 45px
-    }
-
     .ban {
-      flex-grow: 0.4;
+      flex-grow: 0.1;
 
       svg:first-of-type {
         @include size(2.18rem); // 35px
@@ -154,6 +151,7 @@
       color: $darkBlue;
       background-color: $lightBlue_1;
     }
+
     .adminItem ul:nth-of-type(odd) {
       background-color: $lightBlue_1;
     }
@@ -174,8 +172,6 @@
       }
 
       li {
-        margin: 0 0.93rem 0 0; // 15px
-
         path {
           fill: $darkBlue;
         }
@@ -190,7 +186,6 @@
         .abbreviationInstitutionOfEducation {
           display: block;
           cursor: pointer;
-          padding: 0.5rem 0; //8px
         }
 
         .abbreviationInstitutionOfEducation:hover
@@ -233,31 +228,26 @@
           }
         }
       }
-      .adminName {
-        width: 15%;
+
+      .actionItem {
+        display: flex;
+        padding-right: 0.625rem;
+        align-items: center;
+        li {
+          margin-right: 0.8rem;
+        }
       }
 
       .adminEmail,
       .adminInstitutionOfEducation {
         width: 35%;
-        padding-left: 4.5rem;
       }
+
       .adminInstitutionOfEducation {
-        padding-left: 3.6rem;
-      }
-
-      .adminBan,
-      .adminRemove {
-        width: 1.25rem; // 20px
-      }
-
-      .adminLogo {
-        width: 2.81rem; // 45px
+        padding-left: 1.9rem;
       }
 
       .adminBan {
-        padding-right: 3.312rem; // 53px
-
         path {
           transition: fill 0.35s;
         }
@@ -268,6 +258,7 @@
           }
         }
       }
+
       .adminRemove {
         path {
           transition: stroke 0.35s;
@@ -279,24 +270,9 @@
           }
         }
       }
-
-      .adminLogo {
-        font-size: 0;
-
-        svg {
-          margin: 0 0 0 0.25rem; //4px
-          path {
-            fill: $lightBlue_4;
-          }
-        }
-
-        img {
-          border-radius: 50%;
-          @include size(2.18rem); // 35px
-        }
-      }
     }
   }
+
   .imgContainer {
     position: absolute;
     bottom: 0;
@@ -306,6 +282,7 @@
     text-align: right;
     @include size(12.5rem 1.25rem); // 200px 20px
   }
+
   .flashMessageRight,
   .flashMessageLeft {
     position: absolute;
@@ -314,6 +291,7 @@
     left: 5px;
     right: 0;
   }
+
   .flashMessageRight {
     right: 5px;
     left: auto;
