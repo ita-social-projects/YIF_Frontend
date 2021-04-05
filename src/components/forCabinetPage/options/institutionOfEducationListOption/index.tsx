@@ -29,7 +29,7 @@ const InstitutionOfEducationListOption = () => {
 
   const { token, getToken } = useAuth();
 
-  useEffect(() => {
+  const getFavoritesIOE = () => {
     const endpoint = `${APIUrl}InstitutionOfEducation/Favorites`;
     setFetching(true);
     getToken();
@@ -58,7 +58,11 @@ const InstitutionOfEducationListOption = () => {
         });
       }
     });
-  }, []);
+  };
+
+  useEffect(() => {
+    getFavoritesIOE();
+  }, [token]);
 
   const institutionOfEducationCardList = institutionOfEducationList.map(
     (item: any) => {
