@@ -6,19 +6,19 @@ import Delete from '../../common/icons/Delete/index';
 
 interface Props {
   email: string;
-  isLocked: boolean;
+  isBlocked: boolean;
   deleteHandler: () => void;
   blockHandler: () => void;
 }
 
 const Moderator: React.FC<Props> = ({
   email,
-  isLocked,
+  isBlocked,
   deleteHandler,
   blockHandler,
 }) => {
   let blockIcon;
-  if (isLocked) {
+  if (isBlocked) {
     blockIcon = <Lock handleClick={blockHandler} />;
   } else {
     blockIcon = <Unlock handleClick={blockHandler} />;

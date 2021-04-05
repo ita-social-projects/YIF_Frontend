@@ -13,6 +13,7 @@ describe('Moderators Page', () => {
     );
     expect(screen.getByText('Модератори')).toBeInTheDocument();
   });
+
   test('input email', async () => {
     render(
       <Router>
@@ -39,30 +40,17 @@ describe('Moderators Page', () => {
     expect(icon).not.toBeInTheDocument();
   });
 
-  test('possibility submit form', async () => {
-    render(
-      <Router>
-        <Moderators />
-      </Router>
-    );
-    const icon = document.querySelector('.unlock');
-    await wait(() => {
-      userEvent.click(screen.getByRole('button'));
-    });
-    expect(icon).not.toBeInTheDocument();
-  });
-
-  test('delete icon works', async () => {
+  test('deleting works', async () => {
     render(
       <Router>
         <Moderators />
       </Router>
     );
     const icon = document.querySelector('.delete');
-    const blockIcon = document.querySelector('.unlock');
+    expect(screen.getAllByText(/\b(\w*moderator\w*)\b/g)).toHaveLength(5);
     await wait(() => {
       userEvent.click(icon);
     });
-    expect(blockIcon).not.toBeInTheDocument();
+    expect(screen.getAllByText(/\b(\w*moderator\w*)\b/g)).toHaveLength(4);
   });
 });
