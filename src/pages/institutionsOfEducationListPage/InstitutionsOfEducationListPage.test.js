@@ -4,7 +4,6 @@ import InstitutionsOfEducationListPage from '.';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 import {
-  render,
   cleanup,
   act,
   fireEvent,
@@ -14,7 +13,6 @@ import {
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { authContext } from '../../services/tokenValidator';
-import { PaginationPagesCreator } from './paginationPagesCreator';
 
 let container = null;
 beforeEach(() => {
@@ -100,6 +98,8 @@ it('check success response', async () => {
   const heading = queryByTestId(container, 'heading');
   expect(heading.innerHTML).toBe('Заклади освіти');
 
+  const pageButtons = queryAllByTestId(container, 'currentPage');
+  fireEvent.click(pageButtons[2]);
   const prevButton = queryByTestId(container, 'prevPage');
   fireEvent.click(prevButton);
   const nextButton = queryByTestId(container, 'nextPage');
@@ -167,12 +167,9 @@ it('history', async () => {
       container
     );
   });
-
-  const placeholder = queryByTestId(container, 'placeholder');
-  expect(placeholder).toBeInTheDocument();
 });
 
-it('pagination 1 total pages', async () => {
+it('check pagination with total pages = 1', async () => {
   const history = createMemoryHistory();
   const dataPagination = {
     currentPage: 1,
