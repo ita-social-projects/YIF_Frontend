@@ -69,7 +69,7 @@ const App = () => {
           <ProtectedRoute
             user={token}
             path='/institutionOfEducationAccount'
-            allowed={['SuperAdmin']}
+            allowed={['InstitutionOfEducationAdmin']}
           >
             <InstitutionOfEducationAdminPage />
           </ProtectedRoute>
