@@ -3,7 +3,11 @@ import { useLocation } from 'react-router-dom';
 import { Header, Footer, InstitutionOfEducationCard } from '../../components';
 import ErrorBoundry from '../../errorBoundry';
 import styles from './institutionsOfEducationListPage.module.scss';
-import { requestData } from '../../services/requestDataFunction';
+import {
+  requestSecureData,
+  requestData,
+} from '../../services/requestDataFunction';
+import { useAuth } from '../../services/tokenValidator';
 import Spinner from '../../components/common/spinner';
 import { PaginationPagesCreator } from './paginationPagesCreator';
 import ResponsePlaceholder from '../../components/common/responsePlaceholder';
@@ -34,24 +38,34 @@ const InstitutionsOfEducationListPage = () => {
   });
 
   const location: any = useLocation();
+  const { token, getToken } = useAuth();
 
   useEffect(() => {
     let URL: string = '';
     if (location.state !== undefined) {
       URL = `${APIUrl}InstitutionOfEducation?DirectionName=${location.state.chosenDirection}&SpecialityName=${location.state.chosenSpeciality}&InstitutionOfEducationAbbreviation=${location.state.chosenInstitutionOfEducation}&page=${currentPage}&pageSize=${perPage}`;
-    } else if (location.state === undefined) {
+    } else if (location.state === undefined && token) {
+      URL = `${APIUrl}InstitutionOfEducation/Authorized?page=${currentPage}&pageSize=${perPage}`;
+    } else if (location.state === undefined && !token) {
       URL = `${APIUrl}InstitutionOfEducation/Anonymous?page=${currentPage}&pageSize=${perPage}`;
     }
 
     const endpoint = URL;
     setFetching(true);
-    requestData(endpoint, 'GET').then((res: any) => {
+    let requestType: any;
+    if (token) {
+      getToken();
+      requestType = requestSecureData(endpoint, 'GET', token!);
+    } else {
+      requestType = requestData(endpoint, 'GET');
+    }
+    requestType.then((res: any) => {
       const statusCode = res.statusCode.toString();
       if (statusCode.match(/^[23]\d{2}$/)) {
         setTotalPages(res.data.totalPages);
         const newList = res.data.responseList.map((item: any) => {
           return {
-            liked: item.liked,
+            isFavorite: item.isFavorite,
             id: item.id,
             abbreviation: item.abbreviation,
             site: item.site,
@@ -79,7 +93,7 @@ const InstitutionsOfEducationListPage = () => {
       return (
         <InstitutionOfEducationCard
           id={item.id}
-          liked={item.liked}
+          liked={item.isFavorite}
           key={item.id}
           abbreviation={item.abbreviation}
           site={item.site}
@@ -128,6 +142,7 @@ const InstitutionsOfEducationListPage = () => {
     >
       <div
         id='prevPage'
+        data-testid='prevPage'
         className={
           currentPage === 1
             ? `${styles.arrow} ${styles.arrow__prev} ${styles.arrowUnable}`
@@ -146,6 +161,7 @@ const InstitutionsOfEducationListPage = () => {
       {pages.map((page, index) => {
         return (
           <span
+            data-testid='currentPage'
             className={
               currentPage === page
                 ? `${styles.page} ${styles.page__current}`
@@ -160,6 +176,7 @@ const InstitutionsOfEducationListPage = () => {
       })}
       <div
         id='nextPage'
+        data-testid='nextPage'
         className={
           currentPage === totalPages
             ? `${styles.arrow} ${styles.arrow__next} ${styles.arrowUnable}`
