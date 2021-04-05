@@ -6,6 +6,7 @@ import { useAuth } from '../../services/tokenValidator';
 import { requestSecureData } from '../../services/requestDataFunction';
 import { APIUrl } from '../../services/endpoints';
 import CampaingCard from '../campaignCard';
+import { store } from '../../store/store';
 
 interface Props {
   liked?: boolean;
@@ -28,6 +29,8 @@ const InstitutionOfEducationCard: React.FC<Props> = (props) => {
     errorStatusCode: '',
     errorMessage: '',
   });
+  const { currentRole } = store.getState();
+  const isGraduate = currentRole.role === 'Graduate' ? true : false;
 
   const starSVG = (
     <svg
@@ -56,6 +59,22 @@ const InstitutionOfEducationCard: React.FC<Props> = (props) => {
     endOfCampaign,
   } = props;
 
+  let star = null;
+  if (!token || isGraduate) {
+    star = (
+      <Tooltips content='Будь ласка, увійдіть!'>
+        <div
+          className={
+            token && isLiked
+              ? `${styles.card__icon} ${styles.card__icon__liked}`
+              : `${styles.card__icon}`
+          }
+        >
+          {starSVG}
+        </div>
+      </Tooltips>
+    );
+  }
   useEffect(() => {
     if (liked) setLiked(() => !isLiked);
     return () => {
@@ -64,26 +83,27 @@ const InstitutionOfEducationCard: React.FC<Props> = (props) => {
   }, []);
 
   const handleClick = (e: React.SyntheticEvent<EventTarget>) => {
-    e.preventDefault();
-    let itemImg = (e.target as Element).closest('svg');
-    if (itemImg) setLiked(() => !isLiked);
-    let institutionOfEducationId = (e.currentTarget as Element).getAttribute(
-      'data-id'
-    );
-    let parentElem = itemImg?.parentElement;
+    if (token) {
+      let itemImg = (e.target as Element).closest('svg');
+      if (itemImg) setLiked(() => !isLiked);
+      let institutionOfEducationId = (e.currentTarget as Element).getAttribute(
+        'data-id'
+      );
+      let parentElem = itemImg?.parentElement;
 
-    if (parentElem?.classList.contains(`${styles.card__icon__liked}`)) {
-      itemImg &&
-        sendDeleteFavoriteInstitutionOfEducation(
-          `${APIUrl}InstitutionOfEducation/Favorites/${institutionOfEducationId}`,
-          'DELETE'
-        );
-    } else {
-      itemImg &&
-        sendDeleteFavoriteInstitutionOfEducation(
-          `${APIUrl}InstitutionOfEducation/Favorites/${institutionOfEducationId}`,
-          'POST'
-        );
+      if (parentElem?.classList.contains(`${styles.card__icon__liked}`)) {
+        itemImg &&
+          sendDeleteFavoriteInstitutionOfEducation(
+            `${APIUrl}InstitutionOfEducation/Favorites/${institutionOfEducationId}`,
+            'DELETE'
+          );
+      } else {
+        itemImg &&
+          sendDeleteFavoriteInstitutionOfEducation(
+            `${APIUrl}InstitutionOfEducation/Favorites/${institutionOfEducationId}`,
+            'POST'
+          );
+      }
     }
   };
 
@@ -124,18 +144,7 @@ const InstitutionOfEducationCard: React.FC<Props> = (props) => {
       className={styles.card}
       onClick={handleClick}
     >
-      <Tooltips content='Будь ласка, увійдіть!'>
-        <div
-          className={
-            token && isLiked
-              ? `${styles.card__icon} ${styles.card__icon__liked}`
-              : `${styles.card__icon}`
-          }
-        >
-          
-          {starSVG}
-        </div>
-      </Tooltips>
+      {star}
       <h2 className={styles.card__title}>{abbreviation}</h2>
       <div className={styles.card__contentContainer}>
         <div className={styles.card__content}>

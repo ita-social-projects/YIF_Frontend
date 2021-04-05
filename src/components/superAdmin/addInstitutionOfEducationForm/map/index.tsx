@@ -13,8 +13,8 @@ const GetIcon = () => {
 };
 
 const UniversityMap = (props: any) => {
-  const curent = props.curentPosition || [0, 0];
-  const [position, setPosition] = useState<[number, number]>(curent);
+  const current = props.currentPosition || [0, 0];
+  const [position, setPosition] = useState<[number, number]>(current);
 
   const setFieldValue = (name: string, value: number) => {
     props.setFieldValue(name, value);

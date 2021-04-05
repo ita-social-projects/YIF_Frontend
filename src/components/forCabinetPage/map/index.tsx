@@ -14,11 +14,11 @@ const GetIcon = () => {
 };
 
 const InstitutionsOfEducationMap = (props: any) => {
-  const institutionsOfEducationDB = props.data || [];
+  const institutionsOfEducationDB = props.data;
   const [isFetching, setFetching] = useState(true);
-  const [zoom, setZoom] = useState(0);
-  const [centerLat, setCenterLat] = useState(0);
-  const [centerLon, setCenterLon] = useState(0);
+  const [zoom, setZoom] = useState(6);
+  const [centerLat, setCenterLat] = useState(49);
+  const [centerLon, setCenterLon] = useState(30);
 
   useEffect(() => {
     if (institutionsOfEducationDB[0].lat) {
@@ -34,13 +34,17 @@ const InstitutionsOfEducationMap = (props: any) => {
           ? 27.957419925020235
           : institutionsOfEducationDB[0].lon
       );
+    } else {
+      setFetching(false);
     }
   }, [institutionsOfEducationDB]);
 
   const styleURL: string = `https://api.mapbox.com/styles/v1/youritfuture/cklig66bm1iis17oth9p6vklg/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_KEY}`;
 
-  const institutionsOfEducationList = institutionsOfEducationDB.map(
-    (elem: any) => {
+  let institutionsOfEducationList;
+
+  if (institutionsOfEducationDB[0].lat) {
+    institutionsOfEducationList = institutionsOfEducationDB.map((elem: any) => {
       const { id, name, site, lat, lon } = elem;
       return (
         <Marker position={[lat, lon]} icon={GetIcon()} key={id}>
@@ -54,8 +58,8 @@ const InstitutionsOfEducationMap = (props: any) => {
           </Popup>
         </Marker>
       );
-    }
-  );
+    });
+  }
 
   return (
     <Fragment>

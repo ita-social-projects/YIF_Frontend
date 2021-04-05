@@ -1,34 +1,83 @@
 import React from 'react';
-import { unmountComponentAtNode } from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
-import { act } from 'react-dom/test-utils';
-import ReactDOM from 'react-dom';
+import { act, render } from '@testing-library/react';
 import UserCabinet from './index';
 import { store } from '../../store/store';
 import { Provider } from 'react-redux';
+import { authContext } from '../../services/tokenValidator';
 
-let container = null;
+describe('Test Graduate Cabinet Page', () => {
+  test('render with no data', async () => {
+    const mockJsonPromise = Promise.resolve({
+      message: 'message',
+    });
 
-beforeEach(() => {
-  container = document.createElement('div');
-  document.body.appendChild(container);
-});
+    const mockFetchPromise = Promise.resolve({
+      json: () => mockJsonPromise,
+      status: 404,
+    });
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
-afterEach(() => {
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
+    await act(async () => {
+      render(
+        <Provider store={store}>
+          <MemoryRouter>
+            <authContext.Provider
+              value={{
+                token: 'testToken',
+                refreshToken: 'Token',
+                isExpired: false,
+                isRefreshing: false,
+                getToken: () => {},
+                updateToken: () => {},
+                removeToken: () => {},
+              }}
+            >
+              <UserCabinet />
+            </authContext.Provider>
+          </MemoryRouter>
+        </Provider>
+      );
+    });
+  });
 
-it('Check graduateUserCabinet page', () => {
-  act(() => {
-    ReactDOM.render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <UserCabinet />
-        </MemoryRouter>
-      </Provider>,
-      container
-    );
+  test('render with data', async () => {
+    const mockJsonPromise = Promise.resolve([
+      {
+        id: 'id',
+        name: 'name',
+        site: 'site',
+        lat: 49,
+        lon: 29,
+      },
+    ]);
+
+    const mockFetchPromise = Promise.resolve({
+      json: () => mockJsonPromise,
+      status: 200,
+    });
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
+
+    await act(async () => {
+      render(
+        <Provider store={store}>
+          <MemoryRouter>
+            <authContext.Provider
+              value={{
+                token: 'testToken',
+                refreshToken: 'Token',
+                isExpired: false,
+                isRefreshing: false,
+                getToken: () => {},
+                updateToken: () => {},
+                removeToken: () => {},
+              }}
+            >
+              <UserCabinet />
+            </authContext.Provider>
+          </MemoryRouter>
+        </Provider>
+      );
+    });
   });
 });

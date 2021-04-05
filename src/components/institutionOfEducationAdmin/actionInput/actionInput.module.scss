@@ -1,0 +1,45 @@
+@import '../../../styles/index.scss';
+
+.actionInput {
+  @include flex(row, center, space-between);
+  width: 100%;
+  max-width: 52rem;
+
+  .inputContainer {
+    width: 100%;
+    position: relative;
+
+    .inputField {
+      width: 100%;
+      max-width: 45rem;
+      font-size: $font_18px;
+      font-family: $fontOpenSans;
+      border: 1px solid $gray;
+      min-height: 2.5rem;
+      border-radius: 0.3rem;
+      padding-left: 1rem;
+    }
+  }
+
+  button {
+    height: 2.5rem;
+    width: 7.5rem;
+    margin-left: 1rem;
+    border-radius: 0.3rem;
+  }
+}
+
+.inputError {
+  @include flex(row, center, flex-start);
+  width: 100%;
+  max-width: 45rem;
+  background-color: rgba($red, 0.4);
+  font-size: $font_15px;
+  font-family: $fontNunito;
+  min-height: 2rem;
+  height: min-content;
+  padding-left: 1rem;
+  position: absolute;
+  top: 2.5rem;
+  border-radius: 0.3rem;
+}
