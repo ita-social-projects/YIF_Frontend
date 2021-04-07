@@ -32,20 +32,19 @@ const ImageUploaderPopup = (props: TProps) => {
   const [error, setError] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [cropper, setCropper] = useState<any>();
-  const role: string = 'Graduate';
 
   let fileInput: any = React.createRef();
 
-  const [didMount, setDidMount] = useState(false);
+  // const [didMount, setDidMount] = useState(false);
 
-  useEffect(() => {
-    setDidMount(true);
-    return () => setDidMount(false);
-  }, []);
+  // useEffect(() => {
+  //   setDidMount(true);
+  //   return () => setDidMount(false);
+  // }, []);
 
-  if (!didMount) {
-    return null;
-  }
+  // if (!didMount) {
+  //   return null;
+  // }
 
   const highlightArea = () => {
     document
@@ -189,7 +188,7 @@ const ImageUploaderPopup = (props: TProps) => {
               />
               <div className={style.helperImage}>
                 <img
-                  src='assets/icons/imageUpload.svg'
+                  src='/assets/icons/imageUpload.svg'
                   alt={`Перетягніть фотографію ${text} сюди`}
                 />
               </div>

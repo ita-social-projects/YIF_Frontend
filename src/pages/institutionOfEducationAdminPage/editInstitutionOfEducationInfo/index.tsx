@@ -5,61 +5,58 @@ import styles from './editInstitutionOfEducationInfoPage.module.scss';
 import { FormButton } from '../../../components/common/formElements/index';
 import UniversityMap from '../../../components/superAdmin/addInstitutionOfEducationForm/map';
 import ImageUploader from '../../../components/institutionOfEducationAdmin/imageUploader';
+import {
+  requestData,
+  requestSecureData,
+} from '../../../services/requestDataFunction';
+import { APIUrl } from '../../../services/endpoints';
+import { useAuth } from '../../../services/tokenValidator';
 
 const EditInstitutionOfEducationInfoPage = () => {
-  const [initialValues, setinitialValues] = useState({});
+  const [initialValues, setinitialValues] = useState<any>({});
   const [fetching, setFetching] = useState(true);
-
-  const {
-    name,
-    abbreviation,
-    site,
-    address,
-    phone,
-    email,
-    description,
-    institutionOfEducationType,
-    lat,
-    lon,
-  } = {
-    name:
-      'Національний університет водного господарства та природокористування',
-    abbreviation: 'НУВГП',
-    site: 'https://nuwm.edu.ua/',
-    address: 'вулиця Соборна, 11, Рівне, Рівненська область, 33000',
-    phone: '380362633209',
-    email: 'mail@nuwm.edu.ua',
-    description:
-      'Єдиний в Україні вищий навчальний заклад водогосподарського профілю. Заклад є навчально-науковим комплексом, що здійснює підготовку висококваліфікованих фахівців, науково-педагогічних кадрів, забезпечує підвищення кваліфікації фахівців та проводить науково-дослідну роботу.',
-    lat: 50.61798,
-    lon: 26.258654,
-    institutionOfEducationType: 0,
-  };
-
-  const currentPosition = [lat, lon];
-  const foto = 'https://nuwm.edu.ua/images/content/admin/nuwmvsh.jpg';
+  const idU = '076f7ada-ec61-44e3-b4ed-87343b87dd6a';
+  const { imagePath, lat, lon } = initialValues;
+  const [image, setImage] = useState('');
+  const foto = image || imagePath;
+  const { token } = useAuth();
 
   useEffect(() => {
-    setinitialValues({
-      institutionOfEducationType,
-      name,
-      abbreviation,
-      site,
-      address,
-      phone,
-      email,
-      description,
-      institutionOfEducationLat: lat,
-      institutionOfEducationLon: lon,
+    const url = `${APIUrl}InstitutionOfEducation/${idU}`;
+    requestData(url, 'GET').then((res) => {
+      setinitialValues(res.data);
+      setFetching(false);
     });
-    setFetching(false);
   }, []);
+
+  const sendNewDescription = (formikValues: any) => {
+    console.log('foto:', foto);
+    const url = `${APIUrl}InstitutionOfEducationAdmin/ModifyDescriptionOfInstitution`;
+    const data = {
+      ...formikValues,
+      lat: formikValues.institutionOfEducationLat,
+      lon: formikValues.institutionOfEducationLon,
+      imagePath: foto,
+      imageApiModel: {
+        photo: foto,
+      },
+    };
+    console.log('data:', data);
+    requestSecureData(url, 'POST', token!, data).then((res) => {
+      console.log(res);
+    });
+  };
+
+  const imageHandler = (image: any) => {
+    setImage(image);
+  };
 
   return (
     <>
       {!fetching && (
         <>
-          {console.log('render')}
+          {console.log(initialValues)}
+          {console.log(image)}
           <div className={styles.editInfoSection}>
             <main className={styles.mainContent}>
               <h1 className={styles.title}>
@@ -72,9 +69,20 @@ const EditInstitutionOfEducationInfoPage = () => {
                 foto={foto}
                 aspectRatio={16 / 9}
                 text={'університету'}
+                imageHandler={imageHandler}
               />
               <h2 className={styles.infoTitle}>Основна інформація</h2>
-              <Formik initialValues={initialValues} onSubmit={(values) => {}}>
+              <Formik
+                initialValues={{
+                  ...initialValues,
+                  institutionOfEducationLat: '',
+                  institutionOfEducationLon: '',
+                }}
+                onSubmit={(values) => {
+                  sendNewDescription(values);
+                  console.log(values);
+                }}
+              >
                 {({ setFieldValue }) => (
                   <Form className={styles.mainContent}>
                     <div className={styles.infoBox}>
@@ -85,9 +93,9 @@ const EditInstitutionOfEducationInfoPage = () => {
                           name='institutionOfEducationType'
                           className={styles.selector}
                         >
-                          <option value='0'>Виберіть тип...</option>
-                          <option value='1'>Університет</option>
-                          <option value='2'>Коледж</option>
+                          <option value=''>Виберіть тип...</option>
+                          <option value='University'>Університет</option>
+                          <option value='College'>Коледж</option>
                         </Field>
                       </div>
                       <Input id='name' label='Повна назва:' name='name' />
@@ -129,7 +137,7 @@ const EditInstitutionOfEducationInfoPage = () => {
                     <h2 className={styles.infoTitle}>Місце розташування</h2>
                     <Field
                       name='pos'
-                      currentPosition={currentPosition}
+                      currentPosition={[lat, lon]}
                       setFieldValue={setFieldValue}
                       as={UniversityMap}
                     />
