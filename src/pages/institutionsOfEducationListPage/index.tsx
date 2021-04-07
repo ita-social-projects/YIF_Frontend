@@ -27,7 +27,8 @@ const InstitutionsOfEducationListPage = () => {
     },
   ]);
 
-  const [isFetching, setFetching] = useState(false);
+  const [isChanged, setChanged] = useState(false);
+  const [isFetching, setFetching] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(2);
   const [totalPages, setTotalPages] = useState(0);
@@ -40,32 +41,65 @@ const InstitutionsOfEducationListPage = () => {
   const location: any = useLocation();
   const { token, getToken } = useAuth();
 
+  const handleClick = (id: number, isFavorite: boolean) => {
+    console.log(`click`);
+    const endpoint = `${APIUrl}InstitutionOfEducation/Favorites/${id}`;
+    const method = isFavorite ? `DELETE` : `POST`;
+
+    requestSecureData(endpoint, method, token!)
+      .then((res: any) => {
+        const statusCode = res.statusCode.toString();
+        console.log(`not error`);
+        if (statusCode.match(/^[23]\d{2}$/)) {
+          setChanged(!isChanged);
+        } else {
+          // setError({
+          //   hasError: true,
+          //   errorStatusCode: res.statusCode,
+          //   errorMessage:
+          //     res.data.message || 'Щось пішло не так, спробуйте знову1.',
+          // });
+        }
+      })
+      .catch((error) => {
+        console.log(`error`);
+
+        // setError({
+        //   hasError: true,
+        //   errorStatusCode: error.statusCode,
+        //   errorMessage: 'Щось пішло не так, спробуйте знову2.',
+        // });
+      });
+  };
+
   useEffect(() => {
+    console.log(`useEffect`);
     let URL: string = '';
-    if (location.state !== undefined) {
-      URL = `${APIUrl}InstitutionOfEducation?DirectionName=${location.state.chosenDirection}&SpecialityName=${location.state.chosenSpeciality}&InstitutionOfEducationAbbreviation=${location.state.chosenInstitutionOfEducation}&page=${currentPage}&pageSize=${perPage}`;
-    } else if (location.state === undefined && token) {
+    // if (location.state !== undefined) {
+    //   URL = `${APIUrl}InstitutionOfEducation?DirectionName=${location.state.chosenDirection}&SpecialityName=${location.state.chosenSpeciality}&InstitutionOfEducationAbbreviation=${location.state.chosenInstitutionOfEducation}&page=${currentPage}&pageSize=${perPage}`;
+    // } else
+    if (token) {
       URL = `${APIUrl}InstitutionOfEducation/Authorized?page=${currentPage}&pageSize=${perPage}`;
     } else {
       URL = `${APIUrl}InstitutionOfEducation/Anonymous?page=${currentPage}&pageSize=${perPage}`;
     }
 
     const endpoint = URL;
-    setFetching(true);
     let requestType: any;
     if (token) {
-      getToken();
+      // getToken();
       requestType = requestSecureData(endpoint, 'GET', token!);
     } else {
       requestType = requestData(endpoint, 'GET');
     }
     requestType.then((res: any) => {
+      console.log(`res`, res);
       const statusCode = res.statusCode.toString();
       if (statusCode.match(/^[23]\d{2}$/)) {
         setTotalPages(res.data.totalPages);
         const newList = res.data.responseList.map((item: any) => {
           return {
-            isFavorite: item.isFavorite,
+            liked: item.isFavorite,
             id: item.id,
             abbreviation: item.abbreviation,
             site: item.site,
@@ -86,14 +120,15 @@ const InstitutionsOfEducationListPage = () => {
         });
       }
     });
-  }, [currentPage]);
+  }, [currentPage, isChanged]);
 
   const InstitutionsOfEducationCardList = InstitutionsOfEducationList.map(
     (item: any) => {
       return (
         <InstitutionOfEducationCard
           id={item.id}
-          liked={item.isFavorite}
+          handleClick={() => handleClick(item.id, item.liked)}
+          liked={item.liked}
           key={item.id}
           abbreviation={item.abbreviation}
           site={item.site}

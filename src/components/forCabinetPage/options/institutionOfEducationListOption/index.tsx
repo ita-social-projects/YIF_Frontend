@@ -20,19 +20,50 @@ const InstitutionOfEducationListOption = () => {
       endOfCampaign: '',
     },
   ]);
-  const [isFetching, setFetching] = useState(false);
+
+  const [isChanged, setChanged] = useState(false);
+  // const [submitted, setSubmitted] = useState(false);
+
+  const [isFetching, setFetching] = useState(true);
   const [error, setError] = useState({
     hasError: false,
     errorStatusCode: '',
     errorMessage: '',
   });
 
+  const handleClick = (id: number, isFavorite: boolean) => {
+    const endpoint = `${APIUrl}InstitutionOfEducation/Favorites/${id}`;
+    const method = isFavorite ? `DELETE` : `POST`;
+
+    requestSecureData(endpoint, method, token!)
+      .then((res: any) => {
+        const statusCode = res.statusCode.toString();
+        if (statusCode.match(/^[23]\d{2}$/)) {
+          // setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
+          // setSubmitted(false);
+        } else {
+          // setError({
+          //   hasError: true,
+          //   errorStatusCode: res.statusCode,
+          //   errorMessage:
+          //     res.data.message || 'Щось пішло не так, спробуйте знову.',
+          // });
+        }
+      })
+      .catch((error) => {
+        setChanged(!isChanged);
+        // setError({
+        //   hasError: true,
+        //   errorStatusCode: error.statusCode,
+        //   errorMessage: 'Щось пішло не так, спробуйте знову.',
+        // });
+      });
+  };
+
   const { token, getToken } = useAuth();
 
   const getFavoritesIOE = () => {
     const endpoint = `${APIUrl}InstitutionOfEducation/Favorites`;
-    setFetching(true);
-    getToken();
     requestSecureData(endpoint, 'GET', token!).then((res: any) => {
       const statusCode = res.statusCode.toString();
       if (statusCode.match(/^[23]\d{2}$/)) {
@@ -40,6 +71,7 @@ const InstitutionOfEducationListOption = () => {
           return {
             id: item.id,
             abbreviation: item.abbreviation,
+            liked: item.isFavorite,
             site: item.site,
             address: item.address,
             description: item.description,
@@ -62,14 +94,15 @@ const InstitutionOfEducationListOption = () => {
 
   useEffect(() => {
     getFavoritesIOE();
-  }, [token]);
+  }, [isChanged]);
 
   const institutionOfEducationCardList = institutionOfEducationList.map(
     (item: any) => {
       return (
         <InstitutionOfEducationCard
           id={item.id}
-          liked={true}
+          handleClick={() => handleClick(item.id, item.liked)}
+          liked={item.liked}
           key={item.id}
           abbreviation={item.abbreviation}
           site={item.site}
