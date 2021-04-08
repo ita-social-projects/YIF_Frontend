@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './institutionOfEducationCard.module.scss';
 import Tooltips from '../common/tooltip';
-import { useAuth } from '../../services/tokenValidator';
-import { requestSecureData } from '../../services/requestDataFunction';
-import { APIUrl } from '../../services/endpoints';
 import CampaingCard from '../campaignCard';
 import { store } from '../../store/store';
-import Star from './star';
+import Star from '../common/icons/Star/star';
 
 interface Props {
   liked?: boolean;
@@ -23,14 +20,8 @@ interface Props {
 }
 
 const InstitutionOfEducationCard: React.FC<Props> = (props) => {
-  // const [isLiked, setLiked] = useState(false);
-  const { token, getToken } = useAuth();
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState({
-    hasError: false,
-    errorStatusCode: '',
-    errorMessage: '',
-  });
+  const token = localStorage.getItem('token');
+
   const { currentRole } = store.getState();
   const isGraduate = currentRole.role === 'Graduate' ? true : false;
 
@@ -51,70 +42,10 @@ const InstitutionOfEducationCard: React.FC<Props> = (props) => {
   if (!token || isGraduate) {
     star = (
       <Tooltips content='Будь ласка, увійдіть!'>
-        <Star isLiked={liked} handleClick={handleClick} />
+        <Star liked={liked} handleClick={handleClick} />
       </Tooltips>
     );
   }
-  // useEffect(() => {
-  //   if (liked) setLiked(() => !isLiked);
-  //   return () => {
-  //     if (!liked) setLiked(() => isLiked);
-  //   };
-  // }, []);
-
-  // const handleClick = (e: React.SyntheticEvent<EventTarget>) => {
-  //   if (token) {
-  //     let itemImg = (e.target as Element).closest('svg');
-  //     if (itemImg) setLiked(() => !isLiked);
-  //     let institutionOfEducationId = (e.currentTarget as Element).getAttribute(
-  //       'data-id'
-  //     );
-  //     let parentElem = itemImg?.parentElement;
-
-  //     if (parentElem?.classList.contains(`${styles.card__icon__liked}`)) {
-  //       itemImg &&
-  //         sendDeleteFavoriteInstitutionOfEducation(
-  //           `${APIUrl}InstitutionOfEducation/Favorites/${institutionOfEducationId}`,
-  //           'DELETE'
-  //         );
-  //     } else {
-  //       itemImg &&
-  //         sendDeleteFavoriteInstitutionOfEducation(
-  //           `${APIUrl}InstitutionOfEducation/Favorites/${institutionOfEducationId}`,
-  //           'POST'
-  //         );
-  //     }
-  //   }
-  // };
-
-  // let sendDeleteFavoriteInstitutionOfEducation = (
-  //   endpointLikedInstitutionOfEducation: string,
-  //   method: string
-  // ) => {
-  //   getToken();
-  //   requestSecureData(endpointLikedInstitutionOfEducation, method, token!)
-  //     .then((res: any) => {
-  //       const statusCode = res.statusCode.toString();
-  //       if (statusCode.match(/^[23]\d{2}$/)) {
-  //         setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
-  //         setSubmitted(false);
-  //       } else {
-  //         setError({
-  //           hasError: true,
-  //           errorStatusCode: res.statusCode,
-  //           errorMessage:
-  //             res.data.message || 'Щось пішло не так, спробуйте знову.',
-  //         });
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       setError({
-  //         hasError: true,
-  //         errorStatusCode: error.statusCode,
-  //         errorMessage: 'Щось пішло не так, спробуйте знову.',
-  //       });
-  //     });
-  // };
 
   return (
     <div

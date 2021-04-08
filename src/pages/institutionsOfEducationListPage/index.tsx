@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { Header, Footer, InstitutionOfEducationCard } from '../../components';
 import ErrorBoundry from '../../errorBoundry';
 import styles from './institutionsOfEducationListPage.module.scss';
@@ -27,7 +26,7 @@ const InstitutionsOfEducationListPage = () => {
     },
   ]);
 
-  const [isChanged, setChanged] = useState(false);
+  const [toggleError, setToggleError] = useState(false);
   const [isFetching, setFetching] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(2);
@@ -38,21 +37,49 @@ const InstitutionsOfEducationListPage = () => {
     errorMessage: '',
   });
 
-  const { token, getToken } = useAuth();
+  const token = localStorage.getItem('token');
+  // const { getToken } = useAuth();
 
   const handleClick = (id: string, isFavorite: boolean) => {
     const endpoint = `${APIUrl}InstitutionOfEducation/Favorites/${id}`;
     const method = isFavorite ? `DELETE` : `POST`;
 
-    requestSecureData(endpoint, method, token!).then(() => {
-      const updatedList: any = InstitutionsOfEducationList.map((ioe) => {
-        if (id === ioe.id) {
-          ioe.liked = !ioe.liked;
-        }
-        return ioe;
-      });
-      setList(updatedList);
+    const updatedList: any = InstitutionsOfEducationList.map((ioe) => {
+      if (id === ioe.id) {
+        ioe.liked = !ioe.liked;
+      }
+      return ioe;
     });
+    setList(updatedList);
+    // const toke = getToken();
+
+    requestSecureData(endpoint, method, token!)
+      .then((res: any) => {
+        const statusCode = res.statusCode.toString();
+        if (statusCode.match(/^[23]\d{2}$/)) {
+          setError({
+            hasError: false,
+            errorStatusCode: '',
+            errorMessage: '',
+          });
+        } else {
+          setToggleError(!toggleError);
+          setError({
+            hasError: true,
+            errorStatusCode: res.statusCode,
+            errorMessage:
+              res.data.message || 'Щось пішло не так, спробуйте знову.',
+          });
+        }
+      })
+      .catch((error) => {
+        setToggleError(!toggleError);
+        setError({
+          hasError: true,
+          errorStatusCode: error.statusCode,
+          errorMessage: 'Щось пішло не так, спробуйте знову.',
+        });
+      });
   };
 
   useEffect(() => {
@@ -71,7 +98,6 @@ const InstitutionsOfEducationListPage = () => {
       requestType = requestData(endpoint, 'GET');
     }
     requestType.then((res: any) => {
-      console.log(`res`, res);
       const statusCode = res.statusCode.toString();
       if (statusCode.match(/^[23]\d{2}$/)) {
         setTotalPages(res.data.totalPages);
@@ -94,11 +120,11 @@ const InstitutionsOfEducationListPage = () => {
           hasError: true,
           errorStatusCode: res.statusCode,
           errorMessage:
-            res.data.message || 'Щось пішло не так, спробуйте знову.',
+            res.data.message || 'Щось пішло не так, спробуйте знову4.',
         });
       }
     });
-  }, [currentPage, isChanged]);
+  }, [currentPage, toggleError]);
 
   const InstitutionsOfEducationCardList = InstitutionsOfEducationList.map(
     (item: any) => {
@@ -203,7 +229,6 @@ const InstitutionsOfEducationListPage = () => {
           }
         }}
       >
-        {' '}
         {arrowIcon}
       </div>
     </div>
@@ -211,7 +236,6 @@ const InstitutionsOfEducationListPage = () => {
 
   const result = isFetching ? (
     <div className={styles.spinnerContainer}>
-      {' '}
       <Spinner />
     </div>
   ) : (

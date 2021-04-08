@@ -22,7 +22,6 @@ const InstitutionOfEducationListOption = () => {
   ]);
 
   const [isChanged, setChanged] = useState(false);
-  // const [submitted, setSubmitted] = useState(false);
 
   const [isFetching, setFetching] = useState(true);
   const [error, setError] = useState({
@@ -37,26 +36,25 @@ const InstitutionOfEducationListOption = () => {
 
     requestSecureData(endpoint, method, token!)
       .then((res: any) => {
+        setChanged(!isChanged);
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
-          // setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
-          // setSubmitted(false);
+          setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
         } else {
-          // setError({
-          //   hasError: true,
-          //   errorStatusCode: res.statusCode,
-          //   errorMessage:
-          //     res.data.message || 'Щось пішло не так, спробуйте знову.',
-          // });
+          setError({
+            hasError: true,
+            errorStatusCode: res.statusCode,
+            errorMessage:
+              res.data.message || 'Щось пішло не так, спробуйте знову.',
+          });
         }
       })
       .catch((error) => {
-        setChanged(!isChanged);
-        // setError({
-        //   hasError: true,
-        //   errorStatusCode: error.statusCode,
-        //   errorMessage: 'Щось пішло не так, спробуйте знову.',
-        // });
+        setError({
+          hasError: true,
+          errorStatusCode: error.statusCode,
+          errorMessage: 'Щось пішло не так, спробуйте знову.',
+        });
       });
   };
 

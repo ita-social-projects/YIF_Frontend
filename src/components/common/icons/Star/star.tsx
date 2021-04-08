@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import styles from './institutionOfEducationCard.module.scss';
+import React from 'react';
+import styles from './star.module.scss';
 
-const Star = ({ handleClick, isLiked }: any) => {
+const Star = ({ handleClick, liked }: any) => {
   return (
     <div
       onClick={handleClick}
       className={
-        isLiked
+        liked
           ? `${styles.card__icon} ${styles.card__icon__liked}`
           : `${styles.card__icon}`
       }
