@@ -41,45 +41,47 @@ const InstitutionsOfEducationListPage = () => {
   // const { getToken } = useAuth();
 
   const handleClick = (id: string, isFavorite: boolean) => {
-    const endpoint = `${APIUrl}InstitutionOfEducation/Favorites/${id}`;
-    const method = isFavorite ? `DELETE` : `POST`;
+    if (token) {
+      const endpoint = `${APIUrl}InstitutionOfEducation/Favorites/${id}`;
+      const method = isFavorite ? `DELETE` : `POST`;
 
-    const updatedList: any = InstitutionsOfEducationList.map((ioe) => {
-      if (id === ioe.id) {
-        ioe.liked = !ioe.liked;
-      }
-      return ioe;
-    });
-    setList(updatedList);
-    // const toke = getToken();
+      const updatedList: any = InstitutionsOfEducationList.map((ioe) => {
+        if (id === ioe.id) {
+          ioe.liked = !ioe.liked;
+        }
+        return ioe;
+      });
+      setList(updatedList);
+      // const toke = getToken();
 
-    requestSecureData(endpoint, method, token!)
-      .then((res: any) => {
-        const statusCode = res.statusCode.toString();
-        if (statusCode.match(/^[23]\d{2}$/)) {
-          setError({
-            hasError: false,
-            errorStatusCode: '',
-            errorMessage: '',
-          });
-        } else {
+      requestSecureData(endpoint, method, token!)
+        .then((res: any) => {
+          const statusCode = res.statusCode.toString();
+          if (statusCode.match(/^[23]\d{2}$/)) {
+            setError({
+              hasError: false,
+              errorStatusCode: '',
+              errorMessage: '',
+            });
+          } else {
+            setToggleError(!toggleError);
+            setError({
+              hasError: true,
+              errorStatusCode: res.statusCode,
+              errorMessage:
+                res.data.message || 'Щось пішло не так, спробуйте знову.',
+            });
+          }
+        })
+        .catch((error) => {
           setToggleError(!toggleError);
           setError({
             hasError: true,
-            errorStatusCode: res.statusCode,
-            errorMessage:
-              res.data.message || 'Щось пішло не так, спробуйте знову.',
+            errorStatusCode: error.statusCode,
+            errorMessage: 'Щось пішло не так, спробуйте знову.',
           });
-        }
-      })
-      .catch((error) => {
-        setToggleError(!toggleError);
-        setError({
-          hasError: true,
-          errorStatusCode: error.statusCode,
-          errorMessage: 'Щось пішло не так, спробуйте знову.',
         });
-      });
+    }
   };
 
   useEffect(() => {
