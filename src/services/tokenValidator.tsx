@@ -1,7 +1,6 @@
 import React, {
   useState,
   useEffect,
-  useMemo,
   useCallback,
   useContext,
   createContext,
@@ -26,7 +25,6 @@ type Token = string | null;
 type Values = {
   token: Token;
   refreshToken: Token;
-  isExpired: boolean;
   isRefreshing: boolean;
   getToken: Function;
   updateToken: Function;
@@ -59,11 +57,8 @@ function AuthProvider({ children }: any) {
 
   const isTokenExpired = useCallback(
     (token: Token) => {
-      if (!token) {
-        return false;
-      }
       try {
-        const decoded: Decoded = jwt_decode(token);
+        const decoded: Decoded = jwt_decode(token!);
         store.dispatch(setRoleReducer(decoded.roles[1]));
         return decoded.exp <= new Date().getTime() / 1000 ? true : false;
       } catch (error) {
@@ -71,81 +66,60 @@ function AuthProvider({ children }: any) {
         return false;
       }
     },
-    [removeToken]
+    [token]
   );
-
-  const isExpired = useMemo(() => isTokenExpired(token), [
-    isTokenExpired,
-    token,
-  ]);
 
   const getToken = useCallback(async () => {
     const url = `${APIUrl}Authentication/RefreshToken`;
-    let currentToken;
+    let currentToken = token;
     let currentRefreshToken = refreshToken;
 
-    try {
-      setIsRefreshing(true);
-      let response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          token,
-          refreshToken,
-        }),
-      });
+    if (isTokenExpired(currentToken)) {
+      try {
+        setIsRefreshing(true);
+        let response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            token,
+            refreshToken,
+          }),
+        });
 
-      if (response.ok) {
-        let result = await response.json();
-        currentToken = result.token;
-        currentRefreshToken = result.refreshToken;
-        updateToken(currentToken, currentRefreshToken);
-        setIsRefreshing(false);
-      } else {
-        let result = await response.json();
+        if (response.ok) {
+          let result = await response.json();
+          currentToken = result.token;
+          currentRefreshToken = result.refreshToken;
+          updateToken(currentToken, currentRefreshToken);
+          setIsRefreshing(false);
+        } else {
+          let result = await response.json();
+          removeToken();
+          setIsRefreshing(false);
+          console.error(result.title);
+        }
+      } catch (error) {
         removeToken();
         setIsRefreshing(false);
-        console.error(result.title);
+        console.error(error);
       }
-    } catch (error) {
-      removeToken();
-      setIsRefreshing(false);
-      console.error(error);
     }
-    // return currentToken;
-  }, [token, refreshToken, updateToken, removeToken]);
+
+    return currentToken;
+  }, [token, updateToken, removeToken]);
 
   useEffect(() => {
-    setToken(localStorage.getItem('token'));
-    setRefreshToken(localStorage.getItem('refreshToken'));
-
-    const handleStorageEvent = (e: StorageEvent) => {
-      if (e.key === 'token') {
-        setToken(localStorage.getItem('token'));
-      }
-      if (e.key === 'refreshToken') {
-        setRefreshToken(localStorage.getItem('refreshToken'));
-      }
-    };
-
-    window.addEventListener('storage', handleStorageEvent);
-
-    return () => window.removeEventListener('storage', handleStorageEvent);
-  }, []);
-
-  useEffect(() => {
-    if (isExpired && !isRefreshing) getToken();
-  }, [isExpired, isRefreshing, getToken]);
+    if (isTokenExpired(token) && !isRefreshing) getToken();
+  }, [isTokenExpired]);
 
   return (
     <authContext.Provider
       value={{
         token,
         refreshToken,
-        isExpired,
         isRefreshing,
         getToken,
         updateToken,

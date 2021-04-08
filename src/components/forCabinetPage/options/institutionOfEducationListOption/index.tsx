@@ -20,20 +20,19 @@ const InstitutionOfEducationListOption = () => {
       endOfCampaign: '',
     },
   ]);
-  const [isFetching, setFetching] = useState(false);
+  const [isFetching, setFetching] = useState(true);
   const [error, setError] = useState({
     hasError: false,
     errorStatusCode: '',
     errorMessage: '',
   });
 
-  const { token, getToken } = useAuth();
+  const { getToken } = useAuth();
 
-  useEffect(() => {
+  const getAllInstitutionOfEducation = async () => {
     const endpoint = `${APIUrl}InstitutionOfEducation/Favorites`;
-    setFetching(true);
-    getToken();
-    requestSecureData(endpoint, 'GET', token!).then((res: any) => {
+    const currentToken = await getToken();
+    requestSecureData(endpoint, 'GET', currentToken).then((res: any) => {
       const statusCode = res.statusCode.toString();
       if (statusCode.match(/^[23]\d{2}$/)) {
         const newList = res.data.map((item: any) => {
@@ -58,6 +57,9 @@ const InstitutionOfEducationListOption = () => {
         });
       }
     });
+  };
+  useEffect(() => {
+    getAllInstitutionOfEducation();
   }, []);
 
   const institutionOfEducationCardList = institutionOfEducationList.map(

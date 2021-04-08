@@ -14,7 +14,7 @@ import Spinner from '../../common/spinner';
 import questionIcon from './icon/questionIcon';
 
 const AddInstitutionOfEducationForm = () => {
-  const { token, getToken } = useAuth();
+  const { getToken } = useAuth();
   const history = useHistory();
   const [submitted, setSubmitted] = useState(false);
   const [resultMessage, setResultMessage] = useState({
@@ -22,25 +22,24 @@ const AddInstitutionOfEducationForm = () => {
     message: '',
   });
 
-  const submitHandler = (
+  const submitHandler = async (
     e: React.ChangeEvent<HTMLFormElement>,
     pathToRedirect: string,
     values: any
   ) => {
     e.preventDefault();
-
     setSubmitted(true);
     setResultMessage({
       status: '',
       message: '',
     });
 
-    getToken();
+    const currentToken = await getToken();
 
     requestSecureData(
       `${APIUrl}SuperAdmin/AddinstitutionOfEducationAndAdmin`,
       'POST',
-      token!,
+      currentToken,
       {
         name: values.institutionOfEducationName,
         abbreviation: values.institutionOfEducationAbbreviation,
