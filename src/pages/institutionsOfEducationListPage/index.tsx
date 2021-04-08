@@ -38,46 +38,25 @@ const InstitutionsOfEducationListPage = () => {
     errorMessage: '',
   });
 
-  const location: any = useLocation();
   const { token, getToken } = useAuth();
 
-  const handleClick = (id: number, isFavorite: boolean) => {
-    console.log(`click`);
+  const handleClick = (id: string, isFavorite: boolean) => {
     const endpoint = `${APIUrl}InstitutionOfEducation/Favorites/${id}`;
     const method = isFavorite ? `DELETE` : `POST`;
 
-    requestSecureData(endpoint, method, token!)
-      .then((res: any) => {
-        const statusCode = res.statusCode.toString();
-        console.log(`not error`);
-        if (statusCode.match(/^[23]\d{2}$/)) {
-          setChanged(!isChanged);
-        } else {
-          // setError({
-          //   hasError: true,
-          //   errorStatusCode: res.statusCode,
-          //   errorMessage:
-          //     res.data.message || 'Щось пішло не так, спробуйте знову1.',
-          // });
+    requestSecureData(endpoint, method, token!).then(() => {
+      const updatedList: any = InstitutionsOfEducationList.map((ioe) => {
+        if (id === ioe.id) {
+          ioe.liked = !ioe.liked;
         }
-      })
-      .catch((error) => {
-        console.log(`error`);
-
-        // setError({
-        //   hasError: true,
-        //   errorStatusCode: error.statusCode,
-        //   errorMessage: 'Щось пішло не так, спробуйте знову2.',
-        // });
+        return ioe;
       });
+      setList(updatedList);
+    });
   };
 
   useEffect(() => {
-    console.log(`useEffect`);
     let URL: string = '';
-    // if (location.state !== undefined) {
-    //   URL = `${APIUrl}InstitutionOfEducation?DirectionName=${location.state.chosenDirection}&SpecialityName=${location.state.chosenSpeciality}&InstitutionOfEducationAbbreviation=${location.state.chosenInstitutionOfEducation}&page=${currentPage}&pageSize=${perPage}`;
-    // } else
     if (token) {
       URL = `${APIUrl}InstitutionOfEducation/Authorized?page=${currentPage}&pageSize=${perPage}`;
     } else {
@@ -87,7 +66,6 @@ const InstitutionsOfEducationListPage = () => {
     const endpoint = URL;
     let requestType: any;
     if (token) {
-      // getToken();
       requestType = requestSecureData(endpoint, 'GET', token!);
     } else {
       requestType = requestData(endpoint, 'GET');
