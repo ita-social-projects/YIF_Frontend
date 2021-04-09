@@ -73,7 +73,7 @@ function AuthProvider({ children }: any) {
     const url = `${APIUrl}Authentication/RefreshToken`;
     let currentToken = token;
     let currentRefreshToken = refreshToken;
-    if (isTokenExpired(currentToken)) {
+    if (isTokenExpired(currentToken) && !isRefreshing) {
       try {
         setIsRefreshing(true);
         let response = await fetch(url, {
