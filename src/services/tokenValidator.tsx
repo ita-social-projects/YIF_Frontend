@@ -4,6 +4,7 @@ import React, {
   useCallback,
   useContext,
   createContext,
+  useMemo,
 } from 'react';
 import jwt_decode from 'jwt-decode';
 import { APIUrl } from './endpoints';
@@ -55,25 +56,23 @@ function AuthProvider({ children }: any) {
     store.dispatch(removeRoleReducer());
   }, []);
 
-  const isTokenExpired = useCallback(
-    (token: Token) => {
-      try {
-        const decoded: Decoded = jwt_decode(token!);
-        store.dispatch(setRoleReducer(decoded.roles[1]));
-        return decoded.exp <= new Date().getTime() / 1000 ? true : false;
-      } catch (error) {
-        removeToken();
-        return false;
-      }
-    },
-    [token]
-  );
+  const isTokenExpired = useCallback((token: Token) => {
+    try {
+      const decoded: Decoded = jwt_decode(token!);
+      store.dispatch(setRoleReducer(decoded.roles[1]));
+      return decoded.exp <= new Date().getTime() / 1000 ? true : false;
+    } catch (error) {
+      removeToken();
+      return false;
+    }
+  }, []);
+
+  const isExpired = useMemo(() => isTokenExpired(token), [token]);
 
   const getToken = useCallback(async () => {
     const url = `${APIUrl}Authentication/RefreshToken`;
     let currentToken = token;
     let currentRefreshToken = refreshToken;
-
     if (isTokenExpired(currentToken)) {
       try {
         setIsRefreshing(true);
@@ -113,7 +112,7 @@ function AuthProvider({ children }: any) {
 
   useEffect(() => {
     if (isTokenExpired(token) && !isRefreshing) getToken();
-  }, [isTokenExpired]);
+  }, [isExpired]);
 
   return (
     <authContext.Provider
