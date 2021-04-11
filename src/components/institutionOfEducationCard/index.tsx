@@ -21,7 +21,6 @@ interface Props {
 
 const InstitutionOfEducationCard: React.FC<Props> = (props) => {
   const token = localStorage.getItem('token');
-
   const { currentRole } = store.getState();
   const isGraduate = currentRole.role === 'Graduate' ? true : false;
 

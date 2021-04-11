@@ -22,7 +22,6 @@ const InstitutionOfEducationListOption = () => {
   ]);
 
   const [isChanged, setChanged] = useState(false);
-
   const [isFetching, setFetching] = useState(true);
   const [error, setError] = useState({
     hasError: false,
@@ -30,11 +29,13 @@ const InstitutionOfEducationListOption = () => {
     errorMessage: '',
   });
 
-  const handleClick = (id: number, isFavorite: boolean) => {
+  const handleClick = async (id: number, isFavorite: boolean) => {
     const endpoint = `${APIUrl}InstitutionOfEducation/Favorites/${id}`;
     const method = isFavorite ? `DELETE` : `POST`;
 
-    requestSecureData(endpoint, method, token!)
+    const currentToken = await getToken();
+
+    requestSecureData(endpoint, method, currentToken)
       .then((res: any) => {
         setChanged(!isChanged);
         const statusCode = res.statusCode.toString();
@@ -58,11 +59,12 @@ const InstitutionOfEducationListOption = () => {
       });
   };
 
-  const { token, getToken } = useAuth();
+  const { getToken } = useAuth();
 
-  const getFavoritesIOE = () => {
+  const getFavoritesIOE = async () => {
+    const currentToken = await getToken();
     const endpoint = `${APIUrl}InstitutionOfEducation/Favorites`;
-    requestSecureData(endpoint, 'GET', token!).then((res: any) => {
+    requestSecureData(endpoint, 'GET', currentToken).then((res: any) => {
       const statusCode = res.statusCode.toString();
       if (statusCode.match(/^[23]\d{2}$/)) {
         const newList = res.data.map((item: any) => {
@@ -119,7 +121,6 @@ const InstitutionOfEducationListOption = () => {
 
   const result = isFetching ? (
     <div className={style.spinnerContainer}>
-      {' '}
       <Spinner />
     </div>
   ) : (

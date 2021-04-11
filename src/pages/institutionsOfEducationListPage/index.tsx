@@ -38,10 +38,11 @@ const InstitutionsOfEducationListPage = () => {
   });
 
   const token = localStorage.getItem('token');
-  // const { getToken } = useAuth();
+  const { getToken } = useAuth();
 
-  const handleClick = (id: string, isFavorite: boolean) => {
-    if (token) {
+  const handleClick = async (id: string, isFavorite: boolean) => {
+    const currentToken = await getToken();
+    if (currentToken) {
       const endpoint = `${APIUrl}InstitutionOfEducation/Favorites/${id}`;
       const method = isFavorite ? `DELETE` : `POST`;
 
@@ -52,9 +53,8 @@ const InstitutionsOfEducationListPage = () => {
         return ioe;
       });
       setList(updatedList);
-      // const toke = getToken();
 
-      requestSecureData(endpoint, method, token!)
+      requestSecureData(endpoint, method, currentToken)
         .then((res: any) => {
           const statusCode = res.statusCode.toString();
           if (statusCode.match(/^[23]\d{2}$/)) {
