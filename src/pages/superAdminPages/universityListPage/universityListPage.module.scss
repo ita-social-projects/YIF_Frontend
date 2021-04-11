@@ -1,0 +1,17 @@
+@import '../../../styles/index.scss';
+
+.wrapper {
+  display: flex;
+  font-family: $fontOpenSans;
+  font-size: $font_18px;
+}
+
+.universityListPage {
+  @include flex(column, center, flex-start);
+  width: 100%;
+  h1 {
+    width: 100%;
+    font-size: $font_40px;
+    padding: 50px 0 30px 50px;
+  }
+}

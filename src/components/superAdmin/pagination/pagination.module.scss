@@ -1,0 +1,28 @@
+@import '../../../styles/index.scss';
+
+.pagination {
+  height: 50px;
+  margin-bottom: 10px;
+  @include flex(row, center, center);
+
+  .leftArrow {
+    transform: rotate(180deg);
+  }
+
+  .pageNumbers {
+    margin: 0 1rem;
+    @include flex(row, center, center);
+    .number {
+      @include flex(row, center, center);
+    }
+  }
+
+  .paginationItem {
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+    margin: 0.2rem;
+    border: 1px solid $gray;
+    border-radius: 0.4rem;
+  }
+}

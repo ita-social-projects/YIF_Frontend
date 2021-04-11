@@ -19,6 +19,7 @@ import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccount
 import InstitutionOfEducationAdminPage from '../../pages/institutionOfEducationAdminPage';
 import NewPasswordPage from '../../pages/newPasswordPage';
 import ScrollToTop from '../common/scrollToTop/scrollToTop';
+import UniversityListPage from '../../pages/superAdminPages/universityListPage';
 
 const App = () => {
   const { token } = useAuth();
@@ -42,6 +43,9 @@ const App = () => {
           </RedirectRoute>
           <Route path='/directions'>
             <DirectionsListPage />
+          </Route>
+          <Route path='/univList'>
+            <UniversityListPage />
           </Route>
           <Route path='/institutionsOfEducation'>
             <InstitutionsOfEducationListPage />

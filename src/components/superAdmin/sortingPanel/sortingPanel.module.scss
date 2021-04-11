@@ -1,0 +1,22 @@
+@import '../../../styles/index.scss';
+
+.sortingPanel {
+  @include flex(row, center, flex-start);
+  color: #fff;
+  height: 3.125rem;
+  background-color: $lightBlue_4;
+  width: 100%;
+  max-width: 60rem;
+  border-radius: 0.3rem;
+  padding-left: 1rem;
+  font-family: $fontOpenSans;
+
+  .sortItem {
+    @include flex(row, center, flex-start);
+    margin-left: 1.3rem;
+    cursor: pointer;
+    span {
+      margin-right: 0.3rem;
+    }
+  }
+}
