@@ -4,6 +4,7 @@ import styles from './star.module.scss';
 const Star = ({ handleClick, liked }: any) => {
   return (
     <div
+      data-testid='star'
       onClick={handleClick}
       className={
         liked

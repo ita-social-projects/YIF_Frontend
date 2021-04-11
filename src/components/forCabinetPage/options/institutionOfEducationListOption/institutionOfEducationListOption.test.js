@@ -24,25 +24,15 @@ afterEach(cleanup);
 
 const data = [
   {
-    liked: false,
+    liked: true,
     id: 'sdsfsf',
     abbreviation: 'abbreviation1',
     site: 'site1',
     address: 'address1',
-    description: 'description1',
+    description:
+      'long description1 long description1 long description1 long description1 long description1 long description1long description1 long description1 long description1 long description1 long description1 long description1long description1long description1 long description1',
     startOfCampaign: 'startOfCampaign1',
     endOfCampaign: 'endOfCampaign1',
-  },
-  {
-    liked: false,
-    id: 'dfijfjenvnciebv',
-    abbreviation: 'abbreviation2',
-    site: 'site2',
-    address: 'address2',
-    description:
-      'Long description2 Long description2 Long description2 Long description2 Long description2 Long description2 Long description2 Long description2 Long description2 Long description2 Long description2 Long description2 Long description2 Long description2 Long description2 Long description2 Long description2 Long description2 Long description2 Long description2 Long description2 Long description2 Long description2 Long description2',
-    startOfCampaign: 'startOfCampaign2',
-    endOfCampaign: 'endOfCampaign2',
   },
 ];
 
@@ -81,7 +71,7 @@ it('check success response', async () => {
   });
 
   const titles = container.querySelectorAll('h2');
-  expect(titles).toHaveLength(2);
+  expect(titles).toHaveLength(1);
 });
 
 it('check error ', async () => {
@@ -117,4 +107,39 @@ it('check error ', async () => {
   const titles = container.querySelectorAll('h3');
   console.log(titles[0].innerHTML);
   expect(titles).toHaveLength(1);
+});
+
+it('click on the star deleting from favorites', async () => {
+  const mockJsonPromiseStarError = Promise.resolve(data);
+  const mockFetchPromiseStarError = Promise.resolve({
+    json: () => mockJsonPromiseStarError,
+    status: 200,
+  });
+  global.fetch = jest.fn().mockImplementation(() => mockFetchPromiseStarError);
+
+  await act(async () => {
+    ReactDOM.render(
+      <Provider store={store}>
+        <Router history={history}>
+          <authContext.Provider
+            value={{
+              token: 'testToken',
+              refreshToken: 'Token',
+              isExpired: false,
+              isRefreshing: false,
+              getToken: () => {},
+              updateToken: () => {},
+              removeToken: () => {},
+            }}
+          >
+            <InstitutionOfEducationListOption />
+          </authContext.Provider>
+        </Router>
+      </Provider>,
+      container
+    );
+  });
+
+  const star = queryByTestId(container, 'star');
+  fireEvent.click(star);
 });

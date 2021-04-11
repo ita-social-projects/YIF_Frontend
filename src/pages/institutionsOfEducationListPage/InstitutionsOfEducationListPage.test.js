@@ -225,3 +225,118 @@ it('check pagination with total pages = 1', async () => {
   const pageButton = queryByTestId(container, 'currentPage');
   fireEvent.click(pageButton);
 });
+
+it('click on the star adding to favorites', async () => {
+  const history = createMemoryHistory();
+  const currentToken = 'Token';
+
+  const dataPagination = {
+    currentPage: 1,
+    totalPages: 1,
+    responseList: [
+      {
+        isFavorite: false,
+        id: 'sdsfsf',
+        abbreviation: 'abbreviation1',
+        site: 'site1',
+        address: 'address1',
+        description: 'description1',
+        startOfCampaign: 'startOfCampaign1',
+        endOfCampaign: 'endOfCampaign1',
+      },
+    ],
+  };
+
+  const mockJsonPromiseStar = Promise.resolve(dataPagination);
+
+  const mockFetchPromiseStar = Promise.resolve({
+    json: () => mockJsonPromiseStar,
+    status: 200,
+  });
+  global.fetch = jest.fn().mockImplementation(() => mockFetchPromiseStar);
+
+  await act(async () => {
+    ReactDOM.render(
+      <Provider store={store}>
+        <Router history={history}>
+          <authContext.Provider
+            value={{
+              token: 'testToken',
+              refreshToken: 'Token',
+              isExpired: false,
+              isRefreshing: false,
+              getToken: () => {
+                return currentToken;
+              },
+              updateToken: () => {},
+              removeToken: () => {},
+            }}
+          >
+            <InstitutionsOfEducationListPage />
+          </authContext.Provider>
+        </Router>
+      </Provider>,
+      container
+    );
+  });
+
+  const star = queryByTestId(container, 'star');
+  fireEvent.click(star);
+});
+
+it('click on the star deleting from favorites', async () => {
+  const history = createMemoryHistory();
+  const currentToken = 'Token';
+
+  const dataPagination = {
+    currentPage: 1,
+    totalPages: 1,
+    responseList: [
+      {
+        isFavorite: true,
+        id: 'sdsfsf',
+        abbreviation: 'abbreviation1',
+        site: 'site1',
+        address: 'address1',
+        description: 'description1',
+        startOfCampaign: 'startOfCampaign1',
+        endOfCampaign: 'endOfCampaign1',
+      },
+    ],
+  };
+  const mockJsonPromiseStarDel = Promise.resolve(dataPagination);
+
+  const mockFetchPromiseStarDel = Promise.resolve({
+    json: () => mockJsonPromiseStarDel,
+    status: 200,
+  });
+  global.fetch = jest.fn().mockImplementation(() => mockFetchPromiseStarDel);
+
+  await act(async () => {
+    ReactDOM.render(
+      <Provider store={store}>
+        <Router history={history}>
+          <authContext.Provider
+            value={{
+              token: 'testToken',
+              refreshToken: 'Token',
+              isExpired: false,
+              isRefreshing: false,
+              getToken: () => {
+                return currentToken;
+              },
+              updateToken: () => {},
+              removeToken: () => {},
+            }}
+          >
+            <InstitutionsOfEducationListPage />
+          </authContext.Provider>
+        </Router>
+      </Provider>,
+      container
+    );
+  });
+
+  const star = queryByTestId(container, 'star');
+  fireEvent.click(star);
+});

@@ -37,7 +37,6 @@ const InstitutionsOfEducationListPage = () => {
     errorMessage: '',
   });
 
-  const token = localStorage.getItem('token');
   const { getToken } = useAuth();
 
   const handleClick = async (id: string, isFavorite: boolean) => {
@@ -84,9 +83,10 @@ const InstitutionsOfEducationListPage = () => {
     }
   };
 
-  useEffect(() => {
+  const getIOEList = async () => {
+    const currentToken = await getToken();
     let URL: string = '';
-    if (token) {
+    if (currentToken) {
       URL = `${APIUrl}InstitutionOfEducation/Authorized?page=${currentPage}&pageSize=${perPage}`;
     } else {
       URL = `${APIUrl}InstitutionOfEducation/Anonymous?page=${currentPage}&pageSize=${perPage}`;
@@ -94,8 +94,8 @@ const InstitutionsOfEducationListPage = () => {
 
     const endpoint = URL;
     let requestType: any;
-    if (token) {
-      requestType = requestSecureData(endpoint, 'GET', token!);
+    if (currentToken) {
+      requestType = requestSecureData(endpoint, 'GET', currentToken);
     } else {
       requestType = requestData(endpoint, 'GET');
     }
@@ -126,6 +126,10 @@ const InstitutionsOfEducationListPage = () => {
         });
       }
     });
+  };
+
+  useEffect(() => {
+    getIOEList();
   }, [currentPage, toggleError]);
 
   const InstitutionsOfEducationCardList = InstitutionsOfEducationList.map(

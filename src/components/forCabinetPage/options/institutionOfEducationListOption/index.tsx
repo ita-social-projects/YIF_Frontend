@@ -28,14 +28,13 @@ const InstitutionOfEducationListOption = () => {
     errorStatusCode: '',
     errorMessage: '',
   });
+  const { getToken } = useAuth();
 
   const handleClick = async (id: number, isFavorite: boolean) => {
     const endpoint = `${APIUrl}InstitutionOfEducation/Favorites/${id}`;
-    const method = isFavorite ? `DELETE` : `POST`;
-
     const currentToken = await getToken();
 
-    requestSecureData(endpoint, method, currentToken)
+    requestSecureData(endpoint, 'DELETE', currentToken)
       .then((res: any) => {
         setChanged(!isChanged);
         const statusCode = res.statusCode.toString();
@@ -58,8 +57,6 @@ const InstitutionOfEducationListOption = () => {
         });
       });
   };
-
-  const { getToken } = useAuth();
 
   const getFavoritesIOE = async () => {
     const currentToken = await getToken();
