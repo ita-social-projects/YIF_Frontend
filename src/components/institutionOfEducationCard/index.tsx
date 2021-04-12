@@ -22,7 +22,8 @@ interface Props {
 
 const InstitutionOfEducationCard: React.FC<Props> = (props) => {
   const [isLiked, setLiked] = useState(false);
-  const { token, getToken } = useAuth();
+  const token = localStorage.getItem('token');
+  const { getToken } = useAuth();
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState({
     hasError: false,
@@ -107,12 +108,12 @@ const InstitutionOfEducationCard: React.FC<Props> = (props) => {
     }
   };
 
-  let sendDeleteFavoriteInstitutionOfEducation = (
+  let sendDeleteFavoriteInstitutionOfEducation = async (
     endpointLikedInstitutionOfEducation: string,
     method: string
   ) => {
-    getToken();
-    requestSecureData(endpointLikedInstitutionOfEducation, method, token!)
+    const currentToken = await getToken();
+    requestSecureData(endpointLikedInstitutionOfEducation, method, currentToken)
       .then((res: any) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {

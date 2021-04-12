@@ -23,7 +23,7 @@ const InstitutionsOfEducationListPage = () => {
     },
   ]);
 
-  const [isFetching, setFetching] = useState(false);
+  const [isFetching, setFetching] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(2);
   const [totalPages, setTotalPages] = useState(0);
@@ -44,7 +44,6 @@ const InstitutionsOfEducationListPage = () => {
     }
 
     const endpoint = URL;
-    setFetching(true);
     requestData(endpoint, 'GET').then((res: any) => {
       const statusCode = res.statusCode.toString();
       if (statusCode.match(/^[23]\d{2}$/)) {
@@ -173,7 +172,6 @@ const InstitutionsOfEducationListPage = () => {
           }
         }}
       >
-        {' '}
         {arrowIcon}
       </div>
     </div>
@@ -181,7 +179,6 @@ const InstitutionsOfEducationListPage = () => {
 
   const result = isFetching ? (
     <div className={styles.spinnerContainer}>
-      {' '}
       <Spinner />
     </div>
   ) : (

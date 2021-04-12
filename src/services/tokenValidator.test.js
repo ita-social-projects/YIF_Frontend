@@ -80,14 +80,16 @@ describe('fetch token', () => {
 });
 
 describe('token update', () => {
-  test('should update token', () => {
+  test('should update token', async () => {
     render(
       <AuthProvider>
         <TestComponent />
       </AuthProvider>
     );
     const button = screen.getByTestId('update-token');
-    fireEvent.click(button);
+    await wait(() => {
+      fireEvent.click(button);
+    });
 
     expect(localStorage.getItem('token')).toEqual(testToken);
   });

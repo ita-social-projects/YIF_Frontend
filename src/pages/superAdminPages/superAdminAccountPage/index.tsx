@@ -18,12 +18,12 @@ const SuperAdminAccountPage: React.FC = () => {
     institutionOfEducationAdmins,
     setInstitutionOfEducationAdmins,
   ] = useState([]);
-  const { token, getToken } = useAuth();
+  const { getToken } = useAuth();
 
-  const fetchInstitutionOfEducationAdmins = () => {
+  const fetchInstitutionOfEducationAdmins = async () => {
     const endpoint = `${APIUrl}SuperAdmin/GetAllInstitutionOfEducationsAdmins`;
-    getToken();
-    requestSecureData(endpoint, 'GET', token!)
+    const currentToken = await getToken();
+    requestSecureData(endpoint, 'GET', currentToken)
       .then((res: any) => {
         setInstitutionOfEducationAdmins(res.data.responseList);
         setFetching(false);
