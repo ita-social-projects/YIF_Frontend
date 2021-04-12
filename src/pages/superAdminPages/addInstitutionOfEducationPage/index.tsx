@@ -6,12 +6,9 @@ import AddInstitutionOfEducationForm from '../../../components/superAdmin/addIns
 const AddInstitutionOfEducation = () => {
   return (
     <>
-      <Header />
       <section className={styles.addInstitutionOfEducationPage}>
-        <AdminPanel />
         <AddInstitutionOfEducationForm />
       </section>
-      <Footer />
     </>
   );
 };

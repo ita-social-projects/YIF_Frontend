@@ -19,6 +19,7 @@ import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccount
 import InstitutionOfEducationAdminPage from '../../pages/institutionOfEducationAdminPage';
 import NewPasswordPage from '../../pages/newPasswordPage';
 import ScrollToTop from '../common/scrollToTop/scrollToTop';
+import SuperAdmin from '../../pages/superAdminPages/index';
 
 const App = () => {
   const { token } = useAuth();
@@ -54,18 +55,12 @@ const App = () => {
             path='/superAdminAccount'
             allowed={['SuperAdmin']}
           >
-            <SuperAdminAccountPage />
+            <SuperAdmin />
           </ProtectedRoute>
           <Route path='/specialty/:id'>
             <SpecialityPage />
           </Route>
-          <ProtectedRoute
-            user={token}
-            path='/addInstitutionOfEducation'
-            allowed={['SuperAdmin']}
-          >
-            <AddInstitutionOfEducation />
-          </ProtectedRoute>
+
           <ProtectedRoute
             user={token}
             path='/institutionOfEducationAccount'

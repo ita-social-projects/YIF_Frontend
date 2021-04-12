@@ -13,7 +13,7 @@ import { Link, Router } from 'react-router-dom';
 import { ReactComponent as IconLock } from './icons/iconLock.svg';
 import { ReactComponent as IconArrow } from './icons/iconArrow.svg';
 
-const iconIllustrAdmin = 'assets/images/superAdminAccount.svg';
+const iconIllustrAdmin = '/assets/images/superAdminAccount.svg';
 
 export interface IInstitutionOfEducationAdmin {
   id: string;
@@ -362,14 +362,6 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
             )}
           </li>
         </ul>
-      </div>
-      <Link to='/addInstitutionOfEducation'>
-        <button className={`${styles.addButton} ${styles.animatedButton}`}>
-          Додати заклад освіти
-        </button>
-      </Link>
-      <div className={styles.imgContainer}>
-        <img src={iconIllustrAdmin} alt='search something' />
       </div>
     </div>
   );

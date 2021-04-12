@@ -2,4 +2,7 @@
 
 .institutionOfEducationAdminContent {
   display: flex;
+  nav {
+    @include flex(column, flex-start, center);
+  }
 }

@@ -2,12 +2,12 @@
 
 .assideMenu {
   background-color: $darkBlue;
-  flex-basis: 15rem;
+  padding-top: 15%;
+  min-width: 240px;
+  max-width: 240px;
 
-  nav {
-    @include flex(column, flex-start, center);
-    margin: 14.375rem 1.23rem 0;
-    width: 12.5rem;
+  .navContainer {
+    padding: 0 1.23rem;
   }
 
   a {

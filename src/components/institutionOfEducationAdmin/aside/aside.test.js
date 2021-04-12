@@ -1,18 +1,21 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Aside from '.';
-import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
-import { store } from '../../../store/store';
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+const links = (
+  <div>
+    <a href='#'>Link1</a>
+    <a href='#'>Link2</a>
+    <a href='#'>Link3</a>
+  </div>
+);
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(
-    <MemoryRouter>
-      <Provider store={store}>
-        <Aside />
-      </Provider>
-    </MemoryRouter>,
-    div
+  render(
+    <Router>
+      <Aside>{links}</Aside>
+    </Router>
   );
+  expect(screen.getAllByRole('link')).toHaveLength(3);
 });

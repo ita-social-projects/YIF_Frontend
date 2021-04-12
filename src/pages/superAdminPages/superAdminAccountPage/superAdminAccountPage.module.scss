@@ -1,14 +1,30 @@
 @import '../../../styles/index.scss';
 
 .superAdminAccountPage {
-  display: flex;
+  min-height: 90vh;
+  @include flex(column, center, space-between);
+  width: 100%;
+  padding-bottom: 12rem;
   font-family: $fontOpenSans;
   font-size: $font_18px;
   font-weight: $regular;
-  background-color: $lightBlue_3;
+  background: url('/assets/images/superAdminAccount.svg') bottom 0 right 100px
+    no-repeat;
 
-  .spinnerContainer {
-    @include flex(row, center, center);
-    width: 100%;
+  .addButton {
+    width: 20rem;
+    padding: 10px 0;
+    border-radius: 5px;
+    margin-top: 12rem;
+    text-align: center;
+    font-family: $fontOpenSans;
+    font-weight: $regular;
+    font-size: $font_18px;
+    border: 1px solid $darkBlue;
   }
+
+  // .spinnerContainer {
+  //   @include flex(row, center, center);
+  //   width: 100%;
+  // }
 }

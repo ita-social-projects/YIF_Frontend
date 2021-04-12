@@ -1,18 +1,16 @@
 @import '../../styles.scss';
 
 .superAdminAccount {
-  position: relative;
   width: 100%;
   font-size: 1.562rem; // 25px
   text-align: center;
-  margin: 0 20px;
 
   h1 {
     padding: 3.12rem 0 4.37rem 0; // 50px 0 70px 0
   }
 
   .adminTableContainer {
-    margin: 0 auto 12.5rem auto; // 200px
+    margin: 0 auto; // 200px
     background-color: $lightBlue_4;
     font-size: $font_16px;
     border-radius: 10px;
@@ -295,17 +293,5 @@
   .flashMessageRight {
     right: 5px;
     left: auto;
-  }
-
-  .addButton {
-    width: 350px;
-    padding: 10px 0;
-    border-radius: 5px;
-    margin-top: 35px;
-    text-align: center;
-    font-family: $fontOpenSans;
-    font-weight: $regular;
-    font-size: $font_18px;
-    border: 1px solid $darkBlue;
   }
 }

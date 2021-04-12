@@ -11,6 +11,7 @@ import Spinner from '../../../components/common/spinner';
 import { requestSecureData } from '../../../services/requestDataFunction';
 import { APIUrl } from '../../../services/endpoints';
 import { useAuth } from '../../../services/tokenValidator';
+import { Route, Redirect, Switch, useRouteMatch, Link } from 'react-router-dom';
 
 const SuperAdminAccountPage: React.FC = () => {
   const [isFetching, setFetching] = useState(true);
@@ -19,6 +20,7 @@ const SuperAdminAccountPage: React.FC = () => {
     setInstitutionOfEducationAdmins,
   ] = useState([]);
   const { getToken } = useAuth();
+  const { path } = useRouteMatch();
 
   const fetchInstitutionOfEducationAdmins = async () => {
     const endpoint = `${APIUrl}SuperAdmin/GetAllInstitutionOfEducationsAdmins`;
@@ -37,20 +39,18 @@ const SuperAdminAccountPage: React.FC = () => {
   return (
     <>
       <ErrorBoundry>
-        <Header />
         <section className={styles.superAdminAccountPage}>
-          <AdminPanel />
-          {isFetching ? (
-            <div className={styles.spinnerContainer}>
-              <Spinner />
-            </div>
-          ) : (
+          {!isFetching && (
             <SuperAdminAccount
               institutionOfEducationAdmins={institutionOfEducationAdmins}
             />
           )}
+          <Link to={`/superAdminAccount/addInstitutionOfEducation`}>
+            <button className={`${styles.addButton} ${styles.animatedButton}`}>
+              Додати заклад освіти
+            </button>
+          </Link>
         </section>
-        <Footer />
       </ErrorBoundry>
     </>
   );
