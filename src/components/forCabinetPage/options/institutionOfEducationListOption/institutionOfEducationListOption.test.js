@@ -30,9 +30,6 @@ const data = [
       'long description1 long description1 long description1 long description1 long description1 long description1long description1 long description1 long description1 long description1 long description1 long description1long description1long description1 long description1',
     startOfCampaign: 'startOfCampaign1',
     endOfCampaign: 'endOfCampaign1',
-    handleClick: () => {
-      console.log(`data`);
-    },
   },
 ];
 

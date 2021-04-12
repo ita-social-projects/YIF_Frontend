@@ -168,6 +168,8 @@ describe('test IOEFavoritesList component', () => {
     await act(async () => {
       fireEvent.click(pageButton);
     });
+
+    expect(fetch).toBeCalledTimes(1);
   });
 
   test('click on the star adding to favorites', async () => {
@@ -338,5 +340,6 @@ describe('test IOEFavoritesList component', () => {
     await act(async () => {
       fireEvent.click(star[0]);
     });
+    expect(fetch).toBeCalledTimes(1);
   });
 });
