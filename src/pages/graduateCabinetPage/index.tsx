@@ -11,14 +11,12 @@ import { APIUrl } from '../../services/endpoints';
 
 const UserCabinet = () => {
   const [institutionsOfEducationList, setList] = useState([{}]);
-  const { token, getToken } = useAuth();
+  const { getToken } = useAuth();
 
-  useEffect(() => {
+  const getFavorites = async () => {
     const endpoint: string = `${APIUrl}InstitutionOfEducation/Favorites`;
-
-    getToken();
-
-    requestSecureData(endpoint, 'GET', token!).then((res: any) => {
+    const currentToken = await getToken();
+    requestSecureData(endpoint, 'GET', currentToken).then((res: any) => {
       if (!res.data.message) {
         const filteredList = res.data.map((item: any) => {
           return {
@@ -34,7 +32,11 @@ const UserCabinet = () => {
         console.log(res.data.message);
       }
     });
-  }, [APIUrl]);
+  };
+
+  useEffect(() => {
+    getFavorites();
+  }, []);
 
   return (
     <Fragment>

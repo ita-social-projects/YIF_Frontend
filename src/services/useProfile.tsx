@@ -6,10 +6,9 @@ import { setUserReducer, userSelector } from '../store/reducers/setUserReducer';
 import { useSelector } from 'react-redux';
 
 const useProfile = (endpoint: string) => {
-
   const user = useSelector(userSelector);
 
-  const { token, getToken } = useAuth();
+  const { getToken } = useAuth();
   const [name, setName] = useState(user.name);
   const [surname, setSurname] = useState(user.surname);
   const [middleName, setMiddleName] = useState(user.middleName);
@@ -64,10 +63,10 @@ const useProfile = (endpoint: string) => {
 
   const handleSchoolChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-      setSchoolName(value);
+    setSchoolName(value);
   };
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitted(true);
     setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
@@ -76,8 +75,8 @@ const useProfile = (endpoint: string) => {
       successStatusCode: '',
       successMessage: '',
     });
-    getToken();
-    requestSecureData(endpoint, 'POST', token!, {
+    const currentToken = await getToken();
+    requestSecureData(endpoint, 'POST', currentToken, {
       name,
       surname,
       middleName,
