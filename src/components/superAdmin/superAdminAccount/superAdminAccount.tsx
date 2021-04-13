@@ -348,9 +348,9 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
                     searchValue={searchValue}
                     key={admin.id}
                     setBanStatus={setBanStatus}
-                    removeAdminInstitutionOfEducation={
-                      removeAdminInstitutionOfEducation
-                    }
+                    // removeAdminInstitutionOfEducation={
+                    //   removeAdminInstitutionOfEducation
+                    // }
                   />
                 )
               )
