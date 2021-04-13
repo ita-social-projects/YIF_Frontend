@@ -20,7 +20,7 @@ const emailList = [
 ]
 function Tabs() {
   const [initialValues, setinitialValues] = useState({});
-  const [toggleState, setToggleState] = useState(1);
+  const [toggleState, setToggleState] = useState(0);
 
   const toggleTab = (index: any) => {
     setToggleState(index);

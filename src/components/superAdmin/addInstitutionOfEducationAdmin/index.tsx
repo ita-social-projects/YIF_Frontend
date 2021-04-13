@@ -1,8 +1,11 @@
 import React from 'react';
 import styles from './addInstitutionOfEducation.module.scss';
 import { Link, useRouteMatch } from 'react-router-dom';
+import InstitutionOfEducationBlock from '../../institutionOfEducationBlock';
 import { ReactComponent as IconLock } from './icons/iconLock.svg';
 import { ReactComponent as IconRemove } from './icons/iconRemove.svg';
+import Unlock from '../../common/icons/Unlock/index';
+import Delete from '../../common/icons/Delete/index';
 import TabContent from './TabContent'
 
 const AddInstitutionOfEducationAdmin = () => {
@@ -22,64 +25,39 @@ const AddInstitutionOfEducationAdmin = () => {
       return (
         <div className={styles.wrapper}>
           <div className={styles.infoContainer}>
-            <h2 className={styles.infoContainer__abbr}>{abbreviation}</h2>
-            <div className={styles.infoContainer__mainInfo}>
-              <div className={styles.infoContainer__textInfo}>
-                <h1 className={styles.infoContainer__textInfo__fullName}>{name}</h1>
-                <p>
-                  <span>Сайт:</span>
-                  <a href={site} target='_blank'>
-                    {site}
-                  </a>
-                </p>
-                <p>
-                  <span>Email:</span>
-                  <a href={`mailto:${email}`} target='_blank'>
-                    {email}
-                  </a>
-                </p>
-                <p>
-                  <span>Телефон:</span>
-                  <a href={`tel:${phone}`}>{phone}</a>
-                </p>
-                <p>
-                  <span>Адреса:</span>
-                  {address}
-                </p>
-              </div>
-              <img
-                src='https://nuwm.edu.ua/images/content/admin/nuwmvsh.jpg'
-                alt='НУВГП'
-              />
-            </div>
-            <p className={styles.description}>
-              <span>Опис:</span>
-              {description}
-            </p>
+            <InstitutionOfEducationBlock 
+            id={id}
+            name={name}
+            abbreviation={abbreviation}
+            site={site}
+            address={address}
+            phone={phone}
+            email={email}
+            description={description}
+            />
             <Link
               className={`${styles.animatedButton} ${styles.buttonLink}`}
               to={`${path}/edit/${id}`}
             >
               Редагувати
             </Link>
-            <div className={styles.admin}>
-                <h2 className={styles.admin__title}>Адмін</h2>
-                <div className={styles.admin__line}>
-                    <p className={styles.admin__line__name}>
-                        Shanna@melissa.tv
-                    </p>
-                    <div className={styles.admin__line__icons}>
-                        <IconLock />
-                        <IconRemove />
-                    </div>
-                </div>
-                <div className={styles.admin__buttons}>
-                  <TabContent />
+          <div className={styles.admin}>
+            <h2 className={styles.admin__title}>Адмін</h2>
+            <div className={styles.admin__line}>
+                <p className={styles.admin__line__name}>
+                    Shanna@melissa.tv
+                </p>
+                <div className={styles.admin__line__icons}>
+                    <Unlock  handleClick={()=>{}}/>
+                    <Delete handleClick={()=>{}}/>
                 </div>
             </div>
+            <div className={styles.admin__buttons}>
+              <TabContent />
+            </div>
           </div>
-         
         </div>
+      </div>
       );
 };
 

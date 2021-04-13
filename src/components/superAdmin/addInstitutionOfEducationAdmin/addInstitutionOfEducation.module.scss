@@ -104,12 +104,8 @@
         &__icons {
           display: flex;
           align-items: center;
-          svg:first-child {
-            margin-right: 20px;
-            path {
-              fill: #12335e;
-            }
-          }
+          width: 80px;
+          justify-content: space-between;
         }
         &__buttons {
           position: relative;
