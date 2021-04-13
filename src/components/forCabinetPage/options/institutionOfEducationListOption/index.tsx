@@ -20,26 +20,55 @@ const InstitutionOfEducationListOption = () => {
       endOfCampaign: '',
     },
   ]);
-  const [isFetching, setFetching] = useState(false);
+
+  const [isChanged, setChanged] = useState(false);
+  const [isFetching, setFetching] = useState(true);
   const [error, setError] = useState({
     hasError: false,
     errorStatusCode: '',
     errorMessage: '',
   });
+  const { getToken } = useAuth();
 
-  const { token, getToken } = useAuth();
+  const handleClick = async (id: number, isFavorite: boolean) => {
+    const endpoint = `${APIUrl}InstitutionOfEducation/Favorites/${id}`;
+    const currentToken = await getToken();
 
-  useEffect(() => {
+    requestSecureData(endpoint, 'DELETE', currentToken)
+      .then((res: any) => {
+        setChanged(!isChanged);
+        const statusCode = res.statusCode.toString();
+        if (statusCode.match(/^[23]\d{2}$/)) {
+          setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
+        } else {
+          setError({
+            hasError: true,
+            errorStatusCode: res.statusCode,
+            errorMessage:
+              res.data.message || 'Щось пішло не так, спробуйте знову.',
+          });
+        }
+      })
+      .catch((error) => {
+        setError({
+          hasError: true,
+          errorStatusCode: error.statusCode,
+          errorMessage: 'Щось пішло не так, спробуйте знову.',
+        });
+      });
+  };
+
+  const getFavoritesIOE = async () => {
+    const currentToken = await getToken();
     const endpoint = `${APIUrl}InstitutionOfEducation/Favorites`;
-    setFetching(true);
-    getToken();
-    requestSecureData(endpoint, 'GET', token!).then((res: any) => {
+    requestSecureData(endpoint, 'GET', currentToken).then((res: any) => {
       const statusCode = res.statusCode.toString();
       if (statusCode.match(/^[23]\d{2}$/)) {
         const newList = res.data.map((item: any) => {
           return {
             id: item.id,
             abbreviation: item.abbreviation,
+            liked: item.isFavorite,
             site: item.site,
             address: item.address,
             description: item.description,
@@ -58,14 +87,19 @@ const InstitutionOfEducationListOption = () => {
         });
       }
     });
-  }, []);
+  };
+
+  useEffect(() => {
+    getFavoritesIOE();
+  }, [isChanged]);
 
   const institutionOfEducationCardList = institutionOfEducationList.map(
     (item: any) => {
       return (
         <InstitutionOfEducationCard
           id={item.id}
-          liked={true}
+          handleClick={() => handleClick(item.id, item.liked)}
+          liked={item.liked}
           key={item.id}
           abbreviation={item.abbreviation}
           site={item.site}
@@ -84,7 +118,6 @@ const InstitutionOfEducationListOption = () => {
 
   const result = isFetching ? (
     <div className={style.spinnerContainer}>
-      {' '}
       <Spinner />
     </div>
   ) : (
