@@ -6,6 +6,7 @@ import Spinner from '../../../components/common/spinner';
 import { useAuth } from '../../../services/tokenValidator';
 import ResponsePlaceholder from '../../../components/common/responsePlaceholder';
 import { APIUrl } from '../../../services/endpoints';
+import InstitutionsOfEducationMap from '../../../components/forCabinetPage/map';
 
 const InstitutionOfEducationList = () => {
   const [institutionOfEducationList, setList] = useState([
@@ -20,6 +21,16 @@ const InstitutionOfEducationList = () => {
       endOfCampaign: '',
     },
   ]);
+
+  interface List {
+    id: any;
+    name: any;
+    site: any;
+    lat: any;
+    lon: any;
+  }
+
+  const [locationList, setLocationList] = useState([{}]);
 
   const [isChanged, setChanged] = useState(false);
   const [isFetching, setFetching] = useState(true);
@@ -57,7 +68,7 @@ const InstitutionOfEducationList = () => {
         });
       });
   };
-
+  let updatedList: Array<{}> = [];
   const getFavoritesIOE = async () => {
     const currentToken = await getToken();
     const endpoint = `${APIUrl}InstitutionOfEducation/Favorites`;
@@ -65,6 +76,13 @@ const InstitutionOfEducationList = () => {
       const statusCode = res.statusCode.toString();
       if (statusCode.match(/^[23]\d{2}$/)) {
         const newList = res.data.map((item: any) => {
+          updatedList.push({
+            id: item.id,
+            name: item.name,
+            site: item.site,
+            lat: item.lat,
+            lon: item.lon,
+          });
           return {
             id: item.id,
             abbreviation: item.abbreviation,
@@ -76,6 +94,7 @@ const InstitutionOfEducationList = () => {
             endOfCampaign: item.endOfCampaign,
           };
         });
+        setLocationList(updatedList);
         setList(newList);
         setFetching(false);
       } else {
@@ -121,7 +140,10 @@ const InstitutionOfEducationList = () => {
       <Spinner />
     </div>
   ) : (
-    institutionOfEducationCardList
+    <>
+      {institutionOfEducationCardList}
+      <InstitutionsOfEducationMap data={locationList} />
+    </>
   );
 
   return (
