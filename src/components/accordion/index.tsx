@@ -21,7 +21,9 @@ const AccordionItem = (props: Props) => {
       >
         <div className={styles.acc_item__info}>{headerContent}</div>
 
-        <div className={styles.acc_item__icon}>{opened ? '-' : '+'}</div>
+        <div className={styles.acc_item__icon}>
+          {opened ? '\u2212' : '\u002B'}
+        </div>
       </div>
 
       <div className={styles.acc_item__inner}>
