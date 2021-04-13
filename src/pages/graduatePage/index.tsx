@@ -5,6 +5,7 @@ import { Footer, Header, SpecListOption } from '../../components';
 import Aside from '../../components/institutionOfEducationAdmin/aside';
 import MyInfo from './myInfoPage';
 import LikedSpecialties from './likedSpecialtiesPage';
+import InstitutionOfEducationList from './likedInstitutionOfEducationPage';
 
 const GraduateAccountPage = () => {
   const { path } = useRouteMatch();
@@ -40,7 +41,9 @@ const GraduateAccountPage = () => {
             <MyInfo />
           </Route>
 
-          <Route exact path={`${path}/likedInstitutionOfEducation`}></Route>
+          <Route exact path={`${path}/likedInstitutionOfEducation`}>
+            <InstitutionOfEducationList />
+          </Route>
 
           <Route exact path={`${path}/likedSpecialties`}>
             <LikedSpecialties />

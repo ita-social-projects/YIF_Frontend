@@ -1,0 +1,24 @@
+@import '../../../styles/index.scss';
+
+.institutionOfEducationListSection {
+  @include flex(row, flex-start, center);
+  width: 100%;
+  height: auto;
+  min-height: 45rem;
+  background-color: $lightBlue_3;
+  padding: 0 3.125rem;
+  position: relative;
+  padding-top: 0.5rem;
+}
+
+.container {
+  width: 100%;
+  height: auto;
+  @include flex(column, center, flex-start);
+  padding-bottom: 30px;
+}
+
+.spinnerContainer {
+  margin-top: 100px;
+  @include flex(row, center, center);
+}
