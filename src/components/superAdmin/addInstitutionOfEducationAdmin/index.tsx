@@ -2,8 +2,6 @@ import React from 'react';
 import styles from './addInstitutionOfEducation.module.scss';
 import { Link, useRouteMatch } from 'react-router-dom';
 import InstitutionOfEducationBlock from '../../institutionOfEducationBlock';
-import { ReactComponent as IconLock } from './icons/iconLock.svg';
-import { ReactComponent as IconRemove } from './icons/iconRemove.svg';
 import Unlock from '../../common/icons/Unlock/index';
 import Delete from '../../common/icons/Delete/index';
 import TabContent from './TabContent'

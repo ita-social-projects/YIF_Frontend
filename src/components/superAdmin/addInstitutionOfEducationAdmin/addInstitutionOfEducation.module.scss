@@ -1,31 +1,4 @@
 @import '../../styles.scss';
-.superAdminAccount {
-  position: relative;
-  width: 100%;
-  font-size: 1.562rem; // 25px
-  text-align: center;
-  margin: 0 20px;
-
-  h1 {
-    padding: 3.12rem 0 4.37rem 0; // 50px 0 70px 0
-  }
-
-  .adminTableContainer {
-    margin: 0 auto 12.5rem auto; // 200px
-    background-color: $lightBlue_4;
-    font-size: $font_16px;
-    border-radius: 10px;
-    padding: 0 0 0.62rem 0; // 0 0 10px 0
-    max-width: 62.5rem; // 1000px
-    text-align: left;
-    box-shadow: 0 5px 15px 0 rgba($darkBlue, 0.1);
-
-    mark {
-      color: $white;
-      background-color: $darkBlue2;
-    }
-  }
-}
 
 .wrapper {
   background: #f2f9ff url(/assets/images/univer30.svg) bottom -2rem right 22.125vw
@@ -35,54 +8,9 @@
   max-width: 100rem;
   min-height: 110vh;
   margin: 0 auto;
-
   .infoContainer {
     padding: 3.125rem 8.125vw 0 6.25vh;
     margin-bottom: 25rem;
-
-    &__abbr {
-      font-family: $fontNunito;
-      font-size: $font_40px;
-      font-weight: $extraBold;
-      height: 3.438rem;
-    }
-
-    &__mainInfo {
-      @include flex(row, flex-start, space-between);
-    }
-    &__textInfo {
-      &__fullName {
-        font-size: $font_30px;
-        font-weight: $semiBold;
-        font-family: $fontNunito;
-      }
-      a {
-        color: $black;
-        text-decoration: underline;
-      }
-    }
-
-    img {
-      width: 25rem;
-      height: 14rem;
-      border-radius: 3%;
-      opacity: 80%;
-      margin-top: 0.5rem;
-    }
-
-    .description {
-      margin-top: 0;
-    }
-
-    p {
-      margin: 1.25rem 0;
-      line-height: 1.563rem;
-
-      span {
-        font-weight: $semiBold;
-        margin-right: 0.5rem;
-      }
-    }
     .admin {
       margin-top: 42px;
       &__title {
@@ -121,6 +49,15 @@
       border-radius: 0.5rem;
       display: inline-block;
       margin-top: 1.25rem;
+    }
+  }
+  p {
+    margin: 1.25rem 0;
+    line-height: 1.563rem;
+
+    span {
+      font-weight: $semiBold;
+      margin-right: 0.5rem;
     }
   }
 }
