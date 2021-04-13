@@ -20,6 +20,7 @@ import InstitutionOfEducationAdminPage from '../../pages/institutionOfEducationA
 import NewPasswordPage from '../../pages/newPasswordPage';
 import ScrollToTop from '../common/scrollToTop/scrollToTop';
 import SuperAdmin from '../../pages/superAdminPages/index';
+import GraduateAccountPage from '../../pages/graduatePage';
 
 const App = () => {
   const { token } = useAuth();
@@ -72,7 +73,7 @@ const App = () => {
             <NewPasswordPage />
           </Route>
           <ProtectedRoute user={token} path='/cabinet' allowed={['Graduate']}>
-            <GraduateCabinet />
+            <GraduateAccountPage />
           </ProtectedRoute>
           <Route path='/404' component={ErrorPage} status={404} />
           <Route component={ErrorPage} status={404} />

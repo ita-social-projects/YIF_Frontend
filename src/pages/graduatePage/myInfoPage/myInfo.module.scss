@@ -1,0 +1,110 @@
+@import '../../../styles/index.scss';
+
+.container {
+  @include flex(row, flex-start, center);
+  width: 100%;
+}
+
+.mainStyle {
+  @include flex(row, flex-start, flex-start);
+  background: $lightBlue_3 url('/assets/images/userProfile.svg') top 80% right
+    no-repeat;
+  padding: 2.5rem 30rem 5rem 2.5rem;
+  position: relative;
+  height: auto;
+
+  .wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 8rem;
+  }
+
+  .titleContainer {
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    h4 {
+      margin-right: 3.5rem;
+    }
+
+    .title {
+      font-family: $fontNunito;
+      font-weight: $regular;
+      font-size: 1.625rem;
+      color: $black;
+      padding: 0 4.75rem 1.125rem 0;
+    }
+
+    .spinner {
+      padding-right: 23%;
+    }
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin: 0 auto;
+    width: 685px;
+  }
+
+  .button {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .selectWrapper {
+    display: flex;
+    position: relative;
+  }
+  .labelSelect {
+    font-family: $fontNunito;
+    font-weight: $regular;
+    font-size: 1.125rem;
+    color: $black;
+    flex-grow: 1;
+    padding-top: 10px;
+  }
+
+  select {
+    width: 21.875rem;
+    font-size: 0.875rem;
+    padding: 15px 80px 6px 72px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 2.5rem;
+    border: 1px solid $gray;
+    background-color: $white;
+    border-radius: 3px;
+  }
+
+  .selectWrapper:after {
+    content: url(/assets/icons/downArrow.svg);
+    color: black;
+    padding: 0 8px;
+    position: absolute;
+    right: 8px;
+    top: 12px;
+    // z-index: 1;
+    text-align: center;
+    width: 5%;
+    height: 70%;
+    pointer-events: none;
+    box-sizing: border-box;
+  }
+  .selectWrapper:before {
+    content: url(/assets/icons/school.svg);
+    padding: 0 8px;
+    position: absolute;
+    left: 51%;
+    top: 6px;
+    // z-index: 1;
+    text-align: center;
+    pointer-events: none;
+    box-sizing: border-box;
+  }
+}
