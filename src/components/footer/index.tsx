@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
                 to='/directions'
                 id='directionsLinkFooter'
               >
-                Напрями
+                Спеціальності
               </Link>
             </p>
             <p>
@@ -67,3 +67,4 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
+

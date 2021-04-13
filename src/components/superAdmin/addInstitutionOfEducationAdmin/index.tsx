@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
-import { APIUrl } from '../../../services/endpoints';
+import React from 'react';
 import styles from './addInstitutionOfEducation.module.scss';
 import { Link, useRouteMatch } from 'react-router-dom';
-import AccordionItem from '../../accordion';
-import EmailInput from './EmailInput';
-import ModeratorsList from './ModeratorsList';
 import { ReactComponent as IconLock } from './icons/iconLock.svg';
 import { ReactComponent as IconRemove } from './icons/iconRemove.svg';
+import TabContent from './TabContent'
 
 const AddInstitutionOfEducationAdmin = () => {
     const { path } = useRouteMatch();
@@ -77,8 +74,7 @@ const AddInstitutionOfEducationAdmin = () => {
                     </div>
                 </div>
                 <div className={styles.admin__buttons}>
-                  <EmailInput />
-                  <ModeratorsList />
+                  <TabContent />
                 </div>
             </div>
           </div>

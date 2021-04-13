@@ -27,7 +27,6 @@
   }
 }
 
-/* IOE INFO*/
 .wrapper {
   background: #f2f9ff url(/assets/images/univer30.svg) bottom -2rem right 22.125vw
     no-repeat;
@@ -126,109 +125,6 @@
       border-radius: 0.5rem;
       display: inline-block;
       margin-top: 1.25rem;
-    }
-    form {
-      display: flex;
-      label {
-        display: block;
-        margin-bottom: 18px;
-        width: 100%;
-        text-align: center;
-      }
-      .mainInfo {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        position: relative;
-        max-width: 1000px;
-        margin: 0 auto;
-        .customInput {
-          display: block;
-        }
-      }
-      div {
-        display: block;
-        padding: 0;
-      }
-      button {
-        width: 185px;
-        margin: 0;
-        position: absolute;
-        right: 0;
-        bottom: 1px;
-      }
-      input {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        min-height: 2.8rem;
-      }
-    }
-  }
-  /* add wrapper */
-
-  .email__add {
-    padding: 14px 23px;
-    max-width: 190px;
-    text-align: center;
-    background: #27446a;
-    color: #ffff;
-    border-radius: 0.5rem;
-    margin: 25px auto 40px;
-    display: inline-block;
-    cursor: pointer;
-  }
-  .input__wrapper {
-    display: none;
-  }
-  .input__wrapper__opened {
-    display: block;
-  }
-
-  .moderators {
-    padding: 14px 15px;
-    max-width: 290px;
-    text-align: center;
-    background: #27446a;
-    color: #ffff;
-    border-radius: 0.5rem;
-    margin: 25px auto 40px;
-    display: inline-block;
-    cursor: pointer;
-    &__top {
-      background: #5a758c;
-      padding: 1px 50px;
-      border-radius: 0.5rem 0.5rem 0 0;
-      &__address {
-        color: #ffffff;
-        margin: 0;
-      }
-    }
-    &__list {
-      padding: 25px;
-      background-color: #d6e5f2;
-    }
-    &__item {
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      padding: 20px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      &__mail {
-        font-size: 18px;
-        color: #000000;
-      }
-      &__link {
-        font-size: 16px;
-        color: #27446a;
-        cursor: pointer;
-      }
-    }
-    &__wrapper {
-      display: none;
-      &__opened {
-        display: block;
-      }
     }
   }
 }
