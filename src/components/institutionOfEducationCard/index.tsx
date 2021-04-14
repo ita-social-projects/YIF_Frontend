@@ -21,8 +21,7 @@ interface Props {
 }
 
 const InstitutionOfEducationCard: React.FC<Props> = (props) => {
-  const { getToken } = useAuth();
-  const currentToken = getToken();
+  const { token } = useAuth();
   const { currentRole } = store.getState();
   const isGraduate = currentRole.role === 'Graduate' ? true : false;
 
@@ -40,7 +39,7 @@ const InstitutionOfEducationCard: React.FC<Props> = (props) => {
   } = props;
 
   let star = null;
-  if (!currentToken || isGraduate) {
+  if (!token || isGraduate) {
     star = (
       <Tooltips content='Будь ласка, увійдіть!'>
         <Star liked={liked} handleClick={handleClick} />
