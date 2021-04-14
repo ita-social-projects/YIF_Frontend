@@ -21,24 +21,10 @@ function SuperAdmin() {
         <Aside>
           <nav className={styles.navbar}>
             <div className={styles.adminLinkOptions}>
-              <span onClick={openAllLinks}>Адміністратори</span>
+              <div onClick={openAllLinks} className={styles.admins}>
+                <span>Адміністратори</span>
+              </div>
               <div className={!isLinksOpened ? styles.optional : ''}>
-                <div className={styles.optionalItem}>
-                  <Link
-                    className={styles.underlineAnimation}
-                    to='/SuperAdminAccount'
-                  >
-                    Закладів освіти
-                  </Link>
-                </div>
-                <div className={styles.optionalItem}>
-                  <Link
-                    className={styles.underlineAnimation}
-                    to='/SuperAdminAccount'
-                  >
-                    Закладів освіти
-                  </Link>
-                </div>
                 <div className={styles.optionalItem}>
                   <Link
                     className={styles.underlineAnimation}
