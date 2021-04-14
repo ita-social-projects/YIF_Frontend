@@ -41,7 +41,7 @@ it('check footer as a whole component', () => {
 
   expect(links[2].textContent).toBe('support@youritfuture.com');
   // expect(links[3].textContent).toBe("YIF");
-  expect(links[4].textContent).toBe('Напрями');
+  expect(links[4].textContent).toBe('Спеціальності');
   expect(links[5].textContent).toBe('Заклади освіти');
 
   //check buttons
