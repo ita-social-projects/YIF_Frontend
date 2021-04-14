@@ -3,7 +3,7 @@
 .container {
   @include flex(row, center, space-between);
   width: 100%;
-  max-width: 60rem;
+  max-width: 70rem;
   height: 4.5rem;
   background-color: $lightBlue_2;
   border-radius: 0.3rem;

@@ -2,11 +2,11 @@
 
 .sortingPanel {
   @include flex(row, center, flex-start);
+  background-color: $lightBlue_4;
   color: #fff;
   height: 3.125rem;
-  background-color: $lightBlue_4;
   width: 100%;
-  max-width: 60rem;
+  max-width: 70rem;
   border-radius: 0.3rem;
   padding-left: 1rem;
   font-family: $fontOpenSans;
