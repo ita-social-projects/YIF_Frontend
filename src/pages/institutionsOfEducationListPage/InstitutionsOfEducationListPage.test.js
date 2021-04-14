@@ -4,6 +4,8 @@ import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 import { render, screen, act, fireEvent } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { setRoleReducer } from '../../store/reducers/setRoleReducer';
+import userEvent from '@testing-library/user-event';
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -200,6 +202,15 @@ describe('test IOEFavoritesList component', () => {
       ],
     };
 
+    mock.useAuth = jest.fn(() => {
+      return {
+        token: 'token',
+        getToken: jest.fn(() => '123'),
+      };
+    });
+
+    store.dispatch(setRoleReducer('Graduate'));
+
     const mockJsonPromiseStar = Promise.resolve(data);
 
     const mockFetchPromiseStar = Promise.resolve({
@@ -335,11 +346,14 @@ describe('test IOEFavoritesList component', () => {
       );
     });
 
-    const star = screen.getAllByTestId('star');
-
+    const star = screen.queryByTestId('star');
     await act(async () => {
-      fireEvent.click(star[0]);
+      userEvent.hover(star);
     });
-    expect(fetch).toBeCalledTimes(1);
+    await act(async () => {
+      userEvent.click(star);
+    });
+
+    expect(screen.getByText('Будь ласка, увійдіть!')).toBeInTheDocument();
   });
 });

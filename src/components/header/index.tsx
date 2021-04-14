@@ -150,7 +150,7 @@ const Header: React.FC = () => {
             to='/directions'
             className={styles.underlineAnimation}
           >
-            Напрями
+            Спеціальності
           </Link>
           <Link
             id='institutionsOfEducationLink'

@@ -5,6 +5,7 @@ import Tooltips from '../common/tooltip';
 import CampaingCard from '../campaignCard';
 import { store } from '../../store/store';
 import Star from '../common/icons/Star/star';
+import { useAuth } from '../../services/tokenValidator';
 
 interface Props {
   liked?: boolean;
@@ -20,7 +21,7 @@ interface Props {
 }
 
 const InstitutionOfEducationCard: React.FC<Props> = (props) => {
-  const token = localStorage.getItem('token');
+  const { token } = useAuth();
   const { currentRole } = store.getState();
   const isGraduate = currentRole.role === 'Graduate' ? true : false;
 

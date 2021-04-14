@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 describe('header with no user', () => {
   let header;
   const links = [
-    { text: 'Напрями', location: '/directions' },
+    { text: 'Спеціальності', location: '/directions' },
     { text: 'Заклади освіти', location: '/institutionsOfEducation' },
     { text: 'Вхід', location: '/login' },
     { text: 'Реєстрація', location: '/register' },
@@ -64,7 +64,6 @@ describe('header with logged in user', () => {
 
   test('should clear local storage on logout', () => {
     const avatar = screen.getByAltText('avatar');
-    screen.debug();
 
     act(() => {
       fireEvent.click(avatar);

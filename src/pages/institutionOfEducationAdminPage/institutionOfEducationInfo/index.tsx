@@ -1,8 +1,10 @@
 import React from 'react';
 import styles from './institutionOfEducationInfo.module.scss';
+import InstitutionOfEducationBlock from '../../../components/institutionOfEducationBlock';
 import { Link, useRouteMatch } from 'react-router-dom';
 
 const InstitutionOfEducationInfo = () => {
+  
   const { path } = useRouteMatch();
 
   const { id, name, abbreviation, site, address, phone, email, description } = {
@@ -20,40 +22,16 @@ const InstitutionOfEducationInfo = () => {
   return (
     <main className={styles.wrapper}>
       <div className={styles.infoContainer}>
-        <h2 className={styles.infoContainer__abbr}>{abbreviation}</h2>
-        <div className={styles.infoContainer__mainInfo}>
-          <div className={styles.infoContainer__textInfo}>
-            <h1 className={styles.infoContainer__textInfo__fullName}>{name}</h1>
-            <p>
-              <span>Сайт:</span>
-              <a href={site} target='_blank'>
-                {site}
-              </a>
-            </p>
-            <p>
-              <span>Email:</span>
-              <a href={`mailto:${email}`} target='_blank'>
-                {email}
-              </a>
-            </p>
-            <p>
-              <span>Телефон:</span>
-              <a href={`tel:${phone}`}>{phone}</a>
-            </p>
-            <p>
-              <span>Адреса:</span>
-              {address}
-            </p>
-          </div>
-          <img
-            src='https://nuwm.edu.ua/images/content/admin/nuwmvsh.jpg'
-            alt='НУВГП'
-          />
-        </div>
-        <p className={styles.description}>
-          <span>Опис:</span>
-          {description}
-        </p>
+        <InstitutionOfEducationBlock 
+        id={id}
+        name={name}
+        abbreviation={abbreviation}
+        site={site}
+        address={address}
+        phone={phone}
+        email={email}
+        description={description}
+        />
         <Link
           className={`${styles.animatedButton} ${styles.buttonLink}`}
           to={`${path}/edit/${id}`}
