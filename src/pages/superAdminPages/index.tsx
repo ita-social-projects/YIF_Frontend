@@ -22,7 +22,7 @@ function SuperAdmin() {
           <nav className={styles.navbar}>
             <div className={styles.adminLinkOptions}>
               <span onClick={openAllLinks}>Адміністратори</span>
-              <div className={isLinksOpened ? styles.optional : ''}>
+              <div className={!isLinksOpened ? styles.optional : ''}>
                 <div className={styles.optionalItem}>
                   <Link
                     className={styles.underlineAnimation}

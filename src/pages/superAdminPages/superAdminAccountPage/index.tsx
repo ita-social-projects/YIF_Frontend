@@ -41,15 +41,19 @@ const SuperAdminAccountPage: React.FC = () => {
       <ErrorBoundry>
         <section className={styles.superAdminAccountPage}>
           {!isFetching && (
-            <SuperAdminAccount
-              institutionOfEducationAdmins={institutionOfEducationAdmins}
-            />
+            <>
+              <SuperAdminAccount
+                institutionOfEducationAdmins={institutionOfEducationAdmins}
+              />
+              <Link to={`/superAdminAccount/addInstitutionOfEducation`}>
+                <button
+                  className={`${styles.addButton} ${styles.animatedButton}`}
+                >
+                  Додати заклад освіти
+                </button>
+              </Link>
+            </>
           )}
-          <Link to={`/superAdminAccount/addInstitutionOfEducation`}>
-            <button className={`${styles.addButton} ${styles.animatedButton}`}>
-              Додати заклад освіти
-            </button>
-          </Link>
         </section>
       </ErrorBoundry>
     </>

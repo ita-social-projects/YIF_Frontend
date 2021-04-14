@@ -16,7 +16,9 @@ body,
 
 .mapContainer {
   width: 100%;
-  margin: 0 auto;
+  max-width: 90rem;
+  // margin: 0 auto;
+  margin-top: 2rem;
   height: 23.75rem;
   font-size: $font_30px;
   display: flex;

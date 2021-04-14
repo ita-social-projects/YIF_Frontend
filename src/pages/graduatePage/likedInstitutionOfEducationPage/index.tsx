@@ -142,6 +142,7 @@ const InstitutionOfEducationList = () => {
   ) : (
     <>
       {institutionOfEducationCardList}
+
       <InstitutionsOfEducationMap data={locationList} />
     </>
   );
