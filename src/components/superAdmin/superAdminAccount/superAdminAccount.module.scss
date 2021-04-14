@@ -104,7 +104,7 @@
 
     li {
       cursor: pointer;
-      margin: 0 0.93rem 0 0; // 15px
+      margin: 0 3.9rem 0 0; // 15px
       transition: color 0.35s;
 
       &:hover {
@@ -233,6 +233,9 @@
         align-items: center;
         li {
           margin-right: 0.8rem;
+          &:first-child {
+            margin-right: 2.9rem;
+          }
         }
       }
 
@@ -258,6 +261,11 @@
       }
 
       .adminRemove {
+        a {
+          text-decoration: none;
+          background: none;
+          border: none;
+        }
         path {
           transition: stroke 0.35s;
         }

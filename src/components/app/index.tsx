@@ -15,6 +15,7 @@ import { ProtectedRoute, RedirectRoute } from '../../services/customRoutes';
 import ErrorBoundry from '../../errorBoundry';
 import ResetPasswordPage from '../../pages/resetPasswordPage/index';
 import AddInstitutionOfEducation from '../../pages/superAdminPages/addInstitutionOfEducationPage';
+import AddInstitutionOfEducationAdmin from '../../pages/superAdminPages/addInstitutionOfEducationAdminPage';
 import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccountPage';
 import InstitutionOfEducationAdminPage from '../../pages/institutionOfEducationAdminPage';
 import NewPasswordPage from '../../pages/newPasswordPage';
@@ -68,6 +69,13 @@ const App = () => {
             allowed={['InstitutionOfEducationAdmin']}
           >
             <InstitutionOfEducationAdminPage />
+          </ProtectedRoute>
+          <ProtectedRoute
+            user={token}
+            path='/addInstitutionOfEducationAdmin'
+            allowed={['SuperAdmin']}
+          >
+            <AddInstitutionOfEducationAdmin />
           </ProtectedRoute>
           <Route path='/newPassword'>
             <NewPasswordPage />
