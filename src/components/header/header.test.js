@@ -64,7 +64,6 @@ describe('header with logged in user', () => {
 
   test('should clear local storage on logout', () => {
     const avatar = screen.getByAltText('avatar');
-    screen.debug();
 
     act(() => {
       fireEvent.click(avatar);
