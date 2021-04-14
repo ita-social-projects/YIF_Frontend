@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, render, screen } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import InstitutionOfEducationPage from '.';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
@@ -43,5 +43,6 @@ test('check success response', async () => {
       </Provider>
     );
   });
-  screen.debug();
+
+  expect(fetch).toBeCalledTimes(2);
 });

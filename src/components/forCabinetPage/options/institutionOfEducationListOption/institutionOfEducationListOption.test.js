@@ -4,16 +4,18 @@ import InstitutionOfEducationListOption from './index.tsx';
 import { Provider } from 'react-redux';
 import { store } from '../../../../store/store.ts';
 import { render, screen, act, fireEvent } from '@testing-library/react';
+import { setRoleReducer } from '../../../../store/reducers/setRoleReducer';
 
-jest.mock('../../../../services/tokenValidator', () => {
+const mock = require('../../../../services/tokenValidator');
+
+mock.useAuth = jest.fn(() => {
   return {
-    useAuth: () => {
-      return {
-        getToken: jest.fn(() => '123'),
-      };
-    },
+    token: 'token',
+    getToken: jest.fn(() => '123'),
   };
 });
+
+store.dispatch(setRoleReducer('Graduate'));
 
 afterEach(() => {
   jest.clearAllMocks();
