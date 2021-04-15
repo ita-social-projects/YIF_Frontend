@@ -189,7 +189,7 @@ const ImageUploaderPopup = (props: TProps) => {
               />
               <div className={style.helperImage}>
                 <img
-                  src='assets/icons/imageUpload.svg'
+                  src='/assets/icons/imageUpload.svg'
                   alt={`Перетягніть фотографію ${text} сюди`}
                 />
               </div>

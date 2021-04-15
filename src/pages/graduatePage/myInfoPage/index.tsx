@@ -20,61 +20,40 @@ import { store } from '../../../store/store';
 import { setUserPhoto } from '../../../store/reducers/setUserReducer';
 
 const MyInfo = () => {
-  const avatarSyles = {
-    // position: 'absolute',
-    // top: '2.5rem',
-    // left: '2.5rem',
-  };
+  const avatarSyles = {};
 
   const url = `${APIUrl}Users/Current/SetProfile`;
   const useYIFProfile = useProfile(url);
   const user = useSelector(userSelector);
   const [listSchool, setListSchool] = useState([]);
-  const [error, setError] = useState({
-    hasError: false,
-    errorStatusCode: '',
-    errorMessage: '',
-  });
-
-  const [isLoading, setLoading] = useState(false);
-  const [isSuccessLoad, setSuccessLoad] = useState(false);
-  const [profileImageSrc, setProfileImageSrc] = useState();
-
-  const [pic, setPic] = useState('');
-  const settingPic = (value: string) => {
-    setPic(value);
-  };
 
   const { photo } = useSelector(userSelector);
   const defaultPicture = '/assets/icons/avatar.jpg';
   const avatar = photo ? photo : defaultPicture;
 
   const imageHandler = (image: string) => {
-    setLoading(true);
-
     requestImageProfile(`${APIUrl}Users/Current/ChangePhoto`, 'POST', {
       photo: image,
     })
       .then((res: any) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
-          // setError('');
-          setSuccessLoad(true);
-          setLoading(false);
-          setProfileImageSrc(res.data.photo);
           store.dispatch(
             setUserPhoto({
               photo: res.data.photo,
             })
           );
         } else {
-          setError(res.data.message || 'Щось пішло не так, спробуйте знову.');
-          setLoading(false);
+          useYIFProfile.setError({
+            hasError: true,
+            errorStatusCode: res.statusCode,
+            errorMessage:
+              res.data.message || 'Щось пішло не так, спробуйте знову.',
+          });
         }
       })
-      .catch((err) => {
-        // setError('Щось пішло не так, ви можете спробувати знову.');
-        setLoading(false);
+      .catch((errr) => {
+        console.log(errr);
       });
   };
 
@@ -83,10 +62,9 @@ const MyInfo = () => {
       .then((res: any) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
-          setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
           setListSchool(res.data);
         } else {
-          setError({
+          useYIFProfile.setError({
             hasError: true,
             errorStatusCode: res.statusCode,
             errorMessage:
@@ -94,12 +72,8 @@ const MyInfo = () => {
           });
         }
       })
-      .catch((error) => {
-        setError({
-          hasError: true,
-          errorStatusCode: error.statusCode,
-          errorMessage: 'Щось пішло не так, спробуйте знову.',
-        });
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
 
@@ -144,10 +118,7 @@ const MyInfo = () => {
             }}
             enableReinitialize
             validationSchema={validationField}
-            onSubmit={(values, actions) => {
-              actions.setSubmitting(false);
-              console.log(values);
-            }}
+            onSubmit={() => {}}
           >
             {({
               values,
@@ -156,10 +127,6 @@ const MyInfo = () => {
               handleChange,
               handleBlur,
               handleSubmit,
-              isSubmitting,
-              isValid,
-              setFieldTouched,
-              setFieldValue,
             }) => (
               <Form
                 className={styles.form}
