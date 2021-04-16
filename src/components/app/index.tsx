@@ -2,7 +2,6 @@ import React from 'react';
 import './app.scss';
 import Home from '../../pages/home';
 import ErrorPage from '../../pages/errorPage';
-import GraduateCabinet from '../../pages/graduateCabinetPage/index';
 import LoginPage from '../../pages/loginPage';
 import InstitutionsOfEducationListPage from '../../pages/institutionsOfEducationListPage';
 import SpecialityPage from '../../pages/specialityPage';

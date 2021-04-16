@@ -31,27 +31,15 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 
-describe('MyInfoPage', () => {
-  test('render component correctly', () => {
-    render(
-      <Router>
-        <Provider store={store}>
-          <MyInfo />
-        </Provider>
-      </Router>
-    );
-    expect(screen.getByText('Мої дані')).toBeInTheDocument();
-  });
-
-  test('can enter new values and send to server', async () => {
-    await wait(() => {
-      const mockJsonPromise = Promise.resolve(['1', '2', '3']);
-      const mockFetchPromise = Promise.resolve({
-        json: () => mockJsonPromise,
-        status: 200,
-      });
-      global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
+describe('MyInfoPage(enter new values and send to server)', () => {
+  test('graduate can enter new values and send them to server', async () => {
+    const mockJsonPromise = Promise.resolve(['1', '2', '3']);
+    const mockFetchPromise = Promise.resolve({
+      json: () => mockJsonPromise,
+      status: 200,
     });
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
+
     render(
       <Router>
         <Provider store={store}>
@@ -97,6 +85,7 @@ describe('MyInfoPage', () => {
     const button = screen.getByRole('button');
 
     await wait(() => {
+      userEvent.selectOptions(screen.getByTestId('select'), '2');
       fetch.mockImplementationOnce(() =>
         Promise.resolve({
           json: () => Promise.resolve({ message: false }),
@@ -112,7 +101,9 @@ describe('MyInfoPage', () => {
       screen.getByText('Щось пішло не так, спробуйте знову.')
     ).toBeInTheDocument();
   });
+});
 
+describe('MyInfoPage(bad request list of school)', () => {
   test('bad req from server(with message)', async () => {
     fetch.mockImplementationOnce(() =>
       Promise.resolve({
@@ -131,7 +122,9 @@ describe('MyInfoPage', () => {
     });
 
     expect(screen.getByText('very bad news')).toBeInTheDocument();
+    expect(screen.getByTestId('select')).not.toHaveValue();
   });
+
   test('bad req from server(without message)', async () => {
     fetch.mockImplementationOnce(() =>
       Promise.resolve({
@@ -169,17 +162,18 @@ describe('MyInfoPage', () => {
     });
 
     expect(screen.getByTestId('select')).not.toHaveValue();
+    expect(fetch).toBeCalledTimes(1);
   });
+});
 
+describe('MyInfoPage(userFoto)', () => {
   test('user can send his new foto to server', async () => {
-    await wait(() => {
-      fetch.mockImplementationOnce(() =>
-        Promise.resolve({
-          json: () => Promise.resolve(['1', '2', '3']),
-          status: 200,
-        })
-      );
-    });
+    fetch.mockImplementationOnce(() =>
+      Promise.resolve({
+        json: () => Promise.resolve(['1', '2', '3']),
+        status: 200,
+      })
+    );
     await act(async () => {
       render(
         <Router>
@@ -188,9 +182,6 @@ describe('MyInfoPage', () => {
           </Provider>
         </Router>
       );
-    });
-    await wait(() => {
-      userEvent.selectOptions(screen.getByTestId('select'), '2');
     });
     const imageHandler = screen.getByTestId('imageHandler');
     await wait(() => {
@@ -209,11 +200,8 @@ describe('MyInfoPage', () => {
         </Router>
       );
     });
-    await wait(() => {
-      userEvent.selectOptions(screen.getByTestId('select'), '2');
-    });
-    const imageHandler = screen.getByTestId('imageHandler');
 
+    const imageHandler = screen.getByTestId('imageHandler');
     await wait(() => {
       fetch.mockImplementationOnce(() =>
         Promise.resolve({
@@ -239,7 +227,6 @@ describe('MyInfoPage', () => {
     });
 
     const imageHandler = screen.getByTestId('imageHandler');
-
     await wait(() => {
       fetch.mockImplementationOnce(() =>
         Promise.resolve({
@@ -249,6 +236,7 @@ describe('MyInfoPage', () => {
       );
       userEvent.click(imageHandler);
     });
+
     expect(
       screen.getByText('Щось пішло не так, спробуйте знову.')
     ).toBeInTheDocument();

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './graduatePage.module.scss';
 import { Route, Redirect, Switch, useRouteMatch, Link } from 'react-router-dom';
-import { Footer, Header, SpecListOption } from '../../components';
+import { Footer, Header } from '../../components';
 import Aside from '../../components/institutionOfEducationAdmin/aside';
 import MyInfo from './myInfoPage';
 import LikedSpecialties from './likedSpecialtiesPage';
@@ -34,7 +34,7 @@ const GraduateAccountPage = () => {
         </Aside>
         <Switch>
           <Route exact path={`/cabinet`}>
-            <Redirect to={`${path}/myInfo`} />
+            <Redirect to={`${path}/likedSpecialties`} />
           </Route>
 
           <Route exact path={`${path}/myInfo`}>

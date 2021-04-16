@@ -20,13 +20,10 @@ import { store } from '../../../store/store';
 import { setUserPhoto } from '../../../store/reducers/setUserReducer';
 
 const MyInfo = () => {
-  const avatarSyles = {};
-
   const url = `${APIUrl}Users/Current/SetProfile`;
   const useYIFProfile = useProfile(url);
   const user = useSelector(userSelector);
   const [listSchool, setListSchool] = useState([]);
-
   const { photo } = useSelector(userSelector);
   const defaultPicture = '/assets/icons/avatar.jpg';
   const avatar = photo ? photo : defaultPicture;
@@ -81,7 +78,7 @@ const MyInfo = () => {
     <div className={styles.container}>
       <section className={styles.mainStyle}>
         <ImageUploader
-          additionalStyles={avatarSyles}
+          additionalStyles={{}}
           avatar={avatar}
           aspectRatio={1}
           text='профілю'
