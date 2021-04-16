@@ -8,11 +8,9 @@ const AddInstitutionOfEducationAdminPage = () => {
     <>
       <Header />
       <section className={styles.superAdminAccountPage}>
-          <AdminPanel />
-  
-            <AddInstitutionOfEducationAdmin />
- 
-        </section>
+        <AdminPanel />
+        <AddInstitutionOfEducationAdmin />
+      </section>
       <Footer />
     </>
   );

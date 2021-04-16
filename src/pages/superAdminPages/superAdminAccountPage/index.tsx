@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styles from './superAdminAccountPage.module.scss';
 import ErrorBoundry from '../../../errorBoundry';
-import {
-  Header,
-  Footer,
-  AdminPanel,
-  SuperAdminAccount,
-} from '../../../components';
-import Spinner from '../../../components/common/spinner';
+import { SuperAdminAccount } from '../../../components';
 import { requestSecureData } from '../../../services/requestDataFunction';
 import { APIUrl } from '../../../services/endpoints';
 import { useAuth } from '../../../services/tokenValidator';
-import { Route, Redirect, Switch, useRouteMatch, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const SuperAdminAccountPage: React.FC = () => {
   const [isFetching, setFetching] = useState(true);
@@ -20,7 +14,6 @@ const SuperAdminAccountPage: React.FC = () => {
     setInstitutionOfEducationAdmins,
   ] = useState([]);
   const { getToken } = useAuth();
-  const { path } = useRouteMatch();
 
   const fetchInstitutionOfEducationAdmins = async () => {
     const endpoint = `${APIUrl}SuperAdmin/GetAllInstitutionOfEducationsAdmins`;

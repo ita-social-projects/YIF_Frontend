@@ -1,5 +1,4 @@
 import React from 'react';
-import { AdminPanel, Header } from '../../../components';
 import Pagination from '../../../components/superAdmin/pagination';
 import SortingPanel from '../../../components/superAdmin/sortingPanel';
 import UniversityItem from '../../../components/superAdmin/universityItem';
