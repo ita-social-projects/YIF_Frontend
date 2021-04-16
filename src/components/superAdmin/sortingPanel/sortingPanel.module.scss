@@ -11,6 +11,12 @@
   padding-left: 1rem;
   font-family: $fontOpenSans;
 
+  .sortingOptions {
+    @include flex(row, center, space-between);
+    width: 100%;
+    padding-right: 2rem;
+  }
+
   .sortItem {
     @include flex(row, center, flex-start);
     margin-left: 1.3rem;

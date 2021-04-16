@@ -6,13 +6,15 @@ const SortingPanel = () => {
   return (
     <div className={styles.sortingPanel}>
       <div>Сортувати: </div>
-      <div className={styles.sortItem}>
-        <span>Назва</span>
-        <ThinArrow direction={'up'} />
-      </div>
-      <div className={styles.sortItem}>
-        <span>Заблоковані</span>
-        <ThinArrow direction={'up'} />
+      <div className={styles.sortingOptions}>
+        <div className={styles.sortItem}>
+          <span>Назва</span>
+          <ThinArrow direction={'up'} />
+        </div>
+        <div className={styles.sortItem}>
+          <span>Заблоковані</span>
+          <ThinArrow direction={'up'} />
+        </div>
       </div>
     </div>
   );
