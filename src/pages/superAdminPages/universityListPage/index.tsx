@@ -41,10 +41,8 @@ const univList = [
 
 const UniversityListPage: React.FC = () => {
   return (
-    <>
-      <Header />
+    <div className={styles.container}>
       <div className={styles.wrapper}>
-        <AdminPanel />
         <main className={styles.universityListPage}>
           <h1>Університети</h1>
           <Pagination />
@@ -64,7 +62,7 @@ const UniversityListPage: React.FC = () => {
           })}
         </main>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -51,6 +51,9 @@ const App = () => {
           <Route path='/institutionOfEducation/:id'>
             <InstitutionOfEducationPage />
           </Route>
+          <Route path='/newPassword'>
+            <NewPasswordPage />
+          </Route>
           <ProtectedRoute
             user={token}
             path='/superAdminAccount'
@@ -61,7 +64,6 @@ const App = () => {
           <Route path='/specialty/:id'>
             <SpecialityPage />
           </Route>
-
           <ProtectedRoute
             user={token}
             path='/institutionOfEducationAccount'
@@ -76,9 +78,6 @@ const App = () => {
           >
             <AddInstitutionOfEducationAdmin />
           </ProtectedRoute>
-          <Route path='/newPassword'>
-            <NewPasswordPage />
-          </Route>
           <ProtectedRoute user={token} path='/cabinet' allowed={['Graduate']}>
             <GraduateAccountPage />
           </ProtectedRoute>

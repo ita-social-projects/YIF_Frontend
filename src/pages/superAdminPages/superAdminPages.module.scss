@@ -14,6 +14,10 @@
       margin-bottom: 1rem;
       cursor: pointer;
 
+      .admins {
+        display: flex;
+      }
+
       a {
         font-family: $fontNunito;
         font-size: 16px;
@@ -31,10 +35,11 @@
 
     .adminLinkOptions {
       @include flex(column, flex-start, center);
-      span {
+      div {
         color: #fff;
         font-family: $fontNunito;
         font-size: 18px;
+        margin-right: 0.5rem;
       }
     }
   }

@@ -15,6 +15,6 @@ describe('UniversityListPAge', () => {
         </Provider>
       </Router>
     );
-    expect(screen.getAllByText('Університети')).toHaveLength(2);
+    expect(screen.getAllByText('Університети')).toHaveLength(1);
   });
 });

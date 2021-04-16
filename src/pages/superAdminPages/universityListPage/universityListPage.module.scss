@@ -1,5 +1,11 @@
 @import '../../../styles/index.scss';
 
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 10rem;
+}
+
 .wrapper {
   display: flex;
   font-family: $fontOpenSans;

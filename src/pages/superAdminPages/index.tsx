@@ -5,6 +5,9 @@ import Aside from '../../components/institutionOfEducationAdmin/aside';
 import { Route, Redirect, Switch, useRouteMatch, Link } from 'react-router-dom';
 import SuperAdminAccountPage from './superAdminAccountPage';
 import AddInstitutionOfEducation from './addInstitutionOfEducationPage';
+import ThinArrow from '../../components/common/icons/ThinArrow';
+import AddInstitutionOfEducationAdmin from '../../components/superAdmin/addInstitutionOfEducationAdmin';
+import UniversityListPage from './universityListPage';
 
 function SuperAdmin() {
   const [isLinksOpened, setIsLinksOpened] = useState(false);
@@ -22,7 +25,8 @@ function SuperAdmin() {
           <nav className={styles.navbar}>
             <div className={styles.adminLinkOptions}>
               <div onClick={openAllLinks} className={styles.admins}>
-                <span>Адміністратори</span>
+                <div>Адміністратори</div>
+                <ThinArrow isUp={isLinksOpened} />
               </div>
               <div className={!isLinksOpened ? styles.optional : ''}>
                 <div className={styles.optionalItem}>
@@ -35,7 +39,10 @@ function SuperAdmin() {
                 </div>
               </div>
             </div>
-            <Link className={styles.underlineAnimation} to='#'>
+            <Link
+              className={styles.underlineAnimation}
+              to={`${path}/universityList`}
+            >
               Університети
             </Link>
             <Link className={styles.underlineAnimation} to='#'>
@@ -55,6 +62,12 @@ function SuperAdmin() {
           </Route>
           <Route exact path={`${path}/addInstitutionOfEducation`}>
             <AddInstitutionOfEducation />
+          </Route>
+          <Route exact path={`${path}/addInstitutionOfEducationAdmin`}>
+            <AddInstitutionOfEducationAdmin />
+          </Route>
+          <Route exact path={`${path}/universityList`}>
+            <UniversityListPage />
           </Route>
         </Switch>
       </section>
