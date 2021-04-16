@@ -21,17 +21,7 @@ const InstitutionOfEducationList = () => {
       endOfCampaign: '',
     },
   ]);
-
-  interface List {
-    id: any;
-    name: any;
-    site: any;
-    lat: any;
-    lon: any;
-  }
-
   const [locationList, setLocationList] = useState([{}]);
-
   const [isChanged, setChanged] = useState(false);
   const [isFetching, setFetching] = useState(true);
   const [error, setError] = useState({
