@@ -1,0 +1,63 @@
+@import '../../../../styles/index.scss';
+
+.formMargin {
+  margin-top: 5px;
+  width: 350px;
+}
+.formContainer {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  user-select: none;
+  font-family: $fontOpenSans;
+  font-weight: $regular;
+  font-size: $font_15px;
+  word-wrap: break-word;
+}
+
+.formContainer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.formCheckmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: $lightBlue_3;
+}
+
+.formContainer:hover input ~ .formCheckmark {
+  background-color: $gray;
+}
+
+.formContainer input:checked ~ .formCheckmark {
+  background-color: $darkBlue;
+}
+
+.formCheckmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+.formContainer input:checked ~ .formCheckmark:after {
+  display: block;
+}
+
+.formContainer .formCheckmark:after {
+  left: 40%;
+  top: 22%;
+  width: 7px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
