@@ -1,0 +1,36 @@
+@import '../../../styles/index.scss';
+
+.container {
+  @include flex(row, center, space-between);
+  width: 100%;
+  max-width: 70rem;
+  height: 4.5rem;
+  background-color: $lightBlue_2;
+  border-radius: 0.3rem;
+  padding: 0 2rem 0 1rem;
+  font-family: $fontNunito;
+  font-size: $font_18px;
+  margin-top: 0.625rem;
+
+  .common {
+    @include flex(row, center, space-between);
+    width: 100%;
+    height: 2.5rem;
+  }
+
+  .abreviation {
+    @extend .common;
+    border-right: 2px solid $gray;
+    max-width: 6.25rem;
+  }
+
+  .fullName {
+    @extend .common;
+    padding-left: 1rem;
+  }
+
+  .actionItems {
+    @extend .common;
+    max-width: 5rem;
+  }
+}
