@@ -8,7 +8,7 @@
   cursor: pointer;
   .lock {
     width: 1.625rem;
-    fill: rgba(0, 0, 0, 0.8);
+    fill: rgb(0, 0, 0);
   }
   &:hover::after {
     content: 'Розблокувати';

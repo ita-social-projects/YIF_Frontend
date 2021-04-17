@@ -15,8 +15,8 @@ describe('Accordion', () => {
       </Router>
     );
     const accHeader = document.querySelector('.acc_item__line');
-    expect(screen.getByText('+')).toBeInTheDocument();
+    expect(screen.getByText('\u002B')).toBeInTheDocument();
     userEvent.click(accHeader);
-    expect(screen.getByText('-')).toBeInTheDocument();
+    expect(screen.getByText('\u2212')).toBeInTheDocument();
   });
 });

@@ -37,7 +37,7 @@ interface Props {
 }
 
 const SuperAdminAccount: React.FC<Props> = (props) => {
-  const { token, getToken } = useAuth();
+  const { getToken } = useAuth();
   const [currentKey, setCurrentKey] = useState('');
   const [searchValue, setSearchValue] = useState('');
   const [sortSwitch, setSortSwitch] = useState({ a: -1, b: 1 });
@@ -102,10 +102,10 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
   };
 
   // request to server
-  const setBanStatus = (id: string) => {
+  const setBanStatus = async (id: string) => {
     const endpoint = `${APIUrl}SuperAdmin/DisableInstitutionOfEducationAdmin/${id}`;
-    getToken();
-    requestSecureData(endpoint, 'PATCH', token!, {
+    const currentToken = await getToken();
+    requestSecureData(endpoint, 'PATCH', currentToken, {
       id,
     })
       .then((res: any) => {
@@ -154,10 +154,11 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
       });
   };
 
-  const removeAdminInstitutionOfEducation = (id: string) => {
+  const removeAdminInstitutionOfEducation = async (id: string) => {
     const endpoint = `${APIUrl}SuperAdmin/DeleteInstitutionOfEducationAdmin/${id}`;
-    getToken();
-    requestSecureData(endpoint, 'DELETE', token!)
+    const currentToken = await getToken();
+
+    requestSecureData(endpoint, 'DELETE', currentToken)
       .then((res: any) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
@@ -347,9 +348,9 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
                     searchValue={searchValue}
                     key={admin.id}
                     setBanStatus={setBanStatus}
-                    removeAdminInstitutionOfEducation={
-                      removeAdminInstitutionOfEducation
-                    }
+                    // removeAdminInstitutionOfEducation={
+                    //   removeAdminInstitutionOfEducation
+                    // }
                   />
                 )
               )

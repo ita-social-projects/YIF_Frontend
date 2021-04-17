@@ -57,50 +57,43 @@
     font-size: $font_18px;
     font-weight: $bold;
   }
+}
 
-  &__subitem {
-    @include flex(row, center, space-between);
-    padding: 5px 10px;
-    min-height: 50px;
-    background-color: $lightBlue_1;
-    margin-bottom: 5px;
-    border-radius: 5px;
+.acc_subitem {
+  @include flex(column, start, space-between);
+  padding: 15px 10px 10px 15px;
+  min-height: 50px;
+  background-color: $lightBlue_1;
+  margin-bottom: 5px;
+  border-radius: 5px;
 
-    &_info {
-      @include flex(row, center, space-between);
-    }
-
+  &_title {
+    @include flex(row, start, space-between);
+    margin-bottom: 15px;
     h5,
     span {
       font-size: $font_16px;
       font-family: $fontOpenSans;
       font-weight: $semiBold;
     }
+    span {
+      margin-right: 30px;
+    }
+  }
+
+  &__cards {
+    @include flex(row, center, space-between);
+  }
+
+  &__card {
+    padding-left: 55px;
 
     span {
       margin-right: 30px;
     }
 
-    &_btn {
-      font-size: $font_16px;
-      color: $white;
-      padding: 10px 30px;
-      border-radius: 5px;
-      background-color: $darkBlue;
-      transition: 0.3s;
-      cursor: pointer;
-
-      &:hover {
-        background-color: lighten($color: $darkBlue, $amount: 10);
-      }
-    }
-
-    &_btn_checked {
-      background-color: $red;
-
-      &:hover {
-        background-color: darken($color: $red, $amount: 10);
-      }
+    button {
+      margin-right: 10px;
     }
   }
 }

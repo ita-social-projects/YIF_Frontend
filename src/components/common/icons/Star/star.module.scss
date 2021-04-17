@@ -1,0 +1,16 @@
+@import '../../../../styles/index.scss';
+
+.card {
+  &__icon {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+
+    &__liked {
+      svg path {
+        fill: #f8b50b;
+      }
+    }
+  }
+}

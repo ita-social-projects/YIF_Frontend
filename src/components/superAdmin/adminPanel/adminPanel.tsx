@@ -26,7 +26,7 @@ const AdminPanel: React.FC = () => {
           </ul>
         </li>
         <li className={styles.hasLink}>
-          <Link className={styles.underlineAnimation} to='#'>
+          <Link className={styles.underlineAnimation} to='/univList'>
             Університети
           </Link>
         </li>

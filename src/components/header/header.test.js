@@ -7,16 +7,15 @@ import { store } from '../../store/store';
 import { Provider } from 'react-redux';
 
 describe('header with no user', () => {
-  let header;
   const links = [
-    { text: 'Напрями', location: '/directions' },
+    { text: 'Спеціальності', location: '/directions' },
     { text: 'Заклади освіти', location: '/institutionsOfEducation' },
     { text: 'Вхід', location: '/login' },
     { text: 'Реєстрація', location: '/register' },
   ];
 
   beforeEach(() => {
-    header = render(
+    render(
       <Provider store={store}>
         <MemoryRouter>
           <Header />
@@ -44,14 +43,13 @@ describe('header with no user', () => {
 });
 
 describe('header with logged in user', () => {
-  let header;
   localStorage.setItem(
     'token',
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjliNmRkNGY2LTIzMGEtNDA4Ni05YWQ5LTQyYTZlNTEwNmJmOCIsImVtYWlsIjoicm9tYW4uYXJrLmtvQGdtYWlsLmNvbSIsInJvbGVzIjoiR3JhZHVhdGUiLCJleHAiOjE2MDkzMzA2NjR9.EqY773v1vn7_OO72pu8GKpk4ylpQ-UZn8oNQMtP7WPg'
   );
 
   beforeEach(() => {
-    header = render(
+    render(
       <AuthProvider>
         <Provider store={store}>
           <MemoryRouter>
@@ -64,7 +62,6 @@ describe('header with logged in user', () => {
 
   test('should clear local storage on logout', () => {
     const avatar = screen.getByAltText('avatar');
-    screen.debug();
 
     act(() => {
       fireEvent.click(avatar);
