@@ -5,7 +5,7 @@
   font-family: $fontNunito;
   color: $darkBlue;
   width: 130px;
-  border: 2px solid $darkBlue;
+  border: 1px solid $darkBlue;
   padding: 5px;
   border-radius: 5px;
   background-color: transparent;
@@ -22,21 +22,17 @@
     }
   }
 
-  &:hover {
-    color: $white;
-    background-color: lighten($color: $darkBlue, $amount: 10);
-  }
-
   &_checked {
-    border: 2px solid rgba($color: #000000, $alpha: 0.5);
+    border: 1px solid rgba($color: #000000, $alpha: 0.5);
     color: rgba($color: #000000, $alpha: 0.5);
     position: relative;
     &:hover {
       path {
         fill: $white;
       }
+      color: $white;
       background-color: rgba($color: #000000, $alpha: 0.5);
-      border: 2px solid rgba($color: #000000, $alpha: 0.7);
+      border: 1px solid transparent;
     }
   }
 }

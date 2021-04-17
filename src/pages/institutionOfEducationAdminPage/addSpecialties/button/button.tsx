@@ -23,7 +23,9 @@ const Button = (props: any) => {
 
   return (
     <button
-      className={`${styles.btn} ${educationForm ? styles.btn_checked : ''}`}
+      className={`${styles.btn} ${styles.animatedButtonTransparent} ${
+        educationForm ? styles.btn_checked : ''
+      }`}
       onClick={onClick}
     >
       {value}
