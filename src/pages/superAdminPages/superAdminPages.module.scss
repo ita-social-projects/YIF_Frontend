@@ -6,7 +6,7 @@
   .navbar {
     @include flex(column, flex-start, center);
     .optionalItem {
-      margin-top: 10px;
+      margin-top: 0.625rem;
     }
 
     .adminLinkOptions {
@@ -21,7 +21,7 @@
       a {
         font-family: $fontNunito;
         font-size: 16px;
-        margin-left: 10px;
+        margin-left: 0.625rem;
       }
 
       .optional {
@@ -35,10 +35,11 @@
 
     .adminLinkOptions {
       @include flex(column, flex-start, center);
+      padding-bottom: 0.375rem;
       div {
         color: #fff;
         font-family: $fontNunito;
-        font-size: 18px;
+        font-size: $font_18px;
         margin-right: 0.5rem;
       }
     }
