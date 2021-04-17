@@ -37,7 +37,7 @@ const InstitutionsOfEducationListPage = () => {
     errorMessage: '',
   });
 
-  const { getToken } = useAuth();
+  const { token, getToken } = useAuth();
 
   const handleClick = async (id: string, isFavorite: boolean) => {
     const currentToken = await getToken();
@@ -130,7 +130,7 @@ const InstitutionsOfEducationListPage = () => {
 
   useEffect(() => {
     getIOEList();
-  }, [currentPage, toggleError]);
+  }, [currentPage, toggleError, token]);
 
   const InstitutionsOfEducationCardList = InstitutionsOfEducationList.map(
     (item: any) => {
