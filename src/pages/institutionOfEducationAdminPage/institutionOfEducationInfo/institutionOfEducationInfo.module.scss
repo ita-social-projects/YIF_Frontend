@@ -5,13 +5,11 @@
     no-repeat;
   font-family: $fontOpenSans;
   font-size: $font_18px;
-  max-width: 100rem;
-  min-height: 110vh;
+  width: 100%;
+  max-width: 90rem;
   margin: 0 auto;
-  .infoContainer {
-    padding: 3.125rem 8.125vw 0 6.25vh;
-    margin-bottom: 25rem;
-  }
+  padding: 3.125rem 8.125vw 25rem 6.25vh;
+
   .buttonLink {
     width: 15rem;
     text-align: center;
@@ -20,4 +18,10 @@
     display: inline-block;
     margin-top: 1.25rem;
   }
+}
+
+.noContentContainer {
+  width: 100%;
+  height: 80vh;
+  @include flex(row, center, center);
 }
