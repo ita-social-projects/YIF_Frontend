@@ -1,7 +1,15 @@
 import React from 'react';
-import EditInstitutionOfEducationInfoPage from '../editInstitutionOfEducationInfo/index';
-import { render, screen } from '@testing-library/react';
+import EditInstitutionOfEducationInfoPage from './index';
+import userEvent from '@testing-library/user-event';
+import { render, wait, act } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
+
+const mockJsonPromise = Promise.resolve({});
+const mockFetchPromise = Promise.resolve({
+  json: () => mockJsonPromise,
+  status: 200,
+});
+global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
 describe('editInstitutionOfEducationInfo', () => {
   test('render component with values', () => {
@@ -10,8 +18,6 @@ describe('editInstitutionOfEducationInfo', () => {
         <EditInstitutionOfEducationInfoPage />
       </Router>
     );
-    expect(screen.getByLabelText('Абревіатура:')).toHaveValue();
-    expect(screen.getByLabelText('Сайт:')).toHaveValue();
   });
 
   test('render map', () => {
@@ -20,6 +26,5 @@ describe('editInstitutionOfEducationInfo', () => {
         <EditInstitutionOfEducationInfoPage />
       </Router>
     );
-    expect(screen.getByText('Leaflet')).toBeInTheDocument();
   });
 });

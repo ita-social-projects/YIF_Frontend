@@ -5,7 +5,7 @@ import InstitutionOfEducationInfo from './institutionOfEducationInfo';
 import styles from './institutionOfEducationAdminPage.module.scss';
 import { Route, Redirect, Switch, useRouteMatch } from 'react-router-dom';
 import Moderators from './moderators';
-import EditInstitutionOfEducationInfoPage from './editInstitutionOfEducationInfo';
+import EditInstitutionOfEducationInfoPage from './editInstitutionOfEducationInfoPage';
 import OurSpecialties from './ourSpecialties';
 import EditSpecialty from './editSpecialtyPage';
 import AddSpecialties from './addSpecialties';
