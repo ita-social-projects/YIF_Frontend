@@ -1,11 +1,12 @@
-@import '../../../styles.scss';
+@import '../../../styles/index.scss';
 
 .institutionOfEducationListSection {
-  width: inherit;
+  @include flex(row, flex-start, center);
+  width: 100%;
   height: auto;
   min-height: 45rem;
   background-color: $lightBlue_3;
-  padding-left: 4.5rem;
+  padding: 0 3.125rem;
   position: relative;
   padding-top: 0.5rem;
 }
@@ -15,10 +16,9 @@
   height: auto;
   @include flex(column, center, flex-start);
   padding-bottom: 30px;
-  padding-right: 9.03vw;
 }
 
 .spinnerContainer {
-  margin-top: 100px;
+  margin-top: 6.25rem;
   @include flex(row, center, center);
 }

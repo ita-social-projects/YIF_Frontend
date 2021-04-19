@@ -1,7 +1,7 @@
-import React, { Fragment } from "react";
-import style from "./specListOption.module.scss";
+import React, { Fragment } from 'react';
+import style from './likedSpecialties.module.scss';
 
-const SpecListOption = () => {
+const LikedSpecialties = () => {
   return (
     <Fragment>
       <div className={style.mainstyle}>
@@ -11,4 +11,4 @@ const SpecListOption = () => {
   );
 };
 
-export default SpecListOption;
+export default LikedSpecialties;

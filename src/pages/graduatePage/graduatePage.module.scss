@@ -1,8 +1,9 @@
 @import '../../styles/index.scss';
 
-.institutionOfEducationAdminContent {
+.graduateAccountPage {
   display: flex;
-  nav {
+
+  .asideNav {
     @include flex(column, flex-start, center);
   }
 }

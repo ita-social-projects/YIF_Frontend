@@ -1,77 +1,56 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import styles from './userOption.module.scss';
-import { FormButton, FormInputError } from '../../../common/formElements';
+import React, { useEffect, useState } from 'react';
+import styles from './myInfo.module.scss';
+import {
+  FormButton,
+  FormInputError,
+} from '../../../components/common/formElements';
 import { Field, Form, Formik } from 'formik';
-import { validationField } from '../../../../services/validateForm/ValidatorsField';
-import FormInputProfile from '../../../common/formElements/formInputProfile';
-import Spinner from '../../../common/spinner';
-import ImageUploader from '../../../imageUploader';
-import useProfile from '../../../../services/useProfile';
-import { APIUrl } from '../../../../services/endpoints';
-import { FormInputSuccess } from '../../../common/formElements/formInputSuccess/formInputSuccess';
-import { userSelector } from '../../../../store/reducers/setUserReducer';
+import { validationField } from '../../../services/validateForm/ValidatorsField';
+import FormInputProfile from '../../../components/common/formElements/formInputProfile';
+import Spinner from '../../../components/common/spinner';
+import ImageUploader from '../../../components/imageUploader';
+import useProfile from '../../../services/useProfile';
+import { APIUrl } from '../../../services/endpoints';
+import { FormInputSuccess } from '../../../components/common/formElements/formInputSuccess/formInputSuccess';
+import { userSelector } from '../../../store/reducers/setUserReducer';
 import { useSelector } from 'react-redux';
-import { requestData } from '../../../../services/requestDataFunction';
-import { requestImageProfile } from '../../../../services/requestDataFunction';
-import { store } from '../../../../store/store';
-import { setUserPhoto } from '../../../../store/reducers/setUserReducer';
+import { requestData } from '../../../services/requestDataFunction';
+import { requestImageProfile } from '../../../services/requestDataFunction';
+import { store } from '../../../store/store';
+import { setUserPhoto } from '../../../store/reducers/setUserReducer';
 
-const UserOption = () => {
-  const avatarSyles = {
-    position: 'absolute',
-    top: '2.5rem',
-    left: '2.5rem',
-  };
-
+const MyInfo = () => {
   const url = `${APIUrl}Users/Current/SetProfile`;
   const useYIFProfile = useProfile(url);
   const user = useSelector(userSelector);
   const [listSchool, setListSchool] = useState([]);
-  const [error, setError] = useState({
-    hasError: false,
-    errorStatusCode: '',
-    errorMessage: '',
-  });
-
-  const [isLoading, setLoading] = useState(false);
-  const [isSuccessLoad, setSuccessLoad] = useState(false);
-  const [profileImageSrc, setProfileImageSrc] = useState();
-
-  const [pic, setPic] = useState('');
-  const settingPic = (value: string) => {
-    setPic(value);
-  };
-
   const { photo } = useSelector(userSelector);
   const defaultPicture = '/assets/icons/avatar.jpg';
   const avatar = photo ? photo : defaultPicture;
 
   const imageHandler = (image: string) => {
-    setLoading(true);
-
     requestImageProfile(`${APIUrl}Users/Current/ChangePhoto`, 'POST', {
       photo: image,
     })
       .then((res: any) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
-          // setError('');
-          setSuccessLoad(true);
-          setLoading(false);
-          setProfileImageSrc(res.data.photo);
           store.dispatch(
             setUserPhoto({
               photo: res.data.photo,
             })
           );
         } else {
-          setError(res.data.message || 'Щось пішло не так, спробуйте знову.');
-          setLoading(false);
+          useYIFProfile.setError({
+            hasError: true,
+            errorStatusCode: res.statusCode,
+            errorMessage:
+              res.data.message || 'Щось пішло не так, спробуйте знову.',
+          });
         }
       })
-      .catch((err) => {
-        // setError('Щось пішло не так, ви можете спробувати знову.');
-        setLoading(false);
+      .catch((errr) => {
+        console.log(errr);
       });
   };
 
@@ -80,10 +59,9 @@ const UserOption = () => {
       .then((res: any) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
-          setError({ hasError: false, errorStatusCode: '', errorMessage: '' });
           setListSchool(res.data);
         } else {
-          setError({
+          useYIFProfile.setError({
             hasError: true,
             errorStatusCode: res.statusCode,
             errorMessage:
@@ -91,20 +69,16 @@ const UserOption = () => {
           });
         }
       })
-      .catch((error) => {
-        setError({
-          hasError: true,
-          errorStatusCode: error.statusCode,
-          errorMessage: 'Щось пішло не так, спробуйте знову.',
-        });
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
 
   return (
-    <Fragment>
+    <div className={styles.container}>
       <section className={styles.mainStyle}>
         <ImageUploader
-          additionalStyles={avatarSyles}
+          additionalStyles={{}}
           avatar={avatar}
           aspectRatio={1}
           text='профілю'
@@ -141,10 +115,7 @@ const UserOption = () => {
             }}
             enableReinitialize
             validationSchema={validationField}
-            onSubmit={(values, actions) => {
-              actions.setSubmitting(false);
-              console.log(values);
-            }}
+            onSubmit={() => {}}
           >
             {({
               values,
@@ -153,10 +124,6 @@ const UserOption = () => {
               handleChange,
               handleBlur,
               handleSubmit,
-              isSubmitting,
-              isValid,
-              setFieldTouched,
-              setFieldValue,
             }) => (
               <Form
                 className={styles.form}
@@ -300,12 +267,9 @@ const UserOption = () => {
             )}
           </Formik>
         </div>
-        <div className={styles.img}>
-          <img src='assets/images/userProfile.svg' alt='user' />
-        </div>
       </section>
-    </Fragment>
+    </div>
   );
 };
 
-export default UserOption;
+export default MyInfo;
