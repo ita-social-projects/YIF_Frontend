@@ -9,11 +9,11 @@ const SortingPanel = () => {
       <div className={styles.sortingOptions}>
         <div className={styles.sortItem}>
           <span>Назва</span>
-          <ThinArrow direction={'up'} />
+          <ThinArrow isUp={false} />
         </div>
         <div className={styles.sortItem}>
           <span>Заблоковані</span>
-          <ThinArrow direction={'up'} />
+          <ThinArrow isUp={false} />
         </div>
       </div>
     </div>

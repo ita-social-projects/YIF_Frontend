@@ -1,0 +1,47 @@
+@import '../../styles/index.scss';
+
+.superAdmin {
+  display: flex;
+
+  .navbar {
+    @include flex(column, flex-start, center);
+    .optionalItem {
+      margin-top: 0.625rem;
+    }
+
+    .adminLinkOptions {
+      @include flex(column, flex-start, center);
+      margin-bottom: 1rem;
+      cursor: pointer;
+
+      .admins {
+        display: flex;
+      }
+
+      a {
+        font-family: $fontNunito;
+        font-size: 16px;
+        margin-left: 0.625rem;
+      }
+
+      .optional {
+        display: none;
+      }
+    }
+
+    a {
+      margin: 0 0 1rem 0;
+    }
+
+    .adminLinkOptions {
+      @include flex(column, flex-start, center);
+      padding-bottom: 0.375rem;
+      div {
+        color: #fff;
+        font-family: $fontNunito;
+        font-size: $font_18px;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}

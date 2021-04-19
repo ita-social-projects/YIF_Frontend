@@ -3,7 +3,7 @@ import { Footer, Header } from '../../components';
 import Aside from '../../components/institutionOfEducationAdmin/aside';
 import InstitutionOfEducationInfo from './institutionOfEducationInfo';
 import styles from './institutionOfEducationAdminPage.module.scss';
-import { Route, Redirect, Switch, useRouteMatch } from 'react-router-dom';
+import { Route, Redirect, Switch, useRouteMatch, Link } from 'react-router-dom';
 import Moderators from './moderators';
 import EditInstitutionOfEducationInfoPage from './editInstitutionOfEducationInfo';
 import OurSpecialties from './ourSpecialties';
@@ -15,7 +15,28 @@ function InstitutionOfEducationAdminPage() {
     <>
       <Header />
       <section className={styles.institutionOfEducationAdminContent}>
-        <Aside />
+        <Aside>
+          <nav>
+            <Link
+              className={styles.underlineAnimation}
+              to={`${path}/institutionofEducationInfo`}
+            >
+              Заклад освіти
+            </Link>
+            <Link
+              className={styles.underlineAnimation}
+              to={`${path}/ourSpecialties`}
+            >
+              Спеціальності
+            </Link>
+            <Link
+              className={styles.underlineAnimation}
+              to={`${path}/moderators`}
+            >
+              Модератори
+            </Link>
+          </nav>
+        </Aside>
         <Switch>
           <Route exact path={`/institutionOfEducationAccount`}>
             <Redirect to={`${path}/ourSpecialties`} />

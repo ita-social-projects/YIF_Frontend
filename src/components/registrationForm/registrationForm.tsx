@@ -7,6 +7,7 @@ import {
   FormCloseButton,
   FormInput,
   FormInputError,
+  FormInputCheckbox,
   FormTextField,
   FormTitle,
 } from '../common/formElements';
@@ -35,7 +36,7 @@ const RegistrationForm: React.FC = () => {
           />
         )}
         <Formik
-          initialValues={{ email: '', password: '', confirmPassword: '' }}
+          initialValues={{ email: '', password: '', confirmPassword: '', storeDataCheckbox: false,}}
           validationSchema={validationField}
           onSubmit={(values, actions) => {
             actions.setSubmitting(false);
@@ -44,6 +45,7 @@ const RegistrationForm: React.FC = () => {
                 email: '',
                 password: '',
                 confirmPassword: '',
+                storeDataCheckbox: false,
               },
             });
           }}
@@ -65,7 +67,8 @@ const RegistrationForm: React.FC = () => {
                   touched.email &&
                   errors.email === undefined &&
                   errors.password === undefined &&
-                  errors.confirmPassword === undefined
+                  errors.confirmPassword === undefined &&
+                  errors.storeDataCheckbox === undefined
                 ) {
                   useYIFRegistration.handleSubmit(e, '/cabinet');
                 }
@@ -119,6 +122,15 @@ const RegistrationForm: React.FC = () => {
                   }}
                   onBlur={handleBlur}
                   value={values.confirmPassword}
+                />
+              </div>
+              <div>
+              <Field
+                  id='storeDataCheckbox'
+                  component={FormInputCheckbox}
+                  labelText='Прийміть умови зберігання персональної інформації'
+                  type='checkbox'
+                  name='storeDataCheckbox'
                 />
               </div>
               <FormButton

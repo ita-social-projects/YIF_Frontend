@@ -33,8 +33,8 @@ const SpecialityPage = () => {
       description: '',
       educationalProgramLink: '',
       examRequirements: [],
-      educationFormToDescriptions: [],
-      paymentFormToDescriptions: [],
+      educationForm: '',
+      paymentForm: '',
     },
   ]);
 
@@ -42,14 +42,28 @@ const SpecialityPage = () => {
   const { id } = useParams<any>();
 
   useEffect(() => {
-    setFetching(true);
     const endpointForSpecialties = `${APIUrl}Specialty/Descriptions/${id}`;
-    requestData(endpointForSpecialties, 'GET')
-      .then((res: any) => {
-        setSpecialityList(res.data);
-      })
-      .finally(() => setFetching(false));
-  }, []);
+    requestData(endpointForSpecialties, 'GET').then((res: any) => {
+      const newList = res.data.map((item: any) => {
+        const itemDescription = item.descriptions[0];
+        return {
+          id: item.id,
+          institutionOfEducationAbbreviation:
+            item.institutionOfEducationAbbreviation,
+          institutionOfEducationId: item.institutionOfEducationId,
+          specialtyCode: item.specialtyCode,
+          specialtyName: item.specialtyName,
+          description: itemDescription.description,
+          educationalProgramLink: itemDescription.educationalProgramLink,
+          examRequirements: itemDescription.examRequirements,
+          educationForm: itemDescription.educationForm,
+          paymentForm: itemDescription.paymentForm,
+        };
+      });
+      setSpecialityList(newList);
+      setFetching(false);
+    });
+  }, [id]);
 
   const name = specialityList[0].specialtyName;
   const code = specialityList[0].specialtyCode;
@@ -61,12 +75,12 @@ const SpecialityPage = () => {
         institutionOfEducationAbbreviation={
           item.institutionOfEducationAbbreviation
         }
+        institutionOfEducationId={item.institutionOfEducationId}
         examRequirements={item.examRequirements}
-        educationFormToDescriptions={item.educationFormToDescriptions}
-        paymentFormToDescriptions={item.paymentFormToDescriptions}
+        educationForm={item.educationForm}
+        paymentForm={item.paymentForm}
         educationalProgramLink={item.educationalProgramLink}
         description={item.description}
-        institutionOfEducationId={item.institutionOfEducationId}
       />
     );
   });

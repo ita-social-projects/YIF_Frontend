@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import ImageUploaderPopup from './imageUploaderPopup/imageUploaderPopup';
 import style from './imageUploader.module.scss';
-import { useSelector } from 'react-redux';
-import { userSelector } from '../../store/reducers/setUserReducer';
 import { FormInputSuccess } from '../common/formElements/formInputSuccess/formInputSuccess';
 
 const ImageUploader = (props: any) => {

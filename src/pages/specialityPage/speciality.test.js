@@ -24,33 +24,25 @@ const data = [
   {
     id: '64ef8f57-de92-41f4-a034-51e47abfb5de',
     institutionOfEducationAbbreviation: 'ОА',
+    specialtyName: 'Системний аналіз',
+    specialtyCode: '124',
     description: 'We are the best institution Of Education ever',
-    examRequirements: [
+    descriptions: [
       {
-        name: 'Українська мова та література',
-        mark: '150',
-        coefficient: '0,25',
-      },
-      { name: 'Математика', mark: '150', coefficient: '0,45' },
-      { name: 'Історія', mark: '150', coefficient: '0,35' },
-    ],
-    educationFormToDescriptions: [
-      {
-        educationFormName: 'денна',
-      },
-      {
-        educationFormName: 'заочна',
-      },
-      {
-        educationFormName: 'вечірня',
-      },
-    ],
-    paymentFormToDescriptions: [
-      {
-        paymentFormName: 'контракт',
-      },
-      {
-        paymentFormName: 'бюджет',
+        id: '504c2f8c-5520-4eb0-b1e5-f773b492efff',
+        educationalProgramLink: 'example.com',
+        description: 'base description',
+        examRequirements: [
+          {
+            examName: 'Українська мова та література',
+            minimumScore: '150',
+            coefficient: '0,25',
+          },
+          { examName: 'Математика', minimumScore: '150', coefficient: '0,45' },
+          { examName: 'Історія', minimumScore: '150', coefficient: '0,35' },
+        ],
+        educationForm: 'денна',
+        paymentForm: 'контракт',
       },
     ],
   },

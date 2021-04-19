@@ -1,5 +1,4 @@
 import React from 'react';
-import { AdminPanel, Header } from '../../../components';
 import Pagination from '../../../components/superAdmin/pagination';
 import SortingPanel from '../../../components/superAdmin/sortingPanel';
 import UniversityItem from '../../../components/superAdmin/universityItem';
@@ -41,10 +40,8 @@ const univList = [
 
 const UniversityListPage: React.FC = () => {
   return (
-    <>
-      <Header />
+    <div className={styles.container}>
       <div className={styles.wrapper}>
-        <AdminPanel />
         <main className={styles.universityListPage}>
           <h1>Університети</h1>
           <Pagination />
@@ -64,7 +61,7 @@ const UniversityListPage: React.FC = () => {
           })}
         </main>
       </div>
-    </>
+    </div>
   );
 };
 

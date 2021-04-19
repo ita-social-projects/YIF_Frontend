@@ -7,8 +7,8 @@
 }
 
 .pagination {
-  height: 50px;
-  margin-bottom: 10px;
+  height: 3.125rem;
+  margin-bottom: 0.625rem;
   @include flex(row, center, center);
 
   .leftArrow {

@@ -100,7 +100,6 @@ const useProfile = (endpoint: string) => {
               successMessage: '',
             });
           }, 3000);
-          console.log('success kinda');
           store.dispatch(setUserReducer(res.data));
           setSubmitted(false);
         } else {
@@ -110,7 +109,6 @@ const useProfile = (endpoint: string) => {
             errorMessage:
               res.data.message || 'Щось пішло не так, спробуйте знову.',
           });
-          console.log('bad');
         }
       })
       .catch((error) => {
@@ -119,7 +117,6 @@ const useProfile = (endpoint: string) => {
           errorStatusCode: error.statusCode,
           errorMessage: 'Щось пішло не так, спробуйте знову.',
         });
-        console.log('bad bad');
       });
   };
   return {
@@ -139,6 +136,7 @@ const useProfile = (endpoint: string) => {
     submitted,
     error,
     success,
+    setError,
   };
 };
 
