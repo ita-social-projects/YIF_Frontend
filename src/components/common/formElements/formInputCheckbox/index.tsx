@@ -36,7 +36,6 @@ const FormInputCheckbox: FC<CustomInputProps & FieldProps> = ({
         <FormInputError
           errorType="input"
           errorMessage={errors[field.name]}
-          data-testid={field.name}
         />
       ) : null}
     </div>

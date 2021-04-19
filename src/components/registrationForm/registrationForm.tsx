@@ -125,7 +125,7 @@ const RegistrationForm: React.FC = () => {
                 />
               </div>
               <div>
-               <Field
+              <Field
                   id='storeDataCheckbox'
                   component={FormInputCheckbox}
                   labelText='Прийміть умови зберігання персональної інформації'
