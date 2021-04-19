@@ -8,7 +8,6 @@ import { APIUrl } from '../../../services/endpoints';
 import Spinner from '../../../components/common/spinner/index';
 
 interface Info {
-  id: string;
   name: string;
   abbreviation: string;
   site: string;
@@ -16,13 +15,18 @@ interface Info {
   phone: string;
   email: string;
   description: string;
+  imagePath: string;
 }
 
 const InstitutionOfEducationInfo = () => {
+  const [isFetching, setIsFetching] = useState(true);
+  const [error, setError] = useState(false);
   const { path } = useRouteMatch();
   const { getToken } = useAuth();
-  const [data, setData] = useState<Info>({
-    id: '',
+  const [
+    { name, abbreviation, site, address, phone, email, description, imagePath },
+    setData,
+  ] = useState<Info>({
     name: '',
     abbreviation: '',
     site: '',
@@ -30,19 +34,8 @@ const InstitutionOfEducationInfo = () => {
     phone: '',
     email: '',
     description: '',
+    imagePath: '',
   });
-  const [isFetching, setIsFetching] = useState(true);
-  const [error, setError] = useState(false);
-  const {
-    id,
-    name,
-    abbreviation,
-    site,
-    address,
-    phone,
-    email,
-    description,
-  } = data;
 
   useEffect(() => {
     const getInfo = async () => {
@@ -55,16 +48,15 @@ const InstitutionOfEducationInfo = () => {
         );
         if (statusCode.toString().match(/^[23]\d{2}$/)) {
           setData(data);
-          setIsFetching(false);
           setError(false);
         } else {
           setError(true);
-          setIsFetching(false);
         }
       } catch (e) {
         console.log(e);
-        setIsFetching(false);
         setError(true);
+      } finally {
+        setIsFetching(false);
       }
     };
     getInfo();
@@ -88,7 +80,6 @@ const InstitutionOfEducationInfo = () => {
       <main className={styles.wrapper}>
         <div className={styles.infoContainer}>
           <InstitutionOfEducationBlock
-            id={id}
             name={name}
             abbreviation={abbreviation}
             site={site}
@@ -96,10 +87,11 @@ const InstitutionOfEducationInfo = () => {
             phone={phone}
             email={email}
             description={description}
+            imagePath={`http://localhost:5000/images/${imagePath}`}
           />
           <Link
             className={`${styles.animatedButton} ${styles.buttonLink}`}
-            to={`${path}/edit/${id}`}
+            to={`${path}/edit`}
           >
             Редагувати
           </Link>

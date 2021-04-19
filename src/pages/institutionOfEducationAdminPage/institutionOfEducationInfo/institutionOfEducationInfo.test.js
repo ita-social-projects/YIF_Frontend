@@ -14,7 +14,6 @@ jest.mock('../../../services/tokenValidator.tsx', () => {
 });
 
 const mockJsonPromise = Promise.resolve({
-  id: '1',
   name: 'University',
   abbreviation: 'UN',
   site: 'site.com',
