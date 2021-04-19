@@ -117,10 +117,10 @@ const SpecialityCard: React.FC<Props> = (props) => {
           >
             <div className={styles.card__details}>
               <p>
-                <strong>Форма навчання:</strong> {paymentForm}{' '}
+                <strong>Форма навчання:</strong> {educationForm}{' '}
               </p>
               <p>
-                <strong>Форма оплати:</strong> {educationForm}{' '}
+                <strong>Форма оплати:</strong> {paymentForm}{' '}
               </p>
               <p>
                 <strong>Освітня програма:</strong> {educationalProgramLink}{' '}
