@@ -5,8 +5,13 @@ import styles from './editInstitutionOfEducationInfo.module.scss';
 import { FormButton } from '../common/formElements/index';
 import UniversityMap from '../superAdmin/addInstitutionOfEducationForm/map';
 import ImageUploader from '../institutionOfEducationAdmin/imageUploader';
+import editIOEValidationSchema from './editIOEValidation';
 
-interface Values {
+type Image = {
+  photo: string;
+};
+
+interface Common {
   name: string;
   abbreviation: string;
   site: string;
@@ -14,28 +19,36 @@ interface Values {
   phone: string;
   email: string;
   description: string;
+  institutionOfEducationType: string | number;
 }
 
-interface FormikValues extends Values {
+interface Data extends Common {
+  lat: number | string;
+  lon: number | string;
+  imagePath: string;
+}
+
+interface FormikValues extends Common {
   institutionOfEducationLat: number | string;
   institutionOfEducationLon: number | string;
 }
 
-interface Info extends Values {
+interface NewValues extends Common {
   lat: number | string;
   lon: number | string;
+  imageApiModel: Image;
 }
 
 interface Props {
-  data: Info;
-  submitHandler(values: Info): void;
+  data: Data;
+  submitHandler(values: NewValues): void;
 }
 
 const EditInstitutionOfEducationInfo: React.FC<Props> = ({
   data,
   submitHandler,
 }) => {
-  // const [image, setImage] = useState('');
+  const [image, setImage] = useState('');
   const {
     name,
     abbreviation,
@@ -46,6 +59,8 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
     description,
     lat,
     lon,
+    imagePath,
+    institutionOfEducationType,
   } = data;
 
   const initialValues = {
@@ -56,11 +71,14 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
     phone,
     email,
     description,
+    institutionOfEducationType,
+    institutionOfEducationLat: lat,
+    institutionOfEducationLon: lon,
   };
 
-  // const imageHandler = (image: any) => {
-  //   setImage(image);
-  // };
+  const imageHandler = (image: string) => {
+    setImage(image);
+  };
 
   const onSubmit = (values: FormikValues) => {
     const {
@@ -71,10 +89,12 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
       phone,
       email,
       description,
+      institutionOfEducationType,
+      institutionOfEducationLat,
+      institutionOfEducationLon,
     } = values;
-    const lat = values.institutionOfEducationLat;
-    const lon = values.institutionOfEducationLon;
-    const newData: Info = {
+
+    submitHandler({
       name,
       abbreviation,
       site,
@@ -82,10 +102,13 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
       phone,
       email,
       description,
-      lat,
-      lon,
-    };
-    submitHandler(newData);
+      lat: institutionOfEducationLat,
+      lon: institutionOfEducationLon,
+      institutionOfEducationType,
+      imageApiModel: {
+        photo: image || imagePath,
+      },
+    });
   };
 
   return (
@@ -97,24 +120,21 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
         <h3 className={styles.subtitle}>
           Натисніть на поле для вводу, щоб ввести нові дані
         </h3>
-        {/* <ImageUploader
-foto={foto}
-aspectRatio={16 / 9}
-text={'університету'}
-imageHandler={imageHandler}
-/> */}
+        <ImageUploader
+          foto={image || `http://localhost:5000/images/${imagePath}`}
+          aspectRatio={16 / 9}
+          text={'університету'}
+          imageHandler={imageHandler}
+        />
         <h2 className={styles.infoTitle}>Основна інформація</h2>
         <Formik
-          initialValues={{
-            ...initialValues,
-            institutionOfEducationLat: lat,
-            institutionOfEducationLon: lon,
-          }}
+          initialValues={initialValues}
+          validationSchema={editIOEValidationSchema}
           onSubmit={(values) => {
             onSubmit(values);
           }}
         >
-          {({ setFieldValue }) => (
+          {({ setFieldValue, errors }) => (
             <Form className={styles.formContainer}>
               <div className={styles.infoBox}>
                 <div className={styles.selectField}>
@@ -122,12 +142,18 @@ imageHandler={imageHandler}
                   <Field
                     as='select'
                     name='institutionOfEducationType'
+                    data-testid='select'
                     className={styles.selector}
                   >
                     <option value=''>Виберіть тип...</option>
                     <option value='University'>Університет</option>
                     <option value='College'>Коледж</option>
                   </Field>
+                  {errors.institutionOfEducationType && (
+                    <div className={styles.selectError}>
+                      <p>Виберіть тип...</p>
+                    </div>
+                  )}
                 </div>
                 <Input id='name' label='Повна назва:' name='name' />
                 <Input

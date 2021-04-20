@@ -21,6 +21,7 @@
     .subtitle {
       @extend .headingStyle;
       font-size: $font_18px;
+      margin-bottom: 2rem;
     }
 
     .infoTitle {
@@ -40,15 +41,33 @@
       width: 100%;
       background-color: #bad0e5;
       border-radius: 0.5rem;
-      padding: 1.25rem 7rem;
+      padding: 1.25rem 5rem;
     }
 
     .selectField {
       margin-bottom: 1rem;
+      position: relative;
       span {
         margin-right: 1rem;
         font-family: $fontOpenSans;
         font-size: $font_18px;
+      }
+
+      .selectError {
+        @include flex(row, center, flex-end);
+        margin-right: 1rem;
+        position: absolute;
+        right: 0;
+
+        p {
+          @include flex(row, center, flex-start);
+          background-color: rgba($red, 0.4);
+          width: 11.4rem;
+          border-radius: 0.3rem;
+          height: 2rem;
+          padding-left: 1rem;
+          font-family: $fontNunito;
+        }
       }
     }
 

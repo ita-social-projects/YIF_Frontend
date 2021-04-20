@@ -7,7 +7,6 @@ import Spinner from '../../../components/common/spinner';
 import EditInstitutionOfEducationInfo from '../../../components/editIOEInfo';
 
 interface Info {
-  id: string;
   name: string;
   abbreviation: string;
   site: string;
@@ -17,6 +16,8 @@ interface Info {
   description: string;
   lat: number;
   lon: number;
+  imagePath: string;
+  institutionOfEducationType: string | number;
 }
 
 const EditInstitutionOfEducationInfoPage = () => {
@@ -25,7 +26,6 @@ const EditInstitutionOfEducationInfoPage = () => {
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
   const [data, setData] = useState<Info>({
-    id: '',
     name: '',
     abbreviation: '',
     site: '',
@@ -35,6 +35,8 @@ const EditInstitutionOfEducationInfoPage = () => {
     description: '',
     lat: 0,
     lon: 0,
+    imagePath: '',
+    institutionOfEducationType: '',
   });
 
   const sendNewDescription = async (formikValues: any) => {
@@ -54,7 +56,7 @@ const EditInstitutionOfEducationInfoPage = () => {
         setError(true);
       }
     } catch (e) {
-      console.warn('Error when trying send new IOE info', e);
+      console.log('Error when trying send new IOE info', e);
       setError(true);
     }
   };
@@ -76,7 +78,7 @@ const EditInstitutionOfEducationInfoPage = () => {
             setError(true);
           }
         } catch (e) {
-          console.warn('Error when trying get IOE info', e);
+          console.log('Error when trying get IOE info', e);
           setError(true);
         } finally {
           setIsFetching(false);
@@ -87,6 +89,9 @@ const EditInstitutionOfEducationInfoPage = () => {
       };
       getInfo();
     }
+    // return () => {
+    //   setIsNew(false);
+    // };
   }, [isNew]);
 
   let content;
