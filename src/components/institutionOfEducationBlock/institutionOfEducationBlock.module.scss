@@ -1,14 +1,33 @@
 @import '../../styles/index.scss';
 
-.infoContainer {
-  &__abbr {
+.container {
+  max-width: 75rem;
+  .abbreviation {
     font-family: $fontNunito;
     font-size: $font_40px;
     font-weight: $extraBold;
     height: 3.438rem;
   }
-  &__mainInfo {
+
+  .mainInfo {
     @include flex(row, flex-start, space-between);
+
+    .textInfo {
+      .fullName {
+        font-size: $font_30px;
+        font-weight: $semiBold;
+        font-family: $fontNunito;
+      }
+
+      a {
+        color: $black;
+        text-decoration: underline;
+      }
+      p {
+        margin: 1.25rem 0;
+      }
+    }
+
     img {
       width: 25rem;
       height: 14rem;
@@ -16,29 +35,12 @@
       opacity: 80%;
       margin-top: 0.5rem;
     }
-
-    .description {
-      margin-top: 0;
-    }
-    p {
-      margin: 1.25rem 0;
-      line-height: 1.563rem;
-
-      span {
-        font-weight: $semiBold;
-        margin-right: 0.5rem;
-      }
-    }
   }
-  &__textInfo {
-    &__fullName {
-      font-size: $font_30px;
-      font-weight: $semiBold;
-      font-family: $fontNunito;
-    }
-    a {
-      color: $black;
-      text-decoration: underline;
-    }
+  p {
+    line-height: 1.563rem;
+  }
+  span {
+    font-weight: $semiBold;
+    margin-right: 0.5rem;
   }
 }
