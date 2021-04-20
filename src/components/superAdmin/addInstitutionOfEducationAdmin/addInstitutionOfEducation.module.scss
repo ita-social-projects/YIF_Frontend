@@ -5,7 +5,6 @@
     no-repeat;
   font-family: $fontOpenSans;
   font-size: $font_18px;
-  max-width: 100rem;
   min-height: 110vh;
   margin: 0 auto;
   .infoContainer {
@@ -25,6 +24,7 @@
         margin-top: 20px;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         &__name {
+          margin: 1.25rem 0;
           font-size: 18px;
           color: #000000;
         }
@@ -49,15 +49,6 @@
       border-radius: 0.5rem;
       display: inline-block;
       margin-top: 1.25rem;
-    }
-  }
-  p {
-    margin: 1.25rem 0;
-    line-height: 1.563rem;
-
-    span {
-      font-weight: $semiBold;
-      margin-right: 0.5rem;
     }
   }
 }

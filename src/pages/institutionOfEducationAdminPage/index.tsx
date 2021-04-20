@@ -46,7 +46,7 @@ function InstitutionOfEducationAdminPage() {
             <InstitutionOfEducationInfo />
           </Route>
 
-          <Route path={`${path}/institutionOfEducationInfo/edit/:id`}>
+          <Route path={`${path}/institutionOfEducationInfo/edit`}>
             <EditInstitutionOfEducationInfoPage />
           </Route>
 
