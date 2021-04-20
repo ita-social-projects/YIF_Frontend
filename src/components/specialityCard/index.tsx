@@ -9,8 +9,8 @@ interface Props {
   institutionOfEducationId: string;
   description: string;
   educationalProgramLink: string;
-  educationFormToDescriptions: any;
-  paymentFormToDescriptions: any;
+  educationForm: string;
+  paymentForm: string;
 }
 
 const arrowSVG = (
@@ -56,8 +56,8 @@ const SpecialityCard: React.FC<Props> = (props) => {
     code,
     institutionOfEducationAbbreviation,
     examRequirements,
-    educationFormToDescriptions,
-    paymentFormToDescriptions,
+    educationForm,
+    paymentForm,
     educationalProgramLink,
     description,
     institutionOfEducationId,
@@ -72,25 +72,7 @@ const SpecialityCard: React.FC<Props> = (props) => {
       <div className={styles.card__content_coefficient}>{item.coefficient}</div>
     </li>
   ));
-  const paymentForm = educationFormToDescriptions.map(
-    (item: any, idx: number) => (
-      <span key={idx}>
-        {idx != educationFormToDescriptions.length - 1
-          ? item.educationFormName + ' / '
-          : item.educationFormName}{' '}
-      </span>
-    )
-  );
 
-  const educationForm = paymentFormToDescriptions.map(
-    (item: any, idx: number) => (
-      <span key={idx}>
-        {idx != paymentFormToDescriptions.length - 1
-          ? item.paymentFormName + ' / '
-          : item.paymentFormName}
-      </span>
-    )
-  );
   return (
     <div
       data-testid='card'
@@ -135,10 +117,10 @@ const SpecialityCard: React.FC<Props> = (props) => {
           >
             <div className={styles.card__details}>
               <p>
-                <strong>Форма навчання:</strong> {paymentForm}{' '}
+                <strong>Форма навчання:</strong> {educationForm}{' '}
               </p>
               <p>
-                <strong>Форма оплати:</strong> {educationForm}{' '}
+                <strong>Форма оплати:</strong> {paymentForm}{' '}
               </p>
               <p>
                 <strong>Освітня програма:</strong> {educationalProgramLink}{' '}

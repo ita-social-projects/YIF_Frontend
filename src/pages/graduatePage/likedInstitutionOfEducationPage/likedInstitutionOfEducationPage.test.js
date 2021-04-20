@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import InstitutionOfEducationListOption from './index.tsx';
+import InstitutionOfEducationList from '.';
 import { Provider } from 'react-redux';
-import { store } from '../../../../store/store.ts';
+import { store } from '../../../store/store.ts';
 import { render, screen, act, fireEvent } from '@testing-library/react';
-import { setRoleReducer } from '../../../../store/reducers/setRoleReducer';
+import { setRoleReducer } from '../../../store/reducers/setRoleReducer';
 
-const mock = require('../../../../services/tokenValidator');
+const mock = require('../../../services/tokenValidator');
 
 mock.useAuth = jest.fn(() => {
   return {
@@ -43,13 +43,13 @@ const mockFetchPromise = Promise.resolve({
 });
 global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
-describe('test IOEFavoritesList component', () => {
+describe('InstitutionOfEducationList', () => {
   test('check success response', async () => {
     await act(async () => {
       render(
         <Provider store={store}>
           <Router>
-            <InstitutionOfEducationListOption />
+            <InstitutionOfEducationList />
           </Router>
         </Provider>
       );
@@ -70,7 +70,7 @@ describe('test IOEFavoritesList component', () => {
       render(
         <Provider store={store}>
           <Router>
-            <InstitutionOfEducationListOption />
+            <InstitutionOfEducationList />
           </Router>
         </Provider>
       );
@@ -94,7 +94,7 @@ describe('test IOEFavoritesList component', () => {
       render(
         <Provider store={store}>
           <Router>
-            <InstitutionOfEducationListOption />
+            <InstitutionOfEducationList />
           </Router>
         </Provider>
       );
@@ -113,7 +113,7 @@ describe('test IOEFavoritesList component', () => {
     render(
       <Provider store={store}>
         <Router>
-          <InstitutionOfEducationListOption />
+          <InstitutionOfEducationList />
         </Router>
       </Provider>
     );
@@ -137,7 +137,7 @@ describe('test IOEFavoritesList component', () => {
     render(
       <Provider store={store}>
         <Router>
-          <InstitutionOfEducationListOption />
+          <InstitutionOfEducationList />
         </Router>
       </Provider>
     );

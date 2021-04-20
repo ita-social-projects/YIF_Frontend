@@ -1,33 +1,23 @@
-@import '../../../styles.scss';
+@import '../../../styles/index.scss';
+
+.container {
+  @include flex(row, flex-start, center);
+  width: 100%;
+}
 
 .mainStyle {
-  width: inherit;
-  background: $lightBlue_3;
-  padding: 2.5rem 25rem 0 2.5rem;
+  @include flex(row, flex-start, flex-start);
+  background: $lightBlue_3 url('/assets/images/userProfile.svg') top 80% right
+    no-repeat;
+  padding: 2.5rem 30rem 5rem 2.5rem;
   position: relative;
   height: auto;
 
-  .wrapperImg {
-    height: 7.5rem;
-    width: 7.5rem;
-    border-radius: 100%;
-    position: absolute;
-    background-color: $white;
-    top: 3rem;
-    left: 2.5rem;
-
-    .imgAvatar {
-      border-radius: 100%;
-    }
-  }
-
   .wrapper {
     height: 100%;
-    padding: 0 0 2.81rem 2.5rem;
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
-    width: 685px;
+    margin-left: 8rem;
   }
 
   .titleContainer {
@@ -35,6 +25,10 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+
+    h4 {
+      margin-right: 3.5rem;
+    }
 
     .title {
       font-family: $fontNunito;
@@ -55,13 +49,6 @@
     align-items: stretch;
     margin: 0 auto;
     width: 685px;
-  }
-
-  .img {
-    position: absolute;
-    top: 20%;
-    right: 0;
-    z-index: 0;
   }
 
   .button {

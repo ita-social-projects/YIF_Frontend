@@ -2,7 +2,6 @@ import React from 'react';
 import './app.scss';
 import Home from '../../pages/home';
 import ErrorPage from '../../pages/errorPage';
-import GraduateCabinet from '../../pages/graduateCabinetPage/index';
 import LoginPage from '../../pages/loginPage';
 import InstitutionsOfEducationListPage from '../../pages/institutionsOfEducationListPage';
 import SpecialityPage from '../../pages/specialityPage';
@@ -14,13 +13,12 @@ import { useAuth } from '../../services/tokenValidator';
 import { ProtectedRoute, RedirectRoute } from '../../services/customRoutes';
 import ErrorBoundry from '../../errorBoundry';
 import ResetPasswordPage from '../../pages/resetPasswordPage/index';
-import AddInstitutionOfEducation from '../../pages/superAdminPages/addInstitutionOfEducationPage';
 import AddInstitutionOfEducationAdmin from '../../pages/superAdminPages/addInstitutionOfEducationAdminPage';
-import SuperAdminAccountPage from '../../pages/superAdminPages/superAdminAccountPage';
 import InstitutionOfEducationAdminPage from '../../pages/institutionOfEducationAdminPage';
 import NewPasswordPage from '../../pages/newPasswordPage';
 import ScrollToTop from '../common/scrollToTop/scrollToTop';
-import UniversityListPage from '../../pages/superAdminPages/universityListPage';
+import SuperAdmin from '../../pages/superAdminPages/index';
+import GraduateAccountPage from '../../pages/graduatePage';
 
 const App = () => {
   const { token } = useAuth();
@@ -45,32 +43,25 @@ const App = () => {
           <Route path='/directions'>
             <DirectionsListPage />
           </Route>
-          <Route path='/univList'>
-            <UniversityListPage />
-          </Route>
           <Route path='/institutionsOfEducation'>
             <InstitutionsOfEducationListPage />
           </Route>
           <Route path='/institutionOfEducation/:id'>
             <InstitutionOfEducationPage />
           </Route>
+          <Route path='/newPassword'>
+            <NewPasswordPage />
+          </Route>
           <ProtectedRoute
             user={token}
             path='/superAdminAccount'
             allowed={['SuperAdmin']}
           >
-            <SuperAdminAccountPage />
+            <SuperAdmin />
           </ProtectedRoute>
           <Route path='/specialty/:id'>
             <SpecialityPage />
           </Route>
-          <ProtectedRoute
-            user={token}
-            path='/addInstitutionOfEducation'
-            allowed={['SuperAdmin']}
-          >
-            <AddInstitutionOfEducation />
-          </ProtectedRoute>
           <ProtectedRoute
             user={token}
             path='/institutionOfEducationAccount'
@@ -85,11 +76,8 @@ const App = () => {
           >
             <AddInstitutionOfEducationAdmin />
           </ProtectedRoute>
-          <Route path='/newPassword'>
-            <NewPasswordPage />
-          </Route>
           <ProtectedRoute user={token} path='/cabinet' allowed={['Graduate']}>
-            <GraduateCabinet />
+            <GraduateAccountPage />
           </ProtectedRoute>
           <Route path='/404' component={ErrorPage} status={404} />
           <Route component={ErrorPage} status={404} />

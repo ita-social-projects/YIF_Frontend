@@ -1,13 +1,14 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import style from './institutionOfEducationListOption.module.scss';
-import { InstitutionOfEducationCard } from '../../../index';
-import { requestSecureData } from '../../../../services/requestDataFunction';
-import Spinner from '../../../common/spinner';
-import { useAuth } from '../../../../services/tokenValidator';
-import ResponsePlaceholder from '../../../common/responsePlaceholder';
-import { APIUrl } from '../../../../services/endpoints';
+import style from './likedInstitutionOfEducationList.module.scss';
+import InstitutionOfEducationCard from '../../../components/institutionOfEducationCard';
+import { requestSecureData } from '../../../services/requestDataFunction';
+import Spinner from '../../../components/common/spinner';
+import { useAuth } from '../../../services/tokenValidator';
+import ResponsePlaceholder from '../../../components/common/responsePlaceholder';
+import { APIUrl } from '../../../services/endpoints';
+import InstitutionsOfEducationMap from '../../../components/forCabinetPage/map';
 
-const InstitutionOfEducationListOption = () => {
+const InstitutionOfEducationList = () => {
   const [institutionOfEducationList, setList] = useState([
     {
       id: '',
@@ -20,7 +21,7 @@ const InstitutionOfEducationListOption = () => {
       endOfCampaign: '',
     },
   ]);
-
+  const [locationList, setLocationList] = useState([{}]);
   const [isChanged, setChanged] = useState(false);
   const [isFetching, setFetching] = useState(true);
   const [error, setError] = useState({
@@ -57,7 +58,7 @@ const InstitutionOfEducationListOption = () => {
         });
       });
   };
-
+  let updatedList: Array<{}> = [];
   const getFavoritesIOE = async () => {
     const currentToken = await getToken();
     const endpoint = `${APIUrl}InstitutionOfEducation/Favorites`;
@@ -65,6 +66,13 @@ const InstitutionOfEducationListOption = () => {
       const statusCode = res.statusCode.toString();
       if (statusCode.match(/^[23]\d{2}$/)) {
         const newList = res.data.map((item: any) => {
+          updatedList.push({
+            id: item.id,
+            name: item.name,
+            site: item.site,
+            lat: item.lat,
+            lon: item.lon,
+          });
           return {
             id: item.id,
             abbreviation: item.abbreviation,
@@ -76,6 +84,7 @@ const InstitutionOfEducationListOption = () => {
             endOfCampaign: item.endOfCampaign,
           };
         });
+        setLocationList(updatedList);
         setList(newList);
         setFetching(false);
       } else {
@@ -121,7 +130,11 @@ const InstitutionOfEducationListOption = () => {
       <Spinner />
     </div>
   ) : (
-    institutionOfEducationCardList
+    <>
+      {institutionOfEducationCardList}
+
+      <InstitutionsOfEducationMap data={locationList} />
+    </>
   );
 
   return (
@@ -139,4 +152,4 @@ const InstitutionOfEducationListOption = () => {
   );
 };
 
-export default InstitutionOfEducationListOption;
+export default InstitutionOfEducationList;

@@ -2,11 +2,10 @@ import React from 'react';
 import styles from './thinArrow.module.scss';
 
 interface Props {
-  direction: string;
+  isUp: boolean;
 }
 
-const ThinArrow: React.FC<Props> = ({ direction }) => {
-  const isUp = direction === 'up' ? true : false;
+const ThinArrow: React.FC<Props> = ({ isUp }) => {
   return (
     <div className={(isUp && styles.up) || styles.down}>
       <svg

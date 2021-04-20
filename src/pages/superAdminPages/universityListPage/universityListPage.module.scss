@@ -1,5 +1,11 @@
 @import '../../../styles/index.scss';
 
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 10rem;
+}
+
 .wrapper {
   display: flex;
   font-family: $fontOpenSans;
@@ -13,6 +19,6 @@
     width: 100%;
     text-align: center;
     font-size: $font_40px;
-    margin: 50px 0 40px 0;
+    margin: 3.125rem 0 2.5rem 0;
   }
 }

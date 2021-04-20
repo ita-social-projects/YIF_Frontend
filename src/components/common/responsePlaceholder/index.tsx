@@ -12,7 +12,7 @@ const ResponsePlaceholder: React.FC<Props> = (props) => {
       {' '}
       <h3 data-testid='placeholder'>{errorMessage}</h3>
       <div className={style.placeholder__imgContainer}>
-        <img src='assets/images/userCabinetUniversities.svg' alt='student' />
+        <img src='/assets/images/userCabinetUniversities.svg' alt='student' />
       </div>
     </div>
   );

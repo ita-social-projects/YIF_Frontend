@@ -90,7 +90,7 @@ const InstitutionOfEducationCard: React.FC<Props> = (props) => {
         <CampaingCard start={startOfCampaign} end={endOfCampaign} />
       </div>
       <div className={styles.card__img}>
-        <img src='assets/images/universityCard.svg' alt='UniversityCard' />
+        <img src='/assets/images/universityCard.svg' alt='UniversityCard' />
       </div>
     </div>
   );

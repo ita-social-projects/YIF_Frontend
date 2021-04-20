@@ -1,20 +1,22 @@
 import React from 'react';
+import SuperAdmin from './index';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import UniversityListPage from '.';
-import { store } from '../../../store/store';
+import { store } from '../../store/store';
 
-describe('UniversityListPAge', () => {
+describe('SuperAdmin', () => {
   test('render correctly', () => {
     render(
       <Router>
         <Provider store={store}>
-          <UniversityListPage />
+          <SuperAdmin />
         </Provider>
       </Router>
     );
-    expect(screen.getAllByText('Університети')).toHaveLength(1);
+    const navItem = document.querySelector('.admins');
+    userEvent.click(navItem);
+    expect(screen.getByText('Закладів освіти')).toBeInTheDocument();
   });
 });
