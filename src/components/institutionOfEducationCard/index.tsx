@@ -28,7 +28,6 @@ const InstitutionOfEducationCard: React.FC<Props> = (props) => {
   let {
     liked,
     id,
-    data,
     handleClick,
     abbreviation,
     site,
@@ -62,6 +61,7 @@ const InstitutionOfEducationCard: React.FC<Props> = (props) => {
             <a
               href={site}
               target='_blank'
+              rel='noopener noreferrer'
               className={styles.card__content__desc}
             >
               <span className={styles.card__content__subtitle}>Сайт:</span>

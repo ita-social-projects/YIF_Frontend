@@ -30,5 +30,6 @@ export const useGetAllListData = (endpoint: string, action: string) => {
       .catch((err: any) => {
         console.log(err);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
