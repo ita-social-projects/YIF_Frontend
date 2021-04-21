@@ -32,10 +32,16 @@ const Footer: React.FC = () => {
             </p>
           </article>
           <article>
+            <div>
             <Link to='/' className={styles.logo} data-testid='logo'>
               <img src='/logo.svg' alt='YITF Logo' />
             </Link>
+            </div>
+            <div>
+            <p className={styles.disclaimer}>Відповідальність за достовірність наданої інформації несуть заклади освіти</p>
+            </div>
           </article>
+          
           <article>
             <p>
               <Link
