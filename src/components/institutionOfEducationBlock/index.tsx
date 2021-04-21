@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './institutionOfEducationBlock.module.scss';
 
 interface Props {
-  id: string;
   name: string;
   abbreviation: string;
   site: string;
@@ -10,10 +9,10 @@ interface Props {
   phone: string;
   email: string;
   description: string;
+  imagePath: string;
 }
 
 const institutionOfEducationBlock: React.FC<Props> = ({
-  id,
   name,
   abbreviation,
   site,
@@ -21,16 +20,17 @@ const institutionOfEducationBlock: React.FC<Props> = ({
   phone,
   email,
   description,
+  imagePath,
 }: any) => {
   return (
-    <>
-      <h2 className={styles.infoContainer__abbr}>{abbreviation}</h2>
-      <div className={styles.infoContainer__mainInfo}>
-        <div className={styles.infoContainer__textInfo}>
-          <h1 className={styles.infoContainer__textInfo__fullName}>{name}</h1>
+    <div className={styles.container}>
+      <h2 className={styles.abbreviation}>{abbreviation}</h2>
+      <div className={styles.mainInfo}>
+        <div className={styles.textInfo}>
+          <h1 className={styles.fullName}>{name}</h1>
           <p>
             <span>Сайт:</span>
-            <a href={site} target='_blank' rel='noopener noreferrer'>
+            <a href={site} target='_blank'>
               {site}
             </a>
           </p>
@@ -53,16 +53,13 @@ const institutionOfEducationBlock: React.FC<Props> = ({
             {address}
           </p>
         </div>
-        <img
-          src='https://nuwm.edu.ua/images/content/admin/nuwmvsh.jpg'
-          alt='НУВГП'
-        />
+        <img src={imagePath} alt={name} />
       </div>
       <p className={styles.description}>
         <span>Опис:</span>
         {description}
       </p>
-    </>
+    </div>
   );
 };
 
