@@ -51,12 +51,7 @@ const InstitutionsOfEducationMap = (props: any) => {
           <Popup>
             <div id='markerPopup' className={style.popUpContent}>
               <h4 className={style.popUpTitle}>{name}</h4>
-              <a
-                className={style.popUpLink}
-                href={site}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
+              <a className={style.popUpLink} href={site} target='_blank'>
                 Сайт
               </a>
             </div>

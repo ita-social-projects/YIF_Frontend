@@ -100,7 +100,6 @@ const InstitutionOfEducationList = () => {
 
   useEffect(() => {
     getFavoritesIOE();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isChanged]);
 
   const institutionOfEducationCardList = institutionOfEducationList.map(

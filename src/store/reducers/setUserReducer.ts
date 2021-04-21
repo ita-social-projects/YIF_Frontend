@@ -24,7 +24,7 @@ const changeUserLocalStorage = (key: string, value: string) => {
   localStorage.setItem('user', JSON.stringify(data));
 };
 const formatData = (data: any) => {
-  let result: any = {};
+  let result = <any>{};
 
   for (let prop in data) {
     data[prop] !== null && data[prop] !== 'unknown'

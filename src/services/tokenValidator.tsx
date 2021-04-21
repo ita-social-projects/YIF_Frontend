@@ -56,25 +56,18 @@ function AuthProvider({ children }: any) {
     store.dispatch(removeRoleReducer());
   }, []);
 
-  const isTokenExpired = useCallback(
-    (token: Token) => {
-      try {
-        const decoded: Decoded = jwt_decode(token!);
-        store.dispatch(setRoleReducer(decoded.roles[1]));
-        return decoded.exp <= new Date().getTime() / 1000 ? true : false;
-      } catch (error) {
-        removeToken();
-        return false;
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
+  const isTokenExpired = useCallback((token: Token) => {
+    try {
+      const decoded: Decoded = jwt_decode(token!);
+      store.dispatch(setRoleReducer(decoded.roles[1]));
+      return decoded.exp <= new Date().getTime() / 1000 ? true : false;
+    } catch (error) {
+      removeToken();
+      return false;
+    }
+  }, []);
 
-  const isExpired = useMemo(() => {
-    isTokenExpired(token);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
+  const isExpired = useMemo(() => isTokenExpired(token), [token]);
 
   const getToken = useCallback(async () => {
     const url = `${APIUrl}Authentication/RefreshToken`;
@@ -115,12 +108,10 @@ function AuthProvider({ children }: any) {
     }
 
     return currentToken;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, updateToken, removeToken]);
 
   useEffect(() => {
     if (isTokenExpired(token) && !isRefreshing) getToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isExpired]);
 
   return (

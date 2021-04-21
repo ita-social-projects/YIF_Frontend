@@ -19,8 +19,8 @@ const RegistrationForm: React.FC = () => {
   const useYIFRegistration = useRegistration(APIUrl);
 
   return (
-    <section className={classes.wrapper}>
-      <div className={classes.form}>
+    <section role='section' className={classes.wrapper}>
+      <div role='wrapper' className={classes.form}>
         <div className={classes.wrapperImg}>
           <img src='/assets/images/imgRegistration.svg' alt='win' />
         </div>
@@ -36,12 +36,7 @@ const RegistrationForm: React.FC = () => {
           />
         )}
         <Formik
-          initialValues={{
-            email: '',
-            password: '',
-            confirmPassword: '',
-            storeDataCheckbox: false,
-          }}
+          initialValues={{ email: '', password: '', confirmPassword: '', storeDataCheckbox: false,}}
           validationSchema={validationField}
           onSubmit={(values, actions) => {
             actions.setSubmitting(false);
@@ -130,7 +125,7 @@ const RegistrationForm: React.FC = () => {
                 />
               </div>
               <div>
-                <Field
+              <Field
                   id='storeDataCheckbox'
                   component={FormInputCheckbox}
                   labelText='Прийміть умови зберігання персональної інформації'

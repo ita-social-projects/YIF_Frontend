@@ -298,7 +298,6 @@ const DropboxElement: React.FC<Props> = ({
     return () => {
       document.removeEventListener('click', clickMechanich, true);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

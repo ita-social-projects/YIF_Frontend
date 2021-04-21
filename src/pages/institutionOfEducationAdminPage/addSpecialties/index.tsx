@@ -60,9 +60,9 @@ const AddSpecialties = () => {
     educationForm: string
   ) => {
     let clonedDirections = cloneDeep(directions);
-    clonedDirections.forEach((direction: any) => {
+    clonedDirections.find((direction: any) => {
       if (direction.id === directionId) {
-        direction.specialties.forEach((specialty: any) => {
+        direction.specialties.find((specialty: any) => {
           if (specialty.id === specialtyId) {
             specialty.forms[educationForm] = !specialty.forms[educationForm];
             return specialty;

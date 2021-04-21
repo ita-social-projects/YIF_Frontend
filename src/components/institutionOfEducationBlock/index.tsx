@@ -36,11 +36,7 @@ const institutionOfEducationBlock: React.FC<Props> = ({
           </p>
           <p>
             <span>Email:</span>
-            <a
-              href={`mailto:${email}`}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
+            <a href={`mailto:${email}`} target='_blank'>
               {email}
             </a>
           </p>

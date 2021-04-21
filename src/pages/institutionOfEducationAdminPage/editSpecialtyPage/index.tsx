@@ -39,9 +39,9 @@ const EditSpecialty = () => {
 
   useEffect(() => {
     const requirements: any = {};
-    examRequirements.forEach((i) => {
+    examRequirements.map((i) => {
       const { examName, coefficient, minimumScore } = i;
-      requirements[`${examName}${minimumScore}`] = minimumScore;
+      requirements[`${examName}` + `${minimumScore}`] = minimumScore;
       requirements[`${examName}`] = coefficient;
     });
     setinitialValues({
@@ -53,7 +53,6 @@ const EditSpecialty = () => {
       ...requirements,
     });
     setFetching(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

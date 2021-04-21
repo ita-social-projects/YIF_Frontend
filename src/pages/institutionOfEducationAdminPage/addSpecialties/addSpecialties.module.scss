@@ -10,7 +10,7 @@
   padding: 50px;
 
   &__inner {
-    @include flex(column, center, flex-start);
+    @include flex(column, center, start);
     margin: 0 auto;
     max-width: 1040px;
   }
@@ -60,7 +60,7 @@
 }
 
 .acc_subitem {
-  @include flex(column, flex-start, space-between);
+  @include flex(column, start, space-between);
   padding: 15px 10px 10px 15px;
   min-height: 50px;
   background-color: $lightBlue_1;
@@ -68,7 +68,7 @@
   border-radius: 5px;
 
   &_title {
-    @include flex(row, flex-start, space-between);
+    @include flex(row, start, space-between);
     margin-bottom: 15px;
     h5,
     span {
