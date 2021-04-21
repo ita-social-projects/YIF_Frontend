@@ -1,17 +1,19 @@
 @import '../../../styles/index.scss';
 
-.wrapper {
-  background: $lightBlue_3 url(/assets/images/univer30.svg) bottom -2rem right 8.125vw
-    no-repeat;
+.common {
   font-family: $fontOpenSans;
   font-size: $font_18px;
-  max-width: 100rem;
-  min-height: 110vh;
+  width: 100%;
+}
+
+.wrapper {
+  @extend .common;
+  background: $lightBlue_3 url(/assets/images/univer30.svg) bottom -2rem right 8.125vw
+    no-repeat;
+  max-width: 90rem;
   margin: 0 auto;
-  .infoContainer {
-    padding: 3.125rem 8.125vw 0 6.25vh;
-    margin-bottom: 25rem;
-  }
+  padding: 3.125rem 8.125vw 25rem 6.25vh;
+
   .buttonLink {
     width: 15rem;
     text-align: center;
@@ -20,4 +22,10 @@
     display: inline-block;
     margin-top: 1.25rem;
   }
+}
+
+.noContentContainer {
+  @extend .common;
+  @include flex(row, center, center);
+  height: 80vh;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { unmountComponentAtNode } from 'react-dom';
+import { screen } from '@testing-library/dom';
 import { act } from 'react-dom/test-utils';
 import ReactDOM from 'react-dom';
 import Footer from './index';
@@ -30,7 +31,13 @@ it('check footer as a whole component', () => {
 
   let links = container.querySelectorAll('a');
   let buttons = container.querySelectorAll('button');
+  let paragraphs = container.querySelectorAll('p');
 
+  expect(
+    screen.getByText(
+      'Відповідальність за достовірність наданої інформації несуть заклади освіти'
+    )
+  ).toBeTruthy();
   // check links
   expect(links[0].href).toBe('http://localhost/login');
   expect(links[1].href).toBe('http://localhost/register');
@@ -47,4 +54,6 @@ it('check footer as a whole component', () => {
   //check buttons
   expect(buttons[0].textContent).toBe('Вхід');
   expect(buttons[1].textContent).toBe('Реєстрація');
+
+  expect(paragraphs[0].textContent).toBe('Рівне, вул. Словацького, 4-6');
 });

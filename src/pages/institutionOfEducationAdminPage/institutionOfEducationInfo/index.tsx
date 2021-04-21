@@ -1,46 +1,106 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './institutionOfEducationInfo.module.scss';
 import InstitutionOfEducationBlock from '../../../components/institutionOfEducationBlock';
 import { Link, useRouteMatch } from 'react-router-dom';
+import { requestSecureData } from '../../../services/requestDataFunction';
+import { useAuth } from '../../../services/tokenValidator';
+import { APIUrl } from '../../../services/endpoints';
+import Spinner from '../../../components/common/spinner/index';
+
+interface Info {
+  name: string;
+  abbreviation: string;
+  site: string;
+  address: string;
+  phone: string;
+  email: string;
+  description: string;
+  imagePath: string;
+}
 
 const InstitutionOfEducationInfo = () => {
-  
+  const [isFetching, setIsFetching] = useState(true);
+  const [error, setError] = useState(false);
   const { path } = useRouteMatch();
+  const { getToken } = useAuth();
+  const [
+    { name, abbreviation, site, address, phone, email, description, imagePath },
+    setData,
+  ] = useState<Info>({
+    name: '',
+    abbreviation: '',
+    site: '',
+    address: '',
+    phone: '',
+    email: '',
+    description: '',
+    imagePath: '',
+  });
 
-  const { id, name, abbreviation, site, address, phone, email, description } = {
-    id: 'e2bd4ad9-060b-4d53-8222-9f3e5efbcfc7',
-    name:
-      'Національний університет водного господарства та природокористування',
-    abbreviation: 'НУВГП',
-    site: 'https://nuwm.edu.ua/',
-    address: 'вулиця Соборна, 11, Рівне, Рівненська область, 33000',
-    phone: '380362633209',
-    email: 'mail@nuwm.edu.ua',
-    description:
-      'Єдиний в Україні вищий навчальний заклад водогосподарського профілю. Заклад є навчально-науковим комплексом, що здійснює підготовку висококваліфікованих фахівців, науково-педагогічних кадрів, забезпечує підвищення кваліфікації фахівців та проводить науково-дослідну роботу.',
-  };
-  return (
-    <main className={styles.wrapper}>
-      <div className={styles.infoContainer}>
-        <InstitutionOfEducationBlock 
-        id={id}
-        name={name}
-        abbreviation={abbreviation}
-        site={site}
-        address={address}
-        phone={phone}
-        email={email}
-        description={description}
-        />
-        <Link
-          className={`${styles.animatedButton} ${styles.buttonLink}`}
-          to={`${path}/edit/${id}`}
-        >
-          Редагувати
-        </Link>
+  useEffect(() => {
+    const getInfo = async () => {
+      try {
+        const currentToken = await getToken();
+        const { statusCode, data }: any = await requestSecureData(
+          `${APIUrl}InstitutionOfEducationAdmin/GetIoEInfo`,
+          'GET',
+          currentToken
+        );
+        if (statusCode.toString().match(/^[23]\d{2}$/)) {
+          setData(data);
+          setError(false);
+        } else {
+          setError(true);
+        }
+      } catch (e) {
+        console.log(e);
+        setError(true);
+      } finally {
+        setIsFetching(false);
+      }
+    };
+    getInfo();
+  }, []);
+
+  let content;
+  if (isFetching && !error) {
+    content = (
+      <div className={styles.noContentContainer}>
+        <Spinner />
       </div>
-    </main>
-  );
+    );
+  } else if (error && !isFetching) {
+    content = (
+      <div className={styles.noContentContainer}>
+        <h2>Щось пішло не так, спробуйте знову.</h2>
+      </div>
+    );
+  } else {
+    content = (
+      <main className={styles.wrapper}>
+        <div className={styles.infoContainer}>
+          <InstitutionOfEducationBlock
+            name={name}
+            abbreviation={abbreviation}
+            site={site}
+            address={address}
+            phone={phone}
+            email={email}
+            description={description}
+            imagePath={`http://localhost:5000/images/${imagePath}`}
+          />
+          <Link
+            className={`${styles.animatedButton} ${styles.buttonLink}`}
+            to={`${path}/edit`}
+          >
+            Редагувати
+          </Link>
+        </div>
+      </main>
+    );
+  }
+
+  return <>{content}</>;
 };
 
 export default InstitutionOfEducationInfo;
