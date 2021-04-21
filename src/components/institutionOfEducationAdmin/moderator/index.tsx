@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './moderator.module.scss';
 import Lock from '../../common/icons/Lock/index';
 import Unlock from '../../common/icons/Unlock/index';

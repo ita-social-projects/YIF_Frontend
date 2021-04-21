@@ -30,9 +30,8 @@ const ImageUploaderPopup = (props: TProps) => {
 
   const [loadedImage, setLoadedImage] = useState(InitialLoadedImageState);
   const [error, setError] = useState('');
-  const [isLoading, setLoading] = useState(false);
+  let isLoading = false;
   const [cropper, setCropper] = useState<any>();
-  const role: string = 'Graduate';
 
   let fileInput: any = React.createRef();
 

@@ -28,6 +28,7 @@ const SuperAdminAccountPage: React.FC = () => {
 
   useEffect(() => {
     fetchInstitutionOfEducationAdmins();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>

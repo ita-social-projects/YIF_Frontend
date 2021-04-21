@@ -31,34 +31,32 @@ const Partners: React.FunctionComponent = () => {
 
   const goLeft: React.MouseEventHandler = () => {
     x === 0 ? setX(-100 * slideWidth) : setX(x + 100);
-
   };
 
   const goRight: React.MouseEventHandler = () => {
     x === -100 * slideWidth ? setX(0) : setX(x - 100);
-
   };
 
   return (
-
-      <div className={classes.blockPartners}>
-        <h1>Наші партнери</h1>
-        <div className={classes.wrapperSlider}>
-          <div className={classes.slider} style={{transform: `translate( ${x}%)`}}>
-            <div className={classes.inner}>
-              {
-                sliderList.map((item, index) => {
-                  return (
-                      <div key={index} className={classes.slide}>
-                        {item}
-                      </div>
-                  );
-                })
-              }
-            </div>
+    <div className={classes.blockPartners}>
+      <h1>Наші партнери</h1>
+      <div className={classes.wrapperSlider}>
+        <div
+          className={classes.slider}
+          style={{ transform: `translate( ${x}%)` }}
+        >
+          <div className={classes.inner}>
+            {sliderList.map((item, index) => {
+              return (
+                <div key={index} className={classes.slide}>
+                  {item}
+                </div>
+              );
+            })}
           </div>
         </div>
-        {/* <button
+      </div>
+      {/* <button
           data-testid='buttonLeft'
           className={classes.left}
           onClick={goLeft}
@@ -72,7 +70,7 @@ const Partners: React.FunctionComponent = () => {
         >
           {arrow}
         </button> */}
-      </div>
+    </div>
   );
 };
 

@@ -8,12 +8,12 @@ import { FormInputSuccess } from '../../common/formElements/formInputSuccess/for
 import { FormInputError } from '../../common/formElements';
 import TableItem from './tableItem/tableItem';
 import Search from './search/search';
-import { Link, Router } from 'react-router-dom';
+// import { Link, Router } from 'react-router-dom';
 
 import { ReactComponent as IconLock } from './icons/iconLock.svg';
 import { ReactComponent as IconArrow } from './icons/iconArrow.svg';
 
-const iconIllustrAdmin = '/assets/images/superAdminAccount.svg';
+// const iconIllustrAdmin = '/assets/images/superAdminAccount.svg';
 
 export interface IInstitutionOfEducationAdmin {
   id: string;
@@ -154,55 +154,55 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
       });
   };
 
-  const removeAdminInstitutionOfEducation = async (id: string) => {
-    const endpoint = `${APIUrl}SuperAdmin/DeleteInstitutionOfEducationAdmin/${id}`;
-    const currentToken = await getToken();
+  // const removeAdminInstitutionOfEducation = async (id: string) => {
+  //   const endpoint = `${APIUrl}SuperAdmin/DeleteInstitutionOfEducationAdmin/${id}`;
+  //   const currentToken = await getToken();
 
-    requestSecureData(endpoint, 'DELETE', currentToken)
-      .then((res: any) => {
-        const statusCode = res.statusCode.toString();
-        if (statusCode.match(/^[23]\d{2}$/)) {
-          setSortedInstitutionOfEducationAdmins(
-            setNewInstitutionOfEducationAdminsState(
-              sortedInstitutionOfEducationAdmins,
-              id,
-              'removeAdmin'
-            )
-          ); // sorted state
-          setInstitutionOfEducationAdmins(
-            setNewInstitutionOfEducationAdminsState(
-              institutionOfEducationAdmins,
-              id,
-              'removeAdmin'
-            )
-          ); // main state
+  //   requestSecureData(endpoint, 'DELETE', currentToken)
+  //     .then((res: any) => {
+  //       const statusCode = res.statusCode.toString();
+  //       if (statusCode.match(/^[23]\d{2}$/)) {
+  //         setSortedInstitutionOfEducationAdmins(
+  //           setNewInstitutionOfEducationAdminsState(
+  //             sortedInstitutionOfEducationAdmins,
+  //             id,
+  //             'removeAdmin'
+  //           )
+  //         ); // sorted state
+  //         setInstitutionOfEducationAdmins(
+  //           setNewInstitutionOfEducationAdminsState(
+  //             institutionOfEducationAdmins,
+  //             id,
+  //             'removeAdmin'
+  //           )
+  //         ); // main state
 
-          setSuccess(
-            defineSuccessMessage(true, res.statusCode, res.data.message)
-          );
-          setTimeout(() => {
-            setSuccess(defineSuccessMessage());
-          }, 3000);
-        } else {
-          setError(defineErrorMessage(true, res.statusCode, res.data.message));
-          setTimeout(() => {
-            setError(defineErrorMessage());
-          }, 3000);
-        }
-      })
-      .catch((error) => {
-        setError(
-          defineErrorMessage(
-            true,
-            error.statusCode,
-            'Щось пішло не так, спробуйте знову.'
-          )
-        );
-        setTimeout(() => {
-          setError(defineErrorMessage());
-        }, 3000);
-      });
-  };
+  //         setSuccess(
+  //           defineSuccessMessage(true, res.statusCode, res.data.message)
+  //         );
+  //         setTimeout(() => {
+  //           setSuccess(defineSuccessMessage());
+  //         }, 3000);
+  //       } else {
+  //         setError(defineErrorMessage(true, res.statusCode, res.data.message));
+  //         setTimeout(() => {
+  //           setError(defineErrorMessage());
+  //         }, 3000);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       setError(
+  //         defineErrorMessage(
+  //           true,
+  //           error.statusCode,
+  //           'Щось пішло не так, спробуйте знову.'
+  //         )
+  //       );
+  //       setTimeout(() => {
+  //         setError(defineErrorMessage());
+  //       }, 3000);
+  //     });
+  // };
 
   const clearInput = () => {
     setInstitutionOfEducationAdmins(institutionOfEducationAdmins);
@@ -283,6 +283,7 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
 
   useEffect(() => {
     handleSort('isBanned');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

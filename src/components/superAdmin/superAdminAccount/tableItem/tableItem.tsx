@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../superAdminAccount.module.scss';
 import ReactParser from 'html-react-parser';
 import { IInstitutionOfEducationAdmin } from '../superAdminAccount';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ReactComponent as IconLock } from '../icons/iconLock.svg';
 import { ReactComponent as IconEdit } from '../icons/edit.svg';
 
@@ -20,7 +20,7 @@ const TableItem: React.FC<Props> = (props) => {
     setBanStatus,
     //    removeAdminInstitutionOfEducation,
   } = props;
-  const { path } = useRouteMatch();
+  // const { path } = useRouteMatch();
   return (
     <ul>
       <li className={styles.adminEmail}>

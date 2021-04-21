@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import style from './imageCropper.module.scss';
 import { TLoadedImage } from '../imageUploaderPopup/imageUploaderPopup';
 import Spinner from '../../common/spinner';
@@ -24,7 +24,7 @@ const ImageCropper = (props: TProps) => {
     setCropper,
     aspectRatio,
   } = props;
-  const [image, setImage] = useState(loadedImage.data?.toString());
+  let image = loadedImage.data?.toString();
   return (
     <div className={style.imagePrevieContainer}>
       <img
