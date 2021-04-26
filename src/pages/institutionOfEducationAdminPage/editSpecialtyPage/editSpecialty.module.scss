@@ -52,6 +52,36 @@
     font-size: $font_18px;
   }
 
+  .plusContainer {
+    @include flex(column, center, center);
+    @extend .heading;
+    cursor: pointer;
+  }
+
+  .subjectContainer {
+    width: 100%;
+    max-width: 65rem;
+    // height: 100px;
+    @include flex(row, center, space-between);
+    flex-wrap: wrap;
+    padding: 1rem 3rem 0 3rem;
+    background-color: $lightBlue_1;
+    border-radius: 0.3rem;
+
+    .subject {
+      @include flex(row, center, center);
+      @extend .heading;
+      padding: 1rem;
+      width: 100%;
+      // max-width: 28rem;
+      flex-basis: 28rem;
+      background-color: $lightBlue_2;
+      border-radius: 0.3rem;
+      margin: 0 0 1rem 0;
+      cursor: pointer;
+    }
+  }
+
   button {
     margin-bottom: 15rem;
     width: 12.5rem;

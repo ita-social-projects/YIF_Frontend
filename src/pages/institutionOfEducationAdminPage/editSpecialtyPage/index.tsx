@@ -4,6 +4,7 @@ import { Formik, Form } from 'formik';
 import styles from './editSpecialty.module.scss';
 import { FormButton } from '../../../components/common/formElements/index';
 import editSpecialtyValidation from './editSpecialtyValidation';
+import Plus from '../../../components/common/icons/Plus';
 
 const EditSpecialty = () => {
   const [initialValues, setinitialValues] = useState({});
@@ -102,7 +103,7 @@ const EditSpecialty = () => {
                       />
                     </div>
                     <h2 className={styles.infoTitle}>Вимоги до ЗНО</h2>
-                    {examRequirements.map((exam) => {
+                    {/* {examRequirements.map((exam) => {
                       const { examName, minimumScore } = exam;
                       return (
                         <div className={styles.customInput} key={examName}>
@@ -129,7 +130,42 @@ const EditSpecialty = () => {
                           />
                         </div>
                       );
-                    })}
+                    })} */}
+                    <div className={styles.plusContainer} onClick={() => {}}>
+                      <Plus />
+                      <span>Додати предмет</span>
+                    </div>
+
+                    <div className={`${styles.subjectContainer}`}>
+                      <div className={styles.subject}>
+                        Українська література
+                      </div>
+                      <div className={styles.subject}>
+                        Українська література
+                      </div>
+                      <div className={styles.subject}>
+                        Українська література
+                      </div>
+                      <div className={styles.subject}>
+                        Українська література
+                      </div>
+                      <div className={styles.subject}>
+                        Українська література
+                      </div>
+                      <div className={styles.subject}>
+                        Українська література
+                      </div>
+                      <div className={styles.subject}>
+                        Українська література
+                      </div>
+                      <div className={styles.subject}>
+                        Українська література
+                      </div>
+                      <div className={styles.subject}>
+                        Українська література
+                      </div>
+                    </div>
+
                     <FormButton
                       title={'Зберегти'}
                       id='registerFormButton'
