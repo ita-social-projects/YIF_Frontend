@@ -1,0 +1,86 @@
+@import '../../styles.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f2f9ff url(/assets/images/addSpecialty.png) bottom left no-repeat;
+  font-family: $fontOpenSans;
+  font-size: 1.125rem;
+  min-height: 110vh;
+  margin: 0 auto;
+  width: 100%;
+  padding-bottom: 550px;
+  &__title{
+    font-size: 48px;
+    line-height: 65px;
+    margin-bottom: 40px;
+  }
+  form{
+    max-width: 1100px;
+    .topWrapper{
+      background: #BAD0E5;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 40px;
+      border-radius: 10px;
+      div{
+        display: flex;
+        width: 100%;
+      }
+      &__input{
+        width: 100%;
+        margin-left: auto;
+        height: 50px;
+        padding: 10px;
+        box-sizing: border-box;
+        font-family: $fontOpenSans;
+      }
+      &__label{
+        min-width: 105px;
+        display: flex;
+        align-items: center;
+        font-family: $fontOpenSans;
+      }
+      &__textarea{
+        width: 100%;
+        padding: 10px;
+        font-family: $fontOpenSans;
+        min-height: 125px;
+      }
+    }
+    .halfWidth{
+      padding: 0.6rem;
+      flex-basis: 50%;
+      &__code{
+        flex-basis: 40%;
+        margin-left: auto;
+        label{
+          margin-left: auto;
+          margin-right: 0;
+          min-width: 64px;
+        }
+        input{
+          text-align: center;
+        }
+      }
+    }
+    .fullWidth{
+      padding: 0.6rem;
+      flex-basis: 100%;
+      &__textarea{
+        align-items: flex-start;
+        label{
+          padding-top: 10px;
+        }
+      }
+    }
+    button{
+      margin-left: auto;
+      margin-right: 0;
+      max-width: 200px;
+      margin-top: 22px;
+      display: block;
+    }
+  }
+}
