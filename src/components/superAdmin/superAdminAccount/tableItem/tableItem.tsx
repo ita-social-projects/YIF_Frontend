@@ -54,10 +54,7 @@ const TableItem: React.FC<Props> = (props) => {
           {admin.isBanned ? <Lock /> : <Unlock />}
         </li>
         <li data-testid='removeAdmin' className={styles.adminRemove}>
-          <Link
-            className={`${styles.animatedButton} ${styles.buttonLink}`}
-            to={`/superAdminAccount/addInstitutionOfEducationAdmin`}
-          >
+          <Link to={`/superAdminAccount/addInstitutionOfEducationAdmin`}>
             <Edit />
           </Link>
         </li>

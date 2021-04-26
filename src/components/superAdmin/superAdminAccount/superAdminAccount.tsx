@@ -8,9 +8,10 @@ import { FormInputSuccess } from '../../common/formElements/formInputSuccess/for
 import { FormInputError } from '../../common/formElements';
 import TableItem from './tableItem/tableItem';
 import Search from './search/search';
+
+import Lock from '../../common/icons/Lock/index';
 // import { Link, Router } from 'react-router-dom';
 
-import { ReactComponent as IconLock } from './icons/iconLock.svg';
 import { ReactComponent as IconArrow } from './icons/iconArrow.svg';
 
 // const iconIllustrAdmin = '/assets/images/superAdminAccount.svg';
@@ -323,7 +324,8 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
               }`}
               onClick={() => handleSort('isBanned')}
             >
-              <IconLock /> <IconArrow />
+              <Lock containerCN={styles.banContainer} svgCN={styles.banIcon} />{' '}
+              <IconArrow />
             </li>
           </ul>
         </div>

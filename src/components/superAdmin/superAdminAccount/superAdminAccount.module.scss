@@ -29,13 +29,27 @@
     border-radius: 0.3rem;
     transition: transform 0.35s;
 
+    .banContainer {
+      @include flex(column, center, flex-end);
+      height: 1.8rem;
+      width: 1.8rem;
+      position: relative;
+      cursor: pointer;
+      margin-right: 0.2rem;
+      .banIcon {
+        fill: $white;
+      }
+    }
+
     .filterActive {
       color: rgba($white, 0.7);
-      svg:last-of-type {
-        transform: rotate(180deg);
-      }
-      svg path {
+
+      .banIcon {
         fill: rgba($white, 0.7);
+      }
+
+      & > svg {
+        transform: rotate(180deg);
       }
     }
 
@@ -118,27 +132,12 @@
 
     .institutionOfEducation,
     .email {
-      flex-basis: 40%;
+      flex-basis: 45%;
     }
 
     .ban {
-      flex-basis: 15%;
-
-      svg:first-of-type {
-        @include size(2.18rem); // 35px
-
-        path {
-          transition: fill 0.35s;
-
-          &:hover {
-            fill: rgba($white, 0.7);
-          }
-        }
-      }
-
-      svg:last-of-type {
-        margin: 0 0 0.37rem 0; // 6px
-      }
+      flex-basis: 10%;
+      @include flex(row, center, flex-start);
     }
   }
   .adminList {
@@ -163,12 +162,6 @@
       margin-top: 0.625rem;
       @include flex(row, center, flex-start);
 
-      li {
-        path {
-          fill: $darkBlue;
-        }
-      }
-
       .adminInstitutionOfEducation {
         position: relative;
         .abbreviationInstitutionOfEducation {
@@ -192,7 +185,6 @@
           position: absolute;
           box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.2);
           bottom: 2.18rem; // 35px
-          left: 2%;
           max-width: 15.62rem; // 250px
 
           z-index: 1;
@@ -219,8 +211,9 @@
 
       .actionItem {
         display: flex;
-        flex-basis: 15%;
+        flex-basis: 10%;
         align-items: center;
+        margin: 0 1rem 0 0;
         li {
           flex-basis: 50%;
         }
@@ -228,38 +221,8 @@
 
       .adminEmail,
       .adminInstitutionOfEducation {
-        flex-basis: 40%;
-        // flex-grow: 2.5;
+        flex-basis: 45%;
         margin: 0 1rem 0 0;
-      }
-
-      .adminBan {
-        path {
-          transition: fill 0.35s;
-        }
-        &.banned,
-        &:hover {
-          path {
-            fill: $red;
-          }
-        }
-      }
-
-      .adminRemove {
-        a {
-          text-decoration: none;
-          background: none;
-          border: none;
-        }
-        path {
-          transition: stroke 0.35s;
-        }
-
-        &:hover {
-          path {
-            stroke: $red;
-          }
-        }
       }
     }
   }
@@ -278,7 +241,7 @@
   .flashMessageLeft {
     position: absolute;
     width: 350px;
-    bottom: -150px;
+    bottom: -250px;
     left: calc(50% - 175px);
   }
 }

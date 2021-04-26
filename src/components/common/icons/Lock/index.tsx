@@ -2,12 +2,17 @@ import React from 'react';
 import styles from './lock.module.scss';
 interface Props {
   handleClick?: () => void;
+  containerCN?: string;
+  svgCN?: string;
 }
-const Lock: React.FC<Props> = ({ handleClick }) => {
+const Lock: React.FC<Props> = ({ handleClick, containerCN, svgCN }) => {
   return (
-    <div className={styles.container} onClick={handleClick}>
+    <div
+      className={containerCN ? containerCN : styles.container}
+      onClick={handleClick}
+    >
       <svg
-        className={styles.lock}
+        className={svgCN ? svgCN : styles.lock}
         height='512pt'
         viewBox='-64 0 512 512'
         width='512pt'
