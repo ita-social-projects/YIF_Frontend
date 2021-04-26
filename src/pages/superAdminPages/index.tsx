@@ -52,6 +52,12 @@ function SuperAdmin() {
             <Link className={styles.underlineAnimation} to='#'>
               Школи
             </Link>
+            <Link
+              className={styles.underlineAnimation}
+              to={`${path}/addSpecialty`}
+            >
+              Спеціальності
+            </Link>
           </nav>
         </Aside>
         <Switch>
