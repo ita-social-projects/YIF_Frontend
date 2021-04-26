@@ -28,6 +28,13 @@
         display: flex;
         width: 100%;
       }
+      select{
+        appearance: none;
+        background: url(/assets/images/arrow.svg);
+        background-position: 96% 21px;
+        background-repeat: no-repeat;
+        background-color: #fff;
+      }
       &__input{
         width: 100%;
         margin-left: auto;
