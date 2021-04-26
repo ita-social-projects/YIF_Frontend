@@ -3,6 +3,7 @@ import styles from './graduatePage.module.scss';
 import { Route, Redirect, Switch, useRouteMatch, Link } from 'react-router-dom';
 import { Footer, Header } from '../../components';
 import Aside from '../../components/institutionOfEducationAdmin/aside';
+import ChangePassword from '../../components/changePassword';
 import MyInfo from './myInfoPage';
 import LikedSpecialties from './likedSpecialtiesPage';
 import InstitutionOfEducationList from './likedInstitutionOfEducationPage';
@@ -30,6 +31,12 @@ const GraduateAccountPage = () => {
             >
               Обрані спеціальності
             </Link>
+            <Link
+              className={styles.underlineAnimation}
+              to={`${path}/changePassword`}
+            >
+              Змінити пароль
+            </Link>
           </nav>
         </Aside>
         <Switch>
@@ -47,6 +54,10 @@ const GraduateAccountPage = () => {
 
           <Route exact path={`${path}/likedSpecialties`}>
             <LikedSpecialties />
+          </Route>
+
+          <Route exact path={`${path}/changePassword`}>
+            <ChangePassword />
           </Route>
         </Switch>
       </section>
