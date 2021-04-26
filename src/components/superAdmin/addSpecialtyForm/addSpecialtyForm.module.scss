@@ -32,9 +32,10 @@
         width: 100%;
         margin-left: auto;
         height: 3.125rem;
-        padding: 0.625rem;
+        padding: 0.625rem 1rem;
         box-sizing: border-box;
         font-family: $fontOpenSans;
+        border-radius: 0.625rem;
       }
       &__label{
         min-width: 6.563rem;
@@ -44,9 +45,10 @@
       }
       &__textarea{
         width: 100%;
-        padding: 0.625rem;
+        padding: 0.625rem 1rem;
         font-family: $fontOpenSans;
         min-height: 7.813rem;
+        border-radius: 0.625rem;
       }
     }
     .halfWidth{
