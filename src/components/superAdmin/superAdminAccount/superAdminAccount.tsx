@@ -89,14 +89,14 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
   ): IInstitutionOfEducationAdmin[] => {
     if (action === 'setNewBanStatus') {
       return cloneDeep(state).map((admin) => {
-        if (admin.id === id) {
+        if (admin.user.id === id) {
           admin.isBanned = !admin.isBanned;
           return admin;
         }
         return admin;
       });
     } else if (action === 'removeAdmin') {
-      return cloneDeep(state).filter((admin) => admin.id !== id);
+      return cloneDeep(state).filter((admin) => admin.user.id !== id);
     }
     return state;
   };
@@ -289,18 +289,6 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
   return (
     <div className={styles.superAdminAccount}>
       <h1>Адміністратори закладів освіти</h1>
-      {error.hasError && (
-        <div className={styles.flashMessageRight}>
-          {' '}
-          <FormInputError errorType='form' errorMessage={error.errorMessage} />
-        </div>
-      )}
-      {success.hasSuccess && (
-        <div className={styles.flashMessageLeft}>
-          {' '}
-          <FormInputSuccess successMessage={success.successMessage} />
-        </div>
-      )}
       <div className={styles.adminTableContainer}>
         <div className={styles.adminTableHeader}>
           <Search
@@ -347,7 +335,7 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
                   <TableItem
                     admin={admin}
                     searchValue={searchValue}
-                    key={admin.id}
+                    key={admin.user.id}
                     setBanStatus={setBanStatus}
                     // removeAdminInstitutionOfEducation={
                     //   removeAdminInstitutionOfEducation
@@ -357,12 +345,24 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
               )
             ) : (
               <div className={styles.noneInstitutionOfEducationAdmins}>
-                {' '}
                 Не знайдено жодного адміністратора
               </div>
             )}
           </li>
         </ul>
+        {error.hasError && (
+          <div className={styles.flashMessageRight}>
+            <FormInputError
+              errorType='form'
+              errorMessage={error.errorMessage}
+            />
+          </div>
+        )}
+        {success.hasSuccess && (
+          <div className={styles.flashMessageLeft}>
+            <FormInputSuccess successMessage={success.successMessage} />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './lock.module.scss';
 interface Props {
-  handleClick: () => void;
+  handleClick?: () => void;
 }
 const Lock: React.FC<Props> = ({ handleClick }) => {
   return (

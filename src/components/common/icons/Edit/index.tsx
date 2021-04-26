@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './edit.module.scss';
 
 interface Props {
-  handleClick(): void;
+  handleClick?: () => void;
 }
 
 const Edit: React.FC<Props> = ({ handleClick }) => {
