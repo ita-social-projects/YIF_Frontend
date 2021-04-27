@@ -8,42 +8,43 @@ import Plus from '../../../components/common/icons/Plus';
 
 const EditSpecialty = () => {
   const [initialValues, setinitialValues] = useState({});
+  const [isChanged, setIsChanged] = useState(false);
+  const [examRequirements, setExamRequirements] = useState<any>([]);
   const [fetching, setFetching] = useState(true);
-  const {
-    specialtyName,
-    educationalProgramLink,
-    description,
-    examRequirements,
-  } = {
+  const [isOpen, setIsOpen] = useState(false);
+  const { specialtyName, educationalProgramLink, description } = {
     specialtyName: 'Автоматизація та комп’ютерно-інтегровані технології',
     educationalProgramLink: 'example.com',
     description:
       'Це базовий опис спеціальності. Ця спеціальність підійде для тих хто хоче реалізувати себе у майбутньому у даній галузі. Для здобувачів вищої освіти вона буде цікавою тому що вони зможуть розкрити себе у даному напрямку за рахунок актуальної інформації, яку будуть доносити ним професіонали своєї справи, які є майстрами у своїй галузі.',
-    examRequirements: [
-      {
-        examName: 'Англійська мова',
-        minimumScore: 100,
-        coefficient: 0.25,
-      },
-      {
-        examName: 'Математика',
-        minimumScore: 100,
-        coefficient: 0.4,
-      },
-      {
-        examName: 'Українська мова та література',
-        minimumScore: 100,
-        coefficient: 0.25,
-      },
-    ],
+  };
+
+  const examSubjects = [
+    { id: 1, examName: 'Англійська мова' },
+    { id: 2, examName: 'Математика' },
+    { id: 3, examName: 'Українська мова та література' },
+    { id: 4, examName: 'Біологія' },
+    { id: 5, examName: 'Фізика' },
+    { id: 6, examName: 'Християнська етика' },
+  ];
+
+  const addSubject = (id: number) => {
+    console.log('Cliked');
+    examSubjects.forEach((i) => {
+      if (id === i.id) {
+        setExamRequirements([...examRequirements, i]);
+        console.log(examRequirements);
+      }
+    });
+    setIsChanged(!isChanged);
   };
 
   useEffect(() => {
     const requirements: any = {};
-    examRequirements.forEach((i) => {
-      const { examName, coefficient, minimumScore } = i;
-      requirements[`${examName}${minimumScore}`] = minimumScore;
-      requirements[`${examName}`] = coefficient;
+    examRequirements.forEach((i: any) => {
+      const { examName, id } = i;
+      requirements[`${examName}${id}`] = '';
+      requirements[`${examName}`] = '';
     });
     setinitialValues({
       specialtyName: specialtyName,
@@ -55,7 +56,7 @@ const EditSpecialty = () => {
     });
     setFetching(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isChanged]);
 
   return (
     <>
@@ -103,15 +104,15 @@ const EditSpecialty = () => {
                       />
                     </div>
                     <h2 className={styles.infoTitle}>Вимоги до ЗНО</h2>
-                    {/* {examRequirements.map((exam) => {
-                      const { examName, minimumScore } = exam;
+                    {examRequirements.map((exam: any) => {
+                      const { examName, id } = exam;
                       return (
-                        <div className={styles.customInput} key={examName}>
+                        <div className={styles.customInput} key={id}>
                           <span>{examName}:</span>
                           <Input
-                            id={`${examName}${minimumScore}`}
+                            id={`${examName}${id}`}
                             label='Мінімум балів:'
-                            name={`${examName}${minimumScore}`}
+                            name={`${examName}${id}`}
                             requirement='true'
                             type='number'
                             min='0'
@@ -130,42 +131,41 @@ const EditSpecialty = () => {
                           />
                         </div>
                       );
-                    })} */}
-                    <div className={styles.plusContainer} onClick={() => {}}>
+                    })}
+                    <div
+                      className={styles.plusContainer}
+                      onClick={() => setIsOpen(!isOpen)}
+                    >
                       <Plus />
                       <span>Додати предмет</span>
                     </div>
-
-                    <div className={`${styles.subjectContainer}`}>
-                      <div className={styles.subject}>
-                        Українська література
+                    {isOpen && (
+                      <div className={`${styles.subjectContainer}`}>
+                        <div className={styles.containerHeader}>
+                          <span>Виберіть предмети</span>
+                          <div
+                            className={styles.closeContainerIcon}
+                            onClick={() => setIsOpen(!isOpen)}
+                          ></div>
+                        </div>
+                        <div className={styles.subjectWrapper}>
+                          {examSubjects.map((subject) => {
+                            return (
+                              <div
+                                key={subject.id}
+                                className={styles.subject}
+                                onClick={() => {
+                                  addSubject(subject.id);
+                                  console.log(subject.id);
+                                }}
+                              >
+                                {subject.examName}
+                              </div>
+                            );
+                          })}
+                        </div>
                       </div>
-                      <div className={styles.subject}>
-                        Українська література
-                      </div>
-                      <div className={styles.subject}>
-                        Українська література
-                      </div>
-                      <div className={styles.subject}>
-                        Українська література
-                      </div>
-                      <div className={styles.subject}>
-                        Українська література
-                      </div>
-                      <div className={styles.subject}>
-                        Українська література
-                      </div>
-                      <div className={styles.subject}>
-                        Українська література
-                      </div>
-                      <div className={styles.subject}>
-                        Українська література
-                      </div>
-                      <div className={styles.subject}>
-                        Українська література
-                      </div>
-                    </div>
-
+                    )}
                     <FormButton
                       title={'Зберегти'}
                       id='registerFormButton'
