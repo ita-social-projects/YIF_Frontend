@@ -8,6 +8,7 @@ import AddInstitutionOfEducation from './addInstitutionOfEducationPage';
 import ThinArrow from '../../components/common/icons/ThinArrow';
 import AddInstitutionOfEducationAdmin from '../../components/superAdmin/addInstitutionOfEducationAdmin';
 import UniversityListPage from './universityListPage';
+import AddSpecialtyPage from './addSpecialtyPage';
 
 function SuperAdmin() {
   const [isLinksOpened, setIsLinksOpened] = useState(false);
@@ -51,6 +52,12 @@ function SuperAdmin() {
             <Link className={styles.underlineAnimation} to='#'>
               Школи
             </Link>
+            <Link
+              className={styles.underlineAnimation}
+              to={`${path}/addSpecialty`}
+            >
+              Спеціальності
+            </Link>
           </nav>
         </Aside>
         <Switch>
@@ -68,6 +75,9 @@ function SuperAdmin() {
           </Route>
           <Route exact path={`${path}/universityList`}>
             <UniversityListPage />
+          </Route>
+          <Route exact path={`${path}/addSpecialty`}>
+            <AddSpecialtyPage />
           </Route>
         </Switch>
       </section>
