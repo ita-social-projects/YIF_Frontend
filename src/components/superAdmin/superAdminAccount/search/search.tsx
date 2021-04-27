@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../superAdminAccount.module.scss';
 import { ReactComponent as IconSearch } from '../icons/iconSearch.svg';
-const iconClose = 'assets/icons/close.svg';
+const iconClose = '/assets/icons/close.svg';
 
 interface Props {
   searchValue: string;
