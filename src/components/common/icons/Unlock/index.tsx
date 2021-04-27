@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './unlock.module.scss';
 
 interface Props {
-  handleClick: () => void;
+  handleClick?: () => void;
 }
 
 const Unlock: React.FC<Props> = ({ handleClick }) => {
