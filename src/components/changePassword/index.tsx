@@ -25,7 +25,7 @@ const changePassword = () => {
             <>
               {
                 <Form>
-                  <h2>Зміна паролю</h2>
+                  <h2>Зміна пароля</h2>
                   <div>
                     <Field
                       component={FormInput}
