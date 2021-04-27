@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import Input from '../../../components/common/labeledInput/index';
 import { Formik, Form } from 'formik';
 import styles from './editSpecialty.module.scss';
@@ -6,11 +6,57 @@ import { FormButton } from '../../../components/common/formElements/index';
 import editSpecialtyValidation from './editSpecialtyValidation';
 import Plus from '../../../components/common/icons/Plus';
 
+const examSubjects = [
+  { id: 1, examName: 'Англійська мова' },
+  { id: 2, examName: 'Математика' },
+  { id: 3, examName: 'Українська мова та література' },
+  { id: 4, examName: 'Біологія' },
+  { id: 5, examName: 'Фізика' },
+  { id: 6, examName: 'Християнська етика' },
+];
+
+function reducer(state: any, action: any) {
+  switch (action.type) {
+    case 'setInitialValues':
+      return {
+        ...state,
+        initialValues: {
+          ...action.payload,
+        },
+      };
+    case 'setExamSubjects':
+      return {
+        ...state,
+        fetching: false,
+        eSubjects: action.payload,
+      };
+
+    case 'addRequirement':
+      const updated: any = [];
+      state.eSubjects.forEach((subject: any) => {
+        if (action.payload === subject.id) {
+          updated.push(subject);
+        }
+        console.log(updated);
+      });
+      return {
+        ...state,
+        // eSubjects: state.eSubjects.filter(()=>{
+
+        // })
+        examRequirements: [...state.examRequirements, ...updated],
+      };
+
+    default:
+      return state;
+  }
+}
+
 const EditSpecialty = () => {
-  const [initialValues, setinitialValues] = useState({});
+  // const [initialValues, setinitialValues] = useState({});
   const [isChanged, setIsChanged] = useState(false);
-  const [examRequirements, setExamRequirements] = useState<any>([]);
-  const [fetching, setFetching] = useState(true);
+  // const [examRequirements, setExamRequirements] = useState<any>([]);
+  // const [fetching, setFetching] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const { specialtyName, educationalProgramLink, description } = {
     specialtyName: 'Автоматизація та комп’ютерно-інтегровані технології',
@@ -19,25 +65,25 @@ const EditSpecialty = () => {
       'Це базовий опис спеціальності. Ця спеціальність підійде для тих хто хоче реалізувати себе у майбутньому у даній галузі. Для здобувачів вищої освіти вона буде цікавою тому що вони зможуть розкрити себе у даному напрямку за рахунок актуальної інформації, яку будуть доносити ним професіонали своєї справи, які є майстрами у своїй галузі.',
   };
 
-  const examSubjects = [
-    { id: 1, examName: 'Англійська мова' },
-    { id: 2, examName: 'Математика' },
-    { id: 3, examName: 'Українська мова та література' },
-    { id: 4, examName: 'Біологія' },
-    { id: 5, examName: 'Фізика' },
-    { id: 6, examName: 'Християнська етика' },
-  ];
+  const [state, dispatch] = useReducer(reducer, {
+    fetching: true,
+    initialValues: null,
+    eSubjects: [],
+    examRequirements: [],
+  });
 
-  const addSubject = (id: number) => {
-    console.log('Cliked');
-    examSubjects.forEach((i) => {
-      if (id === i.id) {
-        setExamRequirements([...examRequirements, i]);
-        console.log(examRequirements);
-      }
-    });
-    setIsChanged(!isChanged);
-  };
+  const { fetching, initialValues, eSubjects, examRequirements } = state;
+
+  // const addSubject = (id: number) => {
+  //   console.log('Cliked');
+  //   eSubjects.forEach((i: any) => {
+  //     if (id === i.id) {
+  //       setExamRequirements([...examRequirements, i]);
+  //       console.log(examRequirements);
+  //     }
+  //   });
+  //   setIsChanged(!isChanged);
+  // };
 
   useEffect(() => {
     const requirements: any = {};
@@ -46,17 +92,23 @@ const EditSpecialty = () => {
       requirements[`${examName}${id}`] = '';
       requirements[`${examName}`] = '';
     });
-    setinitialValues({
-      specialtyName: specialtyName,
-      paymentForm: 'бюджет, контракт',
-      educationFormName: 'денна, заочна, вечірня',
-      educationalProgramLink: educationalProgramLink,
-      description: description,
-      ...requirements,
+    dispatch({
+      type: 'setInitialValues',
+      payload: {
+        specialtyName: specialtyName,
+        paymentForm: 'бюджет, контракт',
+        educationFormName: 'денна, заочна, вечірня',
+        educationalProgramLink: educationalProgramLink,
+        description: description,
+        ...requirements,
+      },
     });
-    setFetching(false);
+    dispatch({
+      type: 'setExamSubjects',
+      payload: examSubjects,
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isChanged]);
+  }, [state.examRequirements]);
 
   return (
     <>
@@ -149,13 +201,17 @@ const EditSpecialty = () => {
                           ></div>
                         </div>
                         <div className={styles.subjectWrapper}>
-                          {examSubjects.map((subject) => {
+                          {eSubjects.map((subject: any) => {
                             return (
                               <div
                                 key={subject.id}
                                 className={styles.subject}
                                 onClick={() => {
-                                  addSubject(subject.id);
+                                  dispatch({
+                                    type: 'addRequirement',
+                                    payload: subject.id,
+                                  });
+                                  // addSubject(subject.id);
                                   console.log(subject.id);
                                 }}
                               >
