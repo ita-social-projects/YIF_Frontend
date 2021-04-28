@@ -31,13 +31,14 @@
 }
 
 .formInput {
-  padding-bottom: 2px;
+  padding-bottom: 5px;
   font-family: $fontOpenSans;
   font-weight: $regular;
   font-size: 14px; // fix this in the Future
   color: $black;
   width: 100%;
   cursor: pointer;
+  background-color: transparent;
 
   &::placeholder {
     font-family: $fontOpenSans;
