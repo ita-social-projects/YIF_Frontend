@@ -29,6 +29,7 @@
   min-height: 100vh;
   .mainContent {
     margin: 0 auto;
+    padding-bottom: 10rem;
     @include flex(column, center, flex-start);
   }
 
@@ -129,7 +130,24 @@
   }
 
   button {
-    margin-bottom: 15rem;
     width: 12.5rem;
+  }
+
+  .specialtyAction {
+    @include flex(row, center, center);
+    position: relative;
+    width: 65.625rem;
+  }
+
+  .deleteSpecialty {
+    @extend .heading;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: $red;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }

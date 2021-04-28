@@ -144,7 +144,7 @@ const EditSpecialty = () => {
                       />
                       <Input
                         id='description'
-                        label='Опис'
+                        label='Опис:'
                         name='description'
                         area='true'
                       />
@@ -217,8 +217,6 @@ const EditSpecialty = () => {
                                     type: 'addRequirement',
                                     payload: subject.id,
                                   });
-                                  // addSubject(subject.id);
-                                  console.log(subject.id);
                                 }}
                               >
                                 {subject.examName}
@@ -228,12 +226,17 @@ const EditSpecialty = () => {
                         </div>
                       </div>
                     )}
-                    <FormButton
-                      title={'Зберегти'}
-                      id='registerFormButton'
-                      data-testid='button'
-                      form='register'
-                    />
+                    <div className={styles.specialtyAction}>
+                      <FormButton
+                        title={'Зберегти'}
+                        id='registerFormButton'
+                        data-testid='button'
+                        form='register'
+                      />
+                      <div className={styles.deleteSpecialty}>
+                        Видалити спеціальність
+                      </div>
+                    </div>
                   </Form>
                 )}
               </Formik>
