@@ -1,9 +1,13 @@
 import React from 'react';
-
-const Plus = () => {
+import styles from './plus.module.scss';
+interface Props {
+  handleClick: () => void;
+}
+const Plus: React.FC<Props> = ({ handleClick }) => {
   return (
-    <div>
+    <div className={styles.container} onClick={handleClick}>
       <svg
+        className={styles.plus}
         xmlns='http://www.w3.org/2000/svg'
         width='60'
         height='60'

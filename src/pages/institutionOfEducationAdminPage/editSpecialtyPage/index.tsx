@@ -32,19 +32,25 @@ function reducer(state: any, action: any) {
       };
 
     case 'addRequirement':
-      const updated: any = [];
-      state.eSubjects.forEach((subject: any) => {
-        if (action.payload === subject.id) {
-          updated.push(subject);
-        }
-        console.log(updated);
-      });
       return {
         ...state,
-        // eSubjects: state.eSubjects.filter(()=>{
 
-        // })
-        examRequirements: [...state.examRequirements, ...updated],
+        examRequirements: [
+          ...state.examRequirements,
+          ...state.eSubjects.filter((s: any) => s.id === action.payload),
+        ],
+        eSubjects: state.eSubjects.filter((s: any) => s.id !== action.payload),
+      };
+    case 'removeRequirement':
+      return {
+        ...state,
+        eSubjects: [
+          ...state.eSubjects,
+          ...state.examRequirements.filter((s: any) => s.id === action.payload),
+        ],
+        examRequirements: [
+          ...state.examRequirements.filter((s: any) => s.id !== action.payload),
+        ],
       };
 
     default:
@@ -53,10 +59,6 @@ function reducer(state: any, action: any) {
 }
 
 const EditSpecialty = () => {
-  // const [initialValues, setinitialValues] = useState({});
-  const [isChanged, setIsChanged] = useState(false);
-  // const [examRequirements, setExamRequirements] = useState<any>([]);
-  // const [fetching, setFetching] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const { specialtyName, educationalProgramLink, description } = {
     specialtyName: 'Автоматизація та комп’ютерно-інтегровані технології',
@@ -64,26 +66,14 @@ const EditSpecialty = () => {
     description:
       'Це базовий опис спеціальності. Ця спеціальність підійде для тих хто хоче реалізувати себе у майбутньому у даній галузі. Для здобувачів вищої освіти вона буде цікавою тому що вони зможуть розкрити себе у даному напрямку за рахунок актуальної інформації, яку будуть доносити ним професіонали своєї справи, які є майстрами у своїй галузі.',
   };
-
-  const [state, dispatch] = useReducer(reducer, {
+  const initialState = {
     fetching: true,
     initialValues: null,
     eSubjects: [],
     examRequirements: [],
-  });
-
+  };
+  const [state, dispatch] = useReducer(reducer, initialState);
   const { fetching, initialValues, eSubjects, examRequirements } = state;
-
-  // const addSubject = (id: number) => {
-  //   console.log('Cliked');
-  //   eSubjects.forEach((i: any) => {
-  //     if (id === i.id) {
-  //       setExamRequirements([...examRequirements, i]);
-  //       console.log(examRequirements);
-  //     }
-  //   });
-  //   setIsChanged(!isChanged);
-  // };
 
   useEffect(() => {
     const requirements: any = {};
@@ -103,12 +93,16 @@ const EditSpecialty = () => {
         ...requirements,
       },
     });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.examRequirements]);
+
+  useEffect(() => {
     dispatch({
       type: 'setExamSubjects',
       payload: examSubjects,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.examRequirements]);
+  }, []);
 
   return (
     <>
@@ -181,16 +175,28 @@ const EditSpecialty = () => {
                             max='1'
                             step='0.01'
                           />
+                          <div
+                            className={styles.deleteRequirement}
+                            onClick={() => {
+                              dispatch({
+                                type: 'removeRequirement',
+                                payload: id,
+                              });
+                            }}
+                          >
+                            Прибрати
+                          </div>
                         </div>
                       );
                     })}
-                    <div
-                      className={styles.plusContainer}
-                      onClick={() => setIsOpen(!isOpen)}
-                    >
-                      <Plus />
-                      <span>Додати предмет</span>
-                    </div>
+                    {!isOpen && (
+                      <div className={styles.plusContainer}>
+                        <Plus handleClick={() => setIsOpen(!isOpen)} />
+                        <span onClick={() => setIsOpen(!isOpen)}>
+                          Додати предмет
+                        </span>
+                      </div>
+                    )}
                     {isOpen && (
                       <div className={`${styles.subjectContainer}`}>
                         <div className={styles.containerHeader}>

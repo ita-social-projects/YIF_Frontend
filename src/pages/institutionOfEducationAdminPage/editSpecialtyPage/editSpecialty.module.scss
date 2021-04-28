@@ -1,6 +1,7 @@
 @import '../../../styles/index.scss';
 
 .customInput {
+  position: relative;
   border-radius: 0.5rem;
   padding: 1rem 1rem 1rem 2rem;
   background-color: #bad0e5;
@@ -10,6 +11,9 @@
   span {
     font-family: $fontOpenSans;
     min-width: 18rem;
+  }
+  &:hover .deleteRequirement {
+    display: block;
   }
 }
 
@@ -52,10 +56,26 @@
     font-size: $font_18px;
   }
 
+  .deleteRequirement {
+    @extend .heading;
+    display: none;
+    font-size: 13px;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.3rem;
+    color: $red;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   .plusContainer {
     @include flex(column, center, center);
     @extend .heading;
-    cursor: pointer;
+    span {
+      cursor: pointer;
+    }
   }
 
   .subjectContainer {
