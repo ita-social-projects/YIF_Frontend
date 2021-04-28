@@ -9,6 +9,8 @@ import EditInstitutionOfEducationInfoPage from './editInstitutionOfEducationInfo
 import OurSpecialties from './ourSpecialties';
 import EditSpecialty from './editSpecialtyPage';
 import AddSpecialties from './addSpecialties';
+import ChangePassword from '../../components/changePassword';
+
 function InstitutionOfEducationAdminPage() {
   const { path } = useRouteMatch();
   return (
@@ -34,6 +36,12 @@ function InstitutionOfEducationAdminPage() {
               to={`${path}/moderators`}
             >
               Модератори
+            </Link>
+            <Link
+              className={styles.underlineAnimation}
+              to={`${path}/changePassword`}
+            >
+              Змінити пароль
             </Link>
           </nav>
         </Aside>
@@ -61,6 +69,9 @@ function InstitutionOfEducationAdminPage() {
           </Route>
           <Route path={`${path}/moderators`}>
             <Moderators />
+          </Route>
+          <Route exact path={`${path}/changePassword`}>
+            <ChangePassword />
           </Route>
         </Switch>
       </section>
