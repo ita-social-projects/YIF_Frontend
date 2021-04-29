@@ -100,21 +100,14 @@ describe('EditInstitutionOfEducationInfo', () => {
       userEvent.click(imageHandler);
       userEvent.click(screen.getByTestId('button'));
     });
-    expect(submitHandler).toBeCalledWith({
-      name: 'University',
-      abbreviation: 'UY',
-      site: 'https://univ.com',
-      address: 'street',
-      phone: '+380970707007',
-      email: 'univ@mail.com',
-      description:
-        'The best university in the world! You can learn anything you want here!',
-      lat: 0,
-      lon: 0,
-      institutionOfEducationType: 'University',
-      imageApiModel: {
-        photo: 'foto',
+    expect(submitHandler).toBeCalledWith([
+      {
+        path: '/ImageApiModel',
+        op: 'replace',
+        value: {
+          Photo: 'foto',
+        },
       },
-    });
+    ]);
   });
 });

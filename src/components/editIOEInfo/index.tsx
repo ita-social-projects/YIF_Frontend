@@ -7,11 +7,9 @@ import UniversityMap from '../superAdmin/addInstitutionOfEducationForm/map';
 import ImageUploader from '../institutionOfEducationAdmin/imageUploader';
 import editIOEValidationSchema from './editIOEValidation';
 
-type Image = {
-  photo: string;
-};
+type Item = Array<string | number>;
 
-interface Common {
+interface FormikValues {
   name: string;
   abbreviation: string;
   site: string;
@@ -20,35 +18,24 @@ interface Common {
   email: string;
   description: string;
   institutionOfEducationType: string | number;
-}
-
-interface Data extends Common {
   lat: number | string;
   lon: number | string;
+}
+
+interface Data extends FormikValues {
   imagePath: string;
-}
-
-interface FormikValues extends Common {
-  institutionOfEducationLat: number | string;
-  institutionOfEducationLon: number | string;
-}
-
-interface NewValues extends Common {
-  lat: number | string;
-  lon: number | string;
-  imageApiModel: Image;
 }
 
 interface Props {
   data: Data;
-  submitHandler(values: NewValues): void;
+  submitHandler(values: Array<{}>): void;
 }
 
 const EditInstitutionOfEducationInfo: React.FC<Props> = ({
   data,
   submitHandler,
 }) => {
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState<string | null>('');
   const {
     name,
     abbreviation,
@@ -72,43 +59,36 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
     email,
     description,
     institutionOfEducationType,
-    institutionOfEducationLat: lat,
-    institutionOfEducationLon: lon,
+    lat,
+    lon,
   };
 
   const imageHandler = (image: string) => {
     setImage(image);
   };
 
-  const onSubmit = (values: FormikValues) => {
-    const {
-      name,
-      abbreviation,
-      site,
-      address,
-      phone,
-      email,
-      description,
-      institutionOfEducationType,
-      institutionOfEducationLat,
-      institutionOfEducationLon,
-    } = values;
-
-    submitHandler({
-      name,
-      abbreviation,
-      site,
-      address,
-      phone,
-      email,
-      description,
-      lat: institutionOfEducationLat,
-      lon: institutionOfEducationLon,
-      institutionOfEducationType,
-      imageApiModel: {
-        photo: image || imagePath,
-      },
-    });
+  const handleSubmit = (values: FormikValues) => {
+    const oldData: Array<Item> = Object.entries(initialValues);
+    const newData: Array<{}> = [];
+    Object.entries(values)
+      .filter((item, index) => item[1] !== oldData[index][1])
+      .forEach((newItem) => {
+        newData.push({
+          path: `/${newItem[0]}`,
+          op: 'replace',
+          value: newItem[1],
+        });
+      });
+    if (image) {
+      newData.push({
+        path: '/ImageApiModel',
+        op: 'replace',
+        value: {
+          Photo: image,
+        },
+      });
+    }
+    submitHandler(newData);
   };
 
   return (
@@ -131,7 +111,7 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
           initialValues={initialValues}
           validationSchema={editIOEValidationSchema}
           onSubmit={(values) => {
-            onSubmit(values);
+            handleSubmit(values);
           }}
         >
           {({ setFieldValue, errors }) => (
@@ -146,8 +126,8 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
                     className={styles.selector}
                   >
                     <option value=''>Виберіть тип...</option>
-                    <option value='University'>Університет</option>
-                    <option value='College'>Коледж</option>
+                    <option value='0'>Університет</option>
+                    <option value='1'>Коледж</option>
                   </Field>
                   {errors.institutionOfEducationType && (
                     <div className={styles.selectError}>

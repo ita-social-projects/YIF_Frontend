@@ -35,17 +35,6 @@ const ImageUploaderPopup = (props: TProps) => {
 
   let fileInput: any = React.createRef();
 
-  // const [didMount, setDidMount] = useState(false);
-
-  // useEffect(() => {
-  //   setDidMount(true);
-  //   return () => setDidMount(false);
-  // }, []);
-
-  // if (!didMount) {
-  //   return null;
-  // }
-
   const highlightArea = () => {
     document
       .getElementById('imageLoaderContainer')

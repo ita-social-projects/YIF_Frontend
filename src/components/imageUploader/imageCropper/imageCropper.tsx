@@ -28,7 +28,7 @@ const ImageCropper = (props: TProps) => {
   return (
     <div className={style.imagePrevieContainer}>
       <img
-        src='assets/icons/close.svg'
+        src='/assets/icons/close.svg'
         className={style.closeButton}
         alt='close icon'
         onClick={() => {

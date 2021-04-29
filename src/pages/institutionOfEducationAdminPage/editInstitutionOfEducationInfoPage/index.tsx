@@ -45,7 +45,7 @@ const EditInstitutionOfEducationInfoPage = () => {
       const currentToken = await getToken();
       const { statusCode }: any = await requestSecureData(
         url,
-        'POST',
+        'PATCH',
         currentToken,
         formikValues
       );
@@ -67,7 +67,7 @@ const EditInstitutionOfEducationInfoPage = () => {
         try {
           const currentToken = await getToken();
           const { statusCode, data }: any = await requestSecureData(
-            `${APIUrl}InstitutionOfEducationAdmin/GetIoEInfo`,
+            `${APIUrl}InstitutionOfEducationAdmin/GetIoEInfoByUserId`,
             'GET',
             currentToken
           );
