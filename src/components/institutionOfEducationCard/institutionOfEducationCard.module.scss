@@ -2,12 +2,13 @@
 
 .card {
   max-width: 1440px;
+  width: 100%;
   height: auto;
   margin-top: 30px;
   background-color: $lightBlue_2;
   border-radius: 15px;
   padding: 50px 30px 50px 60px;
-  @include flex(column, flex-start, space-between);
+  @include flex(column, stretch, space-between);
   position: relative;
 
   @include mobile-w {

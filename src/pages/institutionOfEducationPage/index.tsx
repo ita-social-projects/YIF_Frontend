@@ -147,7 +147,11 @@ const InstitutionOfEducationPage = () => {
                     <ul>
                       <li>
                         <b>Сайт:</b>{' '}
-                        <a href={site} target='_blank'>
+                        <a
+                          href={site}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                        >
                           {site}
                         </a>
                       </li>
@@ -159,13 +163,21 @@ const InstitutionOfEducationPage = () => {
                       </li>
                       <li>
                         <b>Телефон:</b>{' '}
-                        <a href={`tel:${phone}`} target='_blank'>
+                        <a
+                          href={`tel:${phone}`}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                        >
                           {phone}
                         </a>
                       </li>
                       <li>
                         <b>Ел. пошта:</b>{' '}
-                        <a href={`mailto:${email}`} target='_blank'>
+                        <a
+                          href={`mailto:${email}`}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                        >
                           {email}
                         </a>
                       </li>

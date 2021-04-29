@@ -6,10 +6,12 @@
   width: 1.625rem;
   position: relative;
   cursor: pointer;
+
   .lock {
     width: 1.625rem;
     fill: rgb(0, 0, 0);
   }
+
   &:hover::after {
     content: 'Розблокувати';
     position: absolute;
@@ -20,6 +22,7 @@
     font-weight: bold;
     color: #000;
   }
+
   :hover {
     fill: rgb(0, 0, 0);
   }

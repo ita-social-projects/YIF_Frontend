@@ -130,6 +130,7 @@ const InstitutionsOfEducationListPage = () => {
 
   useEffect(() => {
     getIOEList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, toggleError, token]);
 
   const InstitutionsOfEducationCardList = InstitutionsOfEducationList.map(

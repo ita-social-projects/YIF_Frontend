@@ -2,9 +2,10 @@ import React from 'react';
 import styles from '../superAdminAccount.module.scss';
 import ReactParser from 'html-react-parser';
 import { IInstitutionOfEducationAdmin } from '../superAdminAccount';
-import { Link, useRouteMatch } from 'react-router-dom';
-import { ReactComponent as IconLock } from '../icons/iconLock.svg';
-import { ReactComponent as IconEdit } from '../icons/edit.svg';
+import { Link } from 'react-router-dom';
+import Lock from '../../../common/icons/Lock/index';
+import Unlock from '../../../common/icons/Unlock/index';
+import Edit from '../../../common/icons/Edit/index';
 
 interface Props {
   admin: IInstitutionOfEducationAdmin;
@@ -20,7 +21,7 @@ const TableItem: React.FC<Props> = (props) => {
     setBanStatus,
     //    removeAdminInstitutionOfEducation,
   } = props;
-  const { path } = useRouteMatch();
+  // const { path } = useRouteMatch();
   return (
     <ul>
       <li className={styles.adminEmail}>
@@ -48,16 +49,13 @@ const TableItem: React.FC<Props> = (props) => {
         <li
           data-testid='setBunStatus'
           className={`${styles.adminBan} ${admin.isBanned && styles.banned}`}
-          onClick={() => setBanStatus(admin.id)}
+          onClick={() => setBanStatus(admin.user.id)}
         >
-          <IconLock />
+          {admin.isBanned ? <Lock /> : <Unlock />}
         </li>
         <li data-testid='removeAdmin' className={styles.adminRemove}>
-          <Link
-            className={`${styles.animatedButton} ${styles.buttonLink}`}
-            to={`/superAdminAccount/addInstitutionOfEducationAdmin`}
-          >
-            <IconEdit />
+          <Link to={`/superAdminAccount/addInstitutionOfEducationAdmin`}>
+            <Edit />
           </Link>
         </li>
       </div>

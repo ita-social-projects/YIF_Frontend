@@ -59,6 +59,9 @@
 
     article:nth-of-type(2) {
       // block with logo
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
       .logo {
         text-decoration: none;
@@ -100,4 +103,15 @@
     font-size: $font_18px;
     font-family: $fontOpenSans;
   }
+}
+
+.disclaimer {
+  width: 25rem;
+  margin-top: 1.6rem;
+  text-align: center;
+  font-weight: $regular;
+  font-size: $font_15px;
+  font-family: $fontNunito;
+  color: $darkBlue;
+  // opacity: 0.2%;
 }

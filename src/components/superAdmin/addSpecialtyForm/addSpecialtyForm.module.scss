@@ -1,0 +1,95 @@
+@import '../../styles.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f2f9ff url(/assets/images/addSpecialty.png) bottom left no-repeat;
+  font-family: $fontOpenSans;
+  font-size: 1.125rem;
+  min-height: 110vh;
+  margin: 0 auto;
+  width: 100%;
+  padding-bottom: 34.375rem;
+  &__title{
+    font-size: 3rem;
+    line-height: 4.063rem;
+    margin-bottom: 2.5rem;
+  }
+  form{
+    max-width: 1100px;
+    .topWrapper{
+      background: #BAD0E5;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 2.5rem;
+      border-radius: 10px;
+      div{
+        display: flex;
+        width: 100%;
+      }
+      select{
+        appearance: none;
+        background: url(/assets/images/arrow.svg);
+        background-position: 96% 21px;
+        background-repeat: no-repeat;
+        background-color: #fff;
+      }
+      &__input{
+        width: 100%;
+        margin-left: auto;
+        height: 3.125rem;
+        padding: 0.625rem 1rem;
+        box-sizing: border-box;
+        font-family: $fontOpenSans;
+        border-radius: 0.3rem;
+      }
+      &__label{
+        min-width: 6.563rem;
+        display: flex;
+        align-items: center;
+        font-family: $fontOpenSans;
+      }
+      &__textarea{
+        width: 100%;
+        padding: 0.625rem 1rem;
+        font-family: $fontOpenSans;
+        min-height: 7.813rem;
+        border-radius: 0.3rem;
+      }
+    }
+    .halfWidth{
+      padding: 0.6rem;
+      flex-basis: 50%;
+      &__code{
+        flex-basis: 40%;
+        margin-left: auto;
+        label{
+          margin-left: auto;
+          margin-right: 0;
+          min-width: 4rem;
+        }
+        input{
+          text-align: center;
+        }
+      }
+    }
+    .fullWidth{
+      padding: 0.6rem;
+      flex-basis: 100%;
+      &__textarea{
+        align-items: flex-start;
+        label{
+          padding-top: 0.625rem;
+        }
+      }
+    }
+    button{
+      margin-left: auto;
+      margin-right: 0;
+      max-width: 12.5rem;
+      margin-top: 1.375rem;
+      display: block;
+    }
+  }
+}

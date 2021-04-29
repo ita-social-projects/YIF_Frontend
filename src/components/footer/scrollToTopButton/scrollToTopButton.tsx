@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styles from './scrollToTopButton.module.scss';
 
 const ScrollToTopButton = () => {
@@ -11,10 +11,10 @@ const ScrollToTopButton = () => {
     });
   };
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const currentScrollPos = window.pageYOffset;
     setVisible(currentScrollPos > 200);
-  };
+  }, []);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
