@@ -91,10 +91,10 @@ describe('EditSpecialty', () => {
       const subjects = document.querySelectorAll('.subject');
       userEvent.click(subjects[0]);
       userEvent.click(subjects[3]);
-      const rmButton = screen.getAllByText('Прибрати');
+      const rmButton = document.querySelectorAll('.deleteRequirement');
       expect(rmButton).toHaveLength(2);
       userEvent.click(rmButton[0]);
-      expect(screen.getAllByText('Прибрати')).toHaveLength(1);
+      expect(screen.getAllByText('Мінімум балів:')).toHaveLength(1);
     });
   });
 });

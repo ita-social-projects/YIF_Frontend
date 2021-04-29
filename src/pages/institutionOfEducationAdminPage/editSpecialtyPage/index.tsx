@@ -150,6 +150,35 @@ const EditSpecialty = () => {
                       />
                     </div>
                     <h2 className={styles.infoTitle}>Вимоги до ЗНО</h2>
+                    {isOpen && eSubjects.length > 0 && (
+                      <div className={`${styles.subjectContainer}`}>
+                        <div className={styles.containerHeader}>
+                          <span>Виберіть предмети</span>
+                          <div
+                            className={styles.closeContainerIcon}
+                            onClick={() => setIsOpen(!isOpen)}
+                          ></div>
+                        </div>
+                        <div className={styles.subjectWrapper}>
+                          {eSubjects.map((subject: any) => {
+                            return (
+                              <div
+                                key={subject.id}
+                                className={styles.subject}
+                                onClick={() => {
+                                  dispatch({
+                                    type: 'addRequirement',
+                                    payload: subject.id,
+                                  });
+                                }}
+                              >
+                                {subject.examName}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
                     {examRequirements.map((exam: any) => {
                       const { examName, id } = exam;
                       return (
@@ -183,9 +212,7 @@ const EditSpecialty = () => {
                                 payload: id,
                               });
                             }}
-                          >
-                            Прибрати
-                          </div>
+                          ></div>
                         </div>
                       );
                     })}
@@ -197,35 +224,7 @@ const EditSpecialty = () => {
                         </span>
                       </div>
                     )}
-                    {isOpen && (
-                      <div className={`${styles.subjectContainer}`}>
-                        <div className={styles.containerHeader}>
-                          <span>Виберіть предмети</span>
-                          <div
-                            className={styles.closeContainerIcon}
-                            onClick={() => setIsOpen(!isOpen)}
-                          ></div>
-                        </div>
-                        <div className={styles.subjectWrapper}>
-                          {eSubjects.map((subject: any) => {
-                            return (
-                              <div
-                                key={subject.id}
-                                className={styles.subject}
-                                onClick={() => {
-                                  dispatch({
-                                    type: 'addRequirement',
-                                    payload: subject.id,
-                                  });
-                                }}
-                              >
-                                {subject.examName}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    )}
+
                     <div className={styles.specialtyAction}>
                       <FormButton
                         title={'Зберегти'}
