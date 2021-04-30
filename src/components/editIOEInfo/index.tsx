@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Input from '../common/labeledInput';
 import { Formik, Form, Field } from 'formik';
 import styles from './editInstitutionOfEducationInfo.module.scss';
@@ -103,7 +103,7 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
         <ImageUploader
           foto={image || `http://localhost:5000/images/${imagePath}`}
           aspectRatio={16 / 9}
-          text={'університету'}
+          text={institutionOfEducationType === '0' ? 'університету' : 'коледжу'}
           imageHandler={imageHandler}
         />
         <h2 className={styles.infoTitle}>Основна інформація</h2>

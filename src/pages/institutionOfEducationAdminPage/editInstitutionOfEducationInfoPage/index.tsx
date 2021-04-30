@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './editInstitutionOfEducationInfoPage.module.scss';
 import { requestSecureData } from '../../../services/requestDataFunction';
 import { APIUrl } from '../../../services/endpoints';
@@ -89,9 +89,7 @@ const EditInstitutionOfEducationInfoPage = () => {
       };
       getInfo();
     }
-    // return () => {
-    //   setIsNew(false);
-    // };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isNew]);
 
   let content;

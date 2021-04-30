@@ -60,6 +60,7 @@ const InstitutionOfEducationInfo = () => {
       }
     };
     getInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   let content;

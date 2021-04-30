@@ -30,7 +30,7 @@ const institutionOfEducationBlock: React.FC<Props> = ({
           <h1 className={styles.fullName}>{name}</h1>
           <p>
             <span>Сайт:</span>
-            <a href={site} target='_blank'>
+            <a href={site} target='_blank' rel='noopener noreferrer'>
               {site}
             </a>
           </p>
