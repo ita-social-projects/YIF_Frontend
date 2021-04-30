@@ -57,7 +57,8 @@
 
 .errorStyle {
   @include flex(row, center, flex-start);
-  background-color: rgba($red, 0.4);
+  background-color: #f9cfcd;
+  color: $red;
   font-size: $font_15px;
   font-family: $fontNunito;
   height: 2rem;

@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 const editIOEValidationSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, 'Замала кількість введених символів')
-    .max(50, 'Кількість введених символів перевищує допустиме значення')
+    .max(85, 'Кількість введених символів перевищує допустиме значення')
     .required('Заповніть поле'),
 
   institutionOfEducationType: Yup.string()
@@ -17,7 +17,7 @@ const editIOEValidationSchema = Yup.object().shape({
 
   address: Yup.string()
     .min(2, 'Замала кількість введених символів')
-    .max(50, 'Кількість введених символів перевищує допустиме значення')
+    .max(85, 'Кількість введених символів перевищує допустиме значення')
     .required('Заповніть поле'),
 
   site: Yup.string()
