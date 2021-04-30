@@ -1,59 +1,107 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import Input from '../../../components/common/labeledInput/index';
 import { Formik, Form } from 'formik';
 import styles from './editSpecialty.module.scss';
 import { FormButton } from '../../../components/common/formElements/index';
 import editSpecialtyValidation from './editSpecialtyValidation';
+import Plus from '../../../components/common/icons/Plus';
+
+const examSubjects = [
+  { id: 1, examName: 'Англійська мова' },
+  { id: 2, examName: 'Математика' },
+  { id: 3, examName: 'Українська мова та література' },
+  { id: 4, examName: 'Біологія' },
+  { id: 5, examName: 'Фізика' },
+  { id: 6, examName: 'Християнська етика' },
+];
+
+function reducer(state: any, action: any) {
+  switch (action.type) {
+    case 'setInitialValues':
+      return {
+        ...state,
+        initialValues: {
+          ...action.payload,
+        },
+      };
+    case 'setExamSubjects':
+      return {
+        ...state,
+        fetching: false,
+        eSubjects: action.payload,
+      };
+
+    case 'addRequirement':
+      return {
+        ...state,
+
+        examRequirements: [
+          ...state.examRequirements,
+          ...state.eSubjects.filter((s: any) => s.id === action.payload),
+        ],
+        eSubjects: state.eSubjects.filter((s: any) => s.id !== action.payload),
+      };
+    case 'removeRequirement':
+      return {
+        ...state,
+        eSubjects: [
+          ...state.eSubjects,
+          ...state.examRequirements.filter((s: any) => s.id === action.payload),
+        ],
+        examRequirements: [
+          ...state.examRequirements.filter((s: any) => s.id !== action.payload),
+        ],
+      };
+
+    default:
+      return state;
+  }
+}
 
 const EditSpecialty = () => {
-  const [initialValues, setinitialValues] = useState({});
-  const [fetching, setFetching] = useState(true);
-  const {
-    specialtyName,
-    educationalProgramLink,
-    description,
-    examRequirements,
-  } = {
+  const [isOpen, setIsOpen] = useState(false);
+  const { specialtyName, educationalProgramLink, description } = {
     specialtyName: 'Автоматизація та комп’ютерно-інтегровані технології',
     educationalProgramLink: 'example.com',
     description:
       'Це базовий опис спеціальності. Ця спеціальність підійде для тих хто хоче реалізувати себе у майбутньому у даній галузі. Для здобувачів вищої освіти вона буде цікавою тому що вони зможуть розкрити себе у даному напрямку за рахунок актуальної інформації, яку будуть доносити ним професіонали своєї справи, які є майстрами у своїй галузі.',
-    examRequirements: [
-      {
-        examName: 'Англійська мова',
-        minimumScore: 100,
-        coefficient: 0.25,
-      },
-      {
-        examName: 'Математика',
-        minimumScore: 100,
-        coefficient: 0.4,
-      },
-      {
-        examName: 'Українська мова та література',
-        minimumScore: 100,
-        coefficient: 0.25,
-      },
-    ],
   };
+  const initialState = {
+    fetching: true,
+    initialValues: null,
+    eSubjects: [],
+    examRequirements: [],
+  };
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { fetching, initialValues, eSubjects, examRequirements } = state;
 
   useEffect(() => {
     const requirements: any = {};
-    examRequirements.forEach((i) => {
-      const { examName, coefficient, minimumScore } = i;
-      requirements[`${examName}${minimumScore}`] = minimumScore;
-      requirements[`${examName}`] = coefficient;
+    examRequirements.forEach((i: any) => {
+      const { examName, id } = i;
+      requirements[`${examName}${id}`] = '';
+      requirements[`${examName}`] = '';
     });
-    setinitialValues({
-      specialtyName: specialtyName,
-      paymentForm: 'бюджет, контракт',
-      educationFormName: 'денна, заочна, вечірня',
-      educationalProgramLink: educationalProgramLink,
-      description: description,
-      ...requirements,
+    dispatch({
+      type: 'setInitialValues',
+      payload: {
+        specialtyName: specialtyName,
+        paymentForm: 'бюджет, контракт',
+        educationFormName: 'денна, заочна, вечірня',
+        educationalProgramLink: educationalProgramLink,
+        description: description,
+        ...requirements,
+      },
     });
-    setFetching(false);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.examRequirements]);
+
+  useEffect(() => {
+    dispatch({
+      type: 'setExamSubjects',
+      payload: examSubjects,
+    });
   }, []);
 
   return (
@@ -96,21 +144,50 @@ const EditSpecialty = () => {
                       />
                       <Input
                         id='description'
-                        label='Опис'
+                        label='Опис:'
                         name='description'
                         area='true'
                       />
                     </div>
                     <h2 className={styles.infoTitle}>Вимоги до ЗНО</h2>
-                    {examRequirements.map((exam) => {
-                      const { examName, minimumScore } = exam;
+                    {isOpen && eSubjects.length > 0 && (
+                      <div className={`${styles.subjectContainer}`}>
+                        <div className={styles.containerHeader}>
+                          <span>Виберіть предмети</span>
+                          <div
+                            className={styles.closeContainerIcon}
+                            onClick={() => setIsOpen(!isOpen)}
+                          ></div>
+                        </div>
+                        <div className={styles.subjectWrapper}>
+                          {eSubjects.map((subject: any) => {
+                            return (
+                              <div
+                                key={subject.id}
+                                className={styles.subject}
+                                onClick={() => {
+                                  dispatch({
+                                    type: 'addRequirement',
+                                    payload: subject.id,
+                                  });
+                                }}
+                              >
+                                {subject.examName}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+                    {examRequirements.map((exam: any) => {
+                      const { examName, id } = exam;
                       return (
-                        <div className={styles.customInput} key={examName}>
+                        <div className={styles.customInput} key={id}>
                           <span>{examName}:</span>
                           <Input
-                            id={`${examName}${minimumScore}`}
+                            id={`${examName}${id}`}
                             label='Мінімум балів:'
-                            name={`${examName}${minimumScore}`}
+                            name={`${examName}${id}`}
                             requirement='true'
                             type='number'
                             min='0'
@@ -127,15 +204,38 @@ const EditSpecialty = () => {
                             max='1'
                             step='0.01'
                           />
+                          <div
+                            className={styles.deleteRequirement}
+                            onClick={() => {
+                              dispatch({
+                                type: 'removeRequirement',
+                                payload: id,
+                              });
+                            }}
+                          ></div>
                         </div>
                       );
                     })}
-                    <FormButton
-                      title={'Зберегти'}
-                      id='registerFormButton'
-                      data-testid='button'
-                      form='register'
-                    />
+                    {!isOpen && (
+                      <div className={styles.plusContainer}>
+                        <Plus handleClick={() => setIsOpen(!isOpen)} />
+                        <span onClick={() => setIsOpen(!isOpen)}>
+                          Додати предмет
+                        </span>
+                      </div>
+                    )}
+
+                    <div className={styles.specialtyAction}>
+                      <FormButton
+                        title={'Зберегти'}
+                        id='registerFormButton'
+                        data-testid='button'
+                        form='register'
+                      />
+                      <div className={styles.deleteSpecialty}>
+                        Видалити спеціальність
+                      </div>
+                    </div>
                   </Form>
                 )}
               </Formik>

@@ -7,9 +7,9 @@
 
 .mainStyle {
   @include flex(row, flex-start, flex-start);
-  background: $lightBlue_3 url('/assets/images/userProfile.svg') top 80% right
+  background: $lightBlue_3 url('/assets/images/userProfile.svg') top 80% right -5%
     no-repeat;
-  padding: 2.5rem 30rem 5rem 2.5rem;
+  padding: 2.5rem 25rem 5rem 2.5rem;
   position: relative;
   height: auto;
 
@@ -17,7 +17,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    margin-left: 8rem;
+    margin-left: 4rem;
   }
 
   .titleContainer {

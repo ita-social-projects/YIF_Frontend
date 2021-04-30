@@ -1,0 +1,9 @@
+@import '../../../../styles/index.scss';
+
+.container {
+  cursor: pointer;
+
+  .plus {
+    fill: $lightBlue_1;
+  }
+}
