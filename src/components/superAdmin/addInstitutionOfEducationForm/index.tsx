@@ -48,8 +48,8 @@ const AddInstitutionOfEducationForm = () => {
         phone: values.institutionOfEducationPhone,
         email: values.institutionOfEducationEmail,
         description: values.institutionOfEducationDescription,
-        lat: values.institutionOfEducationLat,
-        lon: values.institutionOfEducationLon,
+        lat: values.lat,
+        lon: values.lon,
         institutionOfEducationType: values.institutionOfEducationType,
         imageApiModel: {
           photo: values.institutionOfEducationPicture,
@@ -98,8 +98,8 @@ const AddInstitutionOfEducationForm = () => {
           institutionOfEducationEmail: '',
           institutionOfEducationDescription: '',
           institutionOfEducationPicture: '',
-          institutionOfEducationLat: '',
-          institutionOfEducationLon: '',
+          lat: '',
+          lon: '',
           institutionOfEducationAdminEmail: '',
         }}
         validationSchema={validationField}
@@ -124,7 +124,7 @@ const AddInstitutionOfEducationForm = () => {
                 errors.institutionOfEducationSite === undefined &&
                 errors.institutionOfEducationEmail === undefined &&
                 errors.institutionOfEducationPhone === undefined &&
-                errors.institutionOfEducationLat === undefined &&
+                errors.lat === undefined &&
                 errors.institutionOfEducationDescription === undefined &&
                 errors.institutionOfEducationAdminEmail === undefined
                 // errors.institutionOfEducationPicture === undefined
@@ -347,11 +347,10 @@ const AddInstitutionOfEducationForm = () => {
                 setFieldValue={setFieldValue}
                 component={InstitutionOfEducationMap}
               />
-              {errors.institutionOfEducationLat &&
-              touched.institutionOfEducationLat ? (
+              {errors.lat && touched.lat ? (
                 <FormInputError
                   errorType='inputFull'
-                  errorMessage={errors.institutionOfEducationLat}
+                  errorMessage={errors.lat}
                 />
               ) : null}
               <div

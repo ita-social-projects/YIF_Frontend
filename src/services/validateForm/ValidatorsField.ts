@@ -21,11 +21,11 @@ export const validationField = Yup.object().shape({
     .min(8, 'Пароль має містити мінімум 8 символів')
     .oneOf([Yup.ref('password'), null], 'Паролі мають співпадати')
     .required('Заповніть поле'),
-  
+
   storeDataCheckbox: Yup.bool()
     .required('Ви повинні прийняти умови використання')
-    .oneOf([true],'Ви повинні прийняти умови використання'),
-    
+    .oneOf([true], 'Ви повинні прийняти умови використання'),
+
   firstName: Yup.string()
     .min(2, 'Недостатня кількість введених символів')
     .max(50, 'Кількість введених символів перевищує допустиме значення'),
@@ -97,7 +97,7 @@ export const validationField = Yup.object().shape({
     .required('Заповніть поле')
     .min(50, 'Кількість символів повинна бути більше 50'),
 
-  institutionOfEducationLat: Yup.string().required('Вкажіть розташування'),
+  lat: Yup.string().required('Вкажіть розташування'),
 
   institutionOfEducationPicture: Yup.string().required('Оберіть зображення'),
 

@@ -29,8 +29,8 @@ const UniversityMap = (props: any) => {
         const lat: number = e.latlng.lat;
         setPosition([lat, lng]);
         if (props.setFieldValue) {
-          setFieldValue('institutionOfEducationLat', lat);
-          setFieldValue('institutionOfEducationLon', lng);
+          setFieldValue('lat', lat);
+          setFieldValue('lon', lng);
         }
       },
     });

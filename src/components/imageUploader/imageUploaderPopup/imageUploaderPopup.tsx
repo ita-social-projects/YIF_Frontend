@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import style from './imageUploaderPopup.module.scss';
 import ImageCropper from '../imageCropper/imageCropper';
 import ButtonUploading from '../buttonUploading/buttonUploading';
@@ -34,17 +34,6 @@ const ImageUploaderPopup = (props: TProps) => {
   const [cropper, setCropper] = useState<any>();
 
   let fileInput: any = React.createRef();
-
-  const [didMount, setDidMount] = useState(false);
-
-  useEffect(() => {
-    setDidMount(true);
-    return () => setDidMount(false);
-  }, []);
-
-  if (!didMount) {
-    return null;
-  }
 
   const highlightArea = () => {
     document
