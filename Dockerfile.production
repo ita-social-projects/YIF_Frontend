@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:14.16.1
 
 COPY . /frond-end/react-app
 WORKDIR /frond-end/react-app
