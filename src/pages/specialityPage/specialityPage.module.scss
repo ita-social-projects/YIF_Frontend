@@ -37,7 +37,7 @@
   border-radius: 2.5rem;
   padding: 1.25rem 5rem;
   color: #fff;
-  display: block;
+  @include flex(column, center, flex-start);
   width: 100%;
   position: relative;
   span {
@@ -51,19 +51,4 @@
 .spinnerContainer {
   margin-top: 6.25rem;
   @include flex(row, center, center);
-}
-
-.card {
-  &__icon {
-    position: absolute;
-    top: 1.875rem;
-    right: 1.875rem;
-    cursor: pointer;
-
-    &__liked {
-      svg path {
-        fill: #f8b50b;
-      }
-    }
-  }
 }

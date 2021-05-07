@@ -133,13 +133,10 @@ const AddInstitutionOfEducationForm = () => {
               }
             }}
           >
+            <div className={styles.fullWidth}>
+              <h1 className={styles.topWrapper__title}>Новий заклад освіти</h1>
+            </div>
             <div className={styles.topWrapper}>
-              <div className={styles.fullWidth}>
-                <h1 className={styles.topWrapper__title}>
-                  Новий заклад освіти
-                </h1>
-              </div>
-
               <div className={styles.halfWidth}>
                 <label
                   className={styles.topWrapper__label}
