@@ -1,30 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Input from '../../../components/common/labeledInput/index';
 import { FormButton } from '../../../components/common/formElements/index';
 import { Formik, Form } from 'formik';
 import styles from './tabs.module.scss';
+import { APIUrl } from '../../../services/endpoints';
+import { useAuth } from '../../../services/tokenValidator';
+import { requestSecureData } from '../../../services/requestDataFunction';
 
-const emailList = [
-  {
-    email: 'Karley_Dach@melissa.tv',
-  },
-  {
-    email: 'Karley_Dach@melissa.tv',
-  },
-  {
-    email: 'Shanna@melissa.tv',
-  },
-  {
-    email: 'Shanna@melissa.tv',
-  },
-];
-function Tabs() {
+// const emailList = [
+//   {
+//     email: 'Karley_Dach@melissa.tv',
+//   },
+//   {
+//     email: 'Karley_Dach@melissa.tv',
+//   },
+//   {
+//     email: 'Shanna@melissa.tv',
+//   },
+//   {
+//     email: 'Shanna@melissa.tv',
+//   },
+// ];
+
+const Tabs = (props: { id: any }) => {
+  const { getToken } = useAuth();
   let initialValues = {};
   const [toggleState, setToggleState] = useState(0);
 
   const toggleTab = (index: any) => {
     setToggleState(index);
   };
+
+  const [moderatorsList, setModeratorsList] = useState({});
+
+  const getModeratorsList = async () => {
+    const endpoint = `${APIUrl}SuperAdmin/GetIoEModeratorsById${props.id}`;
+    const currentToken = await getToken();
+    console.log(`currentToken`, currentToken);
+
+    requestSecureData(endpoint, 'GET', currentToken).then((res: any) => {
+      console.log(`res`, res);
+      // const statusCode = res.statusCode.toString();
+      // if (statusCode.match(/^[23]\d{2}$/)) {
+      //   setModeratorsList(res.data);
+      //   console.log(`res.data`, res.data);
+      // } else {
+      //   console.log(`error`);
+      // }
+    });
+  };
+
+  useEffect(() => {
+    getModeratorsList();
+  }, []);
 
   return (
     <div className='container'>
@@ -95,7 +123,7 @@ function Tabs() {
             <p className={styles.moderators__top__address}>Електронна адреса</p>
           </div>
           <div className={styles.moderators__list}>
-            {emailList.map((item: any, key: number) => {
+            {/* {moderatorsList.map((item: any, key: number) => {
               return (
                 <div key={key} className={styles.moderators__item}>
                   <div className={styles.moderators__item__mail}>
@@ -106,12 +134,12 @@ function Tabs() {
                   </div>
                 </div>
               );
-            })}
+            })} */}
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Tabs;

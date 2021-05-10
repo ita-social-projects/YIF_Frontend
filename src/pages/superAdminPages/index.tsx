@@ -77,7 +77,7 @@ function SuperAdmin() {
           <Route exact path={`${path}/addInstitutionOfEducation`}>
             <AddInstitutionOfEducation />
           </Route>
-          <Route exact path={`${path}/addInstitutionOfEducationAdmin`}>
+          <Route exact path={`${path}/addInstitutionOfEducationAdmin/:ioeId`}>
             <AddInstitutionOfEducationAdmin />
           </Route>
           <Route exact path={`${path}/universityList`}>

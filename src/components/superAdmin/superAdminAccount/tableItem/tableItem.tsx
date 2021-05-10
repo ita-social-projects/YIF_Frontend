@@ -11,6 +11,7 @@ interface Props {
   admin: IInstitutionOfEducationAdmin;
   searchValue: string;
   setBanStatus: Function;
+  id: string;
   //  removeAdminInstitutionOfEducation: Function;
 }
 
@@ -19,6 +20,7 @@ const TableItem: React.FC<Props> = (props) => {
     admin,
     searchValue,
     setBanStatus,
+    id,
     //    removeAdminInstitutionOfEducation,
   } = props;
   // const { path } = useRouteMatch();
@@ -54,7 +56,7 @@ const TableItem: React.FC<Props> = (props) => {
           {admin.isBanned ? <Lock /> : <Unlock />}
         </li>
         <li data-testid='removeAdmin' className={styles.adminRemove}>
-          <Link to={`/superAdminAccount/addInstitutionOfEducationAdmin`}>
+          <Link to={`/superAdminAccount/addInstitutionOfEducationAdmin/${id}`}>
             <Edit />
           </Link>
         </li>

@@ -1,41 +1,67 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './addInstitutionOfEducation.module.scss';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch, useParams } from 'react-router-dom';
 import InstitutionOfEducationBlock from '../../institutionOfEducationBlock';
 import Unlock from '../../common/icons/Unlock/index';
 import Delete from '../../common/icons/Delete/index';
 import TabContent from './TabContent';
+import { APIUrl } from '../../../services/endpoints';
+import { useAuth } from '../../../services/tokenValidator';
+import { requestData } from '../../../services/requestDataFunction';
+
+interface ParamTypes {
+  ioeId: any;
+}
 
 const AddInstitutionOfEducationAdmin = () => {
+  const { getToken } = useAuth();
+  const { ioeId } = useParams<ParamTypes>();
   const { path } = useRouteMatch();
-  const { id, name, abbreviation, site, address, phone, email, description } = {
-    id: 'e2bd4ad9-060b-4d53-8222-9f3e5efbcfc7',
-    name:
-      'Національний університет водного господарства та природокористування',
-    abbreviation: 'НУВГП',
-    site: 'https://nuwm.edu.ua/',
-    address: 'вулиця Соборна, 11, Рівне, Рівненська область, 33000',
-    phone: '380362633209',
-    email: 'mail@nuwm.edu.ua',
-    description:
-      'Єдиний в Україні вищий навчальний заклад водогосподарського профілю. Заклад є навчально-науковим комплексом, що здійснює підготовку висококваліфікованих фахівців, науково-педагогічних кадрів, забезпечує підвищення кваліфікації фахівців та проводить науково-дослідну роботу.',
+  const pathWithoutParams = path.slice(0, path.lastIndexOf('/'));
+
+  const [institutionOfEducation, setInstitutionOfEducation] = useState({
+    name: '',
+    abbreviation: '',
+    site: '',
+    address: '',
+    phone: '',
+    email: '',
+    description: '',
+    imagePath: '',
+  });
+
+  const IOE = () => {
+    const endpoint = `${APIUrl}InstitutionOfEducation/${ioeId}`;
+    requestData(endpoint, 'GET').then((res: any) => {
+      const statusCode = res.statusCode.toString();
+      if (statusCode.match(/^[23]\d{2}$/)) {
+        setInstitutionOfEducation(res.data);
+      } else {
+        console.log(`error`);
+      }
+    });
   };
+
+  useEffect(() => {
+    IOE();
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.infoContainer}>
         <InstitutionOfEducationBlock
-          name={name}
-          abbreviation={abbreviation}
-          site={site}
-          address={address}
-          phone={phone}
-          email={email}
-          description={description}
-          imagePath={'https://nuwm.edu.ua/images/news/489x300/16990.jpg'}
+          name={institutionOfEducation.name}
+          abbreviation={institutionOfEducation.abbreviation}
+          site={institutionOfEducation.site}
+          address={institutionOfEducation.address}
+          phone={institutionOfEducation.phone}
+          email={institutionOfEducation.email}
+          description={institutionOfEducation.description}
+          imagePath={institutionOfEducation.imagePath}
         />
         <Link
           className={`${styles.animatedButton} ${styles.buttonLink}`}
-          to={`${path}/edit/${id}`}
+          to={`${pathWithoutParams}/edit/${ioeId}`}
         >
           Редагувати
         </Link>
@@ -49,7 +75,7 @@ const AddInstitutionOfEducationAdmin = () => {
             </div>
           </div>
           <div className={styles.admin__buttons}>
-            <TabContent />
+            <TabContent id={ioeId} />
           </div>
         </div>
       </div>
