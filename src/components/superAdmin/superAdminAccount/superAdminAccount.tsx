@@ -8,6 +8,7 @@ import { FormInputSuccess } from '../../common/formElements/formInputSuccess/for
 import { FormInputError } from '../../common/formElements';
 import TableItem from './tableItem/tableItem';
 import Search from './search/search';
+import Pagination from '../../../components/superAdmin/pagination';
 
 import Lock from '../../common/icons/Lock/index';
 // import { Link, Router } from 'react-router-dom';
@@ -290,6 +291,7 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
   return (
     <div className={styles.superAdminAccount}>
       <h1>Адміністратори закладів освіти</h1>
+      <Pagination />
       <div className={styles.adminTableContainer}>
         <div className={styles.adminTableHeader}>
           <Search

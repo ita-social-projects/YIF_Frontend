@@ -94,20 +94,19 @@ function Tabs() {
           <div className={styles.moderators__top}>
             <p className={styles.moderators__top__address}>Електронна адреса</p>
           </div>
-          <div className={styles.moderators__list}>
-            {emailList.map((item: any, key: number) => {
-              return (
-                <div key={key} className={styles.moderators__item}>
-                  <div className={styles.moderators__item__mail}>
-                    {item.email}
-                  </div>
-                  <div className={styles.moderators__item__link}>
-                    Призначити адміном
-                  </div>
+
+          {emailList.map((item: any, key: number) => {
+            return (
+              <div key={key} className={styles.moderators__item}>
+                <div className={styles.moderators__item__mail}>
+                  {item.email}
                 </div>
-              );
-            })}
-          </div>
+                <div className={styles.moderators__item__link}>
+                  Призначити адміном
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './delete.module.scss';
 
 interface Props {
-  handleClick: () => void;
+  handleClick?: () => void;
 }
 const Delete: React.FC<Props> = ({ handleClick }) => {
   return (

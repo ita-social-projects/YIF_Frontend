@@ -3,7 +3,7 @@
 .card {
   &__icon {
     position: absolute;
-    top: 30px;
+    top: 2.4rem;
     right: 30px;
     cursor: pointer;
 
@@ -11,6 +11,10 @@
       svg path {
         fill: #f8b50b;
       }
+    }
+
+    & :hover {
+      fill: #f8b50b;
     }
   }
 }

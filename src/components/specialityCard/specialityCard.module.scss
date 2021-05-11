@@ -7,7 +7,7 @@
 }
 .card {
   position: relative;
-  padding: 1.875rem 5.75rem;
+  padding: 2.4rem 5.75rem;
   border-radius: 15px;
   background-color: $lightBlue_2;
   width: 100%;
@@ -107,7 +107,7 @@
       font-size: 1.125rem;
       line-height: 1.563rem;
       color: $black;
-      p{
+      p {
         margin: 0.75rem 0;
       }
     }
@@ -147,19 +147,4 @@
 .spinnerContainer {
   margin-top: 6.25rem;
   @include flex(row, center, center);
-}
-
-.card {
-  &__icon {
-    position: absolute;
-    top: 1.875rem;
-    right: 1.875rem;
-    cursor: pointer;
-
-    &__liked {
-      svg path {
-        fill: #f8b50b;
-      }
-    }
-  }
 }
