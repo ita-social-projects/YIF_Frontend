@@ -40,6 +40,13 @@
         border: 1px solid #afbecf;
         padding: 0 1rem;
       }
+      select {
+        appearance: none;
+        background: url(/assets/images/arrow.svg);
+        background-position: 96% 1rem;
+        background-repeat: no-repeat;
+        background-color: #fff;
+      }
 
       .fullWidth {
         padding: 0.6rem;
