@@ -84,6 +84,17 @@
         }
       }
     }
+    .errorMessages {
+      padding: 0rem 0.6rem;
+      margin-top: -0.625rem;
+      margin-left: auto;
+      &__basic {
+        flex-basis: 89.8%;
+      }
+      &__code {
+        flex-basis: 33.8%;
+      }
+    }
     button {
       margin-left: auto;
       margin-right: 0;

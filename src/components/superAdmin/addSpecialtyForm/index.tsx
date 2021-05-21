@@ -1,10 +1,128 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './addSpecialtyForm.module.scss';
-import { FormButton } from '../../common/formElements';
+import { APIUrl } from '../../../services/endpoints';
+import { useAuth } from '../../../services/tokenValidator';
+import { requestSecureData, requestData } from '../../../services/requestDataFunction';
+import { useHistory } from 'react-router-dom';
 import { Field, Formik, Form } from 'formik';
+import { FormButton, FormInputError } from '../../common/formElements';
+import { FormInputSuccess } from '../../common/formElements/formInputSuccess/formInputSuccess';
 import { validationField } from '../../../services/validateForm/ValidatorsField';
+import Spinner from '../../common/spinner';
 
-const AddSpecialtyForm = () => {
+const AddSpecialtyForm: React.FC = () => {
+  const { getToken } = useAuth();
+  const redirect = useHistory();
+  const [submiting, setSubmitting] = useState(false);
+
+  type FormikValues = {
+    directionName: string;
+    directionCode: string;
+    directionId: string;
+    specialtyDescription: string;
+  };
+  //error state
+  const [error, setError] = useState({
+    hasError: false,
+    errorStatusCode: '',
+    errorMessage: '',
+  });
+
+  //status messages state
+  const [resultMessage, setResultMessage] = useState({
+    status: '',
+    message: '',
+  });
+  const [isFetching, setFetching] = useState(false);
+  const [directionsList, setList] = useState([
+    {
+      id: '',
+      code: '',
+      name: '',
+    },
+  ]);
+
+  const fetchData = async ()=> {
+    const endpoint: string = `${APIUrl}Direction/All`;
+    setFetching(true);
+    requestData(endpoint, 'GET').then((res: any) => {
+      const statusCode = res.statusCode.toString();
+      if (statusCode.match(/^[23]\d{2}$/)) {
+        const newList = res.data.map((item: any) => {
+          return {
+            id: item.id,
+            code: item.code,
+            name: item.name,
+          };
+        });
+        setList(newList);
+        setFetching(false);
+      } else {
+        setError({
+          hasError: true,
+          errorStatusCode: res.statusCode,
+          errorMessage:
+            res.data.message || 'Виникла помилка у відображенні навчальних напрямків.',
+        });
+      }
+    });
+  }
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+
+  const directionsName = directionsList.map((item: any, index: number) => {
+    return <option 
+              value={item.name}
+              key={item.id}
+              >
+                {item.name} 
+           </option>
+  });
+  
+  const handleFormSubmit = async (values: FormikValues) => {
+    const token = await getToken();
+    console.log(token)
+    setSubmitting(true);
+    setResultMessage({
+      status: '',
+      message: '',
+    });
+    const { directionName, directionCode, directionId, specialtyDescription } = values;
+    requestSecureData(
+      `${APIUrl}SuperAdmin/AddSpecialty`, 'POST', token, {
+        name: directionName,
+        directionId: directionId,
+        description: specialtyDescription,
+        code: directionCode
+      })
+      .then((res: any) => {
+        const statusCode = res.statusCode.toString();
+        if (statusCode.match(/^[23]\d{2}$/)) {
+          setResultMessage({
+            status: 'success',
+            message: res.data.message || 'Спеціальність успішно додано',
+          });
+          setSubmitting(false);
+          setTimeout(() => {
+            redirect.push(`${APIUrl}SuperAdmin/AddSpecialty`);
+          }, 3000);
+        } else {
+          setResultMessage({
+            status: 'error',
+            message: res.data.message || 'Щось пішло не так, спробуйте знову.',
+          });
+        }
+      })
+      .catch((error) => {
+        setResultMessage({
+          status: 'error',
+          message: error || 'Щось пішло не так, спробуйте знову.',
+        });
+      });
+  };
+  
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.wrapper__title}>Нова спеціальність</h1>
@@ -12,26 +130,20 @@ const AddSpecialtyForm = () => {
         initialValues={{
           directionName: '',
           directionCode: '',
-          specialtyName: '',
+          directionId: '',
           specialtyDescription: '',
         }}
-        validationSchema={validationField}
-        onSubmit={(values, actions) => {
-          actions.setSubmitting(false);
-        }}
+        onSubmit={handleFormSubmit}
       >
-        {({ handleSubmit }) => (
+        {() => (
           <Form
             className={styles.form}
-            onSubmit={(e: React.ChangeEvent<HTMLFormElement>) => {
-              handleSubmit(e);
-            }}
           >
             <div className={styles.topWrapper}>
               <div className={styles.halfWidth}>
                 <label
                   className={styles.topWrapper__label}
-                  htmlFor='directionNam'
+                  htmlFor='directionName'
                 >
                   Напрям:
                 </label>
@@ -40,17 +152,10 @@ const AddSpecialtyForm = () => {
                   as='select'
                   id='directionName'
                   data-testid='select-type'
-                  name='directionNam'
+                  name='directionName'
+                  value = {directionsList[0].name}
                 >
-                  <option data-testid='empty' value=''>
-                    Інформаційні технології
-                  </option>
-                  <option data-testid='university' value='university'>
-                    Соціальні та поведінкові науки
-                  </option>
-                  <option data-testid='college' value='college'>
-                    Електрична інженерія
-                  </option>
+                  { directionsName }
                 </Field>
               </div>
               <div className={`${styles.halfWidth} ${styles.halfWidth__code}`}>
@@ -64,22 +169,20 @@ const AddSpecialtyForm = () => {
                   className={styles.topWrapper__input}
                   id='directionCode'
                   name='directionCode'
-                  value={'010'}
                 />
               </div>
 
               <div className={styles.fullWidth}>
                 <label
                   className={styles.topWrapper__label}
-                  htmlFor='specialtyName'
+                  htmlFor='directionId'
                 >
                   Назва:
                 </label>
                 <Field
                   className={styles.topWrapper__input}
-                  id='specialtyName'
-                  name='specialtyName'
-                  value={'Інженерія програмного забезпечення(Інтернет речей)'}
+                  id='directionId'
+                  name='directionId'
                 />
               </div>
               <div className={styles.topWrapper__column}>
@@ -98,9 +201,6 @@ const AddSpecialtyForm = () => {
                     name='specialtyDescription'
                     className={styles.topWrapper__textarea}
                     type='textarea'
-                    value={
-                      '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."'
-                    }
                   />
                 </div>
               </div>
