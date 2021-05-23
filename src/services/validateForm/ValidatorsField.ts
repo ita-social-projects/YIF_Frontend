@@ -108,21 +108,4 @@ export const validationField = Yup.object().shape({
       70,
       'Занадто велика кількість символів,перевірте правильність ведення електронної пошти'
     ),
-
-  addSpecialtyDirectionCode: Yup.string()
-      .required('Введіть код спеціальності')
-      .matches(/^[0-9]*$/, 'Введіть лише числа')
-      .min(3, 'Введіть мінімум три цифри')
-      .max(3, 'Введіть максимум три цифри'),
-
-
-  addSpecialtyDirectionId: Yup.string()
-      .required('Введіть освітній напрямок')
-      .min(
-        10,
-        'Занадто мала кількість символів, мінімум 10 символів'
-      ),
-  addSpecialtyDescription: Yup.string()
-      .required('Напишіть опис спеціальності')
-      .min(10, 'Мінімум 10 символів'),
 })

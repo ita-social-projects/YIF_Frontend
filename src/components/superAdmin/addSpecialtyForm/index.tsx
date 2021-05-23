@@ -5,22 +5,16 @@ import { useAuth } from '../../../services/tokenValidator';
 import { requestSecureData, requestData } from '../../../services/requestDataFunction';
 import { useHistory } from 'react-router-dom';
 import { Field, Formik, Form } from 'formik';
-import { FormButton, FormInputError } from '../../common/formElements';
+import { FormButton, FormInputError, FormInput } from '../../common/formElements';
 import { FormInputSuccess } from '../../common/formElements/formInputSuccess/formInputSuccess';
-import { validationField } from '../../../services/validateForm/ValidatorsField';
+import addNewSpeciatyFormValidator from './addSpecialtyFormValidation';
 import Spinner from '../../common/spinner';
 
 const AddSpecialtyForm: React.FC = () => {
   const { getToken } = useAuth();
-  const redirect = useHistory();
-  const [submiting, setSubmitting] = useState(false);
+  const history = useHistory();
+  const [submitting, setSubmitting] = useState(false);
 
-  type FormikValues = {
-    directionName: string;
-    directionCode: string;
-    directionId: string;
-    specialtyDescription: string;
-  };
   //error state
   const [error, setError] = useState({
     hasError: false,
@@ -33,7 +27,7 @@ const AddSpecialtyForm: React.FC = () => {
     status: '',
     message: '',
   });
-  const [isFetching, setFetching] = useState(false);
+
   const [directionsList, setList] = useState([
     {
       id: '',
@@ -41,10 +35,10 @@ const AddSpecialtyForm: React.FC = () => {
       name: '',
     },
   ]);
+  const [specialtyID, setSpecialtyId] = useState('');
 
   const fetchData = async ()=> {
     const endpoint: string = `${APIUrl}Direction/All`;
-    setFetching(true);
     requestData(endpoint, 'GET').then((res: any) => {
       const statusCode = res.statusCode.toString();
       if (statusCode.match(/^[23]\d{2}$/)) {
@@ -56,46 +50,40 @@ const AddSpecialtyForm: React.FC = () => {
           };
         });
         setList(newList);
-        setFetching(false);
+        setSpecialtyId(newList[0].id)
       } else {
         setError({
           hasError: true,
           errorStatusCode: res.statusCode,
           errorMessage:
-            res.data.message || 'Виникла помилка у відображенні навчальних напрямків.',
+            `${res.data.message}, 'Виникла помилка у відображенні навчальних напрямків.'`,
         });
+        console.log(error) // impermanent error rendering
       }
     });
   }
   useEffect(() => {
     fetchData();
   }, []);
-
-
-  const directionsName = directionsList.map((item: any, index: number) => {
-    return <option 
-              value={item.name}
-              key={item.id}
-              >
-                {item.name} 
-           </option>
-  });
   
-  const handleFormSubmit = async (values: FormikValues) => {
-    const token = await getToken();
-    console.log(token)
+  const handleFormSubmit = async (
+    e: React.ChangeEvent<HTMLFormElement>,
+    pathToRedirect: string,
+    values: any
+    ) => {
+    e.preventDefault();
     setSubmitting(true);
     setResultMessage({
       status: '',
       message: '',
     });
-    const { directionName, directionCode, directionId, specialtyDescription } = values;
+    const token = await getToken();
     requestSecureData(
       `${APIUrl}SuperAdmin/AddSpecialty`, 'POST', token, {
-        name: directionName,
-        directionId: directionId,
-        description: specialtyDescription,
-        code: directionCode
+        name: values.directionName,
+        directionId: specialtyID,
+        description: values.specialtyDescription,
+        code: values.directionCode
       })
       .then((res: any) => {
         const statusCode = res.statusCode.toString();
@@ -106,8 +94,8 @@ const AddSpecialtyForm: React.FC = () => {
           });
           setSubmitting(false);
           setTimeout(() => {
-            redirect.push(`${APIUrl}SuperAdmin/AddSpecialty`);
-          }, 3000);
+            history.push(pathToRedirect);
+          }, 2000);
         } else {
           setResultMessage({
             status: 'error',
@@ -122,41 +110,91 @@ const AddSpecialtyForm: React.FC = () => {
         });
       });
   };
-  
+  const allDirectionsNames = directionsList.map((item: any, index: number) => {
+    return <option
+              value={item.name}
+              key={item.id}
+            >
+              {item.name} 
+           </option>
+  });
+  console.log('name', directionsList[0].name)
+  function findIdByTheName(specialtyName:string){
+    directionsList.map((item: any, index: number) => {
+      if(specialtyName === item.name){
+        setSpecialtyId(item.id)
+      }
+    });
+  }
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.wrapper__title}>Нова спеціальність</h1>
       <Formik
+        enableReinitialize
         initialValues={{
-          directionName: '',
+          directionID: '',
           directionCode: '',
-          directionId: '',
+          directionName: '',
           specialtyDescription: '',
         }}
-        onSubmit={handleFormSubmit}
+        validationSchema={addNewSpeciatyFormValidator}
+        onSubmit={(values, actions) => {
+          actions.setSubmitting(false);
+          actions.resetForm({
+            values,
+          });
+        }}
       >
-        {() => (
+        {({values, errors, touched, handleSubmit}) => (
           <Form
             className={styles.form}
+            onSubmit={(e: React.ChangeEvent<HTMLFormElement>)=>{
+              handleSubmit(e);
+              if(
+                touched.directionCode &&
+                errors.directionCode === undefined &&
+                errors.directionName === undefined &&
+                errors.specialtyDescription === undefined
+              ){
+                handleFormSubmit(e, 'addSpecialty', values)
+              }
+            }}
           >
             <div className={styles.topWrapper}>
               <div className={styles.halfWidth}>
                 <label
                   className={styles.topWrapper__label}
-                  htmlFor='directionName'
+                  htmlFor='allDirectionNames'
                 >
                   Напрям:
                 </label>
+                { directionsList[0].name.length>0 ?
                 <Field
                   className={styles.topWrapper__input}
                   as='select'
-                  id='directionName'
+                  id='allDirectionNames'
                   data-testid='select-type'
-                  name='directionName'
-                  value = {directionsList[0].name}
+                  name='allDirectionNames'
+                  onChange={
+                    (e: React.ChangeEvent<HTMLFormElement>) => 
+                      {
+                        findIdByTheName(e.target.value)
+                      }
+                  } 
                 >
-                  { directionsName }
+                  {allDirectionsNames}
                 </Field>
+                    : 
+                <Field
+                  className={styles.topWrapper__input}
+                  as='input'
+                  id='allDirectionNames'
+                  data-testid='select-type'
+                  name='allDirectionNames'
+                  value='Напрями відсутні'
+                  disabled={true}>
+                </Field>
+                  }
               </div>
               <div className={`${styles.halfWidth} ${styles.halfWidth__code}`}>
                 <label
@@ -171,19 +209,36 @@ const AddSpecialtyForm: React.FC = () => {
                   name='directionCode'
                 />
               </div>
-
+              <div className ={`${styles.errorMessages} ${styles.errorMessages__code}`}>
+                {errors.directionCode &&
+                touched.directionCode ? (
+                  <FormInputError
+                    errorType='inputFull'
+                    errorMessage={errors.directionCode}
+                  />
+                ) : null}
+              </div>
               <div className={styles.fullWidth}>
                 <label
                   className={styles.topWrapper__label}
-                  htmlFor='directionId'
+                  htmlFor='directionName'
                 >
                   Назва:
                 </label>
                 <Field
                   className={styles.topWrapper__input}
-                  id='directionId'
-                  name='directionId'
+                  id='directionName'
+                  name='directionName'
                 />
+              </div>
+              <div className ={styles.errorMessages}>
+                {errors.directionName &&
+                touched.directionName ? (
+                  <FormInputError
+                    errorType='inputFull'
+                    errorMessage={errors.directionName}
+                  />
+                ) : null}
               </div>
               <div className={styles.topWrapper__column}>
                 <div
@@ -204,12 +259,39 @@ const AddSpecialtyForm: React.FC = () => {
                   />
                 </div>
               </div>
+              <div className ={styles.errorMessages}>
+                  {errors.specialtyDescription &&
+                  touched.specialtyDescription ? (
+                    <FormInputError
+                      errorType='inputFull'
+                      errorMessage={errors.specialtyDescription}
+                    />
+                  ) : null}
+                </div>
             </div>
-            <FormButton
-              id='userProfileButton'
-              form='AddInstitutionOfEducation'
-              title='Додати'
-            />
+            <div className={styles.botWrapper}>
+              <div className={`${styles.resultMessageContainer} ${styles.messagesContainer}`}>
+                {submitting && resultMessage.status === 'success' && (
+                  <div className={styles.spinner}>
+                    <Spinner />
+                  </div>
+                )}
+                {resultMessage.status === 'success' && (
+                  <FormInputSuccess successMessage={resultMessage.message} />
+                )}
+                {resultMessage.status === 'error' && (
+                  <FormInputError
+                    errorType='form'
+                    errorMessage={resultMessage.message}
+                  />
+                )}
+              </div>
+              <FormButton
+                id='userProfileButton'
+                form='AddInstitutionOfEducation'
+                title='Додати'
+              />
+            </div>
           </Form>
         )}
       </Formik>
