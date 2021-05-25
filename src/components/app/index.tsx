@@ -19,6 +19,7 @@ import NewPasswordPage from '../../pages/newPasswordPage';
 import ScrollToTop from '../common/scrollToTop/scrollToTop';
 import SuperAdmin from '../../pages/superAdminPages/index';
 import GraduateAccountPage from '../../pages/graduatePage';
+import InstitutionOfEducationModeratorPage from '../../pages/institutionOfEducationModeratorPage';
 
 const App = () => {
   const { token } = useAuth();
@@ -68,6 +69,13 @@ const App = () => {
             allowed={['InstitutionOfEducationAdmin']}
           >
             <InstitutionOfEducationAdminPage />
+          </ProtectedRoute>
+          <ProtectedRoute
+            user={token}
+            path='/IoEModeratorAccount'
+            allowed={['InstitutionOfEducationModerator']}
+          >
+            <InstitutionOfEducationModeratorPage />
           </ProtectedRoute>
           <ProtectedRoute
             user={token}

@@ -14,6 +14,9 @@ const useRole = () => {
       case 'InstitutionOfEducationAdmin':
         path = '/institutionOfEducationAccount';
         break;
+      case 'InstitutionOfEducationModerator':
+        path = '/IoEModeratorAccount';
+        break;
     }
 
     return path;
