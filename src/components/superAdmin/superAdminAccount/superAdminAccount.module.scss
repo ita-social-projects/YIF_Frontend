@@ -254,11 +254,11 @@
 
   .page {
     @include flex(row, center, center);
-    margin: 5px;
-    width: 40px;
-    height: 40px;
+    margin: 0.2rem;
+    width: 2rem;
+    height: 2rem;
     font-family: $fontNunito;
-    font-size: 20px;
+    font-size: 18px;
     border: 1px solid $lightBlue_2;
     border-radius: 5px;
     background-color: $lightBlue_3;
@@ -275,8 +275,8 @@
 .arrow {
   margin: 0 30px;
   @include flex(row, center, center);
-  width: 40px;
-  height: 40px;
+  width: 2rem;
+  height: 2rem;
   border-radius: 5px;
   background-color: $lightBlue_3;
   border: 1px solid $lightBlue_2;
