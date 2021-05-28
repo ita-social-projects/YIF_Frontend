@@ -19,7 +19,7 @@ import InstitutionsOfEducationMap from './index';
 // });
 
 describe('Test Leaflet methods', () => {
-  it('should render map with empty data', async () => {
+  it('should render map with empty data0', async () => {
     const institutionsOfEducationDB = [{}];
 
     render(
@@ -35,7 +35,7 @@ describe('Test Leaflet methods', () => {
     const institutionsOfEducationDB = [
       {
         key: '1',
-        id: 'id',
+        id: '1',
         name: 'name',
         site: 'site',
         lat: 49,
@@ -56,7 +56,7 @@ describe('Test Leaflet methods', () => {
     const institutionsOfEducationDB = [
       {
         key: '2',
-        id: 'id',
+        id: '2',
         name: 'name',
         site: 'site',
         lat: 49,
@@ -64,7 +64,7 @@ describe('Test Leaflet methods', () => {
       },
       {
         key: '3',
-        id: 'id',
+        id: '3',
         name: 'name',
         site: 'site',
         lat: 49,
