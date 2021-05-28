@@ -8,7 +8,6 @@ import { FormInputSuccess } from '../../common/formElements/formInputSuccess/for
 import { FormInputError } from '../../common/formElements';
 import TableItem from './tableItem/tableItem';
 import Search from './search/search';
-// import Pagination from '../../../components/superAdmin/pagination';
 import PaginationPagesCreator from '../pagination/paginationPagesCreator';
 import Arrow from '../../common/icons/Arrow';
 import Lock from '../../common/icons/Lock/index';
@@ -365,7 +364,6 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
   return (
     <div className={styles.superAdminAccount}>
       <h1>Адміністратори закладів освіти</h1>
-      {/* <Pagination /> */}
       {pagination}
       <div className={styles.adminTableContainer}>
         <div className={styles.adminTableHeader}>
