@@ -30,11 +30,11 @@ jest.mock('react-router-dom', () => ({
 
 jest.useFakeTimers();
 
-afterEach(() => {
-  jest.clearAllTimers();
-});
-
 describe('NewPasswordForm', () => {
+  afterEach(() => {
+    jest.clearAllTimers();
+  });
+
   test('render component correctly', () => {
     const { getByText, getByRole, getByPlaceholderText } = render(
       <Router>

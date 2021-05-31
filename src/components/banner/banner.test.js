@@ -57,8 +57,7 @@ describe('banner events', () => {
     const button = getByRole('button');
 
     fireEvent.click(button);
-    await wait(() => {
-      expect(handleClick).toHaveBeenCalled();
-    });
+
+    expect(handleClick).toHaveBeenCalled();
   });
 });

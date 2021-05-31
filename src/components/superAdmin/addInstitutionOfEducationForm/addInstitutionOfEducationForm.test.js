@@ -10,8 +10,6 @@ import { authContext } from '../../../services/tokenValidator';
 
 jest.setTimeout(15000);
 
-window.scrollTo = jest.fn();
-
 const mockJsonPromise = Promise.resolve('Університет додано!');
 
 const mockFetchPromise = Promise.resolve({
@@ -31,6 +29,8 @@ jest.mock('react-router-dom', () => ({
 jest.useFakeTimers();
 
 describe('AddIOEForm Test', () => {
+  window.scrollTo = jest.fn();
+
   test('submit without errors and with redirect', async () => {
     const { getByRole, getByLabelText } = render(
       <Router>

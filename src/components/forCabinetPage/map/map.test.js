@@ -1,22 +1,9 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { store } from '../../../store/store';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import InstitutionsOfEducationMap from './index';
-
-// it('renders without crashing', () => {
-//   const mockJsonPromise = Promise.resolve({
-//     message: 'message',
-//   });
-
-//   const mockFetchPromise = Promise.resolve({
-//     json: () => mockJsonPromise,
-//     status: 404,
-//   });
-//   global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
-//   render(<InstitutionOfEducationMap data={institutionsOfEducationDB} />);
-// });
 
 describe('Test Leaflet methods', () => {
   it('should render map with empty data0', async () => {
