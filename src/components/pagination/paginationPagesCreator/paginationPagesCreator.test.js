@@ -1,4 +1,4 @@
-import PaginationPagesCreator from './paginationPagesCreator';
+import PaginationPagesCreator from './index';
 
 it('renders without crashing, if total = 3', () => {
   const request = PaginationPagesCreator(3, 1);

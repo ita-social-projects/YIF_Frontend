@@ -8,11 +8,11 @@ import { FormInputSuccess } from '../../common/formElements/formInputSuccess/for
 import { FormInputError } from '../../common/formElements';
 import TableItem from './tableItem/tableItem';
 import Search from './search/search';
-import PaginationPagesCreator from '../pagination/paginationPagesCreator';
-import Arrow from '../../common/icons/Arrow';
+import PaginationPagesCreator from '../../../components/pagination/paginationPagesCreator/';
 import Lock from '../../common/icons/Lock/index';
 // import { Link, Router } from 'react-router-dom';
 import { ReactComponent as IconArrow } from './icons/iconArrow.svg';
+import Pagination from '../../pagination/pagination';
 
 // const iconIllustrAdmin = '/assets/images/superAdminAccount.svg';
 
@@ -291,71 +291,10 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
   const numberOfPages = Math.ceil(
     institutionOfEducationAdmins.length / perPage
   );
-  const [totalPages, setTotalPages] = useState(numberOfPages);
+  const [totalPages] = useState(numberOfPages);
   const [currentPage, setCurrentPage] = useState(1);
 
   const pages = PaginationPagesCreator(totalPages, currentPage);
-
-  const pagination = (
-    <div
-      id='pagination'
-      data-testid='pagination'
-      className={totalPages ? `${styles.pages}` : `${styles.hiddenElement}`}
-    >
-      <div
-        id='prevPage'
-        data-testid='prevPage'
-        className={
-          currentPage === 1
-            ? `${styles.arrow} ${styles.arrow__prev} ${styles.arrowUnable}`
-            : `${styles.arrow} ${styles.arrow__prev}`
-        }
-        onClick={() => {
-          if (currentPage === 1) {
-            return;
-          } else {
-            setCurrentPage(currentPage - 1);
-          }
-        }}
-      >
-        <Arrow />
-      </div>
-      {pages.map((page, index) => {
-        return (
-          <span
-            data-testid='currentPage'
-            className={
-              currentPage === page
-                ? `${styles.page} ${styles.page__current}`
-                : `${styles.page}`
-            }
-            key={index}
-            onClick={() => setCurrentPage(page)}
-          >
-            {page}
-          </span>
-        );
-      })}
-      <div
-        id='nextPage'
-        data-testid='nextPage'
-        className={
-          currentPage === totalPages
-            ? `${styles.arrow} ${styles.arrow__next} ${styles.arrowUnable}`
-            : `${styles.arrow} ${styles.arrow__next}`
-        }
-        onClick={() => {
-          if (currentPage === totalPages) {
-            return;
-          } else {
-            setCurrentPage(currentPage + 1);
-          }
-        }}
-      >
-        <Arrow />
-      </div>
-    </div>
-  );
 
   // Get current posts
   const indexOfLastPost = currentPage * perPage;
@@ -364,7 +303,12 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
   return (
     <div className={styles.superAdminAccount}>
       <h1>Адміністратори закладів освіти</h1>
-      {pagination}
+      <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        pages={pages}
+      />
       <div className={styles.adminTableContainer}>
         <div className={styles.adminTableHeader}>
           <Search
