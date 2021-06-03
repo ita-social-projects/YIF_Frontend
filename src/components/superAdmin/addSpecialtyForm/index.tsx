@@ -5,7 +5,7 @@ import { useAuth } from '../../../services/tokenValidator';
 import { requestSecureData, requestData } from '../../../services/requestDataFunction';
 import { useHistory } from 'react-router-dom';
 import { Field, Formik, Form } from 'formik';
-import { FormButton, FormInputError, FormInput } from '../../common/formElements';
+import { FormButton, FormInputError } from '../../common/formElements';
 import { FormInputSuccess } from '../../common/formElements/formInputSuccess/formInputSuccess';
 import addNewSpeciatyFormValidator from './addSpecialtyFormValidation';
 import Spinner from '../../common/spinner';
@@ -14,13 +14,6 @@ const AddSpecialtyForm: React.FC = () => {
   const { getToken } = useAuth();
   const history = useHistory();
   const [submitting, setSubmitting] = useState(false);
-
-  //error state
-  const [error, setError] = useState({
-    hasError: false,
-    errorStatusCode: '',
-    errorMessage: '',
-  });
 
   //status messages state
   const [resultMessage, setResultMessage] = useState({
@@ -38,8 +31,9 @@ const AddSpecialtyForm: React.FC = () => {
   const [specialtyID, setSpecialtyId] = useState('');
 
   const fetchData = async ()=> {
-    const endpoint: string = `${APIUrl}Direction/All`;
-    requestData(endpoint, 'GET').then((res: any) => {
+    const endpoint: string = `${APIUrl}Direction/All1`;
+    requestData(endpoint, 'GET')
+    .then((res: any) => {
       const statusCode = res.statusCode.toString();
       if (statusCode.match(/^[23]\d{2}$/)) {
         const newList = res.data.map((item: any) => {
@@ -50,28 +44,30 @@ const AddSpecialtyForm: React.FC = () => {
           };
         });
         setList(newList);
-        setSpecialtyId(newList[0].id)
+        setSpecialtyId(newList[0].id);
       } else {
-        setError({
-          hasError: true,
-          errorStatusCode: res.statusCode,
-          errorMessage:
-            `${res.data.message}, 'Виникла помилка у відображенні навчальних напрямків.'`,
+        setResultMessage({
+          status: 'error',
+          message: res.data.message || 'Виникла помилка у відображенні навчальних напрямків.',
         });
-        console.log(error) // impermanent error rendering
       }
-    });
+    })
+    .catch((error) => {
+      setResultMessage({
+        status: 'error',
+        message: 'Не вдалося завантажити навчальні напрямки.'
+      });
+      console.log(error.message);
+    })
   }
   useEffect(() => {
     fetchData();
   }, []);
   
   const handleFormSubmit = async (
-    e: React.ChangeEvent<HTMLFormElement>,
     pathToRedirect: string,
     values: any
     ) => {
-    e.preventDefault();
     setSubmitting(true);
     setResultMessage({
       status: '',
@@ -92,37 +88,39 @@ const AddSpecialtyForm: React.FC = () => {
             status: 'success',
             message: res.data.message || 'Спеціальність успішно додано',
           });
-          setSubmitting(false);
           setTimeout(() => {
             history.push(pathToRedirect);
-          }, 2000);
+          }, 3000);
+          setSubmitting(false);
         } else {
-          setResultMessage({
-            status: 'error',
-            message: res.data.message || 'Щось пішло не так, спробуйте знову.',
-          });
+           setResultMessage({
+             status: 'error',
+              message: res.data.message || `${Object.keys(res.data.errors).length === 2 ? 'Такий код та назва спеціальності вже є у додатку' : res.data.errors.Code === undefined ? 'Така назва спеціальності вже є у додатку': 'Такий код спеціальності вже є у додатку'}`
+            });
         }
       })
       .catch((error) => {
         setResultMessage({
           status: 'error',
-          message: error || 'Щось пішло не так, спробуйте знову.',
-        });
+          message: error || 'Щось пішло не так, спробуйте знову.'
       });
-  };
+      
+    })
+  }
   const allDirectionsNames = directionsList.map((item: any, index: number) => {
     return <option
               value={item.name}
               key={item.id}
+              data-testid={item.name}
             >
               {item.name} 
            </option>
   });
-  console.log('name', directionsList[0].name)
+
   function findIdByTheName(specialtyName:string){
     directionsList.map((item: any, index: number) => {
       if(specialtyName === item.name){
-        setSpecialtyId(item.id)
+        setSpecialtyId(item.id);
       }
     });
   }
@@ -139,26 +137,17 @@ const AddSpecialtyForm: React.FC = () => {
         }}
         validationSchema={addNewSpeciatyFormValidator}
         onSubmit={(values, actions) => {
+          handleFormSubmit('/superAdminAccount', values);
+          
           actions.setSubmitting(false);
           actions.resetForm({
             values,
           });
         }}
       >
-        {({values, errors, touched, handleSubmit}) => (
+        {({ errors, touched }) => (
           <Form
             className={styles.form}
-            onSubmit={(e: React.ChangeEvent<HTMLFormElement>)=>{
-              handleSubmit(e);
-              if(
-                touched.directionCode &&
-                errors.directionCode === undefined &&
-                errors.directionName === undefined &&
-                errors.specialtyDescription === undefined
-              ){
-                handleFormSubmit(e, 'addSpecialty', values)
-              }
-            }}
           >
             <div className={styles.topWrapper}>
               <div className={styles.halfWidth}>
@@ -166,42 +155,43 @@ const AddSpecialtyForm: React.FC = () => {
                   className={styles.topWrapper__label}
                   htmlFor='allDirectionNames'
                 >
-                  Напрям:
+                  Напрям
                 </label>
                 { directionsList[0].name.length>0 ?
-                <Field
-                  className={styles.topWrapper__input}
-                  as='select'
-                  id='allDirectionNames'
-                  data-testid='select-type'
-                  name='allDirectionNames'
-                  onChange={
-                    (e: React.ChangeEvent<HTMLFormElement>) => 
-                      {
-                        findIdByTheName(e.target.value)
-                      }
-                  } 
-                >
-                  {allDirectionsNames}
-                </Field>
-                    : 
-                <Field
-                  className={styles.topWrapper__input}
-                  as='input'
-                  id='allDirectionNames'
-                  data-testid='select-type'
-                  name='allDirectionNames'
-                  value='Напрями відсутні'
-                  disabled={true}>
-                </Field>
-                  }
+                  <Field
+                    className={styles.topWrapper__input}
+                    as='select'
+                    id='allDirectionNames'
+                    data-testid='select-type'
+                    name='allDirectionNames'
+                    onChange={
+                      (e: React.ChangeEvent<HTMLFormElement>) => 
+                        {
+                          findIdByTheName(e.target.value);
+                        }
+                    } 
+                  >
+                    {allDirectionsNames}
+                  </Field>
+                      : 
+                  <Field
+                    className={styles.topWrapper__input}
+                    as='select'
+                    id='allDirectionNames'
+                    data-testid='select-type'
+                    name='allDirectionNames'
+                    value='Напрями відсутні'
+                    disabled={true} 
+                  > <option>Напрями відсутні</option>
+                  </Field>
+                }
               </div>
               <div className={`${styles.halfWidth} ${styles.halfWidth__code}`}>
                 <label
                   className={styles.topWrapper__label}
                   htmlFor='directionCode'
                 >
-                  Код:
+                  Код
                 </label>
                 <Field
                   className={styles.topWrapper__input}
@@ -223,7 +213,7 @@ const AddSpecialtyForm: React.FC = () => {
                   className={styles.topWrapper__label}
                   htmlFor='directionName'
                 >
-                  Назва:
+                  Назва
                 </label>
                 <Field
                   className={styles.topWrapper__input}
@@ -248,7 +238,7 @@ const AddSpecialtyForm: React.FC = () => {
                     className={styles.topWrapper__label}
                     htmlFor='specialtyDescription'
                   >
-                    Опис:
+                    Опис
                   </label>
                   <Field
                     as='textarea'
