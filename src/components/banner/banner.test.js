@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Banner from '.';
-import { act } from 'react-dom/test-utils';
+import { wait } from '@testing-library/react';
 
 describe('banner elements', () => {
   let banner;
@@ -36,24 +36,22 @@ describe('banner elements', () => {
 });
 
 describe('banner events', () => {
-  test('should change image position on mousemove once every 100ms', () => {
+  test('should change image position on mousemove once every 100ms', async () => {
     const { getByAltText } = render(<Banner />);
     const targetElem = getByAltText('img');
+    jest.useFakeTimers();
+    fireEvent.mouseMove(targetElem, { clientX: 10, clientY: 20 });
+    fireEvent.mouseMove(targetElem, { clientX: 20, clientY: 40 });
 
-    act(() => {
-      fireEvent.mouseMove(targetElem, { clientX: 10, clientY: 20 });
+    await wait(() => {
+      expect(targetElem.style).toHaveProperty(
+        'transform',
+        'translate(-0.2px, -0.4px)'
+      );
     });
-    act(() => {
-      fireEvent.mouseMove(targetElem, { clientX: 20, clientY: 40 });
-    });
-
-    expect(targetElem.style).toHaveProperty(
-      'transform',
-      'translate(-0.2px, -0.4px)'
-    );
   });
 
-  test('should fire scroll event once button is clicked', () => {
+  test('should fire scroll event once button is clicked', async () => {
     const handleClick = jest.fn();
     const { getByRole } = render(<Banner handleClick={handleClick} />);
     const button = getByRole('button');

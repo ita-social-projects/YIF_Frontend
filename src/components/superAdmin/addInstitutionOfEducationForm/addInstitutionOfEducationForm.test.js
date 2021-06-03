@@ -1,18 +1,14 @@
 import React from 'react';
 import AddInstitutionOfEducationForm from './index';
 import { MemoryRouter } from 'react-router-dom';
-import {
-  fireEvent,
-  render,
-  wait,
-} from '@testing-library/react';
+import { fireEvent, render, wait } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { store } from '../../../store/store';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { authContext } from '../../../services/tokenValidator';
 
-jest.setTimeout(15000)
+jest.setTimeout(15000);
 
 const mockJsonPromise = Promise.resolve('Університет додано!');
 
@@ -33,6 +29,8 @@ jest.mock('react-router-dom', () => ({
 jest.useFakeTimers();
 
 describe('AddIOEForm Test', () => {
+  window.scrollTo = jest.fn();
+
   test('submit without errors and with redirect', async () => {
     const { getByRole, getByLabelText } = render(
       <Router>

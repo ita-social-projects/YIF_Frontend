@@ -1,7 +1,7 @@
 import React from 'react';
 import NewPasswordForm from './index';
 import userEvent from '@testing-library/user-event';
-import { render, wait, act } from '@testing-library/react';
+import { render, wait } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 jest.mock('../../services/useCaptcha', () => ({
@@ -31,6 +31,10 @@ jest.mock('react-router-dom', () => ({
 jest.useFakeTimers();
 
 describe('NewPasswordForm', () => {
+  afterEach(() => {
+    jest.clearAllTimers();
+  });
+
   test('render component correctly', () => {
     const { getByText, getByRole, getByPlaceholderText } = render(
       <Router>
@@ -49,12 +53,16 @@ describe('NewPasswordForm', () => {
         <NewPasswordForm />
       </Router>
     );
+
+    userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
+    userEvent.type(getByPlaceholderText('Підтвердіть пароль'), 'Qwerty1@');
+
     await wait(() => {
-      userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
-      userEvent.type(getByPlaceholderText('Підтвердіть пароль'), 'Qwerty1@');
+      expect(getByPlaceholderText('Пароль')).toHaveValue('Qwerty1@');
+      expect(getByPlaceholderText('Підтвердіть пароль')).toHaveValue(
+        'Qwerty1@'
+      );
     });
-    expect(getByPlaceholderText('Пароль')).toHaveValue('Qwerty1@');
-    expect(getByPlaceholderText('Підтвердіть пароль')).toHaveValue('Qwerty1@');
   });
 
   test('shows an input error message', async () => {
@@ -63,12 +71,13 @@ describe('NewPasswordForm', () => {
         <NewPasswordForm />
       </Router>
     );
+    userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
+    userEvent.type(getByPlaceholderText('Підтвердіть пароль'), 'Qwerty1№');
+    userEvent.click(getByRole('button'));
+
     await wait(() => {
-      userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
-      userEvent.type(getByPlaceholderText('Підтвердіть пароль'), 'Qwerty1№');
-      userEvent.click(getByRole('button'));
+      expect(queryByText('Паролі мають співпадати')).toBeInTheDocument();
     });
-    expect(queryByText('Паролі мають співпадати')).toBeInTheDocument();
   });
 
   test('shows a notification of a successful password change', async () => {
@@ -77,16 +86,16 @@ describe('NewPasswordForm', () => {
         <NewPasswordForm />
       </Router>
     );
+    userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
+    userEvent.type(getByPlaceholderText('Підтвердіть пароль'), 'Qwerty1@');
+    userEvent.click(getByRole('button'));
     await wait(() => {
-      userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
-      userEvent.type(getByPlaceholderText('Підтвердіть пароль'), 'Qwerty1@');
-      userEvent.click(getByRole('button'));
+      expect(
+        queryByText(
+          'Ваш пароль змінено! Ви можете увійти за допомогою нового паролю!'
+        )
+      ).toBeInTheDocument();
     });
-    expect(
-      queryByText(
-        'Ваш пароль змінено! Ви можете увійти за допомогою нового паролю!'
-      )
-    ).toBeInTheDocument();
   });
 
   test('redirects to the page after a successful password change ', async () => {
@@ -95,13 +104,13 @@ describe('NewPasswordForm', () => {
         <NewPasswordForm />
       </Router>
     );
+    userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
+    userEvent.type(getByPlaceholderText('Підтвердіть пароль'), 'Qwerty1@');
+    userEvent.click(getByRole('button'));
     await wait(() => {
-      userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
-      userEvent.type(getByPlaceholderText('Підтвердіть пароль'), 'Qwerty1@');
-      userEvent.click(getByRole('button'));
+      jest.runAllTimers();
+      expect(mockHistoryPush).toHaveBeenCalledWith('/login');
     });
-    jest.runAllTimers();
-    expect(mockHistoryPush).toHaveBeenCalledWith('/login');
   });
 
   test('shows an error message when something went wrong', async () => {
@@ -111,14 +120,14 @@ describe('NewPasswordForm', () => {
         <NewPasswordForm />
       </Router>
     );
+    userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
+    userEvent.type(getByPlaceholderText('Підтвердіть пароль'), 'Qwerty1@');
+    userEvent.click(getByRole('button'));
     await wait(() => {
-      userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
-      userEvent.type(getByPlaceholderText('Підтвердіть пароль'), 'Qwerty1@');
-      userEvent.click(getByRole('button'));
+      expect(
+        queryByText('Щось пішло не так, спробуйте знову!')
+      ).toBeInTheDocument();
     });
-    expect(
-      queryByText('Щось пішло не так, спробуйте знову!')
-    ).toBeInTheDocument();
   });
 
   test('error message disappears after 2 sec', async () => {
@@ -128,20 +137,19 @@ describe('NewPasswordForm', () => {
         <NewPasswordForm />
       </Router>
     );
+
+    userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
+    userEvent.type(getByPlaceholderText('Підтвердіть пароль'), 'Qwerty1@');
+    userEvent.click(getByRole('button'));
+
     await wait(() => {
-      userEvent.type(getByPlaceholderText('Пароль'), 'Qwerty1@');
-      userEvent.type(getByPlaceholderText('Підтвердіть пароль'), 'Qwerty1@');
-      userEvent.click(getByRole('button'));
-    });
-    expect(
-      getByText('Щось пішло не так, спробуйте знову!')
-    ).toBeInTheDocument();
-    act(() => {
-      //  The code on the line below gives a warning: Can't perform a React state update on an unmounted component.
+      expect(
+        getByText('Щось пішло не так, спробуйте знову!')
+      ).toBeInTheDocument();
       jest.runAllTimers();
+      expect(
+        queryByText('Щось пішло не так, спробуйте знову!')
+      ).not.toBeInTheDocument();
     });
-    expect(
-      queryByText('Щось пішло не так, спробуйте знову!')
-    ).not.toBeInTheDocument();
   });
 });
