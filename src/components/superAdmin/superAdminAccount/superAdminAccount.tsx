@@ -12,7 +12,7 @@ import PaginationPagesCreator from '../../../components/pagination/paginationPag
 import Lock from '../../common/icons/Lock/index';
 // import { Link, Router } from 'react-router-dom';
 import { ReactComponent as IconArrow } from './icons/iconArrow.svg';
-import Pagination from '../../pagination/pagination';
+import Pagination from '../../pagination';
 
 // const iconIllustrAdmin = '/assets/images/superAdminAccount.svg';
 

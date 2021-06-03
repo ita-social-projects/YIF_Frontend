@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import Pagination from '../../../components/pagination';
 import PaginationPagesCreator from '../../../components/pagination/paginationPagesCreator';
 import SortingPanel from '../../../components/superAdmin/sortingPanel';
 import UniversityItem from '../../../components/superAdmin/universityItem';
 import styles from './universityListPage.module.scss';
-import Pagination from '../../../components/pagination/pagination';
 
 const univList = [
   {

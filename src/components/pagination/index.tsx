@@ -2,7 +2,16 @@ import React from 'react';
 import styles from './pagination.module.scss';
 import Arrow from '../common/icons/Arrow';
 
-const Pagination = ({ totalPages, currentPage, setCurrentPage, pages }) => {
+interface Props {
+  totalPages: number;
+  currentPage: number;
+  setCurrentPage: Function;
+  pages: number[];
+}
+
+const Pagination: React.FC<Props> = (props: Props) => {
+  const { totalPages, currentPage, setCurrentPage, pages } = props;
+
   return (
     <div
       id='pagination'
@@ -21,13 +30,13 @@ const Pagination = ({ totalPages, currentPage, setCurrentPage, pages }) => {
           if (currentPage === 1) {
             return;
           } else {
-            setCurrentPage(currentPage - 1);
+            setCurrentPage((currentPage - 1) as number);
           }
         }}
       >
         <Arrow />
       </div>
-      {pages.map((page, index) => {
+      {pages.map((page: any, index: any) => {
         return (
           <span
             data-testid='currentPage'
