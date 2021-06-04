@@ -84,12 +84,28 @@
         }
       }
     }
+    .messagesContainer {
+      margin-top: 1.375rem;
+    }
+    .errorMessages {
+      display: block;
+      padding: 0.6rem;
+      flex-basis: 90%;
+      margin-left: auto;
+      margin-right: 0;
+      &__code {
+        flex-basis: 33.8%;
+      }
+    }
     button {
       margin-left: auto;
       margin-right: 0;
       max-width: 12.5rem;
       margin-top: 1.375rem;
       display: block;
+    }
+    .botWrapper {
+      @include flex(row, flex-start, space-between);
     }
   }
 }
