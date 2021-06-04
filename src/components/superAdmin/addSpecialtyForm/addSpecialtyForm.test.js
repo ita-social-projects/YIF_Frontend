@@ -10,19 +10,18 @@ import { Provider } from 'react-redux';
 
 jest.setTimeout(15000);
 
-// promises OK
-const postPromiseOK = {"message":"Спеціальність була додана"};
+const postPromiseOK = {'message':'Спеціальність успішно додано'};
 const fetchPromiseToSetList = 
   [
     {
-      code: "15",
-      id: "0673efc6-c6a4-4676-afd5-ed23a9d813d5",
-      name: "Автоматизація та приладобудування"
+      code: '15',
+      id: '0673efc6-c6a4-4676-afd5-ed23a9d813d5',
+      name: 'Автоматизація та приладобудування'
     },
     {
-      code: "05",
-      id: "0c591530-38d0-470f-9d30-24baab853b7b",
-      name: "Соціальні та поведінкові науки"
+      code: '05',
+      id: '0c591530-38d0-470f-9d30-24baab853b7b',
+      name: 'Соціальні та поведінкові науки'
     },
     {
       code: '11',
@@ -30,14 +29,14 @@ const fetchPromiseToSetList =
       name: 'Математика та статистика'
     },
     {
-      code: "14",
-      id: "6abcb97f-59b7-4b8c-a74c-8625529a9cd0",
-      name: "Електрична інженерія"
+      code: '14',
+      id: '6abcb97f-59b7-4b8c-a74c-8625529a9cd0',
+      name: 'Електрична інженерія'
     },
     {
-      code: "12",
-      id: "7fa9ba66-076e-4cf5-9c1c-ca06d92b7f62",
-      name: "Інформаційні технології"
+      code: '12',
+      id: '7fa9ba66-076e-4cf5-9c1c-ca06d92b7f62',
+      name: 'Інформаційні технології'
     }
   ]
 const mockFetchPromiseToSetList = Promise.resolve({
@@ -58,7 +57,8 @@ const mockHistoryPush = jest.fn();
     );
 
 describe('AddSpecialtyForm Test', () => {
-  
+  jest.useFakeTimers();
+
   test('Download list of directions, render h1 ', async () => {
     global.fetch = jest.fn().mockImplementationOnce(() => mockFetchPromiseToSetList)
     const { getByText } = render(
@@ -79,7 +79,7 @@ describe('AddSpecialtyForm Test', () => {
       </Router>
     );
     
-    await wait(() => { expect(getByText('Нова спеціальність')).toBeInTheDocument()})
+    await wait(()=> expect(getByText('Нова спеціальність')).toBeInTheDocument())
     await wait(()=> expect(getByText('Автоматизація та приладобудування')).toBeInTheDocument())
   });
   
@@ -110,48 +110,47 @@ describe('AddSpecialtyForm Test', () => {
     expect(getByText('Напишіть опис спеціальності')).toBeInTheDocument();
   });
 
-  jest.useFakeTimers();
   test('Does redirect works?', async ()=> {
-    global.fetch = jest.fn().mockImplementationOnce(() => mockFetchPromiseToSetList)
-    const { getByRole, getByLabelText, getByText } = render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <authContext.Provider
-            value={{
-              token: 'testToken',
-              refreshToken: 'Token',
-              isExpired: false,
-              isRefreshing: false,
-              getToken: () => {},
-              updateToken: () => {},
-              removeToken: () => {},
-            }}
-          >
-            <AddSpecialtyForm />
-          </authContext.Provider>
-        </MemoryRouter>
-      </Provider>
-    );
-    await wait(()=> {
-      userEvent.selectOptions(getByLabelText('Напрям'), [
-        "Автоматизація та приладобудування"
-       ]
+      global.fetch = jest.fn().mockImplementationOnce(() => mockFetchPromiseToSetList)
+      const { getByRole, getByLabelText, getByText } = render(
+        <Provider store={store}>
+          <MemoryRouter>
+            <authContext.Provider
+              value={{
+                token: 'testToken',
+                refreshToken: 'Token',
+                isExpired: false,
+                isRefreshing: false,
+                getToken: () => {},
+                updateToken: () => {},
+                removeToken: () => {},
+              }}
+            >
+              <AddSpecialtyForm />
+            </authContext.Provider>
+          </MemoryRouter>
+        </Provider>
       );
-      userEvent.type(getByLabelText('Код'), '300');
-      userEvent.type(getByLabelText('Назва'), 'Тестова назва');
-      userEvent.type(getByLabelText('Опис'), 'Тестовий опис спеціальності. Мінімум 10 символів');
-    });
-    global.fetch = jest.fn().mockImplementationOnce(() => mockPostPromiseOK);
-    
-    await wait(() => {
-      userEvent.click(getByRole('button', { name: /Додати/i }));
-    });
-    jest.runAllTimers();
-    await expect(getByText('Спеціальність була додана')).toBeInTheDocument();
-    expect(mockHistoryPush).toHaveBeenCalledWith('/superAdminAccount');
+      await wait(()=> {
+        userEvent.selectOptions(getByLabelText('Напрям'), [
+          "Автоматизація та приладобудування"
+         ]
+        );
+        userEvent.type(getByLabelText('Код'), '300');
+        userEvent.type(getByLabelText('Назва'), 'Тестова назва');
+        userEvent.type(getByLabelText('Опис'), 'Тестовий опис спеціальності. Мінімум 10 символів');
+      });
+      global.fetch = jest.fn().mockImplementationOnce(()=>mockPostPromiseOK)
+      await wait(() => {
+        userEvent.click(getByRole('button', { name: /Додати/i }));
+      });
+      
+      jest.runAllTimers();
+      await expect(getByText('Спеціальність успішно додано')).toBeInTheDocument();
+      await expect(mockHistoryPush).toHaveBeenCalledWith('/superAdminAccount');
   });
 
-  test('Show error message on get specialties function, status: 404', async ()=> {
+  test('Show error message on get specialties function -> status: 404 || catch error', async ()=> {
     const mockGetPromiseBadRequest = Promise.reject({message:'Не вдалося завантажити навчальні напрямки.'});
     global.fetch = jest.fn().mockImplementationOnce(()=> mockGetPromiseBadRequest)
     const { getByText } = render(
@@ -177,7 +176,37 @@ describe('AddSpecialtyForm Test', () => {
     await wait(()=>expect(getByText('Не вдалося завантажити навчальні напрямки.')).toBeInTheDocument())
   })
 
-  test('Show a response error message', async ()=> {
+  test('Show error message on get specialties function -> status:500 || ISE', async ()=> {
+    const getPromiseBadRequest = 'Internal Server Error';
+    const mockGetPromiseBadRequest = Promise.resolve({
+      json: ()=> getPromiseBadRequest,
+      status: 500
+    });
+    global.fetch = jest.fn().mockImplementationOnce(()=> mockGetPromiseBadRequest)
+    const { getByText } = render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <authContext.Provider
+            value={{
+              token: 'testToken',
+              refreshToken: 'Token',
+              isExpired: false,
+              isRefreshing: false,
+              getToken: () => {},
+              updateToken: () => {},
+              removeToken: () => {},
+            }}
+          >
+            <AddSpecialtyForm />
+          </authContext.Provider>
+        </MemoryRouter>
+      </Provider>
+    );
+    await wait(()=>expect(getByText('Напрями відсутні')).toBeInTheDocument())
+    await wait(()=>expect(getByText('Виникла помилка у відображенні навчальних напрямків.')).toBeInTheDocument())
+  })
+
+  test('Show an error message in posting data when name and code exists in DB', async ()=> {
     global.fetch = jest.fn().mockImplementationOnce(()=> mockFetchPromiseToSetList);
     const { getByRole, getByText, getByLabelText } = render(
       <Provider store={store}>
@@ -224,6 +253,106 @@ describe('AddSpecialtyForm Test', () => {
 
     await expect(
       getByText('Такий код та назва спеціальності вже є у додатку')
+    ).toBeInTheDocument();
+  })
+
+  test('Show an error message in posting data when name exists in DB', async ()=> {
+    global.fetch = jest.fn().mockImplementationOnce(()=> mockFetchPromiseToSetList);
+    const { getByRole, getByText, getByLabelText } = render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <authContext.Provider
+            value={{
+              token: 'testToken',
+              refreshToken: 'Token',
+              isExpired: false,
+              isRefreshing: false,
+              getToken: () => {},
+              updateToken: () => {},
+              removeToken: () => {},
+            }}
+          >
+            <AddSpecialtyForm />
+          </authContext.Provider>
+        </MemoryRouter>
+      </Provider>
+    );
+    await wait(()=> {
+      userEvent.selectOptions(getByLabelText('Напрям'), [
+        "Автоматизація та приладобудування"
+       ]
+      );
+      userEvent.type(getByLabelText('Код'), '126');
+      userEvent.type(getByLabelText('Назва'), 'Інформаційні системи та технології');
+      userEvent.type(getByLabelText('Опис'), 'Тестовий опис спеціальності. Мінімум 10 символів');
+    });
+    
+    const postPromiseBadRequest = {"errors":{"Name":["Such Name is exists in the database"]},"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|961fb394-4faa4b922ca00653."}
+    
+    global.fetch = jest.fn().mockImplementationOnce(() => 
+    Promise.resolve({
+      json: () => postPromiseBadRequest,
+        status: 400
+      })
+    );
+    await wait(() => {
+      userEvent.click(getByRole('button', { name: /Додати/i }));
+    });
+    
+    jest.runAllTimers();
+
+    await expect(
+      getByText('Така назва спеціальності вже є у додатку')
+    ).toBeInTheDocument();
+  })
+
+  test('Show an error message in posting data when code exists in DB', async ()=> {
+    global.fetch = jest.fn().mockImplementationOnce(()=> mockFetchPromiseToSetList);
+    const { getByRole, getByText, getByLabelText } = render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <authContext.Provider
+            value={{
+              token: 'testToken',
+              refreshToken: 'Token',
+              isExpired: false,
+              isRefreshing: false,
+              getToken: () => {},
+              updateToken: () => {},
+              removeToken: () => {},
+            }}
+          >
+            <AddSpecialtyForm />
+          </authContext.Provider>
+        </MemoryRouter>
+      </Provider>
+    );
+    await wait(()=> {
+      userEvent.selectOptions(getByLabelText('Напрям'), [
+        "Автоматизація та приладобудування"
+       ]
+      );
+      userEvent.type(getByLabelText('Код'), '126');
+      userEvent.type(getByLabelText('Назва'), 'Інформаційні системи та технології');
+      userEvent.type(getByLabelText('Опис'), 'Тестовий опис спеціальності. Мінімум 10 символів');
+    });
+    
+    const postPromiseBadRequest = {"errors":{"Code":["Such Code is exists in the database"]},"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|961fb394-4faa4b922ca00653."}
+    
+    global.fetch = jest.fn().mockImplementationOnce(() => 
+    Promise.resolve({
+      json: () => postPromiseBadRequest,
+        status: 400
+      })
+    );
+    await wait(() => {
+      userEvent.click(getByRole('button', { name: /Додати/i }));
+    });
+    
+    jest.runAllTimers();
+
+    await expect(
+      getByText('Такий код спеціальності вже є у додатку')
     ).toBeInTheDocument();
   })
 });

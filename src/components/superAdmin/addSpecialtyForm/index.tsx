@@ -31,7 +31,7 @@ const AddSpecialtyForm: React.FC = () => {
   const [specialtyID, setSpecialtyId] = useState('');
 
   const fetchData = async ()=> {
-    const endpoint: string = `${APIUrl}Direction/All1`;
+    const endpoint: string = `${APIUrl}Direction/All`;
     requestData(endpoint, 'GET')
     .then((res: any) => {
       const statusCode = res.statusCode.toString();
@@ -57,7 +57,6 @@ const AddSpecialtyForm: React.FC = () => {
         status: 'error',
         message: 'Не вдалося завантажити навчальні напрямки.'
       });
-      console.log(error.message);
     })
   }
   useEffect(() => {
@@ -74,6 +73,7 @@ const AddSpecialtyForm: React.FC = () => {
       message: '',
     });
     const token = await getToken();
+    try {
     requestSecureData(
       `${APIUrl}SuperAdmin/AddSpecialty`, 'POST', token, {
         name: values.directionName,
@@ -82,30 +82,30 @@ const AddSpecialtyForm: React.FC = () => {
         code: values.directionCode
       })
       .then((res: any) => {
-        const statusCode = res.statusCode.toString();
-        if (statusCode.match(/^[23]\d{2}$/)) {
-          setResultMessage({
-            status: 'success',
-            message: res.data.message || 'Спеціальність успішно додано',
-          });
-          setTimeout(() => {
-            history.push(pathToRedirect);
-          }, 3000);
-          setSubmitting(false);
-        } else {
-           setResultMessage({
-             status: 'error',
-              message: res.data.message || `${Object.keys(res.data.errors).length === 2 ? 'Такий код та назва спеціальності вже є у додатку' : res.data.errors.Code === undefined ? 'Така назва спеціальності вже є у додатку': 'Такий код спеціальності вже є у додатку'}`
+          const statusCode = res.statusCode.toString();
+          if (statusCode.match(/^[23]\d{2}$/)) {
+            setResultMessage({
+              status: 'success',
+              message: res.data.message || 'Спеціальність успішно додано',
             });
+            setTimeout(() => {
+              history.push(pathToRedirect);
+            }, 3000);
+            setSubmitting(false);
+          } else {
+            setResultMessage({
+              status: 'error',
+                message: res.data.message || `${Object.keys(res.data.errors).length === 2 ? 'Такий код та назва спеціальності вже є у додатку' : res.data.errors.Code === undefined ? 'Така назва спеціальності вже є у додатку': 'Такий код спеціальності вже є у додатку'}`
+              });
+            }
         }
-      })
-      .catch((error) => {
+      )}
+      catch(error){
         setResultMessage({
           status: 'error',
-          message: error || 'Щось пішло не так, спробуйте знову.'
-      });
-      
-    })
+          message: 'Щось пішло не так, спробуйте знову.'
+        })
+      }
   }
   const allDirectionsNames = directionsList.map((item: any, index: number) => {
     return <option
