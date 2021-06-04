@@ -42,7 +42,7 @@ const InstitutionOfEducationInfo = () => {
       try {
         const currentToken = await getToken();
         const { statusCode, data }: any = await requestSecureData(
-          `${APIUrl}InstitutionOfEducationAdmin/GetIoEInfoByUserId`,
+          `${APIUrl}InstitutionOfEducationModerator/GetIoEInfoByUserId`,
           'GET',
           currentToken
         );
