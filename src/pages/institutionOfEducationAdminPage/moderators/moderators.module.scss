@@ -3,8 +3,8 @@
 .moderators {
   padding: 3rem 3.125rem 10rem 3.125rem;
   margin: 0 auto;
-  width: 100vw;
-  min-height: 100vh;
+  min-width: calc(100vw - 340px);
+  min-height: calc(100vh - 30vh - 6.25rem);
 
   .container {
     @include flex(column, center, flex-start);
@@ -24,9 +24,16 @@
     margin-top: 2.5rem;
     text-align: center;
   }
+
   .addModeratorForm {
     @include flex(row, center, center);
     width: 100%;
+    position: relative;
+
+    .success {
+      position: absolute;
+      top: 55px;
+    }
   }
 
   .emailInput {
@@ -38,5 +45,24 @@
   .moderatorList {
     @include flex(column, center, center);
     width: 100%;
+    padding-top: 50px;
+
+    .emptyListMessage {
+      font-family: $fontOpenSans;
+      font-size: $font_18px;
+      margin-top: 20px;
+    }
   }
+}
+
+.loadingScreen {
+  @include flex(column, center, center);
+  width: 100%;
+  min-height: calc(100vh - 30vh - 6.25rem);
+}
+
+.errorScreen {
+  @extend .loadingScreen;
+  font-size: $font_18px;
+  font-family: $fontOpenSans;
 }
