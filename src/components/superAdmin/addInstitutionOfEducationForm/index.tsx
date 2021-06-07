@@ -83,7 +83,6 @@ const AddInstitutionOfEducationForm = () => {
         });
       });
   };
-
   return (
     <div className={styles.wrapper}>
       <Formik
@@ -321,6 +320,7 @@ const AddInstitutionOfEducationForm = () => {
                 <div className={styles.uploadContainer}>
                   <Field
                     name='institutionOfEducationPicture'
+                    text={values.institutionOfEducationType}
                     component={ImagePickerField}
                   />
                 </div>

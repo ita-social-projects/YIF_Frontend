@@ -25,7 +25,7 @@ const ImageUploader = (props: any) => {
         <ImageUploaderPopup
           setPopupOpen={(newState: boolean) => setPopupOpen(newState)}
           aspectRatio={aspectRatio}
-          text={text}
+          text={text.length > 0 ? text==='university' ? 'університету' : 'коледжу': 'навчального закладу'}
           imageHandler={imageHandler}
         />
       )}

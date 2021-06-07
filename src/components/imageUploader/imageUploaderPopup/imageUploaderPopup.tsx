@@ -20,7 +20,7 @@ type TProps = {
 
 const ImageUploaderPopup = (props: TProps) => {
   const { setPopupOpen, aspectRatio, text, imageHandler } = props;
-
+ 
   const InitialLoadedImageState: TLoadedImage = {
     name: '',
     size: 0,
