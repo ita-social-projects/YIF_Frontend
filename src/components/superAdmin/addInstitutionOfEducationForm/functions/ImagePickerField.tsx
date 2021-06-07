@@ -1,12 +1,12 @@
 import React from 'react';
 import ImageUploader from '../../../imageUploader';
 
-const ImagePickerField = ({ form, field }: any) => {
+const ImagePickerField = ({ form, field, text }: any) => {
   const [picture, setPicture] = React.useState('');
   const defaultPicture = '/assets/images/defaultUnivPicture.svg';
   const avatar = picture ? picture : defaultPicture;
   const aspectRatio = 16 / 9;
-  const nameOfObject = 'університету';
+  const universityTypeFilter = text !== undefined ? text==='university'?'університету' : 'коледжу' : 'навчального закладу';
 
   const avatarStyles = {
     height: '14rem',
@@ -21,7 +21,7 @@ const ImagePickerField = ({ form, field }: any) => {
       defaultPicture={defaultPicture}
       avatar={avatar}
       aspectRatio={aspectRatio}
-      text={nameOfObject}
+      text={universityTypeFilter}
       imageHandler={(newPicture: string) => {
         setPicture(newPicture);
         form.setFieldValue(field.name, newPicture);

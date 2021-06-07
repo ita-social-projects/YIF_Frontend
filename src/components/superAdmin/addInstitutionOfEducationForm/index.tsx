@@ -21,7 +21,6 @@ const AddInstitutionOfEducationForm = () => {
     status: '',
     message: '',
   });
-
   const submitHandler = async (
     e: React.ChangeEvent<HTMLFormElement>,
     pathToRedirect: string,
@@ -321,6 +320,7 @@ const AddInstitutionOfEducationForm = () => {
                 <div className={styles.uploadContainer}>
                   <Field
                     name='institutionOfEducationPicture'
+                    text={values.institutionOfEducationType}
                     component={ImagePickerField}
                   />
                 </div>
