@@ -10,89 +10,89 @@ import { FormInputSuccess } from '../../components/common/formElements/formInput
 
 const ChangePassword = () => {
 
-    const service = useChangePassword(`${APIUrl}Users/ChangePassword`);
+  const service = useChangePassword(`${APIUrl}Users/ChangePassword`);
 
-    return (
-        <div className={styles.changePasswordWrapper}>
-            <div className={styles.changePassword}>
-                {service.error.hasError && (
-                    <FormInputError
-                        errorType='form'
-                        errorMessage={service.error.errorMessage}
+  return (
+    <div className={styles.changePasswordWrapper}>
+      <div className={styles.changePassword}>
+        {service.error.hasError && (
+          <FormInputError
+            errorType='form'
+            errorMessage={service.error.errorMessage}
+          />
+        )}
+        {service.success.hasSuccess && (
+          <FormInputSuccess
+            successMessage={service.success.successMessage}
+          />
+        )}
+        <Formik
+          initialValues={{
+            oldPassword: '',
+            newPassword: '',
+            confirmNewPassword: '',
+          }}
+          validationSchema={passwordValidationSchema}
+          onSubmit={(values, actions) => {
+            service.handleSubmit(values);
+            actions.setSubmitting(false);
+            actions.resetForm({
+              values: {
+                oldPassword: '',
+                newPassword: '',
+                confirmNewPassword: ''
+              },
+            });
+          }}
+        >
+          {() => (
+            <>
+              {
+                <Form>
+                  <h2>Зміна пароля</h2>
+                  <div>
+                    <Field
+                      component={FormInput}
+                      placeholder={'Старий пароль'}
+                      iconName='lock'
+                      type='password'
+                      name='oldPassword'
+                      showIconPassword={true}
                     />
-                )}
-                {service.success.hasSuccess && (
-                    <FormInputSuccess
-                        successMessage={service.success.successMessage}
+                  </div>
+                  <div>
+                    <Field
+                      component={FormInput}
+                      placeholder={'Новий пароль'}
+                      iconName='lock'
+                      type='password'
+                      name='newPassword'
+                      showIconPassword={true}
                     />
-                )}
-                <Formik
-                    initialValues={{
-                        oldPassword: '',
-                        newPassword: '',
-                        confirmNewPassword: '',
-                    }}
-                    validationSchema={passwordValidationSchema}
-                    onSubmit={(values, actions) => {
-                        service.handleSubmit(values);
-                        actions.setSubmitting(false);
-                        actions.resetForm({
-                            values: {
-                                oldPassword: '',
-                                newPassword: '',
-                                confirmNewPassword: ''
-                            },
-                        });
-                    }}
-                >
-                    {() => (
-                        <>
-                            {
-                                <Form>
-                                    <h2>Зміна пароля</h2>
-                                    <div>
-                                        <Field
-                                            component={FormInput}
-                                            placeholder={'Старий пароль'}
-                                            iconName='lock'
-                                            type='password'
-                                            name='oldPassword'
-                                            showIconPassword={true}
-                                        />
-                                    </div>
-                                    <div>
-                                        <Field
-                                            component={FormInput}
-                                            placeholder={'Новий пароль'}
-                                            iconName='lock'
-                                            type='password'
-                                            name='newPassword'
-                                            showIconPassword={true}
-                                        />
-                                    </div>
-                                    <div>
-                                        <Field
-                                            component={FormInput}
-                                            placeholder={'Підтвердіть новий пароль'}
-                                            iconName='lock'
-                                            type='password'
-                                            name='confirmNewPassword'
-                                            showIconPassword={true}
-                                        />
-                                    </div>
-                                    <FormButton
-                                        title={'Зберегти'}
-                                        id='registerFormButton'
-                                        form='register'
-                                    />
-                                </Form>
-                            }
-                        </>
-                    )}
-                </Formik>
-            </div>
-        </div>
-    );
+                  </div>
+                  <div>
+                    <Field
+                      component={FormInput}
+                      placeholder={'Підтвердіть новий пароль'}
+                      iconName='lock'
+                      type='password'
+                      name='confirmNewPassword'
+                      showIconPassword={true}
+                    />
+                  </div>
+                  <FormButton
+                    title={'Зберегти'}
+                    id='registerFormButton'
+                    form='register'
+                  />
+                </Form>
+              }
+            </>
+          )}
+        </Formik>
+      </div>
+    </div>
+  );
 };
 
 export default ChangePassword;

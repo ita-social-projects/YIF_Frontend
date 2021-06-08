@@ -1,13 +1,10 @@
 import useChangePassword from './useChangePassword';
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 import { render, screen, fireEvent, wait } from '@testing-library/react';
-// import { Provider } from 'react-redux';
 import { AuthProvider } from '../tokenValidator';
 import { Field, Formik, Form } from 'formik';
 import { FormInput } from '../../components/common/formElements/index';
-import ChangePassword from '../../components/changePassword/index';
-
-
 
 jest.mock('../useCaptcha.tsx', () => ({
   _esModule: true,
@@ -23,13 +20,11 @@ const mockFetchPromise = Promise.resolve({
   json: () => mockJsonPromise,
   status: 200,
 });
-// const mockFetchPromiseBad = Promise.resolve({
-//   json: () => mockJsonPromise,
-//   status: 400,
-// });
+const mockFetchPromiseBad = Promise.resolve({
+  json: () => mockJsonPromise,
+  status: 400,
+});
 global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
-
-// jest.useFakeTimers();
 
 describe('use change password hook', () => {
   const TestComponent = () => {
@@ -91,19 +86,6 @@ describe('use change password hook', () => {
     );
   };
 
-  const mockJsonPromise = Promise.resolve({
-    message: 'Пароль успішно змінено',
-  });
-  const mockFetchPromise = Promise.resolve({
-    json: () => mockJsonPromise,
-    status: 200,
-  });
-  const mockFetchPromiseBad = Promise.resolve({
-    json: () => mockJsonPromise,
-    status: 400,
-  });
-  global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
-
   test('should fill and submit form', async () => {
     render(
       <AuthProvider>
@@ -132,15 +114,19 @@ describe('use change password hook', () => {
 
   test('shows a notification of a successful password change', async () => {
     global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
-    render(
+    const { getByTestId } = render(
       <AuthProvider>
         <TestComponent />
       </AuthProvider>
     );
+    userEvent.type(getByTestId('oldPassword'), 'Qwerty1@');
+    userEvent.type(getByTestId('newPassword'), 'Qwerty1@2');
+    userEvent.type(getByTestId('confirmNewPassword'), 'Qwerty1@2');
+    fireEvent.click(screen.getByTestId('submitButton'));
+
     await wait(() => {
-      fireEvent.click(screen.getByTestId('submitButton'));
+      expect(screen.getByTestId('successMessage')).toBeInTheDocument();
     });
-    expect(screen.getByTestId('successMessage')).toBeInTheDocument();
   });
 
   test('shows error message from server', async () => {

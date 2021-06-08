@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 import { render, wait } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-
 describe('ChangePassword', () => {
   test('render component correctly', () => {
     const { getByText, getByRole, getByPlaceholderText } = render(
@@ -28,11 +27,11 @@ describe('ChangePassword', () => {
       </Router>
     );
     await wait(() => {
-    userEvent.type(getByPlaceholderText('Новий пароль'), 'Qwerty-1');
-    userEvent.type(
-      getByPlaceholderText('Підтвердіть новий пароль'),
-      'Qwerty-1'
-    );
+      userEvent.type(getByPlaceholderText('Новий пароль'), 'Qwerty-1');
+      userEvent.type(
+        getByPlaceholderText('Підтвердіть новий пароль'),
+        'Qwerty-1'
+      );
     });
 
     expect(getByPlaceholderText('Новий пароль')).toHaveValue('Qwerty-1');
@@ -48,16 +47,16 @@ describe('ChangePassword', () => {
       </Router>
     );
 
-      userEvent.type(getByPlaceholderText('Старий пароль'), 'QWerty-1');
-      userEvent.type(getByPlaceholderText('Новий пароль'), 'Qwerty-1');
-      userEvent.type(
-        getByPlaceholderText('Підтвердіть новий пароль'),
-        'Qwerty-!'
-      );
-      userEvent.click(getByRole('button'));
+    userEvent.type(getByPlaceholderText('Старий пароль'), 'QWerty-1');
+    userEvent.type(getByPlaceholderText('Новий пароль'), 'Qwerty-1');
+    userEvent.type(
+      getByPlaceholderText('Підтвердіть новий пароль'),
+      'Qwerty-!'
+    );
+    userEvent.click(getByRole('button'));
 
-      await wait(() => {
-        expect(queryByText('Паролі мають співпадати')).toBeInTheDocument();
-      });
+    await wait(() => {
+      expect(queryByText('Паролі мають співпадати')).toBeInTheDocument();
     });
+  });
 });
