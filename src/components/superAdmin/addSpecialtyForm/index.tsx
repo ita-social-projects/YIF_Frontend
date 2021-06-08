@@ -186,7 +186,6 @@ const AddSpecialtyForm: React.FC = () => {
                   </Field>
                 }
               </div>
-
               <div className={`${styles.halfWidth} ${styles.halfWidth__code}`}>
                 <label
                   className={styles.topWrapper__label}
@@ -207,7 +206,6 @@ const AddSpecialtyForm: React.FC = () => {
                   />
                 ) : null}
               </div>
-
               <div className={styles.fullWidth}>
                 <label
                   className={styles.topWrapper__label}
@@ -252,34 +250,28 @@ const AddSpecialtyForm: React.FC = () => {
                     errorMessage={errors.specialtyDescription}
                   />
                 ) : null}
-              </div>
-
-              
-                  
-               
+              </div> 
             </div>
-            <div className={styles.botWrapper}>
-              <div className={`${styles.resultMessageContainer} ${styles.messagesContainer}`}>
-                {submitting && resultMessage.status === 'success' && (
-                  <div className={styles.spinner}>
-                    <Spinner />
-                  </div>
-                )}
-                {resultMessage.status === 'success' && (
-                  <FormInputSuccess successMessage={resultMessage.message} />
-                )}
-                {resultMessage.status === 'error' && (
-                  <FormInputError
-                    errorType='form'
-                    errorMessage={resultMessage.message}
-                  />
-                )}
-              </div>
-              <FormButton
+            <FormButton
                 id='userProfileButton'
                 form='AddInstitutionOfEducation'
                 title='Додати'
               />
+            <div className={`${styles.resultMessageContainer}`}>
+              {submitting && resultMessage.status === 'success' && (
+                <div className={styles.spinner}>
+                  <Spinner />
+                </div>
+              )}
+              {resultMessage.status === 'success' && (
+                <FormInputSuccess successMessage={resultMessage.message} />
+              )}
+              {resultMessage.status === 'error' && (
+                <FormInputError
+                  errorType='form'
+                  errorMessage={resultMessage.message}
+                />
+              )}
             </div>
           </Form>
         )}
