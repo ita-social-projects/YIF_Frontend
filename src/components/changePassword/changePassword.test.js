@@ -26,18 +26,19 @@ describe('ChangePassword', () => {
         <ChangePassword />
       </Router>
     );
+
+    userEvent.type(getByPlaceholderText('Новий пароль'), 'Qwerty-1');
+    userEvent.type(
+      getByPlaceholderText('Підтвердіть новий пароль'),
+      'Qwerty-1'
+    );
+    
     await wait(() => {
-      userEvent.type(getByPlaceholderText('Новий пароль'), 'Qwerty-1');
-      userEvent.type(
-        getByPlaceholderText('Підтвердіть новий пароль'),
+      expect(getByPlaceholderText('Новий пароль')).toHaveValue('Qwerty-1');
+      expect(getByPlaceholderText('Підтвердіть новий пароль')).toHaveValue(
         'Qwerty-1'
       );
     });
-
-    expect(getByPlaceholderText('Новий пароль')).toHaveValue('Qwerty-1');
-    expect(getByPlaceholderText('Підтвердіть новий пароль')).toHaveValue(
-      'Qwerty-1'
-    );
   });
 
   test('shows an input error message', async () => {

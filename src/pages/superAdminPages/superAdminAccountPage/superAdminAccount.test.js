@@ -18,8 +18,7 @@ const institutionOfEducationAdmins = [
     },
     institutionOfEducation: {
       id: '96487fd4-72ea-4830-84cf-9e4d9bf8950f',
-      name:
-        'Національний університет водного господарства та природокористування',
+      name: 'Національний університет водного господарства та природокористування',
       abbreviation: 'НУВГП',
     },
     isBanned: true,
@@ -30,11 +29,12 @@ afterEach(cleanup);
 
 describe('check SuperAdminAccount component', () => {
   it('check func fetchInstitutionOfEducationAdmins', async () => {
-    const fetchInstitutionOfEducationAdmins = jest.fn();
-
     jest.spyOn(global, 'fetch').mockImplementation(() =>
       Promise.resolve({
-        json: () => Promise.resolve(institutionOfEducationAdmins),
+        json: () =>
+          Promise.resolve({
+            responseList: institutionOfEducationAdmins,
+          }),
       })
     );
     await act(async () => {
@@ -52,26 +52,20 @@ describe('check SuperAdminAccount component', () => {
                 removeToken: () => {},
               }}
             >
-              <SuperAdminAccountPage
-                institutionOfEducationAdmins={institutionOfEducationAdmins}
-                onClick={fetchInstitutionOfEducationAdmins()}
-              />
+              <SuperAdminAccountPage />
             </authContext.Provider>
           </MemoryRouter>
         </Provider>
       );
-
-      expect(fetchInstitutionOfEducationAdmins).toHaveBeenCalledTimes(1);
     });
 
     global.fetch.mockRestore();
   });
   it('check error fetchInstitutionOfEducationAdmins ', async () => {
-    const fetchInstitutionOfEducationAdmins = jest.fn();
-
     jest.spyOn(global, 'fetch').mockImplementation(() =>
       Promise.resolve({
-        json: () => Promise.reject(institutionOfEducationAdmins),
+        json: () =>
+          Promise.reject({ responseList: institutionOfEducationAdmins }),
       })
     );
     await act(async () => {
@@ -89,16 +83,11 @@ describe('check SuperAdminAccount component', () => {
                 removeToken: () => {},
               }}
             >
-              <SuperAdminAccountPage
-                institutionOfEducationAdmins={institutionOfEducationAdmins}
-                onClick={fetchInstitutionOfEducationAdmins()}
-              />
+              <SuperAdminAccountPage />
             </authContext.Provider>
           </MemoryRouter>
         </Provider>
       );
-
-      expect(fetchInstitutionOfEducationAdmins).toHaveBeenCalledTimes(1);
     });
 
     global.fetch.mockRestore();

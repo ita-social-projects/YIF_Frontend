@@ -7,7 +7,6 @@
   font-weight: $regular;
   background-color: $lightBlue_3;
   width: 100%;
-  margin: 3.125rem 4.375rem 0;
   .spinnerContainer {
     @include flex(row, center, center);
     width: 100%;

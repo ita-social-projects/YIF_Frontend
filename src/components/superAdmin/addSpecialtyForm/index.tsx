@@ -7,9 +7,7 @@ import { validationField } from '../../../services/validateForm/ValidatorsField'
 const AddSpecialtyForm = () => {
   return (
     <div className={styles.wrapper}>
-        <h1 className={styles.wrapper__title}>
-          Нова спеціальність
-        </h1>
+      <h1 className={styles.wrapper__title}>Нова спеціальність</h1>
       <Formik
         initialValues={{
           directionName: '',
@@ -43,9 +41,10 @@ const AddSpecialtyForm = () => {
                   id='directionName'
                   data-testid='select-type'
                   name='directionNam'
-               
                 >
-                  <option data-testid='empty' value=''>Інформаційні технології</option>
+                  <option data-testid='empty' value=''>
+                    Інформаційні технології
+                  </option>
                   <option data-testid='university' value='university'>
                     Соціальні та поведінкові науки
                   </option>
@@ -56,7 +55,7 @@ const AddSpecialtyForm = () => {
               </div>
               <div className={`${styles.halfWidth} ${styles.halfWidth__code}`}>
                 <label
-                  className={styles.topWrapper__label} 
+                  className={styles.topWrapper__label}
                   htmlFor='directionCode'
                 >
                   Код:
@@ -67,7 +66,6 @@ const AddSpecialtyForm = () => {
                   name='directionCode'
                   value={'010'}
                 />
-
               </div>
 
               <div className={styles.fullWidth}>
@@ -85,7 +83,9 @@ const AddSpecialtyForm = () => {
                 />
               </div>
               <div className={styles.topWrapper__column}>
-                <div className={`${styles.fullWidth} ${styles.fullWidth__textarea}`}>
+                <div
+                  className={`${styles.fullWidth} ${styles.fullWidth__textarea}`}
+                >
                   <label
                     className={styles.topWrapper__label}
                     htmlFor='specialtyDescription'
@@ -96,15 +96,14 @@ const AddSpecialtyForm = () => {
                     as='textarea'
                     id='specialtyDescription'
                     name='specialtyDescription'
-                    className={styles.topWrapper__textarea} 
+                    className={styles.topWrapper__textarea}
                     type='textarea'
-                    value={'"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."'}
+                    value={
+                      '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."'
+                    }
                   />
-                  
                 </div>
-                
               </div>
-              
             </div>
             <FormButton
               id='userProfileButton'

@@ -5,6 +5,7 @@ import styles from './editSpecialty.module.scss';
 import { FormButton } from '../../../components/common/formElements/index';
 import editSpecialtyValidation from './editSpecialtyValidation';
 import Plus from '../../../components/common/icons/Plus';
+import Delete from '../../../components/common/icons/Delete/index';
 
 const examSubjects = [
   { id: 1, examName: 'Англійська мова' },
@@ -232,9 +233,10 @@ const EditSpecialty = () => {
                         data-testid='button'
                         form='register'
                       />
-                      <div className={styles.deleteSpecialty}>
+                      {/* <div className={styles.deleteSpecialty}>
                         Видалити спеціальність
-                      </div>
+                      </div> */}
+                      <Delete />
                     </div>
                   </Form>
                 )}
