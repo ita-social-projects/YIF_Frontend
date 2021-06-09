@@ -90,12 +90,6 @@ const InstitutionOfEducationInfo = () => {
             description={description}
             imagePath={`http://localhost:5000/images/${imagePath}`}
           />
-          <Link
-            className={`${styles.animatedButton} ${styles.buttonLink}`}
-            to={`${path}/edit`}
-          >
-            Редагувати
-          </Link>
         </div>
       </main>
     );

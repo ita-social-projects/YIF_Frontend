@@ -4,11 +4,11 @@ import Aside from '../../components/institutionOfEducationAdmin/aside';
 import InstitutionOfEducationInfo from './institutionOfEducationInfo';
 import styles from './institutionOfEducationModeratorPage.module.scss';
 import { Route, Redirect, Switch, useRouteMatch, Link } from 'react-router-dom';
-import EditInstitutionOfEducationInfoPage from './editInstitutionOfEducationInfoPage';
 import OurSpecialties from './ourSpecialties';
 import EditSpecialty from './editSpecialtyPage';
 import AddSpecialties from './addSpecialties';
 import ChangePassword from '../../components/changePassword';
+import Administrators from './administrators/index'
 
 function InstitutionOfEducationModeratorPage() {
   const { path } = useRouteMatch();
@@ -32,6 +32,12 @@ function InstitutionOfEducationModeratorPage() {
             </Link>
             <Link
               className={styles.underlineAnimation}
+              to={`${path}/administrators`}
+            >
+              Адміністратори
+            </Link>
+            <Link
+              className={styles.underlineAnimation}
               to={`${path}/changePassword`}
             >
               Змінити пароль
@@ -47,12 +53,11 @@ function InstitutionOfEducationModeratorPage() {
             <InstitutionOfEducationInfo />
           </Route>
 
-          <Route path={`${path}/institutionOfEducationInfo/edit`}>
-            <EditInstitutionOfEducationInfoPage />
-          </Route>
-
           <Route exact path={`${path}/ourSpecialties`}>
             <OurSpecialties />
+          </Route>
+          <Route path={`${path}/administrators`}>
+            <Administrators />
           </Route>
           <Route path={`${path}/addSpecialties`}>
             <AddSpecialties />

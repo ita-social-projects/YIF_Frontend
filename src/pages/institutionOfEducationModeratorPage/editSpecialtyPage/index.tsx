@@ -233,10 +233,7 @@ const EditSpecialty = () => {
                         data-testid='button'
                         form='register'
                       />
-                      {/* <div className={styles.deleteSpecialty}>
-                        Видалити спеціальність
-                      </div> */}
-                      <Delete />
+                      {/*<Delete />*/}
                     </div>
                   </Form>
                 )}
