@@ -1,0 +1,19 @@
+@import '../../styles/index.scss';
+
+.directionsPage {
+  margin: 0 auto;
+  width: calc((1180 / 1440) * 100%);
+  max-width: 90rem;
+  height: auto;
+  min-height: 68.75rem;
+  padding-bottom: 3.75rem;
+  @include flex(column, center, flex-start);
+}
+
+.title {
+  margin: 3.125rem 0 1.25rem 0;
+  font-family: $fontNunito;
+  font-size: $font_80px;
+  font-weight: $regular;
+  text-align: center;
+}

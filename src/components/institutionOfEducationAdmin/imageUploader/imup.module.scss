@@ -1,0 +1,35 @@
+@import '../../../styles/index.scss';
+
+.uploader {
+  cursor: pointer;
+  width: 100%;
+  max-width: 70rem;
+  background-color: #ccc;
+  height: 30rem;
+  border-radius: 0.5rem;
+  position: relative;
+  &:hover::after {
+    content: 'Виберіть нове зображення';
+    font-family: $fontNunito;
+    text-align: center;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+    padding: 0.8rem;
+    border-radius: 0 0 0.5rem 0.5rem;
+    background-color: #12335e96;
+    background-image: url(/assets/icons/photo.svg);
+    background-repeat: no-repeat;
+    background-size: auto 65%;
+    background-position: 62% 50%;
+  }
+
+  img {
+    width: inherit;
+    height: inherit;
+    border-radius: 0.5rem;
+  }
+}

@@ -1,0 +1,157 @@
+@import '../../styles/index.scss';
+
+.aboutUs {
+  width: 100%;
+  height: auto;
+  @include flex(column, center, center);
+  position: relative;
+
+  &__title {
+    margin-top: 100px;
+    color: $black;
+    font-family: $fontNunito;
+    font-size: $font_80px;
+    font-weight: $regular;
+
+    @include mobile-w {
+      margin-top: 50px;
+      font-size: calc((60 / 16) * 1rem);
+    }
+
+    @include mobile {
+      margin-top: 50px;
+
+      font-size: calc((50 / 16) * 1rem);
+    }
+  }
+
+  &__desc {
+    width: calc((800 / 1180) * 100%);
+    margin-top: 25px;
+    font-family: $fontOpenSans;
+    font-weight: $regular;
+    font-size: $font_16px;
+    color: $black;
+    text-align: center;
+
+    @include tablet {
+      width: 85%;
+    }
+
+    @include mobile-w {
+      width: 100%;
+    }
+
+    @include mobile {
+      width: 100%;
+      font-size: calc((14 / 16) * 1rem);
+    }
+  }
+
+  &__advantages {
+    width: 100%;
+    height: auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    @include flex(row, flex-start, space-between);
+
+    @include mobile-w {
+      margin-top: 50px;
+      margin-bottom: 50px;
+      @include flex(column, center, flex-start);
+    }
+
+    @include mobile {
+      margin-top: 50px;
+      margin-bottom: 50px;
+      @include flex(column, center, flex-start);
+    }
+
+    &__block {
+      width: calc((330 / 1180) * 100%);
+      height: auto;
+      @include flex(column, center, space-between);
+      background-color: $lightBlue_1;
+      border-radius: 15px;
+
+      @include laptop {
+        width: 30%;
+      }
+
+      @include tablet {
+        width: 30%;
+      }
+
+      @include mobile-w {
+        margin-bottom: 20px;
+        width: 55%;
+      }
+
+      @include mobile {
+        margin-bottom: 20px;
+        width: 90%;
+      }
+    }
+
+    &__title {
+      margin-top: 40px;
+      font-family: $fontNunito;
+      font-weight: $light;
+      font-size: $font_30px;
+
+      @include laptop {
+        font-size: calc((25 / 16) * 1rem);
+      }
+
+      @include tablet {
+        font-size: calc((18 / 16) * 1rem);
+        margin-top: 20px;
+      }
+
+      @include mobile-w {
+        font-size: calc((20 / 16) * 1rem);
+        margin-top: 20px;
+      }
+
+      @include mobile {
+        font-size: calc((20 / 16) * 1rem);
+        margin-top: 20px;
+      }
+    }
+
+    &__imgBlock {
+      margin-top: 40px;
+      width: 100%;
+
+      @include tablet {
+        margin-top: 20px;
+        width: 80%;
+      }
+
+      @include mobile-w {
+        margin-top: 20px;
+        width: 80%;
+      }
+
+      @include mobile {
+        margin-top: 20px;
+        width: 80%;
+      }
+    }
+
+    &__img {
+      width: 100%;
+    }
+  }
+}
+
+.container {
+  width: calc((1180 / 1440) * 100%);
+  max-width: 1440px;
+  height: 100%;
+  @include flex(column, center, flex-start);
+
+  @include tablet {
+    width: 80%;
+  }
+}

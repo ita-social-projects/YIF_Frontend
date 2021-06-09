@@ -1,0 +1,19 @@
+@import '../../../styles/index.scss';
+
+.assideMenu {
+  background-color: $darkBlue;
+  padding-top: 15%;
+  min-width: 240px;
+  max-width: 240px;
+
+  .navContainer {
+    padding: 0 1.23rem;
+  }
+
+  a {
+    margin: 1rem 0;
+    color: #fff;
+    font-family: $fontNunito;
+    font-size: $font_18px;
+  }
+}

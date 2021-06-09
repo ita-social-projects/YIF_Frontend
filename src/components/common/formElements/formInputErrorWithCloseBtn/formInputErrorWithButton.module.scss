@@ -1,0 +1,51 @@
+@import '../../../../styles/index.scss';
+
+.error {
+  position: absolute;
+  top: 0;
+  z-index: 3;
+  cursor: default;
+  width: 50%;
+  padding: 0.8rem;
+
+  background-color: rgba($red, 0.3);
+  color: $red;
+  font-size: 11px;
+  font-weight: $regular;
+  font-family: $fontOpenSans;
+  @include flex(row, center, flex-start);
+
+  opacity: 1;
+  animation-name: element-show;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  animation-direction: reverse;
+}
+
+.formError {
+  svg path {
+    fill: $white;
+  }
+  background-color: $red;
+  color: $white;
+  margin-bottom: 40px;
+  span {
+    cursor: pointer;
+    border-bottom: 1px solid $white;
+  }
+}
+
+.iconWrap {
+  @include flex(row, flex-end, flex-start);
+  padding-right: 15px;
+  align-self: center;
+}
+
+@keyframes element-show {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,131 @@
+@import '../styles.scss';
+
+$borderLine: solid 1px rgba(18, 51, 94, 0.22);
+
+header {
+  box-sizing: border-box;
+  width: 100%;
+  height: 6.25rem; //100px
+  font-size: $font_18px;
+  text-align: center;
+  background: $lightBlue_1;
+  @include flex(row, center, space-between);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+
+  .logo {
+    text-decoration: none;
+    font-family: $fontNunito;
+    color: $black;
+    font-size: $font_40px;
+    font-weight: 800;
+    margin: 0 3vw 0 9.03vw;
+
+    img {
+      max-width: 5rem;
+    }
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    font-family: $fontOpenSans;
+    margin-right: 9.03vw;
+
+    a {
+      text-decoration: none;
+      color: $black;
+      font-size: $font_18px;
+      font-weight: 400;
+      position: relative;
+    }
+    .pages {
+      margin-right: 5.56vw;
+
+      & > * {
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      a {
+        margin-right: 2.5rem;
+      }
+    }
+    .entry {
+      display: flex;
+      align-items: center;
+
+      .animatedButton,
+      .animatedButtonTransparent {
+        padding: 0.875rem 1.5rem; //14px 24px
+        border-radius: 0.625rem; //10px
+        font-size: $font_18px;
+      }
+
+      & > :first-child {
+        margin-right: 1.625rem;
+      }
+
+      .dropdown {
+        position: relative;
+        .user {
+          @include flex(row, center, flex-end);
+          min-width: 12.5rem; //200px
+          padding: 0.3125rem 0.625rem; //5px 10px
+          border: solid 1px $lightBlue_1;
+          box-sizing: border-box;
+
+          .avatar {
+            width: 2.5rem;
+            border-radius: 50%;
+            margin-left: 0.9375rem; //15px
+            cursor: pointer;
+          }
+        }
+        .border {
+          border: $borderLine;
+          border-radius: 0.3125rem 0.3125rem 0 0;
+        }
+      }
+
+      .arrow {
+        cursor: pointer;
+        padding-left: 0.625rem;
+      }
+
+      .dropdownContent {
+        position: absolute;
+        right: 0;
+        width: 100%;
+        min-width: 12.5rem; //200px
+
+        & > * {
+          font-size: 1rem;
+          text-align: right;
+          display: block;
+          width: 100%;
+          cursor: pointer;
+          padding-left: 0;
+          padding: 0.625rem 0.625rem;
+          line-height: 1rem;
+          background: $lightBlue_1;
+          border-bottom: $borderLine;
+          border-left: $borderLine;
+          border-right: $borderLine;
+          box-sizing: border-box;
+
+          &:hover {
+            color: $white;
+            background: $darkBlue;
+          }
+        }
+
+        & > :last-child {
+          border-radius: 0 0 0.3125rem 0.3125rem;
+        }
+      }
+    }
+  }
+}

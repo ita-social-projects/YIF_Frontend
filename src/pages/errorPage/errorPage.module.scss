@@ -1,0 +1,78 @@
+@import '../../styles/index.scss';
+
+.error {
+  overflow: hidden;
+  position: relative;
+  max-height: 800px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: flex-start;
+  text-align: left;
+  background-color: $white;
+  background-image: url(/assets/images/error.svg);
+  background-repeat: no-repeat;
+  background-size: auto 98%;
+  background-position: 95% 100%;
+  font-family: $fontOpenSans;
+  padding: 8.75rem 0 16.7rem 8.125rem;
+  h2 {
+    font-weight: $bold;
+    font-size: $font_80px;
+    line-height: 1.25;
+  }
+  p {
+    margin-top: 3.186rem;
+    font-family: $fontOpenSans;
+    font-size: $font_18px;
+    line-height: 1.36;
+  }
+  .btn {
+    font-family: $fontOpenSans;
+    margin-top: 1.563rem;
+    font-size: $font_18px;
+    color: $red;
+    cursor: pointer;
+    font-weight: $bold;
+  }
+}
+
+@include desktop {
+  /*  >= 1366px   */
+}
+
+@include laptop {
+  /*   1024px - 1365px   */
+  .error {
+    background-size: auto 54%;
+    background-position: 100% 50%;
+    padding-bottom: 12rem;
+  }
+}
+
+@include tablet {
+  /*   768px - 1023px   */
+  .error {
+    background-size: auto 44%;
+    padding-bottom: 6rem;
+    background-position: 100% 30%;
+  }
+}
+@include mobile-w {
+  /*   421px - 767px   */
+  .error {
+    background-image: none;
+    padding-bottom: 1rem;
+  }
+}
+
+@include mobile {
+  /*   <= 420px   */
+  .error {
+    background-image: none;
+    padding-bottom: 1rem;
+  }
+}

@@ -1,0 +1,113 @@
+@import '../../styles/index.scss';
+
+.container {
+  width: 100%;
+  background-color: $lightBlue_1;
+}
+.banner {
+  position: relative;
+  overflow: hidden;
+  background-color: $lightBlue_1;
+  max-height: 530px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5.75rem 0 8.75rem 0;
+
+  background-image: url(/assets/images/baner2.svg);
+  background-repeat: no-repeat;
+  background-size: auto 69%;
+  background-position: 100% 100%;
+
+  h2 {
+    font-family: $fontNunito;
+    font-weight: $regular;
+    font-size: $font_80px;
+    line-height: 1.36;
+  }
+  p {
+    width: 55vw;
+    max-width: 795px;
+    margin: 2.5rem 0 1.875rem 0;
+    font-family: $fontOpenSans;
+    font-size: $font_16px;
+    line-height: 1.36;
+  }
+  a {
+    text-decoration: none;
+    padding: 1rem 3.125rem;
+    border-radius: 15px;
+    font-family: $fontNunito;
+    font-weight: normal;
+    font-size: $font_30px;
+    line-height: 1.13;
+  }
+}
+.animationBg {
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+  animation-play-state: paused;
+  animation-delay: calc(var(--scroll) * -2s);
+  animation-name: animationBg;
+}
+@keyframes animationBg {
+  from {
+    background-size: auto 0%;
+    background-position: 100% 0%;
+  }
+  to {
+    background-size: auto 69%;
+    background-position: 100% 100%;
+  }
+}
+@include desktop {
+  /*  >= 1366px   */
+}
+
+@include laptop {
+  /*   1024px - 1365px   */
+}
+
+@include tablet {
+  /*   768px - 1023px   */
+  @keyframes animationBg {
+    from {
+      background-size: auto 0%;
+      background-position: 100% 0%;
+    }
+    to {
+      background-size: auto 39%;
+      background-position: 100% 70%;
+    }
+  }
+}
+@include mobile-w {
+  /*   421px - 767px   */
+  .banner {
+    background-image: none;
+  }
+  .animationBg {
+    transition-property: none !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+@include mobile {
+  /*   <= 420px   */
+  .banner {
+    background-image: none;
+  }
+  .animationBg {
+    transition-property: none !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}

@@ -1,0 +1,51 @@
+@import '../../styles/index.scss';
+
+$element: '.acc_item';
+
+#{$element} {
+  font-family: $fontNunito, sans-serif;
+  margin-bottom: 5px;
+
+  &__line {
+    cursor: pointer;
+    border-radius: 5px;
+    z-index: 2;
+    position: relative;
+    padding: 25px;
+    @include flex(row, center, space-between);
+  }
+
+  &__icon {
+    font-size: 50px;
+    line-height: 30px;
+  }
+
+  &__inner {
+    max-height: 0;
+    overflow: hidden;
+    z-index: 1;
+    position: relative;
+    transition: 0.1s;
+  }
+
+  &__info {
+    @include flex(row, center, space-between);
+  }
+
+  &__content {
+    transform: translateY(-100%);
+    border-radius: 5px;
+    transition: 0.2s;
+  }
+
+  &__opened {
+    #{$element}__inner {
+      max-height: 100%;
+      margin-top: 5px;
+    }
+
+    #{$element}__content {
+      transform: translateY(0);
+    }
+  }
+}

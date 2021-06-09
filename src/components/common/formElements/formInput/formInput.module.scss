@@ -1,0 +1,49 @@
+@import '../../../../styles/index.scss';
+
+.inputErrorWrap {
+  @include flex(column, flex-start, flex-start);
+}
+
+.inputContainer {
+  @include flex(row, flex-end, flex-start);
+  width: 350px;
+  height: 40px;
+  border-bottom: 1px solid $black;
+  margin-bottom: 45px;
+
+  &__hideShowPasswordIcon {
+    cursor: pointer;
+    margin: 0 5px;
+    path {
+      fill: #5e84a9;
+    }
+  }
+}
+
+.inputFailed {
+  border-bottom: 1px solid $red;
+  margin-bottom: 1px;
+}
+
+.imgContainer {
+  padding: 0 20px;
+  cursor: pointer;
+}
+
+.formInput {
+  padding-bottom: 5px;
+  font-family: $fontOpenSans;
+  font-weight: $regular;
+  font-size: 14px; // fix this in the Future
+  color: $black;
+  width: 100%;
+  cursor: pointer;
+  background-color: transparent;
+
+  &::placeholder {
+    font-family: $fontOpenSans;
+    font-weight: $regular;
+    font-size: 14px; // fix this in the Future
+    color: $black;
+  }
+}

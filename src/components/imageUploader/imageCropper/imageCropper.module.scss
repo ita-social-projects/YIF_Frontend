@@ -1,0 +1,36 @@
+@import '../../../styles/index.scss';
+
+.imagePrevieContainer {
+  position: relative;
+
+  width: 100%;
+  height: 100%; // 53vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  .imgHolder {
+    position: relative;
+    max-width: 70%;
+    width: fit-content;
+    max-height: 100%; //50vh;
+    margin: 0 auto;
+    padding: 0;
+
+    img {
+      height: auto;
+      max-height: 100%; // 50vh;
+      object-fit: contain;
+    }
+  }
+  .closeButton {
+    position: absolute;
+    width: 1.5rem;
+    height: auto;
+    top: 0.5rem;
+    right: 1rem;
+    cursor: pointer;
+  }
+}

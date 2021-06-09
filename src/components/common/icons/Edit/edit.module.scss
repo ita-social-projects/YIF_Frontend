@@ -1,0 +1,31 @@
+@import '../../../../styles/index.scss';
+
+.container {
+  @include flex(row, flex-end, center);
+  width: 1.625rem;
+  height: 1.625rem;
+  position: relative;
+  cursor: pointer;
+  transform: rotate(-8deg);
+
+  svg {
+    width: 1.625rem;
+    height: 1.5rem;
+    fill: rgba(0, 0, 0, 0.623);
+  }
+
+  &:hover::after {
+    content: 'Редагувати';
+    position: absolute;
+    top: 1.75rem;
+    left: -1.7rem;
+    font-family: $fontNunito;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    transform: rotate(8deg);
+  }
+  :hover {
+    fill: rgb(0, 0, 0);
+  }
+}

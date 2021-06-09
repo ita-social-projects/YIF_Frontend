@@ -1,0 +1,248 @@
+@import '../../styles.scss';
+
+.superAdminAccount {
+  width: 100%;
+  font-size: 1.562rem; // 25px
+  text-align: center;
+
+  h1 {
+    padding: 3.12rem 0 4.37rem 0; // 50px 0 70px 0
+  }
+
+  .adminTableContainer {
+    position: relative;
+    margin: 0 auto; // 200px
+    font-size: $font_16px;
+    padding: 0 0 0.62rem 0; // 0 0 10px 0
+    max-width: 70rem; // 1000px
+    text-align: left;
+
+    mark {
+      color: $white;
+      background-color: $darkBlue2;
+    }
+  }
+
+  .adminTableHeader {
+    color: $white;
+    background-color: $lightBlue_4;
+    border-radius: 0.3rem;
+    transition: transform 0.35s;
+
+    .banContainer {
+      @include flex(column, center, flex-end);
+      height: 1.8rem;
+      width: 1.8rem;
+      position: relative;
+      cursor: pointer;
+      margin-right: 0.2rem;
+      .banIcon {
+        width: 100%;
+        fill: $white;
+      }
+    }
+
+    .filterActive {
+      color: rgba($white, 0.7);
+
+      .banIcon {
+        fill: rgba($white, 0.7);
+      }
+
+      & > svg {
+        transform: rotate(180deg);
+      }
+    }
+
+    .search {
+      max-width: 21.87rem; // 350px
+      padding: 0.93rem 0.93rem 0 0.93rem; //15px
+
+      label {
+        transition: background-color 0.35s;
+        display: flex;
+        height: 2.3rem; // 40px
+        overflow: hidden;
+        position: relative;
+
+        img.clearInput {
+          position: absolute;
+          right: 0.62rem; // 10px
+          bottom: 0.62rem; // 10px
+          @include size(15px);
+          cursor: pointer;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.35s;
+
+          &.active {
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+
+        svg {
+          @include size(1.96rem); // 31px
+          cursor: pointer;
+          margin: 0.125rem 0.62rem 0.62rem; // 2px 10px 10px 10px
+
+          path {
+            transition: fill 0.35s;
+            fill: $white;
+          }
+        }
+
+        input {
+          background-color: $lightBlue_2;
+          width: 100%;
+          padding: 0 0.62rem; //10px
+          border-radius: 5px;
+          color: $darkBlue;
+          transition: background-color 0.35s;
+
+          &::placeholder {
+            color: $lightBlue_4;
+          }
+
+          &:focus {
+            background-color: $white;
+          }
+        }
+      }
+    }
+  }
+  .adminTableTitle {
+    padding: 0.62rem 2.5rem;
+    font-size: 1.25rem; // 20px
+    position: relative;
+    @include flex(row, center, flex-start);
+
+    li {
+      cursor: pointer;
+      margin: 0 1rem 0 0; // 15px
+      transition: color 0.35s;
+
+      &:hover {
+        color: rgba($white, 0.7);
+
+        path {
+          fill: rgba($white, 0.7);
+        }
+      }
+    }
+
+    .institutionOfEducation,
+    .email {
+      flex-basis: 45%;
+    }
+
+    .ban {
+      flex-basis: 10%;
+      @include flex(row, center, flex-start);
+    }
+  }
+  .adminList {
+    .noneInstitutionOfEducationAdmins {
+      text-align: center;
+      padding: 0.62rem; // 10px
+      font-size: $font_18px;
+      color: $darkBlue;
+      background-color: $lightBlue_1;
+    }
+
+    .adminItem ul {
+      width: 100%;
+      max-width: 70rem;
+      height: 4.5rem;
+      cursor: pointer;
+      background-color: #d6e5f2;
+      border-radius: 0.3rem;
+      padding: 0.62rem 2.5rem;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.125rem;
+      margin-top: 0.625rem;
+      @include flex(row, center, flex-start);
+
+      .adminInstitutionOfEducation {
+        position: relative;
+        .abbreviationInstitutionOfEducation {
+          display: block;
+          cursor: pointer;
+        }
+
+        .abbreviationInstitutionOfEducation:hover
+          ~ .fullNameInstitutionOfEducation {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .fullNameInstitutionOfEducation {
+          opacity: 0;
+          visibility: hidden;
+          transition: 0.35s;
+          font-size: 0.937rem; // 15px
+          border-radius: 20px;
+          word-wrap: break-word;
+          position: absolute;
+          box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.2);
+          bottom: 2.18rem; // 35px
+          max-width: 15.62rem; // 250px
+
+          z-index: 1;
+          background-color: $gray;
+          color: $darkBlue2;
+          padding: 0.937rem; // 15px
+
+          &::before,
+          &::after {
+            content: '';
+            position: absolute;
+            left: 1.25rem; // -20px
+            bottom: -1.25rem; // -20px
+            border: 10px solid transparent;
+            border-top: 10px solid $gray;
+          }
+
+          &::after {
+            border-top: 10px solid $gray;
+            bottom: -1.187rem; // 19px
+          }
+        }
+      }
+
+      .actionItem {
+        display: flex;
+        flex-basis: 10%;
+        align-items: center;
+        margin: 0 1rem 0 0;
+        li {
+          flex-basis: 50%;
+        }
+      }
+
+      .adminEmail,
+      .adminInstitutionOfEducation {
+        flex-basis: 45%;
+        margin: 0 1rem 0 0;
+      }
+    }
+  }
+
+  .imgContainer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0.93rem 0.93rem 0 0; // 15px
+    font-size: 0;
+    text-align: right;
+    @include size(12.5rem 1.25rem); // 200px 20px
+  }
+
+  .flashMessageRight,
+  .flashMessageLeft {
+    position: absolute;
+    width: 350px;
+    bottom: -250px;
+    left: calc(50% - 175px);
+  }
+}

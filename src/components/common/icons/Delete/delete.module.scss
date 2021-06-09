@@ -1,0 +1,26 @@
+@import '../../../../styles/index.scss';
+
+.container {
+  position: relative;
+  cursor: pointer;
+  height: 1.625rem;
+  width: 1.625rem;
+  .delete {
+    height: 1.625rem;
+    width: 1.625rem;
+    fill: rgba(230, 72, 72, 0.6);
+  }
+  &:hover::after {
+    content: 'Видалити';
+    position: absolute;
+    top: 1.813rem;
+    left: -0.9rem;
+    font-family: $fontNunito;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: rgb(230, 72, 72);
+  }
+  &:hover {
+    fill: rgb(230, 72, 72);
+  }
+}

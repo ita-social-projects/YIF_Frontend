@@ -1,0 +1,152 @@
+@import '../../styles/index';
+
+%btn-style {
+  position: absolute;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.blockPartners {
+  max-width: 1440px;
+  margin: 0 auto 5rem;
+  height: 350px;
+  position: relative;
+
+  h1 {
+    font-family: $fontNunito;
+    text-align: center;
+    font-size: $font_80px;
+    font-weight: $regular;
+    line-height: 5.6rem; //91px
+    margin: 6.25rem 0 5rem 0;
+  }
+
+  .wrapperSlider {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    overflow: hidden;
+
+    .slider {
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      height: 100%;
+      transition: 0.5s ease-in-out;
+
+      .inner {
+        width: 100%;
+        display: flex;
+        margin: 0 auto;
+
+        .slide {
+          margin: 0 1.06rem;
+          display: flex;
+          align-items: center;
+          min-width: 30%;
+          height: 100%;
+          background-color: #f2f9ff;
+          border-radius: 0.93rem;
+          justify-content: center;
+
+        }
+      }
+    }
+  }
+}
+
+.left {
+  left: 8%;
+  top: 60%;
+  @extend %btn-style;
+  transform: rotate(180deg);
+}
+
+.right {
+  right: 8%;
+  top: 65%;
+  @extend %btn-style;
+}
+
+.right:hover path,
+.left:hover path {
+  fill: #12335e;
+}
+
+@include laptop  {
+
+  .blockPartners {
+    max-width: 90%;
+    h1{
+      font-size: 5rem;
+      font-weight: $regular;
+      line-height: 3.6rem;
+    }
+    .wrapperSlider{
+      max-width: 90%;
+      .slider {
+        .inner{
+          .slide {
+            margin: 0 1.05rem;
+            min-width: 29.8%;
+          }
+        }
+      }
+    }
+  }
+  .left{
+    left: -2%;
+    top: 50%;
+  }
+  .right {
+    right: -2%;
+    top: 55%;
+  }
+
+}
+
+@include tablet {
+
+  .blockPartners {
+    max-width: 90%;
+    h1{
+      font-size: 4rem;
+      font-weight: $regular;
+      line-height: 3.6rem;
+    }
+    .wrapperSlider{
+      max-width: 90%;
+      .slider {
+        .inner{
+          .slide {
+            margin: 0 0.75rem;
+            min-width: 30%;
+          }
+        }
+      }
+    }
+  }
+
+  .left,
+  .right {
+    width: 40px;
+    height: 40px;
+  }
+
+  .left{
+    left: -2%;
+    top: 46%;
+  }
+  .right {
+    right: -2%;
+    top: 50%;
+
+  }
+
+}
+

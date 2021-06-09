@@ -1,0 +1,127 @@
+@import '../../../styles/index.scss';
+
+.box{
+  text-align: center;
+  
+  .dropboxMenu{
+    float:left;
+    list-style-type: none;
+    cursor:pointer;
+    border:none;
+    width: 16.25rem;
+    height: 3.44rem;
+    cursor:pointer;
+    border-radius: 0.32rem;
+    background: $lightBlue_3;
+
+    .input_li{
+      .dropbox_title{
+        width: 100%;
+        height: 100%;
+        margin-top:0.125rem;      
+        input{
+          font-size: $font_18px;
+          background:$lightBlue_3;
+          width: 70%;
+          height: 3.125rem;
+          margin-left:1.562rem;
+          float:left;
+          border:none;
+          cursor: pointer;
+          border-radius: 0.32rem;
+          font-family: $fontNunito;
+          font-weight: $light;
+        }
+        .arrow{
+          padding-top:0.937rem;
+          padding-right: 0rem;
+          height: 3.125rem;
+          transition: 0.5s;
+        }
+        .arrow_up{
+          transform:rotateX(180deg);
+        }
+      }
+    }
+  }
+}
+
+.list_box{
+  background:$lightBlue_3;
+  border-radius: 0.32rem;
+  margin-top:0.63rem;
+  padding-top:0rem;
+  height: 0rem;
+  opacity: 1;
+  transition: height 0.7s;
+  padding:0rem;
+  overflow-y: auto;
+  overflow-x:hidden;
+  .combolist_li{
+    margin-top:0.32rem;
+    border-radius: 0.32rem;
+    display: block;
+    text-align: right;
+    height: 0rem;
+    transition: height 0.5s;
+    padding-bottom:0.32rem;
+    padding-left: 0.32rem;
+    padding-right: 0.32rem; 
+
+    li{
+      list-style-type: none;
+      font-size: 0.875rem;
+      font-family: $fontNunito;
+      font-weight: 300;
+      color:$black;
+      box-sizing: border-box;
+      width: 98%; 
+      height: 3.13rem;
+      border-radius: 0.32rem;
+      text-align: left;
+      background-color:$lightBlue_3;
+      padding-left: 1.25rem;
+      display: flex;
+      align-items: center;
+      //padding-top:1.06rem;
+      //padding-bottom: 0.875rem;
+    }
+  }
+  .combolist_li li:hover{
+    background-color: rgba($darkBlue, 0.3);
+  }
+}
+
+// stand alone classes for visual effects
+//for options(li) 
+.show_list_box{
+  height: var(--heigth);//13.13rem;
+  transition: height 0.5s;
+}
+//for text in input 
+.gray_color_text{
+  color:$gray;
+}
+
+// for scroll in dropbox
+// width 
+::-webkit-scrollbar {
+    width:0.49rem;
+}
+//track
+::-webkit-scrollbar-track {
+    background:$lightBlue_3;
+    border-radius: 0.32rem;
+}
+//handle
+::-webkit-scrollbar-thumb {
+    background: rgb(186, 190, 196);
+    border-radius: 0.32rem;
+}
+//hanlde on hover
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(18, 51, 94, 0.3);
+}
+
+
+

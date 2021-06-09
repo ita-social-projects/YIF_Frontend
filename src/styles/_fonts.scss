@@ -1,0 +1,9 @@
+@import './mixins';
+
+@include font('OpenSans', 'openSans', 'OpenSans-Regular', '400', 'normal');
+@include font('OpenSans', 'openSans', 'OpenSans-Bold', '700', 'normal');
+
+@include font('Nunito', 'nunito', 'Nunito-ExtraBold', '800', 'normal');
+@include font('Nunito', 'nunito', 'Nunito-SemiBold', '600', 'normal');
+@include font('Nunito', 'nunito', 'Nunito-Regular', '400', 'normal');
+@include font('Nunito', 'nunito', 'Nunito-Light', '300', 'normal');

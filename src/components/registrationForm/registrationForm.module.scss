@@ -1,0 +1,30 @@
+@import '../../styles/index';
+@import '../../styles/mixins';
+
+.wrapper {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  width: 100%;
+  height: calc(100vh - 6.25rem);
+  min-height: 65.25rem;
+  background-color: $lightBlue_2;
+  @include flex(row, flex-start, center);
+
+  .form {
+    margin: 0 auto;
+    width: 450px;
+    height: auto;
+    background-color: $white;
+    @include flex(column, center, flex-start);
+    position: relative;
+  }
+  .wrapperImg {
+    position: absolute;
+    top: 3.5%;
+    right: 0;
+    img {
+      max-width: 95%;
+      height: auto;
+    }
+  }
+}

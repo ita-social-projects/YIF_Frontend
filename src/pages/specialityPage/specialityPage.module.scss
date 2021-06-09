@@ -1,0 +1,69 @@
+@import '../../styles/index.scss';
+
+.specialityPage {
+  font-family: $fontOpenSans, serif;
+  margin: 0 auto;
+  width: calc((1180 / 1440) * 100%);
+  max-width: 1440px;
+  height: auto;
+  min-height: 1100px;
+  padding-bottom: 3.75rem;
+  @include flex(column, center, flex-start);
+
+  a {
+    color: $white;
+    text-decoration: none;
+  }
+  h2 {
+    font-family: $fontNunito;
+    font-weight: $semiBold;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+  }
+  &__container {
+    width: 100%;
+    max-width: 1440px;
+  }
+}
+
+.title {
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  font-family: $fontNunito;
+  font-size: 3rem;
+  text-align: center;
+  background: #5a758c;
+  line-height: 2.813rem;
+  border-radius: 2.5rem;
+  padding: 1.25rem 5rem;
+  color: #fff;
+  display: block;
+  width: 100%;
+  position: relative;
+  span {
+    position: absolute;
+    right: 1.563rem;
+    top: 1.563rem;
+    line-height: 0;
+  }
+}
+
+.spinnerContainer {
+  margin-top: 6.25rem;
+  @include flex(row, center, center);
+}
+
+.card {
+  &__icon {
+    position: absolute;
+    top: 1.875rem;
+    right: 1.875rem;
+    cursor: pointer;
+
+    &__liked {
+      svg path {
+        fill: #f8b50b;
+      }
+    }
+  }
+}

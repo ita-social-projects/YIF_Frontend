@@ -1,0 +1,117 @@
+@import '../../styles/index.scss';
+
+%button {
+  padding: 0.94rem 1.37rem;
+  border-radius: 0.625rem;
+  margin-bottom: 2.19rem;
+}
+
+.footer {
+  background-color: $lightBlue_1;
+
+  a:link,
+  a:visited {
+    color: $black;
+  }
+
+  .mainElements {
+    padding-top: 5rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+
+    article {
+      width: 14.5rem;
+    }
+
+    article:nth-of-type(1) {
+      // block with buttons
+      margin-left: 8.13rem;
+      font-family: $fontOpenSans;
+      font-size: $font_15px;
+      font-weight: $regular;
+
+      a:nth-of-type(1) {
+        //for button sing In
+        button {
+          @extend %button;
+        }
+      }
+
+      a:nth-of-type(2) {
+        //for button Register
+        margin-left: 0.63rem;
+        button {
+          @extend %button;
+        }
+      }
+      p:nth-of-type(2) {
+        // email link
+        margin-top: 0.63rem;
+        a {
+          font-size: $font_15px;
+          font-weight: $regular;
+          font-family: $fontOpenSans;
+        }
+      }
+    }
+
+    article:nth-of-type(2) {
+      // block with logo
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      .logo {
+        text-decoration: none;
+        font-family: $fontNunito;
+        color: $black;
+        font-size: $font_40px;
+        font-weight: $extraBold;
+
+        img {
+          max-width: 5rem;
+        }
+      }
+    }
+
+    article:nth-of-type(3) {
+      // block with links direc and univ
+      margin-right: 8.13rem;
+      text-align: right;
+      .linkstyle {
+        // fort link style
+        font-weight: $regular;
+        font-size: $font_15px;
+        font-family: $fontOpenSans;
+        width: 100%;
+      }
+      p:nth-of-type(2) {
+        margin-top: 0.63rem;
+      }
+    }
+  }
+  .copyright {
+    width: 20rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3.75rem;
+    padding-bottom: 1.5625rem; //25px
+    text-align: center;
+    font-weight: normal;
+    font-size: $font_18px;
+    font-family: $fontOpenSans;
+  }
+}
+
+.disclaimer {
+  width: 25rem;
+  margin-top: 1.6rem;
+  text-align: center;
+  font-weight: $regular;
+  font-size: $font_15px;
+  font-family: $fontNunito;
+  color: $darkBlue;
+  // opacity: 0.2%;
+}

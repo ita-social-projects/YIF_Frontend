@@ -1,0 +1,68 @@
+@import '../../../styles/index.scss';
+
+$line: 3px solid $darkBlue;
+$animation: 1s linear infinite;
+
+.loader {
+  width: 4.375rem; //70px
+  height: 4.375rem; //70px;
+  border-radius: 50%;
+  perspective: 800px;
+  margin-bottom: 2.5rem; //40px
+}
+
+.line {
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.one {
+  left: 0;
+  top: 0;
+  animation: rotate-one $animation;
+  border-bottom: $line;
+}
+
+@keyframes rotate-one {
+  from {
+    transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+  }
+}
+
+.two {
+  right: 0;
+  top: 0;
+  animation: rotate-two $animation;
+  border-right: $line;
+}
+
+@keyframes rotate-two {
+  from {
+    transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+  }
+}
+
+.three {
+  right: 0;
+  bottom: 0;
+  animation: rotate-three $animation;
+  border-top: $line;
+}
+
+@keyframes rotate-three {
+  from {
+    transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+  }
+}
