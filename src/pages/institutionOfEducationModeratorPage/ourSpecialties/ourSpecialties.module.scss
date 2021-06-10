@@ -1,0 +1,147 @@
+@import '../../../styles/index';
+.specialityAdminPage {
+  margin: 0 auto;
+  width: calc((1180 / 1440) * 100%);
+  max-width: 1440px;
+  min-height: 1100px;
+  padding: 0 3.125rem 3.75rem;
+  box-sizing: content-box;
+  &__title {
+    margin-top: 3.125rem;
+    margin-bottom: 1.25rem;
+    font-family: $fontNunito;
+    font-size: 5rem;
+    font-weight: 400;
+  }
+  &__top {
+    @include flex(row, center, space-between);
+  }
+  .animatedButton {
+    max-width: 200px;
+    display: block;
+    text-align: center;
+    padding: 0.75rem 0.563rem;
+    margin-left: 5rem;
+    font-family: $fontNunito;
+    font-weight: 300;
+    font-size: 1.125rem;
+    border-radius: 10px;
+    margin-top: 2.25rem;
+  }
+}
+
+.acc_item {
+  &__header {
+    margin-top: 1.25rem;
+    background: #bad0e5;
+    font-weight: $extraBold;
+  }
+  &__inner {
+    margin-top: 1.25rem;
+  }
+  &__body {
+    margin-top: 0.938px;
+  }
+  &__subtitle {
+    font-weight: $bold;
+    font-size: 1.125rem;
+    color: #000000;
+    margin-bottom: 1.25rem;
+  }
+  &__underline {
+    text-decoration: underline;
+  }
+  &__block {
+    margin-top: 0.625rem;
+  }
+  &__id {
+    width: 4.063rem;
+  }
+
+  &__name {
+    font-weight: $extraBold;
+    font-size: 1.875rem;
+    color: #000000;
+  }
+
+  &__subitem {
+    position: relative;
+    padding: 1.563rem;
+    margin-top: 1.25rem;
+    background: #d6e5f2;
+    border-radius: 5px;
+    a {
+      font-size: 1.125rem;
+      color: $white;
+      padding: 0.938rem 1.25rem;
+      border-radius: 5px;
+      background-color: $darkBlue;
+      transition: 0.3s;
+    }
+
+    &_info {
+      display: flex;
+    }
+  }
+  &__underline {
+    cursor: pointer;
+  }
+}
+.read__more {
+  &__btn {
+    display: block;
+    font-family: $fontNunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.875rem;
+    color: $black;
+    cursor: pointer;
+  }
+  svg {
+    margin-top: 0.313rem;
+    transform: rotate(0deg);
+    transition: all 0.3s;
+  }
+  &__details {
+    display: none;
+    transition: all 0.1s;
+    p {
+      margin-top: 0.625rem;
+    }
+    &__description {
+      padding-right: 6.25rem;
+    }
+  }
+  &__show {
+    display: inline;
+  }
+  &__hide {
+    display: none;
+  }
+  &__opened {
+    .read__more__details {
+      display: block;
+      transition: all 0.1s;
+      max-height: 100%;
+    }
+    .read__more__show {
+      display: none;
+    }
+    .read__more__hide {
+      display: inline;
+    }
+  }
+  .delete__icon {
+    position: absolute;
+    right: 25px;
+    bottom: 26px;
+    text-align: center;
+    font-size: 0.625rem;
+    font-weight: $bold;
+    color: #ec615b;
+  }
+  .animatedButton {
+    margin: 20px 0 0 0;
+    border-radius: 10px;
+  }
+}

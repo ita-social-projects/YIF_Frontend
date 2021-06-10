@@ -1,0 +1,99 @@
+@import '../../../styles/index';
+
+.spinnerContainer {
+  width: 100%;
+  @include flex(row, center, center);
+}
+
+.AddSpecialties {
+  width: 100%;
+  padding: 50px;
+
+  &__inner {
+    @include flex(column, center, flex-start);
+    margin: 0 auto;
+    max-width: 1040px;
+  }
+
+  &__title {
+    font-family: $fontNunito;
+    font-weight: $semiBold;
+    font-size: $font_30px;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+
+  &__list {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+
+  &__button {
+    padding: 15px 70px;
+    border-radius: 10px;
+    font-family: $fontNunito;
+    font-size: $font_18px;
+    font-weight: $regular;
+  }
+}
+
+.acc_item {
+  &__header {
+    background-color: $lightBlue_2;
+  }
+
+  &__body {
+    background-color: $lightBlue_2;
+    padding: 10px 30px 5px 50px;
+  }
+
+  &__id {
+    margin-right: 30px;
+  }
+
+  &__id,
+  &__name {
+    font-family: $fontOpenSans;
+    font-size: $font_18px;
+    font-weight: $bold;
+  }
+}
+
+.acc_subitem {
+  @include flex(column, flex-start, space-between);
+  padding: 15px 10px 10px 15px;
+  min-height: 50px;
+  background-color: $lightBlue_1;
+  margin-bottom: 5px;
+  border-radius: 5px;
+
+  &_title {
+    @include flex(row, flex-start, space-between);
+    margin-bottom: 15px;
+    h5,
+    span {
+      font-size: $font_16px;
+      font-family: $fontOpenSans;
+      font-weight: $semiBold;
+    }
+    span {
+      margin-right: 30px;
+    }
+  }
+
+  &__cards {
+    @include flex(row, center, space-between);
+  }
+
+  &__card {
+    padding-left: 55px;
+
+    span {
+      margin-right: 30px;
+    }
+
+    button {
+      margin-right: 10px;
+    }
+  }
+}
