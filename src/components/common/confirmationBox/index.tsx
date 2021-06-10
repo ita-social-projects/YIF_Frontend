@@ -3,17 +3,19 @@ import styles from './confirmationBox.module.scss';
 
 type Props = {
   question: string;
-  handleClick: () => Promise<boolean>;
+  handleClick: (response: boolean) => void;
 };
 
 const ConfirmationBox: React.FC<Props> = ({ question, handleClick }) => {
   const emailRegEx =
     /([a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*)/;
-  //highlights only emails for now
+  //highlights only email for now
 
-  const textArr = question.split(emailRegEx).map((text) => {
+  const textArr = question.split(emailRegEx).map((text, index) => {
     return emailRegEx.test(text) ? (
-      <span className={styles.highlighted}>{text}</span>
+      <span className={styles.highlighted} key={index}>
+        {text}
+      </span>
     ) : (
       text
     );
@@ -25,10 +27,16 @@ const ConfirmationBox: React.FC<Props> = ({ question, handleClick }) => {
         <h2>{textArr}</h2>
       </div>
       <div className={styles.buttons}>
-        <button onClick={() => handleClick()} className={styles.animatedButton}>
+        <button
+          onClick={() => handleClick(true)}
+          className={styles.animatedButton}
+        >
           Так
         </button>
-        <button onClick={() => handleClick()} className={styles.animatedButton}>
+        <button
+          onClick={() => handleClick(false)}
+          className={styles.animatedButton}
+        >
           Ні
         </button>
       </div>

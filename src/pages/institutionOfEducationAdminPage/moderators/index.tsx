@@ -9,11 +9,19 @@ import { useAuth } from '../../../services/tokenValidator';
 import { APIUrl } from '../../../services/endpoints';
 import Spinner from '../../../components/common/spinner/index';
 import { FormInputSuccess } from '../../../components/common/formElements/formInputSuccess/formInputSuccess';
+import { ConfirmationBox } from '../../../components/common/confirmationBox/index';
 
 interface Moderator {
-  moderatorId: number;
+  moderatorId: string;
   email: string;
-  isBanned: boolean;
+  isBanned: 'True' | 'False';
+  isDeleted: 'True' | 'False';
+}
+
+interface ModeratorAction {
+  moderatorId: string;
+  action: 'delete' | 'block';
+  question: any;
 }
 
 function Moderators() {
@@ -22,6 +30,11 @@ function Moderators() {
   const [justAdded, setJustAdded] = useState<undefined | string>();
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
+
+  // confirmation hooks
+  const [showConfirmationBox, setShowConfirmationBox] = useState(false);
+  const [moderatorAction, setModeratorAction] =
+    useState<undefined | ModeratorAction>();
 
   const renderModerators = async () => {
     const currentToken = await getToken();
@@ -49,21 +62,53 @@ function Moderators() {
     renderModerators();
   }, []);
 
-  const handleModeratorBlocking = (id: number) => {
-    const updated = moderatorsList.map((moderator) => {
-      if (id === moderator.moderatorId) {
-        moderator.isBanned = !moderator.isBanned;
-      }
-      return moderator;
-    });
-    setModeratorsList(updated);
-  };
+  const handleBlockOrDelete = async (response: boolean) => {
+    if (response) {
+      const currentToken = await getToken();
 
-  const handleModeratorDeleting = (id: number) => {
-    const updated = moderatorsList.filter((moderator) => {
-      return moderator.moderatorId !== id;
-    });
-    setModeratorsList(updated);
+      if (moderatorAction?.action === 'delete') {
+        requestSecureData(
+          `${APIUrl}InstitutionOfEducationAdmin/DeleteIoEModerator?moderatorId=${moderatorAction.moderatorId}`,
+          'DELETE',
+          currentToken
+        )
+          .then(({ statusCode }) => {
+            if (statusCode.toString().match(/^[23]\d{2}$/)) {
+              setShowConfirmationBox(false);
+              setModeratorAction(undefined);
+              renderModerators();
+            } else {
+              setError(true);
+            }
+          })
+          .catch((e) => {
+            console.log(e);
+            setError(true);
+          });
+      } else if (moderatorAction?.action === 'block') {
+        requestSecureData(
+          `${APIUrl}InstitutionOfEducationAdmin/BanIoEModerator/${moderatorAction.moderatorId}`,
+          'PATCH',
+          currentToken
+        )
+          .then(({ statusCode }) => {
+            if (statusCode.toString().match(/^[23]\d{2}$/)) {
+              setShowConfirmationBox(false);
+              setModeratorAction(undefined);
+              renderModerators();
+            } else {
+              setError(true);
+            }
+          })
+          .catch((e) => {
+            console.log(e);
+            setError(true);
+          });
+      }
+    } else {
+      setShowConfirmationBox(false);
+      setModeratorAction(undefined);
+    }
   };
 
   let content;
@@ -147,6 +192,15 @@ function Moderators() {
             </Formik>
           </div>
 
+          {showConfirmationBox ? (
+            <ConfirmationBox
+              question={moderatorAction?.question}
+              handleClick={handleBlockOrDelete}
+            />
+          ) : (
+            ''
+          )}
+
           <div className={styles.moderatorList}>
             {moderatorsList.length === 0 ? (
               <h2 className={styles.emptyListMessage}>
@@ -160,10 +214,27 @@ function Moderators() {
                     key={moderatorId}
                     email={email}
                     deleteHandler={() => {
-                      handleModeratorDeleting(moderatorId);
+                      if (!showConfirmationBox) {
+                        setShowConfirmationBox(true);
+                        setModeratorAction({
+                          moderatorId,
+                          action: 'delete',
+                          question: `Ви справді бажаєте вилучити ${email} з наявних модераторів ?`,
+                        });
+                      }
                     }}
                     blockHandler={() => {
-                      handleModeratorBlocking(moderatorId);
+                      if (!showConfirmationBox) {
+                        setShowConfirmationBox(true);
+                        setModeratorAction({
+                          moderatorId,
+                          action: 'block',
+                          question:
+                            isBanned === 'False'
+                              ? `Ви справді бажаєте заблокувати модератора ${email} ?`
+                              : `Розблокувати ${email}?`,
+                        });
+                      }
                     }}
                     isBlocked={isBanned}
                   />

@@ -6,7 +6,7 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
-  width: 45rem;
+  width: 57rem;
   height: 12rem;
   background-color: $lightBlue_2;
   border: 15px solid $gray;
@@ -23,8 +23,8 @@
   .buttons {
     @include flex(row, center, space-around);
     width: 100%;
-    padding-left: 3.125rem;
-    padding-right: 3.125rem;
+    padding-left: 8.125rem;
+    padding-right: 8.125rem;
 
     button {
       font-size: medium;
