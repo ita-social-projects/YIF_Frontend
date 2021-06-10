@@ -6,6 +6,7 @@ const ImagePickerField = ({ form, field, text }: any) => {
   const defaultPicture = '/assets/images/defaultUnivPicture.svg';
   const avatar = picture ? picture : defaultPicture;
   const aspectRatio = 16 / 9;
+  
   const universityTypeFilter =  text === 'university' ? 'університету' : text==='college' ? 'коледжу' : 'навчального заклкладу';
 
   const avatarStyles = {
