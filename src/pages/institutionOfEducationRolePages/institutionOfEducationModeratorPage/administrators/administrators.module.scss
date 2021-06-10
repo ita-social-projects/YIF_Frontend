@@ -1,0 +1,25 @@
+@import '../../../../styles/index';
+
+.administrators {
+  padding: 3rem 3.125rem 10rem 3.125rem;
+  margin: 0 auto;
+  width: 100vw;
+  min-height: 100vh;
+
+  .container {
+    @include flex(column, center, flex-start);
+  }
+
+  .title {
+    font-family: $fontNunito;
+    font-size: $font_80px;
+    width: 95%;
+    max-width: 90rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .administratorList {
+    @include flex(column, center, center);
+    width: 100%;
+  }
+}
