@@ -18,6 +18,7 @@ const mockFetchPromise = Promise.resolve({
   json: () => mockJsonPromise,
   status: 200,
 });
+
 global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
 const mockHistoryPush = jest.fn();
