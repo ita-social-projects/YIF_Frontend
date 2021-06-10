@@ -1,17 +1,16 @@
 @import '../../styles.scss';
 
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include flex(column, center, center);
   background: #f2f9ff url(/assets/images/addSpecialty.png) bottom left no-repeat;
   font-family: $fontOpenSans;
   font-size: 1.125rem;
   min-height: 110vh;
-  margin: 0 auto;
+  margin: 0 20px;
   width: 100%;
   padding-bottom: 34.375rem;
   &__title {
+    width: 100%;
     text-align: center;
     font-size: 2.5rem;
     margin: 3.125rem 0 2.5rem 0;
@@ -19,15 +18,11 @@
   form {
     max-width: 1100px;
     .topWrapper {
+      @include flex(row, flex-start, center);
       background: #bad0e5;
-      display: flex;
       flex-wrap: wrap;
       padding: 2.5rem;
       border-radius: 10px;
-      div {
-        display: flex;
-        width: 100%;
-      }
       select {
         appearance: none;
         background: url(/assets/images/arrow.svg);
@@ -39,8 +34,7 @@
         width: 100%;
         margin-left: auto;
         height: 3.125rem;
-        padding: 0.625rem 1rem;
-        box-sizing: border-box;
+        padding: 0 1rem;
         font-family: $fontOpenSans;
         border-radius: 0.3rem;
       }
@@ -49,6 +43,7 @@
         display: flex;
         align-items: center;
         font-family: $fontOpenSans;
+        margin-bottom: 0.2rem;
       }
       &__textarea {
         width: 100%;
@@ -84,28 +79,20 @@
         }
       }
     }
-    .messagesContainer {
-      margin-top: 1.375rem;
-    }
-    .errorMessages {
-      display: block;
-      padding: 0.6rem;
-      flex-basis: 90%;
-      margin-left: auto;
-      margin-right: 0;
-      &__code {
-        flex-basis: 33.8%;
-      }
-    }
     button {
-      margin-left: auto;
-      margin-right: 0;
-      max-width: 12.5rem;
-      margin-top: 1.375rem;
+      margin: 0 auto;
+      max-width: 22rem;
+      margin-top: 2rem;
       display: block;
     }
     .botWrapper {
       @include flex(row, flex-start, space-between);
+      width: 100%;
+    }
+    .resultMessageContainer {
+      margin: 2rem 0rem 0rem 0rem;
+      @include flex(column, center, center);
+      justify-self: center;
     }
   }
 }

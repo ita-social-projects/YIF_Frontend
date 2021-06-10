@@ -198,8 +198,6 @@ const AddSpecialtyForm: React.FC = () => {
                   id='directionCode'
                   name='directionCode'
                 />
-              </div>
-              <div className ={`${styles.errorMessages} ${styles.errorMessages__code}`}>
                 {errors.directionCode &&
                 touched.directionCode ? (
                   <FormInputError
@@ -220,8 +218,6 @@ const AddSpecialtyForm: React.FC = () => {
                   id='directionName'
                   name='directionName'
                 />
-              </div>
-              <div className ={styles.errorMessages}>
                 {errors.directionName &&
                 touched.directionName ? (
                   <FormInputError
@@ -230,57 +226,52 @@ const AddSpecialtyForm: React.FC = () => {
                   />
                 ) : null}
               </div>
-              <div className={styles.topWrapper__column}>
-                <div
-                  className={`${styles.fullWidth} ${styles.fullWidth__textarea}`}
+              
+              <div
+                className={`${styles.fullWidth} ${styles.fullWidth__textarea}`}
+              >
+                <label
+                  className={styles.topWrapper__label}
+                  htmlFor='specialtyDescription'
                 >
-                  <label
-                    className={styles.topWrapper__label}
-                    htmlFor='specialtyDescription'
-                  >
-                    Опис
-                  </label>
-                  <Field
-                    as='textarea'
-                    id='specialtyDescription'
-                    name='specialtyDescription'
-                    className={styles.topWrapper__textarea}
-                    type='textarea'
-                  />
-                </div>
-              </div>
-              <div className ={styles.errorMessages}>
-                  {errors.specialtyDescription &&
-                  touched.specialtyDescription ? (
-                    <FormInputError
-                      errorType='inputFull'
-                      errorMessage={errors.specialtyDescription}
-                    />
-                  ) : null}
-                </div>
-            </div>
-            <div className={styles.botWrapper}>
-              <div className={`${styles.resultMessageContainer} ${styles.messagesContainer}`}>
-                {submitting && resultMessage.status === 'success' && (
-                  <div className={styles.spinner}>
-                    <Spinner />
-                  </div>
-                )}
-                {resultMessage.status === 'success' && (
-                  <FormInputSuccess successMessage={resultMessage.message} />
-                )}
-                {resultMessage.status === 'error' && (
+                  Опис
+                </label>
+                <Field
+                  as='textarea'
+                  id='specialtyDescription'
+                  name='specialtyDescription'
+                  className={styles.topWrapper__textarea}
+                  type='textarea'
+                />
+                {errors.specialtyDescription &&
+                touched.specialtyDescription ? (
                   <FormInputError
-                    errorType='form'
-                    errorMessage={resultMessage.message}
+                    errorType='inputFull'
+                    errorMessage={errors.specialtyDescription}
                   />
-                )}
-              </div>
-              <FormButton
+                ) : null}
+              </div> 
+            </div>
+            <FormButton
                 id='userProfileButton'
                 form='AddInstitutionOfEducation'
                 title='Додати'
               />
+            <div className={`${styles.resultMessageContainer}`}>
+              {submitting && resultMessage.status === 'success' && (
+                <div className={styles.spinner}>
+                  <Spinner />
+                </div>
+              )}
+              {resultMessage.status === 'success' && (
+                <FormInputSuccess successMessage={resultMessage.message} />
+              )}
+              {resultMessage.status === 'error' && (
+                <FormInputError
+                  errorType='form'
+                  errorMessage={resultMessage.message}
+                />
+              )}
             </div>
           </Form>
         )}
