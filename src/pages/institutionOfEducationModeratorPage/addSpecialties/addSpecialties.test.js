@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM, { unmountComponentAtNode } from 'react-dom';
 import { queryAllByTestId, queryByTestId } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import AddSpecialties from '.';
 import { Provider } from 'react-redux';
 import { store } from '../../../store/store';
 import { Router } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import { createMemoryHistory } from 'history';
-import { debug } from 'console';
 
 describe('addSpecialties', () => {
   let container = null;
@@ -49,6 +47,31 @@ describe('addSpecialties', () => {
         },
       ],
     },
+    {
+      id: '94c4992c-5580-47e3-8d96-a805fb43327d',
+      name: 'Інформаційні технології',
+      code: '12',
+      specialties: [
+        {
+          id: '6a1393fd-545b-4501-90f1-2949c6c6fabd',
+          name: 'Інженерія програмного забезпечення',
+          code: '121',
+          checked: false,
+        },
+        {
+          id: '675397e4-8886-4351-8107-8cc4221be868',
+          name: 'Системний аналіз',
+          code: '124',
+          checked: false,
+        },
+        {
+          id: 'abe5d4c1-cc71-403c-a32a-0911ec68e6ae',
+          name: 'Кібербезпека',
+          code: '125',
+          checked: false,
+        },
+      ],
+    },
   ];
 
   const mockJsonPromise = Promise.resolve(data);
@@ -59,7 +82,7 @@ describe('addSpecialties', () => {
   });
   global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
-  test('check success response', async () => {
+  test('check if specialties and directions render correctly', async () => {
     const history = createMemoryHistory();
     await act(async () => {
       ReactDOM.render(
@@ -68,20 +91,18 @@ describe('addSpecialties', () => {
             <AddSpecialties />
           </Provider>
         </Router>,
-        container
+        container,
       );
     });
 
     const directions = queryAllByTestId(container, 'direction');
-    expect(directions).toHaveLength(1);
+    expect(directions).toHaveLength(2);
 
-    const heading = queryByTestId(container, 'heading');
-    expect(heading.innerHTML).toBe(
-      'Додайте спеціальності, які є у вашому університеті'
-    );
+    const accordions = queryAllByTestId(container, 'specialty');
+    expect(accordions).toHaveLength(6);
   });
 
-  test('check error ', async () => {
+  test('check if error message renders correctly', async () => {
     const mockFetchPromiseError = Promise.resolve({
       json: () => mockJsonPromise,
       status: 404,
@@ -96,33 +117,11 @@ describe('addSpecialties', () => {
             <AddSpecialties />
           </Provider>
         </Router>,
-        container
+        container,
       );
     });
 
     const placeholder = queryByTestId(container, 'placeholder');
     expect(placeholder).toBeInTheDocument();
   });
-
-  // test('check changes after clicking on button', () => {
-
-  //   // const history = createMemoryHistory();
-  //   // await act(async () => {
-  //   //   ReactDOM.render(
-  //   //     <Router history={history}>
-  //   //       <Provider store={store}>
-  //   //         <AddSpecialties />
-  //   //       </Provider>
-  //   //     </Router>,
-  //   //     container
-  //   //   );
-  //   // });
-
-  //   // const toggler = screen.getByTestId('toggler');
-  //   // debug(toggler);
-  //   // expect(toggler).toHaveTextContent(/додати/i);
-
-  //   // userEvent.click(toggler);
-  //   // expect(toggler).toHaveTextContent(/відміна/i);
-  // });
 });

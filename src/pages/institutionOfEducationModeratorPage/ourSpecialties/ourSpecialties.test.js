@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { render, screen, fireEvent, getAllByTestId } from '@testing-library/react';
-import OurSpecialties from '.';
+import OurSpecialties from './index';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { store } from '../../../store/store';

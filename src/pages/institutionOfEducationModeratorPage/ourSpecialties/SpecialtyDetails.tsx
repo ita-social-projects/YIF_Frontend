@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './ourSpecialties.module.scss';
 import { Link, useRouteMatch } from 'react-router-dom';
-import Delete from '../../../components/common/icons/Delete/index';
+import Delete from '../../../components/common/icons/Delete';
 
 interface Props {
   code: number;

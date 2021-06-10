@@ -101,7 +101,7 @@ const AddSpecialties = () => {
             return (
               <li key={specialty.id} className={styles.acc_subitem}>
                 <div className={styles.acc_subitem_title}>
-                  <span>{specialty.code}</span> <h5>{specialty.name}</h5>
+                  <span>{specialty.code}</span> <h5 data-testid='specialty'>{specialty.name}</h5>
                 </div>
                 <div className={styles.acc_subitem__cards}>
                   <div className={styles.acc_subitem__card}>
@@ -148,6 +148,7 @@ const AddSpecialties = () => {
                     />
 
                     <Button
+                      data-testid='btnclick'
                       value='Контракт'
                       educationForm={externalContract}
                       onClick={() =>
