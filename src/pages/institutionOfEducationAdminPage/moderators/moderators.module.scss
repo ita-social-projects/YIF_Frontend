@@ -33,6 +33,11 @@
     .success {
       position: absolute;
       top: 2.8rem;
+
+      & > div {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+      }
     }
   }
 
@@ -45,7 +50,7 @@
   .moderatorList {
     @include flex(column, center, center);
     width: 100%;
-    padding-top: 1.75rem;
+    padding-top: 0.6rem;
 
     .emptyListMessage {
       font-family: $fontOpenSans;
