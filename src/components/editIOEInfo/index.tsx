@@ -66,7 +66,8 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
   const imageHandler = (image: string) => {
     setImage(image);
   };
-
+  const [type, setIOE] = useState('0');
+  
   const handleSubmit = (values: FormikValues) => {
     const oldData: Array<Item> = Object.entries(initialValues);
     const newData: Array<{}> = [];
@@ -90,7 +91,7 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
     }
     submitHandler(newData);
   };
-
+  console.log(type)
   return (
     <main className={styles.wrapper}>
       <div className={styles.container}>
@@ -100,12 +101,15 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
         <h3 className={styles.subtitle}>
           Натисніть на поле для вводу, щоб ввести нові дані
         </h3>
-        <ImageUploader
-          foto={image || `http://localhost:5000/images/${imagePath}`}
-          aspectRatio={16 / 9}
-          text={institutionOfEducationType === '0' ? 'університету' : 'коледжу'}
-          imageHandler={imageHandler}
-        />
+        <div className={styles.custom_upploader}>
+          <ImageUploader
+            foto={image || `http://localhost:5000/images/${imagePath}`}
+            aspectRatio={16 / 9}
+            text={type === '0' ? 'університету' : type === '1'? 'коледжу': 'навчального закладу'}
+            imageHandler={imageHandler}
+          />
+          
+        </div>
         <h2 className={styles.infoTitle}>Основна інформація</h2>
         <Formik
           initialValues={initialValues}
@@ -124,6 +128,12 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
                     name='institutionOfEducationType'
                     data-testid='select'
                     className={styles.selector}
+                    onClick={
+                      (e: React.ChangeEvent<HTMLFormElement>)=>
+                      {
+                        setIOE(e.target.value)
+                      }
+                    }
                   >
                     <option value=''>Виберіть тип...</option>
                     <option value='0'>Університет</option>
