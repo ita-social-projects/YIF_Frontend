@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM, { unmountComponentAtNode } from 'react-dom';
-import { queryAllByTestId, queryByTestId } from '@testing-library/react';
-import AddSpecialties from '.';
+import { getAllByTestId, queryAllByTestId, queryByTestId } from '@testing-library/react';
+import AddSpecialties from './index';
 import { Provider } from 'react-redux';
 import { store } from '../../../store/store';
 import { Router } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import { createMemoryHistory } from 'history';
+import { fireEvent } from '@testing-library/dom';
 
 describe('addSpecialties', () => {
   let container = null;
@@ -100,6 +101,32 @@ describe('addSpecialties', () => {
 
     const accordions = queryAllByTestId(container, 'specialty');
     expect(accordions).toHaveLength(6);
+  });
+
+  test('check if user can choose different types of specialties', async () => {
+    const history = createMemoryHistory();
+    await act(async () => {
+      ReactDOM.render(
+        <Router history={history}>
+          <Provider store={store}>
+            <AddSpecialties />
+          </Provider>
+        </Router>,
+        container,
+      );
+    });
+
+    const buttons = getAllByTestId(container, 'button');
+
+    buttons.map((button)=>{
+      fireEvent.click(button)
+    })
+
+    const spans = getAllByTestId(container, 'span');
+
+    spans.map((span)=>{
+      expect(span).toBeInTheDocument()
+    })
   });
 
   test('check if error message renders correctly', async () => {

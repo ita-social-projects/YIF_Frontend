@@ -148,7 +148,6 @@ const AddSpecialties = () => {
                     />
 
                     <Button
-                      data-testid='btnclick'
                       value='Контракт'
                       educationForm={externalContract}
                       onClick={() =>
