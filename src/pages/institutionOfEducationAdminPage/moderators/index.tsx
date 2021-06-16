@@ -15,12 +15,11 @@ interface Moderator {
   moderatorId: string;
   email: string;
   isBanned: 'True' | 'False';
-  isDeleted: 'True' | 'False';
 }
 
 interface ModeratorAction {
   moderatorId: string;
-  action: 'delete' | 'block';
+  action: 'delete' | 'block/unblock';
   question: any;
 }
 
@@ -49,11 +48,12 @@ function Moderators() {
         } else {
           setError(true);
         }
-        setIsFetching(false);
       })
       .catch((e) => {
         console.log(e);
         setError(true);
+      })
+      .finally(() => {
         setIsFetching(false);
       });
   };
@@ -62,7 +62,7 @@ function Moderators() {
     renderModerators();
   }, []);
 
-  const handleBlockOrDelete = async (response: boolean) => {
+  const handleBlockUnblockOrDelete = async (response: boolean) => {
     if (response) {
       const currentToken = await getToken();
 
@@ -85,9 +85,9 @@ function Moderators() {
             console.log(e);
             setError(true);
           });
-      } else if (moderatorAction?.action === 'block') {
+      } else {
         requestSecureData(
-          `${APIUrl}InstitutionOfEducationAdmin/BanIoEModerator/${moderatorAction.moderatorId}`,
+          `${APIUrl}InstitutionOfEducationAdmin/BanIoEModerator/${moderatorAction?.moderatorId}`,
           'PATCH',
           currentToken
         )
@@ -181,13 +181,13 @@ function Moderators() {
             >
               <Form className={styles.addModeratorForm}>
                 <ActionInput message={justAdded} name='email' />
-                <div className={styles.success}>
-                  {justAdded ? (
+                {justAdded ? (
+                  <div data-testid='successMessage' className={styles.success}>
                     <FormInputSuccess successMessage={justAdded} />
-                  ) : (
-                    ''
-                  )}
-                </div>
+                  </div>
+                ) : (
+                  ''
+                )}
               </Form>
             </Formik>
           </div>
@@ -195,7 +195,7 @@ function Moderators() {
           {showConfirmationBox ? (
             <ConfirmationBox
               question={moderatorAction?.question}
-              handleClick={handleBlockOrDelete}
+              handleClick={handleBlockUnblockOrDelete}
             />
           ) : (
             ''
@@ -228,7 +228,7 @@ function Moderators() {
                         setShowConfirmationBox(true);
                         setModeratorAction({
                           moderatorId,
-                          action: 'block',
+                          action: 'block/unblock',
                           question:
                             isBanned === 'False'
                               ? `Ви справді бажаєте заблокувати модератора ${email} ?`

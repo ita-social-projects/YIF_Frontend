@@ -1,63 +1,70 @@
 import React from 'react';
 import Moderator from './index';
 import userEvent from '@testing-library/user-event';
-import { render, wait, screen } from '@testing-library/react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
 
-const moderator = {
+const nonBlockedModerator = {
   email: 'moderator@gmail.com',
-  isBlocked: false,
+  isBlocked: 'False',
+};
+const blockedModerator = {
+  email: 'braveKnight@gmail.com',
+  isBlocked: 'True',
 };
 const deleteHandler = jest.fn();
 const blockHandler = jest.fn();
+afterEach(() => {
+  jest.clearAllMocks();
+});
 describe('Moderator Page', () => {
   test('renders without crashing', () => {
     render(
-      <Router>
-        <Moderator
-          email={moderator.email}
-          isBlocked={moderator.isBlocked}
-          deleteHandler={deleteHandler}
-          blockHandler={blockHandler}
-        />
-      </Router>
+      <Moderator
+        email={nonBlockedModerator.email}
+        isBlocked={nonBlockedModerator.isBlocked}
+        deleteHandler={deleteHandler}
+        blockHandler={blockHandler}
+      />
     );
     expect(screen.getByText('moderator@gmail.com')).toBeInTheDocument();
   });
 
-  test('call delete function', async () => {
+  test('call delete function', () => {
     render(
-      <Router>
-        <Moderator
-          email={moderator.email}
-          isBlocked={moderator.isBlocked}
-          deleteHandler={deleteHandler}
-          blockHandler={blockHandler}
-        />
-      </Router>
+      <Moderator
+        email={nonBlockedModerator.email}
+        isBlocked={nonBlockedModerator.isBlocked}
+        deleteHandler={deleteHandler}
+        blockHandler={blockHandler}
+      />
     );
-    const icon = document.querySelector('.delete');
-    await wait(() => {
-      userEvent.click(icon);
-    });
+    userEvent.click(screen.getByTestId('deleteSign'));
     expect(deleteHandler).toBeCalledTimes(1);
   });
 
-  test('call block function', async () => {
+  test('call block function', () => {
     render(
-      <Router>
-        <Moderator
-          email={moderator.email}
-          isBlocked={moderator.isBlocked}
-          deleteHandler={deleteHandler}
-          blockHandler={blockHandler}
-        />
-      </Router>
+      <Moderator
+        email={nonBlockedModerator.email}
+        isBlocked={nonBlockedModerator.isBlocked}
+        deleteHandler={deleteHandler}
+        blockHandler={blockHandler}
+      />
     );
-    const icon = document.querySelector('.unlock');
-    await wait(() => {
-      userEvent.click(icon);
-    });
+    userEvent.click(screen.getByTestId('unlockSign'));
+    expect(blockHandler).toBeCalledTimes(1);
+  });
+
+  test('call unblock function', () => {
+    render(
+      <Moderator
+        email={blockedModerator.email}
+        isBlocked={blockedModerator.isBlocked}
+        deleteHandler={deleteHandler}
+        blockHandler={blockHandler}
+      />
+    );
+    userEvent.click(screen.getByTestId('lockSign'));
     expect(blockHandler).toBeCalledTimes(1);
   });
 });

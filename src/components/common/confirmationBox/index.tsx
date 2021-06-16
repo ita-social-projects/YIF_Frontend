@@ -22,7 +22,7 @@ const ConfirmationBox: React.FC<Props> = ({ question, handleClick }) => {
   });
 
   return (
-    <div className={styles.mainContainer}>
+    <div className={styles.mainContainer} data-testid='confirmationBox'>
       <div className={styles.question}>
         <h2>{textArr}</h2>
       </div>
@@ -30,12 +30,14 @@ const ConfirmationBox: React.FC<Props> = ({ question, handleClick }) => {
         <button
           onClick={() => handleClick(true)}
           className={styles.animatedButton}
+          data-testid='accept'
         >
           Так
         </button>
         <button
           onClick={() => handleClick(false)}
           className={styles.animatedButton}
+          data-testid='reject'
         >
           Ні
         </button>

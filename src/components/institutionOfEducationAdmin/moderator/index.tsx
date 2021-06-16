@@ -20,7 +20,7 @@ const Moderator: React.FC<Props> = ({
   let blockIcon;
   if (isBlocked === 'True') {
     blockIcon = <Lock handleClick={blockHandler} />;
-  } else if (isBlocked === 'False') {
+  } else {
     blockIcon = <Unlock handleClick={blockHandler} />;
   }
 
