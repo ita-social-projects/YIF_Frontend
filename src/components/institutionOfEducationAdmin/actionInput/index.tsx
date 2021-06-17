@@ -4,7 +4,6 @@ import styles from './actionInput.module.scss';
 import { FormInputError } from '../../common/formElements/index';
 
 type Props = {
-  handleClick?: () => void;
   name: string;
 } & FieldAttributes<any>;
 
