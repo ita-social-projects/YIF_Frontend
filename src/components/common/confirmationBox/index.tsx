@@ -7,9 +7,10 @@ type Props = {
 };
 
 const ConfirmationBox: React.FC<Props> = ({ question, handleClick }) => {
+  //highlights only email for now
   const emailRegEx =
     /([a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*)/;
-  //highlights only email for now
+  
 
   const textArr = question.split(emailRegEx).map((text, index) => {
     return emailRegEx.test(text) ? (
