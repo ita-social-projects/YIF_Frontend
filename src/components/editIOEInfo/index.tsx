@@ -91,7 +91,6 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
     }
     submitHandler(newData);
   };
-  console.log(type)
   return (
     <main className={styles.wrapper}>
       <div className={styles.container}>
@@ -116,6 +115,7 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
           validationSchema={editIOEValidationSchema}
           onSubmit={(values) => {
             handleSubmit(values);
+            console.log(values)
           }}
         >
           {({ setFieldValue, errors }) => (
