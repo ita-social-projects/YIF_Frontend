@@ -115,7 +115,6 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
           validationSchema={editIOEValidationSchema}
           onSubmit={(values) => {
             handleSubmit(values);
-            console.log(values)
           }}
         >
           {({ setFieldValue, errors }) => (
