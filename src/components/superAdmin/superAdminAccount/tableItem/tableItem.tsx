@@ -54,9 +54,10 @@ const TableItem: React.FC<Props> = (props) => {
           {admin.isBanned ? <Lock /> : <Unlock />}
         </li>
         <li data-testid='removeAdmin' className={styles.adminRemove}>
-          <Link to={`/superAdminAccount/addInstitutionOfEducationAdmin`}>
-            <Edit />
-          </Link>
+          <Link to={{
+            pathname: '/superAdminAccount/addInstitutionOfEducationAdmin',
+            state: {IoEid: props.admin.institutionOfEducation.id}
+          }}><Edit/></Link>
         </li>
       </div>
     </ul>
