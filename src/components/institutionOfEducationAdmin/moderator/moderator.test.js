@@ -5,7 +5,7 @@ import { render, wait, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 const moderator = {
-  email: 'administrator@gmail.com',
+  email: 'moderator@gmail.com',
   isBlocked: false,
 };
 
@@ -23,7 +23,7 @@ describe('Moderator Page', () => {
         />
       </Router>
     );
-    expect(screen.getByText('administrator@gmail.com')).toBeInTheDocument();
+    expect(screen.getByText('moderator@gmail.com')).toBeInTheDocument();
   });
 
   test('call delete function', async () => {
