@@ -23,6 +23,7 @@ const Button = (props: any) => {
 
   return (
     <button
+      data-testid="button"
       className={`${styles.btn} ${styles.animatedButtonTransparent} ${
         educationForm ? styles.btn_checked : ''
       }`}
@@ -30,7 +31,7 @@ const Button = (props: any) => {
     >
       {value}
       {educationForm && (
-        <span className={styles.btn_checked_icon}>{checkedIcon}</span>
+        <span data-testid="span" className={styles.btn_checked_icon}>{checkedIcon}</span>
       )}
     </button>
   );
