@@ -39,9 +39,9 @@ const univList = [
 ];
 
 const UniversityListPage: React.FC = () => {
-  const [perPage] = useState(2);
+  const perPage = 2;
   const numberOfPages = Math.ceil(univList.length / perPage);
-  const [totalPages] = useState(numberOfPages);
+  const totalPages = numberOfPages;
   const [currentPage, setCurrentPage] = useState(1);
 
   const pages = PaginationPagesCreator(totalPages, currentPage);

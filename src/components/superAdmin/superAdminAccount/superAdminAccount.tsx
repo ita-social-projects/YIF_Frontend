@@ -287,11 +287,11 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [perPage] = useState(2);
+  const perPage = 2;
   const numberOfPages = Math.ceil(
     institutionOfEducationAdmins.length / perPage
   );
-  const [totalPages] = useState(numberOfPages);
+  const totalPages = numberOfPages;
   const [currentPage, setCurrentPage] = useState(1);
 
   const pages = PaginationPagesCreator(totalPages, currentPage);

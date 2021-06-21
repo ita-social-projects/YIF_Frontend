@@ -2,6 +2,7 @@
 
 .pages {
   @include flex(row, center, center);
+  margin-bottom: 0.425rem;
 
   .page {
     @include flex(row, center, center);

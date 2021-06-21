@@ -11,7 +11,9 @@ interface Props {
 
 const Pagination: React.FC<Props> = (props: Props) => {
   const { totalPages, currentPage, setCurrentPage, pages } = props;
-
+  // console.log(totalPages);
+  // console.log(currentPage);
+  // console.log(pages);
   return (
     <div
       id='pagination'
