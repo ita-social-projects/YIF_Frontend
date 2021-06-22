@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { store } from '../../../store/store';
 
+
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
@@ -20,30 +21,30 @@ it('renders without crashing', () => {
 });
 
 
-test('check a toggle click', () => {
-  const handleClick = jest.fn();
-  const { getAllByTestId } = render(
-    <MemoryRouter>
-    <Provider store={store}>
-      <Tabs onClick={handleClick()}/>
-    </Provider>
-  </MemoryRouter>,
-  );
-  const button = getAllByTestId('toggle-btn')[0];
-  fireEvent.click(button);
-  expect(handleClick).toHaveBeenCalled();
-});
-
-test('check a toggle click', () => {
-    const handleClick = jest.fn();
-    const { getAllByTestId } = render(
-      <MemoryRouter>
-      <Provider store={store}>
-        <Tabs onClick={handleClick()}/>
-      </Provider>
-    </MemoryRouter>,
-    );
-    const button = getAllByTestId('toggle-btn')[1];
-    fireEvent.click(button);
-    expect(handleClick).toHaveBeenCalled();
-  });
+// test('check a toggle click', () => {
+//   const handleClick = jest.fn();
+//   const { getAllByTestId } = render(
+//     <MemoryRouter>
+//     <Provider store={store}>
+//       <Tabs onClick={handleClick()}/>
+//     </Provider>
+//   </MemoryRouter>,
+//   );
+//   const button = getAllByTestId('toggle-btn')[0];
+//   fireEvent.click(button);
+//   expect(handleClick).toHaveBeenCalled();
+// });
+//
+// test('check a toggle click', () => {
+//     const handleClick = jest.fn();
+//     const { getAllByTestId } = render(
+//       <MemoryRouter>
+//       <Provider store={store}>
+//         <Tabs onClick={handleClick()}/>
+//       </Provider>
+//     </MemoryRouter>,
+//     );
+//     const button = getAllByTestId('toggle-btn')[1];
+//     fireEvent.click(button);
+//     expect(handleClick).toHaveBeenCalled();
+//   });

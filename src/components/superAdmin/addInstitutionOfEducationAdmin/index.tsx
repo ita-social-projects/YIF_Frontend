@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import styles from './addInstitutionOfEducation.module.scss';
 import { Link, useRouteMatch } from 'react-router-dom';
 import InstitutionOfEducationBlock from '../../institutionOfEducationBlock';
-import Unlock from '../../common/icons/Unlock/index';
-import Delete from '../../common/icons/Delete/index';
 import TabContent from './TabContent';
 import {useLocation} from "react-router-dom";
 import { useAuth } from '../../../services/tokenValidator';
 import { requestSecureData } from '../../../services/requestDataFunction';
 import { APIUrl } from '../../../services/endpoints';
 import Spinner from '../../common/spinner';
+import IoEadmin from '../IoEadmin';
 
 interface IoEinfo {
   ioEId: string,
@@ -20,13 +19,13 @@ interface IoEinfo {
   phone: string,
   email: string,
   description: string,
-  imagePath: string
+  imagePath: string,
+  adminId: string
 }
 
 interface stateType {
   IoEid: { pathname: string }
 }
-
 
 const AddInstitutionOfEducationAdmin = () => {
 
@@ -36,7 +35,7 @@ const AddInstitutionOfEducationAdmin = () => {
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
   const [
-    { ioEId, name, abbreviation, site, address, phone, email, description, imagePath },
+    { ioEId, name, abbreviation, site, address, phone, email, description, imagePath, adminId },
     setData,
   ] = useState<IoEinfo>({
     ioEId: '',
@@ -47,7 +46,8 @@ const AddInstitutionOfEducationAdmin = () => {
     phone: '',
     email: '',
     description: '',
-    imagePath: ''
+    imagePath: '',
+    adminId: ''
   });
 
   useEffect(() => {
@@ -109,18 +109,9 @@ const AddInstitutionOfEducationAdmin = () => {
           >
             Редагувати
           </Link>
-          <div className={styles.admin}>
-            <h2 className={styles.admin__title}>Адмін</h2>
-            <div className={styles.admin__line}>
-              <p className={styles.admin__line__name}>Shanna@melissa.tv</p>
-              <div className={styles.admin__line__icons}>
-                <Unlock handleClick={() => {}} />
-                <Delete handleClick={() => {}} />
-              </div>
-            </div>
-            <div className={styles.admin__buttons}>
-              <TabContent />
-            </div>
+          <IoEadmin adminId={adminId}/>
+          <div className={styles.admin__buttons}>
+            <TabContent IoEid={state.IoEid}/>
           </div>
         </div>
       </div>
