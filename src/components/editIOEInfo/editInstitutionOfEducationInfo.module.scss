@@ -13,6 +13,16 @@
     @include flex(column, center, flex-start);
     padding: 3.125rem 3.125rem 15rem 3.125rem;
 
+    .custom_upploader { 
+      width: 100%;
+      max-width: 75rem;
+      
+      div:nth-child(1){
+        width: 100%;
+        max-width: 75rem;
+      }
+    }
+
     .title {
       @extend .headingStyle;
       font-size: $font_30px;

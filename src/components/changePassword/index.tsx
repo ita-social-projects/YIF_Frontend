@@ -3,15 +3,29 @@ import { Field, Formik, Form } from 'formik';
 import styles from './changePassword.module.scss';
 import passwordValidationSchema from './changePasswordValidation';
 import { FormButton, FormInput } from '../common/formElements/index';
+import useChangePassword from '../../services/changePassword/useChangePassword';
+import { APIUrl } from '../../services/endpoints';
+import { FormInputError } from '../../components/common/formElements';
+import { FormInputSuccess } from '../../components/common/formElements/formInputSuccess/formInputSuccess';
 
-const changePassword = () => {
-  const handleSubmit = () => {
-    console.log('password changed');
-  };
+const ChangePassword = () => {
+
+  const service = useChangePassword(`${APIUrl}Users/ChangePassword`);
 
   return (
     <div className={styles.changePasswordWrapper}>
       <div className={styles.changePassword}>
+        {service.error.hasError && (
+          <FormInputError
+            errorType='form'
+            errorMessage={service.error.errorMessage}
+          />
+        )}
+        {service.success.hasSuccess && (
+          <FormInputSuccess
+            successMessage={service.success.successMessage}
+          />
+        )}
         <Formik
           initialValues={{
             oldPassword: '',
@@ -19,7 +33,17 @@ const changePassword = () => {
             confirmNewPassword: '',
           }}
           validationSchema={passwordValidationSchema}
-          onSubmit={handleSubmit}
+          onSubmit={(values, actions) => {
+            service.handleSubmit(values);
+            actions.setSubmitting(false);
+            actions.resetForm({
+              values: {
+                oldPassword: '',
+                newPassword: '',
+                confirmNewPassword: ''
+              },
+            });
+          }}
         >
           {() => (
             <>
@@ -71,4 +95,4 @@ const changePassword = () => {
   );
 };
 
-export default changePassword;
+export default ChangePassword;

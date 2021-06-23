@@ -40,6 +40,7 @@ const DirectionsListPage = () => {
         });
         setList(newList);
         setFetching(false);
+        
       } else {
         setError({
           hasError: true,
