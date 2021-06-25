@@ -20,7 +20,8 @@ interface IoEinfo {
   email: string,
   description: string,
   imagePath: string,
-  adminId: string
+  adminId: string,
+  adminEmail: string
 }
 
 interface stateType {
@@ -35,7 +36,7 @@ const AddInstitutionOfEducationAdmin = () => {
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
   const [
-    { ioEId, name, abbreviation, site, address, phone, email, description, imagePath, adminId },
+    { ioEId, name, abbreviation, site, address, phone, email, description, imagePath, adminId, adminEmail },
     setData,
   ] = useState<IoEinfo>({
     ioEId: '',
@@ -47,7 +48,8 @@ const AddInstitutionOfEducationAdmin = () => {
     email: '',
     description: '',
     imagePath: '',
-    adminId: ''
+    adminId: '',
+    adminEmail: ''
   });
 
   useEffect(() => {
@@ -109,7 +111,7 @@ const AddInstitutionOfEducationAdmin = () => {
           >
             Редагувати
           </Link>
-          <IoEadmin adminId={adminId}/>
+          <IoEadmin adminId={adminId} adminEmail={adminEmail}/>
           <div className={styles.admin__buttons}>
             <TabContent IoEid={state.IoEid}/>
           </div>
