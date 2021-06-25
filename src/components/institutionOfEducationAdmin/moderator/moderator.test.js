@@ -8,6 +8,7 @@ const moderator = {
   email: 'moderator@gmail.com',
   isBlocked: false,
 };
+
 const deleteHandler = jest.fn();
 const blockHandler = jest.fn();
 describe('Moderator Page', () => {

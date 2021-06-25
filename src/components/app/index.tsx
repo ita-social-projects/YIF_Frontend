@@ -14,11 +14,12 @@ import { ProtectedRoute, RedirectRoute } from '../../services/customRoutes';
 import ErrorBoundry from '../../errorBoundry';
 import ResetPasswordPage from '../../pages/resetPasswordPage/index';
 import AddInstitutionOfEducationAdmin from '../../pages/superAdminPages/addInstitutionOfEducationAdminPage';
-import InstitutionOfEducationAdminPage from '../../pages/institutionOfEducationAdminPage';
+import InstitutionOfEducationAdminPage from '../../pages/institutionOfEducationRolePage/institutionOfEducationAdminPage';
 import NewPasswordPage from '../../pages/newPasswordPage';
 import ScrollToTop from '../common/scrollToTop/scrollToTop';
 import SuperAdmin from '../../pages/superAdminPages/index';
 import GraduateAccountPage from '../../pages/graduatePage';
+import InstitutionOfEducationModeratorPage from '../../pages/institutionOfEducationRolePage/institutionOfEducationModeratorPage';
 
 const App = () => {
   const { token } = useAuth();
@@ -68,6 +69,13 @@ const App = () => {
             allowed={['InstitutionOfEducationAdmin']}
           >
             <InstitutionOfEducationAdminPage />
+          </ProtectedRoute>
+          <ProtectedRoute
+            user={token}
+            path='/IoEModeratorAccount'
+            allowed={['InstitutionOfEducationModerator']}
+          >
+            <InstitutionOfEducationModeratorPage />
           </ProtectedRoute>
           <ProtectedRoute
             user={token}

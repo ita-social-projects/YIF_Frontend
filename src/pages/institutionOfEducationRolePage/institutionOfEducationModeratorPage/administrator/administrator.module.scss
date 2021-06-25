@@ -1,0 +1,20 @@
+@import '../../../../styles/index';
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.email {
+  margin-left: 1%;
+}
+
+.heading {
+  margin-bottom: 2.5%;
+  font-weight: 600;
+}
+
+.administrator {
+  max-width: 100%;
+  margin-top: 2%;
+}
