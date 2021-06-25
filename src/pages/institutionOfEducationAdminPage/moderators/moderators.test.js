@@ -35,7 +35,7 @@ afterEach(() => {
 jest.useFakeTimers();
 
 describe('Render the Moderator page', () => {
-  test('renders page correctly', async () => {
+  test('renders page when moderators already selected', async () => {
     render(<Moderators />);
 
     //spinner appears on load
@@ -51,6 +51,25 @@ describe('Render the Moderator page', () => {
 
     //spinner dissapears after page loaded
     expect(document.getElementsByClassName('loadingScreen')[0]).toBeUndefined();
+  });
+
+  test('renders page when no moderators already selected', async () => {
+    fetch.mockImplementationOnce(() =>
+      Promise.resolve({
+        status: 200,
+        json: () => Promise.resolve([]),
+      })
+    );
+    render(<Moderators />);
+
+    expect(document.getElementsByClassName('loadingScreen')[0]).toBeDefined();
+
+    await wait(() => {
+      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(screen.getByText('Модератори')).toBeInTheDocument();
+      expect(screen.getByRole('textbox')).toBeInTheDocument();
+      expect(screen.getByText('Немає обраних модераторів'));
+    });
   });
 
   test('renders page on server error(error)', async () => {
