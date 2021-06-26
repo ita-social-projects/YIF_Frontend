@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Input from '../../../components/common/labeledInput/index';
-import { FormButton } from '../../../components/common/formElements/index';
+import { FormButton, FormInputError } from '../../../components/common/formElements/index';
 import { Formik, Form } from 'formik';
 import styles from './tabs.module.scss';
-import { requestSecureData } from '../../../services/requestDataFunction';
+import { requestAdminChange, requestSecureData } from '../../../services/requestDataFunction';
 import { APIUrl } from '../../../services/endpoints';
 import Spinner from '../../common/spinner';
 import { useRouteMatch } from 'react-router-dom';
@@ -12,6 +12,12 @@ import { useAuth } from '../../../services/tokenValidator';
 interface Moderator {
   userId: string;
   email: string;
+}
+
+interface Message {
+  errors: {
+    IoEId: string[];
+  };
 }
 
 interface props {
@@ -29,36 +35,48 @@ function Tabs(props: props) {
   const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
+  const [isErrorActive, setIsErrorActive] = useState(false);
   const [moderators, setModerators] = useState<Array<Moderator>>([
     {
       userId: '',
       email: '',
     },
   ]);
+  const [message, setMessage] = useState<Message>({
+      errors: {
+        IoEId: ['']
+      }
+    });
+
+  const chooseIoEadmin = async (userId: string, ioEId: { pathname: string; }) => {
+    try {
+      const { statusCode, data }: any = await requestAdminChange(
+        `${APIUrl}SuperAdmin/ChooseIoEAdminFromModerators`,
+        'PUT',
+        {
+          userId: userId,
+          ioEId: ioEId
+        });
+      if (statusCode.toString().match(/^[23]\d{2}$/)) {
+        setError(false);
+        console.log("success!")
+      } else {
+        setMessage(data);
+        setIsErrorActive(true)
+        setTimeout(
+          function() {
+            setIsErrorActive(false)
+          }, 3000);
+        console.log("error!")
+      }
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setIsFetching(false);
+    }
+  };
 
   useEffect(() => {
-    const chooseIoEadmin = async () => {
-      try {
-        const currentToken = await getToken();
-        const { statusCode, data }: any = await requestSecureData(
-          `${APIUrl}SuperAdmin/ChooseIoEAdminFromModerators`,
-          'PUT',
-          currentToken,
-        );
-        if (statusCode.toString().match(/^[23]\d{2}$/)) {
-          setModerators(data);
-          setError(false);
-        } else {
-          setError(true);
-        }
-      } catch (e) {
-        console.log(e);
-        setError(true);
-      } finally {
-        setIsFetching(false);
-      }
-    };
-
     const getInfo = async () => {
       try {
         const currentToken = await getToken();
@@ -172,12 +190,16 @@ function Tabs(props: props) {
                   <div className={styles.moderators__item__mail}>
                     {moderator.email}
                   </div>
-                  <div className={styles.moderators__item__link}>
+                  <div className={styles.moderators__item__link} onClick={()=>{chooseIoEadmin(
+                    moderator.userId,
+                    props.IoEid
+                  )}}>
                     Призначити адміном
                   </div>
                 </div>
               )
             })}
+            {isErrorActive ? <FormInputError errorMessage={message.errors.IoEId[0]} errorType={"form"}/> : <div/>}
           </div>
         </div>
       </div>
