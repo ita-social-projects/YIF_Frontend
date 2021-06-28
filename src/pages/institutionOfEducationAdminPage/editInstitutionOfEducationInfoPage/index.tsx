@@ -40,7 +40,7 @@ const EditInstitutionOfEducationInfoPage = () => {
   });
 
   const sendNewDescription = async (formikValues: any) => {
-    const url = `${APIUrl}InstitutionOfEducationAdmin/ModifyDescriptionOfInstitution`;
+    const url = `${APIUrl}InstitutionOfEducationAdmin/ModifyInstitution`
     try {
       const currentToken = await getToken();
       const { statusCode }: any = await requestSecureData(
