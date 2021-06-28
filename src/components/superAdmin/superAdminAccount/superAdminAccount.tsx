@@ -8,12 +8,11 @@ import { FormInputSuccess } from '../../common/formElements/formInputSuccess/for
 import { FormInputError } from '../../common/formElements';
 import TableItem from './tableItem/tableItem';
 import Search from './search/search';
-import Pagination from '../../../components/superAdmin/pagination';
-
+import PaginationPagesCreator from '../../../components/pagination/paginationPagesCreator/';
 import Lock from '../../common/icons/Lock/index';
 // import { Link, Router } from 'react-router-dom';
-
 import { ReactComponent as IconArrow } from './icons/iconArrow.svg';
+import Pagination from '../../pagination';
 
 // const iconIllustrAdmin = '/assets/images/superAdminAccount.svg';
 
@@ -71,12 +70,11 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
   const [error, setError] = useState(defineErrorMessage());
   const [success, setSuccess] = useState(defineSuccessMessage());
 
-  const [
-    institutionOfEducationAdmins,
-    setInstitutionOfEducationAdmins,
-  ] = useState<IInstitutionOfEducationAdmin[]>(
-    props.institutionOfEducationAdmins
-  );
+  const [institutionOfEducationAdmins, setInstitutionOfEducationAdmins] =
+    useState<IInstitutionOfEducationAdmin[]>(
+      props.institutionOfEducationAdmins
+    );
+
   const [
     sortedInstitutionOfEducationAdmins,
     setSortedInstitutionOfEducationAdmins,
@@ -285,13 +283,32 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
 
   useEffect(() => {
     handleSort('isBanned');
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const perPage = 2;
+  const numberOfPages = Math.ceil(
+    institutionOfEducationAdmins.length / perPage
+  );
+  const totalPages = numberOfPages;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const pages = PaginationPagesCreator(totalPages, currentPage);
+
+  // Get current posts
+  const indexOfLastPost = currentPage * perPage;
+  const indexOfFirstPost = indexOfLastPost - perPage;
 
   return (
     <div className={styles.superAdminAccount}>
       <h1>Адміністратори закладів освіти</h1>
-      <Pagination />
+      <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        pages={pages}
+      />
       <div className={styles.adminTableContainer}>
         <div className={styles.adminTableHeader}>
           <Search
@@ -334,8 +351,8 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
         <ul className={styles.adminList}>
           <li className={styles.adminItem}>
             {sortedInstitutionOfEducationAdmins.length ? (
-              sortedInstitutionOfEducationAdmins.map(
-                (admin: IInstitutionOfEducationAdmin) => (
+              sortedInstitutionOfEducationAdmins
+                .map((admin: IInstitutionOfEducationAdmin) => (
                   <TableItem
                     admin={admin}
                     searchValue={searchValue}
@@ -345,8 +362,8 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
                     //   removeAdminInstitutionOfEducation
                     // }
                   />
-                )
-              )
+                ))
+                .slice(indexOfFirstPost, indexOfLastPost)
             ) : (
               <div className={styles.noneInstitutionOfEducationAdmins}>
                 Не знайдено жодного адміністратора

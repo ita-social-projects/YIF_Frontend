@@ -1,5 +1,6 @@
-import React from 'react';
-import Pagination from '../../../components/superAdmin/pagination';
+import React, { useState } from 'react';
+import Pagination from '../../../components/pagination';
+import PaginationPagesCreator from '../../../components/pagination/paginationPagesCreator';
 import SortingPanel from '../../../components/superAdmin/sortingPanel';
 import UniversityItem from '../../../components/superAdmin/universityItem';
 import styles from './universityListPage.module.scss';
@@ -8,8 +9,7 @@ const univList = [
   {
     id: '1',
     abbreviation: 'НУВГП',
-    name:
-      'Національний університет водного господарства та природокористування',
+    name: 'Національний університет водного господарства та природокористування',
     isBlocked: false,
   },
   {
@@ -39,26 +39,43 @@ const univList = [
 ];
 
 const UniversityListPage: React.FC = () => {
+  const perPage = 2;
+  const numberOfPages = Math.ceil(univList.length / perPage);
+  const totalPages = numberOfPages;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const pages = PaginationPagesCreator(totalPages, currentPage);
+
+  const indexOfLastPost = currentPage * perPage;
+  const indexOfFirstPost = indexOfLastPost - perPage;
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <main className={styles.universityListPage}>
           <h1>Університети</h1>
-          <Pagination />
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            pages={pages}
+          />
           <SortingPanel />
-          {univList.map((university) => {
-            const { id, name, abbreviation, isBlocked } = university;
-            return (
-              <UniversityItem
-                key={id}
-                abbreviation={abbreviation}
-                fullName={name}
-                isBlocked={isBlocked}
-                handleBlocking={() => {}}
-                handleEditing={() => {}}
-              />
-            );
-          })}
+          {univList
+            .map((university) => {
+              const { id, name, abbreviation, isBlocked } = university;
+              return (
+                <UniversityItem
+                  key={id}
+                  abbreviation={abbreviation}
+                  fullName={name}
+                  isBlocked={isBlocked}
+                  handleBlocking={() => {}}
+                  handleEditing={() => {}}
+                />
+              );
+            })
+            .slice(indexOfFirstPost, indexOfLastPost)}
         </main>
       </div>
     </div>
