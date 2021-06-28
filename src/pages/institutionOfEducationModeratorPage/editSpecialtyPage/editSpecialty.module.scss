@@ -1,0 +1,154 @@
+@import '../../../styles/index';
+
+.customInput {
+  position: relative;
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem 1rem 2rem;
+  background-color: #bad0e5;
+  width: 100%;
+  @include flex(row, center, space-between);
+  margin-bottom: 1.25rem;
+
+  span {
+    font-family: $fontOpenSans;
+    min-width: 18rem;
+  }
+
+  &:hover .deleteRequirement {
+    display: block;
+  }
+}
+
+.editSpecialty {
+  margin: 0 auto;
+
+  .mainInfo {
+    background-color: #bad0e5;
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    width: 65.625rem;
+  }
+  display: flex;
+  min-height: 100vh;
+
+  .mainContent {
+    margin: 0 auto;
+    padding-bottom: 10rem;
+    @include flex(column, center, flex-start);
+  }
+
+  .heading {
+    font-family: $fontNunito;
+    font-weight: $semiBold;
+    text-align: center;
+  }
+
+  .title {
+    @extend .heading;
+    font-size: $font_30px;
+    margin-top: 3.125rem;
+  }
+
+  .infoTitle {
+    @extend .heading, .title;
+    border-bottom: 0.125rem solid #000;
+    margin-bottom: 1.875rem;
+    width: max-content;
+  }
+
+  .subtitle {
+    @extend .heading;
+    font-size: $font_18px;
+  }
+
+  .deleteRequirement {
+    @extend .heading;
+    background: url('/assets/icons/close.svg') center;
+    position: absolute;
+    display: none;
+    width: 1.3rem;
+    height: 1.3rem;
+
+    right: 0.5rem;
+    top: 0.5rem;
+    cursor: pointer;
+  }
+
+  .plusContainer {
+    @include flex(column, center, center);
+    @extend .heading;
+    span {
+      cursor: pointer;
+    }
+  }
+
+  .subjectContainer {
+    @include flex(column, center, space-between);
+    width: 100%;
+    max-width: 65rem;
+    background-color: $lightBlue_1;
+    border-radius: 0.3rem;
+    margin: 2rem 0;
+    padding-bottom: 1rem;
+
+    .containerHeader {
+      @include flex(row, center, flex-end);
+      @extend .heading;
+      width: 100%;
+      padding: 1rem 1rem 0 2.5rem;
+
+      span {
+        width: 100%;
+        text-align: center;
+      }
+
+      .closeContainerIcon {
+        background: url('/assets/icons/close.svg') center no-repeat;
+        width: 1.6rem;
+        height: 1.6rem;
+        cursor: pointer;
+      }
+    }
+
+    .subjectWrapper {
+      @include flex(row, center, space-between);
+      width: 100%;
+      flex-wrap: wrap;
+      padding: 1rem 3rem 0 3rem;
+    }
+
+    .subject {
+      @include flex(row, center, center);
+      @extend .heading;
+      padding: 1rem;
+      width: 100%;
+      width: 28rem;
+      background-color: $lightBlue_2;
+      border-radius: 0.3rem;
+      margin: 0 0 1rem 0;
+      cursor: pointer;
+    }
+  }
+
+  button {
+    width: 12.5rem;
+  }
+
+  .specialtyAction {
+    @include flex(row, center, center);
+    position: relative;
+    width: 65.625rem;
+  }
+
+  .deleteSpecialty {
+    @extend .heading;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: $red;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
