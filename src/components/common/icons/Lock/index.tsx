@@ -10,6 +10,7 @@ const Lock: React.FC<Props> = ({ handleClick, containerCN, svgCN }) => {
     <div
       className={containerCN ? containerCN : styles.container}
       onClick={handleClick}
+      data-testid='lockSign'
     >
       <svg
         className={svgCN ? svgCN : styles.lock}
