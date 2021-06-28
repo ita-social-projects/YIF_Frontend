@@ -9,49 +9,199 @@ const OurSpecialties = () => {
     {
       direction: 'Інформаційні технології',
       details: [
-        {
-          name: "Комп'ютерні науки",
-          code: '124',
-          paymentForm: 'бюджет, контракт',
-          educationForm: 'денна, заочна, вечірня',
-          description:
-            'Це базовий опис спеціальності. Ця спеціальність підійде для тих хто хоче реалізувати себе у майбутньому у даній галузі. Для здобувачів вищої освіти вона буде цікавою тому що вони зможуть розкрити себе у даному напрямку за рахунок актуальної інформації, яку будуть доносити ним професіонали своєї справи, які є майстрами у своїй галузі.',
-          educationalProgramLink: 'example.com',
-        },
+        // {
+        //   name: "Комп'ютерні науки",
+        //   code: '124',
+        //   paymentFormDetails: [
+        //     {
+        //       paymentForm: 'бюджет',
+        //       educationForm: ['денна', 'вечірня', 'заочна'],
+        //     },
+        //     {
+        //       paymentForm: 'контракт',
+        //       educationForm: ['денна', 'вечірня', 'заочна'],
+        //     },
+        //   ],
+        //   description:
+        //     'Це базовий опис спеціальності. Ця спеціальність підійде для тих хто хоче реалізувати себе у майбутньому у даній галузі. Для здобувачів вищої освіти вона буде цікавою тому що вони зможуть розкрити себе у даному напрямку за рахунок актуальної інформації, яку будуть доносити ним професіонали своєї справи, які є майстрами у своїй галузі.',
+        //   educationalProgramLink: 'example.com',
+        // },
         {
           name: 'Інженерія програмного забезпечення (Інтернет речей)',
           code: '122',
-          paymentForm: 'бюджет, контракт',
-          educationForm: 'денна, вечірня',
+          paymentForm: ['контракт'],
+          // paymentFormDetails: [
+          //   {
+          //     paymentForm: 'бюджет',
+          //     educationForm: ['вечірня', 'заочна'],
+          //   },
+          //   {
+          //     paymentForm: 'контракт',
+          //     educationForm: ['денна', 'вечірня'],
+          //   },
+          // ],
+          paymentFormDetails: [
+            {
+              paymentForm: 'бюджет',
+              educationFormDetails: [
+                {
+                  educationForm: 'денна',
+                  examRequirements: [
+                    {
+                      examName: 'Українська мова',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+                {
+                  educationForm: 'заочна',
+                  examRequirements: [
+                    {
+                      examName: 'Українська література',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+                {
+                  educationForm: 'вечірня',
+                  examRequirements: [
+                    {
+                      examName: 'Історія',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              paymentForm: 'контракт',
+              educationFormDetails: [
+                {
+                  educationForm: 'денна',
+                  examRequirements: [
+                    {
+                      examName: 'Історія Erhf]yb',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+                {
+                  educationForm: 'заочна',
+                  examRequirements: [
+                    {
+                      examName: 'Хімія',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+                {
+                  educationForm: 'вечірня',
+                  examRequirements: [
+                    {
+                      examName: 'Малювання',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+          // educationForm: 'денна, вечірня',
           description:
             'Це базовий опис спеціальності. Ця спеціальність підійде для тих хто хоче реалізувати себе у майбутньому у даній галузі. Для здобувачів вищої освіти вона буде цікавою тому що вони зможуть розкрити себе у даному напрямку за рахунок актуальної інформації, яку будуть доносити ним професіонали своєї справи, які є майстрами у своїй галузі.',
           educationalProgramLink: 'example.com',
         },
-        {
-          name: 'Соціальні та поведінкові науки',
-          code: '123',
-          paymentForm: 'бюджет, контракт',
-          educationForm: 'денна',
-          description:
-            'Це базовий опис спеціальності. Ця спеціальність підійде для тих хто хоче реалізувати себе у майбутньому у даній галузі. Для здобувачів вищої освіти вона буде цікавою тому що вони зможуть розкрити себе у даному напрямку за рахунок актуальної інформації, яку будуть доносити ним професіонали своєї справи, які є майстрами у своїй галузі.',
-          educationalProgramLink: 'example.com',
-        },
+        // {
+        //   name: 'Соціальні та поведінкові науки',
+        //   code: '123',
+        //   paymentForm: ['контракт', 'бюджет'],
+        //   educationForm: 'денна',
+        //   description:
+        //     'Це базовий опис спеціальності. Ця спеціальність підійде для тих хто хоче реалізувати себе у майбутньому у даній галузі. Для здобувачів вищої освіти вона буде цікавою тому що вони зможуть розкрити себе у даному напрямку за рахунок актуальної інформації, яку будуть доносити ним професіонали своєї справи, які є майстрами у своїй галузі.',
+        //   educationalProgramLink: 'example.com',
+        // },
       ],
     },
-    {
-      direction: 'Математика та статистика',
-      details: [
-        {
-          name: 'Математика',
-          code: '121',
-          paymentForm: 'бюджет, контракт',
-          educationForm: 'денна, заочна, вечірня',
-          description:
-            'Це базовий опис спеціальності. Ця спеціальність підійде для тих хто хоче реалізувати себе у майбутньому у даній галузі. Для здобувачів вищої освіти вона буде цікавою тому що вони зможуть розкрити себе у даному напрямку за рахунок актуальної інформації, яку будуть доносити ним професіонали своєї справи, які є майстрами у своїй галузі.',
-          educationalProgramLink: 'example.com',
-        },
-      ],
-    },
+    // {
+    //   direction: 'Математика та статистика',
+    //   details: [
+    //     {
+    //       name: 'Математика',
+    //       code: '121',
+    //       paymentForm: ['контракт', 'бюджет'],
+    //       educationForm: 'денна, заочна, вечірня',
+    //       description:
+    //         'Це базовий опис спеціальності. Ця спеціальність підійде для тих хто хоче реалізувати себе у майбутньому у даній галузі. Для здобувачів вищої освіти вона буде цікавою тому що вони зможуть розкрити себе у даному напрямку за рахунок актуальної інформації, яку будуть доносити ним професіонали своєї справи, які є майстрами у своїй галузі.',
+    //       educationalProgramLink: 'example.com',
+    //     },
+    //   ],
+    // },
   ];
 
   const specialityCardList = () =>
@@ -74,7 +224,8 @@ const OurSpecialties = () => {
               name={item.name}
               id={item.id}
               paymentForm={item.paymentForm}
-              educationForm={item.educationForm}
+              paymentFormDetails={item.paymentFormDetails}
+              // educationForm={item.educationForm}
               educationalProgramLink={item.educationalProgramLink}
               description={item.description}
             />
