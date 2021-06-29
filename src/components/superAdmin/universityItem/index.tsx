@@ -34,8 +34,11 @@ const UniversityItem: React.FC<Props> = ({
       <div className={styles.fullName}>{fullName}</div>
       <div className={styles.actionItems}>
         {blockIcon}
-        <Link to={`/superAdminAccount/addInstitutionOfEducationAdmin`}>
-          <Edit />
+        <Link to={{
+          pathname: '/superAdminAccount/addInstitutionOfEducationAdmin',
+          state: {IoEid: IoEid}
+        }}>
+          <Edit/>
         </Link>
       </div>
     </div>
