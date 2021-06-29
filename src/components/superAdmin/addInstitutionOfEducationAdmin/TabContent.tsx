@@ -51,7 +51,6 @@ function Tabs(props: props) {
           setError(true);
         }
       } catch (e) {
-        console.log(e);
         setError(true);
       } finally {
         setIsFetching(false);
@@ -78,7 +77,7 @@ function Tabs(props: props) {
       <div className='container'>
         <div className={styles.tabs}>
           <div
-            data-testid='toggle-btn'
+            data-testid='toggle-btn1'
             className={
               toggleState === 1
                 ? `${styles.tabs__block} ${styles.tabs__block__active}`
@@ -90,7 +89,7 @@ function Tabs(props: props) {
           </div>
 
           <div
-            data-testid='toggle-btn'
+            data-testid='toggle-btn2'
             className={
               toggleState === 1
                 ? `${styles.tabs__block} ${styles.tabs__block__active}`
@@ -112,7 +111,7 @@ function Tabs(props: props) {
           >
             <Formik initialValues={initialValues} onSubmit={() => {}}>
               {() => (
-                <Form className={styles.mainContent}>
+                <Form data-testid='toggle-content-1' className={styles.mainContent}>
                   <div className={styles.mainInfo}>
                     <Input
                       id='email'
@@ -139,12 +138,12 @@ function Tabs(props: props) {
                 : `${styles.content__tabs}`
             }
           >
-            <div className={styles.moderators__top}>
+            <div data-testid='toggle-content-2' className={styles.moderators__top}>
               <p className={styles.moderators__top__address}>Електронна адреса</p>
             </div>
             {moderators.map((moderator) => {
               return (
-                <div key={moderator.userId} className={styles.moderators__item}>
+                <div data-testid="moderator" key={moderator.userId} className={styles.moderators__item}>
                   <div className={styles.moderators__item__mail}>
                     {moderator.email}
                   </div>
