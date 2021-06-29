@@ -63,14 +63,19 @@ const IoEadmin = (props: props) => {
     <div className={styles.admin}>
       {isAdminDeleted? <FormInputSuccess successMessage={message.message}/> : <div/>}
       <h2 className={styles.admin__title}>Адмін</h2>
-      <div className={styles.admin__line}>
-        <p className={styles.admin__line__name}>{props.adminEmail}</p>
-        <div className={styles.admin__line__icons}>
-          <Unlock handleClick={() => {
-          }} />
-          <Delete handleClick={() => {deleteIoEadmin()}} />
-        </div>
-      </div>
+      {
+        props.adminEmail === '' ?
+          <div>Адміністратор не назначений</div>
+          :
+          <div className={styles.admin__line}>
+            <p className={styles.admin__line__name}>{props.adminEmail}</p>
+            <div className={styles.admin__line__icons}>
+              <Unlock handleClick={() => {
+              }} />
+              <Delete handleClick={() => {deleteIoEadmin()}} />
+            </div>
+          </div>
+      }
     </div>
   );
 };
