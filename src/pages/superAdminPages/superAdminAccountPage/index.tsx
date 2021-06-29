@@ -39,13 +39,6 @@ const SuperAdminAccountPage: React.FC = () => {
               <SuperAdminAccount
                 institutionOfEducationAdmins={institutionOfEducationAdmins}
               />
-              <Link to={`/superAdminAccount/addInstitutionOfEducation`}>
-                <button
-                  className={`${styles.addButton} ${styles.animatedButton}`}
-                >
-                  Додати заклад освіти
-                </button>
-              </Link>
             </>
           )}
         </section>

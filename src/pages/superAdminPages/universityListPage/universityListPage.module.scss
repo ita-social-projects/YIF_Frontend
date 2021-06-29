@@ -22,3 +22,18 @@
     margin: 3.125rem 0 2.5rem 0;
   }
 }
+
+.addButton {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  width: 20rem;
+  padding: 0.625rem 0;
+  border-radius: 0.313rem;
+  margin-top: 2rem;
+  text-align: center;
+  font-family: $fontOpenSans;
+  font-weight: $regular;
+  font-size: $font_18px;
+  border: 1px solid $darkBlue;
+}

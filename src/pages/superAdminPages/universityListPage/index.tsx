@@ -4,7 +4,7 @@ import PaginationPagesCreator from '../../../components/pagination/paginationPag
 import SortingPanel from '../../../components/superAdmin/sortingPanel';
 import UniversityItem from '../../../components/superAdmin/universityItem';
 import styles from './universityListPage.module.scss';
-import { useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { useAuth } from '../../../services/tokenValidator';
 import { requestSecureData } from '../../../services/requestDataFunction';
 import { APIUrl } from '../../../services/endpoints';
@@ -103,12 +103,18 @@ const UniversityListPage: React.FC = () => {
                   isBlocked={false} // mock data!
                   handleBlocking={() => {}}
                   handleEditing={() => {}}
+                  IoEid = {id}
                 />
               );
             })
             .slice(indexOfFirstPost, indexOfLastPost)}
         </main>
       </div>
+      <Link to={`/superAdminAccount/addInstitutionOfEducation`}>
+        <button className={`${styles.addButton} ${styles.animatedButton}`}>
+          Додати заклад освіти
+        </button>
+      </Link>
     </div>
   );
 };

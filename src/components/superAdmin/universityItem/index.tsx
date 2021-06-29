@@ -10,6 +10,7 @@ interface Props {
   isBlocked: boolean;
   handleBlocking(): void;
   handleEditing(): void;
+  IoEid: string;
 }
 
 const UniversityItem: React.FC<Props> = ({
@@ -18,6 +19,7 @@ const UniversityItem: React.FC<Props> = ({
   isBlocked,
   fullName,
   abbreviation,
+  IoEid
 }) => {
   let blockIcon;
   if (isBlocked) {
