@@ -113,9 +113,7 @@ const AddInstitutionOfEducationAdmin = () => {
           </Link>
           <IoEadmin adminId={adminId} adminEmail={adminEmail}/>
           <div className={styles.admin__buttons}>
-            <TabContent
-              // IoEid={state.IoEid}
-            />
+            <TabContent IoEid={state.IoEid} />
           </div>
         </div>
       </div>

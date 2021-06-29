@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../../common/formElements/formInputError/formInputError.module.scss'; // fix
+import styles from '../addInstitutionOfEducationAdmin/addInstitutionOfEducation.module.scss';
 import Unlock from '../../common/icons/Unlock';
 import Delete from '../../common/icons/Delete';
 import { useRouteMatch } from 'react-router-dom';
