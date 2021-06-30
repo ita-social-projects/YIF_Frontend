@@ -33,7 +33,7 @@ const mockFetchPromise = Promise.resolve({
 
 global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
-const mock = require('../../../services/tokenValidator');
+const mock = require('../../../../services/tokenValidator');
 
 mock.useAuth = jest.fn(() => {
   return {

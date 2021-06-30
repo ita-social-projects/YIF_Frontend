@@ -23,11 +23,13 @@ const UniversityItem: React.FC<Props> = ({
   IoEid
 }) => {
   let blockIcon;
-  if (isBlocked) {
-    blockIcon = <Lock handleClick={handleBlocking} />;
-  } else {
+  if (!isBlocked) {
     blockIcon = <Unlock handleClick={handleBlocking} />;
   }
+  // Commented, untill 'isBlocked' parameter will be added to the InstitutionOfEducation/Anonymous endpoint
+  // else {
+  //   blockIcon = <Lock handleClick={handleBlocking} />;
+  // }
   return (
     <div className={styles.container}>
       <div className={styles.abreviation}>{abbreviation}</div>

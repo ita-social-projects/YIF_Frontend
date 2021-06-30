@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './addInstitutionOfEducation.module.scss';
 import { Link, useRouteMatch } from 'react-router-dom';
 import InstitutionOfEducationBlock from '../../institutionOfEducationBlock';
-import TabContent from './TabContent';
+import TabContent from './TabContent/TabContent';
 import {useLocation} from "react-router-dom";
 import { useAuth } from '../../../services/tokenValidator';
 import { requestSecureData } from '../../../services/requestDataFunction';
@@ -52,12 +52,17 @@ const AddInstitutionOfEducationAdmin = () => {
     adminEmail: ''
   });
 
+  const IoEid = {
+    pathname: '58611427-2d33-4e17-9cee-0cda0470d150'
+  }
+
   useEffect(() => {
     const getInfo = async () => {
       try {
         const currentToken = await getToken();
         const { statusCode, data }: any = await requestSecureData(
-          `${APIUrl}SuperAdmin/GetIoEInfoByIoEId/${state.IoEid}`,
+          // Check if (state === undefined) for testing
+          `${APIUrl}SuperAdmin/GetIoEInfoByIoEId/${(state === undefined) ? IoEid : state.IoEid}`,
           'GET',
           currentToken,
         );
@@ -93,7 +98,7 @@ const AddInstitutionOfEducationAdmin = () => {
     );
   } else {
     content = (
-      <div className={styles.wrapper}>
+      <div data-testid='content' className={styles.wrapper}>
         <div className={styles.infoContainer}>
           <InstitutionOfEducationBlock
             name={name}
@@ -113,7 +118,8 @@ const AddInstitutionOfEducationAdmin = () => {
           </Link>
           <IoEadmin adminId={adminId} adminEmail={adminEmail}/>
           <div className={styles.admin__buttons}>
-            <TabContent IoEid={state.IoEid} />
+            // Check for (state === undefined) for testing
+            <TabContent IoEid={(state === undefined) ? IoEid : state.IoEid} />
           </div>
         </div>
       </div>

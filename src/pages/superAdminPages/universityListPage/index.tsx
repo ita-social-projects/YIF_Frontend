@@ -8,6 +8,12 @@ import { Link, useRouteMatch } from 'react-router-dom';
 import { useAuth } from '../../../services/tokenValidator';
 import { requestSecureData } from '../../../services/requestDataFunction';
 import { APIUrl } from '../../../services/endpoints';
+import Spinner from '../../../components/common/spinner';
+import { Form, Formik } from 'formik';
+import * as yup from 'yup';
+import ActionInput from '../../../components/institutionOfEducationAdmin/actionInput';
+import { FormInputSuccess } from '../../../components/common/formElements/formInputSuccess/formInputSuccess';
+import { ConfirmationBox } from '../../../components/common/confirmationBox';
 
 interface University {
   id: string,
@@ -61,7 +67,6 @@ const UniversityListPage: React.FC = () => {
           setError(true);
         }
       } catch (e) {
-        console.log(e);
         setError(true);
       } finally {
         setIsFetching(false);
@@ -79,44 +84,59 @@ const UniversityListPage: React.FC = () => {
   const indexOfLastPost = currentPage * perPage;
   const indexOfFirstPost = indexOfLastPost - perPage;
 
-
-  return (
-    <div className={styles.container}>
-      <div className={styles.wrapper}>
-        <main className={styles.universityListPage}>
-          <h1>Університети</h1>
-          <Pagination
-            totalPages={totalPages}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            pages={pages}
-          />
-          <SortingPanel />
-          {response.responseList
-            .map((university) => {
-              const { id, name, abbreviation } = university;
-              return (
-                <UniversityItem
-                  key={id}
-                  abbreviation={abbreviation}
-                  fullName={name}
-                  isBlocked={false} // mock data!
-                  handleBlocking={() => {}}
-                  handleEditing={() => {}}
-                  IoEid = {id}
-                />
-              );
-            })
-            .slice(indexOfFirstPost, indexOfLastPost)}
-        </main>
+  let content;
+  if (isFetching && !error) {
+    content = (
+      <div className={styles.loadingScreen}>
+        <Spinner />
       </div>
-      <Link to={`/superAdminAccount/addInstitutionOfEducation`}>
-        <button className={`${styles.addButton} ${styles.animatedButton}`}>
-          Додати заклад освіти
-        </button>
-      </Link>
-    </div>
-  );
+    );
+  } else if (!isFetching && error) {
+    content = (
+      <div className={styles.errorScreen}>
+        <h2>Щось пішло не так, спробуйте знову.</h2>
+      </div>
+    );
+  } else {
+    content = (
+      <div className={styles.container}>
+        <div className={styles.wrapper}>
+          <main className={styles.universityListPage}>
+            <h1>Університети</h1>
+            <Pagination
+              totalPages={totalPages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              pages={pages}
+            />
+            <SortingPanel />
+            {response.responseList
+              .map((university) => {
+                const { id, name, abbreviation } = university;
+                return (
+                  <UniversityItem
+                    key={id}
+                    abbreviation={abbreviation}
+                    fullName={name}
+                    isBlocked={false} // mock data!
+                    handleBlocking={() => {}}
+                    handleEditing={() => {}}
+                    IoEid = {id}
+                  />
+                );
+              })
+              .slice(indexOfFirstPost, indexOfLastPost)}
+          </main>
+        </div>
+        <Link to={`/superAdminAccount/addInstitutionOfEducation`}>
+          <button className={`${styles.addButton} ${styles.animatedButton}`}>
+            Додати заклад освіти
+          </button>
+        </Link>
+      </div>
+    );
+  }
+  return content;
 };
 
 export default UniversityListPage;

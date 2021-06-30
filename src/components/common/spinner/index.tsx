@@ -3,7 +3,7 @@ import style from './spinner.module.scss';
 
 const Spinner = () => {
   return (
-    <div className={style.loader}>
+    <div data-testid='spinner' className={style.loader}>
       <div className={`${style.line} ${style.one}`}></div>
       <div className={`${style.line} ${style.two}`}></div>
       <div className={`${style.line} ${style.three}`}></div>

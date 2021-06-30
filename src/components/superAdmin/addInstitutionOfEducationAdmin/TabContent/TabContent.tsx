@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import Input from '../../../components/common/labeledInput/index';
-import { FormButton } from '../../../components/common/formElements/index';
+import Input from '../../../common/labeledInput';
+import { FormButton } from '../../../common/formElements';
 import { Formik, Form } from 'formik';
 import styles from './tabs.module.scss';
-import { requestSecureData } from '../../../services/requestDataFunction';
-import { APIUrl } from '../../../services/endpoints';
-import Spinner from '../../common/spinner';
-import { useAuth } from '../../../services/tokenValidator';
+import { requestSecureData } from '../../../../services/requestDataFunction';
+import { APIUrl } from '../../../../services/endpoints';
+import Spinner from '../../../common/spinner';
+import { useAuth } from '../../../../services/tokenValidator';
 
 interface Moderator {
   userId: string;
@@ -45,6 +45,7 @@ function Tabs(props: props) {
           currentToken,
         );
         if (statusCode.toString().match(/^[23]\d{2}$/)) {
+          console.log(data)
           setModerators(data);
           setError(false);
         } else {
