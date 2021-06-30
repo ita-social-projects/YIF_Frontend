@@ -69,7 +69,7 @@ describe('AddIoEadmin page', () => {
       );
     });
 
-    const content = screen.getByTestId('content');
+    const content = screen.getByTestId('renderedContent');
     expect(content).toBeInTheDocument();
   });
 

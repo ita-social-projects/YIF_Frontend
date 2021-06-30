@@ -1,7 +1,6 @@
 import React from 'react';
 import TabContent from './TabContent';
-import { act } from 'react-dom/test-utils';
-import { render, screen } from '@testing-library/react';
+import { render, screen, wait } from '@testing-library/react';
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -45,7 +44,7 @@ mock.useAuth = jest.fn(() => {
 describe('Render the TabContent page', () => {
 
   test('Page renders without crashing', async () => {
-    await act(async () => {
+    await wait(() => {
       render(
         <TabContent IoEid={IoEid} />
       );
@@ -56,7 +55,7 @@ describe('Render the TabContent page', () => {
   });
 
   test('"Add by email" and "Add from moderators" buttons works', async () => {
-    await act(async () => {
+    await wait(() => {
       render(
         <TabContent IoEid={IoEid} />
       );
@@ -73,20 +72,37 @@ describe('Render the TabContent page', () => {
     expect(toggleContent2).toBeInTheDocument()
   });
 
-  test('check error ', async () => {
+  test('Check error ', async () => {
     const mockFetchPromiseError = Promise.resolve({
       json: () => mockJsonPromise,
       status: 404,
     });
     global.fetch = jest.fn().mockImplementation(() => mockFetchPromiseError);
 
-    await act(async () => {
+    await wait(() => {
       render(
         <TabContent IoEid={IoEid} />
       );
     });
 
     const placeholder = screen.getByText('Щось пішло не так, спробуйте знову.')
+    expect(placeholder).toBeInTheDocument();
+  });
+
+  test('Check error with rejected promise', async () => {
+    const mockFetchPromiseError = Promise.resolve({
+      json: () => Promise.reject("Error"),
+      status: 404,
+    });
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromiseError);
+
+    await wait(() => {
+      render(
+        <TabContent IoEid={IoEid} />
+      );
+    });
+
+    const placeholder = screen.getByText('Щось пішло не так, спробуйте знову.');
     expect(placeholder).toBeInTheDocument();
   });
 });

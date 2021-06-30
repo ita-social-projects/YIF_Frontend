@@ -14,10 +14,10 @@ const IoEadmin = (props: props) => {
     <div className={styles.admin}>
       <h2 className={styles.admin__title}>Адмін</h2>
       {
-        props.adminEmail === '' ?
+        props.adminEmail === null ?
           <div>Адміністратор не назначений</div>
           :
-          <div className={styles.admin__line}>
+          <div data-testid='content' className={styles.admin__line}>
             <p className={styles.admin__line__name}>{props.adminEmail}</p>
             <div className={styles.admin__line__icons}>
               <Unlock handleClick={() => {

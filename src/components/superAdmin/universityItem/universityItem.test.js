@@ -11,7 +11,7 @@ const univer = {
 };
 
 describe('UniversityItem', () => {
-  test('render corectly', () => {
+  test('Renders corectly', () => {
     const { id, abbreviation, name, isBlocked } = univer;
     render(
       <Router>

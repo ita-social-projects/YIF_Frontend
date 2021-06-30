@@ -98,7 +98,7 @@ const AddInstitutionOfEducationAdmin = () => {
     );
   } else {
     content = (
-      <div data-testid='content' className={styles.wrapper}>
+      <div data-testid='renderedContent' className={styles.wrapper}>
         <div className={styles.infoContainer}>
           <InstitutionOfEducationBlock
             name={name}

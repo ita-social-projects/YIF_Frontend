@@ -19,6 +19,7 @@ const admin = {
   },
   isBanned: true,
 };
+
 const admin2 = {
   id: '1183f8eb-e8a1-4ad6-bbac-df64e685917d',
   user: {
@@ -40,7 +41,7 @@ describe('check TableItem component', () => {
   it('renders correctly', () => {
     const { queryByText, rerender } = render(
       <MemoryRouter>
-        <TableItem admin={admin} />
+        <TableItem admin={admin} searchValue={''} setBanStatus={()=>{}}/>
       </MemoryRouter>
     );
     expect(queryByText(/nuweeAdmin@gmail.com/i)).toBeInTheDocument();
@@ -52,7 +53,7 @@ describe('check TableItem component', () => {
     expect(queryByText(/НУВГП/i)).toBeInTheDocument();
     rerender(
     <MemoryRouter>
-      <TableItem admin={admin2} />
+      <TableItem admin={admin2} searchValue={''} setBanStatus={()=>{}}/>
     </MemoryRouter>);
   });
 
@@ -60,7 +61,7 @@ describe('check TableItem component', () => {
     const setBanStatus = jest.fn();
     const { queryByTestId } = render(
       <MemoryRouter>
-        <TableItem admin={admin} setBanStatus={setBanStatus} />
+        <TableItem admin={admin} setBanStatus={setBanStatus} searchValue={''} />
       </MemoryRouter>
       
     );

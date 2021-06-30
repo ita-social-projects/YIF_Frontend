@@ -1,14 +1,33 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import IoEadmin from '.';
 
-describe('Pagination', () => {
-  test('render corectly', () => {
+const adminEmail = 'nuweeModerator@gmail.com';
+const adminId = '3e5fbb21-9773-4218-b0ad-e6ff4e485f6d';
+
+const noAdminEmail = null;
+const noAdminId = null;
+
+describe('IoEadmin component', () => {
+  test('Render corectly', () => {
     render(
       <Router>
-        <IoEadmin />
+        <IoEadmin adminEmail={adminEmail} adminId={adminId}/>
       </Router>
     );
+
+    const content = screen.getByTestId('content');
+    expect(content).toBeInTheDocument();
+  });
+
+  test('Check error', () => {
+    render(
+      <Router>
+        <IoEadmin adminEmail={noAdminEmail} adminId={noAdminId}/>
+      </Router>
+    );
+    const error = screen.getByText('Адміністратор не назначений');
+    expect(error).toBeInTheDocument();
   });
 });

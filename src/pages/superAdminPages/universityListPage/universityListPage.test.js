@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, render, screen } from '@testing-library/react';
+import { render, screen, wait } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import UniversityListPage from '.';
 
@@ -52,8 +52,9 @@ afterEach(() => {
 });
 
 describe('UniversityListPage tests', () => {
+
   test('Can get data from server and render it', async () => {
-    await act(async () => {
+    await wait( () => {
       render(
         <Router>
           <UniversityListPage />
@@ -80,7 +81,32 @@ describe('UniversityListPage tests', () => {
       jest.clearAllMocks();
     });
 
-    await act(async () => {
+    await wait(() => {
+      render(
+        <Router>
+          <UniversityListPage />
+        </Router>
+      );
+    });
+
+    const errorMessage = screen.getByText('Щось пішло не так, спробуйте знову.');
+    expect(errorMessage).toBeInTheDocument();
+  });
+
+  test('Check error with rejected promise', async () => {
+
+    const mockFetchPromiseError = Promise.resolve({
+      status: 404,
+      json: () => Promise.reject("Error")
+    });
+
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromiseError);
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    await wait(() => {
       render(
         <Router>
           <UniversityListPage />
