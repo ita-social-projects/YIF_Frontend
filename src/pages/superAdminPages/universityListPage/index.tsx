@@ -87,13 +87,13 @@ const UniversityListPage: React.FC = () => {
   let content;
   if (isFetching && !error) {
     content = (
-      <div className={styles.loadingScreen}>
+      <div className={styles.noContentContainer}>
         <Spinner />
       </div>
     );
   } else if (!isFetching && error) {
     content = (
-      <div className={styles.errorScreen}>
+      <div className={styles.noContentContainer}>
         <h2>Щось пішло не так, спробуйте знову.</h2>
       </div>
     );
