@@ -12,9 +12,7 @@ const noAdminId = null;
 describe('IoEadmin component', () => {
   test('Render corectly', () => {
     render(
-      <Router>
         <IoEadmin adminEmail={adminEmail} adminId={adminId}/>
-      </Router>
     );
 
     const content = screen.getByTestId('content');
@@ -23,9 +21,7 @@ describe('IoEadmin component', () => {
 
   test('Check error', () => {
     render(
-      <Router>
         <IoEadmin adminEmail={noAdminEmail} adminId={noAdminId}/>
-      </Router>
     );
     const error = screen.getByText('Адміністратор не назначений');
     expect(error).toBeInTheDocument();
