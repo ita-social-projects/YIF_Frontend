@@ -118,7 +118,7 @@ const AddInstitutionOfEducationAdmin = () => {
           </Link>
           <IoEadmin adminId={adminId} adminEmail={adminEmail}/>
           <div className={styles.admin__buttons}>
-            // Check for (state === undefined) for testing
+            {/* Check for (state === undefined) for testing*/}
             <TabContent IoEid={(state === undefined) ? IoEid : state.IoEid} />
           </div>
         </div>
