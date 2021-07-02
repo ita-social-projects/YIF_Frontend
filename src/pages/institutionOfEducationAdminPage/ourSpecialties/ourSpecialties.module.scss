@@ -1,4 +1,5 @@
 @import '../../../styles/index.scss';
+
 .specialityAdminPage {
   margin: 0 auto;
   width: calc((1180 / 1440) * 100%);
@@ -30,8 +31,73 @@
   }
 }
 
+.tabs {
+  display: flex;
+  &_inner {
+    @include flex(row, center, flex-end);
+    margin-top: -($tabHeight);
+  }
+  &__container {
+    position: relative;
+  }
+  &__tab {
+    width: 7.1875rem;
+    height: $tabHeight;
+    border-radius: 0.625rem 0.625rem 0px 0rem;
+    color: inherit;
+    background-color: $lightBlue_2;
+    font-family: $fontNunito;
+    font-weight: $regular;
+    font-size: $font_18px;
+    &_active {
+      background-color: $white;
+    }
+  }
+}
+
+.card {
+  &__content {
+    display: block;
+    &__line {
+      @include flex(row, center, space-between);
+      padding: 1.5rem 1.5rem 1.5rem 1.25rem;
+      z-index: 2;
+      position: relative;
+      background-color: #f2f9ff;
+      border-radius: 5px;
+      margin: 0.1294rem 0;
+      &_title {
+        height: 68.93px;
+      }
+      h3 {
+        font-family: $fontNunito;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 1.5rem;
+        line-height: 2.0625rem;
+        color: $black;
+      }
+      & > div {
+        width: calc(100% / 3);
+        font-family: $fontNunito;
+        font-style: normal;
+        font-weight: $light;
+        font-size: $font_18px;
+        &:nth-child(2) {
+          text-align: center;
+        }
+        &:nth-child(3) {
+          text-align: center;
+          max-width: 10.938rem;
+          margin-right: 0;
+          margin-left: auto;
+        }
+      }
+    }
+  }
+}
+
 .acc_item {
-  display: block;
   &__header {
     margin-top: 1.25rem;
     background: #bad0e5;
@@ -45,7 +111,7 @@
   }
   &__subtitle {
     font-weight: $bold;
-    font-size: 1.125rem;
+    font-size: $font_18px;
     color: #000000;
     margin-bottom: 1.25rem;
   }
@@ -53,7 +119,8 @@
     text-decoration: underline;
   }
   &__block {
-    margin-top: 0.625rem;
+    margin-top: 1.625rem;
+    font-size: $font_18px;
   }
   &__disabled {
     display: none;
@@ -70,23 +137,33 @@
 
   &__subitem {
     position: relative;
-    padding: 1.563rem;
+    padding: 2.563rem;
     margin-top: 1.25rem;
     background: #d6e5f2;
     border-radius: 5px;
-    a {
-      font-size: 1.125rem;
-      color: $white;
-      padding: 0.938rem 1.25rem;
-      border-radius: 5px;
-      background-color: $darkBlue;
-      transition: 0.3s;
+    &_container {
+      @include flex(row, center, space-between);
+      margin-bottom: 1rem;
     }
+    // a {
+    //   font-size: $font_18px;
+    //   color: $white;
+    //   padding: 0.938rem 1.25rem;
+    //   border-radius: 5px;
+    //   background-color: $darkBlue;
+    //   transition: 0.3s;
+    // }
 
     &_info {
       display: flex;
     }
   }
+
+  &__actionItems {
+    @include flex(row, center, space-between);
+    width: 4.5rem;
+  }
+
   &__underline {
     cursor: pointer;
   }
@@ -111,9 +188,6 @@
     transition: all 0.1s;
     p {
       margin-top: 0.625rem;
-    }
-    &__description {
-      padding-right: 6.25rem;
     }
   }
   &__show {

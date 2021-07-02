@@ -29,7 +29,7 @@ const OurSpecialties = () => {
         {
           name: 'Інженерія програмного забезпечення (Інтернет речей)',
           code: '122',
-          paymentForm: ['контракт'],
+          paymentForm: ['Контракт'],
           // paymentFormDetails: [
           //   {
           //     paymentForm: 'бюджет',
@@ -42,10 +42,10 @@ const OurSpecialties = () => {
           // ],
           paymentFormDetails: [
             {
-              paymentForm: 'бюджет',
+              paymentForm: 'Бюджет',
               educationFormDetails: [
                 {
-                  educationForm: 'денна',
+                  educationForm: 'Денна',
                   examRequirements: [
                     {
                       examName: 'Українська мова',
@@ -65,7 +65,7 @@ const OurSpecialties = () => {
                   ],
                 },
                 {
-                  educationForm: 'заочна',
+                  educationForm: 'Заочна',
                   examRequirements: [
                     {
                       examName: 'Українська література',
@@ -84,36 +84,16 @@ const OurSpecialties = () => {
                     },
                   ],
                 },
-                {
-                  educationForm: 'вечірня',
-                  examRequirements: [
-                    {
-                      examName: 'Історія',
-                      minimumScore: 130,
-                      coefficient: 0.3,
-                    },
-                    {
-                      examName: 'Математика',
-                      minimumScore: 180,
-                      coefficient: 0.5,
-                    },
-                    {
-                      examName: 'Фізика',
-                      minimumScore: 110,
-                      coefficient: 0.2,
-                    },
-                  ],
-                },
               ],
             },
             {
-              paymentForm: 'контракт',
+              paymentForm: 'Контракт',
               educationFormDetails: [
                 {
-                  educationForm: 'денна',
+                  educationForm: 'Денна',
                   examRequirements: [
                     {
-                      examName: 'Історія Erhf]yb',
+                      examName: 'Історія України',
                       minimumScore: 130,
                       coefficient: 0.3,
                     },
@@ -130,30 +110,10 @@ const OurSpecialties = () => {
                   ],
                 },
                 {
-                  educationForm: 'заочна',
+                  educationForm: 'Заочна',
                   examRequirements: [
                     {
                       examName: 'Хімія',
-                      minimumScore: 130,
-                      coefficient: 0.3,
-                    },
-                    {
-                      examName: 'Математика',
-                      minimumScore: 180,
-                      coefficient: 0.5,
-                    },
-                    {
-                      examName: 'Фізика',
-                      minimumScore: 110,
-                      coefficient: 0.2,
-                    },
-                  ],
-                },
-                {
-                  educationForm: 'вечірня',
-                  examRequirements: [
-                    {
-                      examName: 'Малювання',
                       minimumScore: 130,
                       coefficient: 0.3,
                     },
@@ -223,10 +183,10 @@ const OurSpecialties = () => {
               code={item.code}
               name={item.name}
               id={item.id}
-              paymentForm={item.paymentForm}
+              // paymentForm={item.paymentForm}
               paymentFormDetails={item.paymentFormDetails}
               // educationForm={item.educationForm}
-              educationalProgramLink={item.educationalProgramLink}
+              // educationalProgramLink={item.educationalProgramLink}
               description={item.description}
             />
           ))}
