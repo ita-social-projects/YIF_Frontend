@@ -1,0 +1,37 @@
+@import '../../../styles/index.scss';
+
+.admin {
+  margin-top: 42px;
+  &__title {
+    font-size: 36px;
+  }
+  &__line {
+    @include flex(row, center, space-between);
+    width: 100%;
+    max-width: 70rem;
+    height: 4.5rem;
+    background-color: #d6e5f2;
+    border-radius: 0.3rem;
+    padding: 0 2rem 0 1rem;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.125rem;
+    margin-top: 0.625rem;
+    &__name {
+      margin: 1.25rem 0;
+      font-size: 18px;
+      color: #000000;
+    }
+
+    &__icons {
+      display: flex;
+      align-items: center;
+      width: 80px;
+      justify-content: space-between;
+    }
+    &__buttons {
+      position: relative;
+      min-height: 300px;
+      width: 100%;
+    }
+  }
+}
