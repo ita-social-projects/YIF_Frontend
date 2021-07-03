@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Input from '../../../common/labeledInput';
+import { useHistory } from 'react-router-dom';
 import { FormButton } from '../../../common/formElements';
 import { Formik, Form, Field } from 'formik';
 import styles from './tabs.module.scss';
@@ -21,13 +21,11 @@ interface props {
 }
 
 function Tabs(props: props) {
-
-  let initialValues = {};
   const [toggleState, setToggleState] = useState(0);
   const toggleTab = (index: any) => {
     setToggleState(index);
   };
-
+  const history = useHistory();
   const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
@@ -42,6 +40,51 @@ function Tabs(props: props) {
     status: '',
     message: '',
   });
+  
+  const handleFormSubmit = async (
+    pathToRedirect: string,
+    values: any
+    ) => {
+    setSubmitting(true);
+    setResultMessage({
+      status: '',
+      message: '',
+    });
+    const token = await getToken();
+    console.log(props.IoEid);
+    requestSecureData(
+      `${APIUrl}SuperAdmin/AddInstitutionOfEducationAdmin`, 'POST', token, {
+        institutionOfEducationId: props.IoEid,
+        adminEmail: values.add_by_email
+      })
+      .then((res: any) => {
+        const statusCode = res.statusCode.toString();
+        if (statusCode.match(/^[23]\d{2}$/)) {
+          setResultMessage({
+            status: 'success',
+            message: `Заклад отримав нового адміністратора!`,
+          });
+          setTimeout(() => {
+            history.push(pathToRedirect);
+          }, 3000);
+          setSubmitting(false);
+        }
+        else {
+          setResultMessage({
+            status: 'error',
+              message: res.data.title || 'Щось пішло не так, спробуйте знову.'
+            });
+          }
+        }
+      )
+      .catch((error)=>{
+        setResultMessage({
+          status: 'error',
+          message: error.message || 'Щось пішло не так, спробуйте знову.'
+        })
+      });
+  }
+
   useEffect(() => {
     const getInfo = async () => {
       try {
@@ -119,13 +162,14 @@ function Tabs(props: props) {
             <div className={styles.topWrapper__title}>
               Додати адміністратора:
             </div>
-            <Formik 
+            <Formik
+              enableReinitialize
               initialValues={{
                 add_by_email:''
               }}
               validationSchema={tabContextValidation}
               onSubmit={(values, actions) => {
-                // handleFormSubmit('/superAdminAccount', values);
+                handleFormSubmit('/superAdminAccount', values);
                 actions.setSubmitting(false);
                 actions.resetForm({
                   values,
@@ -146,6 +190,7 @@ function Tabs(props: props) {
                       id='add_by_email'
                       name='add_by_email'
                       placeholder='Email'
+                      
                     />
                     {errors.add_by_email &&
                     touched.add_by_email ? (
@@ -165,21 +210,22 @@ function Tabs(props: props) {
                 </Form>
               )}
             </Formik>
-            <div className={`${styles.resultMessageContainer}`}>
-                  {submitting && resultMessage.status === 'success' && (
-                    <div className={styles.spinner}>
-                      <Spinner />
-                    </div>
-                  )}
-                  {resultMessage.status === 'success' && (
-                    <FormInputSuccess successMessage={resultMessage.message} />
-                  )}
-                  {resultMessage.status === 'error' && (
-                    <FormInputError
-                      errorType='form'
-                      errorMessage={resultMessage.message}
-                    />
-                  )}
+            
+            <div className={styles.resultMessageContainer}>
+              {submitting && resultMessage.status === 'success' && (
+                <div className={styles.spinner}>
+                  <Spinner />
+                </div>
+              )}
+              {resultMessage.status === 'success' && (
+                <FormInputSuccess successMessage={resultMessage.message} />
+              )}
+              {resultMessage.status === 'error' && (
+                <FormInputError
+                  errorType='form'
+                  errorMessage={resultMessage.message}
+                />
+              )}
             </div>
           </div>
 

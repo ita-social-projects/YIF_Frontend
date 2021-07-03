@@ -127,14 +127,6 @@ button {
       border: 1px solid #afbecf;
       border-radius: 0.3rem;
     }
-    .resultMessageContainer {
-      margin: 2rem 0rem 0rem 0rem;
-      @include flex(column, center, center);
-      justify-self: center;
-      padding-top: 13px;
-      padding-bottom: 10px;
-      padding-left: 20px; 
-    }
   }
   .moderators {
     &__top {
@@ -175,5 +167,10 @@ button {
         }
       }
     }
+  }
+  .resultMessageContainer {
+    margin: 2rem 0rem 0rem 0rem;
+    @include flex(column, center, center);
+    justify-self: center;
   }
 }

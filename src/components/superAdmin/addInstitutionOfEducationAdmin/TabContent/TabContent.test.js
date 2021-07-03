@@ -1,6 +1,23 @@
 import React from 'react';
 import TabContent from './TabContent';
 import { render, screen, wait } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
+import { authContext } from '../../../../services/tokenValidator';
+import { store } from '../../../../store/store';
+import { Provider } from 'react-redux';
+
+jest.setTimeout(15000);
+
+const mockHistoryPush = jest.fn();
+    jest.mock('react-router-dom', () => ({
+      ...jest.requireActual('react-router-dom'),
+      useHistory: () => ({
+        push: mockHistoryPush,
+        }),
+      })
+    );
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -42,6 +59,8 @@ mock.useAuth = jest.fn(() => {
 });
 
 describe('Render the TabContent page', () => {
+
+  jest.useFakeTimers();
 
   test('Page renders without crashing', async () => {
     await wait(() => {
@@ -105,4 +124,147 @@ describe('Render the TabContent page', () => {
     const placeholder = screen.getByText('Щось пішло не так, спробуйте знову.');
     expect(placeholder).toBeInTheDocument();
   });
+
+  test('Add new administrator by email', async ()=> {
+    const mockFetchPromiseModerators = Promise.resolve({
+      json: () => Promise.resolve(data),
+      status: 200,
+    });
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromiseModerators);
+    
+    const { getByText, getByLabelText, getByTestId } = render(
+      <Provider store={store}>
+        <MemoryRouter>
+            <authContext.Provider
+              value={{
+                token: 'testToken',
+                refreshToken: 'Token',
+                isExpired: false,
+                isRefreshing: false,
+                getToken: () => {},
+                updateToken: () => {},
+                removeToken: () => {},
+              }}
+            >
+              <TabContent />
+            </authContext.Provider>
+          </MemoryRouter>
+        </Provider>
+    );
+    await wait(()=> {
+      userEvent.type(getByLabelText('Електронна адреса'), 'test@gmail.com');
+    });
+    const mockPostPromiseOK = Promise.resolve({
+      json: () => Promise.resolve('Успішний тест'),
+      status: 200,
+    });
+    global.fetch = jest.fn().mockImplementationOnce(()=>mockPostPromiseOK)
+    await wait(() => {
+      userEvent.click(getByTestId('button', { name: /Додати/i }));
+    });
+    jest.runAllTimers();
+    await expect(getByText('Заклад отримав нового адміністратора!')).toBeInTheDocument();
+    await expect(mockHistoryPush).toHaveBeenCalledWith('/superAdminAccount');
+  });
+
+  test('Check email validation', async()=> {
+    const mockFetchPromiseModerators = Promise.resolve({
+      json: () => Promise.resolve(data),
+      status: 200,
+    });
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromiseModerators);
+    const {getByRole, getByText} = render(
+      <TabContent IoEid={IoEid} />
+    );
+    await wait(() => {
+      userEvent.click(getByRole('button', { name: /Додати/i }));
+    });
+    expect(getByText('Заповніть поле')).toBeInTheDocument();
+  })
+
+
+  test('Check for error with resolved promise', async()=>{
+      const mockFetchPromiseModerators = Promise.resolve({
+      json: () => Promise.resolve(data),
+      status: 200,
+    });
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromiseModerators);
+    
+    const { getByText, getByLabelText, getByTestId } = render(
+      <Provider store={store}>
+        <MemoryRouter>
+            <authContext.Provider
+              value={{
+                token: 'testToken',
+                refreshToken: 'Token',
+                isExpired: false,
+                isRefreshing: false,
+                getToken: () => {},
+                updateToken: () => {},
+                removeToken: () => {},
+              }}
+            >
+              <TabContent />
+            </authContext.Provider>
+          </MemoryRouter>
+        </Provider>
+    );
+    await wait(()=> {
+      userEvent.type(getByLabelText('Електронна адреса'), 'test@gmail.com');
+    });
+    const mockPostPromiseResolveError = Promise.resolve({
+      json: () => Promise.resolve('Error!'),
+      status: 404,
+    });
+    global.fetch = jest.fn().mockImplementationOnce(()=>mockPostPromiseResolveError)
+    await wait(() => {
+      userEvent.click(getByTestId('button', { name: /Додати/i }));
+    });
+    jest.runAllTimers();
+    await expect(getByText('Щось пішло не так, спробуйте знову.')).toBeInTheDocument();
+  })
+
+  test('Check for error with resolved promise', async()=>{
+    const mockFetchPromiseModerators = Promise.resolve({
+    json: () => Promise.resolve(data),
+    status: 200,
+  });
+  global.fetch = jest.fn().mockImplementation(() => mockFetchPromiseModerators);
+  
+  const { getByText, getByLabelText, getByTestId } = render(
+    <Provider store={store}>
+      <MemoryRouter>
+          <authContext.Provider
+            value={{
+              token: 'testToken',
+              refreshToken: 'Token',
+              isExpired: false,
+              isRefreshing: false,
+              getToken: () => {},
+              updateToken: () => {},
+              removeToken: () => {},
+            }}
+          >
+            <TabContent />
+          </authContext.Provider>
+        </MemoryRouter>
+      </Provider>
+    );
+    await wait(()=> {
+      userEvent.type(getByLabelText('Електронна адреса'), 'test@gmail.com');
+    });
+    const mockPostPromiseReject = Promise.resolve({
+      json: () => Promise.reject({
+        message:'Щось пішло не так, спробуйте знову.'
+      }),
+      status: 404,
+    });
+    global.fetch = jest.fn().mockImplementationOnce(()=>mockPostPromiseReject)
+    await wait(() => {
+      userEvent.click(getByTestId('button', { name: /Додати/i }));
+    });
+    jest.runAllTimers();
+    await expect(getByText('Щось пішло не так, спробуйте знову.')).toBeInTheDocument();
+  })
+
 });
