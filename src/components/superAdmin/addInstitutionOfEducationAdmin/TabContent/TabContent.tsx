@@ -7,6 +7,7 @@ import { requestSecureData } from '../../../../services/requestDataFunction';
 import { APIUrl } from '../../../../services/endpoints';
 import Spinner from '../../../common/spinner';
 import { useAuth } from '../../../../services/tokenValidator';
+import tabContextValidation from './tabContextValidation';
 
 interface Moderator {
   userId: string;
