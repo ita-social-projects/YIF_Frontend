@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 export const addNewAdminValidation = Yup.object().shape({
-    email: Yup.string()
+    add_by_email: Yup.string()
         .email('Введіть дійсну електронну адресу')
         .required('Заповніть поле')
         .max(
