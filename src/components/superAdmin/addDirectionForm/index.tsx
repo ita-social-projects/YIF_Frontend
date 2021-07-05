@@ -20,49 +20,57 @@ const AddDirectionForm: React.FC = () => {
     message: '',
   });
 
-  const handleFormSubmit = async (
-    pathToRedirect: string,
-    values: any
-  ) => {
+  const handleFormSubmit = async (pathToRedirect: string, values: any) => {
     setSubmitting(true);
     setResultMessage({
       status: '',
       message: '',
     });
     const token = await getToken();
-    try {
-      requestSecureData(
-        `${APIUrl}SuperAdmin/AddDirection`, 'POST', token, {
-        name: values.directionName,
-        code: values.directionCode,
-      })
-        .then((res: any) => {
-          const statusCode = res.statusCode.toString();
-          if (statusCode.match(/^[23]\d{2}$/)) {
-            setResultMessage({
-              status: 'success',
-              message: res.data.message || 'Напрям успішно додано',
-            });
-            setTimeout(() => {
-              history.push(pathToRedirect);
-            }, 3000);
-            setSubmitting(false);
-          } else {
-            setResultMessage({
-              status: 'error',
-              message: res.data.message || `${Object.keys(res.data.errors).length === 2 ? 'Такий код та напрям вже є у додатку' : res.data.errors.Code === undefined ? 'Такий напрям вже є у додатку' : 'Такий код напряму вже є у додатку'}`
-            });
-          }
+
+    requestSecureData(`${APIUrl}SuperAdmin/AddDirection`, 'POST', token, {
+      name: values.directionName,
+      code: values.directionCode,
+    })
+      .then((res: any) => {
+        const statusCode = res.statusCode.toString();
+        if (statusCode.match(/^[23]\d{2}$/)) {
+          setResultMessage({
+            status: 'success',
+            message: res.data.message || 'Напрям успішно додано',
+          });
+          setTimeout(() => {
+            history.push(pathToRedirect);
+          }, 3000);
+          setSubmitting(false);
+        } else {
+          setResultMessage({
+            status: 'error',
+            message:
+              res.data.message ||
+              `${
+                Object.keys(res.data.errors).length === 2
+                  ? 'Такий код та напрям вже є у додатку'
+                  : res.data.errors.Code === undefined
+                  ? 'Такий напрям вже є у додатку'
+                  : 'Такий код напряму вже є у додатку'
+              }`,
+          });
         }
-        )
-    }
-    catch (error) {
-      setResultMessage({
-        status: 'error',
-        message: 'Щось пішло не так, спробуйте знову.'
       })
-    }
-  }
+      .catch(() => {
+        setResultMessage({
+          status: 'error',
+          message: 'Щось пішло не так, спробуйте знову.',
+        });
+      });
+    setTimeout(() => {
+      setResultMessage({
+        status: '',
+        message: '',
+      });
+    }, 3000);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -83,9 +91,7 @@ const AddDirectionForm: React.FC = () => {
         }}
       >
         {({ errors, touched }) => (
-          <Form
-            className={`${styles.fullWidth} ${styles.form}`}
-          >
+          <Form className={`${styles.fullWidth} ${styles.form}`}>
             <div className={styles.topWrapper}>
               <div className={styles.halfWidth}>
                 <label
@@ -99,8 +105,7 @@ const AddDirectionForm: React.FC = () => {
                   id='directionName'
                   name='directionName'
                 />
-                {errors.directionName &&
-                  touched.directionName ? (
+                {errors.directionName && touched.directionName ? (
                   <FormInputError
                     errorType='inputFull'
                     errorMessage={errors.directionName}
@@ -119,8 +124,7 @@ const AddDirectionForm: React.FC = () => {
                   id='directionCode'
                   name='directionCode'
                 />
-                {errors.directionCode &&
-                  touched.directionCode ? (
+                {errors.directionCode && touched.directionCode ? (
                   <FormInputError
                     errorType='inputFull'
                     errorMessage={errors.directionCode}

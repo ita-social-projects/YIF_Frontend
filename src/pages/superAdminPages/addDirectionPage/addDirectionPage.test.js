@@ -3,14 +3,14 @@ import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from '../../../store/store';
 import ReactDOM from 'react-dom';
-import AddSpecialtyPage from './index';
+import AddDirectionPage from './index';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
     <MemoryRouter>
       <Provider store={store}>
-        <AddSpecialtyPage />
+        <AddDirectionPage />
       </Provider>
     </MemoryRouter>,
     div

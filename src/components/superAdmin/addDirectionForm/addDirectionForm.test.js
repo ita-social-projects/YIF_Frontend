@@ -3,7 +3,6 @@ import AddDirectionForm from './index';
 import { render, wait } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { MemoryRouter } from 'react-router-dom';
 import { authContext } from '../../../services/tokenValidator';
 import { store } from '../../../store/store';
 import { Provider } from 'react-redux';
@@ -28,7 +27,7 @@ jest.mock('react-router-dom', () => ({
 describe('AddDirectionForm Test', () => {
   jest.useFakeTimers();
 
-  test('Front end form validation with no data input', async () => {
+  test('Form validation with no data input', async () => {
     const { getByText, getByRole } = render(
       <Router>
         <authContext.Provider
@@ -56,21 +55,19 @@ describe('AddDirectionForm Test', () => {
   test('Does redirect works?', async () => {
     const { getByRole, getByLabelText, getByText } = render(
       <Provider store={store}>
-        <MemoryRouter>
-          <authContext.Provider
-            value={{
-              token: 'testToken',
-              refreshToken: 'Token',
-              isExpired: false,
-              isRefreshing: false,
-              getToken: () => {},
-              updateToken: () => {},
-              removeToken: () => {},
-            }}
-          >
-            <AddDirectionForm />
-          </authContext.Provider>
-        </MemoryRouter>
+        <authContext.Provider
+          value={{
+            token: 'testToken',
+            refreshToken: 'Token',
+            isExpired: false,
+            isRefreshing: false,
+            getToken: () => {},
+            updateToken: () => {},
+            removeToken: () => {},
+          }}
+        >
+          <AddDirectionForm />
+        </authContext.Provider>
       </Provider>
     );
     await wait(() => {
@@ -81,30 +78,29 @@ describe('AddDirectionForm Test', () => {
     await wait(() => {
       userEvent.click(getByRole('button', { name: /Додати/i }));
     });
-
-    jest.runAllTimers();
-    expect(getByText('Напрям успішно додано')).toBeInTheDocument();
-    expect(mockHistoryPush).toHaveBeenCalledWith('/superAdminAccount');
+    await wait(() => {
+      expect(getByText('Напрям успішно додано')).toBeInTheDocument();
+      jest.runAllTimers();
+      expect(mockHistoryPush).toBeCalledTimes(1);
+    });
   });
 
   test('Show error message if name and code already exist', async () => {
     const { getByRole, getByText, getByLabelText } = render(
       <Provider store={store}>
-        <MemoryRouter>
-          <authContext.Provider
-            value={{
-              token: 'testToken',
-              refreshToken: 'Token',
-              isExpired: false,
-              isRefreshing: false,
-              getToken: () => {},
-              updateToken: () => {},
-              removeToken: () => {},
-            }}
-          >
-            <AddDirectionForm />
-          </authContext.Provider>
-        </MemoryRouter>
+        <authContext.Provider
+          value={{
+            token: 'testToken',
+            refreshToken: 'Token',
+            isExpired: false,
+            isRefreshing: false,
+            getToken: () => {},
+            updateToken: () => {},
+            removeToken: () => {},
+          }}
+        >
+          <AddDirectionForm />
+        </authContext.Provider>
       </Provider>
     );
     await wait(() => {
@@ -136,31 +132,27 @@ describe('AddDirectionForm Test', () => {
       userEvent.click(getByRole('button', { name: /Додати/i }));
     });
 
-    jest.runAllTimers();
-
     expect(
       getByText('Такий код та напрям вже є у додатку')
     ).toBeInTheDocument();
   });
 
-  test('Show error message if name already exist', async () => {
+  test('Show error message if name already exists', async () => {
     const { getByRole, getByText, getByLabelText } = render(
       <Provider store={store}>
-        <MemoryRouter>
-          <authContext.Provider
-            value={{
-              token: 'testToken',
-              refreshToken: 'Token',
-              isExpired: false,
-              isRefreshing: false,
-              getToken: () => {},
-              updateToken: () => {},
-              removeToken: () => {},
-            }}
-          >
-            <AddDirectionForm />
-          </authContext.Provider>
-        </MemoryRouter>
+        <authContext.Provider
+          value={{
+            token: 'testToken',
+            refreshToken: 'Token',
+            isExpired: false,
+            isRefreshing: false,
+            getToken: () => {},
+            updateToken: () => {},
+            removeToken: () => {},
+          }}
+        >
+          <AddDirectionForm />
+        </authContext.Provider>
       </Provider>
     );
     await wait(() => {
@@ -189,28 +181,25 @@ describe('AddDirectionForm Test', () => {
       userEvent.click(getByRole('button', { name: /Додати/i }));
     });
 
-    jest.runAllTimers();
     expect(getByText('Такий напрям вже є у додатку')).toBeInTheDocument();
   });
 
-  test('Show error message if code already exist', async () => {
+  test('Show error message if code already exists', async () => {
     const { getByRole, getByText, getByLabelText } = render(
       <Provider store={store}>
-        <MemoryRouter>
-          <authContext.Provider
-            value={{
-              token: 'testToken',
-              refreshToken: 'Token',
-              isExpired: false,
-              isRefreshing: false,
-              getToken: () => {},
-              updateToken: () => {},
-              removeToken: () => {},
-            }}
-          >
-            <AddDirectionForm />
-          </authContext.Provider>
-        </MemoryRouter>
+        <authContext.Provider
+          value={{
+            token: 'testToken',
+            refreshToken: 'Token',
+            isExpired: false,
+            isRefreshing: false,
+            getToken: () => {},
+            updateToken: () => {},
+            removeToken: () => {},
+          }}
+        >
+          <AddDirectionForm />
+        </authContext.Provider>
       </Provider>
     );
     await wait(() => {
@@ -239,7 +228,47 @@ describe('AddDirectionForm Test', () => {
       userEvent.click(getByRole('button', { name: /Додати/i }));
     });
 
-    jest.runAllTimers();
     expect(getByText('Такий код напряму вже є у додатку')).toBeInTheDocument();
+  });
+
+  test('Show error message if caught exception', async () => {
+    const { getByRole, getByText, getByLabelText } = render(
+      <Provider store={store}>
+        <authContext.Provider
+          value={{
+            token: 'testToken',
+            refreshToken: 'Token',
+            isExpired: false,
+            isRefreshing: false,
+            getToken: () => {},
+            updateToken: () => {},
+            removeToken: () => {},
+          }}
+        >
+          <AddDirectionForm />
+        </authContext.Provider>
+      </Provider>
+    );
+    global.fetch = jest.fn().mockImplementationOnce(() =>
+      Promise.resolve({
+        json: () => Promise.reject('error'),
+        status: 400,
+      })
+    );
+    await wait(() => {
+      userEvent.type(getByLabelText('Код'), '126');
+      userEvent.type(
+        getByLabelText('Назва'),
+        'Інформаційні системи та технології'
+      );
+    });
+
+    await wait(() => {
+      userEvent.click(getByRole('button', { name: /Додати/i }));
+    });
+
+    expect(
+      getByText('Щось пішло не так, спробуйте знову.')
+    ).toBeInTheDocument();
   });
 });
