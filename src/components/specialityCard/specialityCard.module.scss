@@ -102,7 +102,9 @@
       transition: all 0.3s;
     }
     .card__details {
-      display: none;
+      // display: none;
+      height: 0;
+      opacity: 0;
       text-align: left;
       font-size: 1.125rem;
       line-height: 1.563rem;
@@ -113,12 +115,15 @@
     }
     &__opened {
       display: block;
+
       .card__details__btn {
         display: none;
       }
       .card__details {
         display: block;
         transition: all 0.3s;
+        height: auto;
+        opacity: 1;
       }
       svg {
         transform: rotate(180deg);

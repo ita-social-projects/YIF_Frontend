@@ -8,26 +8,27 @@
   padding: 0 3.125rem 3.75rem;
   box-sizing: content-box;
   &__title {
-    margin-top: 3.125rem;
-    margin-bottom: 1.25rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     font-family: $fontNunito;
-    font-size: 5rem;
-    font-weight: 400;
+    font-size: 2.5rem;
+    font-weight: 800;
   }
   &__top {
     @include flex(row, center, space-between);
+    margin-top: 3.125rem;
   }
   .animatedButton {
-    max-width: 200px;
+    max-width: 15.625rem;
     display: block;
     text-align: center;
-    padding: 0.75rem 0.563rem;
-    margin-left: 5rem;
+    padding: 0.625rem 1.25rem;
+    margin-right: 2rem;
     font-family: $fontNunito;
     font-weight: 300;
     font-size: 1.125rem;
     border-radius: 10px;
-    margin-top: 2.25rem;
+    // margin-top: 2.25rem;
   }
 }
 
@@ -81,7 +82,7 @@
         width: calc(100% / 3);
         font-family: $fontNunito;
         font-style: normal;
-        font-weight: $light;
+        font-weight: $regular;
         font-size: $font_18px;
         &:nth-child(2) {
           text-align: center;
@@ -92,6 +93,51 @@
           margin-right: 0;
           margin-left: auto;
         }
+      }
+    }
+  }
+}
+
+.card__more {
+  .card__details {
+    height: 0;
+    opacity: 0;
+    transition: all 0.1s;
+  }
+  .card__details__edit {
+    display: none;
+  }
+  .card__more__btn {
+    display: none;
+    svg {
+      transform: rotate(0deg);
+      transition: all 0.3s;
+    }
+  }
+
+  &__opened {
+    display: block;
+    .card__details {
+      margin-top: 2rem;
+      display: block;
+      transition: all 0.3s;
+      height: auto;
+      opacity: 1;
+    }
+    .animatedButton {
+      display: none;
+    }
+    .card__details__edit {
+      display: block;
+      margin-right: 1rem;
+    }
+    .card__more__btn {
+      display: block;
+      cursor: pointer;
+      text-align: center;
+      svg {
+        transform: rotate(180deg);
+        transition: all 0.3s;
       }
     }
   }
@@ -111,9 +157,11 @@
   }
   &__subtitle {
     font-weight: $bold;
-    font-size: $font_18px;
+    font-size: 20px;
     color: #000000;
-    margin-bottom: 1.25rem;
+    &_text {
+      font-size: 1.25rem;
+    }
   }
   &__underline {
     text-decoration: underline;
@@ -137,20 +185,18 @@
 
   &__subitem {
     position: relative;
-    padding: 2.563rem;
+    padding: 1.5625rem;
     margin-top: 1.25rem;
     background: #d6e5f2;
     border-radius: 5px;
     &_container {
       @include flex(row, center, space-between);
-      margin-bottom: 1rem;
     }
     // a {
     //   font-size: $font_18px;
     //   color: $white;
-    //   padding: 0.938rem 1.25rem;
-    //   border-radius: 5px;
-    //   background-color: $darkBlue;
+    //   // padding: 0.938rem 1.25rem;
+    //   // border-radius: 5px;
     //   transition: 0.3s;
     // }
 
@@ -161,13 +207,14 @@
 
   &__actionItems {
     @include flex(row, center, space-between);
-    width: 4.5rem;
+    height: 3rem;
   }
 
   &__underline {
     cursor: pointer;
   }
 }
+
 .read__more {
   &__btn {
     display: block;
@@ -188,6 +235,7 @@
     transition: all 0.1s;
     p {
       margin-top: 0.625rem;
+      margin-bottom: 0.625rem;
     }
   }
   &__show {

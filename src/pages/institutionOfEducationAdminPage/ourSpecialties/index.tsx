@@ -197,7 +197,9 @@ const OurSpecialties = () => {
   return (
     <section className={styles.specialityAdminPage}>
       <div className={styles.specialityAdminPage__top}>
-        <h1 className={styles.specialityAdminPage__title}>Спеціальності</h1>
+        <h1 className={styles.specialityAdminPage__title}>
+          Наші спеціальності
+        </h1>
         <Link
           id='edit-btn'
           to={`/institutionOfEducationAccount/addSpecialties`}
