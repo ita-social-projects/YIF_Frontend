@@ -1,0 +1,14 @@
+@import '../../../styles/index.scss';
+
+.superAdminAccountPage {
+  display: flex;
+  font-family: $fontOpenSans;
+  font-size: $font_18px;
+  font-weight: $regular;
+  background-color: $lightBlue_3;
+  width: 100%;
+  .spinnerContainer {
+    @include flex(row, center, center);
+    width: 100%;
+  }
+}
