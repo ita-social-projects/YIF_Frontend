@@ -3,7 +3,7 @@ import Input from '../../../common/labeledInput';
 import { FormButton } from '../../../common/formElements';
 import { Formik, Form } from 'formik';
 import styles from './tabs.module.scss';
-import { requestSecureData } from '../../../../services/requestDataFunction';
+import { requestSecureData, requestWithBody } from '../../../../services/requestDataFunction';
 import { APIUrl } from '../../../../services/endpoints';
 import Spinner from '../../../common/spinner';
 import { useAuth } from '../../../../services/tokenValidator';
@@ -11,6 +11,12 @@ import { useAuth } from '../../../../services/tokenValidator';
 interface Moderator {
   userId: string;
   email: string;
+}
+
+interface Message {
+  errors: {
+    IoEId: string[];
+  };
 }
 
 interface props {
@@ -28,12 +34,18 @@ function Tabs(props: props) {
   const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
+  const [isErrorActive, setIsErrorActive] = useState(false);
   const [moderators, setModerators] = useState<Array<Moderator>>([
     {
       userId: '',
       email: '',
     },
   ]);
+  const [message, setMessage] = useState<Message>({
+    errors: {
+      IoEId: ['']
+    }
+  });
 
   useEffect(() => {
     const getInfo = async () => {
@@ -59,6 +71,34 @@ function Tabs(props: props) {
     };
     getInfo();
   }, []);
+
+  const chooseIoEadmin = async (userId: string, ioEId: { pathname: string; }) => {
+    try {
+      const { statusCode, data }: any = await requestWithBody(
+        `${APIUrl}SuperAdmin/ChooseIoEAdminFromModerators`,
+        'PUT',
+        {
+          userId: userId,
+          ioEId: ioEId
+        });
+      if (statusCode.toString().match(/^[23]\d{2}$/)) {
+        setError(false);
+        console.log("success!")
+      } else {
+        setMessage(data);
+        setIsErrorActive(true)
+        setTimeout(
+          function() {
+            setIsErrorActive(false)
+          }, 3000);
+        console.log("error!")
+      }
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setIsFetching(false);
+    }
+  };
 
   let content;
   if (isFetching && !error) {
@@ -148,9 +188,12 @@ function Tabs(props: props) {
                   <div className={styles.moderators__item__mail}>
                     {moderator.email}
                   </div>
-                  <div className={styles.moderators__item__link}>
+                  <button className={styles.moderators__item__link} onClick={()=>{chooseIoEadmin(
+                    moderator.userId,
+                    props.IoEid
+                  )}}>
                     Призначити адміном
-                  </div>
+                  </button>
                 </div>
               )
             })}

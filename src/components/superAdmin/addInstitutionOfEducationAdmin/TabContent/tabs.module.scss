@@ -146,7 +146,8 @@ button {
         font-size: 1rem;
         color: #27446a;
         cursor: pointer;
-
+        font-family: 'Nunito', sans-serif;
+        background-color: transparent;
         &:hover {
           font-weight: 600;
         }

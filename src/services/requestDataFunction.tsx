@@ -16,7 +16,7 @@
 //    'filed2':'value2'
 //}
 
-type Respone<T extends object> = {
+type Response<T extends object> = {
   statusCode: number;
   data: T;
 };
@@ -25,7 +25,7 @@ export async function requestData<TData extends object>(
   url: string,
   method: string,
   body?: any
-): Promise<Respone<TData>> {
+): Promise<Response<TData>> {
   const res = await fetch(url, {
     method: method,
     headers: {
@@ -43,17 +43,13 @@ export async function requestData<TData extends object>(
   };
 }
 
-// REQUEST FOR CHANGE IMAGE PROFILE:
-type ResponeProfileImage<T extends object> = {
-  statusCode: number;
-  data: T;
-};
+// REQUEST FOR CHANGE WITH REQUEST BODY:
 
-export async function requestImageProfile<TData extends object>(
+export async function requestWithBody<TData extends object>(
   url: string,
   method: string,
   body?: any
-): Promise<ResponeProfileImage<TData>> {
+): Promise<Response<TData>> {
   const appJWTToken = localStorage.getItem('token');
 
   const res = await fetch(url, {
@@ -77,7 +73,7 @@ export async function requestSecureData<TData extends object>(
   method: string,
   token: string,
   body?: any
-): Promise<Respone<TData>> {
+): Promise<Response<TData>> {
   const res = await fetch(url, {
     method: method,
     headers: {
