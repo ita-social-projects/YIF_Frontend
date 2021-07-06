@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Input from '../../../common/labeledInput';
-import { FormButton } from '../../../common/formElements';
+import { FormButton, FormInputError } from '../../../common/formElements';
 import { Formik, Form } from 'formik';
 import styles from './tabs.module.scss';
 import { requestSecureData, requestWithBody } from '../../../../services/requestDataFunction';
 import { APIUrl } from '../../../../services/endpoints';
 import Spinner from '../../../common/spinner';
 import { useAuth } from '../../../../services/tokenValidator';
+import { FormInputSuccess } from '../../../common/formElements/formInputSuccess/formInputSuccess';
 
 interface Moderator {
   userId: string;
@@ -34,18 +35,30 @@ function Tabs(props: props) {
   const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
-  const [isErrorActive, setIsErrorActive] = useState(false);
   const [moderators, setModerators] = useState<Array<Moderator>>([
     {
       userId: '',
       email: '',
     },
   ]);
-  const [message, setMessage] = useState<Message>({
-    errors: {
-      IoEId: ['']
-    }
+  const [resultMessage, setResultMessage] = useState({
+    status: '',
+    message: '',
   });
+
+  const showMessage = (statusCode: any, msg: string) => {
+    const result = (statusCode.match(/^[23]\d{2}$/)) ? 'success' : 'error';
+    setResultMessage({
+      status: result,
+      message: msg,
+    });
+    setTimeout(() => {
+      setResultMessage({
+        status: '',
+        message: '',
+      });
+    }, 4000);
+  }
 
   useEffect(() => {
     const getInfo = async () => {
@@ -57,7 +70,6 @@ function Tabs(props: props) {
           currentToken,
         );
         if (statusCode.toString().match(/^[23]\d{2}$/)) {
-          console.log(data)
           setModerators(data);
           setError(false);
         } else {
@@ -82,19 +94,14 @@ function Tabs(props: props) {
           ioEId: ioEId
         });
       if (statusCode.toString().match(/^[23]\d{2}$/)) {
+        showMessage(statusCode.toString(), 'Адміністратора успішно призначено')
         setError(false);
-        console.log("success!")
       } else {
-        setMessage(data);
-        setIsErrorActive(true)
-        setTimeout(
-          function() {
-            setIsErrorActive(false)
-          }, 3000);
-        console.log("error!")
+        showMessage(statusCode.toString(), data.errors.IoEId[0])
       }
     } catch (e) {
       console.log(e);
+      setError(true)
     } finally {
       setIsFetching(false);
     }
@@ -197,6 +204,16 @@ function Tabs(props: props) {
                 </div>
               )
             })}
+            {(resultMessage.status === 'success') &&
+            <div className={styles.message}>
+              <FormInputSuccess successMessage={resultMessage.message} />
+            </div>
+            }
+            {(resultMessage.status === 'error') &&
+            <div className={styles.message}>
+              <FormInputError errorMessage={resultMessage.message} errorType={'form'}/>
+            </div>
+            }
           </div>
         </div>
       </div>

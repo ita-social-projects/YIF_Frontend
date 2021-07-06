@@ -1,5 +1,11 @@
 @import '../../../styles';
 
+.message {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
 .tabs {
   display: flex;
   &__block {
