@@ -3,8 +3,8 @@ import styles from './ourSpecialties.module.scss';
 import { Link, useRouteMatch } from 'react-router-dom';
 import Delete from '../../../components/common/icons/Delete';
 import Edit from '../../../components/common/icons/Edit';
-import Tabs from '../../../components/Tabs/Tabs';
-import Tab from '../../../components/Tabs/Tab';
+import Tabs from '../../../components/Tabs';
+import Tab from '../../../components/Tabs/tab/Tab';
 import ExamRequirementsCard from '../../../components/examRequirementsCard';
 import More from '../../../components/common/icons/More';
 
@@ -18,10 +18,6 @@ interface Props {
   description: string;
   // educationalProgramLink: string;
 }
-
-// const EducationFormTab: React.FC<Props> = ({ educationForm }: any) => {
-//   return <div>{educationForm}</div>;
-// };
 
 const SpecialtyDetails: React.FC<Props> = ({
   code,
@@ -53,17 +49,17 @@ const SpecialtyDetails: React.FC<Props> = ({
         </h3>
         <div className={styles.acc_item__actionItems}>
           <div
-            data-testid='open'
+            data-testid='check-open'
             className={styles.animatedButton}
             onClick={handleClick}
           >
             Детальніше
           </div>
-          <p className={styles.card__details__edit}>
+          <div className={styles.card__details__edit}>
             <Link id='edit-btn' to={`${path}/edit`}>
               <Edit />
             </Link>
-          </p>
+          </div>
           <Delete />
         </div>
       </div>
@@ -132,9 +128,9 @@ const SpecialtyDetails: React.FC<Props> = ({
             <strong className={styles.acc_item__subtitle}>Опис: </strong>
             <span
               className={`${styles.acc_item__underline}`}
+              data-testid='check-open-description'
               key={id}
               onClick={(e) => handleClickDescription(e)}
-              data-testid='check-open'
             >
               {' '}
               <span

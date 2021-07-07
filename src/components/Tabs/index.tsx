@@ -1,5 +1,5 @@
 import React, { ReactElement, useState } from 'react';
-import TabTitle from './TabTitle';
+import TabTitle from './tabTitle/TabTitle';
 
 type Props = {
   children: ReactElement[];
@@ -9,6 +9,8 @@ type Props = {
 
 const Tabs: React.FC<Props> = ({ children, tabsStyle, tabsContainer }) => {
   const [selectedTab, setSelectedTab] = useState(0);
+
+  console.log(children);
 
   return (
     <div className={tabsContainer}>
