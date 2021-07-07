@@ -14,14 +14,9 @@ interface Moderator {
   email: string;
 }
 
-interface Message {
-  errors: {
-    IoEId: string[];
-  };
-}
-
 interface props {
-  IoEid: { pathname: string }
+  IoEid: { pathname: string },
+  setIsAdminDeleted: any
 }
 
 function Tabs(props: props) {
@@ -82,7 +77,7 @@ function Tabs(props: props) {
       }
     };
     getInfo();
-  }, []);
+  }, [moderators]);
 
   const chooseIoEadmin = async (userId: string, ioEId: { pathname: string; }) => {
     try {
@@ -95,6 +90,7 @@ function Tabs(props: props) {
         });
       if (statusCode.toString().match(/^[23]\d{2}$/)) {
         showMessage(statusCode.toString(), 'Адміністратора успішно призначено')
+        props.setIsAdminDeleted(false)
         setError(false);
       } else {
         showMessage(statusCode.toString(), data.errors.IoEId[0])
