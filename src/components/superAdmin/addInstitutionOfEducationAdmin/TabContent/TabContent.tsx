@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Input from '../../../common/labeledInput';
-import { FormButton, FormInputError } from '../../../common/formElements';
-import { Formik, Form } from 'formik';
 import styles from './tabs.module.scss';
 import { requestSecureData, requestWithBody } from '../../../../services/requestDataFunction';
 import { APIUrl } from '../../../../services/endpoints';
 import Spinner from '../../../common/spinner';
 import { useAuth } from '../../../../services/tokenValidator';
 import { FormInputSuccess } from '../../../common/formElements/formInputSuccess/formInputSuccess';
+import { FormInputError } from '../../../common/formElements';
 
 interface Moderator {
   userId: string;
@@ -15,18 +13,14 @@ interface Moderator {
 }
 
 interface props {
-  IoEid: { pathname: string },
-  setIsAdminDeleted: any
+  IoEid: { pathname: string }
 }
 
 function Tabs(props: props) {
-
-  let initialValues = {};
   const [toggleState, setToggleState] = useState(0);
   const toggleTab = (index: any) => {
     setToggleState(index);
   };
-
   const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
@@ -55,6 +49,29 @@ function Tabs(props: props) {
     }, 4000);
   }
 
+
+  const chooseIoEadmin = async (userId: string, ioEId: { pathname: string; }) => {
+    try {
+      const { statusCode, data }: any = await requestWithBody(
+        `${APIUrl}SuperAdmin/ChooseIoEAdminFromModerators`,
+        'PUT',
+        {
+          userId: userId,
+          ioEId: ioEId
+        });
+      if (statusCode.toString().match(/^[23]\d{2}$/)) {
+        showMessage(statusCode.toString(), `Заклад отримав нового адміністратора!`)
+        setError(false);
+      } else {
+        showMessage(statusCode.toString(), data.errors.IoEId[0])
+      }
+    } catch (e) {
+      setError(true)
+    } finally {
+      setIsFetching(false);
+    }
+  };
+
   useEffect(() => {
     const getInfo = async () => {
       try {
@@ -77,31 +94,7 @@ function Tabs(props: props) {
       }
     };
     getInfo();
-  }, [moderators]);
-
-  const chooseIoEadmin = async (userId: string, ioEId: { pathname: string; }) => {
-    try {
-      const { statusCode, data }: any = await requestWithBody(
-        `${APIUrl}SuperAdmin/ChooseIoEAdminFromModerators`,
-        'PUT',
-        {
-          userId: userId,
-          ioEId: ioEId
-        });
-      if (statusCode.toString().match(/^[23]\d{2}$/)) {
-        showMessage(statusCode.toString(), 'Адміністратора успішно призначено')
-        props.setIsAdminDeleted(false)
-        setError(false);
-      } else {
-        showMessage(statusCode.toString(), data.errors.IoEId[0])
-      }
-    } catch (e) {
-      console.log(e);
-      setError(true)
-    } finally {
-      setIsFetching(false);
-    }
-  };
+  }, []);
 
   let content;
   if (isFetching && !error) {
@@ -118,7 +111,7 @@ function Tabs(props: props) {
     );
   } else {
     content = (
-      <div className='container'>
+      <div data-testid='toggle-content-1' className='container'>
         <div className={styles.tabs}>
           <div
             data-testid='toggle-btn1'
@@ -153,26 +146,9 @@ function Tabs(props: props) {
                 : `${styles.content__tabs}`
             }
           >
-            <Formik initialValues={initialValues} onSubmit={() => {}}>
-              {() => (
-                <Form data-testid='toggle-content-1' className={styles.mainContent}>
-                  <div className={styles.mainInfo}>
-                    <Input
-                      id='email'
-                      label='Додати адміністратора:'
-                      name='addAdmin'
-                      placeholder='Email'
-                    />
-                    <FormButton
-                      title={'Додати'}
-                      id='registerFormButton'
-                      data-testid='button'
-                      form='register'
-                    />
-                  </div>
-                </Form>
-              )}
-            </Formik>
+            <div className={styles.topWrapper__title}>
+              Додати адміністратора:
+            </div>
           </div>
 
           <div
@@ -191,25 +167,27 @@ function Tabs(props: props) {
                   <div className={styles.moderators__item__mail}>
                     {moderator.email}
                   </div>
-                  <button className={styles.moderators__item__link} onClick={()=>{chooseIoEadmin(
+                  <button data-testid="chooseBtn" className={styles.moderators__item__link} onClick={()=>{chooseIoEadmin(
                     moderator.userId,
                     props.IoEid
                   )}}>
                     Призначити адміном
                   </button>
+
                 </div>
               )
             })}
-            {(resultMessage.status === 'success') &&
-            <div className={styles.message}>
-              <FormInputSuccess successMessage={resultMessage.message} />
+            <div className={styles.resultMessageContainer}>
+              {resultMessage.status === 'success' && (
+                <FormInputSuccess successMessage={resultMessage.message} />
+              )}
+              {resultMessage.status === 'error' && (
+                <FormInputError
+                  errorType='form'
+                  errorMessage={resultMessage.message}
+                />
+              )}
             </div>
-            }
-            {(resultMessage.status === 'error') &&
-            <div className={styles.message}>
-              <FormInputError errorMessage={resultMessage.message} errorType={'form'}/>
-            </div>
-            }
           </div>
         </div>
       </div>

@@ -120,7 +120,7 @@ const AddInstitutionOfEducationAdmin = () => {
           <IoEadmin adminId={adminId} adminEmail={adminEmail} />
           <div className={styles.admin__buttons}>
             {/* Check for (state === undefined) for testing*/}
-            <TabContent setIsAdminDeleted={setIsAdminDeleted} IoEid={(state === undefined) ? IoEid : state.IoEid} />
+            <TabContent IoEid={(state === undefined) ? IoEid : state.IoEid} />
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import TabContent from './TabContent';
 import { render, screen, wait } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -22,6 +23,12 @@ const data = [
     email: 'vweslaine.pg@ericreyess.com',
   }
 ]
+
+const data2 = {
+  errors: {
+    IoEid: ['Цей навчальний заклад уже має адміністратора']
+  }
+}
 
 const mockJsonPromise = Promise.resolve(data);
 
@@ -70,6 +77,15 @@ describe('Render the TabContent page', () => {
     button2.click()
     const toggleContent2 = screen.getByTestId('toggle-content-2')
     expect(toggleContent2).toBeInTheDocument()
+  });
+
+  test('Add new administrator from moderators', async ()=> {
+
+    const { getByText, getAllByTestId } = render(<TabContent />);
+
+    await wait(() => {userEvent.click(getAllByTestId('chooseBtn')[1]);});
+
+    await expect(getByText('Заклад отримав нового адміністратора!')).toBeInTheDocument();
   });
 
   test('Check error ', async () => {
