@@ -88,7 +88,7 @@ describe('AddIoEadmin page', () => {
       );
     });
 
-    const placeholder = screen.getByText('Щось пішло не так, спробуйте знову.');
+    const placeholder = screen.getByText('Не вдалося отримати інформацію про навчальний заклад');
     expect(placeholder).toBeInTheDocument();
   });
 
@@ -107,7 +107,7 @@ describe('AddIoEadmin page', () => {
       );
     });
 
-    const placeholder = screen.getByText('Щось пішло не так, спробуйте знову.');
+    const placeholder = screen.getByText('Не вдалося отримати інформацію про навчальний заклад');
     expect(placeholder).toBeInTheDocument();
   });
 
