@@ -1,0 +1,39 @@
+@import '../../../../styles/index.scss';
+
+.errorFromInputField {
+  @include flex(row, center, flex-start);
+  padding: 0.7rem;
+  padding-left: 1.4rem;
+  position: absolute;
+  font-size: $font_13px;
+  width: 100%;
+  color: $darkred;
+  font-weight: $regular;
+  font-family: $fontOpenSans;
+  svg path {
+    fill: $darkred;
+  }
+}
+
+.errorFromForm {
+  @include flex(row, center, flex-start);
+  font-size: 13px;
+  font-family: $fontOpenSans;
+  font-weight: $regular;
+  background-color: #b62c2c;
+  width: 100%;
+  color: white;
+  margin-bottom: 2rem;
+  border-radius: 0.3rem;
+  padding: 1.2rem;
+  padding-left: 1.4rem;
+  font-size: $font_13px;
+  svg path {
+    fill: white;
+  }
+}
+
+.iconWrap {
+  @include flex(row, center, center);
+  padding-right: 1rem;
+}
