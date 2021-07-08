@@ -13,7 +13,9 @@ interface Moderator {
 }
 
 interface props {
-  IoEid: { pathname: string }
+  IoEid: { pathname: string },
+  isAdminDeleted: boolean,
+  setIsAdminDeleted: any
 }
 
 function Tabs(props: props) {
@@ -22,6 +24,7 @@ function Tabs(props: props) {
     setToggleState(index);
   };
   const [isFetching, setIsFetching] = useState(true);
+  const [isAdminChanged, setIsAdminChanged] = useState(false);
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
   const [moderators, setModerators] = useState<Array<Moderator>>([
@@ -49,7 +52,6 @@ function Tabs(props: props) {
     }, 4000);
   }
 
-
   const chooseIoEadmin = async (userId: string, ioEId: { pathname: string; }) => {
     try {
       const { statusCode, data }: any = await requestWithBody(
@@ -61,6 +63,8 @@ function Tabs(props: props) {
         });
       if (statusCode.toString().match(/^[23]\d{2}$/)) {
         showMessage(statusCode.toString(), `Заклад отримав нового адміністратора!`)
+        setIsAdminChanged(!isAdminChanged)
+        props.setIsAdminDeleted(!props.isAdminDeleted);
         setError(false);
       } else {
         showMessage(statusCode.toString(), data.errors.IoEId[0])
@@ -94,7 +98,7 @@ function Tabs(props: props) {
       }
     };
     getInfo();
-  }, [moderators.length]);
+  }, [isAdminChanged]);
 
   let content;
   if (isFetching && !error) {
