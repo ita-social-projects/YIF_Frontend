@@ -170,9 +170,6 @@ function Tabs(props: props) {
                 </Form>
               )}
             </Formik>
-            <div className={styles.topWrapper__title}>
-              Додати адміністратора:
-            </div>
           </div>
 
           <div
