@@ -94,7 +94,7 @@ function Tabs(props: props) {
       }
     };
     getInfo();
-  }, []);
+  }, [moderators.length]);
 
   let content;
   if (isFetching && !error) {
@@ -173,7 +173,6 @@ function Tabs(props: props) {
                   )}}>
                     Призначити адміном
                   </button>
-
                 </div>
               )
             })}
