@@ -150,6 +150,26 @@ function Tabs(props: props) {
                 : `${styles.content__tabs}`
             }
           >
+             <Formik initialValues={initialValues} onSubmit={() => {}}>
+              {() => (
+                <Form data-testid='toggle-content-1' className={styles.mainContent}>
+                  <div className={styles.mainInfo}>
+                    <Input
+                      id='email'
+                      label='Додати адміністратора:'
+                      name='addAdmin'
+                      placeholder='Email'
+                    />
+                    <FormButton
+                      title={'Додати'}
+                      id='registerFormButton'
+                      data-testid='button'
+                      form='register'
+                    />
+                  </div>
+                </Form>
+              )}
+            </Formik>
             <div className={styles.topWrapper__title}>
               Додати адміністратора:
             </div>
