@@ -33,7 +33,7 @@ const AddInstitutionOfEducationAdmin = () => {
   const { state } = useLocation<stateType>();
   const { path } = useRouteMatch();
   const [isFetching, setIsFetching] = useState(true);
-  const [isAdminDeleted, setIsAdminDeleted] = useState(false);
+  const [isAdminChanged, setIsAdminChanged] = useState(false);
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
   const [
@@ -82,7 +82,7 @@ const AddInstitutionOfEducationAdmin = () => {
     };
     getInfo()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAdminDeleted]);
+  }, [isAdminChanged]);
 
   let content;
   if (isFetching && !error) {
@@ -120,7 +120,7 @@ const AddInstitutionOfEducationAdmin = () => {
           <IoEadmin adminId={adminId} adminEmail={adminEmail} />
           <div className={styles.admin__buttons}>
             {/* Check for (state === undefined) for testing*/}
-            <TabContent setIsAdminDeleted={setIsAdminDeleted} isAdminDeleted={isAdminDeleted} IoEid={(state === undefined) ? IoEid : state.IoEid} />
+            <TabContent isAdminChanged={isAdminChanged} setIsAdminChanged={setIsAdminChanged} IoEid={(state === undefined) ? IoEid : state.IoEid} />
           </div>
         </div>
       </div>

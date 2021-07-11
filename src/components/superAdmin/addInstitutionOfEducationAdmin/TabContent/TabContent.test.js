@@ -2,6 +2,8 @@ import React from 'react';
 import TabContent from './TabContent';
 import { render, screen, wait } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import AddInstitutionOfEducationAdmin from '../index';
+import { MemoryRouter } from 'react-router-dom';
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -81,7 +83,13 @@ describe('Render the TabContent page', () => {
 
   test('Add new administrator from moderators', async ()=> {
 
-    const { getByText, getAllByTestId } = render(<TabContent />);
+    const { getByText, getAllByTestId } = render(
+      <MemoryRouter>
+        <AddInstitutionOfEducationAdmin>
+          <TabContent IoEid={IoEid}/>
+        </AddInstitutionOfEducationAdmin>
+      </MemoryRouter>
+    );
 
     await wait(() => {userEvent.click(getAllByTestId('chooseBtn')[1]);});
 
