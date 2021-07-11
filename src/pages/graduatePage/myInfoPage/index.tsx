@@ -15,7 +15,7 @@ import { FormInputSuccess } from '../../../components/common/formElements/formIn
 import { userSelector } from '../../../store/reducers/setUserReducer';
 import { useSelector } from 'react-redux';
 import { requestData } from '../../../services/requestDataFunction';
-import { requestWithBody } from '../../../services/requestDataFunction';
+import { requestImageProfile } from '../../../services/requestDataFunction';
 import { store } from '../../../store/store';
 import { setUserPhoto } from '../../../store/reducers/setUserReducer';
 
@@ -29,7 +29,7 @@ const MyInfo = () => {
   const avatar = photo ? photo : defaultPicture;
 
   const imageHandler = (image: string) => {
-    requestWithBody(`${APIUrl}Users/Current/ChangePhoto`, 'POST', {
+    requestImageProfile(`${APIUrl}Users/Current/ChangePhoto`, 'POST', {
       photo: image,
     })
       .then((res: any) => {

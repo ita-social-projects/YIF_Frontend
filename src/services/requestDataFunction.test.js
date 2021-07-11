@@ -2,7 +2,7 @@ import { rejects } from 'assert';
 import { resolve } from 'path';
 import {
   requestData,
-  requestWithBody,
+  requestImageProfile,
   requestSecureData,
 } from './requestDataFunction';
 
@@ -43,7 +43,7 @@ it('request Data on success', () => {
 
 describe('requestImageProfile', () => {
   it('method GET', () => {
-    requestWithBody('URL', 'GET');
+    requestImageProfile('URL', 'GET');
     expect(global.fetch).toHaveBeenCalledWith('URL', {
       body: undefined,
       headers: { 'Content-Type': 'application/json' },

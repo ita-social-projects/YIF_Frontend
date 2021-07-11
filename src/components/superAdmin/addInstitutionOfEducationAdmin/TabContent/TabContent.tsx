@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styles from './tabs.module.scss';
-import { requestSecureData, requestWithBody } from '../../../../services/requestDataFunction';
+import { requestSecureData } from '../../../../services/requestDataFunction';
 import { APIUrl } from '../../../../services/endpoints';
 import Spinner from '../../../common/spinner';
 import { useAuth } from '../../../../services/tokenValidator';
 import { FormInputSuccess } from '../../../common/formElements/formInputSuccess/formInputSuccess';
 import { FormInputError } from '../../../common/formElements';
+import { Formik, Form } from 'formik';
+import Input from '../../../common/labeledInput';
+import { FormButton } from '../../../common/formElements';
 
 interface Moderator {
   userId: string;
@@ -19,6 +22,7 @@ interface props {
 }
 
 function Tabs(props: props) {
+  let initialValues = {};
   const [toggleState, setToggleState] = useState(0);
   const toggleTab = (index: any) => {
     setToggleState(index);
@@ -54,9 +58,11 @@ function Tabs(props: props) {
 
   const chooseIoEadmin = async (userId: string, ioEId: { pathname: string; }) => {
     try {
-      const { statusCode, data }: any = await requestWithBody(
+      const currentToken = await getToken();
+      const { statusCode, data }: any = await requestSecureData(
         `${APIUrl}SuperAdmin/ChooseIoEAdminFromModerators`,
         'PUT',
+        currentToken,
         {
           userId: userId,
           ioEId: ioEId
@@ -115,7 +121,7 @@ function Tabs(props: props) {
     );
   } else {
     content = (
-      <div data-testid='toggle-content-1' className='container'>
+      <div className='container'>
         <div className={styles.tabs}>
           <div
             data-testid='toggle-btn1'
@@ -144,6 +150,7 @@ function Tabs(props: props) {
 
         <div className={styles.content}>
           <div
+            data-testid='toggle-content-1'
             className={
               toggleState === 1
                 ? `${styles.content__tabs} ${styles.content__tabs__active}`
@@ -152,7 +159,7 @@ function Tabs(props: props) {
           >
              <Formik initialValues={initialValues} onSubmit={() => {}}>
               {() => (
-                <Form data-testid='toggle-content-1' className={styles.mainContent}>
+                <Form className={styles.mainContent}>
                   <div className={styles.mainInfo}>
                     <Input
                       id='email'
@@ -173,13 +180,14 @@ function Tabs(props: props) {
           </div>
 
           <div
+            data-testid='toggle-content-2'
             className={
               toggleState === 2
                 ? `${styles.content__tabs} ${styles.content__tabs__active}`
                 : `${styles.content__tabs}`
             }
           >
-            <div data-testid='toggle-content-2' className={styles.moderators__top}>
+            <div className={styles.moderators__top}>
               <p className={styles.moderators__top__address}>Електронна адреса</p>
             </div>
             {moderators.map((moderator) => {

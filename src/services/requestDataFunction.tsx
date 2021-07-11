@@ -43,13 +43,17 @@ export async function requestData<TData extends object>(
   };
 }
 
-// REQUEST FOR CHANGE WITH REQUEST BODY:
+// REQUEST FOR CHANGE IMAGE PROFILE:
+type ResponeProfileImage<T extends object> = {
+  statusCode: number;
+  data: T;
+};
 
-export async function requestWithBody<TData extends object>(
+export async function requestImageProfile<TData extends object>(
   url: string,
   method: string,
   body?: any
-): Promise<Response<TData>> {
+): Promise<ResponeProfileImage<TData>> {
   const appJWTToken = localStorage.getItem('token');
 
   const res = await fetch(url, {
