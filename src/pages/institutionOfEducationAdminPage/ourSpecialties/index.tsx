@@ -5,8 +5,8 @@ import styles from './ourSpecialties.module.scss';
 import SpecialtyDetails from './SpecialtyDetails';
 
 interface props {
-  role: string
-  rolePath: string
+  role: string;
+  rolePath: string;
 }
 
 const OurSpecialties = (props: props) => {
@@ -395,7 +395,7 @@ const OurSpecialties = (props: props) => {
                       coefficient: 0.3,
                     },
                     {
-                      examName: 'Математика',
+                      examName: 'Малювання',
                       minimumScore: 180,
                       coefficient: 0.5,
                     },

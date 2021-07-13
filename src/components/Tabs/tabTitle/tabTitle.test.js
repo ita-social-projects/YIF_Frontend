@@ -96,7 +96,6 @@ describe('TabTitle', () => {
         title={title}
       />
     );
-    screen.debug();
 
     const button = screen.getByRole('button');
     expect(button).not.toHaveClass('tabStyle_active');

@@ -26,6 +26,7 @@ test('render a title', () => {
       </Provider>
     </MemoryRouter>
   );
+
   expect(getByText(/Наші Спеціальності/i)).toBeInTheDocument();
   const title = screen.getByText(/Наші Спеціальності/i);
   expect(title).toBeInTheDocument();
@@ -40,6 +41,10 @@ test('render a title', () => {
   const spectitle2 = screen.getByText(/124 Комп'ютерні науки/i);
   expect(spectitle2).toBeInTheDocument();
   expect(spectitle2.tagName).toMatch(/h3/i);
+
+  expect(getByText(/Соціальні та поведінкові науки/i)).toBeInTheDocument();
+
+  screen.debug();
 });
 
 test('click to extend specialty card', () => {

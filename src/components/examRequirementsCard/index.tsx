@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface Props {
-  examRequirements: any;
+  examRequirements: any[];
   card__content: string;
   card__content__line: string;
   card__content__line_title: string;
