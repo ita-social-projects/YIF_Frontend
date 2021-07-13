@@ -5,8 +5,8 @@ import styles from './ourSpecialties.module.scss';
 import SpecialtyDetails from './SpecialtyDetails';
 
 interface props {
-  role: string
-  rolePath: string
+  role: string;
+  rolePath: string;
 }
 
 const OurSpecialties = (props: props) => {
@@ -17,8 +17,98 @@ const OurSpecialties = (props: props) => {
         {
           name: "Комп'ютерні науки",
           code: '124',
-          paymentForm: 'бюджет, контракт',
-          educationForm: 'денна, заочна, вечірня',
+          paymentFormDetails: [
+            {
+              paymentForm: 'Бюджет',
+              educationFormDetails: [
+                {
+                  educationForm: 'Денна',
+                  examRequirements: [
+                    {
+                      examName: 'Українська мова',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+                {
+                  educationForm: 'Заочна',
+                  examRequirements: [
+                    {
+                      examName: 'Українська література',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              paymentForm: 'Контракт',
+              educationFormDetails: [
+                {
+                  educationForm: 'Денна',
+                  examRequirements: [
+                    {
+                      examName: 'Історія України',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+                {
+                  educationForm: 'Заочна',
+                  examRequirements: [
+                    {
+                      examName: 'Хімія',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
           description:
             'Це базовий опис спеціальності. Ця спеціальність підійде для тих хто хоче реалізувати себе у майбутньому у даній галузі. Для здобувачів вищої освіти вона буде цікавою тому що вони зможуть розкрити себе у даному напрямку за рахунок актуальної інформації, яку будуть доносити ним професіонали своєї справи, які є майстрами у своїй галузі.',
           educationalProgramLink: 'example.com',
@@ -26,20 +116,198 @@ const OurSpecialties = (props: props) => {
         {
           name: 'Інженерія програмного забезпечення (Інтернет речей)',
           code: '122',
-          paymentForm: 'бюджет, контракт',
-          educationForm: 'денна, вечірня',
+          paymentFormDetails: [
+            {
+              paymentForm: 'Бюджет',
+              educationFormDetails: [
+                {
+                  educationForm: 'Денна',
+                  examRequirements: [
+                    {
+                      examName: 'Українська мова',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+                {
+                  educationForm: 'Заочна',
+                  examRequirements: [
+                    {
+                      examName: 'Українська література',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              paymentForm: 'Контракт',
+              educationFormDetails: [
+                {
+                  educationForm: 'Денна',
+                  examRequirements: [
+                    {
+                      examName: 'Історія України',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+                {
+                  educationForm: 'Заочна',
+                  examRequirements: [
+                    {
+                      examName: 'Хімія',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
           description:
             'Це базовий опис спеціальності. Ця спеціальність підійде для тих хто хоче реалізувати себе у майбутньому у даній галузі. Для здобувачів вищої освіти вона буде цікавою тому що вони зможуть розкрити себе у даному напрямку за рахунок актуальної інформації, яку будуть доносити ним професіонали своєї справи, які є майстрами у своїй галузі.',
-          educationalProgramLink: 'example.com',
         },
         {
           name: 'Соціальні та поведінкові науки',
           code: '123',
-          paymentForm: 'бюджет, контракт',
-          educationForm: 'денна',
+          paymentFormDetails: [
+            {
+              paymentForm: 'Бюджет',
+              educationFormDetails: [
+                {
+                  educationForm: 'Денна',
+                  examRequirements: [
+                    {
+                      examName: 'Українська мова',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+                {
+                  educationForm: 'Заочна',
+                  examRequirements: [
+                    {
+                      examName: 'Українська література',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              paymentForm: 'Контракт',
+              educationFormDetails: [
+                {
+                  educationForm: 'Денна',
+                  examRequirements: [
+                    {
+                      examName: 'Історія України',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+                {
+                  educationForm: 'Заочна',
+                  examRequirements: [
+                    {
+                      examName: 'Хімія',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
           description:
             'Це базовий опис спеціальності. Ця спеціальність підійде для тих хто хоче реалізувати себе у майбутньому у даній галузі. Для здобувачів вищої освіти вона буде цікавою тому що вони зможуть розкрити себе у даному напрямку за рахунок актуальної інформації, яку будуть доносити ним професіонали своєї справи, які є майстрами у своїй галузі.',
-          educationalProgramLink: 'example.com',
         },
       ],
     },
@@ -49,11 +317,100 @@ const OurSpecialties = (props: props) => {
         {
           name: 'Математика',
           code: '121',
-          paymentForm: 'бюджет, контракт',
-          educationForm: 'денна, заочна, вечірня',
+          paymentFormDetails: [
+            {
+              paymentForm: 'Бюджет',
+              educationFormDetails: [
+                {
+                  educationForm: 'Денна',
+                  examRequirements: [
+                    {
+                      examName: 'Українська мова',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+                {
+                  educationForm: 'Заочна',
+                  examRequirements: [
+                    {
+                      examName: 'Українська література',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              paymentForm: 'Контракт',
+              educationFormDetails: [
+                {
+                  educationForm: 'Денна',
+                  examRequirements: [
+                    {
+                      examName: 'Історія України',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Математика',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+                {
+                  educationForm: 'Заочна',
+                  examRequirements: [
+                    {
+                      examName: 'Хімія',
+                      minimumScore: 130,
+                      coefficient: 0.3,
+                    },
+                    {
+                      examName: 'Малювання',
+                      minimumScore: 180,
+                      coefficient: 0.5,
+                    },
+                    {
+                      examName: 'Фізика',
+                      minimumScore: 110,
+                      coefficient: 0.2,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
           description:
             'Це базовий опис спеціальності. Ця спеціальність підійде для тих хто хоче реалізувати себе у майбутньому у даній галузі. Для здобувачів вищої освіти вона буде цікавою тому що вони зможуть розкрити себе у даному напрямку за рахунок актуальної інформації, яку будуть доносити ним професіонали своєї справи, які є майстрами у своїй галузі.',
-          educationalProgramLink: 'example.com',
         },
       ],
     },
@@ -78,9 +435,7 @@ const OurSpecialties = (props: props) => {
               code={item.code}
               name={item.name}
               id={item.id}
-              paymentForm={item.paymentForm}
-              educationForm={item.educationForm}
-              educationalProgramLink={item.educationalProgramLink}
+              paymentFormDetails={item.paymentFormDetails}
               description={item.description}
             />
           ))}
@@ -91,7 +446,9 @@ const OurSpecialties = (props: props) => {
   return (
     <section className={styles.specialityAdminPage}>
       <div className={styles.specialityAdminPage__top}>
-        <h1 className={styles.specialityAdminPage__title}>Спеціальності</h1>
+        <h1 className={styles.specialityAdminPage__title}>
+          Наші спеціальності
+        </h1>
         <Link
           id='edit-btn'
           to={props.rolePath}
