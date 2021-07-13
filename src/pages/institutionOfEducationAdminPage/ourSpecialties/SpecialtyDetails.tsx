@@ -12,11 +12,8 @@ interface Props {
   code: number;
   name: string;
   id: string;
-  // paymentForm: string;
   paymentFormDetails: any;
-  // educationForm: string;
   description: string;
-  // educationalProgramLink: string;
 }
 
 const SpecialtyDetails: React.FC<Props> = ({
@@ -68,6 +65,7 @@ const SpecialtyDetails: React.FC<Props> = ({
         <Tabs tabsStyle={styles.tabs} tabsContainer={styles.tabs__container}>
           {paymentFormDetails.map((form: any, index: any) => (
             <Tab
+              data-testid='outerTab'
               title={form.paymentForm}
               key={index}
               tabStyle={styles.tabs__tab}

@@ -1,34 +1,37 @@
 import React from 'react';
 import Tabs from './index';
-import { render, screen } from '@testing-library/react';
+import Tab from './tab/Tab';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 afterEach(() => {
   jest.clearAllMocks();
 });
 
+let tabStyle = 'tabStyle';
+let tabStyle_active = 'tabStyle_active';
+let tabs = {
+  children: [
+    <Tab
+      tabStyle={tabStyle}
+      tabStyle_active={tabStyle_active}
+      title='Вкладка_1'
+    >
+      'Бюджет'
+    </Tab>,
+    <Tab
+      tabStyle={tabStyle}
+      tabStyle_active={tabStyle_active}
+      title='Вкладка_2'
+    >
+      'Контракт'
+    </Tab>,
+  ],
+  tabsStyle: 'tabs__tab',
+  tabsContainer: 'tabs__container',
+};
+
 describe('Tabs', () => {
   test('render and work', () => {
-    let tabs = {
-      children: [
-        // {
-        //   props: {
-        //     title: 'Бюджет',
-        //     tabStyle: 'ourSpecialties_tabs__tab',
-        //     tabStyle_active: 'ourSpecialties_tabs__tab_active',
-        //   },
-        // },
-        // {
-        //   props: {
-        //     title: 'Контракт',
-        //     tabStyle: 'ourSpecialties_tabs__tab',
-        //     tabStyle_active: 'ourSpecialties_tabs__tab_active',
-        //   },
-        // },
-      ],
-      tabsStyle: 'tabs__tab',
-      tabsContainer: 'tabs__container',
-    };
-
     let { children, tabsStyle, tabsContainer } = tabs;
     render(
       <Tabs
@@ -37,6 +40,31 @@ describe('Tabs', () => {
         tabsContainer={tabsContainer}
       />
     );
-    screen.debug();
+  });
+
+  test('switched the tab', () => {
+    let { children, tabsStyle, tabsContainer } = tabs;
+    render(
+      <Tabs
+        children={children}
+        tabsStyle={tabsStyle}
+        tabsContainer={tabsContainer}
+      />
+    );
+    const tab1 = screen.getByRole('button', {
+      name: 'Вкладка_1',
+    });
+    const tab2 = screen.getByRole('button', {
+      name: 'Вкладка_2',
+    });
+    const selectedTab = screen.queryByTestId('selectedTab');
+
+    fireEvent.click(tab2);
+    expect(selectedTab).toHaveTextContent('Контракт');
+    expect(tab2).toHaveClass('tabStyle_active');
+
+    fireEvent.click(tab1);
+    expect(selectedTab).toHaveTextContent('Бюджет');
+    expect(tab1).toHaveClass('tabStyle_active');
   });
 });

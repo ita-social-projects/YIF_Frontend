@@ -10,10 +10,8 @@ type Props = {
 const Tabs: React.FC<Props> = ({ children, tabsStyle, tabsContainer }) => {
   const [selectedTab, setSelectedTab] = useState(0);
 
-  console.log(children);
-
   return (
-    <div className={tabsContainer}>
+    <div className={tabsContainer} data-testid='selectedTab'>
       <ul className={tabsStyle}>
         {children.map((item, index) => (
           <TabTitle

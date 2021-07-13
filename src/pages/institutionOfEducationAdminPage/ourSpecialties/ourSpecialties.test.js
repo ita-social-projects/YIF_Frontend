@@ -69,5 +69,4 @@ test('click to extend specialty description', () => {
   const descriptionButton = getAllByTestId('check-open-description')[0];
   fireEvent.click(descriptionButton);
   expect(handleClickDescription).toHaveBeenCalled();
-  screen.debug();
 });

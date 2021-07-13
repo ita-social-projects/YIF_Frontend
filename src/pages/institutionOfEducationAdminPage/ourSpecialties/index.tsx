@@ -430,10 +430,7 @@ const OurSpecialties = () => {
               code={item.code}
               name={item.name}
               id={item.id}
-              // paymentForm={item.paymentForm}
               paymentFormDetails={item.paymentFormDetails}
-              // educationForm={item.educationForm}
-              // educationalProgramLink={item.educationalProgramLink}
               description={item.description}
             />
           ))}
