@@ -89,7 +89,7 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
   ): IInstitutionOfEducationAdmin[] => {
     if (action === 'setNewBanStatus') {
       return cloneDeep(state).map((admin) => {
-        if (admin.user.id === id) {
+        if (admin.id === id) {
           admin.isBanned = !admin.isBanned;
           return admin;
         }
@@ -322,7 +322,7 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
               data-testid='sortByUserEmail'
               className={`${styles.email} ${
                 currentKey === 'email' && styles.filterActive
-              }`}
+                }`}
               onClick={() => handleSort('email')}
             >
               Електронна адреса <IconArrow />
@@ -331,7 +331,7 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
               data-testid='sortByAbbreviation'
               className={`${styles.institutionOfEducation} ${
                 currentKey === 'abbreviation' && styles.filterActive
-              }`}
+                }`}
               onClick={() => handleSort('abbreviation')}
             >
               Заклад освіти <IconArrow />
@@ -340,7 +340,7 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
               data-testid='sortByBanned'
               className={`${styles.ban} ${
                 currentKey === 'isBanned' && styles.filterActive
-              }`}
+                }`}
               onClick={() => handleSort('isBanned')}
             >
               <Lock containerCN={styles.banContainer} svgCN={styles.banIcon} />{' '}
@@ -358,9 +358,9 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
                     searchValue={searchValue}
                     key={admin.user.id}
                     setBanStatus={setBanStatus}
-                    // removeAdminInstitutionOfEducation={
-                    //   removeAdminInstitutionOfEducation
-                    // }
+                  // removeAdminInstitutionOfEducation={
+                  //   removeAdminInstitutionOfEducation
+                  // }
                   />
                 ))
                 .slice(indexOfFirstPost, indexOfLastPost)

@@ -1,14 +1,62 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../addInstitutionOfEducationAdmin/addInstitutionOfEducation.module.scss';
-import Unlock from '../../common/icons/Unlock';
+import { APIUrl } from '../../../services/endpoints';
+import { useAuth } from '../../../services/tokenValidator'; import Unlock from '../../common/icons/Unlock';
+import { requestSecureData } from '../../../services/requestDataFunction';
+import Lock from '../../common/icons/Lock/index';
+import { FormInputSuccess } from '../../common/formElements/formInputSuccess/formInputSuccess';
+import { FormInputError } from '../../common/formElements';
 import Delete from '../../common/icons/Delete';
 
 interface props {
   adminId: string,
-  adminEmail: string
+  adminEmail: string,
+  // adminBanStatus: boolean
 }
 
-const IoEadmin = (props: props) => {
+const IoEadmin: React.FC<props> = (props) => {
+  const {
+    adminId,
+    adminEmail,
+    // adminBanStatus
+  } = props;
+  const [resultMessage, setResultMessage] = useState({
+    status: '',
+    message: '',
+  });
+  const [isBanned, setBanned] = useState(); // adminBanStatus
+
+  const showMessage = (statusCode: any, msg: string) => {
+    const result = (statusCode.match(/^[23]\d{2}$/)) ? 'success' : 'error';
+    setResultMessage({
+      status: result,
+      message: msg,
+    });
+    setTimeout(() => {
+      setResultMessage({
+        status: '',
+        message: '',
+      });
+    }, 4000);
+  }
+
+  const { getToken } = useAuth();
+
+  const banIoEAdmin = async (id: string) => {
+    const banEndpoint = `${APIUrl}SuperAdmin/DisableInstitutionOfEducationAdmin/${adminId}`;
+    const currentToken = await getToken();
+
+    requestSecureData(banEndpoint, 'PATCH', currentToken)
+      .then((res: any) => {
+        const statusCode = res.statusCode.toString();
+        setBanned(res.data.isBanned);
+        let msg = `Адміністратора навчального закладу ${isBanned ? 'розблоковано' : 'заблоковано'}`;
+        showMessage(statusCode, msg);
+      })
+      .catch((error) => {
+        showMessage('error', error);
+      });
+  };
 
   return (
     <div className={styles.admin}>
@@ -20,11 +68,26 @@ const IoEadmin = (props: props) => {
           <div data-testid='content' className={styles.admin__line}>
             <p className={styles.admin__line__name}>{props.adminEmail}</p>
             <div className={styles.admin__line__icons}>
-              <Unlock handleClick={() => {
-              }} />
-              <Delete handleClick={() => {}} />
+              <div>
+                {!isBanned ? <Unlock data-testid="unlockSign" handleClick={() => banIoEAdmin(adminId)} />
+                  : <Lock data-testid="lockSign" handleClick={() => banIoEAdmin(adminId)} />}
+              </div>
+              <Delete handleClick={() => { }} />
             </div>
           </div>
+      }
+      {(resultMessage.status === 'error') &&
+        <div data-testid='errorMessage' className={styles.flashMessageRight}>
+          <FormInputError data-testid='errorMessage'
+            errorType='form'
+            errorMessage={resultMessage.message}
+          />
+        </div>
+      }
+      {(resultMessage.status === 'success') &&
+        <div data-testid='successMessage' className={styles.flashMessageLeft}>
+          <FormInputSuccess data-testid='successMessage' successMessage={resultMessage.message} />
+        </div>
       }
     </div>
   );
