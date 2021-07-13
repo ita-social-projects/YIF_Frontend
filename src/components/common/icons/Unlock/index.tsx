@@ -7,7 +7,11 @@ interface Props {
 
 const Unlock: React.FC<Props> = ({ handleClick }) => {
   return (
-    <div className={styles.container} onClick={handleClick}>
+    <div
+      className={styles.container}
+      onClick={handleClick}
+      data-testid='unlockSign'
+    >
       <svg
         className={styles.unlock}
         id='bold'

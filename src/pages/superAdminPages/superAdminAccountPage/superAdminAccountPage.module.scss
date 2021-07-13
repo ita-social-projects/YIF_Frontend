@@ -11,18 +11,6 @@
   background: url('/assets/images/superAdminAccount.svg') bottom 0 right 100px
     no-repeat;
 
-  .addButton {
-    width: 20rem;
-    padding: 0.625rem 0;
-    border-radius: 0.313rem;
-    // margin-top: 12rem;
-    text-align: center;
-    font-family: $fontOpenSans;
-    font-weight: $regular;
-    font-size: $font_18px;
-    border: 1px solid $darkBlue;
-  }
-
   // .spinnerContainer {
   //   @include flex(row, center, center);
   //   width: 100%;

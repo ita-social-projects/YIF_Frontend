@@ -1,0 +1,82 @@
+@import '../../styles.scss';
+
+.wrapper {
+  @include flex(column, center, center);
+  background: #f2f9ff url(/assets/images/addSpecialty.png) bottom left no-repeat;
+  font-family: $fontOpenSans;
+  font-size: 1.125rem;
+  min-height: 110vh;
+  margin: 0 20px;
+  width: 100%;
+  padding-bottom: 34.375rem;
+  &__title {
+    width: 90%;
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 3.125rem 0 2.5rem 0;
+  }
+  form {
+    width: 90%;
+    .topWrapper {
+      @include flex(row, flex-start, center);
+      background: #bad0e5;
+      flex-wrap: wrap;
+      padding: 2.5rem;
+      border-radius: 10px;
+      select {
+        appearance: none;
+        background: url(/assets/images/arrow.svg);
+        background-position: 96% 21px;
+        background-repeat: no-repeat;
+        background-color: #fff;
+      }
+      &__input {
+        width: 100%;
+        margin-left: auto;
+        height: 3.125rem;
+        padding: 0 1rem;
+        font-family: $fontOpenSans;
+        border-radius: 0.3rem;
+      }
+      &__label {
+        min-width: 6.563rem;
+        display: flex;
+        align-items: center;
+        font-family: $fontOpenSans;
+        margin-bottom: 0.2rem;
+      }
+    }
+    .halfWidth {
+      padding: 0.6rem;
+      flex-basis: 65%;
+      &__code {
+        flex-basis: 30%;
+        margin-left: auto;
+        label {
+          margin-left: auto;
+          margin-right: 0;
+          min-width: 4rem;
+        }
+        input {
+          text-align: center;
+        }
+      }
+    }
+    .fullWidth {
+      padding: 0.6rem;
+      flex-basis: 100%;
+    }
+    button {
+      margin-left: auto;
+      margin-right: 0;
+      max-width: 12.5rem;
+      margin-top: 2rem;
+      display: block;
+    }
+    .resultMessageContainer {
+      margin: 2rem 0rem 0rem 0rem;
+      @include flex(column, center, center);
+      justify-self: center;
+    }
+  }
+}

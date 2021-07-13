@@ -1,14 +1,14 @@
 import React from 'react';
 import { Footer, Header } from '../../components';
 import Aside from '../../components/institutionOfEducationAdmin/aside';
-import InstitutionOfEducationInfo from './institutionOfEducationInfo';
+import InstitutionOfEducationInfo from './institutionOfEducationInfo/index';
 import styles from './institutionOfEducationAdminPage.module.scss';
 import { Route, Redirect, Switch, useRouteMatch, Link } from 'react-router-dom';
 import Moderators from './moderators';
 import EditInstitutionOfEducationInfoPage from './editInstitutionOfEducationInfoPage';
-import OurSpecialties from './ourSpecialties';
-import EditSpecialty from './editSpecialtyPage';
-import AddSpecialties from './addSpecialties';
+import OurSpecialties from './ourSpecialties/index';
+import EditSpecialty from './editSpecialtyPage/index';
+import AddSpecialties from './addSpecialties/index';
 import ChangePassword from '../../components/changePassword';
 
 function InstitutionOfEducationAdminPage() {
@@ -21,7 +21,7 @@ function InstitutionOfEducationAdminPage() {
           <nav>
             <Link
               className={styles.underlineAnimation}
-              to={`${path}/institutionofEducationInfo`}
+              to={`${path}/institutionOfEducationInfo`}
             >
               Заклад освіти
             </Link>
@@ -51,7 +51,7 @@ function InstitutionOfEducationAdminPage() {
           </Route>
 
           <Route exact path={`${path}/institutionOfEducationInfo`}>
-            <InstitutionOfEducationInfo />
+            <InstitutionOfEducationInfo role={'administrator'} roleAPI={'InstitutionOfEducationAdmin/GetIoEInfoByUserId'}/>
           </Route>
 
           <Route path={`${path}/institutionOfEducationInfo/edit`}>
@@ -59,7 +59,7 @@ function InstitutionOfEducationAdminPage() {
           </Route>
 
           <Route exact path={`${path}/ourSpecialties`}>
-            <OurSpecialties />
+            <OurSpecialties role={'moderator'} rolePath={'/institutionOfEducationAccount/addSpecialties'}/>
           </Route>
           <Route path={`${path}/addSpecialties`}>
             <AddSpecialties />

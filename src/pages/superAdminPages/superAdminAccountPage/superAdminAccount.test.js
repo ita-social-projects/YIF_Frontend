@@ -1,9 +1,8 @@
 import React from 'react';
-import { render, cleanup } from '@testing-library/react';
+import { render, cleanup, wait } from '@testing-library/react';
 import SuperAdminAccountPage from './index';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import { act } from 'react-dom/test-utils';
 import { store } from '../../../store/store';
 import { authContext } from '../../../services/tokenValidator';
 
@@ -28,7 +27,8 @@ const institutionOfEducationAdmins = [
 afterEach(cleanup);
 
 describe('check SuperAdminAccount component', () => {
-  it('check func fetchInstitutionOfEducationAdmins', async () => {
+
+  it('Check function fetchInstitutionOfEducationAdmins', async () => {
     jest.spyOn(global, 'fetch').mockImplementation(() =>
       Promise.resolve({
         json: () =>
@@ -37,7 +37,7 @@ describe('check SuperAdminAccount component', () => {
           }),
       })
     );
-    await act(async () => {
+    await wait(() => {
       render(
         <Provider store={store}>
           <MemoryRouter>
@@ -61,6 +61,7 @@ describe('check SuperAdminAccount component', () => {
 
     global.fetch.mockRestore();
   });
+
   it('check error fetchInstitutionOfEducationAdmins ', async () => {
     jest.spyOn(global, 'fetch').mockImplementation(() =>
       Promise.resolve({
@@ -68,7 +69,7 @@ describe('check SuperAdminAccount component', () => {
           Promise.reject({ responseList: institutionOfEducationAdmins }),
       })
     );
-    await act(async () => {
+    await wait(() => {
       render(
         <Provider store={store}>
           <MemoryRouter>

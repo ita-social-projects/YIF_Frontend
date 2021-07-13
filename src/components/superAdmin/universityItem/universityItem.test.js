@@ -11,14 +11,17 @@ const univer = {
 };
 
 describe('UniversityItem', () => {
-  test('render corectly', () => {
-    const { abbreviation, name, isBlocked } = univer;
+  test('Renders corectly', () => {
+    const { id, abbreviation, name, isBlocked } = univer;
     render(
       <Router>
         <UniversityItem
           abbreviation={abbreviation}
           fullName={name}
           isBlocked={isBlocked}
+          IoEid={id}
+          handleBlocking={()=>{}}
+          handleEditing={()=>{}}
         />
       </Router>
     );

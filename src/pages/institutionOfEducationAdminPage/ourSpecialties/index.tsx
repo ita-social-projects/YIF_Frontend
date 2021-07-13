@@ -4,7 +4,12 @@ import AccordionItem from '../../../components/accordion';
 import styles from './ourSpecialties.module.scss';
 import SpecialtyDetails from './SpecialtyDetails';
 
-const OurSpecialties = () => {
+interface props {
+  role: string
+  rolePath: string
+}
+
+const OurSpecialties = (props: props) => {
   const specialtyList = [
     {
       direction: 'Інформаційні технології',
@@ -446,7 +451,7 @@ const OurSpecialties = () => {
         </h1>
         <Link
           id='edit-btn'
-          to={`/institutionOfEducationAccount/addSpecialties`}
+          to={props.rolePath}
           className={` ${styles.animatedButton}`}
         >
           Додати спеціальність

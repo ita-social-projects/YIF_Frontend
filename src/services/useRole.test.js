@@ -16,4 +16,8 @@ describe('USE ROLE HOOK', () => {
     store.dispatch(setRoleReducer('SuperAdmin'));
     expect(pathToRedirect()).toBe('/superAdminAccount');
   });
+  it('shoud return /IoEModeratorAccount path', () => {
+    store.dispatch(setRoleReducer('InstitutionOfEducationModerator'));
+    expect(pathToRedirect()).toBe('/IoEModeratorAccount');
+  });
 });

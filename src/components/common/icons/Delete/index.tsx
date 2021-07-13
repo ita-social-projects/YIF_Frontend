@@ -6,7 +6,11 @@ interface Props {
 }
 const Delete: React.FC<Props> = ({ handleClick }) => {
   return (
-    <div className={styles.container} onClick={handleClick}>
+    <div
+      className={styles.container}
+      onClick={handleClick}
+      data-testid='deleteSign'
+    >
       <svg
         xmlns='http://www.w3.org/2000/svg'
         fill='none'

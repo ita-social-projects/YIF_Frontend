@@ -52,7 +52,9 @@ const editIOEValidationSchema = Yup.object().shape({
 
   description: Yup.string()
     .required('Заповніть поле')
-    .min(50, 'Кількість символів повинна бути більше 50'),
+    .min(50, 'Кількість символів повинна бути більше 50')
+    .max(250, 'Кількість символів не повинна перевищувати 250')
+    ,
 });
 
 export default editIOEValidationSchema;

@@ -91,7 +91,6 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
     }
     submitHandler(newData);
   };
-  console.log(type)
   return (
     <main className={styles.wrapper}>
       <div className={styles.container}>
