@@ -45,7 +45,6 @@ function Tabs(props: props) {
           currentToken,
         );
         if (statusCode.toString().match(/^[23]\d{2}$/)) {
-          console.log(data)
           setModerators(data);
           setError(false);
         } else {

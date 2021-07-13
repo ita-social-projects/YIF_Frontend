@@ -11,20 +11,21 @@ import Delete from '../../common/icons/Delete';
 interface props {
   adminId: string,
   adminEmail: string,
-  // adminBanStatus: boolean
+  isAdminBanned: boolean
 }
 
 const IoEadmin: React.FC<props> = (props) => {
   const {
     adminId,
     adminEmail,
-    // adminBanStatus
+    isAdminBanned
   } = props;
   const [resultMessage, setResultMessage] = useState({
     status: '',
     message: '',
   });
-  const [isBanned, setBanned] = useState(); // adminBanStatus
+  const [isBanned, setBanned] = useState(isAdminBanned);
+  const { getToken } = useAuth();
 
   const showMessage = (statusCode: any, msg: string) => {
     const result = (statusCode.match(/^[23]\d{2}$/)) ? 'success' : 'error';
@@ -39,8 +40,6 @@ const IoEadmin: React.FC<props> = (props) => {
       });
     }, 4000);
   }
-
-  const { getToken } = useAuth();
 
   const banIoEAdmin = async (id: string) => {
     const banEndpoint = `${APIUrl}SuperAdmin/DisableInstitutionOfEducationAdmin/${adminId}`;

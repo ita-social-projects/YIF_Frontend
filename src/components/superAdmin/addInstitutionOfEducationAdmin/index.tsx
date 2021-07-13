@@ -21,7 +21,8 @@ interface IoEinfo {
   description: string,
   imagePath: string,
   adminId: string,
-  adminEmail: string
+  adminEmail: string,
+  isAdminBanned: boolean
 }
 
 interface stateType {
@@ -36,7 +37,7 @@ const AddInstitutionOfEducationAdmin = () => {
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
   const [
-    { ioEId, name, abbreviation, site, address, phone, email, description, imagePath, adminId, adminEmail },
+    { ioEId, name, abbreviation, site, address, phone, email, description, imagePath, adminId, adminEmail, isAdminBanned },
     setData,
   ] = useState<IoEinfo>({
     ioEId: '',
@@ -49,7 +50,8 @@ const AddInstitutionOfEducationAdmin = () => {
     description: '',
     imagePath: '',
     adminId: '',
-    adminEmail: ''
+    adminEmail: '',
+    isAdminBanned: true,
   });
 
   const IoEid = {
@@ -116,7 +118,7 @@ const AddInstitutionOfEducationAdmin = () => {
           >
             Редагувати
           </Link>
-          <IoEadmin adminId={adminId} adminEmail={adminEmail}/>
+          <IoEadmin adminId={adminId} adminEmail={adminEmail} isAdminBanned={isAdminBanned}/>
           <div className={styles.admin__buttons}>
             {/* Check for (state === undefined) for testing*/}
             <TabContent IoEid={(state === undefined) ? IoEid : state.IoEid} />
