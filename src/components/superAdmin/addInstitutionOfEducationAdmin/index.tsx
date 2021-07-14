@@ -56,6 +56,8 @@ const AddInstitutionOfEducationAdmin = () => {
     pathname: '58611427-2d33-4e17-9cee-0cda0470d150'
   }
 
+  const [isAdminDeleted, setIsAdminDeleted] = useState(false);
+
   useEffect(() => {
     const getInfo = async () => {
       try {
@@ -81,7 +83,7 @@ const AddInstitutionOfEducationAdmin = () => {
     };
     getInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isAdminDeleted]);
 
   let content;
   if (isFetching && !error) {
@@ -116,7 +118,7 @@ const AddInstitutionOfEducationAdmin = () => {
           >
             Редагувати
           </Link>
-          <IoEadmin adminId={adminId} adminEmail={adminEmail}/>
+          <IoEadmin adminId={adminId} adminEmail={adminEmail} setIsAdminDeleted={setIsAdminDeleted} isAdminDeleted={isAdminDeleted}/>
           <div className={styles.admin__buttons}>
             {/* Check for (state === undefined) for testing*/}
             <TabContent IoEid={(state === undefined) ? IoEid : state.IoEid} />

@@ -1,33 +1,88 @@
-import React from 'react';
-import styles from '../addInstitutionOfEducationAdmin/addInstitutionOfEducation.module.scss';
+import React, { useEffect, useState } from 'react';
+import styles from './IoEadmin.module.scss';
 import Unlock from '../../common/icons/Unlock';
 import Delete from '../../common/icons/Delete';
+import { useAuth } from '../../../services/tokenValidator';
+import { requestSecureData } from '../../../services/requestDataFunction';
+import { APIUrl } from '../../../services/endpoints';
+import { FormInputSuccess } from '../../common/formElements/formInputSuccess/formInputSuccess';
 
 interface props {
   adminId: string,
-  adminEmail: string
+  adminEmail: string,
+  setIsAdminDeleted: any,
+  isAdminDeleted: boolean
+}
+interface IoEadmin {
+  email: string
+}
+interface Message {
+  message: string
 }
 
 const IoEadmin = (props: props) => {
+  const { getToken } = useAuth();
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState<Message>(
+    {
+      message: ''
+    });
 
-  return (
-    <div className={styles.admin}>
-      <h2 className={styles.admin__title}>Адмін</h2>
-      {
-        props.adminEmail === null ?
-          <div>Адміністратор не назначений</div>
-          :
-          <div data-testid='content' className={styles.admin__line}>
-            <p className={styles.admin__line__name}>{props.adminEmail}</p>
-            <div className={styles.admin__line__icons}>
-              <Unlock handleClick={() => {
-              }} />
-              <Delete handleClick={() => {}} />
-            </div>
-          </div>
+  const deleteIoEadmin = async () => {
+    try {
+      const currentToken = await getToken();
+      const { statusCode, data }: any = await requestSecureData(
+        `${APIUrl}SuperAdmin/DeleteInstitutionOfEducationAdmin/${props.adminId}`,
+        'DELETE',
+        currentToken,
+      );
+      if (statusCode.toString().match(/^[23]\d{2}$/)) {
+          setMessage(data);
+        props.setIsAdminDeleted(true)
+        setTimeout(
+          function() {
+            props.setIsAdminDeleted(false)
+          }, 4000);
+        setError(false);
+      } else {
+        setError(true);
       }
-    </div>
-  );
+    } catch (e) {
+      console.log(e);
+      setError(true);
+    }
+  };
+  let content;
+  if (error) {
+    content = (
+      <div  className={styles.noContent}>
+        <h2>Щось пішло не так, спробуйте знову.</h2>
+      </div>
+    );  
+  } else {
+    content = (
+      <div data-testid = 'contentBlock' className={styles.admin}>
+       <div className = {styles.adminMessageBlock}> <h2 className={styles.admin__title}>Адмін</h2>
+               <div data-testid='formInputSuccess' className = {styles.formInputSuccessDeleted}>{props.isAdminDeleted? 
+               <FormInputSuccess  successMessage={message.message}/> : <div/>}</div>
+       </div>
+        {
+          props.adminEmail === null ?
+            <div className={styles.adminMessageBlock}>Адміністратор не назначений</div>
+            :
+            <div  className={styles.admin__line}>
+              <p className={styles.admin__line__name}>{props.adminEmail}</p>
+              <div className={styles.admin__line__icons}>
+                <Unlock handleClick={() => {
+                }} />
+                <div data-testid='deleteButton'><Delete   handleClick={() => {deleteIoEadmin()}} /></div>
+              </div>
+            </div>
+        }
+      </div>
+    );
+  }
+  return <>{content}</>;
 };
 
 export default IoEadmin;
