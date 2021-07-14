@@ -69,7 +69,7 @@ const IoEadmin: React.FC<props> = (props) => {
             <div data-testid='content' className={styles.admin__line}>
               <p className={styles.admin__line__name}>{props.adminEmail}</p>
               <div className={styles.admin__line__icons}>
-                <div>
+                <div data-testid="unlockSign">
                   {!isBanned ? <Unlock data-testid="unlockSign" handleClick={() => banIoEAdmin(adminId)} />
                     : <Lock data-testid="lockSign" handleClick={() => banIoEAdmin(adminId)} />}
                 </div>
