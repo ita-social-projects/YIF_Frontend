@@ -35,10 +35,8 @@
     }
   }
 }
-// .flashMessageRight,
-// .flashMessageLeft {
-//   position: absolute;
-//   width: 350px;
-//   bottom: -250px;
-//   left: calc(50% - 175px);
-// }
+.resultMessageContainer {
+  position: absolute;
+  margin-top: 80px;
+  left: calc(50% - 113px);
+}

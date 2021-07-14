@@ -59,25 +59,27 @@ const IoEadmin: React.FC<props> = (props) => {
   };
 
   return (
-    <div className={styles.admin}>
-      <h2 className={styles.admin__title}>Адмін</h2>
-      {
-        props.adminEmail === null ?
-          <div>Адміністратор не призначений</div>
-          :
-          <div data-testid='content' className={styles.admin__line}>
-            <p className={styles.admin__line__name}>{props.adminEmail}</p>
-            <div className={styles.admin__line__icons}>
-              <div>
-                {!isBanned ? <Unlock data-testid="unlockSign" handleClick={() => banIoEAdmin(adminId)} />
-                  : <Lock data-testid="lockSign" handleClick={() => banIoEAdmin(adminId)} />}
+    <>
+      <div className={styles.admin}>
+        <h2 className={styles.admin__title}>Адмін</h2>
+        {
+          props.adminEmail === null ?
+            <div>Адміністратор не призначений</div>
+            :
+            <div data-testid='content' className={styles.admin__line}>
+              <p className={styles.admin__line__name}>{props.adminEmail}</p>
+              <div className={styles.admin__line__icons}>
+                <div>
+                  {!isBanned ? <Unlock data-testid="unlockSign" handleClick={() => banIoEAdmin(adminId)} />
+                    : <Lock data-testid="lockSign" handleClick={() => banIoEAdmin(adminId)} />}
+                </div>
+                <Delete handleClick={() => { }} />
               </div>
-              <Delete handleClick={() => { }} />
             </div>
-          </div>
-      }
+        }
+      </div>
       {(resultMessage.status === 'error') &&
-        <div data-testid='errorMessage' className={styles.flashMessageRight}>
+        <div data-testid='errorMessage' className={styles.resultMessageContainer}>
           <FormInputError data-testid='errorMessage'
             errorType='form'
             errorMessage={resultMessage.message}
@@ -85,11 +87,11 @@ const IoEadmin: React.FC<props> = (props) => {
         </div>
       }
       {(resultMessage.status === 'success') &&
-        <div data-testid='successMessage' className={styles.flashMessageLeft}>
+        <div data-testid='successMessage' className={styles.resultMessageContainer}>
           <FormInputSuccess data-testid='successMessage' successMessage={resultMessage.message} />
         </div>
       }
-    </div>
+    </>
   );
 };
 
