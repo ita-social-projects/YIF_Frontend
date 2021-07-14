@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../addInstitutionOfEducationAdmin/addInstitutionOfEducation.module.scss';
+// import styles from '../addInstitutionOfEducationAdmin/addInstitutionOfEducation.module.scss';
+import styles from './IoEadmin.module.scss'
 import { APIUrl } from '../../../services/endpoints';
 import { useAuth } from '../../../services/tokenValidator'; import Unlock from '../../common/icons/Unlock';
 import { requestSecureData } from '../../../services/requestDataFunction';
@@ -53,7 +54,7 @@ const IoEadmin: React.FC<props> = (props) => {
         showMessage(statusCode, msg);
       })
       .catch((error) => {
-        showMessage('error', error);
+        showMessage('error', 'Щось пішло не так, спробуйте знову');
       });
   };
 
@@ -62,7 +63,7 @@ const IoEadmin: React.FC<props> = (props) => {
       <h2 className={styles.admin__title}>Адмін</h2>
       {
         props.adminEmail === null ?
-          <div>Адміністратор не назначений</div>
+          <div>Адміністратор не призначений</div>
           :
           <div data-testid='content' className={styles.admin__line}>
             <p className={styles.admin__line__name}>{props.adminEmail}</p>
