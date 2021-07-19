@@ -20,7 +20,7 @@ interface Message {
   message: string
 }
 
-const IoEadmin = (props: props) => {
+let IoEadmin = (props: props) => {
   const { getToken } = useAuth();
   const [error, setError] = useState(false);
   const [message, setMessage] = useState<Message>(
@@ -63,8 +63,8 @@ const IoEadmin = (props: props) => {
     content = (
       <div data-testid = 'contentBlock' className={styles.admin}>
        <div className = {styles.adminMessageBlock}> <h2 className={styles.admin__title}>Адмін</h2>
-               <div data-testid='formInputSuccess' className = {styles.formInputSuccessDeleted}>{props.isAdminDeleted? 
-               <FormInputSuccess  successMessage={message.message}/> : <div/>}</div>
+               <div data-testid='formInputSuccess' className = {styles.formInputSuccessDeleted}>
+                 {props.isAdminDeleted? <FormInputSuccess  successMessage={message.message}/> : <div/>}</div>
        </div>
         {
           props.adminEmail === null ?
