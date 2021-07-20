@@ -33,6 +33,8 @@ const AddInstitutionOfEducationAdmin = () => {
   const { state } = useLocation<stateType>();
   const { path } = useRouteMatch();
   const [isFetching, setIsFetching] = useState(true);
+  // 
+  const [isAdminChanged, setIsAdminChanged] = useState(false);
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
   const [
@@ -56,7 +58,7 @@ const AddInstitutionOfEducationAdmin = () => {
     pathname: '58611427-2d33-4e17-9cee-0cda0470d150'
   }
 
-  const [isAdminDeleted, setIsAdminDeleted] = useState(false);
+  // const [isAdminDeleted, setIsAdminDeleted] = useState(false);
 
   useEffect(() => {
     const getInfo = async () => {
@@ -83,7 +85,7 @@ const AddInstitutionOfEducationAdmin = () => {
     };
     getInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAdminDeleted]);
+  }, [isAdminChanged]);
 
   let content;
   if (isFetching && !error) {
@@ -118,7 +120,7 @@ const AddInstitutionOfEducationAdmin = () => {
           >
             Редагувати
           </Link>
-          <IoEadmin adminId={adminId} adminEmail={adminEmail} setIsAdminDeleted={setIsAdminDeleted} isAdminDeleted={isAdminDeleted}/>
+          <IoEadmin adminId={adminId} adminEmail={adminEmail} setIsAdminChanged={setIsAdminChanged} isAdminChanged={isAdminChanged}/>
           <div className={styles.admin__buttons}>
             {/* Check for (state === undefined) for testing*/}
             <TabContent IoEid={(state === undefined) ? IoEid : state.IoEid} />
