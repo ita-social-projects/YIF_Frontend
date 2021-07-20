@@ -33,7 +33,6 @@ const AddInstitutionOfEducationAdmin = () => {
   const { state } = useLocation<stateType>();
   const { path } = useRouteMatch();
   const [isFetching, setIsFetching] = useState(true);
-  // 
   const [isAdminChanged, setIsAdminChanged] = useState(false);
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
