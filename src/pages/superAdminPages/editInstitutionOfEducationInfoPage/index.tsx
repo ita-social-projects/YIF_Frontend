@@ -5,6 +5,7 @@ import { APIUrl } from '../../../services/endpoints';
 import { useAuth } from '../../../services/tokenValidator';
 import Spinner from '../../../components/common/spinner';
 import EditInstitutionOfEducationInfo from '../../../components/editIOEInfo';
+import {useLocation} from "react-router-dom"; 
 
 interface Info {
   name: string;
@@ -20,7 +21,12 @@ interface Info {
   institutionOfEducationType: string | number;
 }
 
+interface stateType {
+  IoEid: string;
+}
+
 const EditInstitutionOfEducationInfoPage = () => {
+  const { state } = useLocation<stateType>();
   const [isFetching, setIsFetching] = useState(true);
   const [isNew, setIsNew] = useState(false);
   const [error, setError] = useState(false);
@@ -39,8 +45,9 @@ const EditInstitutionOfEducationInfoPage = () => {
     institutionOfEducationType: '',
   });
 
+   
   const sendNewDescription = async (formikValues: any) => {
-    const url = `${APIUrl}SuperAdmin/ModifyIoE/1229ac52-bcc6-4dfb-932e-9f8463e3a47a`
+    const url = `${APIUrl}SuperAdmin/ModifyIoE/${state.IoEid}`
     try {
       const currentToken = await getToken();
       const { statusCode }: any = await requestSecureData(
@@ -66,8 +73,9 @@ const EditInstitutionOfEducationInfoPage = () => {
       const getInfo = async () => {
         try {
           const currentToken = await getToken();
+             
           const { statusCode, data }: any = await requestSecureData(
-            `${APIUrl}SuperAdmin/GetIoEInfoByIoEId/1229ac52-bcc6-4dfb-932e-9f8463e3a47a`,
+            `${APIUrl}SuperAdmin/GetIoEInfoByIoEId/${state.IoEid}`,
             'GET',
             currentToken
           );
@@ -89,6 +97,7 @@ const EditInstitutionOfEducationInfoPage = () => {
       };
       getInfo();
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isNew]);
 
@@ -106,6 +115,7 @@ const EditInstitutionOfEducationInfoPage = () => {
       </div>
     );
   } else {
+    
     content = (
       <>
         {isNew && <div className={styles.success}>Дані успішно змінено!</div>}
