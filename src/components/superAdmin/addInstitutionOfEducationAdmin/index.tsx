@@ -3,7 +3,7 @@ import styles from './addInstitutionOfEducation.module.scss';
 import { Link, useRouteMatch } from 'react-router-dom';
 import InstitutionOfEducationBlock from '../../institutionOfEducationBlock';
 import TabContent from './TabContent/TabContent';
-import {useLocation} from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 import { useAuth } from '../../../services/tokenValidator';
 import { requestSecureData } from '../../../services/requestDataFunction';
 import { APIUrl } from '../../../services/endpoints';
@@ -50,12 +50,12 @@ const AddInstitutionOfEducationAdmin = () => {
     description: '',
     imagePath: '',
     adminId: '',
-    adminEmail: ''
+    adminEmail: '',
   });
 
   const IoEid = {
-    pathname: '58611427-2d33-4e17-9cee-0cda0470d150'
-  }
+    pathname: '58611427-2d33-4e17-9cee-0cda0470d150',
+  };
 
   // const [isAdminDeleted, setIsAdminDeleted] = useState(false);
 
@@ -82,7 +82,7 @@ const AddInstitutionOfEducationAdmin = () => {
         setIsFetching(false);
       }
     };
-    getInfo();
+    getInfo()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAdminChanged]);
 
@@ -119,10 +119,12 @@ const AddInstitutionOfEducationAdmin = () => {
           >
             Редагувати
           </Link>
+
           <IoEadmin adminId={adminId} adminEmail={adminEmail} setIsAdminChanged={setIsAdminChanged} isAdminChanged={isAdminChanged}/>
+
           <div className={styles.admin__buttons}>
             {/* Check for (state === undefined) for testing*/}
-            <TabContent IoEid={(state === undefined) ? IoEid : state.IoEid} />
+            <TabContent isAdminChanged={isAdminChanged} setIsAdminChanged={setIsAdminChanged} IoEid={(state === undefined) ? IoEid : state.IoEid} />
           </div>
         </div>
       </div>
@@ -130,6 +132,6 @@ const AddInstitutionOfEducationAdmin = () => {
   }
 
   return <>{content}</>;
-}
+};
 
 export default AddInstitutionOfEducationAdmin;
