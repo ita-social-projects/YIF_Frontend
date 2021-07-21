@@ -10,10 +10,8 @@ import { FormInputSuccess } from '../../common/formElements/formInputSuccess/for
 interface props {
   adminId: string,
   adminEmail: string,
-  // const [isAdminChanged, setIsAdminChanged] = useState(false);
-
-  setIsAdminChanged: any,
-  isAdminChanged: boolean
+  setIsAdminDeleted: any,
+  isAdminDeleted: boolean
 }
 interface IoEadmin {
   email: string
@@ -21,7 +19,6 @@ interface IoEadmin {
 interface Message {
   message: string
 }
-
 let IoEadmin = (props: props) => {
   const { getToken } = useAuth();
   const [error, setError] = useState(false);
@@ -40,11 +37,11 @@ let IoEadmin = (props: props) => {
       );
       if (statusCode.toString().match(/^[23]\d{2}$/)) {
           setMessage(data);
-        props.setIsAdminChanged(true)
+        props.setIsAdminDeleted(true)
         setTimeout(
           function() {
-            props.setIsAdminChanged(false)
-          }, 4000);
+            props.setIsAdminDeleted(false)
+          }, 2000);
         setError(false);
       } else {
         setError(true);
@@ -66,7 +63,7 @@ let IoEadmin = (props: props) => {
       <div data-testid = 'contentBlock' className={styles.admin}>
        <div className = {styles.adminMessageBlock}> <h2 className={styles.admin__title}>Адмін</h2>
                <div data-testid='formInputSuccess' className = {styles.formInputSuccessDeleted}>
-                 {props.isAdminChanged? <FormInputSuccess  successMessage={message.message}/> : <div/>}</div>
+                 {props.isAdminDeleted? <FormInputSuccess  successMessage={message.message}/> : <div/>}</div>
        </div>
         {
           props.adminEmail === null ?

@@ -3,7 +3,7 @@ import styles from './addInstitutionOfEducation.module.scss';
 import { Link, useRouteMatch } from 'react-router-dom';
 import InstitutionOfEducationBlock from '../../institutionOfEducationBlock';
 import TabContent from './TabContent/TabContent';
-import {useLocation} from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 import { useAuth } from '../../../services/tokenValidator';
 import { requestSecureData } from '../../../services/requestDataFunction';
 import { APIUrl } from '../../../services/endpoints';
@@ -34,6 +34,8 @@ const AddInstitutionOfEducationAdmin = () => {
   const { path } = useRouteMatch();
   const [isFetching, setIsFetching] = useState(true);
   const [isAdminChanged, setIsAdminChanged] = useState(false);
+  const [isAdminDeleted, setIsAdminDeleted] = useState(false);
+
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
   const [
@@ -50,14 +52,12 @@ const AddInstitutionOfEducationAdmin = () => {
     description: '',
     imagePath: '',
     adminId: '',
-    adminEmail: ''
+    adminEmail: '',
   });
 
   const IoEid = {
-    pathname: '58611427-2d33-4e17-9cee-0cda0470d150'
-  }
-
-  // const [isAdminDeleted, setIsAdminDeleted] = useState(false);
+    pathname: '58611427-2d33-4e17-9cee-0cda0470d150',
+  };
 
   useEffect(() => {
     const getInfo = async () => {
@@ -82,9 +82,9 @@ const AddInstitutionOfEducationAdmin = () => {
         setIsFetching(false);
       }
     };
-    getInfo();
+    getInfo()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAdminChanged]);
+  }, [isAdminDeleted]);
 
   let content;
   if (isFetching && !error) {
@@ -119,10 +119,13 @@ const AddInstitutionOfEducationAdmin = () => {
           >
             Редагувати
           </Link>
-          <IoEadmin adminId={adminId} adminEmail={adminEmail} setIsAdminChanged={setIsAdminChanged} isAdminChanged={isAdminChanged}/>
+                                                         {/* const [isAdminDeleted, setIsAdminDeleted] = useState(false); */}
+
+          <IoEadmin adminId={adminId} adminEmail={adminEmail} isAdminDeleted={isAdminDeleted} setIsAdminDeleted={setIsAdminDeleted}/>
+
           <div className={styles.admin__buttons}>
             {/* Check for (state === undefined) for testing*/}
-            <TabContent IoEid={(state === undefined) ? IoEid : state.IoEid} />
+            <TabContent isAdminChanged={isAdminChanged} setIsAdminChanged={setIsAdminChanged} IoEid={(state === undefined) ? IoEid : state.IoEid} />
           </div>
         </div>
       </div>
@@ -130,6 +133,6 @@ const AddInstitutionOfEducationAdmin = () => {
   }
 
   return <>{content}</>;
-}
+};
 
 export default AddInstitutionOfEducationAdmin;
