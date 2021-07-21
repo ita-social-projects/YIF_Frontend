@@ -1,70 +1,117 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { store } from '../../../store/store';
-import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
+import { render, screen, wait } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { Marker } from 'react-leaflet';
 import InstitutionsOfEducationMap from './index';
+import L from 'leaflet';
 
-describe('Test Leaflet methods', () => {
-  it('should render map with empty data0', async () => {
-    const institutionsOfEducationDB = [{}];
+window.scrollTo = jest.fn();
 
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <InstitutionsOfEducationMap data={institutionsOfEducationDB} />
-        </MemoryRouter>
-      </Provider>
+describe('Test InstitutionsOfEducationMap component', () => {
+  test('render map with no markers', () => {
+    const data = [{}];
+
+    render(<InstitutionsOfEducationMap data={data} />);
+
+    expect(document.getElementById('mapComponent')).not.toContainHTML(
+      `${(<Marker />)}`
     );
   });
 
-  it('should render map with 1 marker', async () => {
-    const institutionsOfEducationDB = [
+  test('render map with one marker', () => {
+    const data = [
       {
-        key: '1',
-        id: '1',
-        name: 'name',
-        site: 'site',
-        lat: 49,
-        lon: 29,
+        id: 'ae6172ab-138e-4a5d-9f9d-4f579623daee',
+        name: 'Рівненський державний гуманітарний університет',
+        site: 'http://www.rshu.edu.ua/',
+        lat: 50.62373,
+        lon: 26.260765,
       },
     ];
-
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <InstitutionsOfEducationMap data={institutionsOfEducationDB} />
-        </MemoryRouter>
-      </Provider>
+    const marker = (
+      <Marker
+        position={[data.lat, data.lon]}
+        icon={L.icon({
+          iconUrl: require('./icon/marker.svg'),
+          iconSize: [45, 45],
+        })}
+      />
     );
+    render(<InstitutionsOfEducationMap data={data} />);
+
+    expect(document.getElementById('mapComponent')).toContainHTML(`${marker}`);
   });
 
-  it('should render map with 2 markers', async () => {
-    const institutionsOfEducationDB = [
+  test('render map with more that one marker', () => {
+    const data = [
       {
-        key: '2',
-        id: '2',
-        name: 'name',
-        site: 'site',
-        lat: 49,
-        lon: 29,
+        id: '62f54bfa-9e75-419c-9933-0d07cba2ec32',
+        name: 'Національний університет водного господарства та природокористування',
+        site: 'https://nuwm.edu.ua/',
+        lat: 50.61798,
+        lon: 26.258654,
       },
       {
-        key: '3',
-        id: '3',
-        name: 'name',
-        site: 'site',
-        lat: 49,
-        lon: 29,
+        id: 'ae6172ab-138e-4a5d-9f9d-4f579623daee',
+        name: 'Рівненський державний гуманітарний університет',
+        site: 'http://www.rshu.edu.ua/',
+        lat: 50.62373,
+        lon: 26.260765,
       },
     ];
+    render(<InstitutionsOfEducationMap data={data} />);
 
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <InstitutionsOfEducationMap data={institutionsOfEducationDB} />
-        </MemoryRouter>
-      </Provider>
+    for (const element of data) {
+      const marker = (
+        <Marker
+          position={[element.lat, element.lon]}
+          icon={L.icon({
+            iconUrl: require('./icon/marker.svg'),
+            iconSize: [45, 45],
+          })}
+        />
+      );
+      expect(document.getElementById('mapComponent')).toContainHTML(
+        `${marker}`
+      );
+    }
+  });
+
+  test('check the popup content of the marker', async () => {
+    const data = [
+      {
+        id: '62f54bfa-9e75-419c-9933-0d07cba2ec32',
+        name: 'Національний університет водного господарства та природокористування',
+        site: 'https://nuwm.edu.ua/',
+        lat: 50.61798,
+        lon: 26.258654,
+      },
+    ];
+    const marker = (
+      <Marker
+        position={[data.lat, data.lon]}
+        icon={L.icon({
+          iconUrl: require('./icon/marker.svg'),
+          iconSize: [45, 45],
+        })}
+      />
     );
+
+    render(<InstitutionsOfEducationMap data={data} />);
+
+    await wait(() => {
+      userEvent.click(document.querySelector('.leaflet-marker-icon'));
+    });
+
+    expect(
+      screen.getByText(
+        'Національний університет водного господарства та природокористування'
+      )
+    ).toBeInTheDocument();
+    expect(
+      document.querySelector('[href="https://nuwm.edu.ua/"]')
+    ).toBeInTheDocument();
+
+    screen.debug();
   });
 });
