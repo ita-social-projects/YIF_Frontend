@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import Input from '../../../common/labeledInput';
-import { FormButton } from '../../../common/formElements';
-import { Formik, Form } from 'formik';
 import styles from './tabs.module.scss';
 import { requestSecureData } from '../../../../services/requestDataFunction';
 import { APIUrl } from '../../../../services/endpoints';
 import Spinner from '../../../common/spinner';
 import { useAuth } from '../../../../services/tokenValidator';
+import { FormInputSuccess } from '../../../common/formElements/formInputSuccess/formInputSuccess';
+import { FormInputError } from '../../../common/formElements';
+import { Formik, Form } from 'formik';
+import Input from '../../../common/labeledInput';
+import { FormButton } from '../../../common/formElements';
 
 interface Moderator {
   userId: string;
@@ -14,17 +16,17 @@ interface Moderator {
 }
 
 interface props {
-  IoEid: { pathname: string }
+  IoEid: { pathname: string },
+  isAdminChanged: boolean,
+  setIsAdminChanged: any
 }
 
 function Tabs(props: props) {
-
   let initialValues = {};
   const [toggleState, setToggleState] = useState(0);
   const toggleTab = (index: any) => {
     setToggleState(index);
   };
-
   const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
@@ -34,6 +36,49 @@ function Tabs(props: props) {
       email: '',
     },
   ]);
+  const [resultMessage, setResultMessage] = useState({
+    status: '',
+    message: '',
+  });
+
+  const showMessage = (statusCode: any, msg: string) => {
+    const result = (statusCode.match(/^[23]\d{2}$/)) ? 'success' : 'error';
+    setResultMessage({
+      status: result,
+      message: msg,
+    });
+    setTimeout(() => {
+      setResultMessage({
+        status: '',
+        message: '',
+      });
+    }, 4000);
+  }
+
+  const chooseIoEadmin = async (userId: string, ioEId: { pathname: string; }) => {
+    try {
+      const currentToken = await getToken();
+      const { statusCode, data }: any = await requestSecureData(
+        `${APIUrl}SuperAdmin/ChooseIoEAdminFromModerators`,
+        'PUT',
+        currentToken,
+        {
+          userId: userId,
+          ioEId: ioEId
+        });
+      if (statusCode.toString().match(/^[23]\d{2}$/)) {
+        showMessage(statusCode.toString(), `Заклад отримав нового адміністратора!`)
+        props.setIsAdminChanged(!props.isAdminChanged);
+        setError(false);
+      } else {
+        showMessage(statusCode.toString(), data.errors.IoEId[0])
+      }
+    } catch (e) {
+      setError(true)
+    } finally {
+      setIsFetching(false);
+    }
+  };
 
   useEffect(() => {
     const getInfo = async () => {
@@ -57,7 +102,7 @@ function Tabs(props: props) {
       }
     };
     getInfo();
-  }, []);
+  }, [props.isAdminChanged]);
 
   let content;
   if (isFetching && !error) {
@@ -103,15 +148,16 @@ function Tabs(props: props) {
 
         <div className={styles.content}>
           <div
+            data-testid='toggle-content-1'
             className={
               toggleState === 1
                 ? `${styles.content__tabs} ${styles.content__tabs__active}`
                 : `${styles.content__tabs}`
             }
           >
-            <Formik initialValues={initialValues} onSubmit={() => {}}>
+             <Formik initialValues={initialValues} onSubmit={() => {}}>
               {() => (
-                <Form data-testid='toggle-content-1' className={styles.mainContent}>
+                <Form className={styles.mainContent}>
                   <div className={styles.mainInfo}>
                     <Input
                       id='email'
@@ -132,13 +178,14 @@ function Tabs(props: props) {
           </div>
 
           <div
+            data-testid='toggle-content-2'
             className={
               toggleState === 2
                 ? `${styles.content__tabs} ${styles.content__tabs__active}`
                 : `${styles.content__tabs}`
             }
           >
-            <div data-testid='toggle-content-2' className={styles.moderators__top}>
+            <div className={styles.moderators__top}>
               <p className={styles.moderators__top__address}>Електронна адреса</p>
             </div>
             {moderators.map((moderator) => {
@@ -147,12 +194,26 @@ function Tabs(props: props) {
                   <div className={styles.moderators__item__mail}>
                     {moderator.email}
                   </div>
-                  <div className={styles.moderators__item__link}>
+                  <button data-testid="chooseBtn" className={styles.moderators__item__link} onClick={()=>{chooseIoEadmin(
+                    moderator.userId,
+                    props.IoEid
+                  )}}>
                     Призначити адміном
-                  </div>
+                  </button>
                 </div>
               )
             })}
+            <div className={styles.resultMessageContainer}>
+              {resultMessage.status === 'success' && (
+                <FormInputSuccess successMessage={resultMessage.message} />
+              )}
+              {resultMessage.status === 'error' && (
+                <FormInputError
+                  errorType='form'
+                  errorMessage={resultMessage.message}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>

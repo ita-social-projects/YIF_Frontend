@@ -16,7 +16,7 @@
 //    'filed2':'value2'
 //}
 
-type Respone<T extends object> = {
+type Response<T extends object> = {
   statusCode: number;
   data: T;
 };
@@ -25,7 +25,7 @@ export async function requestData<TData extends object>(
   url: string,
   method: string,
   body?: any
-): Promise<Respone<TData>> {
+): Promise<Response<TData>> {
   const res = await fetch(url, {
     method: method,
     headers: {
@@ -77,7 +77,7 @@ export async function requestSecureData<TData extends object>(
   method: string,
   token: string,
   body?: any
-): Promise<Respone<TData>> {
+): Promise<Response<TData>> {
   const res = await fetch(url, {
     method: method,
     headers: {
