@@ -87,15 +87,6 @@ describe('Test InstitutionsOfEducationMap component', () => {
         lon: 26.258654,
       },
     ];
-    const marker = (
-      <Marker
-        position={[data.lat, data.lon]}
-        icon={L.icon({
-          iconUrl: require('./icon/marker.svg'),
-          iconSize: [45, 45],
-        })}
-      />
-    );
 
     render(<InstitutionsOfEducationMap data={data} />);
 
