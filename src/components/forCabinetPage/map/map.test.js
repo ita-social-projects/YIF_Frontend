@@ -102,7 +102,5 @@ describe('Test InstitutionsOfEducationMap component', () => {
     expect(
       document.querySelector('[href="https://nuwm.edu.ua/"]')
     ).toBeInTheDocument();
-
-    screen.debug();
   });
 });
