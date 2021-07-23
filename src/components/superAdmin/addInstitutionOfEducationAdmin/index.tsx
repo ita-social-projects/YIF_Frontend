@@ -113,8 +113,8 @@ const AddInstitutionOfEducationAdmin = () => {
           <Link
             className={`${styles.animatedButton} ${styles.buttonLink}`}
             to={{pathname: `${path}/edit/`, 
-               state: {IoEid: state.IoEid}}}
-          >
+              state: { IoEid: (state === undefined) ?  IoEid : state.IoEid}}}
+         >
             Редагувати
           </Link>
           <IoEadmin adminId={adminId} adminEmail={adminEmail}/>
