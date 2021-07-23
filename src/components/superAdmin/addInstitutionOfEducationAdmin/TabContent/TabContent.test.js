@@ -1,6 +1,9 @@
 import React from 'react';
 import TabContent from './TabContent';
 import { render, screen, wait } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import AddInstitutionOfEducationAdmin from '../index';
+import { MemoryRouter } from 'react-router-dom';
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -22,6 +25,12 @@ const data = [
     email: 'vweslaine.pg@ericreyess.com',
   }
 ]
+
+const data2 = {
+  errors: {
+    IoEid: ['Цей навчальний заклад уже має адміністратора']
+  }
+}
 
 const mockJsonPromise = Promise.resolve(data);
 
@@ -71,6 +80,43 @@ describe('Render the TabContent page', () => {
     const toggleContent2 = screen.getByTestId('toggle-content-2')
     expect(toggleContent2).toBeInTheDocument()
   });
+
+  test('Add new administrator from moderators', async ()=> {
+
+    const { getByText, getAllByTestId } = render(
+      <MemoryRouter>
+        <AddInstitutionOfEducationAdmin>
+          <TabContent IoEid={IoEid}/>
+        </AddInstitutionOfEducationAdmin>
+      </MemoryRouter>
+    );
+
+    await wait(() => {userEvent.click(getAllByTestId('chooseBtn')[1]);});
+
+    await expect(getByText('Заклад отримав нового адміністратора!')).toBeInTheDocument();
+  });
+
+  test('Add new administrator from moderators with error', async()=>{
+
+    const { getByText, getAllByTestId } = render(<TabContent />);
+
+    await wait(()=> {
+      userEvent.click(getByText('Вибрати зі списку модераторів'));
+    });
+
+    const mockPostPromiseResolveError = Promise.resolve({
+      json: () => Promise.resolve({errors: { IoEId: ['Цей навчальний заклад вже має адміністратора']}}),
+      status: 400,
+    });
+
+    global.fetch = jest.fn().mockImplementationOnce(()=>mockPostPromiseResolveError)
+
+    await wait(() => {
+      userEvent.click(getAllByTestId('chooseBtn')[1]);
+    });
+
+    await expect(getByText('Цей навчальний заклад вже має адміністратора')).toBeInTheDocument();
+  })
 
   test('Check error ', async () => {
     const mockFetchPromiseError = Promise.resolve({

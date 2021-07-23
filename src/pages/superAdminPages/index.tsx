@@ -11,6 +11,8 @@ import UniversityListPage from './universityListPage';
 import ChangePassword from '../../components/changePassword';
 import AddSpecialtyPage from './addSpecialtyPage';
 import EditInstitutionOfEducationInfoPage from './editInstitutionOfEducationInfoPage';
+import AddDirectionPage from './addDirectionPage/index'
+
 
 function SuperAdmin() {
   const [isLinksOpened, setIsLinksOpened] = useState(false);
@@ -62,6 +64,12 @@ function SuperAdmin() {
             </Link>
             <Link
               className={styles.underlineAnimation}
+              to={`${path}/addDirection`}
+            >
+              Напрями
+            </Link>
+            <Link
+              className={styles.underlineAnimation}
               to={`${path}/addSpecialty`}
             >
               Спеціальності
@@ -89,6 +97,9 @@ function SuperAdmin() {
           </Route>
           <Route exact path={`${path}/changePassword`}>
             <ChangePassword />
+          </Route>
+          <Route exact path={`${path}/addDirection`}>
+            <AddDirectionPage />
           </Route>
           <Route exact path={`${path}/addSpecialty`}>
             <AddSpecialtyPage />

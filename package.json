@@ -86,6 +86,7 @@
     "indent": 4
   },
   "jest": {
+    
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}",
       "!src/serviceWorker.ts",
