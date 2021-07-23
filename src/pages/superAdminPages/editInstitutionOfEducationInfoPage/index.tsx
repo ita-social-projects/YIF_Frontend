@@ -45,9 +45,11 @@ const EditInstitutionOfEducationInfoPage = () => {
     institutionOfEducationType: '',
   });
 
+  const IoEid = '58611427-2d33-4e17-9cee-0cda0470d150';
+
    
   const sendNewDescription = async (formikValues: any) => {
-    const url = `${APIUrl}SuperAdmin/ModifyIoE/${state.IoEid}`
+    const url = `${APIUrl}SuperAdmin/ModifyIoE/${(state === undefined) ? IoEid :state.IoEid}`
     try {
       const currentToken = await getToken();
       const { statusCode }: any = await requestSecureData(
@@ -75,7 +77,7 @@ const EditInstitutionOfEducationInfoPage = () => {
           const currentToken = await getToken();
              
           const { statusCode, data }: any = await requestSecureData(
-            `${APIUrl}SuperAdmin/GetIoEInfoByIoEId/${state.IoEid}`,
+            `${APIUrl}SuperAdmin/GetIoEInfoByIoEId/${(state === undefined) ? IoEid : state.IoEid}`,
             'GET',
             currentToken
           );
@@ -92,7 +94,7 @@ const EditInstitutionOfEducationInfoPage = () => {
           setIsFetching(false);
           setTimeout(() => {
             setIsNew(false);
-          }, 4000);
+          }, 5000);
         }
       };
       getInfo();

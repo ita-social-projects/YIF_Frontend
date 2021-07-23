@@ -39,7 +39,7 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 
-jest.useFakeTimers();
+
 
 describe('editInstitutionOfEducationInfo', () => {
   describe('fetch data from server', () => {
