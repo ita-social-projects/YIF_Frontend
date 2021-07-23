@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from './editInstitutionOfEducationInfoPage.module.scss';
 import { requestSecureData } from '../../../services/requestDataFunction';
-import { APIUrl } from '../../../services/endpoints';
 import { useAuth } from '../../../services/tokenValidator';
+import { APIUrl } from '../../../services/endpoints';
 import Spinner from '../../../components/common/spinner';
 import EditInstitutionOfEducationInfo from '../../../components/editIOEInfo';
 import {useLocation} from "react-router-dom"; 

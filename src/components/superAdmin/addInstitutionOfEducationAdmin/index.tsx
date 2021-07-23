@@ -39,7 +39,7 @@ const AddInstitutionOfEducationAdmin = () => {
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
   const [
-    { ioEId, name, abbreviation, site, address, phone, email, description, imagePath, adminId, adminEmail },
+    { name, abbreviation, site, address, phone, email, description, imagePath, adminId, adminEmail },
     setData,
   ] = useState<IoEinfo>({
     ioEId: '',
