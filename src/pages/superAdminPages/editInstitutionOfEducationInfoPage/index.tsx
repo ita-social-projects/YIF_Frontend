@@ -5,7 +5,7 @@ import { useAuth } from '../../../services/tokenValidator';
 import { APIUrl } from '../../../services/endpoints';
 import Spinner from '../../../components/common/spinner';
 import EditInstitutionOfEducationInfo from '../../../components/editIOEInfo';
-import {useLocation} from "react-router-dom"; 
+import {useLocation, useHistory} from "react-router-dom"; 
 
 interface Info {
   name: string;
@@ -27,6 +27,7 @@ interface stateType {
 
 const EditInstitutionOfEducationInfoPage = () => {
   const { state } = useLocation<stateType>();
+  const history = useHistory();
   const [isFetching, setIsFetching] = useState(true);
   const [isNew, setIsNew] = useState(false);
   const [error, setError] = useState(false);
@@ -61,6 +62,9 @@ const EditInstitutionOfEducationInfoPage = () => {
       if (statusCode.toString().match(/^[23]\d{2}$/)) {
         setError(false);
         setIsNew(true);
+        setTimeout(() => {
+          history.goBack();
+        }, 2000);
       } else {
         setError(true);
       }
