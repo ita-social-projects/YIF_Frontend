@@ -21,7 +21,8 @@ interface IoEinfo {
   description: string,
   imagePath: string,
   adminId: string,
-  adminEmail: string
+  adminEmail: string,
+  isAdminBanned: boolean
 }
 
 interface stateType {
@@ -39,7 +40,7 @@ const AddInstitutionOfEducationAdmin = () => {
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
   const [
-    { name, abbreviation, site, address, phone, email, description, imagePath, adminId, adminEmail },
+    { name, abbreviation, site, address, phone, email, description, imagePath, adminId, adminEmail, isAdminBanned },
     setData,
   ] = useState<IoEinfo>({
     ioEId: '',
@@ -53,6 +54,7 @@ const AddInstitutionOfEducationAdmin = () => {
     imagePath: '',
     adminId: '',
     adminEmail: '',
+    isAdminBanned: true,
   });
 
   const IoEid = {
@@ -115,16 +117,20 @@ const AddInstitutionOfEducationAdmin = () => {
           />
           <Link
             className={`${styles.animatedButton} ${styles.buttonLink}`}
-            to={{pathname: `${path}/edit/`, 
-              state: { IoEid: (state === undefined) ?  IoEid : state.IoEid}}}
-         >
+            to={{
+              pathname: `${path}/edit/`,
+              state: { IoEid: (state === undefined) ? IoEid : state.IoEid }
+            }}
+          >
             Редагувати
           </Link>
-                                                         {/* const [isAdminDeleted, setIsAdminDeleted] = useState(false); */}
-
-          <IoEadmin adminId={adminId} adminEmail={adminEmail} isAdminDeleted={isAdminDeleted} setIsAdminDeleted={setIsAdminDeleted}/>
-
-
+          <IoEadmin 
+            adminId={adminId} 
+            adminEmail={adminEmail} 
+            isAdminBanned={isAdminBanned} 
+            isAdminDeleted={isAdminDeleted} 
+            setIsAdminDeleted={setIsAdminDeleted} 
+          />
           <div className={styles.admin__buttons}>
             {/* Check for (state === undefined) for testing*/}
             <TabContent isAdminChanged={isAdminChanged} setIsAdminChanged={setIsAdminChanged} IoEid={(state === undefined) ? IoEid : state.IoEid} />
