@@ -1,6 +1,5 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './map.module.scss';
-import Spinner from '../../../components/common/spinner';
 import L from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
@@ -15,14 +14,12 @@ const GetIcon = () => {
 
 const InstitutionsOfEducationMap = (props: any) => {
   const institutionsOfEducationDB = props.data;
-  const [isFetching, setFetching] = useState(true);
   const [zoom, setZoom] = useState(6);
   const [centerLat, setCenterLat] = useState(49);
   const [centerLon, setCenterLon] = useState(30);
 
   useEffect(() => {
     if (institutionsOfEducationDB[0].lat) {
-      setFetching(false);
       setZoom(institutionsOfEducationDB.length > 1 ? 8 : 12);
       setCenterLat(
         institutionsOfEducationDB.length > 1
@@ -34,8 +31,6 @@ const InstitutionsOfEducationMap = (props: any) => {
           ? 27.957419925020235
           : institutionsOfEducationDB[0].lon
       );
-    } else {
-      setFetching(false);
     }
   }, [institutionsOfEducationDB]);
 
@@ -67,23 +62,16 @@ const InstitutionsOfEducationMap = (props: any) => {
   }
 
   return (
-    <Fragment>
-      {isFetching ? (
-        <div className={style.spinnerContainer}>
-          <Spinner />
-        </div>
-      ) : (
-        <MapContainer
-          id='mapComponent'
-          className={style.mapContainer}
-          zoom={zoom}
-          center={[centerLat, centerLon]}
-        >
-          <TileLayer url={styleURL} />
-          {institutionsOfEducationList}
-        </MapContainer>
-      )}
-    </Fragment>
+    <MapContainer
+      data-testid='mapComponent'
+      id='mapComponent'
+      className={style.mapContainer}
+      zoom={zoom}
+      center={[centerLat, centerLon]}
+    >
+      <TileLayer url={styleURL} />
+      {institutionsOfEducationList}
+    </MapContainer>
   );
 };
 

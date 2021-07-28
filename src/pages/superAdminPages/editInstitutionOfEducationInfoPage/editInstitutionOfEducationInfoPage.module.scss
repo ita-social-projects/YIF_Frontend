@@ -1,0 +1,26 @@
+@import '../../../styles/index';
+body {
+  position: relative;
+}
+
+.success {
+  @include flex(row, center, center);
+  font-family: $fontNunito;
+  font-weight: $semiBold;
+  border-radius: 0.4rem;
+  width: 20rem;
+  height: 4rem;
+  background-color: rgba(0, 0, 0, 0.658);
+  color: #fff;
+  position: fixed;
+  top: 48.5%;
+  left: 47.5%;
+  z-index: 2;
+}
+
+.noContent {
+  @include flex(row, center, center);
+  width: 100%;
+  height: 80vh;
+}
+
