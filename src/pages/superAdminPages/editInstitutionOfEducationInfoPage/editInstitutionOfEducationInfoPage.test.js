@@ -1,9 +1,8 @@
 import React from 'react';
 import EditInstitutionOfEducationInfoPage from './index';
-import userEvent from '@testing-library/user-event';
 import { render, wait, act, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { BrowserRouter as Router } from 'react-router-dom';
-
 
 jest.mock('../../../services/tokenValidator', () => {
   return {
@@ -39,7 +38,7 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 
-jest.useFakeTimers();
+
 
 describe('editInstitutionOfEducationInfo', () => {
   describe('fetch data from server', () => {

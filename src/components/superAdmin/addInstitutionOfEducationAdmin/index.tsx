@@ -39,7 +39,7 @@ const AddInstitutionOfEducationAdmin = () => {
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
   const [
-    { ioEId, name, abbreviation, site, address, phone, email, description, imagePath, adminId, adminEmail },
+    { name, abbreviation, site, address, phone, email, description, imagePath, adminId, adminEmail },
     setData,
   ] = useState<IoEinfo>({
     ioEId: '',
@@ -115,8 +115,9 @@ const AddInstitutionOfEducationAdmin = () => {
           />
           <Link
             className={`${styles.animatedButton} ${styles.buttonLink}`}
-            to={`${path}/edit/${ioEId}`}
-          >
+            to={{pathname: `${path}/edit/`, 
+              state: { IoEid: (state === undefined) ?  IoEid : state.IoEid}}}
+         >
             Редагувати
           </Link>
                                                          {/* const [isAdminDeleted, setIsAdminDeleted] = useState(false); */}

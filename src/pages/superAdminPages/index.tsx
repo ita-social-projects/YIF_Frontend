@@ -10,6 +10,7 @@ import AddInstitutionOfEducationAdmin from '../../components/superAdmin/addInsti
 import UniversityListPage from './universityListPage';
 import ChangePassword from '../../components/changePassword';
 import AddSpecialtyPage from './addSpecialtyPage';
+import EditInstitutionOfEducationInfoPage from './editInstitutionOfEducationInfoPage';
 import AddDirectionPage from './addDirectionPage/index'
 
 
@@ -87,6 +88,9 @@ function SuperAdmin() {
           </Route>
           <Route exact path={`${path}/addInstitutionOfEducationAdmin`}>
             <AddInstitutionOfEducationAdmin />
+          </Route>
+          <Route path={`${path}/addInstitutionOfEducationAdmin/edit`}>
+            <EditInstitutionOfEducationInfoPage />
           </Route>
           <Route exact path={`${path}/universityList`}>
             <UniversityListPage />
