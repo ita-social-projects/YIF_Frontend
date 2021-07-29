@@ -15,14 +15,6 @@
 
 .admin {
   margin-top: 42px;
-//   }
-// &__noAdmin{
-//   display:block;
-//   width: 350px;
-//   padding-top: 22px;
-//   padding-bottom: 16px;
-//   font-size: 18px;
-//   }
   &__title {
     font-size: 36px;
      }
@@ -55,5 +47,10 @@
       width: 100%;
     }
   }
+}
+.resultMessageContainer {
+  position: absolute;
+  margin-top: 80px;
+  left: calc(50% - 113px);
 }
 

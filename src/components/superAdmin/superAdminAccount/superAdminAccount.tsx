@@ -10,11 +10,8 @@ import TableItem from './tableItem/tableItem';
 import Search from './search/search';
 import PaginationPagesCreator from '../../../components/pagination/paginationPagesCreator/';
 import Lock from '../../common/icons/Lock/index';
-// import { Link, Router } from 'react-router-dom';
 import { ReactComponent as IconArrow } from './icons/iconArrow.svg';
 import Pagination from '../../pagination';
-
-// const iconIllustrAdmin = '/assets/images/superAdminAccount.svg';
 
 export interface IInstitutionOfEducationAdmin {
   id: string;
@@ -89,7 +86,7 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
   ): IInstitutionOfEducationAdmin[] => {
     if (action === 'setNewBanStatus') {
       return cloneDeep(state).map((admin) => {
-        if (admin.user.id === id) {
+        if (admin.id === id) {
           admin.isBanned = !admin.isBanned;
           return admin;
         }
@@ -101,7 +98,6 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
     return state;
   };
 
-  // request to server
   const setBanStatus = async (id: string) => {
     const endpoint = `${APIUrl}SuperAdmin/DisableInstitutionOfEducationAdmin/${id}`;
     const currentToken = await getToken();

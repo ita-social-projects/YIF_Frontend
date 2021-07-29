@@ -49,7 +49,7 @@ const TableItem: React.FC<Props> = (props) => {
         <li
           data-testid='setBunStatus'
           className={`${styles.adminBan} ${admin.isBanned && styles.banned}`}
-          onClick={() => setBanStatus(admin.user.id)}
+          onClick={() => setBanStatus(admin.id)}
         >
           {admin.isBanned ? <Lock /> : <Unlock />}
         </li>
