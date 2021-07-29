@@ -21,7 +21,9 @@ const IoEadmin: React.FC<props> = (props) => {
   const {
     adminId,
     adminEmail,
-    isAdminBanned
+    isAdminDeleted,
+    setIsAdminDeleted,
+    isAdminBanned,
   } = props;
   const { getToken } = useAuth();
   const [resultMessage, setResultMessage] = useState({
@@ -29,7 +31,6 @@ const IoEadmin: React.FC<props> = (props) => {
     message: '',
   });
   const [isBanned, setBanned] = useState(isAdminBanned);
-  const [isAdminDeleted, setIsAdminDeleted] = useState(false);
 
   const showMessage = (statusCode: any, msg: string) => {
     const result = (statusCode.match(/^[23]\d{2}$/)) ? 'success' : 'error';
@@ -61,8 +62,8 @@ const IoEadmin: React.FC<props> = (props) => {
 
   const deleteIoEadmin = async () => {
     const currentToken = await getToken();
-    const deleteEnpoint = `${APIUrl}SuperAdmin/DeleteInstitutionOfEducationAdmin/${adminId}`
-    requestSecureData(deleteEnpoint, 'DELETE', currentToken)
+    const deleteEndpoint = `${APIUrl}SuperAdmin/DeleteInstitutionOfEducationAdmin/${adminId}`
+    requestSecureData(deleteEndpoint, 'DELETE', currentToken)
       .then((res: any) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {

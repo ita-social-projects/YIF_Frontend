@@ -134,7 +134,7 @@ describe('IoEadmin component', () => {
       });
     });
     
-    test('Check deleteIoEadmin success', async () => {
+    xtest('Check deleteIoEadmin success', async () => {
       const { getByTestId } = render(
       <AuthProvider>
         <IoEadmin
