@@ -177,7 +177,10 @@ const FormInputProfile: FC<Props & FieldProps> = ({
       </div>
       <div className={styles.wrapperErrorInput}>
         {touched[field.name] && errors[field.name] ? (
-          <FormInputError errorType='input' errorMessage={errors[field.name]} />
+          <FormInputError
+            errorFor='inputField'
+            errorMessage={errors[field.name]}
+          />
         ) : null}
       </div>
     </>

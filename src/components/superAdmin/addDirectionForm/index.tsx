@@ -101,13 +101,17 @@ const AddDirectionForm: React.FC = () => {
                   Назва
                 </label>
                 <Field
-                  className={styles.topWrapper__input}
+                  className={`${styles.topWrapper__input} ${
+                    errors.directionName && touched.directionName
+                      ? styles.errorInField_borderAround_inset
+                      : ''
+                  }`}
                   id='directionName'
                   name='directionName'
                 />
                 {errors.directionName && touched.directionName ? (
                   <FormInputError
-                    errorType='inputFull'
+                    errorFor='inputField'
                     errorMessage={errors.directionName}
                   />
                 ) : null}
@@ -120,13 +124,17 @@ const AddDirectionForm: React.FC = () => {
                   Код
                 </label>
                 <Field
-                  className={styles.topWrapper__input}
+                  className={`${styles.topWrapper__input} ${
+                    errors.directionCode && touched.directionCode
+                      ? styles.errorInField_borderAround_inset
+                      : ''
+                  }`}
                   id='directionCode'
                   name='directionCode'
                 />
                 {errors.directionCode && touched.directionCode ? (
                   <FormInputError
-                    errorType='inputFull'
+                    errorFor='inputField'
                     errorMessage={errors.directionCode}
                   />
                 ) : null}
@@ -148,7 +156,7 @@ const AddDirectionForm: React.FC = () => {
               )}
               {resultMessage.status === 'error' && (
                 <FormInputError
-                  errorType='form'
+                  errorFor='form'
                   data-testid='errorMessage'
                   errorMessage={resultMessage.message}
                 />

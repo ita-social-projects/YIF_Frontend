@@ -2,7 +2,6 @@
 
 .errorFromInputField {
   @include flex(row, center, flex-start);
-  padding: 0.7rem;
   padding-left: 1.4rem;
   position: absolute;
   font-size: $font_13px;
@@ -10,6 +9,7 @@
   color: $darkred;
   font-weight: $regular;
   font-family: $fontOpenSans;
+  height: $errMessageHeight;
   svg path {
     fill: $darkred;
   }

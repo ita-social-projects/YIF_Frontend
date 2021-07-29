@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './formInputError.module.scss';
 
 interface Props {
-  errorMessage: any; //use to input text of error message
+  errorMessage: any; // use to place text into an error message
   errorFor: 'inputField' | 'form'; // use either of this words to properly locate and present visually this component
-  redirectLink?: string; // use only for RegistarationForm
+  redirectLink?: string; // use only for RegistarationForm component
 }
 
 const FormInputError: React.FC<Props> = ({
@@ -51,4 +51,4 @@ const FormInputError: React.FC<Props> = ({
   );
 };
 
-export { FormInputError };
+export default FormInputError;

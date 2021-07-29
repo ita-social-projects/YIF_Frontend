@@ -1,5 +1,5 @@
-import React, { Fragment, useState } from 'react';
-import style from './map.module.scss';
+import React, { useState } from 'react';
+import styles from './map.module.scss';
 import L, { LeafletMouseEvent } from 'leaflet';
 import { MapContainer, TileLayer, useMapEvents, Marker } from 'react-leaflet';
 
@@ -12,7 +12,7 @@ const GetIcon = () => {
   });
 };
 
-const UniversityMap = (props: any) => {
+const InstitutionOfEducationMap = (props: any) => {
   const current = props.currentPosition || [0, 0];
   const [position, setPosition] = useState<[number, number]>(current);
 
@@ -38,18 +38,19 @@ const UniversityMap = (props: any) => {
   };
 
   return (
-    <Fragment>
-      <MapContainer
-        id='mapComponent'
-        className={style.mapContainer}
-        zoom={6}
-        center={[49, 32]}
-      >
-        <TileLayer url={styleURL} />
-        <LocationMarker />
-      </MapContainer>
-    </Fragment>
+    <MapContainer
+      id='mapComponent'
+      key={props.errors.lat}
+      className={`${styles.mapContainer} ${
+        props.errors.lat ? styles.errorInField_borderAround : ''
+      }`}
+      zoom={6}
+      center={[49, 32]}
+    >
+      <TileLayer url={styleURL} />
+      <LocationMarker />
+    </MapContainer>
   );
 };
 
-export default UniversityMap;
+export default InstitutionOfEducationMap;

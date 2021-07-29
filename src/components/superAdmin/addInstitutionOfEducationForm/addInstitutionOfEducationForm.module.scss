@@ -18,7 +18,7 @@
       height: auto;
       position: relative;
       flex-wrap: wrap;
-      @include flex(row, flex-start, center);
+      @include flex(row, center, center);
       max-width: 52.5rem;
 
       &__title {
@@ -41,6 +41,8 @@
         padding: 0 1rem;
       }
       select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
         appearance: none;
         background: url(/assets/images/arrow.svg);
         background-position: 96% 1rem;
@@ -77,15 +79,14 @@
 
       .pictureWrapper {
         flex-basis: 50%;
-        padding: 0.6rem;
-        margin-top: 1.4rem;
+        padding: 0 0.6rem;
+        margin-bottom: 0.9rem;
 
         .uploadContainer {
-          @include flex(column, center, center);
           background-color: white;
-          height: 100%;
           border: 1px solid #afbecf;
           border-radius: 0.3rem;
+          @include flex(column, center, center);
 
           &__img {
             width: 10rem;

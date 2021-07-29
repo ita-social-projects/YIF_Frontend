@@ -10,11 +10,14 @@ describe('Test Leaflet methods', () => {
   it('should render map', async () => {
     const handleClick = jest.fn();
     const setFieldValue = jest.fn();
-
+    const errors = {
+      lat: 50.44917,
+    };
     const { container } = render(
       <Provider store={store}>
         <MemoryRouter>
           <UniversityMap
+            errors={errors}
             onClick={handleClick()}
             setFieldValue={setFieldValue}
           />
@@ -27,22 +30,5 @@ describe('Test Leaflet methods', () => {
     fireEvent.click(map);
     expect(handleClick).toHaveBeenCalledTimes(1);
     expect(setFieldValue).toHaveBeenCalledTimes(2);
-  });
-
-  it('should render marker', async () => {
-    const handleClick = jest.fn();
-
-    const { container } = render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <LocationMarker onClick={handleClick()} />
-        </MemoryRouter>
-      </Provider>
-    );
-
-    const marker = container.querySelector('div');
-    expect(marker).toBeInTheDocument();
-    fireEvent.click(marker);
-    expect(handleClick).toHaveBeenCalledTimes(1);
   });
 });

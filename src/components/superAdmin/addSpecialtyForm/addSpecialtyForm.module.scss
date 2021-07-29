@@ -24,6 +24,8 @@
       padding: 2.5rem;
       border-radius: 10px;
       select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
         appearance: none;
         background: url(/assets/images/arrow.svg);
         background-position: 96% 21px;
@@ -54,7 +56,7 @@
       }
     }
     .halfWidth {
-      padding: 0.6rem;
+      padding: 0 0.6rem;
       flex-basis: 50%;
       &__code {
         flex-basis: 40%;
@@ -70,7 +72,7 @@
       }
     }
     .fullWidth {
-      padding: 0.6rem;
+      padding: 0 0.6rem;
       flex-basis: 100%;
       &__textarea {
         align-items: flex-start;

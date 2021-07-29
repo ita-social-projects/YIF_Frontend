@@ -143,18 +143,25 @@ const AddInstitutionOfEducationForm = () => {
                 >
                   Назва
                 </label>
-                <Field
-                  className={styles.topWrapper__input}
-                  id='institutionOfEducationName'
-                  name='institutionOfEducationName'
-                />
-                {errors.institutionOfEducationName &&
-                touched.institutionOfEducationName ? (
-                  <FormInputError
-                    errorType='inputFull'
-                    errorMessage={errors.institutionOfEducationName}
+                <div className={styles.inputFieldWrapper}>
+                  <Field
+                    className={`${styles.topWrapper__input} ${
+                      errors.institutionOfEducationName &&
+                      touched.institutionOfEducationName
+                        ? styles.errorInField_borderAround
+                        : ''
+                    }`}
+                    id='institutionOfEducationName'
+                    name='institutionOfEducationName'
                   />
-                ) : null}
+                  {errors.institutionOfEducationName &&
+                  touched.institutionOfEducationName ? (
+                    <FormInputError
+                      errorFor='inputField'
+                      errorMessage={errors.institutionOfEducationName}
+                    />
+                  ) : null}
+                </div>
               </div>
 
               <div className={styles.halfWidth}>
@@ -164,29 +171,36 @@ const AddInstitutionOfEducationForm = () => {
                 >
                   Тип закладу освіти
                 </label>
-                <Field
-                  className={styles.topWrapper__input}
-                  as='select'
-                  id='institutionOfEducationType'
-                  data-testid='select-type'
-                  name='institutionOfEducationType'
-                  value={values.institutionOfEducationType}
-                >
-                  <option data-testid='empty' value=''></option>
-                  <option data-testid='university' value='university'>
-                    Університет
-                  </option>
-                  <option data-testid='college' value='college'>
-                    Коледж
-                  </option>
-                </Field>
-                {errors.institutionOfEducationType &&
-                touched.institutionOfEducationType ? (
-                  <FormInputError
-                    errorType='inputFull'
-                    errorMessage={errors.institutionOfEducationType}
-                  />
-                ) : null}
+                <div className={styles.inputFieldWrapper}>
+                  <Field
+                    className={`${styles.topWrapper__input} ${
+                      errors.institutionOfEducationType &&
+                      touched.institutionOfEducationType
+                        ? styles.errorInField_borderAround
+                        : ''
+                    }`}
+                    as='select'
+                    id='institutionOfEducationType'
+                    data-testid='select-type'
+                    name='institutionOfEducationType'
+                    value={values.institutionOfEducationType}
+                  >
+                    <option data-testid='empty' value=''></option>
+                    <option data-testid='university' value='university'>
+                      Університет
+                    </option>
+                    <option data-testid='college' value='college'>
+                      Коледж
+                    </option>
+                  </Field>
+                  {errors.institutionOfEducationType &&
+                  touched.institutionOfEducationType ? (
+                    <FormInputError
+                      errorFor='inputField'
+                      errorMessage={errors.institutionOfEducationType}
+                    />
+                  ) : null}
+                </div>
               </div>
 
               <div className={styles.halfWidth}>
@@ -196,18 +210,25 @@ const AddInstitutionOfEducationForm = () => {
                 >
                   Аббревіатура
                 </label>
-                <Field
-                  className={styles.topWrapper__input}
-                  id='institutionOfEducationAbbreviation'
-                  name='institutionOfEducationAbbreviation'
-                />
-                {errors.institutionOfEducationAbbreviation &&
-                touched.institutionOfEducationAbbreviation ? (
-                  <FormInputError
-                    errorType='inputFull'
-                    errorMessage={errors.institutionOfEducationAbbreviation}
+                <div className={styles.inputFieldWrapper}>
+                  <Field
+                    className={`${styles.topWrapper__input} ${
+                      errors.institutionOfEducationAbbreviation &&
+                      touched.institutionOfEducationAbbreviation
+                        ? styles.errorInField_borderAround
+                        : ''
+                    }`}
+                    id='institutionOfEducationAbbreviation'
+                    name='institutionOfEducationAbbreviation'
                   />
-                ) : null}
+                  {errors.institutionOfEducationAbbreviation &&
+                  touched.institutionOfEducationAbbreviation ? (
+                    <FormInputError
+                      errorFor='inputField'
+                      errorMessage={errors.institutionOfEducationAbbreviation}
+                    />
+                  ) : null}
+                </div>
               </div>
 
               <div className={styles.halfWidth}>
@@ -217,18 +238,25 @@ const AddInstitutionOfEducationForm = () => {
                 >
                   Адреса
                 </label>
-                <Field
-                  className={styles.topWrapper__input}
-                  id='institutionOfEducationAddress'
-                  name='institutionOfEducationAddress'
-                />
-                {errors.institutionOfEducationAddress &&
-                touched.institutionOfEducationAddress ? (
-                  <FormInputError
-                    errorType='inputFull'
-                    errorMessage={errors.institutionOfEducationAddress}
+                <div className={styles.inputFieldWrapper}>
+                  <Field
+                    className={`${styles.topWrapper__input} ${
+                      errors.institutionOfEducationAddress &&
+                      touched.institutionOfEducationAddress
+                        ? styles.errorInField_borderAround
+                        : ''
+                    }`}
+                    id='institutionOfEducationAddress'
+                    name='institutionOfEducationAddress'
                   />
-                ) : null}
+                  {errors.institutionOfEducationAddress &&
+                  touched.institutionOfEducationAddress ? (
+                    <FormInputError
+                      errorFor='inputField'
+                      errorMessage={errors.institutionOfEducationAddress}
+                    />
+                  ) : null}
+                </div>
               </div>
 
               <div className={styles.halfWidth}>
@@ -238,18 +266,25 @@ const AddInstitutionOfEducationForm = () => {
                 >
                   Сайт
                 </label>
-                <Field
-                  className={styles.topWrapper__input}
-                  id='institutionOfEducationSite'
-                  name='institutionOfEducationSite'
-                />
-                {errors.institutionOfEducationSite &&
-                touched.institutionOfEducationSite ? (
-                  <FormInputError
-                    errorType='inputFull'
-                    errorMessage={errors.institutionOfEducationSite}
+                <div className={styles.inputFieldWrapper}>
+                  <Field
+                    className={`${styles.topWrapper__input} ${
+                      errors.institutionOfEducationSite &&
+                      touched.institutionOfEducationSite
+                        ? styles.errorInField_borderAround
+                        : ''
+                    }`}
+                    id='institutionOfEducationSite'
+                    name='institutionOfEducationSite'
                   />
-                ) : null}
+                  {errors.institutionOfEducationSite &&
+                  touched.institutionOfEducationSite ? (
+                    <FormInputError
+                      errorFor='inputField'
+                      errorMessage={errors.institutionOfEducationSite}
+                    />
+                  ) : null}
+                </div>
               </div>
 
               <div className={styles.halfWidth}>
@@ -259,18 +294,25 @@ const AddInstitutionOfEducationForm = () => {
                 >
                   Електронна адреса
                 </label>
-                <Field
-                  className={styles.topWrapper__input}
-                  id='institutionOfEducationEmail'
-                  name='institutionOfEducationEmail'
-                />
-                {errors.institutionOfEducationEmail &&
-                touched.institutionOfEducationEmail ? (
-                  <FormInputError
-                    errorType='inputFull'
-                    errorMessage={errors.institutionOfEducationEmail}
+                <div className={styles.inputFieldWrapper}>
+                  <Field
+                    className={`${styles.topWrapper__input} ${
+                      errors.institutionOfEducationEmail &&
+                      touched.institutionOfEducationEmail
+                        ? styles.errorInField_borderAround
+                        : ''
+                    }`}
+                    id='institutionOfEducationEmail'
+                    name='institutionOfEducationEmail'
                   />
-                ) : null}
+                  {errors.institutionOfEducationEmail &&
+                  touched.institutionOfEducationEmail ? (
+                    <FormInputError
+                      errorFor='inputField'
+                      errorMessage={errors.institutionOfEducationEmail}
+                    />
+                  ) : null}
+                </div>
               </div>
               <div className={styles.topWrapper__column}>
                 <div className={styles.topWrapper__column__fullWidth}>
@@ -280,18 +322,25 @@ const AddInstitutionOfEducationForm = () => {
                   >
                     Телефон
                   </label>
-                  <Field
-                    className={styles.topWrapper__input}
-                    id='institutionOfEducationPhone'
-                    name='institutionOfEducationPhone'
-                  />
-                  {errors.institutionOfEducationPhone &&
-                  touched.institutionOfEducationPhone ? (
-                    <FormInputError
-                      errorType='inputFull'
-                      errorMessage={errors.institutionOfEducationPhone}
+                  <div className={styles.inputFieldWrapper}>
+                    <Field
+                      className={`${styles.topWrapper__input} ${
+                        errors.institutionOfEducationPhone &&
+                        touched.institutionOfEducationPhone
+                          ? styles.errorInField_borderAround
+                          : ''
+                      }`}
+                      id='institutionOfEducationPhone'
+                      name='institutionOfEducationPhone'
                     />
-                  ) : null}
+                    {errors.institutionOfEducationPhone &&
+                    touched.institutionOfEducationPhone ? (
+                      <FormInputError
+                        errorFor='inputField'
+                        errorMessage={errors.institutionOfEducationPhone}
+                      />
+                    ) : null}
+                  </div>
                 </div>
                 <div className={styles.fullWidth}>
                   <label
@@ -300,24 +349,38 @@ const AddInstitutionOfEducationForm = () => {
                   >
                     Опис
                   </label>
-                  <Field
-                    as='textarea'
-                    id='institutionOfEducationDescription'
-                    name='institutionOfEducationDescription'
-                    className={styles.topWrapper__textarea}
-                    type='textarea'
-                  />
-                  {errors.institutionOfEducationDescription &&
-                  touched.institutionOfEducationDescription ? (
-                    <FormInputError
-                      errorType='inputFull'
-                      errorMessage={errors.institutionOfEducationDescription}
+                  <div className={styles.inputFieldWrapper}>
+                    <Field
+                      as='textarea'
+                      id='institutionOfEducationDescription'
+                      name='institutionOfEducationDescription'
+                      className={`${styles.topWrapper__textarea} ${
+                        errors.institutionOfEducationDescription &&
+                        touched.institutionOfEducationDescription
+                          ? styles.errorInField_borderAround
+                          : ''
+                      }`}
+                      type='textarea'
                     />
-                  ) : null}
+                    {errors.institutionOfEducationDescription &&
+                    touched.institutionOfEducationDescription ? (
+                      <FormInputError
+                        errorFor='inputField'
+                        errorMessage={errors.institutionOfEducationDescription}
+                      />
+                    ) : null}
+                  </div>
                 </div>
               </div>
               <div className={styles.pictureWrapper}>
-                <div className={styles.uploadContainer}>
+                <div
+                  className={`${styles.uploadContainer} ${
+                    errors.institutionOfEducationPicture &&
+                    touched.institutionOfEducationPicture
+                      ? styles.errorInField_borderAround
+                      : ''
+                  }`}
+                >
                   <Field
                     name='institutionOfEducationPicture'
                     text={values.institutionOfEducationType}
@@ -327,7 +390,7 @@ const AddInstitutionOfEducationForm = () => {
                 {errors.institutionOfEducationPicture &&
                 touched.institutionOfEducationPicture ? (
                   <FormInputError
-                    errorType='inputFull'
+                    errorFor='inputField'
                     errorMessage={errors.institutionOfEducationPicture}
                   />
                 ) : null}
@@ -338,18 +401,21 @@ const AddInstitutionOfEducationForm = () => {
               <h2 className={styles.bottomWrapper__subtitle}>
                 Виберіть місце розташування
               </h2>
-              <Field
-                name='lat'
-                data-testid='lat'
-                setFieldValue={setFieldValue}
-                component={InstitutionOfEducationMap}
-              />
-              {errors.lat && touched.lat ? (
-                <FormInputError
-                  errorType='inputFull'
-                  errorMessage={errors.lat}
+              <div className={styles.inputFieldWrapper}>
+                <Field
+                  name='lat'
+                  data-testid='lat'
+                  errors={errors}
+                  setFieldValue={setFieldValue}
+                  component={InstitutionOfEducationMap}
                 />
-              ) : null}
+                {errors.lat && touched.lat ? (
+                  <FormInputError
+                    errorFor='inputField'
+                    errorMessage={errors.lat}
+                  />
+                ) : null}
+              </div>
               <div
                 className={`${styles.bottomWrapper__halfWidth} ${styles.mailContainer}`}
               >
@@ -367,20 +433,26 @@ const AddInstitutionOfEducationForm = () => {
                     Адміністратору надійде лист для створення облікового запису
                   </div>
                 </div>
-
-                <Field
-                  className={styles.mailContainer__input}
-                  id='institutionOfEducationAdminEmail'
-                  name='institutionOfEducationAdminEmail'
-                  type='email'
-                />
-                {errors.institutionOfEducationAdminEmail &&
-                touched.institutionOfEducationAdminEmail ? (
-                  <FormInputError
-                    errorType='inputFull'
-                    errorMessage={errors.institutionOfEducationAdminEmail}
+                <div className={styles.inputFieldWrapper}>
+                  <Field
+                    className={`${styles.mailContainer__input} ${
+                      errors.institutionOfEducationAdminEmail &&
+                      touched.institutionOfEducationAdminEmail
+                        ? styles.errorInField_borderAround
+                        : ''
+                    }`}
+                    id='institutionOfEducationAdminEmail'
+                    name='institutionOfEducationAdminEmail'
+                    type='email'
                   />
-                ) : null}
+                  {errors.institutionOfEducationAdminEmail &&
+                  touched.institutionOfEducationAdminEmail ? (
+                    <FormInputError
+                      errorFor='inputField'
+                      errorMessage={errors.institutionOfEducationAdminEmail}
+                    />
+                  ) : null}
+                </div>
               </div>
               <FormButton
                 id='userProfileButton'
@@ -396,7 +468,7 @@ const AddInstitutionOfEducationForm = () => {
                 )}
                 {resultMessage.status === 'error' && (
                   <FormInputError
-                    errorType='form'
+                    errorFor='inputField'
                     errorMessage={resultMessage.message}
                   />
                 )}

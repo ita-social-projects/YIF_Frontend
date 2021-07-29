@@ -29,7 +29,7 @@ const ResetPasswordForm = () => {
           !useYIFResetPassword.error.hasError && <Spinner />}
         {useYIFResetPassword.error.hasError && (
           <FormInputError
-            errorType='form'
+            errorFor='form'
             errorMessage={useYIFResetPassword.error.errorMessage}
           />
         )}

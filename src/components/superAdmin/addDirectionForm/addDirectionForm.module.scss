@@ -5,7 +5,6 @@
   background: #f2f9ff url(/assets/images/addSpecialty.png) bottom left no-repeat;
   font-family: $fontOpenSans;
   font-size: 1.125rem;
-  min-height: 110vh;
   margin: 0 20px;
   width: 100%;
   padding-bottom: 34.375rem;
@@ -24,6 +23,8 @@
       padding: 2.5rem;
       border-radius: 10px;
       select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
         appearance: none;
         background: url(/assets/images/arrow.svg);
         background-position: 96% 21px;
@@ -62,10 +63,7 @@
         }
       }
     }
-    .fullWidth {
-      padding: 0.6rem;
-      flex-basis: 100%;
-    }
+
     button {
       margin-left: auto;
       margin-right: 0;
@@ -78,5 +76,10 @@
       @include flex(column, center, center);
       justify-self: center;
     }
+  }
+  .fullWidth {
+    padding: 0.6rem;
+    flex-basis: 100%;
+    max-width: 1100px;
   }
 }
