@@ -54,7 +54,6 @@ describe('HOME PAGE: lower banner', () => {
           value={{
             token: 'testToken',
             refreshToken: 'Token',
-            isExpired: false,
             isRefreshing: false,
             getToken: () => {},
             updateToken: () => {},
@@ -68,6 +67,6 @@ describe('HOME PAGE: lower banner', () => {
     const button = getByRole('link');
     fireEvent.click(button);
     expect(handleClick).toHaveBeenCalledTimes(1);
-    expect(history.location.pathname).toEqual('/cabinet');
+    expect(history.location.pathname).toEqual('/');
   });
 });

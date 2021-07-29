@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { FormButton } from '../../../common/formElements';
 import { Formik, Form, Field } from 'formik';
 import styles from './tabs.module.scss';
@@ -10,6 +9,7 @@ import { useAuth } from '../../../../services/tokenValidator';
 import tabContextValidation from './tabContextValidation';
 import { FormInputSuccess } from '../../../common/formElements/formInputSuccess/formInputSuccess';
 import { FormInputError } from '../../../common/formElements';
+import ResponsePlaceholder from '../../../common/responsePlaceholder';
 
 interface Moderator {
   userId: string;
@@ -17,7 +17,9 @@ interface Moderator {
 }
 
 interface props {
-  IoEid: { pathname: string }
+  IoEid: { pathname: string },
+  isAdminChanged: boolean,
+  setIsAdminChanged: any
 }
 
 function Tabs(props: props) {
@@ -25,7 +27,6 @@ function Tabs(props: props) {
   const toggleTab = (index: any) => {
     setToggleState(index);
   };
-  const history = useHistory();
   const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState(false);
   const { getToken } = useAuth();
@@ -41,17 +42,23 @@ function Tabs(props: props) {
     message: '',
   });
   
-  const handleFormSubmit = async (
-    pathToRedirect: string,
-    values: any
-    ) => {
-    setSubmitting(true);
+  const showMessage = (statusCode: any, msg: string) => {
+    const result = (statusCode.match(/^[23]\d{2}$/)) ? 'success' : 'error';
     setResultMessage({
-      status: '',
-      message: '',
+      status: result,
+      message: msg,
     });
+    setTimeout(() => {
+      setResultMessage({
+        status: '',
+        message: '',
+      });
+    }, 4000);
+  }
+
+  const handleFormSubmit = async (pathToRedirect: string,values: any) => {
+    setSubmitting(true);
     const token = await getToken();
-    console.log(props.IoEid);
     requestSecureData(
       `${APIUrl}SuperAdmin/AddInstitutionOfEducationAdmin`, 'POST', token, {
         institutionOfEducationId: props.IoEid,
@@ -60,30 +67,43 @@ function Tabs(props: props) {
       .then((res: any) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
-          setResultMessage({
-            status: 'success',
-            message: `Заклад отримав нового адміністратора!`,
-          });
-          setTimeout(() => {
-            history.push(pathToRedirect);
-          }, 3000);
+          showMessage(statusCode.toString(), `Заклад отримав нового адміністратора!`)
+          props.setIsAdminChanged(!props.isAdminChanged);
           setSubmitting(false);
         }
         else {
-          setResultMessage({
-            status: 'error',
-              message: res.data.title || 'Щось пішло не так, спробуйте знову.'
-            });
-          }
+          showMessage(statusCode.toString(), statusCode === '409' ? 'Цей навчальний заклад уже має адміністратора' : 'Щось пішло не так, спробуйте знову.');
         }
-      )
+      })
       .catch((error)=>{
-        setResultMessage({
-          status: 'error',
-          message: error.message || 'Щось пішло не так, спробуйте знову.'
-        })
+        showMessage(error.toString(), 'Щось пішло не так, спробуйте знову.');
       });
   }
+
+  const chooseIoEadmin = async (userId: string, ioEId: { pathname: string; }) => {
+    try {
+      const currentToken = await getToken();
+      const { statusCode, data }: any = await requestSecureData(
+        `${APIUrl}SuperAdmin/ChooseIoEAdminFromModerators`,
+        'PUT',
+        currentToken,
+        {
+          userId: userId,
+          ioEId: ioEId
+        });
+      if (statusCode.toString().match(/^[23]\d{2}$/)) {
+        showMessage(statusCode.toString(), `Заклад отримав нового адміністратора!`)
+        props.setIsAdminChanged(!props.isAdminChanged);
+        setError(false);
+      } else {
+        showMessage(statusCode.toString(), data.errors.IoEId[0])
+      }
+    } catch (e) {
+      setError(true)
+    } finally {
+      setIsFetching(false);
+    }
+  };
 
   useEffect(() => {
     const getInfo = async () => {
@@ -107,7 +127,7 @@ function Tabs(props: props) {
       }
     };
     getInfo();
-  }, []);
+  }, [props.isAdminChanged]);
 
   let content;
   if (isFetching && !error) {
@@ -119,7 +139,7 @@ function Tabs(props: props) {
   } else if (error && !isFetching) {
     content = (
       <div className={styles.noContentContainer}>
-        <h2>Щось пішло не так, спробуйте знову.</h2>
+        <ResponsePlaceholder errorMessage = 'Щось пішло не так, спробуйте знову.'/>
       </div>
     );
   } else {
@@ -153,6 +173,7 @@ function Tabs(props: props) {
 
         <div className={styles.content}>
           <div
+            data-testid='toggle-content-0'
             className={
               toggleState === 1
                 ? `${styles.content__tabs} ${styles.content__tabs__active}` 
@@ -190,7 +211,7 @@ function Tabs(props: props) {
                       id='add_by_email'
                       name='add_by_email'
                       placeholder='Email'
-                      
+                      data-testid='email-field'
                     />
                     {errors.add_by_email &&
                     touched.add_by_email ? (
@@ -218,6 +239,49 @@ function Tabs(props: props) {
                 </div>
               )}
               {resultMessage.status === 'success' && (
+                <FormInputSuccess 
+                  successMessage={resultMessage.message} 
+                  data-test-id ='success message'
+                />
+              )}
+              {resultMessage.status === 'error' && (
+                <FormInputError
+                  data-test-id ='eror message'
+                  errorType='form'
+                  errorMessage={resultMessage.message}
+                />
+              )}
+            </div>
+          </div>
+
+          <div
+            data-testid='toggle-content-2'
+            className={
+              toggleState === 2
+                ? `${styles.content__tabs} ${styles.content__tabs__active}`
+                : `${styles.content__tabs}`
+            }
+          >
+            <div className={styles.moderators__top}>
+              <p className={styles.moderators__top__address}>Електронна адреса</p>
+            </div>
+            {moderators.map((moderator) => {
+              return (
+                <div data-testid="moderator" key={moderator.userId} className={styles.moderators__item}>
+                  <div className={styles.moderators__item__mail}>
+                    {moderator.email}
+                  </div>
+                  <button data-testid="chooseBtn" className={styles.moderators__item__link} onClick={()=>{chooseIoEadmin(
+                    moderator.userId,
+                    props.IoEid
+                  )}}>
+                    Призначити адміном
+                  </button>
+                </div>
+              )
+            })}
+            <div className={styles.resultMessageContainer}>
+              {resultMessage.status === 'success' && (
                 <FormInputSuccess successMessage={resultMessage.message} />
               )}
               {resultMessage.status === 'error' && (
@@ -228,35 +292,10 @@ function Tabs(props: props) {
               )}
             </div>
           </div>
-
-          <div
-            className={
-              toggleState === 2
-                ? `${styles.content__tabs} ${styles.content__tabs__active}`
-                : `${styles.content__tabs}`
-            }
-          >
-            <div data-testid='toggle-content-2' className={styles.moderators__top}>
-              <p className={styles.moderators__top__address}>Електронна адреса</p>
-            </div>
-            {moderators.map((moderator) => {
-              return (
-                <div data-testid="moderator" key={moderator.userId} className={styles.moderators__item}>
-                  <div className={styles.moderators__item__mail}>
-                    {moderator.email}
-                  </div>
-                  <div className={styles.moderators__item__link}>
-                    Призначити адміном
-                  </div>
-                </div>
-              )
-            })}
-          </div>
         </div>
       </div>
     );
   }
-
   return <>{content}</>;
 }
 

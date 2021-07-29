@@ -10,13 +10,13 @@
   width: 100%;
   padding-bottom: 34.375rem;
   &__title {
-    width: 100%;
+    width: 90%;
     text-align: center;
     font-size: 2.5rem;
     margin: 3.125rem 0 2.5rem 0;
   }
   form {
-    max-width: 1100px;
+    width: 90%;
     .topWrapper {
       @include flex(row, flex-start, center);
       background: #bad0e5;
@@ -45,19 +45,12 @@
         font-family: $fontOpenSans;
         margin-bottom: 0.2rem;
       }
-      &__textarea {
-        width: 100%;
-        padding: 0.625rem 1rem;
-        font-family: $fontOpenSans;
-        min-height: 7.813rem;
-        border-radius: 0.3rem;
-      }
     }
     .halfWidth {
       padding: 0.6rem;
-      flex-basis: 50%;
+      flex-basis: 65%;
       &__code {
-        flex-basis: 40%;
+        flex-basis: 30%;
         margin-left: auto;
         label {
           margin-left: auto;
@@ -72,12 +65,6 @@
     .fullWidth {
       padding: 0.6rem;
       flex-basis: 100%;
-      &__textarea {
-        align-items: flex-start;
-        label {
-          padding-top: 0.625rem;
-        }
-      }
     }
     button {
       margin-left: auto;
@@ -85,10 +72,6 @@
       max-width: 12.5rem;
       margin-top: 2rem;
       display: block;
-    }
-    .botWrapper {
-      @include flex(row, flex-start, space-between);
-      width: 100%;
     }
     .resultMessageContainer {
       margin: 2rem 0rem 0rem 0rem;

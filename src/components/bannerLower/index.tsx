@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import style from './bannerLower.module.scss';
 import { authContext } from '../../services/tokenValidator';
 import { Link } from 'react-router-dom';
+import useRole from '../../services/useRole';
+
+const { pathToRedirect } = useRole();
 
 export default class BannerLower extends Component<any> {
   scrollRef: any = React.createRef();
@@ -31,7 +34,7 @@ export default class BannerLower extends Component<any> {
 
   render() {
     const entryContent = this.context.token ? (
-      <Link className={style.animatedButton} to='/cabinet'>
+      <Link className={style.animatedButton} to={pathToRedirect()}>
         Увійти в кабінет
       </Link>
     ) : (

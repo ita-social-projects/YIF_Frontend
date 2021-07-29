@@ -1,5 +1,11 @@
 @import '../../../styles';
 
+.message {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
 .tabs {
   display: flex;
   &__block {
@@ -161,7 +167,8 @@ button {
         font-size: 1rem;
         color: #27446a;
         cursor: pointer;
-
+        font-family: 'Nunito', sans-serif;
+        background-color: transparent;
         &:hover {
           font-weight: 600;
         }
@@ -169,8 +176,8 @@ button {
     }
   }
   .resultMessageContainer {
-    margin: 2rem 5rem 0rem 0rem;
     @include flex(column, center, center);
     justify-self: center;
+    margin-top: 2rem;
   }
 }
