@@ -21,8 +21,6 @@ const IoEadmin: React.FC<props> = (props) => {
   const {
     adminId,
     adminEmail,
-    isAdminDeleted,
-    setIsAdminDeleted,
     isAdminBanned
   } = props;
   const { getToken } = useAuth();
@@ -31,6 +29,7 @@ const IoEadmin: React.FC<props> = (props) => {
     message: '',
   });
   const [isBanned, setBanned] = useState(isAdminBanned);
+  const [isAdminDeleted, setIsAdminDeleted] = useState(false);
 
   const showMessage = (statusCode: any, msg: string) => {
     const result = (statusCode.match(/^[23]\d{2}$/)) ? 'success' : 'error';
@@ -68,9 +67,9 @@ const IoEadmin: React.FC<props> = (props) => {
         const statusCode = res.statusCode.toString();
         if (statusCode.match(/^[23]\d{2}$/)) {
           setIsAdminDeleted(true);
-        };
-        let msg = `Адміністратора навчального закладу видалено`;
-        showMessage(statusCode, msg);
+          const msg = `Адміністратора навчального закладу видалено`;
+          showMessage(statusCode, msg);
+        } 
       }).catch((error) => showMessage('error', 'Щось пішло не так, спробуйте знову'));
   };
 

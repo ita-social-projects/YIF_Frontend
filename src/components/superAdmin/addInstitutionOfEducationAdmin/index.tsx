@@ -86,7 +86,7 @@ const AddInstitutionOfEducationAdmin = () => {
     };
     getInfo()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAdminDeleted]);
+  }, [isAdminDeleted, isAdminChanged]);
 
   let content;
   if (isFetching && !error) {

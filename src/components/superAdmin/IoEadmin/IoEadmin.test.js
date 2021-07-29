@@ -1,39 +1,30 @@
 import React from 'react';
-import { render, screen, wait, fireEvent } from '@testing-library/react';
+import { render, screen, wait, fireEvent, act } from '@testing-library/react';
 import IoEadmin from './index';
 import { AuthProvider } from '../../../services/tokenValidator';
 import userEvent from '@testing-library/user-event';
-// import waitForElementToBeRemoved from '@testing-library/react';
 
 afterEach(() => {
   jest.clearAllMocks();
 });
 
+React.useState = jest.fn((value) => isAdminDeleted = value);
+
 const adminEmail = 'nuweeModerator@gmail.com';
 const adminId = '3e5fbb21-9773-4218-b0ad-e6ff4e485f6d';
-// const isAdminBanned = true;
-// const isAdminDeleted = false;
+const isAdminDeleted = false;
 
 const noAdminEmail = null;
 const noAdminId = null;
 
 const mockJsonPromise = Promise.resolve('received data');
-
 const mockFetchPromise = Promise.resolve({
   json: () => mockJsonPromise,
   status: 200,
 });
 
 global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
-
-// const mock = require('../../../services/tokenValidator');
-
-// mock.useAuth = jest.fn(() => {
-//   return {
-//     token: 'token',
-//     getToken: jest.fn(() => '123'),
-//   };
-// })
+jest.useFakeTimers();
 
 describe('IoEadmin component', () => {
   // test1
@@ -60,8 +51,9 @@ describe('IoEadmin component', () => {
         />
       </AuthProvider>
     );
+   act(() => { 
     fireEvent.click(getByTestId('unlockSign'));
-
+   });
     global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
     const mockFetchPromise = Promise.resolve({
       json: () => mockJsonPromise,
@@ -84,7 +76,9 @@ describe('IoEadmin component', () => {
         />
       </AuthProvider>
     );
+
     fireEvent.click(getByTestId('lockSign'));
+    
     global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
     await wait(() => {
       expect(
@@ -109,17 +103,11 @@ describe('IoEadmin component', () => {
       userEvent.click(screen.getByTestId('unlockSign'));
     });
     expect(getByText('Щось пішло не так, спробуйте знову')).toBeInTheDocument();
-
-    // await waitForElementToBeRemoved(() =>
-    // queryByText('Щось пішло не так, спробуйте знову')
-    // );
-
+  
     // jest.runAllTimers();
-    // await wait(() => {
-    //   expect(
-    //     getByText('Щось пішло не так, спробуйте знову')
+    //       expect(
+    //     screen.queryByText('Щось пішло не так, спробуйте знову')
     //   ).not.toBeInTheDocument();
-    // }); 
   });
 
   test('Check when deleteIoEadmin caught exception', async () => {
@@ -146,46 +134,27 @@ describe('IoEadmin component', () => {
       });
     });
     
-    jest.setTimeout(30000);
     test('Check deleteIoEadmin success', async () => {
       const { getByTestId } = render(
       <AuthProvider>
         <IoEadmin
           adminId={adminId}
           adminEmail={adminEmail}
-          isAdminDeleted={false}
         />
       </AuthProvider>
     );
-    fireEvent.click(getByTestId('deleteSign'));
 
+  fireEvent.click(getByTestId('deleteSign'));
     global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
     const mockFetchPromise = Promise.resolve({
       json: () => Promise.resolve(),
-      status: 400, //why?
+      status: 200,
     });
+
     await wait(() => {
       expect(
         screen.getByText('Адміністратора навчального закладу видалено')
       ).toBeInTheDocument();
     });
   });
-
-  // test31
-  // test('test4', async ()=> {
-  //   const mockFetchPromise = Promise.resolve({
-  //     json: () => Promise.resolve(data),
-  //     status: 200,
-  //   });
-  //     global.fetch = jest.fn()(() => mockFetchPromise);
-  //     await wait(() => {
-  //       render(
-  //         <IoEadmin />
-  //       );
-  //     });
-  //     const deleteButton = screen.getByTestId('deleteButton');
-  //     fireEvent.click(deleteButton);
-  //     screen.debug();
-  //     await expect(screen.getByTestId('formInputSuccess')).toBeInTheDocument();
-  //   });
-})
+});
