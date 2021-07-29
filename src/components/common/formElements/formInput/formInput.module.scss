@@ -9,7 +9,6 @@
   width: 350px;
   height: 40px;
   border-bottom: 1px solid $black;
-  margin-bottom: 45px;
 
   &__hideShowPasswordIcon {
     cursor: pointer;
@@ -18,11 +17,6 @@
       fill: #5e84a9;
     }
   }
-}
-
-.inputFailed {
-  border-bottom: 1px solid $red;
-  margin-bottom: 1px;
 }
 
 .imgContainer {
@@ -39,6 +33,34 @@
   width: 100%;
   cursor: pointer;
   background-color: transparent;
+
+  &::-webkit-input-placeholder {
+    font-family: $fontOpenSans;
+    font-weight: $regular;
+    font-size: 14px; // fix this in the Future
+    color: $black;
+  }
+
+  &::-moz-placeholder {
+    font-family: $fontOpenSans;
+    font-weight: $regular;
+    font-size: 14px; // fix this in the Future
+    color: $black;
+  }
+
+  &:-ms-input-placeholder {
+    font-family: $fontOpenSans;
+    font-weight: $regular;
+    font-size: 14px; // fix this in the Future
+    color: $black;
+  }
+
+  &::-ms-input-placeholder {
+    font-family: $fontOpenSans;
+    font-weight: $regular;
+    font-size: 14px; // fix this in the Future
+    color: $black;
+  }
 
   &::placeholder {
     font-family: $fontOpenSans;

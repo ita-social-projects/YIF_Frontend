@@ -80,7 +80,7 @@ const NewPasswordForm: React.FC = () => {
         )}
         {!submiting && error && (
           <FormInputError
-            errorType='form'
+            errorFor='form'
             errorMessage={'Щось пішло не так, спробуйте знову!'}
           />
         )}

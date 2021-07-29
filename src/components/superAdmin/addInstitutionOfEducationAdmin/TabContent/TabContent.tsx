@@ -16,9 +16,9 @@ interface Moderator {
 }
 
 interface props {
-  IoEid: { pathname: string },
-  isAdminChanged: boolean,
-  setIsAdminChanged: any
+  IoEid: { pathname: string };
+  isAdminChanged: boolean;
+  setIsAdminChanged: any;
 }
 
 function Tabs(props: props) {
@@ -42,7 +42,7 @@ function Tabs(props: props) {
   });
 
   const showMessage = (statusCode: any, msg: string) => {
-    const result = (statusCode.match(/^[23]\d{2}$/)) ? 'success' : 'error';
+    const result = statusCode.match(/^[23]\d{2}$/) ? 'success' : 'error';
     setResultMessage({
       status: result,
       message: msg,
@@ -53,9 +53,12 @@ function Tabs(props: props) {
         message: '',
       });
     }, 4000);
-  }
+  };
 
-  const chooseIoEadmin = async (userId: string, ioEId: { pathname: string; }) => {
+  const chooseIoEadmin = async (
+    userId: string,
+    ioEId: { pathname: string }
+  ) => {
     try {
       const currentToken = await getToken();
       const { statusCode, data }: any = await requestSecureData(
@@ -64,17 +67,21 @@ function Tabs(props: props) {
         currentToken,
         {
           userId: userId,
-          ioEId: ioEId
-        });
+          ioEId: ioEId,
+        }
+      );
       if (statusCode.toString().match(/^[23]\d{2}$/)) {
-        showMessage(statusCode.toString(), `Заклад отримав нового адміністратора!`)
+        showMessage(
+          statusCode.toString(),
+          `Заклад отримав нового адміністратора!`
+        );
         props.setIsAdminChanged(!props.isAdminChanged);
         setError(false);
       } else {
-        showMessage(statusCode.toString(), data.errors.IoEId[0])
+        showMessage(statusCode.toString(), data.errors.IoEId[0]);
       }
     } catch (e) {
-      setError(true)
+      setError(true);
     } finally {
       setIsFetching(false);
     }
@@ -87,7 +94,7 @@ function Tabs(props: props) {
         const { statusCode, data }: any = await requestSecureData(
           `${APIUrl}SuperAdmin/GetIoEModeratorsById/${props.IoEid}`,
           'GET',
-          currentToken,
+          currentToken
         );
         if (statusCode.toString().match(/^[23]\d{2}$/)) {
           setModerators(data);
@@ -155,7 +162,7 @@ function Tabs(props: props) {
                 : `${styles.content__tabs}`
             }
           >
-             <Formik initialValues={initialValues} onSubmit={() => {}}>
+            <Formik initialValues={initialValues} onSubmit={() => {}}>
               {() => (
                 <Form className={styles.mainContent}>
                   <div className={styles.mainInfo}>
@@ -186,22 +193,31 @@ function Tabs(props: props) {
             }
           >
             <div className={styles.moderators__top}>
-              <p className={styles.moderators__top__address}>Електронна адреса</p>
+              <p className={styles.moderators__top__address}>
+                Електронна адреса
+              </p>
             </div>
             {moderators.map((moderator) => {
               return (
-                <div data-testid="moderator" key={moderator.userId} className={styles.moderators__item}>
+                <div
+                  data-testid='moderator'
+                  key={moderator.userId}
+                  className={styles.moderators__item}
+                >
                   <div className={styles.moderators__item__mail}>
                     {moderator.email}
                   </div>
-                  <button data-testid="chooseBtn" className={styles.moderators__item__link} onClick={()=>{chooseIoEadmin(
-                    moderator.userId,
-                    props.IoEid
-                  )}}>
+                  <button
+                    data-testid='chooseBtn'
+                    className={styles.moderators__item__link}
+                    onClick={() => {
+                      chooseIoEadmin(moderator.userId, props.IoEid);
+                    }}
+                  >
                     Призначити адміном
                   </button>
                 </div>
-              )
+              );
             })}
             <div className={styles.resultMessageContainer}>
               {resultMessage.status === 'success' && (
@@ -209,7 +225,7 @@ function Tabs(props: props) {
               )}
               {resultMessage.status === 'error' && (
                 <FormInputError
-                  errorType='form'
+                  errorFor='form'
                   errorMessage={resultMessage.message}
                 />
               )}

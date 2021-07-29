@@ -80,3 +80,8 @@
   right: 47px;
   cursor: pointer;
 }
+
+.loadingScreen {
+  @include flex(row, center, center);
+  width: 100%;
+}

@@ -67,7 +67,7 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
     setImage(image);
   };
   const [type, setIOE] = useState('0');
-  
+
   const handleSubmit = (values: FormikValues) => {
     const oldData: Array<Item> = Object.entries(initialValues);
     const newData: Array<{}> = [];
@@ -104,10 +104,15 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
           <ImageUploader
             foto={image || `http://localhost:5000/images/${imagePath}`}
             aspectRatio={16 / 9}
-            text={type === '0' ? 'університету' : type === '1'? 'коледжу': 'навчального закладу'}
+            text={
+              type === '0'
+                ? 'університету'
+                : type === '1'
+                ? 'коледжу'
+                : 'навчального закладу'
+            }
             imageHandler={imageHandler}
           />
-          
         </div>
         <h2 className={styles.infoTitle}>Основна інформація</h2>
         <Formik
@@ -127,12 +132,9 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
                     name='institutionOfEducationType'
                     data-testid='select'
                     className={styles.selector}
-                    onClick={
-                      (e: React.ChangeEvent<HTMLFormElement>)=>
-                      {
-                        setIOE(e.target.value)
-                      }
-                    }
+                    onClick={(e: React.ChangeEvent<HTMLFormElement>) => {
+                      setIOE(e.target.value);
+                    }}
                   >
                     <option value=''>Виберіть тип...</option>
                     <option value='0'>Університет</option>
@@ -167,6 +169,7 @@ const EditInstitutionOfEducationInfo: React.FC<Props> = ({
               <h2 className={styles.infoTitle}>Місце розташування</h2>
               <Field
                 name='pos'
+                errors={errors}
                 currentPosition={[lat, lon]}
                 setFieldValue={setFieldValue}
                 as={UniversityMap}

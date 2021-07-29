@@ -1,0 +1,26 @@
+@import './vars.scss';
+
+// wrap input field and error message field into div with this class
+.inputFieldWrapper {
+  width: 100%;
+  height: 100%;
+  margin-bottom: $errMessageHeight;
+}
+
+// use this class when error in input field with borders around occur
+.errorInField_borderAround {
+  border: 1px solid $darkred !important;
+  box-shadow: 0px 0px 3px $darkred;
+}
+
+// use this class in the same case as ^^^^ class but when background around the field is blue
+.errorInField_borderAround_inset {
+  border: 1px solid $darkred !important;
+  box-shadow: inset 0px 0px 3px $darkred;
+}
+
+// use this class when error in input field with border only on the bottom occur
+.errorInField_underline {
+  border-bottom: 1px solid $darkred !important;
+  box-shadow: 0px 2px 1px -1px $darkred;
+}

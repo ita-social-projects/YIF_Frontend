@@ -95,7 +95,7 @@ const MyInfo = () => {
             )}
             {useYIFProfile.error.hasError && (
               <FormInputError
-                errorType='form'
+                errorFor='form'
                 errorMessage={useYIFProfile.error.errorMessage}
               />
             )}

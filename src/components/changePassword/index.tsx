@@ -9,7 +9,6 @@ import { FormInputError } from '../../components/common/formElements';
 import { FormInputSuccess } from '../../components/common/formElements/formInputSuccess/formInputSuccess';
 
 const ChangePassword = () => {
-
   const service = useChangePassword(`${APIUrl}Users/ChangePassword`);
 
   return (
@@ -17,14 +16,12 @@ const ChangePassword = () => {
       <div className={styles.changePassword}>
         {service.error.hasError && (
           <FormInputError
-            errorType='form'
+            errorFor='form'
             errorMessage={service.error.errorMessage}
           />
         )}
         {service.success.hasSuccess && (
-          <FormInputSuccess
-            successMessage={service.success.successMessage}
-          />
+          <FormInputSuccess successMessage={service.success.successMessage} />
         )}
         <Formik
           initialValues={{
@@ -40,7 +37,7 @@ const ChangePassword = () => {
               values: {
                 oldPassword: '',
                 newPassword: '',
-                confirmNewPassword: ''
+                confirmNewPassword: '',
               },
             });
           }}

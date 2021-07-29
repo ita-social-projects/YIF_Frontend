@@ -22,6 +22,7 @@ $font_30px: 1.875rem;
 $font_18px: 1.125rem;
 $font_16px: 1rem;
 $font_15px: 0.9375rem;
+$font_13px: 0.8125rem;
 
 // colors
 $darkBlue: #12335e;
@@ -31,6 +32,7 @@ $gray: #afbecf;
 $black: #000000;
 $white: #ffffff;
 $red: #ec615b;
+$darkred: #aa1c17;
 $green: #06a141;
 
 $lightBlue_1: #bad0e5;
@@ -46,3 +48,6 @@ $borderSecond: 1px solid $black;
 
 //tab height in tab component {
 $tabHeight: 2.4375rem;
+
+//height of the FormInputErrorComponent
+$errMessageHeight: 2.5rem;

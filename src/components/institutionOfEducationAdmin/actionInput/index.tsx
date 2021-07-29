@@ -24,9 +24,15 @@ const ActionInput: React.FC<Props> = ({ name }) => {
   return (
     <div className={styles.actionInput}>
       <div className={styles.inputContainer}>
-        <input className={styles.inputField} type='text' {...field} />
+        <input
+          className={`${styles.inputField} ${
+            errorText ? styles.errorInField_borderAround : ''
+          }`}
+          type='text'
+          {...field}
+        />
         {errorText && (
-          <FormInputError errorType='input' errorMessage={errorText} />
+          <FormInputError errorFor='inputField' errorMessage={errorText} />
         )}
       </div>
       <button

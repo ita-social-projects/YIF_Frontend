@@ -26,7 +26,10 @@ const FormInputCheckbox: FC<CustomInputProps & FieldProps> = ({
         </label>
       </div>
       {touched[field.name] && errors[field.name] ? (
-        <FormInputError errorType='input' errorMessage={errors[field.name]} />
+        <FormInputError
+          errorFor='inputField'
+          errorMessage={errors[field.name]}
+        />
       ) : null}
     </div>
   );

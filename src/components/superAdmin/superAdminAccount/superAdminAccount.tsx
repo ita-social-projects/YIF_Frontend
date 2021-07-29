@@ -369,10 +369,7 @@ const SuperAdminAccount: React.FC<Props> = (props) => {
         </ul>
         {error.hasError && (
           <div className={styles.flashMessageRight}>
-            <FormInputError
-              errorType='form'
-              errorMessage={error.errorMessage}
-            />
+            <FormInputError errorFor='form' errorMessage={error.errorMessage} />
           </div>
         )}
         {success.hasSuccess && (

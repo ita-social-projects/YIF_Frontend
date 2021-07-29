@@ -202,17 +202,23 @@ const AddSpecialtyForm: React.FC = () => {
                 >
                   Код
                 </label>
-                <Field
-                  className={styles.topWrapper__input}
-                  id='directionCode'
-                  name='directionCode'
-                />
-                {errors.directionCode && touched.directionCode ? (
-                  <FormInputError
-                    errorType='inputFull'
-                    errorMessage={errors.directionCode}
+                <div className={styles.inputFieldWrapper}>
+                  <Field
+                    className={`${styles.topWrapper__input} ${
+                      errors.directionCode && touched.directionCode
+                        ? styles.errorInField_borderAround_inset
+                        : ''
+                    }`}
+                    id='directionCode'
+                    name='directionCode'
                   />
-                ) : null}
+                  {errors.directionCode && touched.directionCode ? (
+                    <FormInputError
+                      errorFor='inputField'
+                      errorMessage={errors.directionCode}
+                    />
+                  ) : null}
+                </div>
               </div>
               <div className={styles.fullWidth}>
                 <label
@@ -221,17 +227,23 @@ const AddSpecialtyForm: React.FC = () => {
                 >
                   Назва
                 </label>
-                <Field
-                  className={styles.topWrapper__input}
-                  id='directionName'
-                  name='directionName'
-                />
-                {errors.directionName && touched.directionName ? (
-                  <FormInputError
-                    errorType='inputFull'
-                    errorMessage={errors.directionName}
+                <div className={styles.inputFieldWrapper}>
+                  <Field
+                    className={`${styles.topWrapper__input} ${
+                      errors.directionName && touched.directionName
+                        ? styles.errorInField_borderAround_inset
+                        : ''
+                    }`}
+                    id='directionName'
+                    name='directionName'
                   />
-                ) : null}
+                  {errors.directionName && touched.directionName ? (
+                    <FormInputError
+                      errorFor='inputField'
+                      errorMessage={errors.directionName}
+                    />
+                  ) : null}
+                </div>
               </div>
 
               <div
@@ -243,19 +255,27 @@ const AddSpecialtyForm: React.FC = () => {
                 >
                   Опис
                 </label>
-                <Field
-                  as='textarea'
-                  id='specialtyDescription'
-                  name='specialtyDescription'
-                  className={styles.topWrapper__textarea}
-                  type='textarea'
-                />
-                {errors.specialtyDescription && touched.specialtyDescription ? (
-                  <FormInputError
-                    errorType='inputFull'
-                    errorMessage={errors.specialtyDescription}
+                <div className={styles.inputFieldWrapper}>
+                  <Field
+                    as='textarea'
+                    id='specialtyDescription'
+                    name='specialtyDescription'
+                    className={`${styles.topWrapper__textarea} ${
+                      errors.specialtyDescription &&
+                      touched.specialtyDescription
+                        ? styles.errorInField_borderAround_inset
+                        : ''
+                    }`}
+                    type='textarea'
                   />
-                ) : null}
+                  {errors.specialtyDescription &&
+                  touched.specialtyDescription ? (
+                    <FormInputError
+                      errorFor='inputField'
+                      errorMessage={errors.specialtyDescription}
+                    />
+                  ) : null}
+                </div>
               </div>
             </div>
             <FormButton
@@ -274,7 +294,7 @@ const AddSpecialtyForm: React.FC = () => {
               )}
               {resultMessage.status === 'error' && (
                 <FormInputError
-                  errorType='form'
+                  errorFor='form'
                   errorMessage={resultMessage.message}
                 />
               )}
