@@ -10,11 +10,11 @@ import { FormInputSuccess } from '../../common/formElements/formInputSuccess/for
 import { FormInputError } from '../../common/formElements';
 
 interface props {
-  adminId: string,
-  adminEmail: string,
-  setIsAdminDeleted: any,
-  isAdminDeleted: boolean,
-  isAdminBanned: boolean,
+  adminId: string;
+  adminEmail: string;
+  setIsAdminDeleted: any;
+  isAdminDeleted: boolean;
+  isAdminBanned: boolean;
 }
 
 const IoEadmin: React.FC<props> = (props) => {
@@ -33,7 +33,7 @@ const IoEadmin: React.FC<props> = (props) => {
   const [isBanned, setBanned] = useState(isAdminBanned);
 
   const showMessage = (statusCode: any, msg: string) => {
-    const result = (statusCode.match(/^[23]\d{2}$/)) ? 'success' : 'error';
+    const result = statusCode.match(/^[23]\d{2}$/) ? 'success' : 'error';
     setResultMessage({
       status: result,
       message: msg,
@@ -44,7 +44,7 @@ const IoEadmin: React.FC<props> = (props) => {
         message: '',
       });
     }, 2000);
-  }
+  };
 
   const banIoEAdmin = async (id: string) => {
     const currentToken = await getToken();
@@ -54,15 +54,19 @@ const IoEadmin: React.FC<props> = (props) => {
       .then((res: any) => {
         const statusCode = res.statusCode.toString();
         setBanned(res.data.isBanned);
-        let msg = `Адміністратора навчального закладу ${isBanned ? 'розблоковано' : 'заблоковано'}`;
+        let msg = `Адміністратора навчального закладу ${
+          isBanned ? 'розблоковано' : 'заблоковано'
+        }`;
         showMessage(statusCode, msg);
       })
-      .catch((error) => showMessage('error', 'Щось пішло не так, спробуйте знову'));
+      .catch((error) =>
+        showMessage('error', 'Щось пішло не так, спробуйте знову')
+      );
   };
 
   const deleteIoEadmin = async () => {
     const currentToken = await getToken();
-    const deleteEndpoint = `${APIUrl}SuperAdmin/DeleteInstitutionOfEducationAdmin/${adminId}`
+    const deleteEndpoint = `${APIUrl}SuperAdmin/DeleteInstitutionOfEducationAdmin/${adminId}`;
     requestSecureData(deleteEndpoint, 'DELETE', currentToken)
       .then((res: any) => {
         const statusCode = res.statusCode.toString();
@@ -70,43 +74,70 @@ const IoEadmin: React.FC<props> = (props) => {
           setIsAdminDeleted(true);
           const msg = `Адміністратора навчального закладу видалено`;
           showMessage(statusCode, msg);
-        } 
-      }).catch((error) => showMessage('error', 'Щось пішло не так, спробуйте знову'));
+        }
+      })
+      .catch((error) =>
+        showMessage('error', 'Щось пішло не так, спробуйте знову')
+      );
   };
 
   return (
     <>
       <div className={styles.admin}>
         <h2 className={styles.admin__title}>Адмін</h2>
-        {
-          props.adminEmail === null ?
-            <div className={styles.admin__line}>Адміністратор не призначений</div>
-            :
-            <div data-testid='content' className={styles.admin__line}>
-              <p className={styles.admin__line__name}>{props.adminEmail}</p>
-              <div className={styles.admin__line__icons}>
-                <div>
-                  {!isBanned ? <Unlock data-testid="unlockSign" handleClick={() => banIoEAdmin(adminId)} />
-                    : <Lock data-testid="lockSign" handleClick={() => banIoEAdmin(adminId)} />}
-                </div>
-                <div data-testid='deleteButton'><Delete handleClick={() => { deleteIoEadmin() }} /></div>
+        {props.adminEmail === null ? (
+          <div className={styles.admin__line}>Адміністратор не призначений</div>
+        ) : (
+          <div data-testid='content' className={styles.admin__line}>
+            <p className={styles.admin__line__name}>{props.adminEmail}</p>
+            <div className={styles.admin__line__icons}>
+              <div>
+                {!isBanned ? (
+                  <Unlock
+                    data-testid='unlockSign'
+                    handleClick={() => banIoEAdmin(adminId)}
+                  />
+                ) : (
+                  <Lock
+                    data-testid='lockSign'
+                    handleClick={() => banIoEAdmin(adminId)}
+                  />
+                )}
+              </div>
+              <div data-testid='deleteButton'>
+                <Delete
+                  handleClick={() => {
+                    deleteIoEadmin();
+                  }}
+                />
               </div>
             </div>
-        }
+          </div>
+        )}
       </div>
-      {(resultMessage.status === 'error') &&
-        <div data-testid='errorMessage' className={styles.resultMessageContainer}>
-          <FormInputError data-testid='errorMessage'
+      {resultMessage.status === 'error' && (
+        <div
+          data-testid='errorMessage'
+          className={styles.resultMessageContainer}
+        >
+          <FormInputError
+            data-testid='errorMessage'
             errorFor='form'
             errorMessage={resultMessage.message}
           />
         </div>
-      }
-      {(resultMessage.status === 'success') &&
-        <div data-testid='successMessage' className={styles.resultMessageContainer}>
-          <FormInputSuccess data-testid='successMessage' successMessage={resultMessage.message} />
+      )}
+      {resultMessage.status === 'success' && (
+        <div
+          data-testid='successMessage'
+          className={styles.resultMessageContainer}
+        >
+          <FormInputSuccess
+            data-testid='successMessage'
+            successMessage={resultMessage.message}
+          />
         </div>
-      }
+      )}
     </>
   );
 };
