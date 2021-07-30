@@ -9,6 +9,7 @@ import { requestSecureData } from '../../../services/requestDataFunction';
 import { APIUrl } from '../../../services/endpoints';
 import Spinner from '../../common/spinner';
 import IoEadmin from '../IoEadmin';
+import ResponsePlaceholder from '../../../components/common/responsePlaceholder';
 
 interface IoEinfo {
   ioEId: string,
@@ -98,7 +99,7 @@ const AddInstitutionOfEducationAdmin = () => {
   } else if (error && !isFetching) {
     content = (
       <div className={styles.noContentContainer}>
-        <h2>Щось пішло не так, спробуйте знову.</h2>
+        <ResponsePlaceholder errorMessage='Не вдалося отримати інформацію про навчальний заклад'/>
       </div>
     );
   } else {

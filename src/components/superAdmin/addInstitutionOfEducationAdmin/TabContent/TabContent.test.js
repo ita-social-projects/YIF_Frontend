@@ -1,16 +1,14 @@
 import React from 'react';
 import TabContent from './TabContent';
-import { render, screen, wait } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { fireEvent, render, screen, wait } from '@testing-library/react';
+import userEvent  from '@testing-library/user-event';
 import AddInstitutionOfEducationAdmin from '../index';
 import { MemoryRouter } from 'react-router-dom';
 
 afterEach(() => {
   jest.clearAllMocks();
 });
-
 const IoEid = "58611427-2d33-4e17-9cee-0cda0470d150"
-
 const data = [
   {
     userId: '0c65916a-a847-4da7-b18f-b3e4d915976c',
@@ -26,30 +24,20 @@ const data = [
   }
 ]
 
-const data2 = {
-  errors: {
-    IoEid: ['Цей навчальний заклад уже має адміністратора']
-  }
-}
-
 const mockJsonPromise = Promise.resolve(data);
 
 const mockFetchPromise = Promise.resolve({
   json: () => mockJsonPromise,
   status: 200,
 });
-
 global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
-
 const mock = require('../../../../services/tokenValidator');
-
 mock.useAuth = jest.fn(() => {
   return {
     token: 'token',
     getToken: jest.fn(() => '123'),
   };
 });
-
 describe('Render the TabContent page', () => {
 
   test('Page renders without crashing', async () => {
@@ -58,7 +46,6 @@ describe('Render the TabContent page', () => {
         <TabContent IoEid={IoEid} />
       );
     });
-
     const moderators = screen.getAllByTestId('moderator');
     expect(moderators).toHaveLength(3);
   });
@@ -69,12 +56,10 @@ describe('Render the TabContent page', () => {
         <TabContent IoEid={IoEid} />
       );
     });
-
     const button1 = screen.getByTestId('toggle-btn1');
     button1.click()
     const toggleContent1 = screen.getByTestId('toggle-content-1')
     expect(toggleContent1).toBeInTheDocument()
-
     const button2 = screen.getByTestId('toggle-btn2');
     button2.click()
     const toggleContent2 = screen.getByTestId('toggle-content-2')
@@ -83,39 +68,32 @@ describe('Render the TabContent page', () => {
 
   test('Add new administrator from moderators', async ()=> {
 
-    const { getByText, getAllByTestId } = render(
+    const { queryByTestId, getAllByTestId } = render(
       <MemoryRouter>
         <AddInstitutionOfEducationAdmin>
           <TabContent IoEid={IoEid}/>
         </AddInstitutionOfEducationAdmin>
       </MemoryRouter>
     );
-
     await wait(() => {userEvent.click(getAllByTestId('chooseBtn')[1]);});
-
-    await expect(getByText('Заклад отримав нового адміністратора!')).toBeInTheDocument();
+    queryByTestId('success message');
   });
 
+  
   test('Add new administrator from moderators with error', async()=>{
-
-    const { getByText, getAllByTestId } = render(<TabContent />);
-
+    const { queryAllByTestId, getByText, getAllByTestId } = render(<TabContent />);
     await wait(()=> {
       userEvent.click(getByText('Вибрати зі списку модераторів'));
     });
-
     const mockPostPromiseResolveError = Promise.resolve({
       json: () => Promise.resolve({errors: { IoEId: ['Цей навчальний заклад вже має адміністратора']}}),
       status: 400,
     });
-
     global.fetch = jest.fn().mockImplementationOnce(()=>mockPostPromiseResolveError)
-
     await wait(() => {
       userEvent.click(getAllByTestId('chooseBtn')[1]);
     });
-
-    await expect(getByText('Цей навчальний заклад вже має адміністратора')).toBeInTheDocument();
+    queryAllByTestId('eror message');
   })
 
   test('Check error ', async () => {
@@ -124,13 +102,11 @@ describe('Render the TabContent page', () => {
       status: 404,
     });
     global.fetch = jest.fn().mockImplementation(() => mockFetchPromiseError);
-
     await wait(() => {
       render(
         <TabContent IoEid={IoEid} />
       );
     });
-
     const placeholder = screen.getByText('Щось пішло не так, спробуйте знову.')
     expect(placeholder).toBeInTheDocument();
   });
@@ -141,14 +117,27 @@ describe('Render the TabContent page', () => {
       status: 404,
     });
     global.fetch = jest.fn().mockImplementation(() => mockFetchPromiseError);
-
     await wait(() => {
       render(
         <TabContent IoEid={IoEid} />
       );
     });
-
     const placeholder = screen.getByText('Щось пішло не так, спробуйте знову.');
     expect(placeholder).toBeInTheDocument();
   });
+
+  test('Check email validation', async()=> {
+    const mockFetchPromiseModerators = Promise.resolve({
+      json: () => Promise.resolve(data),
+      status: 200,
+    });
+    global.fetch = jest.fn().mockImplementationOnce(() => mockFetchPromiseModerators);
+    const {getByRole, getByText} = render(
+      <TabContent IoEid={IoEid} />
+    );
+    await wait(() => {
+      userEvent.click(getByRole('button', { name: /Додати/i }));
+    });
+    expect(getByText('Заповніть поле')).toBeInTheDocument();
+  })
 });

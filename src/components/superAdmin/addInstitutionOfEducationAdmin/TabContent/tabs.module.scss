@@ -80,43 +80,58 @@ button {
   }
   p {
     width: 100%;
-    // height: 100%;
   }
-  form {
+  .topWrapper__title {
+    @include flex(row, center, space-between);
+    margin-bottom: 0.625rem;
+    width: 100%;
+    max-width: 70rem;
+    background-color: #5a758c;
+    color: #fff;
+    height: 3.125rem;
+    border-radius: 0.3rem;
+    padding: 0 2rem 0 1rem;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.125rem;
+    margin-bottom: .7rem;
+  }
+  .mainContent {
     display: flex;
-    label {
+    width: 100%;
+    max-width: 70rem;
+    flex-wrap: wrap;
+    position: relative;
+    background-color: #d6e5f2;
+    justify-content: space-between;
+    border-radius: 0.3rem;
+    .input_block{
       display: block;
-      margin-bottom: 1.125rem;
-      width: 100%;
-      text-align: center;
-    }
-    .mainInfo {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      position: relative;
-      max-width: 1000px;
-      margin: 0 auto;
-      .customInput {
-        display: block;
-      }
-    }
-    div {
-      display: block;
-      padding: 0;
+      width: 81%;
+      padding: 1.5rem;
     }
     button {
-      width: 185px;
-      margin: 0;
+      display: block;
       position: absolute;
-      right: 0;
-      bottom: 1px;
+      width: 185px;
+      right: 1.5rem;
+      top: 1.18rem;
+    }
+    button:hover {
+      background-color: #fff;
+    }
+    .topWrapper__label {
+      display: block;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.125rem;
+      margin-bottom: .3rem;
     }
     input {
-      margin: 0;
+      margin-left: 0;
       padding: 0.625rem;
       width: 100%;
-      min-height: 2.8rem;
+      min-height: 2.70rem;
+      border: 1px solid #afbecf;
+      border-radius: 0.3rem;
     }
   }
   .moderators {
@@ -161,8 +176,8 @@ button {
     }
   }
   .resultMessageContainer {
-    margin: 2rem 0rem 0rem 0rem;
     @include flex(column, center, center);
     justify-self: center;
+    margin-top: 2rem;
   }
 }
