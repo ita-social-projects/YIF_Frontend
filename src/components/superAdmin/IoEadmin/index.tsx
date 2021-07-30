@@ -97,7 +97,7 @@ const IoEadmin: React.FC<props> = (props) => {
       {(resultMessage.status === 'error') &&
         <div data-testid='errorMessage' className={styles.resultMessageContainer}>
           <FormInputError data-testid='errorMessage'
-            errorType='form'
+            errorFor='form'
             errorMessage={resultMessage.message}
           />
         </div>
